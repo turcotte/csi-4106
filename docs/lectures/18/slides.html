@@ -1,0 +1,2813 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
+
+  <meta name="author" content="Marcel Turcotte">
+  <title>CSI 4106 - Fall 2025 – Population-Based Metaheuristics</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+<meta property="og:title" content="Population-Based Metaheuristics – CSI 4106 - Fall 2025">
+<meta property="og:description" content="CSI 4106 Introduction to Artificial Intelligence">
+<meta property="og:site_name" content="CSI 4106 - Fall 2025">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Population-Based Metaheuristics</h1>
+  <p class="subtitle">CSI 4106 Introduction to Artificial Intelligence</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Marcel Turcotte 
+</div>
+</div>
+</div>
+
+  <p class="date">Version: Jul 11, 2025 15:33</p>
+</section>
+<section>
+<section id="preamble" class="title-slide slide level1 center">
+<h1>Preamble</h1>
+
+</section>
+<section id="quote-of-the-day" class="slide level2">
+<h2>Quote of the Day</h2>
+<p></p><div id="tweet-65762"></div><script>tweet={"url":"https:\/\/twitter.com\/leland_mcinnes\/status\/1844546148356292975","author_name":"Leland McInnes","author_url":"https:\/\/twitter.com\/leland_mcinnes","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EAn ArXiv data map you can browse yourself:\u003Ca href=\"https:\/\/t.co\/ulpNmynrRf\"\u003Ehttps:\/\/t.co\/ulpNmynrRf\u003C\/a\u003E\u003Cbr\u003E\u003Cbr\u003E(an early demo; please be gentle; use shift to lasso-select; click on a point to open the paper) \u003Ca href=\"https:\/\/t.co\/kKD7lqrs14\"\u003Epic.twitter.com\/kKD7lqrs14\u003C\/a\u003E\u003C\/p\u003E&mdash; Leland McInnes (@leland_mcinnes) \u003Ca href=\"https:\/\/twitter.com\/leland_mcinnes\/status\/1844546148356292975?ref_src=twsrc%5Etfw\"\u003EOctober 11, 2024\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-65762").innerHTML = tweet["html"];</script><p></p>
+<aside class="notes">
+<p><a href="https://www.linkedin.com/in/leland-mcinnes-406233103/?originalSubdomain=ca">Leland McInnes</a> is a data science researcher at the <a href="https://www.cse-cst.gc.ca/en/mission/research-cse/tutte-institute-mathematics-computing">Tutte Institute for Mathematics and Computing</a> (TIMC) in Ottawa. TIMC is a government research institute dedicated to fundamental mathematics and computer science. McInnes is renowned for developing <a href="https://umap-learn.readthedocs.io/en/latest/">UMAP</a>, a leading dimensionality reduction technique, and <a href="https://github.com/scikit-learn-contrib/hdbscan">HDBSCAN</a>, a popular clustering algorithm integrated into <a href="https://scikit-learn.org/stable/">scikit-learn</a>.</p>
+<p>This post highlights the application of these technologies in visualizing publications from <a href="https://arxiv.org">arXiv</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="learning-objectives" class="slide level2 smaller">
+<h2>Learning Objectives</h2>
+<ul>
+<li><strong>Understand</strong> the definition and purpose of metaheuristics in optimization problems.</li>
+<li><strong>Learn</strong> the principles and components of genetic algorithms (GAs).</li>
+<li><strong>Comprehend</strong> the implementation details of GAs, including encoding, selection, crossover, mutation, and fitness evaluation.</li>
+<li><strong>Apply</strong> GAs to solve the 0/1 knapsack problem with practical Python examples.</li>
+<li><strong>Recognize</strong> different encoding schemes and selection methods in GAs.</li>
+</ul>
+
+<aside><div>
+<p><strong>See also</strong>: <a href="knapsack">companion Jupyter Notebook</a>.</p>
+</div></aside></section></section>
+<section>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
+
+</section>
+<section id="metaheuristics" class="slide level2">
+<h2>Metaheuristics</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/metaheuristics-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="../../assets/images/metaheuristics-00.png" class="quarto-figure quarto-figure-center" height="450"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p><strong>Simulated annealing</strong> draws inspiration from principles in <strong>physics</strong>. In contrast, we now explore a <strong>biologically</strong> inspired strategy.</p>
+</div></aside></section>
+<section id="definition" class="slide level2">
+<h2>Definition</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Gil-Rios:2021aa">(<a href="#/references" role="doc-biblioref" onclick="">Gil-Rios et al. 2021</a>)</span></strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Metaheuristics</strong> are higher-level procedures or heuristics designed to <strong>guide the search</strong> for solutions in optimization problems with <strong>large solution spaces</strong>, aiming to find good solutions more efficiently than traditional methods.</p>
+</div>
+</div>
+</div>
+<p>Meta heuristics balance <strong>exploitation</strong> and <strong>exploration</strong> to <strong>avoid local optima</strong>, often incorporating <strong>randomness</strong>, <strong>memory</strong>, or <strong>adaptive mechanisms</strong>.</p>
+
+<aside><div>
+<p>They are adaptable to <strong>diverse optimization problems</strong>.</p>
+</div></aside></section>
+<section id="definition-1" class="slide level2">
+<h2>Definition</h2>
+<p>A <strong>genetic algorithm</strong> is an evolutionary optimization technique that uses a <strong>population of candidate solutions</strong>, evolving them through <strong>selection</strong>, <strong>crossover</strong>, and <strong>mutation</strong> to iteratively improve towards an “optimal” solution.</p>
+</section>
+<section class="slide level2">
+
+<p><a href="../../assets/images/Holland-GeneticAlgorithms-1992-title.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="../../assets/images/Holland-GeneticAlgorithms-1992-title.png"></a></p>
+
+<aside><div>
+<p><span class="citation" data-cites="Holland:1992aa">Holland (<a href="#/references" role="doc-biblioref" onclick="">1992</a>)</span>, <span class="citation" data-cites="Holland:1973aa">Holland (<a href="#/references" role="doc-biblioref" onclick="">1973</a>)</span></p>
+</div></aside></section>
+<section id="trends-in-ai" class="slide level2">
+<h2>Trends in AI</h2>
+<p></p><div id="tweet-93376"></div><script>tweet={"url":"https:\/\/twitter.com\/fchollet\/status\/1854246566753890733","author_name":"François Chollet","author_url":"https:\/\/twitter.com\/fchollet","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003ESimilarly, there are several research directions today seen as long-abandoned failures, that are only waiting for the right amount of attention and the right level of compute scale to shine. Genetic algorithms are one of them.\u003C\/p\u003E&mdash; François Chollet (@fchollet) \u003Ca href=\"https:\/\/twitter.com\/fchollet\/status\/1854246566753890733?ref_src=twsrc%5Etfw\"\u003ENovember 6, 2024\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-93376").innerHTML = tweet["html"];</script><p></p>
+</section>
+<section id="applications" class="slide level2">
+<h2>Applications</h2>
+<ul>
+<li><strong>Optimization</strong>: Solving complex engineering, logistics, and scheduling problems.</li>
+<li><strong>Machine Learning</strong>: Feature selection, hyperparameter tuning, and evolving neural network architectures.</li>
+<li><strong>Robotics</strong>: Path planning, sensor optimization, control strategy development, and robot designs<sup>1</sup>.</li>
+</ul>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>This approach has led to the development of <strong>unique</strong>, sometimes <strong>unexpected</strong> robot forms and control strategies that are <strong>well-suited to specific tasks or environments</strong>, often outperforming traditional, human-engineered designs in <strong>adaptability</strong> and <strong>robustness</strong>.</p></li></ol></aside></section>
+<section id="applications-continued" class="slide level2 smaller">
+<h2>Applications (continued)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://media.springernature.com/full/springer-static/cover-hires/book/978-3-030-70542-8?as=webp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="https://media.springernature.com/full/springer-static/cover-hires/book/978-3-030-70542-8?as=webp.png" class="nostretch quarto-figure quarto-figure-center" height="400"></a></p>
+</figure>
+</div>
+<p><span class="citation" data-cites="Oliva:2021aa">Oliva, Houssein, and Hinojosa (<a href="#/references" role="doc-biblioref" onclick="">2021</a>)</span></p>
+<p><a href="https://link.springer.com/book/10.1007/978-3-030-70542-8">Springer Link</a></p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://media.springernature.com/full/springer-static/cover-hires/book/978-981-19-3888-7?as=webp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="https://media.springernature.com/full/springer-static/cover-hires/book/978-981-19-3888-7?as=webp.png" class="nostretch quarto-figure quarto-figure-center" height="400"></a></p>
+</figure>
+</div>
+<p><span class="citation" data-cites="Eddaly:2023aa">Eddaly, Jarboui, and Siarry (<a href="#/references" role="doc-biblioref" onclick="">2023</a>)</span></p>
+<p><a href="https://link.springer.com/book/10.1007/978-981-19-3888-7">Springer Link</a></p>
+</div></div>
+<aside class="notes">
+<p>Did you know that you can freely access the entire collection of books from Springer? By using a device connected to a uOttawa IP address and visiting <a href="https://link.springer.com">Springer Link</a>, you have the ability to download books in either PDF or EPUB format.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="from-biology-to-genetic-algorithms" class="slide level2">
+<h2>From Biology to Genetic Algorithms</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Mayr:1982aa">(<a href="#/references" role="doc-biblioref" onclick="">Mayr 1982, 481</a>)</span></strong></p>
+</div>
+<div class="callout-content">
+<p>There is probably no more <strong>original</strong>, more <strong>complex</strong>, and <strong>bolder</strong> concept in the history of ideas than Darwin’s mechanistic explanation of adaptation.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Dennett:1995aa">(<a href="#/references" role="doc-biblioref" onclick="">Dennett 1995</a>)</span></strong></p>
+</div>
+<div class="callout-content">
+<p>If I were to give an award for the <strong>single best idea anyone has ever had</strong>, I’d give it to Darwin, ahead of Newton &amp; Einstein and everyone else.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="definition-2" class="slide level2">
+<h2>Definition</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Gregory:2009aa">(<a href="#/references" role="doc-biblioref" onclick="">Gregory 2009</a>)</span></strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Natural selection</strong> is a <strong>non-random difference in reproductive output among replicating entities</strong>, often due indirectly to differences in survival in a particular environment, <strong>leading to an increase in the proportion of beneficial, heritable characteristics</strong> within a population from one generation to the next.</p>
+</div>
+</div>
+</div>
+
+<aside><div>
+<p><strong>Evolution</strong> is an <strong>adaptive optimization process</strong>.</p>
+</div></aside></section></section>
+<section>
+<section id="components" class="title-slide slide level1 center">
+<h1>Components</h1>
+
+</section>
+<section id="basic-ga" class="slide level2">
+<h2>Basic GA</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ga-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="../../assets/images/ga-00.png" class="quarto-figure quarto-figure-center" height="450"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:60%;">
+<ol type="1">
+<li>Initialize <strong>population</strong></li>
+<li>Compute the <strong>fitness</strong></li>
+<li>Select <strong>individuals</strong> (chromosomes)</li>
+<li><strong>Crossover</strong></li>
+<li><strong>Mutation</strong></li>
+<li>If not done, <strong>goto</strong> 2</li>
+</ol>
+</div></div>
+
+<aside><div>
+<p>In this context, the term <strong>population</strong> refers to a collection of candidate solutions or states.</p>
+</div></aside></section>
+<section id="choices" class="slide level2">
+<h2>Choices</h2>
+<ul>
+<li>How to <strong>encode</strong> a candidate solution or state?</li>
+<li>How to <strong>select</strong> candidate solutions?</li>
+<li>How to define the <strong>crossover</strong> operator?</li>
+<li>How to define the <strong>mutation</strong> operator?</li>
+<li>How to calculate the <strong>fitness</strong>?</li>
+</ul>
+</section>
+<section id="problem" class="slide level2">
+<h2>Problem</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><strong>0/1 knapsack problem</strong>: Given items with defined <strong>weights</strong> and <strong>values</strong>, the objective is to <strong>maximize total value</strong> by selecting items for a knapsack without surpassing a <strong>fixed capacity</strong>. Each item must be either fully <strong>included (1)</strong> or <strong>excluded (0)</strong>.</p>
+</div><div class="column" style="width:40%;">
+<p><a href="../../assets/images/knapsack_girl_scout.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="../../assets/images/knapsack_girl_scout.png"></a></p>
+</div></div>
+
+<aside class="notes">
+<p>This problem is NP-complete and often solved using dynamic programming for optimal solutions in feasible time.</p>
+<p>The image displayed above was generated based on the following prompt: “Illustrate a cartoon girl scout wearing glasses, dressed in a scout uniform featuring brown shorts and hiking boots. She holds a ledger in one hand and a pencil in the other, with a large backpack secured to her back. In front of her, display a variety of items she might choose to pack into her backpack. These items should include a stack of books, a stuffed toy, a cup, assorted snacks, and a pair of binoculars. The scene should evoke a sense of decision-making and exploration.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Attribution</strong>: Generated by DALL-E, via ChatGPT (GPT-4), OpenAI, November 10, 2024.</p>
+</div></aside></section>
+<section id="problem-continued" class="slide level2">
+<h2>Problem (continued)</h2>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \text { maximize } \sum_{i=1}^n x_i \cdot v_i  \\
+&amp; \text { subject to } \sum_{i=1}^n x_i \cdot w_i  \leq W \text { and } x_i \in\{0,1\} .
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(W\)</span> represents the fixed <strong>maximum weight</strong>, and <span class="math inline">\(x_i\)</span> is a binary variable indicating whether item <span class="math inline">\(i\)</span> is <strong>included (1)</strong> or <strong>excluded (0)</strong>.</p>
+</section>
+<section id="applications-1" class="slide level2 scrollable">
+<h2>Applications</h2>
+<ol type="1">
+<li><p><strong>Finance and Investment</strong>: In portfolio optimization, where each asset has a risk (analogous to weight) and expected return (value), the knapsack framework helps select a set of assets that maximizes return without exceeding a risk threshold.</p></li>
+<li><p><strong>Resource Allocation</strong>: Common in project management, where resources (budget, personnel, time) need to be allocated across projects or tasks to maximize overall value, taking into account limited availability.</p></li>
+<li><p><strong>Supply Chain and Logistics</strong>: Used to maximize the value of goods transported within vehicle weight or volume constraints. It can also be applied in warehouse storage, where space is limited, and high-value items are prioritized.</p></li>
+<li><p><strong>Ad Placement and Marketing</strong>: Used in digital advertising to select the most profitable combination of ads to display within limited space (e.g., website or app banner space), maximizing revenue under size or display constraints.</p></li>
+</ol>
+</section>
+<section id="greedy-algorithms" class="slide level2">
+<h2>Greedy Algorithms</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Skiena:2008aa">(<a href="#/references" role="doc-biblioref" onclick="">Skiena 2008, 192</a>)</span></strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Greedy algorithms</strong> make the decision of what to do next by selecting the <strong>best local option</strong> from all available choices <strong>without</strong> regard to the global structure.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="data" class="slide level2">
+<h2>Data</h2>
+<div id="a29d5e93" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a><span class="co"># Sample data</span></span>
+<span id="cb1-4"><a></a></span>
+<span id="cb1-5"><a></a>values <span class="op">=</span> np.array([</span>
+<span id="cb1-6"><a></a>    <span class="dv">360</span>, <span class="dv">83</span>, <span class="dv">59</span>, <span class="dv">130</span>, <span class="dv">431</span>, <span class="dv">67</span>, <span class="dv">230</span>, <span class="dv">52</span>, <span class="dv">93</span>, <span class="dv">125</span>, <span class="dv">670</span>, <span class="dv">892</span>, <span class="dv">600</span>, <span class="dv">38</span>, <span class="dv">48</span>, <span class="dv">147</span>,</span>
+<span id="cb1-7"><a></a>    <span class="dv">78</span>, <span class="dv">256</span>, <span class="dv">63</span>, <span class="dv">17</span>, <span class="dv">120</span>, <span class="dv">164</span>, <span class="dv">432</span>, <span class="dv">35</span>, <span class="dv">92</span>, <span class="dv">110</span>, <span class="dv">22</span>, <span class="dv">42</span>, <span class="dv">50</span>, <span class="dv">323</span>, <span class="dv">514</span>, <span class="dv">28</span>,</span>
+<span id="cb1-8"><a></a>    <span class="dv">87</span>, <span class="dv">73</span>, <span class="dv">78</span>, <span class="dv">15</span>, <span class="dv">26</span>, <span class="dv">78</span>, <span class="dv">210</span>, <span class="dv">36</span>, <span class="dv">85</span>, <span class="dv">189</span>, <span class="dv">274</span>, <span class="dv">43</span>, <span class="dv">33</span>, <span class="dv">10</span>, <span class="dv">19</span>, <span class="dv">389</span>, <span class="dv">276</span>,</span>
+<span id="cb1-9"><a></a>    <span class="dv">312</span>])</span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a>weights <span class="op">=</span> np.array([</span>
+<span id="cb1-12"><a></a>    <span class="dv">7</span>, <span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">22</span>, <span class="dv">80</span>, <span class="dv">94</span>, <span class="dv">11</span>, <span class="dv">81</span>, <span class="dv">70</span>, <span class="dv">64</span>, <span class="dv">59</span>, <span class="dv">18</span>, <span class="dv">0</span>, <span class="dv">36</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">15</span>, <span class="dv">42</span>, <span class="dv">9</span>, <span class="dv">0</span>,</span>
+<span id="cb1-13"><a></a>    <span class="dv">42</span>, <span class="dv">47</span>, <span class="dv">52</span>, <span class="dv">32</span>, <span class="dv">26</span>, <span class="dv">48</span>, <span class="dv">55</span>, <span class="dv">6</span>, <span class="dv">29</span>, <span class="dv">84</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">18</span>, <span class="dv">56</span>, <span class="dv">7</span>, <span class="dv">29</span>, <span class="dv">93</span>, <span class="dv">44</span>, <span class="dv">71</span>,</span>
+<span id="cb1-14"><a></a>    <span class="dv">3</span>, <span class="dv">86</span>, <span class="dv">66</span>, <span class="dv">31</span>, <span class="dv">65</span>, <span class="dv">0</span>, <span class="dv">79</span>, <span class="dv">20</span>, <span class="dv">65</span>, <span class="dv">52</span>, <span class="dv">13</span>])</span>
+<span id="cb1-15"><a></a></span>
+<span id="cb1-16"><a></a>capacity <span class="op">=</span> <span class="dv">850</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside><div>
+<p>Data from <a href="https://developers.google.com/optimization/pack/knapsack">Google OR-Tools</a>.</p>
+</div></aside></section>
+<section id="ascending-order-of-weight" class="slide level2 scrollable">
+<h2>Ascending order of weight</h2>
+<div id="97481c26" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="kw">def</span> greedy_knapsack_weight(weights, values, capacity):</span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a>    num_items <span class="op">=</span> <span class="bu">len</span>(weights)</span>
+<span id="cb2-4"><a></a></span>
+<span id="cb2-5"><a></a>    <span class="co"># Create a list of items with their values and original indices</span></span>
+<span id="cb2-6"><a></a>    items <span class="op">=</span> <span class="bu">list</span>(<span class="bu">zip</span>(weights, values, <span class="bu">range</span>(num_items)))</span>
+<span id="cb2-7"><a></a></span>
+<span id="cb2-8"><a></a>    <span class="co"># Sort items by weight in increasing order</span></span>
+<span id="cb2-9"><a></a>    items.sort()</span>
+<span id="cb2-10"><a></a>    </span>
+<span id="cb2-11"><a></a>    total_weight, total_value <span class="op">=</span> <span class="dv">0</span>,<span class="dv">0</span></span>
+<span id="cb2-12"><a></a>    solution <span class="op">=</span> np.zeros(num_items, dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb2-13"><a></a>    </span>
+<span id="cb2-14"><a></a>    <span class="co"># Select items based on the sorted order</span></span>
+<span id="cb2-15"><a></a>    <span class="cf">for</span> w, v, idx <span class="kw">in</span> items:</span>
+<span id="cb2-16"><a></a>        <span class="cf">if</span> total_weight <span class="op">+</span> w <span class="op">&lt;=</span> capacity:</span>
+<span id="cb2-17"><a></a>            solution[idx] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-18"><a></a>            total_weight <span class="op">+=</span> w</span>
+<span id="cb2-19"><a></a>            total_value <span class="op">+=</span> v</span>
+<span id="cb2-20"><a></a>        <span class="cf">else</span>:</span>
+<span id="cb2-21"><a></a>            <span class="cf">break</span>  <span class="co"># Skip items that would exceed the capacity</span></span>
+<span id="cb2-22"><a></a>    </span>
+<span id="cb2-23"><a></a>    <span class="cf">return</span> solution, total_value, total_weight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside class="notes">
+<ul>
+<li>What is the time complexity of this method?
+<ul>
+<li><span class="math inline">\(\mathcal{O}(n \log n)\)</span> due to sorting.</li>
+</ul></li>
+<li>Is this strategy relevant?
+<ul>
+<li>It overlooks value, the critical factor for optimization.</li>
+</ul></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Is this strategy <strong>relevant</strong>?</p>
+</div></aside></section>
+<section id="greedy_knapsack_weight" class="slide level2">
+<h2><code>greedy_knapsack_weight</code></h2>
+<div id="eb6901bc" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a>solution, total_value, total_weight <span class="op">=</span> greedy_knapsack_weight(weights, values, capacity)</span>
+<span id="cb3-2"><a></a></span>
+<span id="cb3-3"><a></a><span class="bu">print</span>(<span class="ss">f"Solution: </span><span class="sc">{</span>solution<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-4"><a></a><span class="bu">print</span>(<span class="ss">f"Value: </span><span class="sc">{</span>total_value<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-5"><a></a><span class="bu">print</span>(<span class="ss">f"Weight: </span><span class="sc">{</span>total_weight<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solution: [1 1 1 1 0 0 1 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 0
+ 1 0 1 0 0 1 0 1 0 1 0 1 1]
+Value: 5891
+Weight: 817</code></pre>
+</div>
+</div>
+</section>
+<section id="descending-value-order" class="slide level2 scrollable">
+<h2>Descending value order</h2>
+<div id="34b518d8" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="kw">def</span> greedy_knapsack_value(weights, values, capacity):</span>
+<span id="cb5-2"><a></a></span>
+<span id="cb5-3"><a></a>    num_items <span class="op">=</span> <span class="bu">len</span>(weights)</span>
+<span id="cb5-4"><a></a></span>
+<span id="cb5-5"><a></a>    <span class="co"># Create a list of items with their values and original indices</span></span>
+<span id="cb5-6"><a></a>    items <span class="op">=</span> <span class="bu">list</span>(<span class="bu">zip</span>(values, weights, <span class="bu">range</span>(num_items)))</span>
+<span id="cb5-7"><a></a></span>
+<span id="cb5-8"><a></a>    <span class="co"># Sort items by value in decreasing order</span></span>
+<span id="cb5-9"><a></a>    items.sort(reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-10"><a></a>    </span>
+<span id="cb5-11"><a></a>    total_weight <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-12"><a></a>    total_value <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-13"><a></a>    solution <span class="op">=</span> np.zeros(num_items, dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb5-14"><a></a>    </span>
+<span id="cb5-15"><a></a>    <span class="co"># Select items based on the sorted order</span></span>
+<span id="cb5-16"><a></a>    <span class="cf">for</span> v, w, idx <span class="kw">in</span> items:</span>
+<span id="cb5-17"><a></a>        <span class="cf">if</span> total_weight <span class="op">+</span> w <span class="op">&lt;=</span> capacity:</span>
+<span id="cb5-18"><a></a>            solution[idx] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb5-19"><a></a>            total_weight <span class="op">+=</span> w</span>
+<span id="cb5-20"><a></a>            total_value <span class="op">+=</span> v</span>
+<span id="cb5-21"><a></a>    </span>
+<span id="cb5-22"><a></a>    <span class="cf">return</span> solution, total_value, total_weight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<ul>
+<li>What is the time complexity of this method?
+<ul>
+<li><span class="math inline">\(\mathcal{O}(n \log n)\)</span> due to sorting.</li>
+</ul></li>
+<li>Is this strategy relevant?
+<ul>
+<li>Emphasizes maximizing value but does not guarantee an optimal solution.</li>
+</ul></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="greedy_knapsack_value" class="slide level2">
+<h2><code>greedy_knapsack_value</code></h2>
+<div id="22671b06" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>solution, total_value, total_weight <span class="op">=</span> greedy_knapsack_value(weights, values, capacity)</span>
+<span id="cb6-2"><a></a></span>
+<span id="cb6-3"><a></a><span class="bu">print</span>(<span class="ss">f"Solution: </span><span class="sc">{</span>solution<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-4"><a></a><span class="bu">print</span>(<span class="ss">f"Value: </span><span class="sc">{</span>total_value<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-5"><a></a><span class="bu">print</span>(<span class="ss">f"Weight: </span><span class="sc">{</span>total_weight<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solution: [1 1 0 1 1 0 1 0 0 1 1 1 1 0 1 1 0 1 0 1 1 1 1 0 0 0 0 0 0 1 1 0 0 0 1 0 0
+ 0 1 1 0 1 1 0 1 0 0 1 1 1]
+Value: 7339
+Weight: 849</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="ga-implementation" class="title-slide slide level1 center">
+<h1>GA Implementation</h1>
+
+</section>
+<section id="encoding" class="slide level2">
+<h2>Encoding</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ga_chromosomes-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="../../assets/images/ga_chromosomes-00.png" class="quarto-figure quarto-figure-center" height="150"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p>The most <strong>straightforward representation</strong> for each <strong>chromosome</strong> (<strong>state</strong>) is an array of size <span class="math inline">\(n\)</span>, where <span class="math inline">\(n\)</span> represents the number of items. Each element <span class="math inline">\(i\)</span> in the array indicates whether item <span class="math inline">\(i\)</span> is <strong>included (1)</strong> or <strong>excluded (0)</strong>.</p>
+</div></aside></section>
+<section id="population" class="slide level2">
+<h2>Population</h2>
+<div id="9068cb7c" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="kw">def</span> initialize_population(pop_size, num_items):</span>
+<span id="cb8-2"><a></a></span>
+<span id="cb8-3"><a></a>    <span class="co">"""</span></span>
+<span id="cb8-4"><a></a><span class="co">    Initialize the population with random binary strings.</span></span>
+<span id="cb8-5"><a></a></span>
+<span id="cb8-6"><a></a><span class="co">    Args:</span></span>
+<span id="cb8-7"><a></a><span class="co">        pop_size (int): Number of individuals in the population.</span></span>
+<span id="cb8-8"><a></a><span class="co">        num_items (int): Number of items in the knapsack problem.</span></span>
+<span id="cb8-9"><a></a></span>
+<span id="cb8-10"><a></a><span class="co">    Returns:</span></span>
+<span id="cb8-11"><a></a><span class="co">        np.ndarray: Initialized population.</span></span>
+<span id="cb8-12"><a></a><span class="co">    """</span></span>
+<span id="cb8-13"><a></a></span>
+<span id="cb8-14"><a></a>    <span class="cf">return</span> np.random.randint(<span class="dv">2</span>, size<span class="op">=</span>(pop_size, num_items))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside class="notes">
+<p><strong>Problem specificity</strong>: Adjust the population size based on the complexity of the problem. More complex problems may require a larger population to effectively explore the solution space.</p>
+<p><strong>Available resources</strong>: Consider the available computing resources, as a larger population size increases memory and computational time requirements.</p>
+<p><strong>Balance between diversity and convergence</strong>: A larger population can maintain higher genetic diversity, which helps avoid local optima, but may also slow convergence. Find a balance suitable for your problem.</p>
+<p><strong>Guidelines</strong>: For many problems, an empirical rule is to start with a population size between 50 and 100, then adjust based on observed performance.</p>
+<p><strong>Adaptive approaches</strong>: Consider using adaptive methods that dynamically adjust the population size based on the algorithm’s progress.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>How to choose the <strong>population size (number of individuals/chromosomes)</strong>?</p>
+</div></aside></section>
+<section id="population-1" class="slide level2">
+<h2>Population</h2>
+<p>The proposed method for initializing the population presents a <strong>problem</strong>.</p>
+
+<aside class="notes">
+<p>The initial population is generated entirely at random without considering feasibility.</p>
+<p>This can result in most individuals being infeasible (exceeding capacity), especially for larger problems, slowing down convergence.</p>
+<p><strong>Suggestion</strong>: Introduce a feasibility check during initialization or generate initial solutions that are more likely to be feasible.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Can you identify <em>what it is?</em></p>
+</div></aside></section>
+<section id="fitness" class="slide level2">
+<h2>Fitness</h2>
+<div id="2a1c115c" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="kw">def</span> evaluate_fitness(population, weights, values, capacity, penalty_factor<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb9-2"><a></a></span>
+<span id="cb9-3"><a></a>    total_weights <span class="op">=</span> np.dot(population, weights)</span>
+<span id="cb9-4"><a></a></span>
+<span id="cb9-5"><a></a>    total_values <span class="op">=</span> np.dot(population, values)</span>
+<span id="cb9-6"><a></a></span>
+<span id="cb9-7"><a></a>    penalties <span class="op">=</span> penalty_factor <span class="op">*</span> np.maximum(<span class="dv">0</span>, total_weights <span class="op">-</span> capacity)</span>
+<span id="cb9-8"><a></a></span>
+<span id="cb9-9"><a></a>    fitness <span class="op">=</span> total_values <span class="op">-</span> penalties</span>
+<span id="cb9-10"><a></a></span>
+<span id="cb9-11"><a></a>    <span class="cf">return</span> fitness</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside class="notes">
+<p>First, notice the extensive use of numpy. The total weight for each chromosome of our population is calculated with a single expression. Likewise for total values.</p>
+<p>The fitness function employs a smoother penalization strategy by deducting a penalty proportional to the excess weight, thereby distinguishing between solutions that exceed the weight limit.</p>
+<p>Alternatively, one could assign a fitness value of zero to any solution that exceeds the knapsack’s capacity. However, this stringent penalization could result in a significant portion, or even all, of the population having zero fitness, particularly in the initial generations. This scenario poses challenges for selection mechanisms, such as roulette wheel selection, which rely on non-zero fitness values to calculate selection probabilities, potentially leading to division by zero errors.</p>
+<p>The proposed strategy, which applies penalties to overweight solutions, may lead the genetic algorithm to generate infeasible solutions. Such instances require external handling by restarting the genetic algorithm whenever an infeasible solution is encountered.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Can you identify a possible <strong>issue</strong> with this fitness function?</p>
+</div></aside></section>
+<section id="roulette-wheel-selection" class="slide level2">
+<h2>Roulette Wheel Selection</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Roulette wheel selection</strong> is a stochastic selection method where the probability of selecting an individual is proportional to its fitness relative to the rest of the population.</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ga_roulette.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="../../assets/images/ga_roulette.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+
+<aside class="notes">
+<p>What is the fundamental objective of this selection method? Why not simply choose the individuals with the highest fitness?</p>
+<p>The fundamental objective is to maintain a diverse population.</p>
+<h3 id="advantages"><strong>Advantages</strong></h3>
+<ol type="1">
+<li><p><strong>Fitness Proportionality</strong></p>
+<ul>
+<li><strong>Simple Implementation</strong>: The method is straightforward to implement, requiring the calculation of cumulative probabilities based on fitness values.</li>
+<li><strong>All Individuals Have a Chance</strong>: Even individuals with lower fitness have a non-zero probability of being selected, maintaining genetic diversity.</li>
+</ul></li>
+<li><p><strong>Selection Pressure Adjusted by Fitness</strong></p>
+<ul>
+<li><strong>Dynamic Pressure</strong>: Selection pressure naturally adjusts based on the fitness distribution of the population.</li>
+<li><strong>Encourages High-Fitness Individuals</strong>: Individuals with higher fitness are more likely to be selected, promoting the propagation of advantageous traits.</li>
+</ul></li>
+</ol>
+<h3 id="disadvantages"><strong>Disadvantages</strong></h3>
+<ol type="1">
+<li><p><strong>Sensitivity to Fitness Scaling</strong></p>
+<ul>
+<li><strong>Negative Fitness Values</strong>: If fitness values are negative or zero (which can happen when penalties are applied), the method becomes problematic as probabilities cannot be negative or zero.</li>
+<li><strong>Scaling Issues</strong>: When fitness values are very close together or have a small range, the selection probabilities become nearly uniform, reducing selection pressure.</li>
+</ul></li>
+<li><p><strong>Premature Convergence Risk</strong></p>
+<ul>
+<li><strong>Dominance of High-Fitness Individuals</strong>: If a few individuals have significantly higher fitness, they may dominate the selection process, leading to reduced diversity and premature convergence to suboptimal solutions.</li>
+</ul></li>
+<li><p><strong>Computational Overhead</strong></p>
+<ul>
+<li><strong>Normalization Required</strong>: Fitness values need to be normalized to probabilities, which adds computational steps, especially if adjustments are needed for negative fitness values.</li>
+</ul></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Attribution</strong>: <span class="citation" data-cites="Santos-Amorim:2012aa">Santos Amorim et al. (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span></p>
+</div></aside></section>
+<section id="roulette_selection" class="slide level2">
+<h2><code>roulette_selection</code></h2>
+<div id="80da9e31" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="kw">def</span> roulette_selection(population, fitness):</span>
+<span id="cb10-2"><a></a></span>
+<span id="cb10-3"><a></a>    <span class="co"># Adjust fitness to be non-negative</span></span>
+<span id="cb10-4"><a></a>    min_fitness <span class="op">=</span> np.<span class="bu">min</span>(fitness)</span>
+<span id="cb10-5"><a></a>    adjusted_fitness <span class="op">=</span> fitness <span class="op">-</span> min_fitness <span class="op">+</span> <span class="fl">1e-6</span>  <span class="co"># small epsilon to avoid zero division</span></span>
+<span id="cb10-6"><a></a></span>
+<span id="cb10-7"><a></a>    total_fitness <span class="op">=</span> np.<span class="bu">sum</span>(adjusted_fitness)</span>
+<span id="cb10-8"><a></a>    probabilities <span class="op">=</span> adjusted_fitness <span class="op">/</span> total_fitness</span>
+<span id="cb10-9"><a></a></span>
+<span id="cb10-10"><a></a>    pop_size <span class="op">=</span> population.shape[<span class="dv">0</span>]</span>
+<span id="cb10-11"><a></a>    selected_indices <span class="op">=</span> np.random.choice(pop_size, size<span class="op">=</span>pop_size, p<span class="op">=</span>probabilities)</span>
+<span id="cb10-12"><a></a></span>
+<span id="cb10-13"><a></a>    <span class="cf">return</span> population[selected_indices]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside class="notes">
+<p>A small value is added to the adjusted fitness values to avoid dividing by 0.</p>
+<p>Returns a population of the same size. The fittest individuals should now be more represented.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>In your own words, what does <code>roulette_selection</code> do?</p>
+</div></aside></section>
+<section id="crossover" class="slide level2">
+<h2>Crossover</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ga_chromosomes_crossover-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="../../assets/images/ga_chromosomes_crossover-00.png" class="quarto-figure quarto-figure-center" height="425"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p>In the <strong>single crossover</strong> method, a crossover point is <strong>randomly selected</strong>. The resulting child 1 is formed by combining the <strong>prefix</strong> of parent 1 with the <strong>suffix</strong> of parent 2, while child 2 is created by joining the suffix of parent 1 with the prefix of parent 2.</p>
+</div></aside></section>
+<section id="crossover-1" class="slide level2">
+<h2>Crossover</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><a href="../../assets/images/ga_chromosomes_crossover-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="../../assets/images/ga_chromosomes_crossover-00.png"></a></p>
+<p>Parents</p>
+</div><div class="column" style="width:50%;">
+<p><a href="../../assets/images/ga_chromosomes_crossover-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="../../assets/images/ga_chromosomes_crossover-01.png"></a></p>
+<p>Offspring</p>
+</div></div>
+
+<aside><div>
+<p>Two <strong>parent individuals</strong> produce two <strong>offspring</strong>.</p>
+</div></aside></section>
+<section id="crossover-2" class="slide level2">
+<h2>Crossover</h2>
+<div id="c0cac2ba" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a><span class="kw">def</span> single_point_crossover(parents, crossover_rate):</span>
+<span id="cb11-2"><a></a></span>
+<span id="cb11-3"><a></a>    num_parents, num_genes <span class="op">=</span> parents.shape</span>
+<span id="cb11-4"><a></a>    np.random.shuffle(parents)</span>
+<span id="cb11-5"><a></a>    offspring <span class="op">=</span> []</span>
+<span id="cb11-6"><a></a></span>
+<span id="cb11-7"><a></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, num_parents, <span class="dv">2</span>):</span>
+<span id="cb11-8"><a></a></span>
+<span id="cb11-9"><a></a>        parent1 <span class="op">=</span> parents[i]</span>
+<span id="cb11-10"><a></a>        parent2 <span class="op">=</span> parents[i<span class="op">+</span><span class="dv">1</span> <span class="cf">if</span> i<span class="op">+</span><span class="dv">1</span> <span class="op">&lt;</span> num_parents <span class="cf">else</span> <span class="dv">0</span>]</span>
+<span id="cb11-11"><a></a></span>
+<span id="cb11-12"><a></a>        child1 <span class="op">=</span> parent1.copy()</span>
+<span id="cb11-13"><a></a>        child2 <span class="op">=</span> parent2.copy()</span>
+<span id="cb11-14"><a></a></span>
+<span id="cb11-15"><a></a>        <span class="cf">if</span> np.random.rand() <span class="op">&lt;</span> crossover_rate:</span>
+<span id="cb11-16"><a></a>            point <span class="op">=</span> np.random.randint(<span class="dv">1</span>, num_genes)  <span class="co"># Crossover point</span></span>
+<span id="cb11-17"><a></a>            child1[:point], child2[:point] <span class="op">=</span> parent2[:point], parent1[:point]</span>
+<span id="cb11-18"><a></a></span>
+<span id="cb11-19"><a></a>        offspring.append(child1)</span>
+<span id="cb11-20"><a></a>        offspring.append(child2)</span>
+<span id="cb11-21"><a></a></span>
+<span id="cb11-22"><a></a>    <span class="cf">return</span> np.array(offspring)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside><div>
+<p>Controlled by a user-specified parameter, <code>crossover_rate</code>, typical value 0.8.</p>
+</div></aside></section>
+<section id="mutation" class="slide level2">
+<h2>Mutation</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ga_chromosomes_mutate-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="../../assets/images/ga_chromosomes_mutate-00.png" class="quarto-figure quarto-figure-center" height="450"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p>In this basic scenario, a <strong>mutation</strong> involves “flipping” a bit.</p>
+</div></aside></section>
+<section id="mutate" class="slide level2">
+<h2>Mutate</h2>
+<div id="63463bb7" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a><span class="kw">def</span> mutation(offspring, mutation_rate):</span>
+<span id="cb12-2"><a></a></span>
+<span id="cb12-3"><a></a>    num_offspring, num_genes <span class="op">=</span> offspring.shape</span>
+<span id="cb12-4"><a></a></span>
+<span id="cb12-5"><a></a>    mutation_matrix <span class="op">=</span> np.random.rand(num_offspring, num_genes) <span class="op">&lt;</span> mutation_rate</span>
+<span id="cb12-6"><a></a></span>
+<span id="cb12-7"><a></a>    offspring[mutation_matrix] <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> offspring[mutation_matrix]</span>
+<span id="cb12-8"><a></a></span>
+<span id="cb12-9"><a></a>    <span class="cf">return</span> offspring</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside><div>
+<p>A user-defined <strong>mutation rate</strong> determines whether a <strong>position</strong> undergoes “mutation.”</p>
+</div></aside></section>
+<section id="clarification" class="slide level2 scrollable">
+<h2>Clarification</h2>
+<div id="bbfbfe5b" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb13-2"><a></a></span>
+<span id="cb13-3"><a></a>offspring <span class="op">=</span> initialize_population(<span class="dv">4</span>, <span class="dv">10</span>)</span>
+<span id="cb13-4"><a></a></span>
+<span id="cb13-5"><a></a>num_offspring, num_genes <span class="op">=</span> offspring.shape</span>
+<span id="cb13-6"><a></a></span>
+<span id="cb13-7"><a></a><span class="bu">print</span>(<span class="st">"Offspring:"</span>)</span>
+<span id="cb13-8"><a></a><span class="bu">print</span>(offspring)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Offspring:
+[[0 1 0 0 0 1 0 0 0 1]
+ [0 0 0 0 1 0 1 1 1 0]
+ [1 0 1 1 1 1 1 1 1 1]
+ [0 0 1 1 1 0 1 0 0 0]]</code></pre>
+</div>
+</div>
+<div id="f16a22bf" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a>mutation_rate <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb15-2"><a></a>mutation_matrix <span class="op">=</span> np.random.rand(num_offspring, num_genes) <span class="op">&lt;</span> mutation_rate</span>
+<span id="cb15-3"><a></a></span>
+<span id="cb15-4"><a></a><span class="bu">print</span>(<span class="st">"Mutation matrix:"</span>)</span>
+<span id="cb15-5"><a></a><span class="bu">print</span>(mutation_matrix)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mutation matrix:
+[[False False False False False False False False False  True]
+ [False False False False False False False False False False]
+ [False False  True False False False False False False False]
+ [False False False False False False False False  True False]]</code></pre>
+</div>
+</div>
+<div id="dd6eb38f" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="bu">print</span>(<span class="st">"offspring[mutation_matrix]:"</span>)</span>
+<span id="cb17-2"><a></a><span class="bu">print</span>(offspring[mutation_matrix])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>offspring[mutation_matrix]:
+[1 1 0]</code></pre>
+</div>
+</div>
+<div id="242cf729" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="bu">print</span>(<span class="st">"1 - offspring[mutation_matrix]:"</span>)</span>
+<span id="cb19-2"><a></a><span class="bu">print</span>(<span class="dv">1</span> <span class="op">-</span> offspring[mutation_matrix])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 - offspring[mutation_matrix]:
+[0 0 1]</code></pre>
+</div>
+</div>
+<div id="d5541fca" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>offspring[mutation_matrix] <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> offspring[mutation_matrix]</span>
+<span id="cb21-2"><a></a></span>
+<span id="cb21-3"><a></a><span class="bu">print</span>(<span class="st">"Mutated offstring:"</span>)</span>
+<span id="cb21-4"><a></a><span class="bu">print</span>(offspring)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mutated offstring:
+[[0 1 0 0 0 1 0 0 0 0]
+ [0 0 0 0 1 0 1 1 1 0]
+ [1 0 0 1 1 1 1 1 1 1]
+ [0 0 1 1 1 0 1 0 1 0]]</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>This implementation makes extensive use of Numpy.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="elitism" class="slide level2">
+<h2>Elitism</h2>
+<p><strong>Elitism</strong> in genetic algorithms is a strategy where a subset of the fittest individuals from the current generation is directly carried over to the next generation.</p>
+<p>This approach ensures that the best solutions are preserved throughout the evolutionary process, enhancing convergence speed and maintaining high-quality solutions within the population.</p>
+</section>
+<section id="elitism-1" class="slide level2">
+<h2>Elitism</h2>
+<div id="429ed8c9" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a><span class="kw">def</span> elitism(population, fitness, elite_size):</span>
+<span id="cb23-2"><a></a></span>
+<span id="cb23-3"><a></a>    elite_indices <span class="op">=</span> np.argsort(fitness)[<span class="op">-</span>elite_size:]  <span class="co"># Get indices of top individuals</span></span>
+<span id="cb23-4"><a></a></span>
+<span id="cb23-5"><a></a>    elites <span class="op">=</span> population[elite_indices]</span>
+<span id="cb23-6"><a></a></span>
+<span id="cb23-7"><a></a>    <span class="cf">return</span> elites</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="genetic-algorithm-version-1" class="slide level2 scrollable">
+<h2>Genetic Algorithm (Version 1)</h2>
+<div id="e9389f1d" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a><span class="kw">def</span> genetic_algorithm(weights, values, capacity, pop_size<span class="op">=</span><span class="dv">100</span>, </span>
+<span id="cb24-2"><a></a>                      num_generations<span class="op">=</span><span class="dv">100</span>, crossover_rate<span class="op">=</span><span class="fl">0.8</span>,</span>
+<span id="cb24-3"><a></a>                      mutation_rate<span class="op">=</span><span class="fl">0.05</span>, elite_percent<span class="op">=</span><span class="fl">0.02</span>):</span>
+<span id="cb24-4"><a></a></span>
+<span id="cb24-5"><a></a>    num_items <span class="op">=</span> <span class="bu">len</span>(weights)</span>
+<span id="cb24-6"><a></a>    elite_size <span class="op">=</span> <span class="bu">max</span>(<span class="dv">1</span>, <span class="bu">int</span>(pop_size <span class="op">*</span> elite_percent))</span>
+<span id="cb24-7"><a></a>    population <span class="op">=</span> initialize_population(pop_size, num_items)</span>
+<span id="cb24-8"><a></a></span>
+<span id="cb24-9"><a></a>    <span class="cf">for</span> generation <span class="kw">in</span> <span class="bu">range</span>(num_generations):</span>
+<span id="cb24-10"><a></a></span>
+<span id="cb24-11"><a></a>        fitness <span class="op">=</span> evaluate_fitness(population, weights, values, capacity)</span>
+<span id="cb24-12"><a></a></span>
+<span id="cb24-13"><a></a>        <span class="co"># Elitism</span></span>
+<span id="cb24-14"><a></a>        elites <span class="op">=</span> elitism(population, fitness, elite_size)</span>
+<span id="cb24-15"><a></a></span>
+<span id="cb24-16"><a></a>        <span class="co"># Selection</span></span>
+<span id="cb24-17"><a></a>        parents <span class="op">=</span> roulette_selection(population, fitness)</span>
+<span id="cb24-18"><a></a></span>
+<span id="cb24-19"><a></a>        <span class="co"># Crossover</span></span>
+<span id="cb24-20"><a></a>        offspring <span class="op">=</span> single_point_crossover(parents, crossover_rate)</span>
+<span id="cb24-21"><a></a></span>
+<span id="cb24-22"><a></a>        <span class="co"># Mutation</span></span>
+<span id="cb24-23"><a></a>        offspring <span class="op">=</span> mutation(offspring, mutation_rate)</span>
+<span id="cb24-24"><a></a></span>
+<span id="cb24-25"><a></a>        <span class="co"># Create new population</span></span>
+<span id="cb24-26"><a></a>        population <span class="op">=</span> np.vstack((elites, offspring))</span>
+<span id="cb24-27"><a></a></span>
+<span id="cb24-28"><a></a>        <span class="co"># Ensure population size</span></span>
+<span id="cb24-29"><a></a>        <span class="cf">if</span> population.shape[<span class="dv">0</span>] <span class="op">&gt;</span> pop_size:</span>
+<span id="cb24-30"><a></a>            population <span class="op">=</span> population[:pop_size]</span>
+<span id="cb24-31"><a></a>        <span class="cf">elif</span> population.shape[<span class="dv">0</span>] <span class="op">&lt;</span> pop_size:</span>
+<span id="cb24-32"><a></a>            <span class="co"># Add random individuals to fill population</span></span>
+<span id="cb24-33"><a></a>            num_new_individuals <span class="op">=</span> pop_size <span class="op">-</span> population.shape[<span class="dv">0</span>]</span>
+<span id="cb24-34"><a></a>            new_individuals <span class="op">=</span> initialize_population(num_new_individuals, num_items)</span>
+<span id="cb24-35"><a></a>            population <span class="op">=</span> np.vstack((population, new_individuals))</span>
+<span id="cb24-36"><a></a></span>
+<span id="cb24-37"><a></a>    <span class="co"># After all generations, return the best solution</span></span>
+<span id="cb24-38"><a></a>    fitness <span class="op">=</span> evaluate_fitness(population, weights, values, capacity)</span>
+<span id="cb24-39"><a></a>    best_index <span class="op">=</span> np.argmax(fitness)</span>
+<span id="cb24-40"><a></a>    best_solution <span class="op">=</span> population[best_index]</span>
+<span id="cb24-41"><a></a>    best_value <span class="op">=</span> np.dot(best_solution, values)</span>
+<span id="cb24-42"><a></a>    best_weight <span class="op">=</span> np.dot(best_solution, weights)</span>
+<span id="cb24-43"><a></a></span>
+<span id="cb24-44"><a></a>    <span class="cf">return</span> best_solution, best_value, best_weight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="run" class="slide level2">
+<h2>Run</h2>
+<div id="05c574e7" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a></a>np.random.seed(<span class="dv">13</span>)</span>
+<span id="cb25-2"><a></a></span>
+<span id="cb25-3"><a></a>solution, total_value, total_weight <span class="op">=</span> genetic_algorithm(weights, values, capacity)</span>
+<span id="cb25-4"><a></a></span>
+<span id="cb25-5"><a></a><span class="bu">print</span>(<span class="ss">f"Solution: </span><span class="sc">{</span>solution<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb25-6"><a></a><span class="bu">print</span>(<span class="ss">f"Value: </span><span class="sc">{</span>total_value<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb25-7"><a></a><span class="bu">print</span>(<span class="ss">f"Weight: </span><span class="sc">{</span>total_weight<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solution: [1 1 0 1 1 0 1 0 0 0 1 1 1 0 1 1 1 1 1 0 1 1 1 0 0 1 0 1 0 1 1 1 1 1 1 0 0
+ 1 0 1 0 0 1 0 1 0 0 1 1 1]
+Value: 7357
+Weight: 848</code></pre>
+</div>
+</div>
+</section>
+<section id="genetic-algorithm-version-1.1" class="slide level2 scrollable">
+<h2>Genetic Algorithm (Version 1.1)</h2>
+<div id="6d2d6a2c" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a></a><span class="kw">def</span> genetic_algorithm(weights, values, capacity, pop_size<span class="op">=</span><span class="dv">100</span>, </span>
+<span id="cb27-2"><a></a>                      num_generations<span class="op">=</span><span class="dv">100</span>, crossover_rate<span class="op">=</span><span class="fl">0.8</span>, </span>
+<span id="cb27-3"><a></a>                      mutation_rate<span class="op">=</span><span class="fl">0.05</span>, elite_percent<span class="op">=</span><span class="fl">0.02</span>):</span>
+<span id="cb27-4"><a></a></span>
+<span id="cb27-5"><a></a>    num_items <span class="op">=</span> <span class="bu">len</span>(weights)</span>
+<span id="cb27-6"><a></a>    elite_size <span class="op">=</span> <span class="bu">max</span>(<span class="dv">1</span>, <span class="bu">int</span>(pop_size <span class="op">*</span> elite_percent))</span>
+<span id="cb27-7"><a></a>    population <span class="op">=</span> initialize_population(pop_size, num_items)</span>
+<span id="cb27-8"><a></a></span>
+<span id="cb27-9"><a></a>    average_fitness_history <span class="op">=</span> []</span>
+<span id="cb27-10"><a></a>    best_fitness_history <span class="op">=</span> []</span>
+<span id="cb27-11"><a></a></span>
+<span id="cb27-12"><a></a>    <span class="cf">for</span> generation <span class="kw">in</span> <span class="bu">range</span>(num_generations):</span>
+<span id="cb27-13"><a></a></span>
+<span id="cb27-14"><a></a>        fitness <span class="op">=</span> evaluate_fitness(population, weights, values, capacity)</span>
+<span id="cb27-15"><a></a></span>
+<span id="cb27-16"><a></a>        <span class="co"># Track average and best fitness</span></span>
+<span id="cb27-17"><a></a>        average_fitness <span class="op">=</span> np.mean(fitness)</span>
+<span id="cb27-18"><a></a>        best_fitness <span class="op">=</span> np.<span class="bu">max</span>(fitness)</span>
+<span id="cb27-19"><a></a>        average_fitness_history.append(average_fitness)</span>
+<span id="cb27-20"><a></a>        best_fitness_history.append(best_fitness)</span>
+<span id="cb27-21"><a></a></span>
+<span id="cb27-22"><a></a>        <span class="co"># Elitism</span></span>
+<span id="cb27-23"><a></a>        elites <span class="op">=</span> elitism(population, fitness, elite_size)</span>
+<span id="cb27-24"><a></a></span>
+<span id="cb27-25"><a></a>        <span class="co"># Selection</span></span>
+<span id="cb27-26"><a></a>        parents <span class="op">=</span> roulette_selection(population, fitness)</span>
+<span id="cb27-27"><a></a></span>
+<span id="cb27-28"><a></a>        <span class="co"># Crossover</span></span>
+<span id="cb27-29"><a></a>        offspring <span class="op">=</span> single_point_crossover(parents, crossover_rate)</span>
+<span id="cb27-30"><a></a></span>
+<span id="cb27-31"><a></a>        <span class="co"># Mutation</span></span>
+<span id="cb27-32"><a></a>        offspring <span class="op">=</span> mutation(offspring, mutation_rate)</span>
+<span id="cb27-33"><a></a></span>
+<span id="cb27-34"><a></a>        <span class="co"># Create new population</span></span>
+<span id="cb27-35"><a></a>        population <span class="op">=</span> np.vstack((elites, offspring))</span>
+<span id="cb27-36"><a></a></span>
+<span id="cb27-37"><a></a>        <span class="co"># Ensure population size</span></span>
+<span id="cb27-38"><a></a>        <span class="cf">if</span> population.shape[<span class="dv">0</span>] <span class="op">&gt;</span> pop_size:</span>
+<span id="cb27-39"><a></a>            population <span class="op">=</span> population[:pop_size]</span>
+<span id="cb27-40"><a></a>        <span class="cf">elif</span> population.shape[<span class="dv">0</span>] <span class="op">&lt;</span> pop_size:</span>
+<span id="cb27-41"><a></a>            <span class="co"># Add random individuals to fill population</span></span>
+<span id="cb27-42"><a></a>            num_new_individuals <span class="op">=</span> pop_size <span class="op">-</span> population.shape[<span class="dv">0</span>]</span>
+<span id="cb27-43"><a></a>            new_individuals <span class="op">=</span> initialize_population(num_new_individuals, num_items)</span>
+<span id="cb27-44"><a></a>            population <span class="op">=</span> np.vstack((population, new_individuals))</span>
+<span id="cb27-45"><a></a></span>
+<span id="cb27-46"><a></a>    <span class="co"># After all generations, return the best solution</span></span>
+<span id="cb27-47"><a></a>    fitness <span class="op">=</span> evaluate_fitness(population, weights, values, capacity)</span>
+<span id="cb27-48"><a></a>    best_index <span class="op">=</span> np.argmax(fitness)</span>
+<span id="cb27-49"><a></a>    best_solution <span class="op">=</span> population[best_index]</span>
+<span id="cb27-50"><a></a>    best_value <span class="op">=</span> np.dot(best_solution, values)</span>
+<span id="cb27-51"><a></a>    best_weight <span class="op">=</span> np.dot(best_solution, weights)</span>
+<span id="cb27-52"><a></a></span>
+<span id="cb27-53"><a></a>    <span class="cf">return</span> best_solution, best_value, best_weight, average_fitness_history, best_fitness_history</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="plot" class="slide level2">
+<h2>Plot</h2>
+<div id="2c6e4456" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb28-2"><a></a></span>
+<span id="cb28-3"><a></a><span class="kw">def</span> plot_fitness_over_generations(avg_fitness_history, best_fitness_history):</span>
+<span id="cb28-4"><a></a></span>
+<span id="cb28-5"><a></a>  generations <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(avg_fitness_history) <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb28-6"><a></a></span>
+<span id="cb28-7"><a></a>  plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">6</span>))</span>
+<span id="cb28-8"><a></a></span>
+<span id="cb28-9"><a></a>  plt.plot(generations, avg_fitness_history, label<span class="op">=</span><span class="st">'Average Fitness'</span>)</span>
+<span id="cb28-10"><a></a>  plt.plot(generations, best_fitness_history, label<span class="op">=</span><span class="st">'Best Fitness'</span>)</span>
+<span id="cb28-11"><a></a>  plt.xlabel(<span class="st">'Generation'</span>)</span>
+<span id="cb28-12"><a></a>  plt.ylabel(<span class="st">'Fitness'</span>)</span>
+<span id="cb28-13"><a></a>  plt.title(<span class="st">'Fitness over Generations'</span>)</span>
+<span id="cb28-14"><a></a>  plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="run-1" class="slide level2 scrollable">
+<h2>Run</h2>
+<div id="0e780513" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a></a>np.random.seed(<span class="dv">13</span>)</span>
+<span id="cb29-2"><a></a></span>
+<span id="cb29-3"><a></a>solution, total_value, total_weight, avg_fitness_history, best_fitness_history <span class="op">=</span> genetic_algorithm(weights, values, capacity)</span>
+<span id="cb29-4"><a></a></span>
+<span id="cb29-5"><a></a><span class="bu">print</span>(<span class="ss">f"Solution: </span><span class="sc">{</span>solution<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb29-6"><a></a><span class="bu">print</span>(<span class="ss">f"Value: </span><span class="sc">{</span>total_value<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb29-7"><a></a><span class="bu">print</span>(<span class="ss">f"Weight: </span><span class="sc">{</span>total_weight<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb29-8"><a></a></span>
+<span id="cb29-9"><a></a>plot_fitness_over_generations(avg_fitness_history, best_fitness_history)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="run-1-output" class="slide level2 scrollable output-location-slide"><h2>Run</h2><div class="cell output-location-slide" data-execution_count="21">
+<div class="cell-output cell-output-stdout">
+<pre><code>Solution: [1 1 0 1 1 0 1 0 0 0 1 1 1 0 1 1 1 1 1 0 1 1 1 0 0 1 0 1 0 1 1 1 1 1 1 0 0
+ 1 0 1 0 0 1 0 1 0 0 1 1 1]
+Value: 7357
+Weight: 848</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-22-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides_files/figure-revealjs/cell-22-output-2.png" width="527" height="523"></a></p>
+</figure>
+</div>
+</div>
+</div></section><section id="run-2" class="slide level2 scrollable">
+<h2>Run</h2>
+<div id="958e23cc" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb31-2"><a></a></span>
+<span id="cb31-3"><a></a>best_value <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb31-4"><a></a>best_weight <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb31-5"><a></a>best_solution, best_averages, best_bests <span class="op">=</span> <span class="va">None</span>,  <span class="va">None</span>, <span class="va">None</span></span>
+<span id="cb31-6"><a></a></span>
+<span id="cb31-7"><a></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb31-8"><a></a></span>
+<span id="cb31-9"><a></a>  solution, total_value, total_weight, avg_fitness_history, best_fitness_history <span class="op">=</span> genetic_algorithm(weights, values, capacity)</span>
+<span id="cb31-10"><a></a></span>
+<span id="cb31-11"><a></a>  <span class="cf">if</span> total_value <span class="op">&gt;</span> best_value <span class="kw">and</span> total_weight <span class="op">&lt;=</span> capacity:</span>
+<span id="cb31-12"><a></a>    best_value <span class="op">=</span> total_value</span>
+<span id="cb31-13"><a></a>    best_weight <span class="op">=</span> total_weight</span>
+<span id="cb31-14"><a></a>    best_solution <span class="op">=</span> solution</span>
+<span id="cb31-15"><a></a>    best_averages <span class="op">=</span> avg_fitness_history</span>
+<span id="cb31-16"><a></a>    best_bests <span class="op">=</span> best_fitness_history</span>
+<span id="cb31-17"><a></a></span>
+<span id="cb31-18"><a></a></span>
+<span id="cb31-19"><a></a><span class="bu">print</span>(<span class="ss">f"Solution: </span><span class="sc">{</span>best_solution<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-20"><a></a><span class="bu">print</span>(<span class="ss">f"Value: </span><span class="sc">{</span>best_value<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-21"><a></a><span class="bu">print</span>(<span class="ss">f"Weight: </span><span class="sc">{</span>best_weight<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-22"><a></a></span>
+<span id="cb31-23"><a></a>plot_fitness_over_generations(best_averages, best_bests)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="run-2-output" class="slide level2 scrollable output-location-slide"><h2>Run</h2><div class="cell output-location-slide" data-execution_count="22">
+<div class="cell-output cell-output-stdout">
+<pre><code>Solution: [1 1 0 1 1 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 0 1 1 0 1 0 0 1 1 1 1 0 1 0 1 0 0
+ 0 1 1 0 1 1 0 1 0 0 1 1 1]
+Value: 7506
+Weight: 846</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-23-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="slides_files/figure-revealjs/cell-23-output-2.png" width="527" height="523"></a></p>
+</figure>
+</div>
+</div>
+</div></section><section id="using-google-or-tools" class="slide level2">
+<h2>Using Google OR Tools</h2>
+<div id="c67b8941" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a></a><span class="co"># https://developers.google.com/optimization/pack/knapsack</span></span>
+<span id="cb33-2"><a></a></span>
+<span id="cb33-3"><a></a><span class="im">from</span> ortools.algorithms.python <span class="im">import</span> knapsack_solver</span>
+<span id="cb33-4"><a></a></span>
+<span id="cb33-5"><a></a><span class="kw">def</span> solve_using_ortools(values, weights, capacity):</span>
+<span id="cb33-6"><a></a></span>
+<span id="cb33-7"><a></a>  weights <span class="op">=</span> [weights]</span>
+<span id="cb33-8"><a></a></span>
+<span id="cb33-9"><a></a>  <span class="co"># Create the solver</span></span>
+<span id="cb33-10"><a></a>  </span>
+<span id="cb33-11"><a></a>  solver <span class="op">=</span> knapsack_solver.KnapsackSolver(</span>
+<span id="cb33-12"><a></a>      knapsack_solver.SolverType.KNAPSACK_MULTIDIMENSION_BRANCH_AND_BOUND_SOLVER,</span>
+<span id="cb33-13"><a></a>      <span class="st">"KnapsackExample"</span>,</span>
+<span id="cb33-14"><a></a>  )</span>
+<span id="cb33-15"><a></a></span>
+<span id="cb33-16"><a></a>  solver.init(values, weights, [capacity])</span>
+<span id="cb33-17"><a></a></span>
+<span id="cb33-18"><a></a>  computed_value <span class="op">=</span> solver.solve()</span>
+<span id="cb33-19"><a></a></span>
+<span id="cb33-20"><a></a>  packed_items <span class="op">=</span> []</span>
+<span id="cb33-21"><a></a>  packed_weights <span class="op">=</span> []</span>
+<span id="cb33-22"><a></a>  total_weight <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb33-23"><a></a>  <span class="bu">print</span>(<span class="st">"Total value ="</span>, computed_value)</span>
+<span id="cb33-24"><a></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(values)):</span>
+<span id="cb33-25"><a></a>      <span class="cf">if</span> solver.best_solution_contains(i):</span>
+<span id="cb33-26"><a></a>          packed_items.append(i)</span>
+<span id="cb33-27"><a></a>          packed_weights.append(weights[<span class="dv">0</span>][i])</span>
+<span id="cb33-28"><a></a>          total_weight <span class="op">+=</span> weights[<span class="dv">0</span>][i]</span>
+<span id="cb33-29"><a></a>  <span class="bu">print</span>(<span class="st">"Total weight:"</span>, total_weight)</span>
+<span id="cb33-30"><a></a>  <span class="bu">print</span>(<span class="st">"Packed items:"</span>, packed_items)</span>
+<span id="cb33-31"><a></a>  <span class="bu">print</span>(<span class="st">"Packed_weights:"</span>, packed_weights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="solve_using_ortools" class="slide level2">
+<h2><code>solve_using_ortools</code></h2>
+<div id="c706275f" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a></a>solve_using_ortools(values, weights, capacity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total value = 7534
+Total weight: 850
+Packed items: [0, 1, 3, 4, 6, 10, 11, 12, 14, 15, 16, 17, 18, 19, 21, 22, 24, 27, 28, 29, 30, 31, 32, 34, 38, 39, 41, 42, 44, 47, 48, 49]
+Packed_weights: [np.int64(7), np.int64(0), np.int64(22), np.int64(80), np.int64(11), np.int64(59), np.int64(18), np.int64(0), np.int64(3), np.int64(8), np.int64(15), np.int64(42), np.int64(9), np.int64(0), np.int64(47), np.int64(52), np.int64(26), np.int64(6), np.int64(29), np.int64(84), np.int64(2), np.int64(4), np.int64(18), np.int64(7), np.int64(71), np.int64(3), np.int64(66), np.int64(31), np.int64(0), np.int64(65), np.int64(52), np.int64(13)]</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="discussion" class="title-slide slide level1 center">
+<h1>Discussion</h1>
+
+</section>
+<section id="encoding-schemes" class="slide level2">
+<h2>Encoding Schemes</h2>
+<ul>
+<li><p><strong>Binary encoding</strong> is commonly used.</p></li>
+<li><p><strong>Permutation encoding</strong>. Typically used with problems such as “Travelling Salesman Problem (TSP)” and N-Queens.</p></li>
+<li><p><strong>Values encoding</strong>. In this encoding, integer, real, or character values are used. Example: learning the parameters of a polynomical in a regression problem.</p></li>
+</ul>
+</section>
+<section id="selection" class="slide level2">
+<h2>Selection</h2>
+<p><strong>Tournament selection</strong> involves randomly selecting a subset of individuals (a tournament) from the population and then selecting the best individual from this subset to be a parent. The process is repeated until the required number of parents is selected.</p>
+<p>This method balances between <strong>exploration</strong> and <strong>exploitation</strong>. It allows for controlling selection pressure by varying the tournament size. <strong>Larger tournaments increase selection pressure</strong>, favoring the fittest individuals more strongly.</p>
+<aside class="notes">
+<h3 id="advantages-1"><strong>Advantages</strong></h3>
+<ol type="1">
+<li><p><strong>Robustness to Fitness Scaling</strong></p>
+<ul>
+<li><strong>Handles Negative Fitness Values</strong>: The method relies on relative ranking within the tournament rather than absolute fitness values, making it robust to negative or zero fitness values.</li>
+<li><strong>Less Sensitive to Fitness Distribution</strong>: Since selection is based on comparison rather than proportion, it performs well even when fitness values are close together.</li>
+</ul></li>
+<li><p><strong>Adjustable Selection Pressure</strong></p>
+<ul>
+<li><strong>Control via Tournament Size</strong>: The selection pressure can be easily adjusted by changing the tournament size:
+<ul>
+<li><strong>Larger Tournaments</strong>: Higher selection pressure, as there is a greater chance of selecting the best individuals.</li>
+<li><strong>Smaller Tournaments</strong>: Lower selection pressure, promoting diversity.</li>
+</ul></li>
+<li><strong>Simplicity</strong>: Easy to implement without the need for fitness normalization.</li>
+</ul></li>
+<li><p><strong>Maintains Diversity</strong></p>
+<ul>
+<li><strong>Avoids Premature Convergence</strong>: By not solely focusing on high-fitness individuals, it maintains genetic diversity within the population.</li>
+</ul></li>
+</ol>
+<h3 id="disadvantages-1"><strong>Disadvantages</strong></h3>
+<ol type="1">
+<li><p><strong>Stochastic Nature</strong></p>
+<ul>
+<li><strong>Randomness in Selection</strong>: The selection process is more stochastic, and the best individual in the population might not be selected if not included in a tournament.</li>
+<li><strong>Possible Slow Convergence</strong>: If the tournament size is too small, the algorithm may converge slowly due to low selection pressure.</li>
+</ul></li>
+<li><p><strong>Parameter Dependence</strong></p>
+<ul>
+<li><strong>Requires Tuning</strong>: The performance is sensitive to the choice of tournament size, which may require experimentation to optimize.</li>
+</ul></li>
+<li><p><strong>Computational Considerations</strong></p>
+<ul>
+<li><strong>Multiple Comparisons</strong>: Requires random sampling and comparisons, which might be computationally more intensive for very large populations, though generally negligible.</li>
+</ul></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="tournament_selection" class="slide level2">
+<h2><code>tournament_selection</code></h2>
+<div id="d8430956" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a></a><span class="kw">def</span> tournament_selection(population, fitness, tournament_size):</span>
+<span id="cb36-2"><a></a></span>
+<span id="cb36-3"><a></a>    pop_size <span class="op">=</span> population.shape[<span class="dv">0</span>]</span>
+<span id="cb36-4"><a></a></span>
+<span id="cb36-5"><a></a>    selected_indices <span class="op">=</span> []</span>
+<span id="cb36-6"><a></a></span>
+<span id="cb36-7"><a></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(pop_size):</span>
+<span id="cb36-8"><a></a></span>
+<span id="cb36-9"><a></a>        participants <span class="op">=</span> np.random.choice(pop_size, tournament_size, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb36-10"><a></a></span>
+<span id="cb36-11"><a></a>        best <span class="op">=</span> participants[np.argmax(fitness[participants])]</span>
+<span id="cb36-12"><a></a></span>
+<span id="cb36-13"><a></a>        selected_indices.append(best)</span>
+<span id="cb36-14"><a></a></span>
+<span id="cb36-15"><a></a>    <span class="cf">return</span> population[selected_indices]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside><div>
+<p>Typical values for <code>tournament_size</code> are 2, 3, 4, or 5.</p>
+</div></aside></section>
+<section id="discussion-1" class="slide level2">
+<h2>Discussion</h2>
+<div id="f7fa7bd6" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a></a>np.random.seed(<span class="dv">27</span>)</span>
+<span id="cb37-2"><a></a></span>
+<span id="cb37-3"><a></a>pop_size, num_items <span class="op">=</span> <span class="dv">100</span>, <span class="dv">50</span></span>
+<span id="cb37-4"><a></a></span>
+<span id="cb37-5"><a></a>population <span class="op">=</span> initialize_population(pop_size, num_items)</span>
+<span id="cb37-6"><a></a></span>
+<span id="cb37-7"><a></a>fitness <span class="op">=</span> evaluate_fitness(population, weights, values, capacity)</span>
+<span id="cb37-8"><a></a></span>
+<span id="cb37-9"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb37-10"><a></a>plt.hist(fitness, bins<span class="op">=</span><span class="dv">10</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb37-11"><a></a>plt.xlabel(<span class="st">'Fitness Values'</span>)</span>
+<span id="cb37-12"><a></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb37-13"><a></a>plt.title(<span class="st">'Histogram of Fitness Values'</span>)</span>
+<span id="cb37-14"><a></a>plt.show()</span>
+<span id="cb37-15"><a></a></span>
+<span id="cb37-16"><a></a><span class="cf">for</span> tournament_size <span class="kw">in</span> [<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>, pop_size]:</span>
+<span id="cb37-17"><a></a>  participants <span class="op">=</span> np.random.choice(pop_size, tournament_size, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb37-18"><a></a>  <span class="bu">print</span>(<span class="ss">f"tournament_size: </span><span class="sc">{</span>tournament_size<span class="sc">}</span><span class="ss">, fitness: </span><span class="sc">{</span><span class="bu">max</span>(fitness[participants])<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside class="notes">
+<ul>
+<li>Smaller <span class="math inline">\(k\)</span> (e.g., <span class="math inline">\(k = 2\)</span>): Low selection pressure promotes diversity and exploration, useful in early generations.</li>
+<li>Larger <span class="math inline">\(k\)</span> (e.g., <span class="math inline">\(k = 5\)</span>): High selection pressure accelerates convergence, emphasizing exploitation, ideal in later generations.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="discussion-1-output" class="slide level2 output-location-slide"><h2>Discussion</h2><div class="cell output-location-slide" data-execution_count="26">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-27-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-revealjs/cell-27-output-1.png" width="361" height="376"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tournament_size: 2, fitness: 1985
+tournament_size: 4, fitness: 2933
+tournament_size: 8, fitness: 3966
+tournament_size: 100, fitness: 5478</code></pre>
+</div>
+</div></section><section id="genetic-algorithm-version-2" class="slide level2 scrollable">
+<h2>Genetic Algorithm (Version 2)</h2>
+<div id="4ace0321" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a></a><span class="kw">def</span> genetic_algorithm(weights, values, capacity, pop_size<span class="op">=</span><span class="dv">100</span>, </span>
+<span id="cb39-2"><a></a>                      num_generations<span class="op">=</span><span class="dv">100</span>, crossover_rate<span class="op">=</span><span class="fl">0.8</span>,</span>
+<span id="cb39-3"><a></a>                      mutation_rate<span class="op">=</span><span class="fl">0.05</span>, elite_percent<span class="op">=</span><span class="fl">0.02</span>, </span>
+<span id="cb39-4"><a></a>                      selection_type<span class="op">=</span><span class="st">'tournament'</span>, tournament_size<span class="op">=</span><span class="dv">3</span>):</span>
+<span id="cb39-5"><a></a></span>
+<span id="cb39-6"><a></a>    num_items <span class="op">=</span> <span class="bu">len</span>(weights)</span>
+<span id="cb39-7"><a></a>    elite_size <span class="op">=</span> <span class="bu">max</span>(<span class="dv">1</span>, <span class="bu">int</span>(pop_size <span class="op">*</span> elite_percent))</span>
+<span id="cb39-8"><a></a>    population <span class="op">=</span> initialize_population(pop_size, num_items)</span>
+<span id="cb39-9"><a></a></span>
+<span id="cb39-10"><a></a>    average_fitness_history <span class="op">=</span> []</span>
+<span id="cb39-11"><a></a>    best_fitness_history <span class="op">=</span> []</span>
+<span id="cb39-12"><a></a></span>
+<span id="cb39-13"><a></a>    <span class="cf">for</span> generation <span class="kw">in</span> <span class="bu">range</span>(num_generations):</span>
+<span id="cb39-14"><a></a></span>
+<span id="cb39-15"><a></a>        fitness <span class="op">=</span> evaluate_fitness(population, weights, values, capacity)</span>
+<span id="cb39-16"><a></a></span>
+<span id="cb39-17"><a></a>        <span class="co"># Track average and best fitness</span></span>
+<span id="cb39-18"><a></a>        average_fitness <span class="op">=</span> np.mean(fitness)</span>
+<span id="cb39-19"><a></a>        best_fitness <span class="op">=</span> np.<span class="bu">max</span>(fitness)</span>
+<span id="cb39-20"><a></a>        average_fitness_history.append(average_fitness)</span>
+<span id="cb39-21"><a></a>        best_fitness_history.append(best_fitness)</span>
+<span id="cb39-22"><a></a></span>
+<span id="cb39-23"><a></a>        <span class="co"># Elitism</span></span>
+<span id="cb39-24"><a></a>        elites <span class="op">=</span> elitism(population, fitness, elite_size)</span>
+<span id="cb39-25"><a></a></span>
+<span id="cb39-26"><a></a>        <span class="co"># Selection</span></span>
+<span id="cb39-27"><a></a>        <span class="cf">if</span> selection_type <span class="op">==</span> <span class="st">'tournament'</span>:</span>
+<span id="cb39-28"><a></a>            parents <span class="op">=</span> tournament_selection(population, fitness, tournament_size)</span>
+<span id="cb39-29"><a></a>        <span class="cf">elif</span> selection_type <span class="op">==</span> <span class="st">'roulette'</span>:</span>
+<span id="cb39-30"><a></a>            parents <span class="op">=</span> roulette_selection(population, fitness)</span>
+<span id="cb39-31"><a></a>        <span class="cf">else</span>:</span>
+<span id="cb39-32"><a></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Invalid selection type"</span>)</span>
+<span id="cb39-33"><a></a></span>
+<span id="cb39-34"><a></a>        <span class="co"># Crossover</span></span>
+<span id="cb39-35"><a></a>        offspring <span class="op">=</span> single_point_crossover(parents, crossover_rate)</span>
+<span id="cb39-36"><a></a></span>
+<span id="cb39-37"><a></a>        <span class="co"># Mutation</span></span>
+<span id="cb39-38"><a></a>        offspring <span class="op">=</span> mutation(offspring, mutation_rate)</span>
+<span id="cb39-39"><a></a></span>
+<span id="cb39-40"><a></a>        <span class="co"># Create new population</span></span>
+<span id="cb39-41"><a></a>        population <span class="op">=</span> np.vstack((elites, offspring))</span>
+<span id="cb39-42"><a></a></span>
+<span id="cb39-43"><a></a>        <span class="co"># Ensure population size</span></span>
+<span id="cb39-44"><a></a>        <span class="cf">if</span> population.shape[<span class="dv">0</span>] <span class="op">&gt;</span> pop_size:</span>
+<span id="cb39-45"><a></a>            population <span class="op">=</span> population[:pop_size]</span>
+<span id="cb39-46"><a></a>        <span class="cf">elif</span> population.shape[<span class="dv">0</span>] <span class="op">&lt;</span> pop_size:</span>
+<span id="cb39-47"><a></a>            <span class="co"># Add random individuals to fill population</span></span>
+<span id="cb39-48"><a></a>            num_new_individuals <span class="op">=</span> pop_size <span class="op">-</span> population.shape[<span class="dv">0</span>]</span>
+<span id="cb39-49"><a></a>            new_individuals <span class="op">=</span> initialize_population(num_new_individuals, num_items)</span>
+<span id="cb39-50"><a></a>            population <span class="op">=</span> np.vstack((population, new_individuals))</span>
+<span id="cb39-51"><a></a></span>
+<span id="cb39-52"><a></a>    <span class="co"># After all generations, return the best solution</span></span>
+<span id="cb39-53"><a></a>    fitness <span class="op">=</span> evaluate_fitness(population, weights, values, capacity)</span>
+<span id="cb39-54"><a></a>    best_index <span class="op">=</span> np.argmax(fitness)</span>
+<span id="cb39-55"><a></a>    best_solution <span class="op">=</span> population[best_index]</span>
+<span id="cb39-56"><a></a>    best_value <span class="op">=</span> np.dot(best_solution, values)</span>
+<span id="cb39-57"><a></a>    best_weight <span class="op">=</span> np.dot(best_solution, weights)</span>
+<span id="cb39-58"><a></a></span>
+<span id="cb39-59"><a></a>    <span class="cf">return</span> best_solution, best_value, best_weight, average_fitness_history, best_fitness_history</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="run-3" class="slide level2 scrollable">
+<h2>Run</h2>
+<div id="38fe9aa8" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb40-2"><a></a></span>
+<span id="cb40-3"><a></a>best_value, best_weight <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb40-4"><a></a>best_solution, best_averages, best_bests <span class="op">=</span> <span class="va">None</span>,  <span class="va">None</span>, <span class="va">None</span></span>
+<span id="cb40-5"><a></a></span>
+<span id="cb40-6"><a></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb40-7"><a></a></span>
+<span id="cb40-8"><a></a>  solution, total_value, total_weight, avg_fitness_history, best_fitness_history <span class="op">=</span> genetic_algorithm(weights, values, capacity)</span>
+<span id="cb40-9"><a></a></span>
+<span id="cb40-10"><a></a>  <span class="cf">if</span> total_value <span class="op">&gt;</span> best_value <span class="kw">and</span> total_weight <span class="op">&lt;=</span> capacity:</span>
+<span id="cb40-11"><a></a>    best_value <span class="op">=</span> total_value</span>
+<span id="cb40-12"><a></a>    best_weight <span class="op">=</span> total_weight</span>
+<span id="cb40-13"><a></a>    best_solution <span class="op">=</span> solution</span>
+<span id="cb40-14"><a></a>    best_averages <span class="op">=</span> avg_fitness_history</span>
+<span id="cb40-15"><a></a>    best_bests <span class="op">=</span> best_fitness_history</span>
+<span id="cb40-16"><a></a></span>
+<span id="cb40-17"><a></a></span>
+<span id="cb40-18"><a></a><span class="bu">print</span>(<span class="ss">f"Solution: </span><span class="sc">{</span>best_solution<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb40-19"><a></a><span class="bu">print</span>(<span class="ss">f"Value: </span><span class="sc">{</span>best_value<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb40-20"><a></a><span class="bu">print</span>(<span class="ss">f"Weight: </span><span class="sc">{</span>best_weight<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb40-21"><a></a></span>
+<span id="cb40-22"><a></a>plot_fitness_over_generations(best_averages, best_bests)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="run-3-output" class="slide level2 scrollable output-location-slide"><h2>Run</h2><div class="cell output-location-slide" data-execution_count="28">
+<div class="cell-output cell-output-stdout">
+<pre><code>Solution: [1 1 0 1 1 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 0 1 1 0 1 0 0 1 1 1 1 1 1 0 1 0 0
+ 0 1 1 0 1 1 0 1 0 0 1 1 1]
+Value: 7534
+Weight: 850</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-29-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-revealjs/cell-29-output-2.png" width="527" height="523"></a></p>
+</figure>
+</div>
+</div>
+</div></section><section id="tournament_size2-4-8" class="slide level2 scrollable">
+<h2><code>tournament_size=2, 4, 8</code></h2>
+<div id="1795cac6" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb42-2"><a></a></span>
+<span id="cb42-3"><a></a><span class="cf">for</span> tournament_size <span class="kw">in</span> (<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>):</span>
+<span id="cb42-4"><a></a></span>
+<span id="cb42-5"><a></a>  best_value, best_weight <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb42-6"><a></a>  best_solution, best_averages, best_bests <span class="op">=</span> <span class="va">None</span>,  <span class="va">None</span>, <span class="va">None</span></span>
+<span id="cb42-7"><a></a></span>
+<span id="cb42-8"><a></a>  <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb42-9"><a></a></span>
+<span id="cb42-10"><a></a>      solution, total_value, total_weight, avg_fitness_history, best_fitness_history <span class="op">=</span> genetic_algorithm(</span>
+<span id="cb42-11"><a></a>        weights, values, capacity, tournament_size<span class="op">=</span>tournament_size</span>
+<span id="cb42-12"><a></a>      )</span>
+<span id="cb42-13"><a></a></span>
+<span id="cb42-14"><a></a>      <span class="cf">if</span> total_value <span class="op">&gt;</span> best_value <span class="kw">and</span> total_weight <span class="op">&lt;=</span> capacity:</span>
+<span id="cb42-15"><a></a>        best_value <span class="op">=</span> total_value</span>
+<span id="cb42-16"><a></a>        best_weight <span class="op">=</span> total_weight</span>
+<span id="cb42-17"><a></a>        best_solution <span class="op">=</span> solution</span>
+<span id="cb42-18"><a></a>        best_averages <span class="op">=</span> avg_fitness_history</span>
+<span id="cb42-19"><a></a>        best_bests <span class="op">=</span> best_fitness_history</span>
+<span id="cb42-20"><a></a></span>
+<span id="cb42-21"><a></a>  <span class="bu">print</span>(<span class="ss">f"Solution: </span><span class="sc">{</span>best_solution<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb42-22"><a></a>  <span class="bu">print</span>(<span class="ss">f"Value: </span><span class="sc">{</span>best_value<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb42-23"><a></a>  <span class="bu">print</span>(<span class="ss">f"Weight: </span><span class="sc">{</span>best_weight<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb42-24"><a></a></span>
+<span id="cb42-25"><a></a>  plot_fitness_over_generations(best_averages, best_bests)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside class="notes">
+<p>As one increases the tournament size increases, average and best fitness get closer. Faster convergence.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="tournament_size2-4-8-output" class="slide level2 scrollable output-location-slide"><h2><code>tournament_size=2, 4, 8</code></h2><div class="cell output-location-slide" data-execution_count="29">
+<div class="cell-output cell-output-stdout">
+<pre><code>Solution: [1 1 0 1 1 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 0 1 1 0 1 0 0 1 1 1 1 1 1 0 1 0 0
+ 0 1 1 0 1 1 0 1 0 0 1 1 1]
+Value: 7534
+Weight: 850
+Solution: [1 1 0 1 1 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 0 1 1 0 1 0 0 1 1 1 1 1 1 0 1 0 0
+ 0 1 1 0 1 1 0 1 0 0 1 1 1]
+Value: 7534
+Weight: 850
+Solution: [1 1 0 1 1 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 0 1 1 0 1 0 0 1 1 1 1 1 1 0 1 0 0
+ 0 1 1 0 1 1 0 1 0 0 1 1 1]
+Value: 7534
+Weight: 850</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-30-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-revealjs/cell-30-output-2.png" width="527" height="523"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-30-output-3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="slides_files/figure-revealjs/cell-30-output-3.png" width="527" height="523"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-30-output-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="slides_files/figure-revealjs/cell-30-output-4.png" width="527" height="523"></a></p>
+</figure>
+</div>
+</div>
+</div></section><section id="crossover-3" class="slide level2">
+<h2>Crossover</h2>
+<ul>
+<li><strong>Single</strong> or <strong>k-point</strong> cross-over.</li>
+</ul>
+<aside class="notes">
+<p>K-point crossover is a genetic algorithm technique used for combining two parent solutions to generate offspring. It involves selecting <span class="math inline">\(k\)</span> crossover points and swapping segments of the parents between these points. Here are some scenarios where k-point crossover might be particularly useful:</p>
+<ol type="1">
+<li><p><strong>Complex Solution Spaces</strong>: When the problem domain involves complex interdependencies between variables, k-point crossover can help explore the solution space more thoroughly by allowing multiple segments to be exchanged between parents.</p></li>
+<li><p><strong>Diverse Genetic Material</strong>: By increasing <span class="math inline">\(k\)</span>, more genetic material from both parents is mixed, which can introduce greater diversity into the offspring. This can be beneficial in avoiding premature convergence on suboptimal solutions.</p></li>
+<li><p><strong>Balancing Exploration and Exploitation</strong>: K-point crossover provides a balance between exploration (by introducing new combinations of genetic material) and exploitation (by maintaining some continuity with the parent solutions). This can be advantageous in maintaining a healthy diversity in the population.</p></li>
+<li><p><strong>Tuning Genetic Algorithm Performance</strong>: Adjusting the number of crossover points (<span class="math inline">\(k\)</span>) allows for fine-tuning the genetic algorithm’s performance. A higher <span class="math inline">\(k\)</span> can be used to increase diversity, while a lower <span class="math inline">\(k\)</span> can focus on exploiting known good solutions.</p></li>
+<li><p><strong>Large Solution Representations</strong>: In problems with large solution representations, such as long binary strings or large arrays, k-point crossover allows for more nuanced mixing of genetic material, potentially leading to more effective search and optimization.</p></li>
+<li><p><strong>Empirical Testing</strong>: Sometimes, k-point crossover is chosen based on empirical results, where experimentation shows that it performs better for a specific problem or dataset compared to other crossover methods.</p></li>
+</ol>
+<p>K-point crossover is versatile and can be adapted to the needs of different problems by adjusting the number of crossover points, making it a useful tool in the genetic algorithm toolkit.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="uniform-crossover" class="slide level2">
+<h2>Uniform crossover</h2>
+<p><strong>Uniform crossover</strong> in genetic algorithms is a recombination technique where <strong>each gene</strong> in the offspring is <strong>independently chosen</strong> from one of the two parent genomes with equal probability. This approach allows for a <strong>more varied combination of parental traits</strong> compared to traditional crossover methods, promoting <strong>greater genetic diversity</strong> in the resulting population.</p>
+</section>
+<section id="uniform_crossover" class="slide level2">
+<h2><code>uniform_crossover</code></h2>
+<div id="c547308d" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a></a><span class="kw">def</span> uniform_crossover(parents, crossover_rate):</span>
+<span id="cb44-2"><a></a></span>
+<span id="cb44-3"><a></a>    num_parents, num_genes <span class="op">=</span> parents.shape</span>
+<span id="cb44-4"><a></a>    np.random.shuffle(parents)</span>
+<span id="cb44-5"><a></a></span>
+<span id="cb44-6"><a></a>    offspring <span class="op">=</span> []</span>
+<span id="cb44-7"><a></a></span>
+<span id="cb44-8"><a></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, num_parents, <span class="dv">2</span>):</span>
+<span id="cb44-9"><a></a></span>
+<span id="cb44-10"><a></a>        parent1 <span class="op">=</span> parents[i]</span>
+<span id="cb44-11"><a></a>        parent2 <span class="op">=</span> parents[i<span class="op">+</span><span class="dv">1</span> <span class="cf">if</span> i<span class="op">+</span><span class="dv">1</span> <span class="op">&lt;</span> num_parents <span class="cf">else</span> <span class="dv">0</span>]</span>
+<span id="cb44-12"><a></a></span>
+<span id="cb44-13"><a></a>        child1 <span class="op">=</span> parent1.copy()</span>
+<span id="cb44-14"><a></a>        child2 <span class="op">=</span> parent2.copy()</span>
+<span id="cb44-15"><a></a></span>
+<span id="cb44-16"><a></a>        <span class="cf">if</span> np.random.rand() <span class="op">&lt;</span> crossover_rate:</span>
+<span id="cb44-17"><a></a></span>
+<span id="cb44-18"><a></a>            mask <span class="op">=</span> np.random.randint(<span class="dv">0</span>, <span class="dv">2</span>, size<span class="op">=</span>num_genes).astype(<span class="bu">bool</span>)</span>
+<span id="cb44-19"><a></a></span>
+<span id="cb44-20"><a></a>            child1[mask], child2[mask] <span class="op">=</span> parent2[mask], parent1[mask]</span>
+<span id="cb44-21"><a></a></span>
+<span id="cb44-22"><a></a>        offspring.append(child1)</span>
+<span id="cb44-23"><a></a>        offspring.append(child2)</span>
+<span id="cb44-24"><a></a></span>
+<span id="cb44-25"><a></a>    <span class="cf">return</span> np.array(offspring)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="genetic-algorithm-version-3" class="slide level2 scrollable">
+<h2>Genetic Algorithm (Version 3)</h2>
+<div id="b970abf6" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a></a><span class="kw">def</span> genetic_algorithm(weights, values, capacity, pop_size<span class="op">=</span><span class="dv">100</span>, </span>
+<span id="cb45-2"><a></a>                      num_generations<span class="op">=</span><span class="dv">200</span>, crossover_rate<span class="op">=</span><span class="fl">0.8</span>,</span>
+<span id="cb45-3"><a></a>                      mutation_rate<span class="op">=</span><span class="fl">0.05</span>, elite_percent<span class="op">=</span><span class="fl">0.02</span>, </span>
+<span id="cb45-4"><a></a>                      selection_type<span class="op">=</span><span class="st">'tournament'</span>, tournament_size<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb45-5"><a></a>                      crossover_type<span class="op">=</span><span class="st">'single_point'</span>):</span>
+<span id="cb45-6"><a></a></span>
+<span id="cb45-7"><a></a>    num_items <span class="op">=</span> <span class="bu">len</span>(weights)</span>
+<span id="cb45-8"><a></a>    elite_size <span class="op">=</span> <span class="bu">max</span>(<span class="dv">1</span>, <span class="bu">int</span>(pop_size <span class="op">*</span> elite_percent))</span>
+<span id="cb45-9"><a></a>    population <span class="op">=</span> initialize_population(pop_size, num_items)</span>
+<span id="cb45-10"><a></a></span>
+<span id="cb45-11"><a></a>    average_fitness_history <span class="op">=</span> []</span>
+<span id="cb45-12"><a></a>    best_fitness_history <span class="op">=</span> []</span>
+<span id="cb45-13"><a></a></span>
+<span id="cb45-14"><a></a>    <span class="cf">for</span> generation <span class="kw">in</span> <span class="bu">range</span>(num_generations):</span>
+<span id="cb45-15"><a></a></span>
+<span id="cb45-16"><a></a>        fitness <span class="op">=</span> evaluate_fitness(population, weights, values, capacity)</span>
+<span id="cb45-17"><a></a></span>
+<span id="cb45-18"><a></a>        <span class="co"># Track average and best fitness</span></span>
+<span id="cb45-19"><a></a>        average_fitness <span class="op">=</span> np.mean(fitness)</span>
+<span id="cb45-20"><a></a>        best_fitness <span class="op">=</span> np.<span class="bu">max</span>(fitness)</span>
+<span id="cb45-21"><a></a>        average_fitness_history.append(average_fitness)</span>
+<span id="cb45-22"><a></a>        best_fitness_history.append(best_fitness)</span>
+<span id="cb45-23"><a></a></span>
+<span id="cb45-24"><a></a>        <span class="co"># Elitism</span></span>
+<span id="cb45-25"><a></a>        elites <span class="op">=</span> elitism(population, fitness, elite_size)</span>
+<span id="cb45-26"><a></a></span>
+<span id="cb45-27"><a></a>        <span class="co"># Selection</span></span>
+<span id="cb45-28"><a></a>        <span class="cf">if</span> selection_type <span class="op">==</span> <span class="st">'tournament'</span>:</span>
+<span id="cb45-29"><a></a>            parents <span class="op">=</span> tournament_selection(population, fitness, tournament_size)</span>
+<span id="cb45-30"><a></a>        <span class="cf">elif</span> selection_type <span class="op">==</span> <span class="st">'roulette'</span>:</span>
+<span id="cb45-31"><a></a>            parents <span class="op">=</span> roulette_selection(population, fitness)</span>
+<span id="cb45-32"><a></a>        <span class="cf">else</span>:</span>
+<span id="cb45-33"><a></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Invalid selection type"</span>)</span>
+<span id="cb45-34"><a></a></span>
+<span id="cb45-35"><a></a>        <span class="co"># Crossover</span></span>
+<span id="cb45-36"><a></a>        <span class="cf">if</span> crossover_type <span class="op">==</span> <span class="st">'single_point'</span>:</span>
+<span id="cb45-37"><a></a>            offspring <span class="op">=</span> single_point_crossover(parents, crossover_rate)</span>
+<span id="cb45-38"><a></a>        <span class="cf">elif</span> crossover_type <span class="op">==</span> <span class="st">'uniform'</span>:</span>
+<span id="cb45-39"><a></a>            offspring <span class="op">=</span> uniform_crossover(parents, crossover_rate)</span>
+<span id="cb45-40"><a></a>        <span class="cf">else</span>:</span>
+<span id="cb45-41"><a></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Invalid crossover type"</span>)</span>
+<span id="cb45-42"><a></a></span>
+<span id="cb45-43"><a></a>        <span class="co"># Mutation</span></span>
+<span id="cb45-44"><a></a>        offspring <span class="op">=</span> mutation(offspring, mutation_rate)</span>
+<span id="cb45-45"><a></a></span>
+<span id="cb45-46"><a></a>        <span class="co"># Create new population</span></span>
+<span id="cb45-47"><a></a>        population <span class="op">=</span> np.vstack((elites, offspring))</span>
+<span id="cb45-48"><a></a></span>
+<span id="cb45-49"><a></a>        <span class="co"># Ensure population size</span></span>
+<span id="cb45-50"><a></a>        <span class="cf">if</span> population.shape[<span class="dv">0</span>] <span class="op">&gt;</span> pop_size:</span>
+<span id="cb45-51"><a></a>            population <span class="op">=</span> population[:pop_size]</span>
+<span id="cb45-52"><a></a>        <span class="cf">elif</span> population.shape[<span class="dv">0</span>] <span class="op">&lt;</span> pop_size:</span>
+<span id="cb45-53"><a></a>            <span class="co"># Add random individuals to fill population</span></span>
+<span id="cb45-54"><a></a>            num_new_individuals <span class="op">=</span> pop_size <span class="op">-</span> population.shape[<span class="dv">0</span>]</span>
+<span id="cb45-55"><a></a>            new_individuals <span class="op">=</span> initialize_population(num_new_individuals, num_items)</span>
+<span id="cb45-56"><a></a>            population <span class="op">=</span> np.vstack((population, new_individuals))</span>
+<span id="cb45-57"><a></a></span>
+<span id="cb45-58"><a></a>    <span class="co"># After all generations, return the best solution</span></span>
+<span id="cb45-59"><a></a>    fitness <span class="op">=</span> evaluate_fitness(population, weights, values, capacity)</span>
+<span id="cb45-60"><a></a>    best_index <span class="op">=</span> np.argmax(fitness)</span>
+<span id="cb45-61"><a></a>    best_solution <span class="op">=</span> population[best_index]</span>
+<span id="cb45-62"><a></a>    best_value <span class="op">=</span> np.dot(best_solution, values)</span>
+<span id="cb45-63"><a></a>    best_weight <span class="op">=</span> np.dot(best_solution, weights)</span>
+<span id="cb45-64"><a></a></span>
+<span id="cb45-65"><a></a>    <span class="cf">return</span> best_solution, best_value, best_weight, average_fitness_history, best_fitness_history</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="run-4" class="slide level2 scrollable">
+<h2>Run</h2>
+<div id="7d0e5fe5" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb46-2"><a></a></span>
+<span id="cb46-3"><a></a>best_value, best_weight <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb46-4"><a></a>best_solution, best_averages, best_bests <span class="op">=</span> <span class="va">None</span>,  <span class="va">None</span>, <span class="va">None</span></span>
+<span id="cb46-5"><a></a></span>
+<span id="cb46-6"><a></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb46-7"><a></a></span>
+<span id="cb46-8"><a></a>  solution, total_value, total_weight, avg_fitness_history, best_fitness_history <span class="op">=</span> genetic_algorithm(</span>
+<span id="cb46-9"><a></a>    weights, values, capacity, crossover_type<span class="op">=</span><span class="st">'uniform'</span></span>
+<span id="cb46-10"><a></a>  )</span>
+<span id="cb46-11"><a></a></span>
+<span id="cb46-12"><a></a>  <span class="cf">if</span> total_value <span class="op">&gt;</span> best_value <span class="kw">and</span> total_weight <span class="op">&lt;=</span> capacity:</span>
+<span id="cb46-13"><a></a>    best_value <span class="op">=</span> total_value</span>
+<span id="cb46-14"><a></a>    best_weight <span class="op">=</span> total_weight</span>
+<span id="cb46-15"><a></a>    best_solution <span class="op">=</span> solution</span>
+<span id="cb46-16"><a></a>    best_averages <span class="op">=</span> avg_fitness_history</span>
+<span id="cb46-17"><a></a>    best_bests <span class="op">=</span> best_fitness_history</span>
+<span id="cb46-18"><a></a></span>
+<span id="cb46-19"><a></a></span>
+<span id="cb46-20"><a></a><span class="bu">print</span>(<span class="ss">f"Solution: </span><span class="sc">{</span>best_solution<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb46-21"><a></a><span class="bu">print</span>(<span class="ss">f"Value: </span><span class="sc">{</span>best_value<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb46-22"><a></a><span class="bu">print</span>(<span class="ss">f"Weight: </span><span class="sc">{</span>best_weight<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb46-23"><a></a></span>
+<span id="cb46-24"><a></a>plot_fitness_over_generations(best_averages, best_bests)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="run-4-output" class="slide level2 scrollable output-location-slide"><h2>Run</h2><div class="cell output-location-slide" data-execution_count="32">
+<div class="cell-output cell-output-stdout">
+<pre><code>Solution: [1 1 0 1 1 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 0 1 1 0 1 0 0 1 1 1 1 1 1 0 1 0 0
+ 0 1 1 0 1 1 0 1 0 0 1 1 1]
+Value: 7534
+Weight: 850</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-33-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="slides_files/figure-revealjs/cell-33-output-2.png" width="527" height="523"></a></p>
+</figure>
+</div>
+</div>
+</div></section><section id="crossover-4" class="slide level2">
+<h2>Crossover</h2>
+<p><strong>Single-Point Crossover</strong> is advantageous when <strong>building blocks</strong> (contiguous gene sequences) are <strong>meaningful</strong> and <strong>beneficial to preserve</strong>. However, in the 0/1 Knapsack Problem, the position of items in the chromosome is typically arbitrary, and preserving contiguous sections may not correspond to better solutions.</p>
+<p><strong>Uniform Crossover</strong> offers <strong>better exploration</strong> by independently mixing genes, which aligns well with the nature of the knapsack problem where each item’s inclusion is an independent decision. It reduces positional bias and increases the likelihood of discovering optimal combinations of items.</p>
+</section>
+<section id="crossover-5" class="slide level2">
+<h2>Crossover</h2>
+<p><strong>Order preserving.</strong> For each offspring, retain the sequence of elements from one parent while filling in the remaining positions with elements from the other parent, preserving their order as they appear in the second parent.</p>
+
+<aside><div>
+<p>See <span class="citation" data-cites="Cattolico:2006aa">(<a href="#/references" role="doc-biblioref" onclick="">Cattolico and Cicirello 2006</a>)</span> for variants.</p>
+</div></aside></section>
+<section id="order-1-crossover-ox" class="slide level2">
+<h2>Order 1 crossover (OX)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://media.springernature.com/full/springer-static/image/chp%3A10.1007%2F978-981-15-6067-5_60/MediaObjects/486739_1_En_60_Fig2_HTML.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="https://media.springernature.com/full/springer-static/image/chp%3A10.1007%2F978-981-15-6067-5_60/MediaObjects/486739_1_En_60_Fig2_HTML.png" class="quarto-figure quarto-figure-center" height="450"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>OX is designed to preserve the relative order of elements from one parent while filling gaps with elements from the other parent.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Attribution</strong>: <span class="citation" data-cites="Bye:2021aa">(<a href="#/references" role="doc-biblioref" onclick="">Bye et al. 2021</a>)</span></p>
+</div></aside></section>
+<section id="partially-mapped-crossover-pmx" class="slide level2">
+<h2>Partially Mapped Crossover (PMX)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://media.springernature.com/full/springer-static/image/chp%3A10.1007%2F978-981-15-6067-5_60/MediaObjects/486739_1_En_60_Fig1_HTML.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="https://media.springernature.com/full/springer-static/image/chp%3A10.1007%2F978-981-15-6067-5_60/MediaObjects/486739_1_En_60_Fig1_HTML.png" class="quarto-figure quarto-figure-center" height="450"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>PMX ensures positional consistency by maintaining the relative ordering of elements between parent chromosomes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Attribution</strong>: <span class="citation" data-cites="Bye:2021aa">(<a href="#/references" role="doc-biblioref" onclick="">Bye et al. 2021</a>)</span></p>
+</div></aside></section>
+<section id="comparison" class="slide level2 smaller">
+<h2>Comparison</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 32%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th><strong>PMX</strong></th>
+<th><strong>OX</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Preservation of Position</strong></td>
+<td>High</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<td><strong>Preservation of Order</strong></td>
+<td>Partial</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<td><strong>Exploration vs.&nbsp;Exploitation</strong></td>
+<td>Exploitation-focused</td>
+<td>Exploration-focused</td>
+</tr>
+<tr class="even">
+<td><strong>Implementation Complexity</strong></td>
+<td>Higher</td>
+<td>Lower</td>
+</tr>
+<tr class="odd">
+<td><strong>Application Suitability</strong></td>
+<td>Problems with positional dependencies</td>
+<td>Problems with order dependencies</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="mutation-1" class="slide level2">
+<h2>Mutation</h2>
+<ul>
+<li><p><strong>Bit Flip Mutation:</strong> This involves flipping the value of a bit at a selected position within the chromosome.</p>
+<ul>
+<li><strong>Mutation Rate:</strong> A typical mutation rate is <span class="math inline">\(1/n\)</span>, where <span class="math inline">\(n\)</span> represents the length of the chromosome.</li>
+</ul></li>
+</ul>
+</section>
+<section id="mutation-2" class="slide level2">
+<h2>Mutation</h2>
+<ul>
+<li><strong>Replacement or Random Resetting:</strong> For integer and real-valued chromosomes, employ a random selection from the uniform distribution <span class="math inline">\(U(a, b)\)</span> to choose a new value within the interval <span class="math inline">\([a, b]\)</span>. Similar to the bit flip operator, determine for each position whether a mutation should occur, then apply the replacement if necessary.</li>
+</ul>
+</section>
+<section id="mutation-3" class="slide level2">
+<h2>Mutation</h2>
+<ul>
+<li><strong>Swap Mutation:</strong> This operator randomly selects two genes within a permutation and exchanges their positions. Such mutations facilitate the exploration of various permutations, potentially yielding improved solutions.</li>
+</ul>
+
+<aside><div>
+<p>Mutation operators should be crafted to preserve valid permutations while introducing population diversity, thereby mitigating premature convergence to suboptimal solutions.</p>
+</div></aside></section>
+<section id="remarks" class="slide level2">
+<h2>Remarks</h2>
+<p>When designing operators, it is critical to ensure they can explore the entire state space exhaustively.</p>
+<p>Mutation operators should remain unbiased to maintain the integrity of the exploration process.</p>
+</section>
+<section id="comprehensive-example-1" class="slide level2">
+<h2>Comprehensive Example (1)</h2>
+<p>A <a href="knapsack">Jupyter Notebook</a> containing all lecture code has been created.</p>
+<p>It includes tests on 25 problem instances.</p>
+<p>In this context, the <strong>genetic algorithm consistently outperformed the greedy algorithms</strong>, matching the best greedy results in 8 cases and <strong>surpassing them in 17 cases</strong>, with improvements up to 6%.</p>
+</section>
+<section id="comprehensive-example-2" class="slide level2">
+<h2>Comprehensive Example (2)</h2>
+<p>Fredj Kharroubi conducted an empirical study on the knapsack problem, comparing the performance of several algorithms: <strong>generate-and-test</strong>, <strong>greedy search</strong>, <strong>simulated annealing</strong>, and a <strong>genetic algorithm</strong>.</p>
+<p><a href="https://github.com/fredjkhar/knapsack-greedy-stochastic-genetic-algos/blob/main/knapsack.ipynb">Jupyter Notebook</a></p>
+</section>
+<section id="discussions-on-hyperparameters" class="slide level2">
+<h2>Discussions on Hyperparameters</h2>
+<h3 id="population-size">Population Size</h3>
+<ul>
+<li><p>A <strong>larger size</strong> improves genetic diversity but increases computational cost.</p></li>
+<li><p>A <strong>smaller size</strong> speeds up execution but risks premature convergence.</p></li>
+</ul>
+</section>
+<section id="discussions-on-hyperparameters-1" class="slide level2">
+<h2>Discussions on Hyperparameters</h2>
+<h3 id="mutation-and-crossover-rates">Mutation and Crossover Rates</h3>
+<ul>
+<li><p><strong>High rates</strong> promote exploration but risk disrupting viable solutions.</p></li>
+<li><p><strong>Low rates</strong> favor exploitation but risk getting stuck in local optima.</p></li>
+</ul>
+</section>
+<section id="discussions-on-hyperparameters-2" class="slide level2">
+<h2>Discussions on Hyperparameters</h2>
+<h3 id="selection-and-tournament-size">Selection and Tournament Size</h3>
+<ul>
+<li><p><strong>Tournament selection</strong> is robust against uneven fitness distributions.</p></li>
+<li><p>A <strong>medium tournament size (3-5)</strong> balances exploration and exploitation well.</p></li>
+</ul>
+</section>
+<section id="parameters" class="slide level2">
+<h2>Parameters</h2>
+<p>Genetic algorithms, like many machine learning and search algorithms, require <strong>hyperparameter tuning</strong> to optimize their performance.</p>
+<p>Key hyperparameters in genetic algorithms include <strong>population size</strong>, <strong>mutation rate</strong>, <strong>crossover rate</strong>, <strong>selection method</strong>, and the <strong>number of generations</strong>.</p>
+</section>
+<section id="discussion-2" class="slide level2">
+<h2>Discussion</h2>
+<p>Like other metaheuristic approaches, genetic algorithms can become trapped in <strong>local optima</strong>. A common solution, akin to the <strong>random restart</strong> technique used in hill climbing, is to periodically reinitialize the algorithm to explore different regions of the solution space.</p>
+<p><strong>Doubling the population size</strong> with each restart enhances the likelihood of exploring diverse regions of the state space.</p>
+</section>
+<section id="skepticism-toward-ga" class="slide level2">
+<h2>Skepticism toward GA</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Skiena:2008aa">(<a href="#/references" role="doc-biblioref" onclick="">Skiena 2008, 267</a>)</span></strong></p>
+</div>
+<div class="callout-content">
+<p>[I]t is quite <strong>unnatural</strong> to model applications in terms of genetic operators like mutation and crossover on bit strings. The <strong>pseudobiology</strong> adds another level of <strong>complexity</strong> between you and your problem. Second, genetic algorithms <strong>take a very long time on nontrivial problems</strong>. [<span class="math inline">\(\ldots\)</span>] [T]he analogy with evolution – where significant progress require [sic] millions of years –&nbsp;can be quite appropriate. […]</p>
+<p><strong>I have never encountered any problem where genetic algorithms seemed to me the right way to attack it.</strong> Further, I have never seen any computational results reported using genetic algorithms that have favorably impressed me. Stick to&nbsp;simulated annealing&nbsp;for your heuristic search <strong>voodoo</strong> needs.</p>
+</div>
+</div>
+</div>
+
+<aside class="notes">
+<p>It seems that individuals tend to either appreciate or dislike genetic algorithms.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>The <strong>bold formatting</strong> has been applied by me.</p>
+</div></aside></section>
+<section id="greedy-value-to-weight-ratio" class="slide level2">
+<h2>Greedy: value-to-weight ratio</h2>
+<div id="eb57026c" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a></a><span class="kw">def</span> greedy_knapsack_ratio(weights, values, capacity):</span>
+<span id="cb48-2"><a></a></span>
+<span id="cb48-3"><a></a>    num_items <span class="op">=</span> <span class="bu">len</span>(weights)</span>
+<span id="cb48-4"><a></a></span>
+<span id="cb48-5"><a></a>    <span class="co"># Calculate value-to-weight ratio for each item</span></span>
+<span id="cb48-6"><a></a>    ratio <span class="op">=</span> values <span class="op">/</span> (weights <span class="op">+</span> <span class="fl">1e-6</span>)</span>
+<span id="cb48-7"><a></a></span>
+<span id="cb48-8"><a></a>    <span class="co"># Create a list of items with their ratios and original indices</span></span>
+<span id="cb48-9"><a></a>    items <span class="op">=</span> <span class="bu">list</span>(<span class="bu">zip</span>(ratio, values, weights, <span class="bu">range</span>(num_items)))</span>
+<span id="cb48-10"><a></a></span>
+<span id="cb48-11"><a></a>    <span class="co"># Sort items by ratio in decreasing order</span></span>
+<span id="cb48-12"><a></a>    items.sort(reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb48-13"><a></a>    </span>
+<span id="cb48-14"><a></a>    total_weight <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb48-15"><a></a>    total_value <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb48-16"><a></a>    solution <span class="op">=</span> np.zeros(num_items, dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb48-17"><a></a>    </span>
+<span id="cb48-18"><a></a>    <span class="co"># Select items based on the sorted order</span></span>
+<span id="cb48-19"><a></a>    <span class="cf">for</span> r, v, w, idx <span class="kw">in</span> items:</span>
+<span id="cb48-20"><a></a>        <span class="cf">if</span> total_weight <span class="op">+</span> w <span class="op">&lt;=</span> capacity:</span>
+<span id="cb48-21"><a></a>            solution[idx] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb48-22"><a></a>            total_weight <span class="op">+=</span> w</span>
+<span id="cb48-23"><a></a>            total_value <span class="op">+=</span> v</span>
+<span id="cb48-24"><a></a>     </span>
+<span id="cb48-25"><a></a>    <span class="cf">return</span> solution, total_value, total_weight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>Why adding <code>1e-6)</code> to the denominator <code>ratio = values / (weights + 1e-6)</code>?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="greedy_knapsack_ratio" class="slide level2">
+<h2><code>greedy_knapsack_ratio</code></h2>
+<div id="43802cea" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a></a>solution, total_value, total_weight <span class="op">=</span> greedy_knapsack_ratio(weights, values, capacity)</span>
+<span id="cb49-2"><a></a></span>
+<span id="cb49-3"><a></a><span class="bu">print</span>(<span class="ss">f"Solution: </span><span class="sc">{</span>solution<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb49-4"><a></a><span class="bu">print</span>(<span class="ss">f"Value: </span><span class="sc">{</span>total_value<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb49-5"><a></a><span class="bu">print</span>(<span class="ss">f"Weight: </span><span class="sc">{</span>total_weight<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solution: [1 1 0 1 1 0 1 0 0 0 1 1 1 0 1 1 1 1 1 1 0 1 1 0 1 0 0 1 1 1 1 1 1 0 1 0 0
+ 0 1 1 0 1 1 0 1 0 0 1 1 1]
+Value: 7534
+Weight: 850</code></pre>
+</div>
+</div>
+
+<aside><div>
+<p>For <strong>this particular instance</strong>, <code>greedy_knapsack_ratio</code> finds the optimal solution!</p>
+</div></aside></section>
+<section id="frameworks" class="slide level2">
+<h2>Frameworks</h2>
+<ul>
+<li><a href="https://github.com/DEAP/deap">DEAP</a>,
+<ul>
+<li>DEAP is an evolutionary computation framework designed for <strong>rapid prototyping</strong> and testing of ideas. It aims to make algorithms explicit and data structures transparent. The framework seamlessly integrates with <strong>parallelization mechanisms</strong>, including multiprocessing and SCOOP.</li>
+<li>It has been developed at Université Laval since 2012.</li>
+</ul></li>
+<li><a href="https://pygad.readthedocs.io/en/latest/">PyGAD</a>, <a href="https://www.digitalocean.com/community/tutorials/genetic-algorithm-applications-using-pygad">5 PyGAD applications</a></li>
+</ul>
+</section></section>
+<section>
+<section id="genetic-programming" class="title-slide slide level1 center">
+<h1>Genetic Programming</h1>
+
+</section>
+<section id="definition-3" class="slide level2">
+<h2>Definition</h2>
+<p><strong>Genetic programming</strong> is an evolutionary algorithm-based methodology that <strong>evolves computer programs</strong> to solve problems by mimicking natural selection processes.</p>
+<p>It automatically discovers optimal or near-optimal solutions by iteratively modifying a population of <strong>candidate programs</strong>, guided by a fitness function.</p>
+
+<aside><div>
+<p>Can be seen as a form of machine learning or automatic programming.</p>
+</div></aside></section>
+<section id="genetic-programming-1" class="slide level2">
+<h2>Genetic Programming</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/GP_crossover.png/1222px-GP_crossover.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/GP_crossover.png/1222px-GP_crossover.png" class="quarto-figure quarto-figure-center" height="450"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p><strong>Attribution</strong>: U-ichi, <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>, via Wikimedia Commons</p>
+</div></aside></section>
+<section id="genetic-programming-2" class="slide level2">
+<h2>Genetic Programming</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/K2Hl7m2Ty_4" width="800" height="450" title="Machine Learning Control: Genetic Programming" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section></section>
+<section>
+<section id="prologue" class="title-slide slide level1 center">
+<h1>Prologue</h1>
+
+</section>
+<section id="conclusion" class="slide level2">
+<h2>Conclusion</h2>
+<ul>
+<li>Rather than exploring a single solution at a time, GA explore several solutions in parallel.</li>
+</ul>
+</section>
+<section id="comparison-of-sa-and-ga" class="slide level2 scrollable smaller">
+<h2>Comparison of SA and GA</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 38%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Aspect</th>
+<th>Simulated Annealing (SA)</th>
+<th>Genetic Algorithms (GA)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Solution Representation</strong></td>
+<td>Single solution iteratively improved</td>
+<td>Population of solutions evolved over generations</td>
+</tr>
+<tr class="even">
+<td><strong>Exploration Mechanism</strong></td>
+<td>Random moves to neighboring solutions; acceptance based on temperature</td>
+<td>Crossover and mutation generate new solutions from existing ones</td>
+</tr>
+<tr class="odd">
+<td><strong>Exploitation Mechanism</strong></td>
+<td>Gradual reduction in temperature focuses search around current best solution</td>
+<td>Selection and elitism favor fitter individuals in the population</td>
+</tr>
+<tr class="even">
+<td><strong>Control Parameters</strong></td>
+<td>Temperature, cooling schedule</td>
+<td>Population size, crossover rate, mutation rate, selection method</td>
+</tr>
+<tr class="odd">
+<td><strong>Search Strategy</strong></td>
+<td>Explores by accepting worse solutions at higher temperatures</td>
+<td>Explores by combining and mutating existing solutions</td>
+</tr>
+<tr class="even">
+<td><strong>Balance of Exploration and Exploitation</strong></td>
+<td>Controlled by temperature schedule</td>
+<td>Controlled by genetic operator rates and selection pressure</td>
+</tr>
+<tr class="odd">
+<td><strong>Escape from Local Optima</strong></td>
+<td>Possible due to probabilistic acceptance of worse solutions</td>
+<td>Possible due to diversity in population and genetic variations</td>
+</tr>
+<tr class="even">
+<td><strong>Convergence</strong></td>
+<td>Depends on cooling schedule; may be slow for large problems</td>
+<td>Can converge prematurely without sufficient diversity</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="summary" class="slide level2 scrollable">
+<h2>Summary</h2>
+<ul>
+<li><p><strong>Metaheuristics Overview</strong></p></li>
+<li><p><strong>Genetic Algorithms (GAs)</strong></p></li>
+<li><p><strong>Applications of GAs</strong></p></li>
+<li><p><strong>Components of GAs:</strong></p>
+<ul>
+<li><strong>Encoding:</strong> Representation of candidate solutions (e.g., binary strings for the knapsack problem).</li>
+<li><strong>Population:</strong> A set of candidate solutions initialized randomly or by some heuristic.</li>
+<li><strong>Selection:</strong> Methods like roulette wheel and tournament selection choose fitter individuals for reproduction.</li>
+<li><strong>Crossover:</strong> Combines parts of two parents to create offspring (e.g., single-point crossover).</li>
+<li><strong>Mutation:</strong> Randomly alters genes in a chromosome to maintain genetic diversity.</li>
+<li><strong>Fitness Function:</strong> Evaluates how close a candidate solution is to the optimum.</li>
+</ul></li>
+<li><p><strong>Knapsack Problem Example:</strong></p>
+<ul>
+<li>Demonstrated how to apply GAs to the 0/1 knapsack problem.</li>
+<li>Provided Python code snippets implementing GA components for the problem.</li>
+<li>Showed how to generate an initial population, perform crossover and mutation, and select the next generation.</li>
+<li>Compared GA solutions with optimal solutions obtained using Google’s OR-Tools.</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<ul>
+<li><strong>Metaheuristics Overview:</strong>
+<ul>
+<li>Metaheuristics are high-level strategies guiding other heuristics to explore large solution spaces.</li>
+<li>They balance exploitation and exploration to avoid local optima.</li>
+<li>Genetic algorithms (GAs) are a type of metaheuristic inspired by biological evolution.</li>
+</ul></li>
+<li><strong>Genetic Algorithms (GAs):</strong>
+<ul>
+<li>GAs use a population of candidate solutions (chromosomes) that evolve over generations.</li>
+<li>Key operations in GAs include selection, crossover (recombination), and mutation.</li>
+<li>The goal is to optimize a fitness function that measures the quality of solutions.</li>
+</ul></li>
+<li><strong>Applications of GAs:</strong>
+<ul>
+<li>Widely used in optimization, machine learning (e.g., feature selection, hyperparameter tuning), robotics, finance, resource allocation, supply chain, and more.</li>
+<li>GAs can solve complex problems that are difficult for traditional methods.</li>
+</ul></li>
+<li><strong>Components of GAs:</strong>
+<ul>
+<li><strong>Encoding:</strong> Representation of candidate solutions (e.g., binary strings for the knapsack problem).</li>
+<li><strong>Population:</strong> A set of candidate solutions initialized randomly or by some heuristic.</li>
+<li><strong>Selection:</strong> Methods like roulette wheel and tournament selection choose fitter individuals for reproduction.</li>
+<li><strong>Crossover:</strong> Combines parts of two parents to create offspring (e.g., single-point crossover).</li>
+<li><strong>Mutation:</strong> Randomly alters genes in a chromosome to maintain genetic diversity.</li>
+<li><strong>Fitness Function:</strong> Evaluates how close a candidate solution is to the optimum.</li>
+</ul></li>
+<li><strong>Knapsack Problem Example:</strong>
+<ul>
+<li>Demonstrated how to apply GAs to the 0/1 knapsack problem.</li>
+<li>Provided Python code snippets implementing GA components for the problem.</li>
+<li>Showed how to generate an initial population, perform crossover and mutation, and select the next generation.</li>
+<li>Compared GA solutions with optimal solutions obtained using Google’s OR-Tools.</li>
+</ul></li>
+<li><strong>Choices in GAs:</strong>
+<ul>
+<li><strong>Encoding Schemes:</strong> Binary encoding, permutation encoding (for problems like TSP), and value encoding.</li>
+<li><strong>Selection Methods:</strong> Roulette wheel selection and tournament selection.</li>
+<li><strong>Crossover Techniques:</strong> Single-point, k-point, and order-preserving crossovers.</li>
+<li><strong>Mutation Rates:</strong> Balancing exploration and exploitation.</li>
+</ul></li>
+<li><strong>Skepticism Toward GAs:</strong>
+<ul>
+<li>Presented a critical view from Steven Skiena, emphasizing the unnatural modeling and long computation times.</li>
+<li>Highlighted that some experts prefer other methods like simulated annealing.</li>
+</ul></li>
+<li><strong>Genetic Programming:</strong>
+<ul>
+<li>An extension of GAs where the solutions are computer programs.</li>
+<li>Programs evolve over time to solve problems, guided by a fitness function.</li>
+<li>Applications include automated programming and machine learning tasks.</li>
+</ul></li>
+<li><strong>Frameworks and Resources:</strong>
+<ul>
+<li>Mentioned frameworks like DEAP and PyGAD for implementing GAs.</li>
+<li>Provided resources for further reading and exploration.</li>
+<li>Encouraged accessing materials through university resources like Springer Link.</li>
+</ul></li>
+<li><strong>Conclusion:</strong>
+<ul>
+<li>GAs explore multiple solutions in parallel, offering a different approach from single-solution methods.</li>
+<li>Recognized the importance of parameter tuning in GAs for optimal performance.</li>
+<li>Acknowledged the ongoing debates about the efficacy of GAs in various applications.</li>
+</ul></li>
+<li><strong>Next Steps:</strong>
+<ul>
+<li>Encouraged further exploration of metaheuristics and their applications.</li>
+<li>Suggested delving into genetic programming for advanced problem-solving techniques.</li>
+</ul></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="further-readings" class="slide level2">
+<h2>Further Readings</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://media.springernature.com/full/springer-static/cover-hires/book/978-3-319-52156-5?as=webp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="https://media.springernature.com/full/springer-static/cover-hires/book/978-3-319-52156-5?as=webp.png" class="quarto-figure quarto-figure-center" height="450"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>Did you know that you can freely access the entire collection of books from Springer? By using a device connected to a uOttawa IP address and visiting <a href="https://link.springer.com">Springer Link</a>, you have the ability to download books in either PDF or EPUB format.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><span class="citation" data-cites="Kramer:2017aa">Kramer (<a href="#/references" role="doc-biblioref" onclick="">2017</a>)</span>, <a href="https://link.springer.com/book/10.1007/978-3-319-52156-5">access via Springer Link</a>.</p>
+</div></aside></section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
+<ul>
+<li><p><a href="https://www.packtpub.com/en-ca/product/hands-on-genetic-algorithms-with-python-9781838557744?type=print&amp;gad_source=1&amp;gbraid=0AAAAAqt_OJ2kO_w96Jqk-JLhcjI36MFJR&amp;gclid=Cj0KCQiAoae5BhCNARIsADVLzZfjZA2WVMy3xUD34JccQekzdizamwllN3iSBW00SqtzSEwIXDbg4_QaAnUgEALw_wcB">Hands on genetic algorithms with Python</a></p></li>
+<li><p>See <a href="https://openreview.net/forum?id=ibNr25jJrf">Direct Evolutionary Optimization of Variational Autoencoders With Binary Latents</a> for a recent application in machine learning.</p></li>
+<li><p><a href="https://spectrum.ieee.org/evolutionary-ai-coding-agents">AI Improves at Improving Itself Using an Evolutionary Trick: Researchers use evolutionary algorithms to enhance AI coding skills</a> by Matthew Mutson, in IEEE Spectrum, 26 june 2025 (5 minutes read)</p></li>
+</ul>
+</section>
+<section id="next-lecture" class="slide level2">
+<h2>Next lecture</h2>
+<ul>
+<li>We will look at the Monte Carlo Tree Search (MCTS) algorithm</li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Bye:2021aa" class="csl-entry" role="listitem">
+Bye, Robin T., Magnus Gribbestad, Ramesh Chandra, and Ottar L. Osen. 2021. <span>“A Comparison of GA Crossover and Mutation Methods for the Traveling Salesman Problem.”</span> In <em>Innovations in Computational Intelligence and Computer Vision</em>, edited by Manoj Kumar Sharma, Vijaypal Singh Dhaka, Thinagaran Perumal, Nilanjan Dey, and João Manuel R. S. Tavares, 529–42. Singapore: Springer Singapore.
+</div>
+<div id="ref-Cattolico:2006aa" class="csl-entry" role="listitem">
+Cattolico, Mike, and Vincent A Cicirello. 2006. <span>“<span class="nocase">Non-wrapping order crossover: an order preserving crossover operator that respects absolute position</span>.”</span> <em>Proceedings of the 8th Annual Conference on Genetic and Evolutionary Computation</em>, 1125–32. <a href="https://doi.org/10.1145/1143997.1144177">https://doi.org/10.1145/1143997.1144177</a>.
+</div>
+<div id="ref-Dennett:1995aa" class="csl-entry" role="listitem">
+Dennett, Daniel C. 1995. <span>“Darwin’s Dangerous Idea.”</span> <em>The Sciences</em> 35 (3): 34–40.
+</div>
+<div id="ref-Eddaly:2023aa" class="csl-entry" role="listitem">
+Eddaly, M., B. Jarboui, and P. Siarry. 2023. <em>Metaheuristics for Machine Learning: New Advances and Tools</em>. Computational Intelligence Methods and Applications. Springer Nature Singapore. <a href="https://books.google.ca/books?id=yXMtzwEACAAJ">https://books.google.ca/books?id=yXMtzwEACAAJ</a>.
+</div>
+<div id="ref-Gil-Rios:2021aa" class="csl-entry" role="listitem">
+Gil-Rios, Miguel-Angel, Ivan Cruz-Aceves, Fernando Cervantes-Sanchez, Igor Guryev, and Juan-Manuel López-Hernández. 2021. <span>“Automatic Enhancement of Coronary Arteries Using Convolutional Gray-Level Templates and Path-Based Metaheuristics.”</span> In <em>Recent Trends in Computational Intelligence Enabled Research</em>, edited by Siddhartha Bhattacharyya, Paramartha Dutta, Debabrata Samanta, Anirban Mukherjee, and Indrajit Pan, 129–53. Academic Press.
+</div>
+<div id="ref-Gregory:2009aa" class="csl-entry" role="listitem">
+Gregory, T. Ryan. 2009. <span>“Understanding Natural Selection: Essential Concepts and Common Misconceptions.”</span> <em>Evolution: Education and Outreach</em> 2 (2): 156–75. <a href="https://doi.org/10.1007/s12052-009-0128-1">https://doi.org/10.1007/s12052-009-0128-1</a>.
+</div>
+<div id="ref-Holland:1973aa" class="csl-entry" role="listitem">
+Holland, John H. 1973. <span>“Genetic Algorithms and the Optimal Allocation of Trials.”</span> <em>SIAM Journal on Computing</em> 2 (2): 88–105. <a href="https://doi.org/10.1137/0202009">https://doi.org/10.1137/0202009</a>.
+</div>
+<div id="ref-Holland:1992aa" class="csl-entry" role="listitem">
+———. 1992. <span>“<span>Genetic Algorithms</span>.”</span> <em>Scientific American</em> 267: 66–73. <a href="https://www.jstor.org/stable/10.2307/24939139">https://www.jstor.org/stable/10.2307/24939139</a>.
+</div>
+<div id="ref-Kramer:2017aa" class="csl-entry" role="listitem">
+Kramer, Oliver. 2017. <em>Genetic Algorithm Essentials</em>. Studies in Computational Intelligence ; 679. Cham, Switzerland: Springer.
+</div>
+<div id="ref-Mayr:1982aa" class="csl-entry" role="listitem">
+Mayr, Ernst. 1982. <em>The Growth of Biological Thought: Diversity, Evolution, and Inheritance</em>. Harvard University Press.
+</div>
+<div id="ref-Mitchell:1998aa" class="csl-entry" role="listitem">
+Mitchell, Melanie. 1998. <em>An Introduction to Genetic Algorithms</em>. Cambridge, MA, USA: MIT Press.
+</div>
+<div id="ref-Oliva:2021aa" class="csl-entry" role="listitem">
+Oliva, D., E. H. Houssein, and S. Hinojosa. 2021. <em>Metaheuristics in Machine Learning: Theory and Applications</em>. Studies in Computational Intelligence. Springer International Publishing. <a href="https://books.google.ca/books?id=Zlw4EAAAQBAJ">https://books.google.ca/books?id=Zlw4EAAAQBAJ</a>.
+</div>
+<div id="ref-Russell:2020aa" class="csl-entry" role="listitem">
+Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</span> Modern Approach</em>. 4th ed. Pearson. <a href="http://aima.cs.berkeley.edu/">http://aima.cs.berkeley.edu/</a>.
+</div>
+<div id="ref-Santos-Amorim:2012aa" class="csl-entry" role="listitem">
+Santos Amorim, Elisa Portes dos, Carolina Ribeiro Xavier, Ricardo Silva Campos, and Rodrigo Weber dos Santos. 2012. <span>“Comparison Between Genetic Algorithms and Differential Evolution for Solving the History Matching Problem.”</span> In <em>Computational Science and Its Applications - <span>ICCSA</span> 2012 - 12th International Conference, Salvador de Bahia, Brazil, June 18-21, 2012, Proceedings, Part <span>I</span></em>, edited by Beniamino Murgante, Osvaldo Gervasi, Sanjay Misra, Nadia Nedjah, Ana Maria A. C. Rocha, David Taniar, and Bernady O. Apduhan, 7333:635–48. Lecture Notes in Computer Science. Springer. <a href="https://doi.org/10.1007/978-3-642-31125-3\_48">https://doi.org/10.1007/978-3-642-31125-3\_48</a>.
+</div>
+<div id="ref-Skiena:2008aa" class="csl-entry" role="listitem">
+Skiena, Steven S. 2008. <em>The Algorithm Design Manual</em>. London: Springer. <a href="https://doi.org/10.1007/978-1-84800-070-4">https://doi.org/10.1007/978-1-84800-070-4</a>.
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Marcel <strong>Turcotte</strong></p>
+<p><a href="mailto:Marcel.Turcotte@uOttawa.ca">Marcel.Turcotte@uOttawa.ca</a></p>
+<p>School of Electrical Engineering and <strong>Computer Science</strong> (EE<strong>CS</strong>)</p>
+<p>University of Ottawa</p>
+
+
+</section></section>
+
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../../assets/images/uottawa_hor_black.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p><a href="https://turcotte.xyz/teaching/csi-4106">turcotte.xyz/teaching/csi-4106</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/turcotte\.xyz\/teaching\/csi-4106");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+<script src="https://platform.twitter.com/widgets.js"></script>
+</body></html>

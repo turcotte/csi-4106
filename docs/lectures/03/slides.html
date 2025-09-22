@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.33">
+
+  <meta name="author" content="Marcel Turcotte">
+  <title>CSI 4106 - Fall 2025 – Learning Algorithms</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+<meta property="og:title" content="Learning Algorithms – CSI 4106 - Fall 2025">
+<meta property="og:description" content="CSI 4106 - Fall 2025">
+<meta property="og:site_name" content="CSI 4106 - Fall 2025">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Learning Algorithms</h1>
+  <p class="subtitle">CSI 4106 - Fall 2025</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Marcel Turcotte 
+</div>
+</div>
+</div>
+
+  <p class="date">Version: Sep 16, 2025 10:02</p>
+</section>
+<section>
+<section id="preamble" class="title-slide slide level1 center">
+<h1>Preamble</h1>
+
+</section>
+<section id="message-of-the-day" class="slide level2">
+<h2>Message of the Day</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/OmzzoJM5YQM" width="889" height="500" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<aside class="notes">
+<p>Large language models exhibit remarkable linguistic capabilities, prompting an increasing number of individuals to engage in personal dialogues with them. Murray Shanahan, affiliated with Google DeepMind and Imperial College, introduces an compelling framework for examining the “behavior” of these models. He conceptualizes their interactions through the lens of role play, as discussed in his recent work <a href="https://www.nature.com/articles/s41586-023-06647-8">published in Nature</a>.</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=v1Py_hWcmkU">Consciousness, reasoning and the philosophy of AI with Murray Shanahan</a>, in this Google DeepMind podcast, Hannah Fry interviews Murray Shanahan, 2025-04-24.</li>
+</ul>
+<p>Depending on the context of their interaction prompts, these models can adopt personas that simulate malevolent individuals, potentially offering advice with harmful consequences.</p>
+<ul>
+<li><a href="">OpenAI Eagerly Trying To Reduce AI Psychosis And Squash Co-Creation Of Human-AI Delusions When Using ChatGPT And GPT-5</a>, by Lance Eliot, Forbes, 2025-09-02.</li>
+<li><a href="https://www.pbs.org/newshour/show/what-to-know-about-ai-psychosis-and-the-effect-of-ai-chatbots-on-mental-health">What to know about ‘AI psychosis’ and the effect of AI chatbots on mental health</a>, PBS News, 2025-08-31.</li>
+</ul>
+<p>Here is a reminder for the University of Ottawa’s wellness page, which offers a comprehensive array of resources, including medical and mental health-care services, designed to support your well-being and that of those around you.</p>
+<ul>
+<li><a href="https://www.uottawa.ca/campus-life/health-wellness">Student Health and Wellness</a></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><a href="https://www.youtube.com/watch?v=OmzzoJM5YQM">Microsoft boss troubled by rise in reports of ‘AI psychosis’</a>, BBC News, 2025-08-21.</p>
+</div></aside></section>
+<section id="learning-outcomes" class="slide level2">
+<h2>Learning outcomes</h2>
+<ul>
+<li><strong>Differentiate</strong> between model, objective, and optimizer in learning algorithms.</li>
+<li><strong>Explain</strong> KNN for classification and regression, including uniform and distance-weighted prediction.</li>
+<li><strong>Describe</strong> decision trees and <strong>apply</strong> the split criterion using impurity measures such as Gini.</li>
+<li><strong>Interpret</strong> decision boundaries and the concept of linear separability.</li>
+</ul>
+<aside class="notes">
+<p>As indicated in the introductory lecture, I aim to present a series of concepts leading to deep learning. As a starting point, linear regression would be a logical choice as a primary learning algorithm to examine. Nonetheless, it is equally critical to possess a high-level understanding of various other learning algorithms, as they differ significantly in model structures and training processes. Therefore, I will briefly discuss k-nearest neighbours and decision trees, before introducing linear regression.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="knn" class="title-slide slide level1 center">
+<h1>KNN</h1>
+
+</section>
+<section id="k-nearest-neighbours-knn" class="slide level2 scrollable">
+<h2>k-nearest neighbours (KNN)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://scikit-learn.org/stable/_images/sphx_glr_plot_classification_001.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="https://scikit-learn.org/stable/_images/sphx_glr_plot_classification_001.png" class="quarto-figure quarto-figure-center" height="300"></a></p>
+</figure>
+</div>
+<ul>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier">KNeighborsClassifier</a>, <a href="https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html">examples</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html">KNeighborsRegressor</a>, <a href="https://scikit-learn.org/stable/auto_examples/neighbors/plot_regression.html">exemples</a></li>
+</ul>
+
+<aside><div>
+<p><strong>Attribution</strong>: <a href="https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html">Nearest Neighbors Classification</a>.</p>
+</div></aside></section>
+<section id="knn---learning" class="slide level2">
+<h2>KNN - Learning</h2>
+<ul>
+<li><em>Lazy learning</em>: no explicit training</li>
+<li>The “model” is the dataset</li>
+</ul>
+<aside class="notes">
+<p>The <strong>k-nearest neighbour</strong> (KNN) algorithm simply stores its training data. There is no explicit training. We call this “lazy learning”.</p>
+<p>When the number of examples is large, the low-dimensional data can be stored in a specialized data structure, such as kd-tree or ball tree, to accelerate the computation at inference time. For high-dimensional data, techniques, such as approximate nearest neighbour (ANN) have been developped.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="knn---inference" class="slide level2">
+<h2>KNN - Inference</h2>
+<ul>
+<li>Classify/regress based on the labels/values of the <span class="math inline">\(k\)</span> closest examples in feature space</li>
+</ul>
+
+<aside class="notes">
+<p>Although the inference cost may seem low, being linear with respect to the number of examples. It is important to remember that the typical workflow for a machine learning project is to train a model once and use that model for every query, where the number of queries can be quite large.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Cost is <span class="math inline">\(\mathcal{O}(ND)\)</span> per query (naïve), where <span class="math inline">\(N\)</span> = number of examples, <span class="math inline">\(D\)</span> = dimensions</p>
+</div></aside></section>
+<section id="formal-definition" class="slide level2">
+<h2>Formal Definition</h2>
+<p>Given <strong>dataset</strong> <span class="math inline">\(\{(x_i, y_i)\}_1^{N}\)</span> and an <strong>unseen example</strong> <span class="math inline">\(x\)</span>:</p>
+<ul>
+<li>Compute <strong>distances</strong> <span class="math inline">\(d(x, x_i)\)</span></li>
+<li>Select the <strong><span class="math inline">\(k\)</span> smallest distances</strong></li>
+<li>Classification: <strong>majority vote</strong> (possibly weighted by <span class="math inline">\(1/d\)</span>)</li>
+<li>Regression: <strong>average</strong> (possibly weighted)</li>
+</ul>
+<aside class="notes">
+<p>The <strong>k-nearest neighbour</strong> (KNN) algorithm is a simple, <strong>non-parametric</strong>, <strong>instance-based</strong> learning method used for classification and regression. It classifies a data point based on the majority label of its <span class="math inline">\(k\)</span> nearest neighbours in the feature space, where <span class="math inline">\(k\)</span> is a user-defined constant. Distance metrics like Euclidean distance are commonly used to determine the nearest neighbours.</p>
+<p>In the context of regression, the predicted value <span class="math inline">\(\hat{y}(x)\)</span> is calculated as a weighted sum of the labels of its <span class="math inline">\(k\)</span> nearest neighbours. The weights can be uniform or based on distance, reflecting the proximity of each neighbour to the query point <span class="math inline">\(x\)</span>.</p>
+<p>For a query point <span class="math inline">\(x\)</span>, let its <span class="math inline">\(k\)</span> nearest neighbours have targets <span class="math inline">\(y_1, \dots, y_k\)</span> and distances <span class="math inline">\(d_1, \dots, d_k\)</span>.</p>
+<ul>
+<li><strong>Uniform weights (default)</strong>:</li>
+</ul>
+<p><span class="math display">\[
+\hat{y}(x) = \frac{1}{k} \sum_{i=1}^k y_i
+\]</span></p>
+<ul>
+<li><strong>Distance weights</strong> (the built-in option <code>"distance"</code>):</li>
+</ul>
+<p><span class="math display">\[
+\hat{y}(x) = \frac{\sum_{i=1}^k \frac{1}{d_i} \, y_i}{\sum_{i=1}^k \frac{1}{d_i}}
+\]</span></p>
+<p>In the above, as the distance <span class="math inline">\(d_i\)</span> between the example <span class="math inline">\(x_i\)</span> and the example <span class="math inline">\(x\)</span> increases, the reciprocal <span class="math inline">\(\frac{1}{d_i}\)</span> decreases. Consequently, examples that are farther from <span class="math inline">\(x\)</span> exert less influence on the predicted outcome, <span class="math inline">\(\hat{y}(x)\)</span>.</p>
+<p>In both cases, convex combination property guarantees that:</p>
+<p><span class="math display">\[
+\min(y_1, \dots, y_k) \;\; \leq \;\; \hat{y}(x) \;\; \leq \;\; \max(y_1, \dots, y_k).
+\]</span></p>
+<p>A <strong>non-parametric</strong> algorithm does not make any assumptions about the underlying data distribution and does not learn a fixed set of parameters or a model during the training phase. Instead, it relies directly on the training data to make decisions at the time of classification or regression, making it flexible and adaptive to various data shapes but potentially computationally expensive at prediction time.</p>
+<p>KNN has clear limitations:</p>
+<ol type="1">
+<li><strong>Computational cost</strong>
+<ul>
+<li>Prediction requires computing distances to all training points, <span class="math inline">\(O(n)\)</span> per query.</li>
+</ul></li>
+<li><strong>Curse of dimensionality</strong>
+<ul>
+<li>In high-dimensional spaces, distance metrics lose discriminative power.</li>
+</ul></li>
+<li><strong>Choice of <span class="math inline">\(k\)</span> and distance metric</strong>
+<ul>
+<li>Small <span class="math inline">\(k\)</span>: high variance, sensitive to noise/outliers.</li>
+<li>Large <span class="math inline">\(k\)</span>: high bias, oversmoothing.</li>
+</ul></li>
+<li><strong>Sensitivity to feature scaling</strong>
+<ul>
+<li>Distances are scale-dependent; variables with larger ranges dominate unless features are normalized/standardized.</li>
+</ul></li>
+<li><strong>Imbalanced data</strong>
+<ul>
+<li>In classification, if one class is much more frequent, KNN can be biased toward that class since neighbours are more likely to belong to it.</li>
+</ul></li>
+<li><strong>Not extrapolative</strong>
+<ul>
+<li>Predictions are always convex combinations (in regression) or majority votes (in classification) of training labels.</li>
+<li>This means KNN cannot extrapolate trends outside the range of observed training data.</li>
+</ul></li>
+</ol>
+<p>In scikit-learn, several models are commonly used for regression tasks. Here are some of the main models:</p>
+<ol type="1">
+<li><strong>Linear Regression</strong> (<code>LinearRegression</code>):
+<ul>
+<li>A simple linear approach that models the relationship between the independent variables and the dependent variable by fitting a linear equation to the observed data.</li>
+</ul></li>
+<li><strong>Support Vector Regression</strong> (<code>SVR</code>):
+<ul>
+<li>An extension of Support Vector Machines (SVM) for regression tasks, which tries to fit the best line within a specified margin of tolerance.</li>
+</ul></li>
+<li><strong>Decision Tree Regression</strong> (<code>DecisionTreeRegressor</code>):
+<ul>
+<li>Uses decision trees to model the relationship between the input features and the target variable by recursively splitting the data into subsets.</li>
+</ul></li>
+<li><strong>Random Forest Regression</strong> (<code>RandomForestRegressor</code>):
+<ul>
+<li>An ensemble method that uses multiple decision trees to improve predictive accuracy and control overfitting.</li>
+</ul></li>
+<li><strong>Gradient Boosting Regression</strong> (<code>GradientBoostingRegressor</code>):
+<ul>
+<li>Another ensemble method that builds sequential decision trees, where each tree corrects the errors of the previous one.</li>
+</ul></li>
+<li><strong>K-Nearest Neighbors Regression</strong> (<code>KNeighborsRegressor</code>):
+<ul>
+<li>A non-parametric method that predicts the target variable based on the average of the k-nearest neighbours in the feature space.</li>
+</ul></li>
+</ol>
+<p>These models offer a range of approaches to handle different types of regression problems, each with its own strengths and suitable applications.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exercises" class="slide level2">
+<h2>Exercises</h2>
+<p>Download these examples to experiment with code variations. Notably, examine how <strong>changes in <span class="math inline">\(k\)</span></strong> impact <strong>classification decision boundaries</strong> and <strong>regression line smoothness</strong>.</p>
+<ul>
+<li><a href="https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html">Nearest Neighbors Classification</a></li>
+<li><a href="https://scikit-learn.org/stable/auto_examples/neighbors/plot_regression.html">Nearest Neighbors Regression</a></li>
+<li><a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html">Importance of Feature Scaling</a></li>
+</ul>
+<aside class="notes">
+<p>The scikit-learn website offers <a href="https://scikit-learn.org/stable/auto_examples/index.html">examples</a> in Jupyter Notebook format, accessible via desktop browsers with links on the right.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="decision-tree" class="title-slide slide level1 center">
+<h1>Decision Tree</h1>
+
+</section>
+<section id="interpretable" class="slide level2">
+<h2>Interpretable</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://www.canada.ca/content/dam/phac-aspc/images/services/reports-publications/health-promotion-chronic-disease-prevention-canada-research-policy-practice/vol-43-no-2-2023/a3f1-en.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="https://www.canada.ca/content/dam/phac-aspc/images/services/reports-publications/health-promotion-chronic-disease-prevention-canada-research-policy-practice/vol-43-no-2-2023/a3f1-en.jpg" class="quarto-figure quarto-figure-center" height="475"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>Decision trees are valuable because they clearly delineate the rules learned by the model. The decision tree above illustrates the results of a study examining clinically significant anxiety symptoms. In this instance, the initial determinant was whether students reported having a positive home environment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Attribution:</strong> <a href="https://www.canada.ca/en/public-health/services/reports-publications/health-promotion-chronic-disease-prevention-canada-research-policy-practice/vol-43-no-2-2023/decision-trees-population-health-surveillance-research-youth-mental-health-compass-study.html">Public Health Agency of Canada</a></p>
+</div></aside></section>
+<section id="what-is-a-decision-tree" class="slide level2">
+<h2>What is a Decision Tree?</h2>
+<ul>
+<li class="fragment">A decision tree is a <strong>hierarchical structure</strong> represented as a directed acyclic graph, used for <strong>classification</strong> and <strong>regression</strong> tasks.</li>
+<li class="fragment">Each <strong>internal node</strong> performs a binary test on a particular feature (<span class="math inline">\(j\)</span>), such as evaluating whether the number of connections at a school surpasses a specified threshold.</li>
+<li class="fragment">The <strong>leaves</strong> function as decision nodes.</li>
+</ul>
+
+<aside class="notes">
+<p>Decision trees can extend beyond binary splits, as exemplified by algorithms like <strong>ID3</strong>, which accommodate nodes with multiple children.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>The tree’s <strong>structure</strong> is <strong>inferred</strong> (<strong>learnt</strong>) from the <strong>training data</strong>.</p>
+</div></aside></section>
+<section id="classifying-new-instances-inference" class="slide level2">
+<h2>Classifying New Instances (Inference)</h2>
+<ul>
+<li class="fragment">Begin at the <strong>root</strong> node of the decision tree. Proceed by answering a sequence of <strong>binary questions</strong> until a <strong>leaf node</strong> is reached. The label associated with this leaf denotes the <strong>classification</strong> of the instance.</li>
+<li class="fragment">Alternatively, some algorithms may store a <strong>probability distribution</strong> at the leaf, representing the fraction of training samples corresponding to each class <span class="math inline">\(k\)</span>, across all possible classes <span class="math inline">\(k\)</span>.</li>
+</ul>
+<aside class="notes">
+<p>When a <strong>decision tree</strong> is used to solve a <strong>regression</strong> task, each <strong>leaf node</strong> stores a <strong>prediction value</strong>. Specifically:</p>
+<p><span class="math display">\[
+\hat{y}_\text{leaf} = \frac{1}{N_\text{leaf}} \sum_{i \in \text{leaf}} y_i,
+\]</span></p>
+<p>where <span class="math inline">\(N_\text{leaf}\)</span> is the number of training samples that ended up in that leaf, and <span class="math inline">\(y_i\)</span> are their target values.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="decision-boundary" class="title-slide slide level1 center">
+<h1>Decision Boundary</h1>
+
+</section>
+<section id="palmer-pinguins-dataset" class="slide level2 scrollable">
+<h2>Palmer Pinguins Dataset</h2>
+<div id="6181fc56" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="co"># Loading our dataset</span></span>
+<span id="cb1-2"><a></a></span>
+<span id="cb1-3"><a></a><span class="cf">try</span>:</span>
+<span id="cb1-4"><a></a>  <span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb1-5"><a></a><span class="cf">except</span>:</span>
+<span id="cb1-6"><a></a>  <span class="op">!</span> pip install palmerpenguins</span>
+<span id="cb1-7"><a></a>  <span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb1-8"><a></a></span>
+<span id="cb1-9"><a></a>penguins <span class="op">=</span> load_penguins()</span>
+<span id="cb1-10"><a></a></span>
+<span id="cb1-11"><a></a><span class="co"># Pairplot using seaborn</span></span>
+<span id="cb1-12"><a></a></span>
+<span id="cb1-13"><a></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-14"><a></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-15"><a></a></span>
+<span id="cb1-16"><a></a>sns.pairplot(penguins, hue<span class="op">=</span><span class="st">'species'</span>, markers<span class="op">=</span>[<span class="st">"o"</span>, <span class="st">"s"</span>, <span class="st">"D"</span>])</span>
+<span id="cb1-17"><a></a>plt.suptitle(<span class="st">"Pairwise Scatter Plots of Penguins Features"</span>)</span>
+<span id="cb1-18"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="palmer-pinguins-dataset-output" class="slide level2 scrollable output-location-slide"><h2>Palmer Pinguins Dataset</h2><div class="cell output-location-slide" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides_files/figure-revealjs/cell-2-output-1.png" width="1304" height="1180"></a></p>
+</figure>
+</div>
+</div>
+</div></section><section id="binary-classification-problem" class="slide level2">
+<h2>Binary Classification Problem</h2>
+<ul>
+<li>Several scatter plots reveal a distinct clustering of <strong>Gentoo</strong> instances.</li>
+<li>To illustrate our next exemple, we propose a <strong>binary classification</strong> model: <strong>Gentoo</strong> versus <strong>non-Gentoo</strong>.</li>
+<li>Our analysis will concentrate on two key features: <strong>body mass</strong> and <strong>bill depth</strong>.</li>
+</ul>
+</section>
+<section id="definition" class="slide level2">
+<h2>Definition</h2>
+<p>A <strong>decision boundary</strong> is a “boundary” that partitions the underlying feature space into <strong>regions</strong> corresponding to <strong>different class labels</strong>.</p>
+
+<aside><div>
+<p>The term <strong>boundary</strong> will be clarified over the next slides.</p>
+</div></aside></section>
+<section id="decision-boundary-1" class="slide level2">
+<h2>Decision Boundary</h2>
+<p>The decision boundary between these attributes can be represented as a <strong>line</strong>.</p>
+<div id="f36c8a74" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="co"># Import necessary libraries</span></span>
+<span id="cb2-2"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb2-4"><a></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a><span class="cf">try</span>:</span>
+<span id="cb2-7"><a></a>  <span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb2-8"><a></a><span class="cf">except</span>:</span>
+<span id="cb2-9"><a></a>  <span class="op">!</span> pip install palmerpenguins</span>
+<span id="cb2-10"><a></a>  <span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb2-11"><a></a></span>
+<span id="cb2-12"><a></a><span class="co"># Load the Palmer Penguins dataset</span></span>
+<span id="cb2-13"><a></a>df <span class="op">=</span> load_penguins()</span>
+<span id="cb2-14"><a></a></span>
+<span id="cb2-15"><a></a><span class="co"># Preserve only the necessary features: 'bill_depth_mm' and 'body_mass_g'</span></span>
+<span id="cb2-16"><a></a>features <span class="op">=</span> [<span class="st">'bill_depth_mm'</span>, <span class="st">'body_mass_g'</span>]</span>
+<span id="cb2-17"><a></a>df <span class="op">=</span> df[features <span class="op">+</span> [<span class="st">'species'</span>]]</span>
+<span id="cb2-18"><a></a></span>
+<span id="cb2-19"><a></a><span class="co"># Drop rows with missing values</span></span>
+<span id="cb2-20"><a></a>df.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-21"><a></a></span>
+<span id="cb2-22"><a></a><span class="co"># Create a binary problem: 'Gentoo' vs 'Not Gentoo'</span></span>
+<span id="cb2-23"><a></a>df[<span class="st">'species_binary'</span>] <span class="op">=</span> df[<span class="st">'species'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: <span class="dv">1</span> <span class="cf">if</span> x <span class="op">==</span> <span class="st">'Gentoo'</span> <span class="cf">else</span> <span class="dv">0</span>)</span>
+<span id="cb2-24"><a></a></span>
+<span id="cb2-25"><a></a><span class="co"># Define feature matrix X and target vector y</span></span>
+<span id="cb2-26"><a></a>X <span class="op">=</span> df[features].values</span>
+<span id="cb2-27"><a></a>y <span class="op">=</span> df[<span class="st">'species_binary'</span>].values</span>
+<span id="cb2-28"><a></a></span>
+<span id="cb2-29"><a></a><span class="co"># Split the data into training and testing sets</span></span>
+<span id="cb2-30"><a></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb2-31"><a></a></span>
+<span id="cb2-32"><a></a><span class="co"># Function to plot initial scatter of data</span></span>
+<span id="cb2-33"><a></a><span class="kw">def</span> plot_scatter(X, y):</span>
+<span id="cb2-34"><a></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb2-35"><a></a>    plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'orange'</span>, edgecolors<span class="op">=</span><span class="st">'k'</span>, marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span><span class="st">'Gentoo'</span>)</span>
+<span id="cb2-36"><a></a>    plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, edgecolors<span class="op">=</span><span class="st">'k'</span>, marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span><span class="st">'Not Gentoo'</span>)</span>
+<span id="cb2-37"><a></a>    plt.xlabel(<span class="st">'Bill Depth (mm)'</span>)</span>
+<span id="cb2-38"><a></a>    plt.ylabel(<span class="st">'Body Mass (g)'</span>)</span>
+<span id="cb2-39"><a></a>    plt.title(<span class="st">'Scatter Plot of Bill Depth vs. Body Mass'</span>)</span>
+<span id="cb2-40"><a></a>    plt.legend()</span>
+<span id="cb2-41"><a></a>    plt.show()</span>
+<span id="cb2-42"><a></a>    </span>
+<span id="cb2-43"><a></a><span class="co"># Plot the initial scatter plot</span></span>
+<span id="cb2-44"><a></a>plot_scatter(X_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+</section>
+<section id="decision-boundary-1-output" class="slide level2 output-location-slide"><h2>Decision Boundary</h2><div class="cell output-location-slide" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="750" height="449"></a></p>
+</figure>
+</div>
+</div>
+</div></section><section id="decision-boundary-2" class="slide level2">
+<h2>Decision Boundary</h2>
+<p>The decision boundary between these attributes can be represented as a <strong>line</strong>.</p>
+<div id="7de929f4" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="co"># Train a logistic regression model</span></span>
+<span id="cb3-2"><a></a>model <span class="op">=</span> LogisticRegression()</span>
+<span id="cb3-3"><a></a>model.fit(X_train, y_train)</span>
+<span id="cb3-4"><a></a></span>
+<span id="cb3-5"><a></a><span class="co"># Function to plot decision boundary</span></span>
+<span id="cb3-6"><a></a><span class="kw">def</span> plot_decision_boundary(X, y, model):</span>
+<span id="cb3-7"><a></a>    x_min, x_max <span class="op">=</span> X[:, <span class="dv">0</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="dv">1</span>, X[:, <span class="dv">0</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-8"><a></a>    y_min, y_max <span class="op">=</span> X[:, <span class="dv">1</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="dv">1</span>, X[:, <span class="dv">1</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb3-9"><a></a>    xx, yy <span class="op">=</span> np.meshgrid(np.arange(x_min, x_max, <span class="fl">0.1</span>),</span>
+<span id="cb3-10"><a></a>                         np.arange(y_min, y_max, <span class="fl">0.1</span>))</span>
+<span id="cb3-11"><a></a>    Z <span class="op">=</span> model.predict(np.c_[xx.ravel(), yy.ravel()])</span>
+<span id="cb3-12"><a></a>    Z <span class="op">=</span> Z.reshape(xx.shape)</span>
+<span id="cb3-13"><a></a>    </span>
+<span id="cb3-14"><a></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb3-15"><a></a>    plt.contourf(xx, yy, Z, alpha<span class="op">=</span><span class="fl">0.3</span>, cmap<span class="op">=</span><span class="st">'RdYlBu'</span>)</span>
+<span id="cb3-16"><a></a>    plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'orange'</span>, edgecolors<span class="op">=</span><span class="st">'k'</span>, marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span><span class="st">'Gentoo'</span>)</span>
+<span id="cb3-17"><a></a>    plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, edgecolors<span class="op">=</span><span class="st">'k'</span>, marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span><span class="st">'Not Gentoo'</span>)</span>
+<span id="cb3-18"><a></a>    plt.xlabel(<span class="st">'Bill Depth (mm)'</span>)</span>
+<span id="cb3-19"><a></a>    plt.ylabel(<span class="st">'Body Mass (g)'</span>)</span>
+<span id="cb3-20"><a></a>    plt.title(<span class="st">'Logistic Regression Decision Boundary'</span>)</span>
+<span id="cb3-21"><a></a>    plt.legend()</span>
+<span id="cb3-22"><a></a>    plt.show()</span>
+<span id="cb3-23"><a></a></span>
+<span id="cb3-24"><a></a><span class="co"># Plot the decision boundary on the training set</span></span>
+<span id="cb3-25"><a></a>plot_decision_boundary(X_train, y_train, model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+</section>
+<section id="decision-boundary-2-output" class="slide level2 output-location-slide"><h2>Decision Boundary</h2><div class="cell output-location-slide" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-revealjs/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="750" height="449"></a></p>
+</figure>
+</div>
+</div>
+</div></section><section id="definition-1" class="slide level2">
+<h2>Definition</h2>
+<p>We say that the data is <strong>linearly separable</strong> when two classes of data can be perfectly separated by a <strong>single linear boundary</strong>, such as a <strong>line</strong> in <strong>two-dimensional space</strong> or a <strong>hyperplane in higher dimensions</strong>.</p>
+</section>
+<section id="simple-decision-doundary" class="slide level2">
+<h2>Simple Decision Doundary</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/geurts-2009fq_fig1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="../../assets/images/geurts-2009fq_fig1.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+<p><em>(a)</em> training data, <em>(b)</em> quadratic curve, and <em>(c)</em> linear function.</p>
+<div class="asside">
+<p><strong>Attribution:</strong> <span class="citation" data-cites="geurts:2009fq">(<a href="#/references" role="doc-biblioref" onclick="">Geurts, Irrthum, and Wehenkel 2009</a>)</span></p>
+</div>
+<aside class="notes">
+<p>The table on the left presents training data for a hypothetical <strong>binary classification task</strong> in a medical context, where the two attributes, <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, are used to predict the target variable, <span class="math inline">\(y\)</span>, which can take on two values: <em>sick</em> and <em>healthy</em>. You can imagine that <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are measurements, such as blood pressure and heart rate or cholesterol and glucose levels.</p>
+<p><strong>Logistic regression</strong> (c) employs a linear <strong>decision boundary</strong>. In this specific example, the decision boundary is represented by a straight line. Employing logistic regression for this problem results in several classification errors: red dots above the line, which should be classified as ‘sick’, are incorrectly predicted as ‘healthy’. Conversely, green dots below the line, which should be classified as ‘healthy’, are incorrectly predicted as ‘sick’.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="complex-decision-boundary" class="slide level2">
+<h2>Complex Decision Boundary</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/geurts-2009fq_fig2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="../../assets/images/geurts-2009fq_fig2.png" class="quarto-figure quarto-figure-center" height="375"></a></p>
+</figure>
+</div>
+<p><strong>Decision trees</strong> are capable of generating <strong>irregular</strong> and <strong>non-linear</strong> decision boundaries.</p>
+<div class="asside">
+<p><strong>Attribution:</strong> <em>ibidem</em>.</p>
+</div>
+<aside class="notes">
+<p>Make sure to understand the relationships between the eight decision rules delineated in the decision tree and the nine line segments represented in the scatter plot.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="definition-revised" class="slide level2">
+<h2>Definition (revised)</h2>
+<p>A <strong>decision boundary</strong> is a hypersurface that partitions the underlying feature space into <strong>regions</strong> corresponding to <strong>different class labels</strong>.</p>
+</section></section>
+<section>
+<section id="decision-tree-contd" class="title-slide slide level1 center">
+<h1>Decision Tree (contd)</h1>
+
+</section>
+<section id="constructing-a-decision-tree" class="slide level2">
+<h2>Constructing a Decision Tree</h2>
+<ul>
+<li><p>How to <strong>construct</strong> (<strong>learnt</strong>) a decision tree?</p></li>
+<li><p>Are there some trees that are <strong>“better”</strong> than others?</p></li>
+<li><p>Is it feasible to construct an <strong>optimal decision tree</strong> with computational efficiency?</p></li>
+</ul>
+
+<aside><div>
+<p><span class="citation" data-cites="Hyafil:1976aa">(<a href="#/references" role="doc-biblioref" onclick="">Hyafil and Rivest 1976</a>)</span></p>
+</div></aside></section>
+<section id="optimality" class="slide level2">
+<h2>Optimality</h2>
+<ul>
+<li>Let <span class="math inline">\(X = \{x_1, \ldots, x_n\}\)</span> be a finite set of <strong>objects</strong>.</li>
+<li>Let <span class="math inline">\(\mathcal{T} = \{T_1, \ldots, T_t\}\)</span> be a finite set of <strong>tests</strong>.</li>
+<li>For each object and test, we have:
+<ul>
+<li><span class="math inline">\(T_i(x_j)\)</span> is either <strong>true</strong> or <strong>false</strong>.</li>
+</ul></li>
+<li>An <strong>optimal</strong> tree is one that completely identifies all the objects in <span class="math inline">\(X\)</span> and <span class="math inline">\(|T|\)</span> is <strong>minimum</strong>.</li>
+</ul>
+
+<aside class="notes">
+<p><span class="citation" data-cites="Hyafil:1976aa">Hyafil and Rivest (<a href="#/references" role="doc-biblioref" onclick="">1976</a>)</span> showed that constructing optimal binary decision trees is NP-Complete.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><span class="citation" data-cites="Hyafil:1976aa">(<a href="#/references" role="doc-biblioref" onclick="">Hyafil and Rivest 1976</a>)</span></p>
+</div></aside></section>
+<section id="constructing-a-decision-tree-1" class="slide level2">
+<h2>Constructing a Decision Tree</h2>
+<ul>
+<li><strong>Iterative development</strong>: Initiate with an <strong>empty tree</strong>. Progressively introduce <strong>nodes</strong>, each informed by the <strong>training dataset</strong>, continuing until the dataset is <strong>completely classified</strong> or alternative termination criteria, such as <strong>maximum tree depth</strong>, are met.</li>
+</ul>
+
+<aside><div>
+<p><strong>Learning</strong> is the process of building the tree from training data.</p>
+</div></aside></section>
+<section id="constructing-a-decision-tree-2" class="slide level2">
+<h2>Constructing a Decision Tree</h2>
+<ul>
+<li><strong>Initial Node Construction</strong>:
+<ul>
+<li>To establish the root node, evaluate all available <span class="math inline">\(D\)</span> features.
+<ul>
+<li>For each feature, assess various threshold values derived from the observed data within the training set.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="constructing-a-decision-tree-3" class="slide level2">
+<h2>Constructing a Decision Tree</h2>
+<ul>
+<li>For a <strong>numerical feature</strong>, the algorithm considers <strong>all possible split points</strong> (thresholds) in the feature’s range.</li>
+<li>These split points are typically the <strong>midpoints</strong> between two consecutive, <strong>sorted unique values</strong> of the feature.</li>
+</ul>
+</section>
+<section id="constructing-a-decision-tree-4" class="slide level2">
+<h2>Constructing a Decision Tree</h2>
+<ul>
+<li>For a <strong>categorical feature</strong> with <span class="math inline">\(k\)</span> unique values, the algorithm considers <strong>all possible ways</strong> of splitting the categories into two groups.</li>
+<li>For instance, if the feature (forecast) has values, ‘Rainy’, ‘Cloudy’, and ‘Sunny’, it evaluates the following splits:
+<ul>
+<li><span class="math inline">\(\{\mathrm{Rainy}\}\)</span> vs.&nbsp;<span class="math inline">\(\{\mathrm{Cloudy}, \mathrm{Sunny}\}\)</span>,</li>
+<li><span class="math inline">\(\{\mathrm{Cloudy}\}\)</span> vs.&nbsp;<span class="math inline">\(\{\mathrm{Rainy}, \mathrm{Sunny}\}\)</span> ,</li>
+<li><span class="math inline">\(\{\mathrm{Sunny}\}\)</span> vs.&nbsp;<span class="math inline">\(\{\mathrm{Rainy}, \mathrm{Cloudy}\}\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="evaluation" class="slide level2">
+<h2>Evaluation</h2>
+<p>What defines a <strong>“good” data split</strong>?</p>
+<div class="{incremental}">
+<ul>
+<li><span class="math inline">\(\{\mathrm{Rainy}\}\)</span> vs.&nbsp;<span class="math inline">\(\{\mathrm{Cloudy}, \mathrm{Sunny}\}\)</span> : <span class="math inline">\([20,10,5]\)</span> and <span class="math inline">\([10,10,15]\)</span>.</li>
+<li><span class="math inline">\(\{\mathrm{Cloudy}\}\)</span> vs.&nbsp;<span class="math inline">\(\{\mathrm{Rainy}, \mathrm{Sunny}\}\)</span> : <span class="math inline">\([40,0,0]\)</span> and <span class="math inline">\([0,30,0]\)</span>.</li>
+</ul>
+</div>
+
+<aside><div>
+<p>Where <span class="math inline">\([20,10,5]\)</span> indicates that the subgroup contains 20 examples of the ‘Poor’, 10 for ‘Average’, and 5 for ‘Excellent’, for our predictive model to classify the likelihood of a successful fishing day.</p>
+</div></aside></section>
+<section id="evaluation-1" class="slide level2">
+<h2>Evaluation</h2>
+<ul>
+<li class="fragment"><p><strong>Heterogeneity</strong> (also referred to as <strong>impurity</strong>) and <strong>homogeneity</strong> are critical metrics for evaluating the composition of resulting data partitions.</p></li>
+<li class="fragment"><p>Optimally, each of these partitions should contain data entries from a <strong>single class</strong> to achieve maximum homogeneity.</p></li>
+<li class="fragment"><p><strong>Entropy</strong> and the <strong>Gini index</strong> are two widely utilized metrics for assessing these characteristics.</p></li>
+</ul>
+</section>
+<section id="evalution" class="slide level2 smaller">
+<h2>Evalution</h2>
+<p>Objective function for <strong>sklearn.tree.DecisionTreeClassifier</strong> (CART):</p>
+<p><span class="math display">\[
+  J(k,t_k) = \frac{N_{\text{left}}}{N_{\text{parent}}} G_{\text{left}} + \frac{N_{\text{right}}}{N_{\text{parent}}} G_{\text{right}}
+\]</span></p>
+<ul>
+<li><p>The cost of partitioning the data using <strong>feature</strong> <span class="math inline">\(k\)</span> and <strong>threshold</strong> <span class="math inline">\(t_k\)</span>.</p></li>
+<li><p><span class="math inline">\(N_{\text{left}}\)</span> and <span class="math inline">\(N_{\text{right}}\)</span> is the <strong>number of examples</strong> in the <strong>left</strong> and <strong>right</strong> subsets, respectively, and <span class="math inline">\(N_{\text{parent}}\)</span> is the number of examples before splitting the data.</p></li>
+<li><p><span class="math inline">\(G_{\text{left}}\)</span> and <span class="math inline">\(G_{\text{right}}\)</span> is the <strong>impurity</strong> of the <strong>left</strong> and <strong>right</strong> subsets, respectively.</p></li>
+</ul>
+
+<aside><div>
+<p>Minimize or maximize <span class="math inline">\(J\)</span>?</p>
+</div></aside></section>
+<section id="gini-index" class="slide level2">
+<h2>Gini Index</h2>
+<ul>
+<li><strong>Gini index</strong> (default)</li>
+</ul>
+<p><span class="math display">\[
+  G_i = 1 - \sum_{k=1}^n p_{i,k}^2
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(p_{i,k}\)</span> is the proportion of the examples from this class <span class="math inline">\(k\)</span> in the node <span class="math inline">\(i\)</span>.</p></li>
+<li><p>What is the <strong>maximum</strong> value of the Gini index?</p></li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p>The value of the Gini index is maximum when all the classes are equiprobable, i.e.&nbsp;the proportions are the same.</p></li>
+<li><p>For a binary classification, <span class="math inline">\(1 - [\frac{1}{2}^2 + \frac{1}{2}^2] = 0.5\)</span>.</p></li>
+<li><p>For the general case, <span class="math inline">\(1 - n \times \frac{1}{n}^2 = 1 - \frac{1}{n}\)</span>, as <span class="math inline">\(n \to \infty\)</span>, <span class="math inline">\(\frac{1}{n} \to 0\)</span>, and the Gini index tends to 1.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="gini-index-1" class="slide level2">
+<h2>Gini Index</h2>
+<p>Considering a <strong>binary classification</strong> problem:</p>
+<ul>
+<li><span class="math inline">\(1 - [(0/100)^2 + (100/100)^2] = 0\)</span> (pure)</li>
+<li><span class="math inline">\(1 - [(25/100)^2 + (75/100)^2] = 0.375\)</span></li>
+<li><span class="math inline">\(1 - [(50/100)^2 + (50/100)^2] = 0.5\)</span></li>
+</ul>
+<aside class="notes">
+<p>Based on the above, are we solving a minimization or maximization problem?</p>
+<p>When the problem is formulated as follows:</p>
+<ul>
+<li>For each candidate split <span class="math inline">\((k, t_k)\)</span>, compute</li>
+</ul>
+<p><span class="math display">\[
+  J(k,t_k) = \frac{N_{\text{left}}}{N_{\text{parent}}} G_{\text{left}} + \frac{N_{\text{right}}}{N_{\text{parent}}} G_{\text{right}}
+\]</span></p>
+<ul>
+<li>The algorithm then chooses the split with the <strong>lowest</strong> <span class="math inline">\(J\)</span>, i.e.&nbsp;the split that yields the smallest weighted impurity.</li>
+</ul>
+<p>Many textbooks describe this as <strong>maximizing impurity reduction (information gain)</strong>, which is just</p>
+<p><span class="math display">\[
+\Delta G = G_{\text{parent}} - J(k,t_k).
+\]</span></p>
+<p>Maximizing <span class="math inline">\(\Delta G\)</span> has benefits.</p>
+<p>If no potential split for a given parent node leads to a reduction in impurity, the recursive process of node splitting halts. In this scenario, the classification performance of the parent node surpasses that of any possible split.</p>
+<p>If the algorithm is considering splitting a parent node, it means the <span class="math inline">\(G_{\text{parent}} &gt; 0\)</span>, otherwise the process would have stopped.</p>
+<p>What about <span class="math inline">\(\frac{N_{\text{left}}}{N_{\text{parent}}}\)</span> and <span class="math inline">\(\frac{N_{\text{right}}}{N_{\text{parent}}}\)</span>?</p>
+<p>What happens if the number of examples in one child is very small?</p>
+<p>Suppose we isolate 1 sample (pure) into the left child, and leave <span class="math inline">\(N-1\)</span> mixed in the right child.</p>
+<ul>
+<li>Left child: <span class="math inline">\(G_{left} = 0\)</span>, weight = <span class="math inline">\(1/N\)</span>.</li>
+<li>Right child: <span class="math inline">\(G_{right} \approx G_{parent}\)</span>, weighted by <span class="math inline">\((N-1)/N\)</span>.</li>
+</ul>
+<p>Thus <span class="math display">\[
+   J(k,t_k) \;\approx\; \frac{N-1}{N} \, G_{\textrm{parent}} ,
+\]</span></p>
+<p>therefore</p>
+<p><span class="math display">\[
+\Delta \;\approx\; \, G_{\textrm{parent}} - \frac{N-1}{N} \, G_{\textrm{parent}} = \frac{1}{N} \, G_{\textrm{parent}}.
+\]</span></p>
+<p>That’s only a tiny gain (shrinks as <span class="math inline">\(N\)</span> grows).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="gini-index-2" class="slide level2">
+<h2>Gini Index</h2>
+<div id="e3387738" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="kw">def</span> gini_index(p):</span>
+<span id="cb4-2"><a></a>    <span class="co">"""Calculate the Gini index."""</span></span>
+<span id="cb4-3"><a></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> (p<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> p)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb4-4"><a></a></span>
+<span id="cb4-5"><a></a><span class="co"># Probability values for class 1</span></span>
+<span id="cb4-6"><a></a>p_values <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb4-7"><a></a></span>
+<span id="cb4-8"><a></a><span class="co"># Calculate Gini index for each probability</span></span>
+<span id="cb4-9"><a></a>gini_values <span class="op">=</span> [gini_index(p) <span class="cf">for</span> p <span class="kw">in</span> p_values]</span>
+<span id="cb4-10"><a></a></span>
+<span id="cb4-11"><a></a><span class="co"># Plot the Gini index</span></span>
+<span id="cb4-12"><a></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb4-13"><a></a>plt.plot(p_values, gini_values, label<span class="op">=</span><span class="st">'Gini Index'</span>, color<span class="op">=</span><span class="st">'b'</span>)</span>
+<span id="cb4-14"><a></a>plt.title(<span class="st">'Gini Index for Binary Classification'</span>)</span>
+<span id="cb4-15"><a></a>plt.xlabel(<span class="st">'Probability of Class 1 (p)'</span>)</span>
+<span id="cb4-16"><a></a>plt.ylabel(<span class="st">'Gini Index'</span>)</span>
+<span id="cb4-17"><a></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb4-18"><a></a>plt.legend()</span>
+<span id="cb4-19"><a></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-revealjs/cell-5-output-1.png" class="quarto-figure quarto-figure-center" width="663" height="523"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="iris-dataset" class="slide level2">
+<h2>Iris Dataset</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><a href="../../assets/images/geron-2019_6_1_dt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="../../assets/images/geron-2019_6_1_dt.png"></a></p>
+</div><div class="column" style="width:60%;">
+<p><a href="../../assets/images/geron-2019_6_2_dtdt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="../../assets/images/geron-2019_6_2_dtdt.png"></a></p>
+</div></div>
+
+<aside><div>
+<p><strong>Attribution:</strong> <span class="citation" data-cites="geron2019">(<a href="#/references" role="doc-biblioref" onclick="">Géron 2019</a>)</span>, Figures 6.1 and 6.2</p>
+</div></aside></section>
+<section id="complete-example" class="slide level2">
+<h2>Complete Example</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/_L39rN6gz7Y" width="889" height="500" title="Decision and Classification Trees, Clearly Explained!!!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<aside><div>
+<p><a href="https://www.youtube.com/watch?v=_L39rN6gz7Y">Decision and Classification Trees, Clearly Explained!!!</a>, (18 m 7s) <a href="https://www.youtube.com/@statquest/videos">StatQuest</a>, 2021-04-26</p>
+</div></aside></section>
+<section id="stopping-criteria" class="slide level2">
+<h2>Stopping Criteria</h2>
+<ul>
+<li>All the examples in a given node belong to the <strong>same class</strong>.</li>
+<li>Depth of the tree would exceed <strong>max_depth</strong>.</li>
+<li>Number of examples in the node is <strong>min_sample_split</strong> or less.</li>
+<li>None of the splits decreases impurity sufficiently (<strong>min_impurity_decrease</strong>).</li>
+<li>See documentation for other criteria.</li>
+</ul>
+</section>
+<section id="limitations" class="slide level2">
+<h2>Limitations</h2>
+<ul>
+<li class="fragment">Possibly creates <strong>large trees</strong>
+<ul>
+<li class="fragment">Challenge for <strong>interpretation</strong></li>
+<li class="fragment"><strong>Overfitting</strong></li>
+</ul></li>
+<li class="fragment"><strong>Greedy algorithm</strong>, no guarantee to find the optimal tree. <span class="citation" data-cites="Hyafil:1976aa">(<a href="#/references" role="doc-biblioref" onclick="">Hyafil and Rivest 1976</a>)</span></li>
+<li class="fragment"><strong>Small changes</strong> to the data set produce <strong>vastly different trees</strong></li>
+</ul>
+</section>
+<section id="large-trees" class="slide level2">
+<h2>Large Trees</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/stiglic-2012cs_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="../../assets/images/stiglic-2012cs_2.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p><span class="citation" data-cites="stiglic:2012cs">(<a href="#/references" role="doc-biblioref" onclick="">Stiglic et al. 2012</a>)</span></p>
+</div></aside></section>
+<section id="small-changes-to-the-dataset" class="slide level2 scrollable">
+<h2>Small Changes to the Dataset</h2>
+<div id="3ba2e9b5" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span>
+<span id="cb5-2"><a></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report, accuracy_score</span>
+<span id="cb5-3"><a></a></span>
+<span id="cb5-4"><a></a><span class="co"># Loading the dataset</span></span>
+<span id="cb5-5"><a></a></span>
+<span id="cb5-6"><a></a>X, y <span class="op">=</span> load_penguins(return_X_y <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb5-7"><a></a></span>
+<span id="cb5-8"><a></a>target_names <span class="op">=</span> [<span class="st">'Adelie'</span>,<span class="st">'Chinstrap'</span>,<span class="st">'Gentoo'</span>]</span>
+<span id="cb5-9"><a></a></span>
+<span id="cb5-10"><a></a><span class="co"># Split the dataset into training and testing sets</span></span>
+<span id="cb5-11"><a></a></span>
+<span id="cb5-12"><a></a><span class="cf">for</span> seed <span class="kw">in</span> (<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">90</span>, <span class="dv">96</span>, <span class="dv">99</span>, <span class="dv">2</span>):</span>
+<span id="cb5-13"><a></a></span>
+<span id="cb5-14"><a></a>  <span class="bu">print</span>(<span class="ss">f'Seed: </span><span class="sc">{</span>seed<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb5-15"><a></a></span>
+<span id="cb5-16"><a></a>  <span class="co"># Create new training and test sets based on a different random seed</span></span>
+<span id="cb5-17"><a></a></span>
+<span id="cb5-18"><a></a>  X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span>seed)</span>
+<span id="cb5-19"><a></a></span>
+<span id="cb5-20"><a></a>  <span class="co"># Creating a new classifier</span></span>
+<span id="cb5-21"><a></a></span>
+<span id="cb5-22"><a></a>  clf <span class="op">=</span> tree.DecisionTreeClassifier(random_state<span class="op">=</span>seed)</span>
+<span id="cb5-23"><a></a></span>
+<span id="cb5-24"><a></a>  <span class="co"># Training</span></span>
+<span id="cb5-25"><a></a></span>
+<span id="cb5-26"><a></a>  clf.fit(X_train, y_train)</span>
+<span id="cb5-27"><a></a></span>
+<span id="cb5-28"><a></a>  <span class="co"># Make predictions</span></span>
+<span id="cb5-29"><a></a></span>
+<span id="cb5-30"><a></a>  y_pred <span class="op">=</span> clf.predict(X_test)</span>
+<span id="cb5-31"><a></a></span>
+<span id="cb5-32"><a></a>  <span class="co"># Plotting the tree</span></span>
+<span id="cb5-33"><a></a></span>
+<span id="cb5-34"><a></a>  tree.plot_tree(clf, </span>
+<span id="cb5-35"><a></a>               feature_names <span class="op">=</span> X.columns,</span>
+<span id="cb5-36"><a></a>               class_names <span class="op">=</span> target_names,</span>
+<span id="cb5-37"><a></a>               filled <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb5-38"><a></a>  plt.show()</span>
+<span id="cb5-39"><a></a></span>
+<span id="cb5-40"><a></a>  <span class="co"># Evaluating the model</span></span>
+<span id="cb5-41"><a></a></span>
+<span id="cb5-42"><a></a>  accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
+<span id="cb5-43"><a></a></span>
+<span id="cb5-44"><a></a>  report <span class="op">=</span> classification_report(y_test, y_pred, target_names<span class="op">=</span>target_names)</span>
+<span id="cb5-45"><a></a></span>
+<span id="cb5-46"><a></a>  <span class="bu">print</span>(<span class="ss">f'Accuracy: </span><span class="sc">{</span>accuracy<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb5-47"><a></a>  <span class="bu">print</span>(<span class="st">'Classification Report:'</span>)</span>
+<span id="cb5-48"><a></a>  <span class="bu">print</span>(report)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+
+</section>
+<section id="small-changes-to-the-dataset-output" class="slide level2 scrollable output-location-slide"><h2>Small Changes to the Dataset</h2><div class="cell output-location-slide" data-execution_count="5">
+<div class="cell-output cell-output-stdout">
+<pre><code>Seed: 4</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-6-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="slides_files/figure-revealjs/cell-6-output-2.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy: 0.99
+Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       1.00      0.97      0.99        36
+   Chinstrap       0.94      1.00      0.97        17
+      Gentoo       1.00      1.00      1.00        16
+
+    accuracy                           0.99        69
+   macro avg       0.98      0.99      0.99        69
+weighted avg       0.99      0.99      0.99        69
+
+Seed: 7</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-6-output-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides_files/figure-revealjs/cell-6-output-4.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy: 0.91
+Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.96      0.83      0.89        30
+   Chinstrap       0.83      1.00      0.91        15
+      Gentoo       0.92      0.96      0.94        24
+
+    accuracy                           0.91        69
+   macro avg       0.90      0.93      0.91        69
+weighted avg       0.92      0.91      0.91        69
+
+Seed: 90</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-6-output-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="slides_files/figure-revealjs/cell-6-output-6.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy: 0.94
+Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.90      1.00      0.95        26
+   Chinstrap       0.93      0.88      0.90        16
+      Gentoo       1.00      0.93      0.96        27
+
+    accuracy                           0.94        69
+   macro avg       0.94      0.93      0.94        69
+weighted avg       0.95      0.94      0.94        69
+
+Seed: 96</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-6-output-8.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-revealjs/cell-6-output-8.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy: 0.90
+Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.83      0.97      0.89        30
+   Chinstrap       1.00      0.67      0.80        15
+      Gentoo       0.96      0.96      0.96        24
+
+    accuracy                           0.90        69
+   macro avg       0.93      0.86      0.88        69
+weighted avg       0.91      0.90      0.90        69
+
+Seed: 99</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-6-output-10.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-revealjs/cell-6-output-10.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy: 1.00
+Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       1.00      1.00      1.00        31
+   Chinstrap       1.00      1.00      1.00        12
+      Gentoo       1.00      1.00      1.00        26
+
+    accuracy                           1.00        69
+   macro avg       1.00      1.00      1.00        69
+weighted avg       1.00      1.00      1.00        69
+
+Seed: 2</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-6-output-12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-revealjs/cell-6-output-12.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy: 0.55
+Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.62      0.97      0.75        30
+   Chinstrap       0.43      0.90      0.58        10
+      Gentoo       0.00      0.00      0.00        29
+
+    accuracy                           0.55        69
+   macro avg       0.35      0.62      0.44        69
+weighted avg       0.33      0.55      0.41        69
+</code></pre>
+</div>
+</div></section><section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>The lecture surveyed three learning algorithms, <strong>k-nearest neighbours (KNN)</strong>, <strong>decision trees</strong>, and <strong>linear regression</strong>, and framed them via model, objective, and optimization.</li>
+<li>We then <strong>constructed decision trees</strong>, showed that regression leaves returned the sample mean, minimized the weighted impurity <span class="math inline">\(J\)</span>, and analyzed the Gini index.</li>
+<li><strong>Decision boundaries</strong> were illustrated for linear and non-linear models.</li>
+</ul>
+</section></section>
+<section>
+<section id="prologue" class="title-slide slide level1 center">
+<h1>Prologue</h1>
+
+</section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
+<ul>
+<li><a href="https://scikit-learn.org/stable/auto_examples/tree/plot_iris_dtc.html">Plot the decision surface of decision trees trained on the iris dataset</a> from <code>sklearn</code></li>
+<li><a href="https://kirenz.github.io/classification/docs/trees.html">Decision trees</a> by <a href="https://kirenz.github.io">Jan Kirenz</a>, a Professor at HdM Stuttgart</li>
+<li><a href="https://www.youtube.com/watch?v=cWYgtUU9COg">CS 320 Apr12-2021 (Part 2) - Decision Boundaries</a> by <a href="https://tyler.caraza-harter.com">Tyler Caraza-Harter</a>, an Instructor at UW-Madison</li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-geron2019" class="csl-entry" role="listitem">
+Géron, Aurélien. 2019. <em>Hands-on Machine Learning with Scikit-Learn, Keras, and TensorFlow</em>. 2nd ed. O’Reilly Media.
+</div>
+<div id="ref-geurts:2009fq" class="csl-entry" role="listitem">
+Geurts, Pierre, Alexandre Irrthum, and Louis Wehenkel. 2009. <span>“Supervised Learning with Decision Tree-Based Methods in Computational and Systems Biology.”</span> <em>Molecular bioSystems</em> 5 (12): 1593–1605. <a href="https://doi.org/10.1039/b907946g">https://doi.org/10.1039/b907946g</a>.
+</div>
+<div id="ref-Hyafil:1976aa" class="csl-entry" role="listitem">
+Hyafil, Laurent, and Ronald L. Rivest. 1976. <span>“Constructing Optimal Binary Decision Trees Is NP-Complete.”</span> <em>Inf. Process. Lett.</em> 5 (1): 15–17. <a href="https://doi.org/10.1016/0020-0190(76)90095-8">https://doi.org/10.1016/0020-0190(76)90095-8</a>.
+</div>
+<div id="ref-Russell:2020aa" class="csl-entry" role="listitem">
+Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</span> Modern Approach</em>. 4th ed. Pearson. <a href="http://aima.cs.berkeley.edu/">http://aima.cs.berkeley.edu/</a>.
+</div>
+<div id="ref-stiglic:2012cs" class="csl-entry" role="listitem">
+Stiglic, Gregor, Simon Kocbek, Igor Pernek, and Peter Kokol. 2012. <span>“Comprehensive Decision Tree Models in Bioinformatics.”</span> Edited by Ahmed Moustafa. <em>PLoS ONE</em> 7 (3): e33812. <a href="https://doi.org/10.1371/journal.pone.0033812">https://doi.org/10.1371/journal.pone.0033812</a>.
+</div>
+</div>
+</section>
+<section id="next-lecture" class="slide level2">
+<h2>Next lecture</h2>
+<ul>
+<li>Training a linear model</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p>Marcel <strong>Turcotte</strong></p>
+<p><a href="mailto:Marcel.Turcotte@uOttawa.ca">Marcel.Turcotte@uOttawa.ca</a></p>
+<p>School of Electrical Engineering and <strong>Computer Science</strong> (EE<strong>CS</strong>)</p>
+<p>University of Ottawa</p>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../../assets/images/uottawa_hor_black.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p><a href="https://turcotte.xyz/teaching/csi-4106">turcotte.xyz/teaching/csi-4106</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/turcotte\.xyz\/teaching\/csi-4106");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+</body></html>

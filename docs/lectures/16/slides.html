@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
+
+  <meta name="author" content="Marcel Turcotte">
+  <title>CSI 4106 - Fall 2025 – Heuristic Search</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+<meta property="og:title" content="Heuristic Search – CSI 4106 - Fall 2025">
+<meta property="og:description" content="CSI 4106 Introduction to Artificial Intelligence">
+<meta property="og:site_name" content="CSI 4106 - Fall 2025">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Heuristic Search</h1>
+  <p class="subtitle">CSI 4106 Introduction to Artificial Intelligence</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Marcel Turcotte 
+</div>
+</div>
+</div>
+
+  <p class="date">Version: Jul 11, 2025 11:49</p>
+</section>
+<section>
+<section id="preamble" class="title-slide slide level1 center">
+<h1>Preamble</h1>
+
+</section>
+<section id="quote-of-the-day" class="slide level2">
+<h2>Quote of the Day</h2>
+<p></p><div id="tweet-27152"></div><script>tweet={"url":"https:\/\/twitter.com\/ylecun\/status\/1851948279816134819","author_name":"Yann LeCun","author_url":"https:\/\/twitter.com\/ylecun","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"et\" dir=\"ltr\"\u003ETraining Llama 4 on 100k H100s. \u003Ca href=\"https:\/\/t.co\/p1k936YRdJ\"\u003Ehttps:\/\/t.co\/p1k936YRdJ\u003C\/a\u003E\u003C\/p\u003E&mdash; Yann LeCun (@ylecun) \u003Ca href=\"https:\/\/twitter.com\/ylecun\/status\/1851948279816134819?ref_src=twsrc%5Etfw\"\u003EOctober 31, 2024\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-27152").innerHTML = tweet["html"];</script><p></p>
+</section>
+<section id="learning-objectives" class="slide level2 smaller">
+<h2>Learning Objectives</h2>
+<ul>
+<li><p><strong>Comprehend</strong> informed search strategies and heuristic functions’ role in search efficiency.</p></li>
+<li><p><strong>Implement</strong> and compare BFS, DFS, and Best-First Search using the 8-Puzzle problem.</p></li>
+<li><p><strong>Analyze</strong> performance and optimality of various search algorithms.</p></li>
+</ul>
+</section></section>
+<section>
+<section id="summary" class="title-slide slide level1 center">
+<h1>Summary</h1>
+
+</section>
+<section id="search-problem-definition" class="slide level2">
+<h2>Search Problem Definition</h2>
+<ul>
+<li class="fragment"><p>A collection of <strong>states</strong>, referred to as the <strong>state space</strong>.</p></li>
+<li class="fragment"><p>An <strong>initial state</strong> where the agent begins.</p></li>
+<li class="fragment"><p>One or more <strong>goal states</strong> that define successful outcomes.</p></li>
+<li class="fragment"><p>A set of <strong>actions</strong> available in a given state <span class="math inline">\(s\)</span>.</p></li>
+<li class="fragment"><p>A <strong>transition model</strong> that determines the next state based on the current state and selected action.</p></li>
+<li class="fragment"><p>An <strong>action cost function</strong> that specifies the cost of performing action <span class="math inline">\(a\)</span> in state <span class="math inline">\(s\)</span> to reach state <span class="math inline">\(s'\)</span>.</p></li>
+</ul>
+</section>
+<section id="definitions" class="slide level2">
+<h2>Definitions</h2>
+<ul>
+<li class="fragment">A <strong>path</strong> is defined as a sequence of actions.</li>
+<li class="fragment">A <strong>solution</strong> is a path that connects the initial state to the goal state.</li>
+<li class="fragment">An <strong>optimal solution</strong> is the path with the lowest cost among all possible solutions.</li>
+</ul>
+
+<aside class="notes">
+<p>In certain problems, multiple optimal solutions may exist. However, it is typically sufficient to identify and report a single optimal solution. Providing all optimal solutions can significantly increase time and space complexity for some problems.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>We assume that the <strong>path cost</strong> is the sum of the individual action costs, and all costs are positive. The state space can be conceptualized as a <strong>graph</strong>, where the nodes represent the states and the edges correspond to the actions.</p>
+</div></aside></section>
+<section id="example-8-puzzle" class="slide level2">
+<h2>Example: 8-Puzzle</h2>
+<div id="42de87b5" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="slides_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="758" height="374"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="search-tree" class="slide level2">
+<h2>Search Tree</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_tree-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="../../assets/images/search_tree-00.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>The search algorithms we examine today construct a search tree, where each node represents a state within the state space and each edge represents an action.</p>
+<p>It is important to distinguish between the search tree and the state space, which can be depicted as a graph. The structure of the search tree varies depending on the algorithm employed to address the search problem.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>A <strong>search tree</strong> is a <em>conceptual tree structure</em> where <strong>nodes</strong> represent <em>states</em> in a <strong>state space</strong>, and <strong>edges</strong> represent possible <strong>actions</strong>, facilitating systematic exploration to find a <strong>path</strong> from an <strong>initial state</strong> to a <strong>goal state</strong>.</p>
+</div></aside></section>
+<section id="search-tree-1" class="slide level2">
+<h2>Search Tree</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_bfs-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="../../assets/images/search_bfs-00.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p>An example of a <strong>search tree</strong> for the <strong>8-Puzzle</strong>. The solution here is incomplete.</p>
+</div></aside></section>
+<section id="frontier" class="slide level2">
+<h2>Frontier</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_bfs-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="../../assets/images/search_bfs-01.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p>Any state corresponding to a node in the search tree is considered <strong>reached</strong>. <strong>Frontier</strong> nodes are those that have been <strong>reached</strong> but have <strong>not yet been expanded</strong>. Above, there are <strong>10 expanded nodes</strong> and <strong>11 frontier nodes</strong>, resulting in a total of 21 nodes that have been <strong>reached</strong>.</p>
+</div></aside></section>
+<section id="frontier-1" class="slide level2">
+<h2>Frontier</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="../../assets/images/search_frontier-01.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-02.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="../../assets/images/search_frontier-02.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-03.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="../../assets/images/search_frontier-03.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+
+<aside class="notes">
+<p>The diagrams correspond to the search tree presented on the previous page. For example, the initial state can be expanded using three actions: slide left, right, and up. Node (2, 3) can only be expanded by sliding down, while node (3, 3) can be expanded by sliding left and down.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>In the 8-Puzzle, four actions are possible: slide <strong>left</strong>, <strong>right</strong>, <strong>up</strong>, or <strong>down</strong>. The search can be visualized on a grid: <strong>purple nodes</strong>: expanded states, <strong>green nodes</strong>: frontier states (reached but not expanded).</p>
+</div></aside></section>
+<section id="frontier-2" class="slide level2">
+<h2>Frontier</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-04.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="../../assets/images/search_frontier-04.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-05.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="../../assets/images/search_frontier-05.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="is_empty" class="slide level2">
+<h2><code>is_empty</code></h2>
+<div id="4e6edbed" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a><span class="kw">def</span> is_empty(frontier):</span>
+<span id="cb1-2"><a></a>    <span class="co">"""Checks if the frontier is empty."""</span></span>
+<span id="cb1-3"><a></a>    <span class="cf">return</span> <span class="bu">len</span>(frontier) <span class="op">==</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="is_goal" class="slide level2">
+<h2><code>is_goal</code></h2>
+<div id="6bd3f258" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="kw">def</span> is_goal(state, goal_state):</span>
+<span id="cb2-2"><a></a>    <span class="co">"""Determines if a given state matches the goal state."""</span></span>
+<span id="cb2-3"><a></a>    <span class="cf">return</span> state <span class="op">==</span> goal_state</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside><div>
+<p>Auxilliary method.</p>
+</div></aside></section>
+<section id="expand" class="slide level2">
+<h2><code>expand</code></h2>
+<div id="3f059273" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="kw">def</span> expand(state):</span>
+<span id="cb3-2"><a></a>    <span class="co">"""Generates successor states by moving the blank tile in all possible directions."""</span></span>
+<span id="cb3-3"><a></a>    size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(state) <span class="op">**</span> <span class="fl">0.5</span>)  <span class="co"># Determine puzzle size (3 for 8-puzzle, 4 for 15-puzzle)</span></span>
+<span id="cb3-4"><a></a>    idx <span class="op">=</span> state.index(<span class="dv">0</span>)  <span class="co"># Find the index of the blank tile represented by 0</span></span>
+<span id="cb3-5"><a></a>    x, y <span class="op">=</span> idx <span class="op">%</span> size, idx <span class="op">//</span> size  <span class="co"># Convert index to (x, y) coordinates</span></span>
+<span id="cb3-6"><a></a>    neighbors <span class="op">=</span> []</span>
+<span id="cb3-7"><a></a></span>
+<span id="cb3-8"><a></a>    <span class="co"># Define possible moves: Left, Right, Up, Down</span></span>
+<span id="cb3-9"><a></a>    moves <span class="op">=</span> [(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>), (<span class="dv">1</span>, <span class="dv">0</span>), (<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>), (<span class="dv">0</span>, <span class="dv">1</span>)]</span>
+<span id="cb3-10"><a></a>    <span class="cf">for</span> dx, dy <span class="kw">in</span> moves:</span>
+<span id="cb3-11"><a></a>        nx, ny <span class="op">=</span> x <span class="op">+</span> dx, y <span class="op">+</span> dy</span>
+<span id="cb3-12"><a></a>        <span class="co"># Check if the new position is within the puzzle boundaries</span></span>
+<span id="cb3-13"><a></a>        <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;=</span> nx <span class="op">&lt;</span> size <span class="kw">and</span> <span class="dv">0</span> <span class="op">&lt;=</span> ny <span class="op">&lt;</span> size:</span>
+<span id="cb3-14"><a></a>            n_idx <span class="op">=</span> ny <span class="op">*</span> size <span class="op">+</span> nx</span>
+<span id="cb3-15"><a></a>            new_state <span class="op">=</span> state.copy()</span>
+<span id="cb3-16"><a></a>            <span class="co"># Swap the blank tile with the adjacent tile</span></span>
+<span id="cb3-17"><a></a>            new_state[idx], new_state[n_idx] <span class="op">=</span> new_state[n_idx], new_state[idx]</span>
+<span id="cb3-18"><a></a>            neighbors.append(new_state)</span>
+<span id="cb3-19"><a></a>    <span class="cf">return</span> neighbors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="print_solution" class="slide level2">
+<h2><code>print_solution</code></h2>
+<div id="60a207b4" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="kw">def</span> print_solution(solution):</span>
+<span id="cb4-2"><a></a>    <span class="co">"""Prints the sequence of steps from the initial to the goal state."""</span></span>
+<span id="cb4-3"><a></a>    size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(solution[<span class="dv">0</span>]) <span class="op">**</span> <span class="fl">0.5</span>)</span>
+<span id="cb4-4"><a></a>    <span class="cf">for</span> step, state <span class="kw">in</span> <span class="bu">enumerate</span>(solution):</span>
+<span id="cb4-5"><a></a>        <span class="bu">print</span>(<span class="ss">f"Step </span><span class="sc">{</span>step<span class="sc">}</span><span class="ss">:"</span>)</span>
+<span id="cb4-6"><a></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(size):</span>
+<span id="cb4-7"><a></a>            row <span class="op">=</span> state[i<span class="op">*</span>size:(i<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span>size]</span>
+<span id="cb4-8"><a></a>            <span class="bu">print</span>(<span class="st">' '</span>.join(<span class="bu">str</span>(n) <span class="cf">if</span> n <span class="op">!=</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">' '</span> <span class="cf">for</span> n <span class="kw">in</span> row))</span>
+<span id="cb4-9"><a></a>        <span class="bu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="breadth-first-search" class="slide level2">
+<h2>Breadth-first search</h2>
+<div id="f2f421d9" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="im">from</span> collections <span class="im">import</span> deque</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Breadth-first search (BFS)</strong> employs a <strong>queue</strong> to manage the frontier nodes, which are also known as the open list.</p>
+</section>
+<section id="breadth-first-search-1" class="slide level2 scrollable">
+<h2>Breadth-first search</h2>
+<div id="cc9bee4f" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="kw">def</span> bfs(initial_state, goal_state):</span>
+<span id="cb6-2"><a></a></span>
+<span id="cb6-3"><a></a>    frontier <span class="op">=</span> deque()  <span class="co"># Initialize the queue for BFS</span></span>
+<span id="cb6-4"><a></a>    frontier.append((initial_state, []))  <span class="co"># Each element is a tuple: (state, path)</span></span>
+<span id="cb6-5"><a></a></span>
+<span id="cb6-6"><a></a>    explored <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb6-7"><a></a>    explored.add(<span class="bu">tuple</span>(initial_state))</span>
+<span id="cb6-8"><a></a></span>
+<span id="cb6-9"><a></a>    iterations <span class="op">=</span> <span class="dv">0</span> <span class="co"># simply used to compare algorithms</span></span>
+<span id="cb6-10"><a></a></span>
+<span id="cb6-11"><a></a>    <span class="cf">while</span> <span class="kw">not</span> is_empty(frontier):</span>
+<span id="cb6-12"><a></a>        current_state, path <span class="op">=</span> frontier.popleft()</span>
+<span id="cb6-13"><a></a></span>
+<span id="cb6-14"><a></a>        <span class="cf">if</span> is_goal(current_state, goal_state):</span>
+<span id="cb6-15"><a></a>            <span class="bu">print</span>(<span class="ss">f"Number of iterations: </span><span class="sc">{</span>iterations<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-16"><a></a>            <span class="cf">return</span> path <span class="op">+</span> [current_state]  <span class="co"># Return the successful path</span></span>
+<span id="cb6-17"><a></a></span>
+<span id="cb6-18"><a></a>        iterations <span class="op">=</span> iterations <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb6-19"><a></a></span>
+<span id="cb6-20"><a></a>        <span class="cf">for</span> neighbor <span class="kw">in</span> expand(current_state):</span>
+<span id="cb6-21"><a></a>            neighbor_tuple <span class="op">=</span> <span class="bu">tuple</span>(neighbor)</span>
+<span id="cb6-22"><a></a>            <span class="cf">if</span> neighbor_tuple <span class="kw">not</span> <span class="kw">in</span> explored:</span>
+<span id="cb6-23"><a></a>                explored.add(neighbor_tuple)</span>
+<span id="cb6-24"><a></a>                frontier.append((neighbor, path <span class="op">+</span> [current_state]))</span>
+<span id="cb6-25"><a></a></span>
+<span id="cb6-26"><a></a>    <span class="cf">return</span> <span class="va">None</span>  <span class="co"># No solution found</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside><div>
+<p>Using <code>tuple</code> makes states immutable and hashable, enabling storage in a set.</p>
+</div></aside></section>
+<section id="depth-first-search" class="slide level2 scrollable">
+<h2>Depth-First Search</h2>
+<div id="79aa82f3" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="kw">def</span> dfs(initial_state, goal_state):</span>
+<span id="cb7-2"><a></a></span>
+<span id="cb7-3"><a></a>    frontier <span class="op">=</span> [(initial_state, [])]  <span class="co"># Each element is a tuple: (state, path)</span></span>
+<span id="cb7-4"><a></a></span>
+<span id="cb7-5"><a></a>    explored <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb7-6"><a></a>    explored.add(<span class="bu">tuple</span>(initial_state))</span>
+<span id="cb7-7"><a></a></span>
+<span id="cb7-8"><a></a>    iterations <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-9"><a></a></span>
+<span id="cb7-10"><a></a>    <span class="cf">while</span> <span class="kw">not</span> is_empty(frontier):</span>
+<span id="cb7-11"><a></a>        current_state, path <span class="op">=</span> frontier.pop()</span>
+<span id="cb7-12"><a></a></span>
+<span id="cb7-13"><a></a>        <span class="cf">if</span> is_goal(current_state, goal_state):</span>
+<span id="cb7-14"><a></a>            <span class="bu">print</span>(<span class="ss">f"Number of iterations: </span><span class="sc">{</span>iterations<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-15"><a></a>            <span class="cf">return</span> path <span class="op">+</span> [current_state]  <span class="co"># Return the successful path</span></span>
+<span id="cb7-16"><a></a></span>
+<span id="cb7-17"><a></a>        iterations <span class="op">=</span> iterations <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb7-18"><a></a></span>
+<span id="cb7-19"><a></a>        <span class="cf">for</span> neighbor <span class="kw">in</span> expand(current_state):</span>
+<span id="cb7-20"><a></a>            neighbor_tuple <span class="op">=</span> <span class="bu">tuple</span>(neighbor)</span>
+<span id="cb7-21"><a></a>            <span class="cf">if</span> neighbor_tuple <span class="kw">not</span> <span class="kw">in</span> explored:</span>
+<span id="cb7-22"><a></a>                explored.add(neighbor_tuple)</span>
+<span id="cb7-23"><a></a>                frontier.append((neighbor, path <span class="op">+</span> [current_state]))</span>
+<span id="cb7-24"><a></a></span>
+<span id="cb7-25"><a></a>    <span class="cf">return</span> <span class="va">None</span>  <span class="co"># No solution found</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="remarks" class="slide level2">
+<h2>Remarks</h2>
+<ul>
+<li><p><strong>Breadth-first search (BFS)</strong> identifies the optimal solution, 25 moves, in 145,605 iterations.</p></li>
+<li><p><strong>Depth-first search (DFS)</strong> discovers a solution involving 1,157 moves in 1,187 iterations.</p></li>
+</ul>
+
+<aside class="notes">
+<p>Will <strong>Depth-First Search (DFS)</strong> invariably yield sub-optimal solutions?</p>
+<p>No, if the optimal solution lies along the path traversed by depth-first search (DFS) within the search tree, then DFS will indeed identify the optimal solution.</p>
+<p>Is it possible for DFS to discover solutions superior to the optimal solution?</p>
+<p>Certainly not; such solutions would either be invalid (involving impossible moves) or indicate an error in your estimation.</p>
+<p>Does this imply that depth-first search (DFS) has no practical applications?</p>
+<p>When is it appropriate to use DFS?</p>
+<p>Breadth-first search (BFS) expands its frontier systematically in all directions, leading to rapid growth in memory requirements.</p>
+<p>In contrast, the memory usage of DFS is constrained by the number of moves needed to reach its backtracking points or the path length of the first solution found. In all scenarios, DFS continues expanding the frontier in one direction.</p>
+<p>In certain applications where all possible solutions must be explored, the entire search space must be traversed. Using BFS in these cases would be prohibitively expensive in terms of memory. However, DFS can explore the entire space with minimal memory usage.</p>
+<p>The programming language Prolog includes a built-in backtracking algorithm that enumerates all possible solutions. Backtracking is a memory-efficient variant of DFS.</p>
+<p>Depth-limited and iterative deepening search would be alternative uninformed search algorithms.</p>
+<p>Finding solutions more efficiently requires domain knowledge.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>How can solutions be discovered <strong>more efficiently</strong>?</p>
+</div></aside></section></section>
+<section>
+<section id="informed-search" class="title-slide slide level1 center">
+<h1>Informed Search</h1>
+
+</section>
+<section id="heuristic-search" class="slide level2">
+<h2>Heuristic Search</h2>
+<p>Informed search algorithms utilize <strong>domain-specific knowledge</strong> regarding the goal state’s location.</p>
+</section>
+<section id="heuristic-search-1" class="slide level2">
+<h2>Heuristic Search</h2>
+<p>Let <span class="math inline">\(f(n)\)</span> be a <strong>heuristic function</strong> that estimates the <strong>cost of the cheapest path</strong> from the current state or node <span class="math inline">\(n\)</span> to the goal.</p>
+
+<aside><div>
+<p>This approach is termed <strong>best-first search</strong>.</p>
+</div></aside></section>
+<section id="heuristic-search-2" class="slide level2">
+<h2>Heuristic Search</h2>
+<p>In <strong>route-finding problems</strong>, one might employ the straight-line distance from the current node to the destination as a heuristic. Although an actual path may not exist along that straight line, the algorithm will prioritize expanding the node closest to the destination (goal) based on this straight-line measurement.</p>
+</section>
+<section id="implementation" class="slide level2">
+<h2>Implementation</h2>
+<ul>
+<li class="fragment"><p>How can the existing <strong>breadth-first</strong> and <strong>depth-first search</strong> algorithms be modified to implement <strong>best-first search</strong>?</p>
+<ul>
+<li class="fragment">This can be achieved by employing a <strong>priority queue</strong>, which is sorted according to the values of the <strong>heuristic function</strong> <span class="math inline">\(h(n)\)</span>.</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<div id="5a476495" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="im">import</span> heapq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="remark" class="slide level2">
+<h2>Remark</h2>
+<p><strong>Breadth-first</strong> search can be interpreted as a form of <strong>best-first search</strong>, where the heuristic function <span class="math inline">\(f(n)\)</span> is defined as the <strong>depth of the node within the search tree</strong>, corresponding to the path length.</p>
+<aside class="notes">
+<p>Is this solution viable? The answer is nuanced. It is useful for examining the properties of the algorithm, but using a queue will likely provide a more efficient implementation.</p>
+<p>Can you think of a way to implement depth-first-search as a best-first-search?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="astar" class="slide level2">
+<h2><span class="math inline">\(A^\star\)</span></h2>
+<p><span class="math inline">\(A^\star\)</span> (a-star) is the <strong>most common informed search</strong>.</p>
+<p><span class="math display">\[
+    f(n) = g(n) + h(n)
+\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(g(n)\)</span> is the path cost from the <em>initial state</em> to <span class="math inline">\(n\)</span>.</li>
+<li><span class="math inline">\(h(n)\)</span> is an <strong>estimate</strong> of the cost of the shortest path from <span class="math inline">\(n\)</span> to the <em>goal state</em>.</li>
+</ul>
+
+<aside class="notes">
+<p>It is clear that <span class="math inline">\(g(n)\)</span> is a known value and not an estimate. Consequently, the accuracy of <span class="math inline">\(f(n)\)</span> improves as the execution progresses.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><span class="citation" data-cites="Hart:1968aa">Hart, Nilsson, and Raphael (<a href="#/references" role="doc-biblioref" onclick="">1968</a>)</span></p>
+</div></aside></section>
+<section id="admissibility" class="slide level2">
+<h2>Admissibility</h2>
+<p>A heuristic is <strong>admissible</strong> if <em>it never overestimates the true cost to reach the goal from any node in the search space</em>.</p>
+<p>This ensures that the <span class="math inline">\(A^\star\)</span> algorithm finds an optimal solution, as it guarantees that the estimated cost is always a lower bound on the actual cost.</p>
+</section>
+<section id="admissibility-1" class="slide level2">
+<h2>Admissibility</h2>
+<p>Formally, a heuristic <span class="math inline">\(h(n)\)</span> is admissible if: <span class="math display">\[
+h(n) \leq h^*(n)
+\]</span> where:</p>
+<ul>
+<li><span class="math inline">\(h(n)\)</span> is the heuristic estimate of the cost from node <span class="math inline">\(n\)</span> to the goal.</li>
+<li><span class="math inline">\(h^*(n)\)</span> is the actual cost of the optimal path from node <span class="math inline">\(n\)</span> to the goal.</li>
+</ul>
+
+<aside><div>
+<p>What would happen if a heuristic were to overestimate the cost of the shortest path from <span class="math inline">\(n\)</span> to the goal?</p>
+</div></aside></section>
+<section id="cost-optimality" class="slide level2">
+<h2>Cost Optimality</h2>
+<p><strong>Cost optimality</strong> refers to an algorithm’s ability to find the least-cost solution among all possible solutions.</p>
+<p>In the context of search algorithms like <span class="math inline">\(A^\star\)</span>, cost optimality means that the algorithm will identify the path with the lowest total cost from the start to the goal, assuming an admissible heuristic is used.</p>
+</section>
+<section id="proof-of-optimality" class="slide level2 scrollable smaller">
+<h2>Proof of optimality</h2>
+<p><strong>Theorem:</strong> If <span class="math inline">\(h(n)\)</span> is an admissible heuristic, then <span class="math inline">\(A^\star\)</span> using <span class="math inline">\(h(n)\)</span> will always find an optimal solution if one exists.</p>
+<p><strong>Proof:</strong></p>
+<ol type="1">
+<li><p><strong>Assumption for Contradiction:</strong> Suppose that <span class="math inline">\(A^\star\)</span> returns a suboptimal solution with cost <span class="math inline">\(C &gt; C^\star\)</span>, where <span class="math inline">\(C^\star\)</span> is the cost of the optimal solution.</p></li>
+<li><p><strong>State of Frontier:</strong> At the time <span class="math inline">\(A^\star\)</span> finds and returns the suboptimal solution, there must be no unexplored nodes <span class="math inline">\(n\)</span> in the frontier (open list) such that <span class="math inline">\(f(n) \leq C^\star\)</span>. If there were such a node, <span class="math inline">\(A^\star\)</span> would have selected it for expansion before the node leading to the suboptimal solution due to its lower <span class="math inline">\(f(n)\)</span> value.</p></li>
+<li><p><strong>Existence of Optimal Path Nodes:</strong> However, along the optimal path to the goal, there must be nodes <span class="math inline">\(n\)</span> such that <span class="math inline">\(f(n) = g(n) + h(n) \leq C^\star\)</span>, because:</p>
+<ul>
+<li><span class="math inline">\(g(n)\)</span> is the cost from the start to <span class="math inline">\(n\)</span> along the optimal path, so <span class="math inline">\(g(n) \leq C^\star\)</span>.</li>
+<li><span class="math inline">\(h(n) \leq h^*(n)\)</span> because <span class="math inline">\(h(n)\)</span> is admissible.</li>
+<li><span class="math inline">\(h^*(n)\)</span> is the true cost from <span class="math inline">\(n\)</span> to the goal along the optimal path, so <span class="math inline">\(g(n) + h^*(n) = C^\star\)</span>.</li>
+<li>Therefore, <span class="math inline">\(f(n) = g(n) + h(n) \leq g(n) + h^*(n) = C^\star\)</span>.</li>
+</ul></li>
+<li><p><strong>Contradiction:</strong> This means there are nodes in the frontier with <span class="math inline">\(f(n) \leq C^\star\)</span> that have not yet been explored, contradicting the assumption that no such nodes exist at the time the suboptimal solution is returned.</p></li>
+<li><p><strong>Conclusion:</strong> Therefore, <span class="math inline">\(A^\star\)</span> cannot return a suboptimal solution when using an admissible heuristic. It must find the optimal solution with cost <span class="math inline">\(C^\star\)</span>. Q.E.D.</p></li>
+</ol>
+</section>
+<section id="puzzle" class="slide level2">
+<h2>8-Puzzle</h2>
+<p>Can you think of a heuristic function, <span class="math inline">\(h(n)\)</span>, for the 8-Puzzle?</p>
+</section>
+<section id="misplaced-tiles-distance" class="slide level2">
+<h2>Misplaced Tiles Distance</h2>
+<div id="520ec17b" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="kw">def</span>  misplaced_tiles_distance(state, goal_state):</span>
+<span id="cb9-2"><a></a></span>
+<span id="cb9-3"><a></a>    <span class="co"># Count the number of misplaced tiles</span></span>
+<span id="cb9-4"><a></a>    misplaced_tiles <span class="op">=</span> <span class="bu">sum</span>(<span class="dv">1</span> <span class="cf">for</span> s, g <span class="kw">in</span> <span class="bu">zip</span>(state, goal_state) <span class="cf">if</span> s <span class="op">!=</span> g <span class="kw">and</span> s <span class="op">!=</span> <span class="dv">0</span>)</span>
+<span id="cb9-5"><a></a>    </span>
+<span id="cb9-6"><a></a>    <span class="cf">return</span> misplaced_tiles</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside><div>
+<p>Is this heuristic admissible?</p>
+</div></aside></section>
+<section id="puzzle-1" class="slide level2">
+<h2>8-Puzzle</h2>
+<div id="bb2addae" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="slides_files/figure-revealjs/cell-13-output-1.png" class="quarto-figure quarto-figure-center" width="758" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="best-first-search" class="slide level2">
+<h2>Best-First Search</h2>
+<div id="75f4c78e" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="kw">def</span> best_first_search(initial_state, goal_state):</span>
+<span id="cb10-2"><a></a></span>
+<span id="cb10-3"><a></a>    frontier <span class="op">=</span> []  <span class="co"># Initialize the priority queue</span></span>
+<span id="cb10-4"><a></a>    initial_h <span class="op">=</span> misplaced_tiles_distance(initial_state, goal_state)</span>
+<span id="cb10-5"><a></a>    <span class="co"># Push the initial state with its heuristic value onto the queue</span></span>
+<span id="cb10-6"><a></a>    heapq.heappush(frontier, (initial_h, <span class="dv">0</span>, initial_state, []))  <span class="co"># (f(n), g(n), state, path)</span></span>
+<span id="cb10-7"><a></a></span>
+<span id="cb10-8"><a></a>    explored <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb10-9"><a></a></span>
+<span id="cb10-10"><a></a>    iterations <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb10-11"><a></a></span>
+<span id="cb10-12"><a></a>    <span class="cf">while</span> <span class="kw">not</span> is_empty(frontier):</span>
+<span id="cb10-13"><a></a>        f, g, current_state, path <span class="op">=</span> heapq.heappop(frontier)</span>
+<span id="cb10-14"><a></a></span>
+<span id="cb10-15"><a></a>        <span class="cf">if</span> is_goal(current_state, goal_state):</span>
+<span id="cb10-16"><a></a>            <span class="bu">print</span>(<span class="ss">f"Number of iterations: </span><span class="sc">{</span>iterations<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-17"><a></a>            <span class="cf">return</span> path <span class="op">+</span> [current_state]  <span class="co"># Return the successful path</span></span>
+<span id="cb10-18"><a></a></span>
+<span id="cb10-19"><a></a>        iterations <span class="op">=</span> iterations <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb10-20"><a></a></span>
+<span id="cb10-21"><a></a>        explored.add(<span class="bu">tuple</span>(current_state))</span>
+<span id="cb10-22"><a></a></span>
+<span id="cb10-23"><a></a>        <span class="cf">for</span> neighbor <span class="kw">in</span> expand(current_state):</span>
+<span id="cb10-24"><a></a>            <span class="cf">if</span> <span class="bu">tuple</span>(neighbor) <span class="kw">not</span> <span class="kw">in</span> explored:</span>
+<span id="cb10-25"><a></a>                new_g <span class="op">=</span> g <span class="op">+</span> <span class="dv">1</span>  <span class="co"># Increment the path cost</span></span>
+<span id="cb10-26"><a></a>                h <span class="op">=</span> misplaced_tiles_distance(neighbor, goal_state)</span>
+<span id="cb10-27"><a></a>                new_f <span class="op">=</span> new_g <span class="op">+</span> h  <span class="co"># Calculate the new total cost</span></span>
+<span id="cb10-28"><a></a>                <span class="co"># Push the neighbor state onto the priority queue</span></span>
+<span id="cb10-29"><a></a>                heapq.heappush(frontier, (new_f, new_g, neighbor, path <span class="op">+</span> [current_state]))</span>
+<span id="cb10-30"><a></a>                explored.add(<span class="bu">tuple</span>(neighbor))  <span class="co"># Mark neighbor as explored</span></span>
+<span id="cb10-31"><a></a></span>
+<span id="cb10-32"><a></a>    <span class="cf">return</span> <span class="va">None</span>  <span class="co"># No solution found</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="simple-case" class="slide level2">
+<h2>Simple Case</h2>
+<div id="97bdd633" class="cell" data-execution_count="14">
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of iterations: 2</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-15-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides_files/figure-revealjs/cell-15-output-2.png" class="quarto-figure quarto-figure-center" width="758" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="98fb5615" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a></a>initial_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb12-2"><a></a>                   <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">6</span>,</span>
+<span id="cb12-3"><a></a>                   <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">8</span>]</span>
+<span id="cb12-4"><a></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb12-5"><a></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb12-6"><a></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb12-7"><a></a></span>
+<span id="cb12-8"><a></a>best_first_search(initial_state_8, goal_state_8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of iterations: 2</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>[[1, 2, 3, 4, 0, 6, 7, 5, 8],
+ [1, 2, 3, 4, 5, 6, 7, 0, 8],
+ [1, 2, 3, 4, 5, 6, 7, 8, 0]]</code></pre>
+</div>
+</div>
+</section>
+<section id="challenging-case" class="slide level2 scrollable">
+<h2>Challenging Case</h2>
+<div id="fd4984bf" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a></a>initial_state_8 <span class="op">=</span> [<span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">5</span>,</span>
+<span id="cb15-2"><a></a>                   <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">7</span>,</span>
+<span id="cb15-3"><a></a>                   <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>]</span>
+<span id="cb15-4"><a></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb15-5"><a></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb15-6"><a></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb15-7"><a></a></span>
+<span id="cb15-8"><a></a><span class="bu">print</span>(<span class="st">"Solving 8-puzzle with best_first_search..."</span>)</span>
+<span id="cb15-9"><a></a></span>
+<span id="cb15-10"><a></a>solution_8_bfs <span class="op">=</span> best_first_search(initial_state_8, goal_state_8)</span>
+<span id="cb15-11"><a></a></span>
+<span id="cb15-12"><a></a><span class="cf">if</span> solution_8_bfs:</span>
+<span id="cb15-13"><a></a>    <span class="bu">print</span>(<span class="ss">f"Best_first_search Solution found in </span><span class="sc">{</span><span class="bu">len</span>(solution_8_bfs) <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> moves:"</span>)</span>
+<span id="cb15-14"><a></a>    print_solution(solution_8_bfs)</span>
+<span id="cb15-15"><a></a><span class="cf">else</span>:</span>
+<span id="cb15-16"><a></a>    <span class="bu">print</span>(<span class="st">"No solution found for 8-puzzle using best_first_search."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solving 8-puzzle with best_first_search...
+Number of iterations: 29005
+Best_first_search Solution found in 25 moves:
+Step 0:
+6 4 5
+8 2 7
+1   3
+
+Step 1:
+6 4 5
+8 2 7
+  1 3
+
+Step 2:
+6 4 5
+  2 7
+8 1 3
+
+Step 3:
+6 4 5
+2   7
+8 1 3
+
+Step 4:
+6   5
+2 4 7
+8 1 3
+
+Step 5:
+  6 5
+2 4 7
+8 1 3
+
+Step 6:
+2 6 5
+  4 7
+8 1 3
+
+Step 7:
+2 6 5
+4   7
+8 1 3
+
+Step 8:
+2 6 5
+4 1 7
+8   3
+
+Step 9:
+2 6 5
+4 1 7
+  8 3
+
+Step 10:
+2 6 5
+  1 7
+4 8 3
+
+Step 11:
+2 6 5
+1   7
+4 8 3
+
+Step 12:
+2 6 5
+1 7  
+4 8 3
+
+Step 13:
+2 6 5
+1 7 3
+4 8  
+
+Step 14:
+2 6 5
+1 7 3
+4   8
+
+Step 15:
+2 6 5
+1   3
+4 7 8
+
+Step 16:
+2   5
+1 6 3
+4 7 8
+
+Step 17:
+2 5  
+1 6 3
+4 7 8
+
+Step 18:
+2 5 3
+1 6  
+4 7 8
+
+Step 19:
+2 5 3
+1   6
+4 7 8
+
+Step 20:
+2   3
+1 5 6
+4 7 8
+
+Step 21:
+  2 3
+1 5 6
+4 7 8
+
+Step 22:
+1 2 3
+  5 6
+4 7 8
+
+Step 23:
+1 2 3
+4 5 6
+  7 8
+
+Step 24:
+1 2 3
+4 5 6
+7   8
+
+Step 25:
+1 2 3
+4 5 6
+7 8  
+</code></pre>
+</div>
+</div>
+</section>
+<section id="puzzle-2" class="slide level2">
+<h2>8-Puzzle</h2>
+<div id="a4f4d5aa" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a></a><span class="kw">def</span> manhattan_distance(state, goal_state):</span>
+<span id="cb17-2"><a></a>    distance <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb17-3"><a></a>    size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(state) <span class="op">**</span> <span class="fl">0.5</span>)</span>
+<span id="cb17-4"><a></a>    <span class="cf">for</span> num <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(state)):</span>
+<span id="cb17-5"><a></a>        idx1 <span class="op">=</span> state.index(num)</span>
+<span id="cb17-6"><a></a>        idx2 <span class="op">=</span> goal_state.index(num)</span>
+<span id="cb17-7"><a></a>        x1, y1 <span class="op">=</span> idx1 <span class="op">%</span> size, idx1 <span class="op">//</span> size</span>
+<span id="cb17-8"><a></a>        x2, y2 <span class="op">=</span> idx2 <span class="op">%</span> size, idx2 <span class="op">//</span> size</span>
+<span id="cb17-9"><a></a>        distance <span class="op">+=</span> <span class="bu">abs</span>(x1 <span class="op">-</span> x2) <span class="op">+</span> <span class="bu">abs</span>(y1 <span class="op">-</span> y2)</span>
+<span id="cb17-10"><a></a>    <span class="cf">return</span> distance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside><div>
+<p>Calculates the <strong>Manhattan distance</strong> heuristic for a given state. Is this heuristic <strong>admissible</strong>?</p>
+</div></aside></section>
+<section id="puzzle-3" class="slide level2">
+<h2>8-Puzzle</h2>
+<div id="82d77e83" class="cell" data-execution_count="18">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-19-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="slides_files/figure-revealjs/cell-19-output-1.png" class="quarto-figure quarto-figure-center" width="758" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="puzzle-4" class="slide level2">
+<h2>8-Puzzle</h2>
+<ul>
+<li class="fragment">Compare <strong>Manhattan</strong> vs.&nbsp;<strong>Misplaced Tiles</strong> heuristics.</li>
+<li class="fragment">Which is more effective?</li>
+<li class="fragment">Significant run time differences?</li>
+</ul>
+</section>
+<section id="puzzle-5" class="slide level2">
+<h2>8-Puzzle</h2>
+<div id="a5f1a849" class="cell" data-execution_count="19">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-20-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides_files/figure-revealjs/cell-20-output-1.png" class="quarto-figure quarto-figure-center" width="758" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>where</p>
+<ul>
+<li><strong>a</strong> = misplaced tiles distance</li>
+<li><strong>b</strong> = Manathan distance</li>
+</ul>
+</section>
+<section id="puzzle-6" class="slide level2">
+<h2>8-Puzzle</h2>
+<div id="40f777b5" class="cell" data-execution_count="20">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-21-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="slides_files/figure-revealjs/cell-21-output-1.png" class="quarto-figure quarto-figure-center" width="758" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<p>where</p>
+<ul>
+<li><strong>a</strong> = misplaced tiles distance</li>
+<li><strong>b</strong> = Manathan distance</li>
+</ul>
+<aside class="notes">
+<p><code>misplaced_tiles_distance</code> does not take into account how far a tile is from its expected final location, whereas <code>manhattan_distance</code> does.</p>
+<p>Thus, one can expect the algorithm using the Manhattan distance to select the next node to explore more wisely.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="best-first-search-1" class="slide level2">
+<h2>Best-First Search</h2>
+<div id="7290e1c0" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a><span class="kw">def</span> best_first_search_revised(initial_state, goal_state):</span>
+<span id="cb18-2"><a></a></span>
+<span id="cb18-3"><a></a>    frontier <span class="op">=</span> []  <span class="co"># Initialize the priority queue</span></span>
+<span id="cb18-4"><a></a>    initial_h <span class="op">=</span> manhattan_distance(initial_state, goal_state)</span>
+<span id="cb18-5"><a></a>    <span class="co"># Push the initial state with its heuristic value onto the queue</span></span>
+<span id="cb18-6"><a></a>    heapq.heappush(frontier, (initial_h, <span class="dv">0</span>, initial_state, []))  <span class="co"># (f(n), g(n), state, path)</span></span>
+<span id="cb18-7"><a></a></span>
+<span id="cb18-8"><a></a>    explored <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb18-9"><a></a></span>
+<span id="cb18-10"><a></a>    iterations <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-11"><a></a></span>
+<span id="cb18-12"><a></a>    <span class="cf">while</span> <span class="kw">not</span> is_empty(frontier):</span>
+<span id="cb18-13"><a></a>        f, g, current_state, path <span class="op">=</span> heapq.heappop(frontier)</span>
+<span id="cb18-14"><a></a></span>
+<span id="cb18-15"><a></a>        <span class="cf">if</span> is_goal(current_state, goal_state):</span>
+<span id="cb18-16"><a></a>            <span class="bu">print</span>(<span class="ss">f"Number of iterations: </span><span class="sc">{</span>iterations<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-17"><a></a>            <span class="cf">return</span> path <span class="op">+</span> [current_state]  <span class="co"># Return the successful path</span></span>
+<span id="cb18-18"><a></a></span>
+<span id="cb18-19"><a></a>        iterations <span class="op">=</span> iterations <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb18-20"><a></a></span>
+<span id="cb18-21"><a></a>        explored.add(<span class="bu">tuple</span>(current_state))</span>
+<span id="cb18-22"><a></a></span>
+<span id="cb18-23"><a></a>        <span class="cf">for</span> neighbor <span class="kw">in</span> expand(current_state):</span>
+<span id="cb18-24"><a></a>            <span class="cf">if</span> <span class="bu">tuple</span>(neighbor) <span class="kw">not</span> <span class="kw">in</span> explored:</span>
+<span id="cb18-25"><a></a>                new_g <span class="op">=</span> g <span class="op">+</span> <span class="dv">1</span>  <span class="co"># Increment the path cost</span></span>
+<span id="cb18-26"><a></a>                h <span class="op">=</span> manhattan_distance(neighbor, goal_state)</span>
+<span id="cb18-27"><a></a>                new_f <span class="op">=</span> new_g <span class="op">+</span> h  <span class="co"># Calculate the new total cost</span></span>
+<span id="cb18-28"><a></a>                <span class="co"># Push the neighbor state onto the priority queue</span></span>
+<span id="cb18-29"><a></a>                heapq.heappush(frontier, (new_f, new_g, neighbor, path <span class="op">+</span> [current_state]))</span>
+<span id="cb18-30"><a></a>                explored.add(<span class="bu">tuple</span>(neighbor))  <span class="co"># Mark neighbor as explored</span></span>
+<span id="cb18-31"><a></a></span>
+<span id="cb18-32"><a></a>    <span class="cf">return</span> <span class="va">None</span>  <span class="co"># No solution found</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>When expanding a node in the search tree, it is crucial to note that we do not immediately evaluate its descendant nodes to determine if they are goal nodes. Instead, these descendants are added to the frontier, which is a priority queue. This allows their <span class="math inline">\(f(n)\)</span> values to be compared with those of other nodes in the frontier, ensuring that the most promising nodes are considered first based on their estimated total cost.</p>
+<p>Consequently, it is possible for the frontier to include nodes that are goal nodes. However, their <span class="math inline">\(f(n)\)</span> values may be higher than those of other nodes deemed more promising, as these other nodes might lead to a shorter path to the goal.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="simple-case-1" class="slide level2">
+<h2>Simple Case</h2>
+<div id="89431645" class="cell" data-execution_count="22">
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of iterations: 2</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-23-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-revealjs/cell-23-output-2.png" class="quarto-figure quarto-figure-center" width="758" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="6c39997b" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a>initial_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb20-2"><a></a>                    <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">6</span>,</span>
+<span id="cb20-3"><a></a>                    <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">8</span>]</span>
+<span id="cb20-4"><a></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb20-5"><a></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb20-6"><a></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb20-7"><a></a></span>
+<span id="cb20-8"><a></a>best_first_search_revised(initial_state_8, goal_state_8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of iterations: 2</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>[[1, 2, 3, 4, 0, 6, 7, 5, 8],
+ [1, 2, 3, 4, 5, 6, 7, 0, 8],
+ [1, 2, 3, 4, 5, 6, 7, 8, 0]]</code></pre>
+</div>
+</div>
+</section>
+<section id="challenging-case-1" class="slide level2 scrollable">
+<h2>Challenging Case</h2>
+<div id="9592fe49" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>initial_state_8 <span class="op">=</span> [<span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">5</span>,</span>
+<span id="cb23-2"><a></a>                   <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">7</span>,</span>
+<span id="cb23-3"><a></a>                   <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>]</span>
+<span id="cb23-4"><a></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb23-5"><a></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb23-6"><a></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb23-7"><a></a></span>
+<span id="cb23-8"><a></a><span class="bu">print</span>(<span class="st">"Solving 8-puzzle with best_first_search..."</span>)</span>
+<span id="cb23-9"><a></a></span>
+<span id="cb23-10"><a></a>solution_8_bfs <span class="op">=</span> best_first_search_revised(initial_state_8, goal_state_8)</span>
+<span id="cb23-11"><a></a></span>
+<span id="cb23-12"><a></a><span class="cf">if</span> solution_8_bfs:</span>
+<span id="cb23-13"><a></a>    <span class="bu">print</span>(<span class="ss">f"Best_first_search Solution found in </span><span class="sc">{</span><span class="bu">len</span>(solution_8_bfs) <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> moves:"</span>)</span>
+<span id="cb23-14"><a></a>    print_solution(solution_8_bfs)</span>
+<span id="cb23-15"><a></a><span class="cf">else</span>:</span>
+<span id="cb23-16"><a></a>    <span class="bu">print</span>(<span class="st">"No solution found for 8-puzzle using best_first_search."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solving 8-puzzle with best_first_search...
+Number of iterations: 2255
+Best_first_search Solution found in 25 moves:
+Step 0:
+6 4 5
+8 2 7
+1   3
+
+Step 1:
+6 4 5
+8 2 7
+  1 3
+
+Step 2:
+6 4 5
+  2 7
+8 1 3
+
+Step 3:
+6 4 5
+2   7
+8 1 3
+
+Step 4:
+6   5
+2 4 7
+8 1 3
+
+Step 5:
+  6 5
+2 4 7
+8 1 3
+
+Step 6:
+2 6 5
+  4 7
+8 1 3
+
+Step 7:
+2 6 5
+4   7
+8 1 3
+
+Step 8:
+2 6 5
+4 1 7
+8   3
+
+Step 9:
+2 6 5
+4 1 7
+  8 3
+
+Step 10:
+2 6 5
+  1 7
+4 8 3
+
+Step 11:
+2 6 5
+1   7
+4 8 3
+
+Step 12:
+2 6 5
+1 7  
+4 8 3
+
+Step 13:
+2 6 5
+1 7 3
+4 8  
+
+Step 14:
+2 6 5
+1 7 3
+4   8
+
+Step 15:
+2 6 5
+1   3
+4 7 8
+
+Step 16:
+2   5
+1 6 3
+4 7 8
+
+Step 17:
+2 5  
+1 6 3
+4 7 8
+
+Step 18:
+2 5 3
+1 6  
+4 7 8
+
+Step 19:
+2 5 3
+1   6
+4 7 8
+
+Step 20:
+2   3
+1 5 6
+4 7 8
+
+Step 21:
+  2 3
+1 5 6
+4 7 8
+
+Step 22:
+1 2 3
+  5 6
+4 7 8
+
+Step 23:
+1 2 3
+4 5 6
+  7 8
+
+Step 24:
+1 2 3
+4 5 6
+7   8
+
+Step 25:
+1 2 3
+4 5 6
+7 8  
+</code></pre>
+</div>
+</div>
+</section>
+<section id="experiments" class="slide level2">
+<h2>1000 Experiments</h2>
+<div id="c682ac61" class="cell" data-execution_count="28">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-29-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-revealjs/cell-29-output-1.png" class="quarto-figure quarto-figure-center" width="1332" height="564"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="scatter-plot-manathan" class="slide level2">
+<h2>Scatter Plot (Manathan)</h2>
+<div id="e5e19db7" class="cell" data-execution_count="29">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-30-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-revealjs/cell-30-output-1.png" class="quarto-figure quarto-figure-center" width="685" height="523"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exploration" class="slide level2 smaller">
+<h2>Exploration</h2>
+<p>Breadth-first search (BFS) is guaranteed to find the shortest path, or lowest-cost solution, assuming all actions have unit cost.</p>
+<p>Develop a program that performs the following tasks:</p>
+<ol type="1">
+<li>Generate a random configuration of the 8-Puzzle.</li>
+<li>Determine the shortest path using breadth-first search.</li>
+<li>Identify the optimal solution using the <span class="math inline">\(A^\star\)</span> algorithm.</li>
+<li>Compare the costs of the solutions obtained in steps 2 and 3. There should be no discrepancy if <span class="math inline">\(A^\star\)</span> identifies cost-optimal solutions.</li>
+<li>Repeat the process.</li>
+</ol>
+</section>
+<section id="exploration-1" class="slide level2 smaller">
+<h2>Exploration</h2>
+<p>The heuristic <span class="math inline">\(h(n) = 0\)</span> is considered admissible, yet it typically results in inefficient exploration of the search space. Develop a program to investigate this concept. Demonstrate that when all actions are assumed to have unit cost, both <span class="math inline">\(A^\star\)</span> and breadth-first search (BFS) explore the search space similarly. Specifically, they examine all paths of length one, followed by paths of length two, and so forth.</p>
+</section>
+<section id="remarks-1" class="slide level2">
+<h2>Remarks</h2>
+<ul>
+<li><p><strong>Breadth-first search (BFS)</strong> identifies the optimal solution, 25 moves, in 145,605 iterations.</p></li>
+<li><p><strong>Depth-first search (DFS)</strong> discovers a solution involving 1,157 moves in 1,187 iterations.</p></li>
+<li><p><strong>Best-First Search </strong> using the Manathan distance identifies the optimal solution, 25 moves, in 2,255 iterations.</p></li>
+</ul>
+
+<aside><div>
+
+</div></aside></section>
+<section id="measuring-performance" class="slide level2">
+<h2>Measuring Performance</h2>
+<ul>
+<li><p><strong>Completeness</strong>: Does the algorithm <strong>ensure</strong> that a solution will be found if one exists, and accurately indicate failure when no solution exists?</p></li>
+<li><p><strong>Cost Optimality</strong>: Does the algorithm identify the (a) solution with the <strong>lowest path cost</strong> among all possible solutions?</p></li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p>Are all three algorithms complete? What are the necessary conditions?</p></li>
+<li><p>Do all three algorithms guarantee cost optimality?</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="measuring-performance-1" class="slide level2">
+<h2>Measuring Performance</h2>
+<ul>
+<li><p><strong>Time Complexity</strong>: How does the <strong>time</strong> required by the algorithm scale with respect to the <strong>number of states</strong> and <strong>actions</strong>?</p></li>
+<li><p><strong>Space Complexity</strong>: How does the <strong>space</strong> required by the algorithm scale with respect to the <strong>number of states</strong> and <strong>actions</strong>?</p></li>
+</ul>
+
+<aside class="notes">
+<ul>
+<li>What is the time and space complexity of breadth-first-search? <span class="math inline">\(\mathcal{O}(b^d)\)</span></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Alternatively, complexity can be evaluated based on the <strong>depth</strong> (<span class="math inline">\(d\)</span>) and <strong>branching factor</strong> (<span class="math inline">\(b\)</span>) of the search tree, instead of the number of states (nodes) and actions (edges) in the state space.</p>
+</div></aside></section>
+<section id="videos-by-sebastian-lague" class="slide level2 smaller scrollable">
+<h2>Videos by Sebastian Lague</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=-L-WgKMFuhE">A* Pathfinding (E01: algorithm explanation)</a> posted on 2014-12-16.</li>
+<li><a href="https://www.youtube.com/watch?v=nhiFx28e7JY">A* Pathfinding (E02: node grid)</a> posted on 2014-12-18.</li>
+<li><a href="https://www.youtube.com/watch?v=mZfyt03LDH4">A* Pathfinding (E03: algorithm implementation)</a> posted on 2014-12-19.</li>
+<li><a href="https://www.youtube.com/watch?v=3Dw5d7PlcTM">A* Pathfinding (E04: heap optimization)</a> posted on 2014-12-24.</li>
+<li><a href="https://www.youtube.com/watch?v=dn1XRIaROM4">A* Pathfinding (E05: units)</a> posted on 2015-01-06.</li>
+<li><a href="https://www.youtube.com/watch?v=T0Qv4-KkAUo">A* Pathfinding (E06: weights)</a> posted on 2015-01-11.</li>
+<li><a href="https://www.youtube.com/watch?v=Tb-rM3wGwv4">A* Pathfinding (E07: smooth weights)</a> posted on 2016-12-30.</li>
+<li><a href="https://www.youtube.com/watch?v=NjQjl-ZBXoY">A* Pathfinding (E08: path smoothing 1/2)</a> posted on 2017-01-31.</li>
+<li><a href="https://www.youtube.com/watch?v=bfevcsANSr4">A* Pathfinding (E09: path smoothing 2/2)</a> posted on 2017-01-31.</li>
+<li><a href="https://www.youtube.com/watch?v=TFyEWDMQUKc">A* Pathfinding (E10: threading)</a> posted on 2017-02-03.</li>
+<li><a href="https://www.youtube.com/playlist?list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW">A* Pathfinding Tutorial (Unity)</a> (play list)</li>
+</ul>
+</section>
+<section id="a-resource-dedicated-to-astar" class="slide level2">
+<h2>A resource dedicated to <span class="math inline">\(A^\star\)</span></h2>
+<ul>
+<li><a href="http://theory.stanford.edu/~amitp/GameProgramming/">Amit’s A* Pages</a></li>
+</ul>
+</section></section>
+<section>
+<section id="prologue" class="title-slide slide level1 center">
+<h1>Prologue</h1>
+
+</section>
+<section id="summary-1" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>Informed Search and Heuristics
+<ul>
+<li>Best-First Search</li>
+</ul></li>
+<li>Implementations</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><strong>Informed Search and Heuristics:</strong>
+<ul>
+<li>Introduced the concept of <strong>heuristic functions</strong> (<code>h(n)</code>) to estimate costs.</li>
+<li><strong>Best-First Search:</strong>
+<ul>
+<li>Uses heuristics to prioritize nodes that seem closer to the goal.</li>
+<li>Implemented with a priority queue sorted by estimated cost.</li>
+</ul></li>
+<li><strong>Manhattan Distance Heuristic:</strong>
+<ul>
+<li>Calculates the sum of the distances of tiles from their goal positions.</li>
+<li>Used in the 8-Puzzle to guide the search more efficiently.</li>
+</ul></li>
+</ul></li>
+<li><strong>Comparative Analysis:</strong>
+<ul>
+<li><strong>BFS:</strong> Optimal solution in 145,605 iterations (25 moves).</li>
+<li><strong>DFS:</strong> Suboptimal solution in 1,187 iterations (1,157 moves).</li>
+<li><strong>Best-First Search:</strong> Optimal solution in 2,255 iterations (25 moves).</li>
+<li>Demonstrated that informed search algorithms can find optimal solutions more efficiently.</li>
+</ul></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="next-lecture" class="slide level2">
+<h2>Next lecture</h2>
+<ul>
+<li>We will examine additional search algorithms.</li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Hart:1968aa" class="csl-entry" role="listitem">
+Hart, Peter E., Nils J. Nilsson, and Bertram Raphael. 1968. <span>“<span class="nocase">A Formal Basis for the Heuristic Determination of Minimum Cost Paths</span>.”</span> <em>IEEE Transactions on Systems Science and Cybernetics</em> 4 (2): 100–107. <a href="https://doi.org/10.1109/tssc.1968.300136">https://doi.org/10.1109/tssc.1968.300136</a>.
+</div>
+<div id="ref-Russell:2020aa" class="csl-entry" role="listitem">
+Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</span> Modern Approach</em>. 4th ed. Pearson. <a href="http://aima.cs.berkeley.edu/">http://aima.cs.berkeley.edu/</a>.
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Marcel <strong>Turcotte</strong></p>
+<p><a href="mailto:Marcel.Turcotte@uOttawa.ca">Marcel.Turcotte@uOttawa.ca</a></p>
+<p>School of Electrical Engineering and <strong>Computer Science</strong> (EE<strong>CS</strong>)</p>
+<p>University of Ottawa</p>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../../assets/images/uottawa_hor_black.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p><a href="https://turcotte.xyz/teaching/csi-4106">turcotte.xyz/teaching/csi-4106</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/turcotte\.xyz\/teaching\/csi-4106");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+<script src="https://platform.twitter.com/widgets.js"></script>
+</body></html>

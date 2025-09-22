@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xl="http://www.w3.org/1999/xlink" version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://www.w3.org/2000/svg" viewBox="828.6645 93.50208 637.6929 284.03937" width="637.6929" height="284.03937">
+  <defs/>
+  <g id="Canvas_1" stroke="none" stroke-opacity="1" stroke-dasharray="none" fill="none" fill-opacity="1">
+    <title>Canvas 1</title>
+    <g id="Canvas_1_Layer_1">
+      <title>Layer 1</title>
+      <g id="Line_198">
+        <path d="M 1172.8125 174.9751 L 1210.5292 231.52267 L 1253.5356 296.0612" stroke="#927d72" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_191">
+        <path d="M 1187.5816 166.94101 L 1274.6512 232.4725 L 1368.9089 303.98164" stroke="#718791" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_190">
+        <path d="M 1147.3926 179.54113 L 1147.6637 230.67003 L 1147.3713 291.50234" stroke="#718791" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_188">
+        <path d="M 1121.8408 175.09673 L 1084.7983 231.52267 L 1043.0719 295.42594" stroke="#718791" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_81">
+        <path d="M 1106.9067 167.06028 L 1020.6763 232.4725 L 926.2546 303.60727" stroke="#718791" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_45">
+        <ellipse cx="1147.1645" cy="136.52177" rx="56.6930036451333" ry="42.5197527338499" fill="#aaa"/>
+        <ellipse cx="1147.1645" cy="136.52177" rx="56.6930036451333" ry="42.5197527338499" stroke="#919191" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(1103.8102 117.52177)" fill="white">
+          <tspan font-family="Comic Sans MS" font-weight="bold" font-size="14" fill="white" x="16.106285" y="15" xml:space="preserve">Machine </tspan>
+          <tspan font-family="Comic Sans MS" font-weight="bold" font-size="14" fill="white" x="15.326988" y="34" xml:space="preserve">Learning</tspan>
+        </text>
+      </g>
+      <g id="Graphic_82">
+        <ellipse cx="885.8574" cy="334.04145" rx="56.6930036451331" ry="42.5197527338499" fill="#caefff"/>
+        <ellipse cx="885.8574" cy="334.04145" rx="56.6930036451331" ry="42.5197527338499" stroke="#718791" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(842.5031 326.04145)" fill="black">
+          <tspan font-family="Comic Sans MS" font-size="12" fill="black" x="21.041832" y="13" xml:space="preserve">Problem</tspan>
+        </text>
+      </g>
+      <g id="Graphic_177">
+        <ellipse cx="1017.8574" cy="334.04145" rx="56.6930036451333" ry="42.5197527338499" fill="#ffcdef"/>
+        <ellipse cx="1017.8574" cy="334.04145" rx="56.6930036451333" ry="42.5197527338499" stroke="#927387" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(974.5031 326.04145)" fill="black">
+          <tspan font-family="Comic Sans MS" font-size="12" fill="black" x="30.05648" y="13" xml:space="preserve">Data</tspan>
+        </text>
+      </g>
+      <g id="Graphic_155">
+        <ellipse cx="1147.1645" cy="334.52177" rx="56.6930036451333" ry="42.5197527338499" fill="#ffddcb"/>
+        <ellipse cx="1147.1645" cy="334.52177" rx="56.6930036451333" ry="42.5197527338499" stroke="#927d72" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(1103.8102 326.52177)" fill="black">
+          <tspan font-family="Comic Sans MS" font-size="12" fill="black" x="14.980309" y="13" xml:space="preserve">Evaluation</tspan>
+        </text>
+      </g>
+      <g id="Graphic_199">
+        <ellipse cx="1279.1645" cy="334.52177" rx="56.6930036451333" ry="42.5197527338499" fill="#ffd579"/>
+        <path d="M 1319.2524 304.45584 C 1341.3925 321.0608 1341.3925 347.98273 1319.2524 364.5877 C 1297.1125 381.19273 1261.2166 381.19273 1239.0766 364.5877 C 1216.9366 347.98273 1216.9366 321.0608 1239.0766 304.45584 C 1261.2166 287.8508 1297.1125 287.8508 1319.2524 304.45584" stroke="#927d72" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8.0,5.0" stroke-width="1"/>
+        <text transform="translate(1235.8102 326.52177)" fill="black">
+          <tspan font-family="Comic Sans MS" font-size="12" fill="black" x="23.362144" y="13" xml:space="preserve">Theory</tspan>
+        </text>
+      </g>
+      <g id="Graphic_153">
+        <ellipse cx="1409.1645" cy="334.52177" rx="56.6930036451333" ry="42.5197527338499" fill="#eefecb"/>
+        <ellipse cx="1409.1645" cy="334.52177" rx="56.6930036451333" ry="42.5197527338499" stroke="#879072" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(1365.8102 318.52177)" fill="black">
+          <tspan font-family="Comic Sans MS" font-size="12" fill="black" x="7.163902" y="13" xml:space="preserve">Mathematics </tspan>
+          <tspan font-family="Comic Sans MS" font-size="12" fill="black" x="18.115074" y="29" xml:space="preserve">Essential</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

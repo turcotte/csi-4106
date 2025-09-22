@@ -1,0 +1,7632 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.32">
+
+  <meta name="author" content="Marcel Turcotte">
+  <title>CSI 4106 - Fall 2025 – Introduction to Search</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+      margin-bottom: 0em;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-f563837468303362081e247dddd440d0.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+<meta property="og:title" content="Introduction to Search – CSI 4106 - Fall 2025">
+<meta property="og:description" content="CSI 4106">
+<meta property="og:site_name" content="CSI 4106 - Fall 2025">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Introduction to Search</h1>
+  <p class="subtitle">CSI 4106</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Marcel Turcotte 
+</div>
+</div>
+</div>
+
+  <p class="date">Version: Jul 10, 2025 16:58</p>
+</section>
+<section>
+<section id="preamble" class="title-slide slide level1 center">
+<h1>Preamble</h1>
+
+</section>
+<section id="quote-of-the-day" class="slide level2">
+<h2>Quote of the Day</h2>
+<p></p><div id="tweet-92309"></div><script>tweet={"url":"https:\/\/twitter.com\/ScienceMIT\/status\/1849190557555290118","author_name":"MIT Science","author_url":"https:\/\/twitter.com\/ScienceMIT","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EBrain studies show that language is not essential for the cognitive processes that underlie thought via \u003Ca href=\"https:\/\/twitter.com\/sciam?ref_src=twsrc%5Etfw\"\u003E@sciam\u003C\/a\u003E \u003Ca href=\"https:\/\/t.co\/i3yz9o547I\"\u003Ehttps:\/\/t.co\/i3yz9o547I\u003C\/a\u003E\u003C\/p\u003E&mdash; MIT Science (@ScienceMIT) \u003Ca href=\"https:\/\/twitter.com\/ScienceMIT\/status\/1849190557555290118?ref_src=twsrc%5Etfw\"\u003EOctober 23, 2024\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.twitter.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"Twitter","provider_url":"https:\/\/twitter.com","version":"1.0"};document.getElementById("tweet-92309").innerHTML = tweet["html"];</script><p></p>
+</section>
+<section id="learning-objectives" class="slide level2 smaller">
+<h2>Learning Objectives</h2>
+<ul>
+<li><p><strong>Understand</strong> the role of search algorithms in AI, crucial for planning, reasoning, and applications like AlphaGo.</p></li>
+<li><p><strong>Grasp</strong> key search concepts: state space, initial/goal states, actions, transition models, cost functions.</p></li>
+<li><p><strong>Learn</strong> differences and implementations of uninformed search algorithms (BFS and DFS).</p></li>
+<li><p><strong>Comprehend</strong> informed search strategies and heuristic functions’ role in search efficiency.</p></li>
+<li><p><strong>Implement</strong> and compare BFS, DFS, and Best-First Search using the 8-Puzzle problem.</p></li>
+<li><p><strong>Analyze</strong> performance and optimality of various search algorithms.</p></li>
+</ul>
+<aside class="notes">
+<p>Today’s focus is primarily on providing justification, as well as introducing key concepts and terminology.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="justification" class="title-slide slide level1 center">
+<h1>Justification</h1>
+
+</section>
+<section id="justification-1" class="slide level2">
+<h2>Justification</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/AlphaGo-Nature-2016.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="../../assets/images/AlphaGo-Nature-2016.png" class="quarto-figure quarto-figure-center" height="525"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p><span class="citation" data-cites="Silver:2016aa">Silver et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span></p>
+</div></aside></section>
+<section id="justification-2" class="slide level2">
+<h2>Justification</h2>
+<p>We have honed our expertise in <strong>machine learning</strong> to a point where we possess a robust understanding of <strong>neural networks</strong> and <strong>deep learning</strong>, allowing us to develop simple models using <strong>Keras</strong>.</p>
+<div class="fragment">
+<p>In recent years, <strong>Monte Carlo Tree Search (MCTS)</strong> has played a pivotal role in advancing <strong>artificial intelligence</strong> research. After initially concentrating on deep learning, <strong>we are now shifting our focus to search</strong>.</p>
+</div>
+</section>
+<section id="justification-3" class="slide level2">
+<h2>Justification</h2>
+<p>The integration of <strong>deep learning</strong> and <strong>MCTS</strong> underpins modern applications such as <strong><a href="https://deepmind.google/research/breakthroughs/alphago/">AlphaGo</a></strong>, <strong><a href="https://deepmind.google/discover/blog/alphazero-shedding-new-light-on-chess-shogi-and-go/">AlphaZero</a></strong>, and <strong><a href="https://deepmind.google/discover/blog/muzero-mastering-go-chess-shogi-and-atari-without-rules/">MuZero</a></strong>.</p>
+<div class="fragment">
+<p>Search algorithms are crucial in addressing challenges in <strong>planning</strong> and <strong>reasoning</strong> and are likely to become <strong>increasingly significant in future developments</strong>.</p>
+</div>
+</section>
+<section id="search-a-biased-timeline" class="slide level2 smaller">
+<h2>Search (a biased timeline)</h2>
+<ul>
+<li><strong>1968 – A*</strong>: Heuristic-based search, foundational for pathfinding and planning in AI.</li>
+<li><strong>1970s-1980s – Population-Based Algorithms</strong> (e.g., Genetic Algorithms): Stochastic optimization approaches useful for large, complex search spaces.</li>
+<li><strong>1980s – Constraint Satisfaction Problems (CSPs)</strong>: Search in structured spaces with explicit constraints; a precursor to formal problem-solving systems.</li>
+<li><strong>2013 – DQN</strong>: Reinforcement learning via search (Q-learning) from raw input (pixels).</li>
+<li><strong>2015 – AlphaGo</strong>: Game-tree search with Monte Carlo Tree Search (MCTS) combined with deep learning.</li>
+<li><strong>2017 – AlphaZero</strong>: Generalized self-play with MCTS in multiple domains.</li>
+<li><strong>2019 – MuZero</strong>: Search in unknown environments without predefined models.</li>
+<li><strong>2020 – Agent57</strong>: Generalized search across multiple environments (Atari games).</li>
+<li><strong>2020 – AlphaGeometry</strong>: Search-based theorem proving in mathematical spaces.</li>
+<li><strong>2021 – FunSearch</strong>: Potentially another generalization of search techniques.</li>
+</ul>
+</section>
+<section id="search" class="slide level2">
+<h2>Search</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/g-dKXOlsf98" width="889" height="500" title="WThe computer that mastered Go" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<aside class="notes">
+<p>In 1997, IBM’s Deep Blue defeated the reigning world chess champion, Garry Kasparov. However, the AI community was not particularly impressed, as the system’s primary accomplishment lay in its ability to evaluate 200 million chess positions per second. Following the match, Kasparov remarked that Deep Blue was “as intelligent as your alarm clock.”</p>
+<p>Since then, significant advancements have been made. Unlike Deep Blue, AlphaZero relies on “more interesting approaches than brute-force search, which are perhaps more human-like in the way that they deal with the position.” This prompted Kasparov to express his approval, stating, “I can’t hide my satisfaction that [AlphaZero] plays with a dynamic style reminiscent of my own!”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><a href="https://youtu.be/g-dKXOlsf98">The computer that mastered Go</a>. <a href="https://www.youtube.com/@NatureVideoChannel">Nature Video</a> posted on YouTube on 2016-01-27. (7<strong>m</strong> 52<strong>s</strong>)</p>
+</div></aside></section>
+<section id="alphago---the-movie" class="slide level2">
+<h2>AlphaGo - The Movie</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/WXuK6gekU1Y" width="889" height="500" title="AlphaGo - The Movie | Full award-winning documentary" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Yes, <strong>AlphaGo</strong> successfully defeated the <strong>world champion</strong>, Lee <strong>Sedol</strong>. (1<strong>h</strong> 30<strong>m</strong>)</p>
+</div></aside></section>
+<section id="alphago2muzero" class="slide level2">
+<h2>AlphaGo2MuZero</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/AlphaGo2MuZero.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="../../assets/images/AlphaGo2MuZero.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p><a href="https://www.davidsilver.uk">David Silver</a>, a principal research scientist at DeepMind and a professor at University College London, is one of the leading researchers on these projects. He earned his PhD at the University of Alberta, where he was supervised by <a href="https://apps.ualberta.ca/directory/person/rsutton">Richard Sutton</a>.</p>
+<p>You might also want to watch the following video: <a href="https://youtu.be/WXHFqTvfFSw?si=oXsOtb2uxvU1CyKb">AlphaGo Zero: Discovering new knowledge</a>. Posted on YouTube on 2017-10-18.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Attribution</strong>: <a href="https://deepmind.google/discover/blog/muzero-mastering-go-chess-shogi-and-atari-without-rules/">MuZero: Mastering Go, chess, shogi and Atari without rules</a>, Google DeepMind, 2020-12-23. <span class="citation" data-cites="10.1038/s41586-020-03051-4">Schrittwieser et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p>
+</div></aside></section></section>
+<section>
+<section id="search-1" class="title-slide slide level1 center">
+<h1>Search</h1>
+
+</section>
+<section id="applications" class="slide level2">
+<h2>Applications</h2>
+<ul>
+<li class="fragment"><strong>Pathfinding and Navigation</strong>: Used in robotics and video games to find a <strong>path</strong> from a <strong>starting point</strong> to a <strong>destination</strong>.</li>
+<li class="fragment"><strong>Puzzle Solving</strong>: Solving puzzles like the <strong>8-puzzle</strong>, <strong>mazes</strong>, or <strong>Sudoku</strong>.</li>
+<li class="fragment"><strong>Network Analysis</strong>: Analyzing networks and graphs, such as finding <strong>connectivity</strong> or <strong>shortest paths</strong> in <strong>social networks</strong> or <strong>transportation maps</strong>.</li>
+<li class="fragment"><strong>Game Playing</strong>: Used to evaluate moves in games like <strong>chess</strong> or <strong>Go</strong>, especially when combined with other strategies.</li>
+</ul>
+</section>
+<section id="applications-1" class="slide level2">
+<h2>Applications</h2>
+<ul>
+<li class="fragment"><strong>Scheduling</strong>: Planning and scheduling tasks in <strong>manufacturing</strong>, <strong>project management</strong>, or <strong>airline scheduling</strong>.</li>
+<li class="fragment"><strong>Resource Allocation</strong>: Allocating resources in a network or within an organization where <strong>constraints</strong> must be satisfied.</li>
+<li class="fragment"><strong>Configuration Problems</strong>: Solving problems where a set of components must be assembled to meet specific requirements, such as configuring a computer system or <strong>designing a circuit</strong>.</li>
+</ul>
+</section>
+<section id="applications-2" class="slide level2">
+<h2>Applications</h2>
+<ul>
+<li class="fragment"><p><strong>Decision Making under Uncertainty</strong>: Used in <strong>real-time strategy games</strong> and <strong>simulations</strong> where decisions need to be evaluated under uncertain conditions.</p></li>
+<li class="fragment"><p><strong>Storrytelling</strong>: LLMs can effectively generate stories when guided by a valid input plan from an <strong>automated planner</strong>. <span class="citation" data-cites="Simon:2024aa">(<a href="#/references" role="doc-biblioref" onclick="">Simon and Muise 2024</a>)</span></p></li>
+</ul>
+<aside class="notes">
+<p>The applications of search algorithms are both <strong>numerous</strong> and <strong>diverse</strong>.</p>
+<p>Search has been an active area of research not only because of its wide range of applications but also due to the potential for improvements in algorithms to significantly reduce program execution time or facilitate the exploration of larger search spaces.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ol type="1">
+<li class="fragment"><p><strong>Deterministic &amp; Heuristic Search</strong>: BFS, DFS, A* for pathfinding and optimization in classical AI.</p></li>
+<li class="fragment"><p><strong>CSPs &amp; Population-Based Algorithms</strong>: Focus on structured problems and stochastic search.</p></li>
+<li class="fragment"><p><strong>Adversarial Game Algorithms</strong>: Minimax, alpha-beta pruning, MCTS for decision-making in competitive environments.</p></li>
+</ol>
+
+<aside><div>
+<p>This lecture and the upcoming ones will thoroughly cover these topics.</p>
+</div></aside></section>
+<section id="definition" class="slide level2">
+<h2>Definition</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Russell:2020aa">(<a href="#/references" role="doc-biblioref" onclick="">Russell and Norvig 2020, 63</a>)</span></strong></p>
+</div>
+<div class="callout-content">
+<p>When the correct action to take is not immediately obvious, an agent may need to to <strong>plan ahead</strong>: to consider a <strong>sequence of actions</strong> that form a <strong>path</strong> to a <strong>goal state</strong>. Such an agent is called a <strong>problem-solving agent</strong>, and the computational process it undertakes is called <strong>search</strong>.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="terminology" class="slide level2">
+<h2>Terminology</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/agent-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="../../assets/images/agent-01.png" class="quarto-figure quarto-figure-center" height="400"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>The definition of an agent in <strong>artificial intelligence (AI)</strong> shares some similarities with the <strong>psychological</strong> definition, but there are key distinctions. In AI, an agent is an <strong>autonomous entity</strong> that perceives its <strong>environment</strong> through <strong>sensors</strong> and acts upon it using <strong>actuators</strong> to achieve specific <strong>goals</strong>. Both definitions involve <strong>perception</strong>, <strong>decision-making</strong>, and <strong>action</strong>.</p>
+<p>However, while psychological agents are human or biological and involve <strong>complex cognitive</strong> and <strong>emotional processes</strong>, AI agents are computational and operate based on algorithms designed to <strong>maximize certain performance measures</strong> or <strong>achieve predefined objectives</strong>. The focus in AI is more on the technical implementation of these processes, whereas in psychology, the emphasis is on understanding the cognitive and motivational aspects of agency.</p>
+<p>The concept of <strong>agentic design</strong> in software engineering and artificial intelligence has experienced a resurgence in popularity.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>An <strong>agent</strong> is an entity that performs <strong>actions</strong>. A <strong>rational agent</strong> is one that acts to achieve the <strong>“best” outcome</strong>. Conceptually, an <strong>agent</strong> perceives its environment through <strong>sensors</strong> and interacts with it using <strong>actuators</strong>.</p>
+</div></aside></section>
+<section id="environment-characteristics" class="slide level2">
+<h2>Environment Characteristics</h2>
+<ul>
+<li><strong>Observability</strong>: Partially observable, or <em>fully observable</em></li>
+<li><strong>Agent Composition</strong>: <em>Single</em> or multiple agents</li>
+<li><strong>Predictability</strong>: <em>Deterministic</em> or non-deterministic</li>
+<li><strong>State Dependency</strong>: <em>Stateless</em> or stateful</li>
+<li><strong>Temporal Dynamics</strong>: <em>Static</em> or dynamic</li>
+<li><strong>State Representation</strong>: <em>Discrete</em> or continuous</li>
+</ul>
+
+<aside class="notes">
+<p>The characteristics of an environment influence the complexity of problem-solving.</p>
+<ul>
+<li><p>A <strong>fully observable environment</strong> allows the agent to detect all relevant aspects for decision-making.</p></li>
+<li><p>In a <strong>deterministic environment</strong>, the agent can predict the next state based on the current state and its subsequent action.</p></li>
+<li><p><strong>Stateless (Episodic) Environments</strong> involve decisions or actions that are independent of prior actions, with experiences divided into unrelated episodes. An example is a classification problem.</p></li>
+<li><p><strong>Stateful (Sequential) Environments</strong> require that each action’s outcome can affect future decisions, as the sequence of actions impacts the state and subsequent choices. An example is a chess game.</p></li>
+<li><p>A <strong>dynamic environment</strong> is characterized by changes in context while the agent is deliberating.</p></li>
+<li><p>Chess serves as an example of a <strong>discrete environment</strong>, with a finite, though large, number of states. In contrast, an autonomous vehicle operates within a <strong>continuous-state</strong> and <strong>continuous-time environment</strong>.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>In this lecture, environments are assumed to be: <em>fully observable</em>, <em>single agent</em>, <em>stateless</em>, <em>deterministic</em>, <em>static</em>, and <em>discrete</em>.</p>
+</div></aside></section>
+<section id="problem-solving-process" class="slide level2">
+<h2>Problem-Solving Process</h2>
+<p><strong>Search</strong>: The process involves simulating sequences of actions until the agent achieves its goal. A successful sequence is termed a <strong>solution</strong>.</p>
+<aside class="notes">
+<p>A precise formulation facilitates the development of reusable code.</p>
+<p>An environment characterized as stateless, single-agent, fully observable, deterministic, static, and discrete implies that the solution to any problem within this context is a fixed sequence of actions.</p>
+<ul>
+<li><strong>Stateless</strong>: Each decision is independent of previous actions, meaning the solution does not depend on history.</li>
+<li><strong>Single Agent</strong>: There is no interaction with other agents that could introduce variability.</li>
+<li><strong>Fully Observable</strong>: The agent has complete information about the environment, allowing for precise decision-making.</li>
+<li><strong>Deterministic</strong>: The outcome of actions is predictable, with no randomness affecting the result.</li>
+<li><strong>Static</strong>: The environment does not change over time, so the conditions remain constant.</li>
+<li><strong>Discrete</strong>: The environment has a finite number of states and actions, enabling a clear sequence of steps.</li>
+</ul>
+<p>I anticipate that you are already familiar with these concepts, and thus, this initial lecture primarily serves as a review.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="search-problem-definition" class="slide level2">
+<h2>Search Problem Definition</h2>
+<ul>
+<li class="fragment"><p>A collection of <strong>states</strong>, referred to as the <strong>state space</strong>.</p></li>
+<li class="fragment"><p>An <strong>initial state</strong> where the agent begins.</p></li>
+<li class="fragment"><p>One or more <strong>goal states</strong> that define successful outcomes.</p></li>
+<li class="fragment"><p>A set of <strong>actions</strong> available in a given state <span class="math inline">\(s\)</span>.</p></li>
+<li class="fragment"><p>A <strong>transition model</strong> that determines the next state based on the current state and selected action.</p></li>
+<li class="fragment"><p>An <strong>action cost function</strong> that specifies the cost of performing action <span class="math inline">\(a\)</span> in state <span class="math inline">\(s\)</span> to reach state <span class="math inline">\(s'\)</span>.</p></li>
+</ul>
+</section>
+<section id="definitions" class="slide level2">
+<h2>Definitions</h2>
+<ul>
+<li class="fragment">A <strong>path</strong> is defined as a sequence of actions.</li>
+<li class="fragment">A <strong>solution</strong> is a path that connects the initial state to the goal state.</li>
+<li class="fragment">An <strong>optimal solution</strong> is the path with the lowest cost among all possible solutions.</li>
+</ul>
+
+<aside class="notes">
+<p>In certain problems, multiple optimal solutions may exist. However, it is typically sufficient to identify and report a single optimal solution. Providing all optimal solutions can significantly increase time and space complexity for some problems.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>We assume that the <strong>path cost</strong> is the sum of the individual action costs, and all costs are positive. The state space can be conceptualized as a <strong>graph</strong>, where the nodes represent the states and the edges correspond to the actions.</p>
+</div></aside></section>
+<section id="example-8-puzzle" class="slide level2">
+<h2>Example: 8-Puzzle</h2>
+<div id="7d9a1a7f" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="758" height="374"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="puzzle" class="slide level2">
+<h2>8-Puzzle</h2>
+<ul>
+<li class="fragment"><p>How can the <strong>states</strong> be represented?</p></li>
+<li class="fragment"><p>What constitutes the <strong>initial state</strong>?</p></li>
+<li class="fragment"><p>What defines the <strong>actions</strong>?</p></li>
+<li class="fragment"><p>What would constitute a <strong>path</strong>?</p></li>
+<li class="fragment"><p>What characterizes the <strong>goal state</strong>?</p></li>
+<li class="fragment"><p>What would constitute a <strong>solution</strong>?</p></li>
+<li class="fragment"><p>What should be the <strong>cost of an action</strong>?</p></li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p>Each state can be represented as a list containing the numbers 0 to 8. Each number corresponds to a tile, and its position in the list reflects its location in the grid, with 0 denoting the blank space.</p></li>
+<li><p>The initial state is a permutation of the numbers 0 to 8.</p></li>
+<li><p>Actions include <strong>left</strong>, <strong>right</strong>, <strong>up</strong>, and <strong>down</strong>, which involve sliding an adjacent tile into the blank space.</p></li>
+<li><p>A path would be a sequence of actions, say <strong>left</strong>, <strong>left</strong>, <strong>up</strong>.</p></li>
+<li><p>The transition model maps a given state and action to a new state. Not all actions are feasible from every state; for instance, if the blank space is at the edge of the grid, only certain moves are possible, such as down, up, or left.</p></li>
+<li><p>The goal state is achieved when the list is ordered from 1 to 8, followed by 0, indicating that the tiles are arranged correctly. How many goal states are there?</p></li>
+<li><p>A solution would be a valid path transforming an initial state into a goal state.</p></li>
+<li><p>Each action incurs a cost of 1.</p></li>
+</ul>
+<p>How many possible states are there?</p>
+<p>There are 9! = 362,880 states. Brut force is feasible.</p>
+<p>How many states are there for the 15-Puzzle?</p>
+<p>15! = 1,307,674,368,000 (1.3 trillion)!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="search-tree" class="slide level2">
+<h2>Search Tree</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_tree-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="../../assets/images/search_tree-00.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>The search algorithms we examine today construct a search tree, where each node represents a state within the state space and each edge represents an action.</p>
+<p>It is important to distinguish between the search tree and the state space, which can be depicted as a graph. The structure of the search tree varies depending on the algorithm employed to address the search problem.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>A <strong>search tree</strong> is a <em>conceptual tree structure</em> where <strong>nodes</strong> represent <em>states</em> in a <strong>state space</strong>, and <strong>edges</strong> represent possible <strong>actions</strong>, facilitating systematic exploration to find a <strong>path</strong> from an <strong>initial state</strong> to a <strong>goal state</strong>.</p>
+</div></aside></section>
+<section id="search-tree-1" class="slide level2">
+<h2>Search Tree</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_bfs-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="../../assets/images/search_bfs-00.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p>An example of a <strong>search tree</strong> for the <strong>8-Puzzle</strong>. The solution here is incomplete.</p>
+</div></aside></section>
+<section id="search-tree-2" class="slide level2">
+<h2>Search Tree</h2>
+<ul>
+<li><p>The <strong>root</strong> of the search tree represents the <strong>initial state</strong> of the problem.</p></li>
+<li><p><strong>Expanding</strong> a node involves evaluating <strong>all possible actions</strong> available from that state.</p></li>
+<li><p>The <strong>result</strong> of an action is the new state achieved after <strong>applying that action</strong> to the <strong>current state</strong>.</p></li>
+<li><p>Similar to other tree structures, each node (except for the <strong>root</strong> and <strong>leaf</strong> nodes) has a <strong>parent</strong> and may have <strong>children</strong>.</p></li>
+</ul>
+
+<aside><div>
+<p>A distinctive feature of a search algorithm is its method for <strong>selecting the next node to expand</strong>.</p>
+</div></aside></section>
+<section id="frontier" class="slide level2">
+<h2>Frontier</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_bfs-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="../../assets/images/search_bfs-01.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p>Any state corresponding to a node in the search tree is considered <strong>reached</strong>. <strong>Frontier</strong> nodes are those that have been <strong>reached</strong> but have <strong>not yet been expanded</strong>. Above, there are <strong>10 expanded nodes</strong> and <strong>11 frontier nodes</strong>, resulting in a total of 21 nodes that have been <strong>reached</strong>.</p>
+</div></aside></section>
+<section id="frontier-1" class="slide level2">
+<h2>Frontier</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="../../assets/images/search_frontier-01.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-02.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="../../assets/images/search_frontier-02.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-03.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="../../assets/images/search_frontier-03.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+
+<aside class="notes">
+<p>The diagrams correspond to the search tree presented on the previous page. For example, the initial state can be expanded using three actions: slide left, right, and up. Node (2, 3) can only be expanded by sliding down, while node (3, 3) can be expanded by sliding left and down.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>In the 8-Puzzle, four actions are possible: slide <strong>left</strong>, <strong>right</strong>, <strong>up</strong>, or <strong>down</strong>. The search can be visualized on a grid: <strong>purple nodes</strong>: expanded states, <strong>green nodes</strong>: frontier states (reached but not expanded).</p>
+</div></aside></section>
+<section id="frontier-2" class="slide level2">
+<h2>Frontier</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-04.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="../../assets/images/search_frontier-04.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-05.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="../../assets/images/search_frontier-05.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="uninformed-search" class="title-slide slide level1 center">
+<h1>Uninformed search</h1>
+
+</section>
+<section id="definition-1" class="slide level2">
+<h2>Definition</h2>
+<p>An <strong>uninformed search</strong> is a search strategy that explores the search space using only the information available in the problem definition, without any domain-specific knowledge, evaluating nodes based solely on their inherent properties rather than estimated costs or heuristics.</p>
+</section>
+<section id="state-representation" class="slide level2">
+<h2>State Representation</h2>
+<div id="10e0e5d2" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides_files/figure-revealjs/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="374" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="612e248a" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a></a>initial_state_8 <span class="op">=</span> [<span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">5</span>,</span>
+<span id="cb1-2"><a></a>                   <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">7</span>,</span>
+<span id="cb1-3"><a></a>                   <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>]</span>
+<span id="cb1-4"><a></a></span>
+<span id="cb1-5"><a></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb1-6"><a></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb1-7"><a></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside><div>
+<p>The states are represented as <strong>lists</strong> of numbers. <code>0</code> represents the <strong>blank tile</strong>.</p>
+</div></aside></section>
+<section id="is_goal" class="slide level2">
+<h2><code>is_goal</code></h2>
+<div id="a8f75d4e" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="kw">def</span> is_goal(state, goal_state):</span>
+<span id="cb2-2"><a></a>    <span class="co">"""Determines if a given state matches the goal state."""</span></span>
+<span id="cb2-3"><a></a>    <span class="cf">return</span> state <span class="op">==</span> goal_state</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside><div>
+<p>Auxilliary method.</p>
+</div></aside></section>
+<section id="expand" class="slide level2">
+<h2><code>expand</code></h2>
+<div id="bb3927fc" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="kw">def</span> expand(state):</span>
+<span id="cb3-2"><a></a>    <span class="co">"""Generates successor states by moving the blank tile in all possible directions."""</span></span>
+<span id="cb3-3"><a></a>    size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(state) <span class="op">**</span> <span class="fl">0.5</span>)  <span class="co"># Determine puzzle size (3 for 8-puzzle, 4 for 15-puzzle)</span></span>
+<span id="cb3-4"><a></a>    idx <span class="op">=</span> state.index(<span class="dv">0</span>)  <span class="co"># Find the index of the blank tile represented by 0</span></span>
+<span id="cb3-5"><a></a>    x, y <span class="op">=</span> idx <span class="op">%</span> size, idx <span class="op">//</span> size  <span class="co"># Convert index to (x, y) coordinates</span></span>
+<span id="cb3-6"><a></a>    neighbors <span class="op">=</span> []</span>
+<span id="cb3-7"><a></a></span>
+<span id="cb3-8"><a></a>    <span class="co"># Define possible moves: Left, Right, Up, Down</span></span>
+<span id="cb3-9"><a></a>    moves <span class="op">=</span> [(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>), (<span class="dv">1</span>, <span class="dv">0</span>), (<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>), (<span class="dv">0</span>, <span class="dv">1</span>)]</span>
+<span id="cb3-10"><a></a>    <span class="cf">for</span> dx, dy <span class="kw">in</span> moves:</span>
+<span id="cb3-11"><a></a>        nx, ny <span class="op">=</span> x <span class="op">+</span> dx, y <span class="op">+</span> dy</span>
+<span id="cb3-12"><a></a>        <span class="co"># Check if the new position is within the puzzle boundaries</span></span>
+<span id="cb3-13"><a></a>        <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;=</span> nx <span class="op">&lt;</span> size <span class="kw">and</span> <span class="dv">0</span> <span class="op">&lt;=</span> ny <span class="op">&lt;</span> size:</span>
+<span id="cb3-14"><a></a>            n_idx <span class="op">=</span> ny <span class="op">*</span> size <span class="op">+</span> nx</span>
+<span id="cb3-15"><a></a>            new_state <span class="op">=</span> state.copy()</span>
+<span id="cb3-16"><a></a>            <span class="co"># Swap the blank tile with the adjacent tile</span></span>
+<span id="cb3-17"><a></a>            new_state[idx], new_state[n_idx] <span class="op">=</span> new_state[n_idx], new_state[idx]</span>
+<span id="cb3-18"><a></a>            neighbors.append(new_state)</span>
+<span id="cb3-19"><a></a>    <span class="cf">return</span> neighbors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="expand-1" class="slide level2">
+<h2><code>expand</code></h2>
+<div id="f9219bf9" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="slides_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="758" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="21110495" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a>expand(initial_state_8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>[[6, 4, 5, 8, 2, 7, 0, 1, 3],
+ [6, 4, 5, 8, 2, 7, 1, 3, 0],
+ [6, 4, 5, 8, 0, 7, 1, 2, 3]]</code></pre>
+</div>
+</div>
+</section>
+<section id="is_empty" class="slide level2">
+<h2><code>is_empty</code></h2>
+<div id="9451e113" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a><span class="kw">def</span> is_empty(frontier):</span>
+<span id="cb6-2"><a></a>    <span class="co">"""Checks if the frontier is empty."""</span></span>
+<span id="cb6-3"><a></a>    <span class="cf">return</span> <span class="bu">len</span>(frontier) <span class="op">==</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside class="notes">
+<p>Are there 8-Puzzle boards that have no solutions?</p>
+<p>The solvability of the 8-puzzle depends on the number of <strong>inversions</strong> in the initial state. An inversion is a pair of tiles where a higher-numbered tile precedes a lower-numbered tile when the puzzle is viewed as a sequence (excluding the blank tile).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>If the frontier becomes empty (no more nodes to be expanded), the problem has no solution.</p>
+</div></aside></section>
+<section id="print_solution" class="slide level2">
+<h2><code>print_solution</code></h2>
+<div id="454d89c0" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="kw">def</span> print_solution(solution):</span>
+<span id="cb7-2"><a></a>    <span class="co">"""Prints the sequence of steps from the initial to the goal state."""</span></span>
+<span id="cb7-3"><a></a>    size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(solution[<span class="dv">0</span>]) <span class="op">**</span> <span class="fl">0.5</span>)</span>
+<span id="cb7-4"><a></a>    <span class="cf">for</span> step, state <span class="kw">in</span> <span class="bu">enumerate</span>(solution):</span>
+<span id="cb7-5"><a></a>        <span class="bu">print</span>(<span class="ss">f"Step </span><span class="sc">{</span>step<span class="sc">}</span><span class="ss">:"</span>)</span>
+<span id="cb7-6"><a></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(size):</span>
+<span id="cb7-7"><a></a>            row <span class="op">=</span> state[i<span class="op">*</span>size:(i<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span>size]</span>
+<span id="cb7-8"><a></a>            <span class="bu">print</span>(<span class="st">' '</span>.join(<span class="bu">str</span>(n) <span class="cf">if</span> n <span class="op">!=</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">' '</span> <span class="cf">for</span> n <span class="kw">in</span> row))</span>
+<span id="cb7-9"><a></a>        <span class="bu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="cycles" class="slide level2">
+<h2>Cycles</h2>
+<p>A path that revisits the same states forms a <strong>cycle</strong>.</p>
+<p>Allowing cycles would render the resulting <strong>search tree</strong> <strong>infinite</strong>.</p>
+<p>To prevent this, we monitor the states that have been reached, though this incurs a <strong>memory cost</strong>.</p>
+</section></section>
+<section>
+<section id="breadth-first-search" class="title-slide slide level1 center">
+<h1>Breadth-first search</h1>
+
+</section>
+<section id="breadth-first-search-1" class="slide level2">
+<h2>Breadth-first search</h2>
+<div id="5381059d" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a><span class="im">from</span> collections <span class="im">import</span> deque</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Breadth-first search (BFS)</strong> employs a <strong>queue</strong> to manage the frontier nodes, which are also known as the open list.</p>
+</section>
+<section id="breadth-first-search-2" class="slide level2 scrollable">
+<h2>Breadth-first search</h2>
+<div id="a035a324" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="kw">def</span> bfs(initial_state, goal_state):</span>
+<span id="cb9-2"><a></a></span>
+<span id="cb9-3"><a></a>    frontier <span class="op">=</span> deque()  <span class="co"># Initialize the queue for BFS</span></span>
+<span id="cb9-4"><a></a>    frontier.append((initial_state, []))  <span class="co"># Each element is a tuple: (state, path)</span></span>
+<span id="cb9-5"><a></a></span>
+<span id="cb9-6"><a></a>    explored <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb9-7"><a></a>    explored.add(<span class="bu">tuple</span>(initial_state))</span>
+<span id="cb9-8"><a></a></span>
+<span id="cb9-9"><a></a>    iterations <span class="op">=</span> <span class="dv">0</span> <span class="co"># simply used to compare algorithms</span></span>
+<span id="cb9-10"><a></a></span>
+<span id="cb9-11"><a></a>    <span class="cf">while</span> <span class="kw">not</span> is_empty(frontier):</span>
+<span id="cb9-12"><a></a>        current_state, path <span class="op">=</span> frontier.popleft()</span>
+<span id="cb9-13"><a></a></span>
+<span id="cb9-14"><a></a>        <span class="cf">if</span> is_goal(current_state, goal_state):</span>
+<span id="cb9-15"><a></a>            <span class="bu">print</span>(<span class="ss">f"Number of iterations: </span><span class="sc">{</span>iterations<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-16"><a></a>            <span class="cf">return</span> path <span class="op">+</span> [current_state]  <span class="co"># Return the successful path</span></span>
+<span id="cb9-17"><a></a></span>
+<span id="cb9-18"><a></a>        iterations <span class="op">=</span> iterations <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb9-19"><a></a></span>
+<span id="cb9-20"><a></a>        <span class="cf">for</span> neighbor <span class="kw">in</span> expand(current_state):</span>
+<span id="cb9-21"><a></a>            neighbor_tuple <span class="op">=</span> <span class="bu">tuple</span>(neighbor)</span>
+<span id="cb9-22"><a></a>            <span class="cf">if</span> neighbor_tuple <span class="kw">not</span> <span class="kw">in</span> explored:</span>
+<span id="cb9-23"><a></a>                explored.add(neighbor_tuple)</span>
+<span id="cb9-24"><a></a>                frontier.append((neighbor, path <span class="op">+</span> [current_state]))</span>
+<span id="cb9-25"><a></a></span>
+<span id="cb9-26"><a></a>    <span class="cf">return</span> <span class="va">None</span>  <span class="co"># No solution found</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside><div>
+<p>Find the <strong>shortest path</strong> from the initial state to the goal state.</p>
+</div></aside></section>
+<section id="simple-case" class="slide level2">
+<h2>Simple Case</h2>
+<div id="31d04277" class="cell" data-execution_count="13">
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of iterations: 12</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-14-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-revealjs/cell-14-output-2.png" class="quarto-figure quarto-figure-center" width="758" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="05233c68" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>initial_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb11-2"><a></a>                    <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">6</span>,</span>
+<span id="cb11-3"><a></a>                    <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">8</span>]</span>
+<span id="cb11-4"><a></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb11-5"><a></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb11-6"><a></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb11-7"><a></a></span>
+<span id="cb11-8"><a></a>bfs(initial_state_8, goal_state_8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of iterations: 12</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>[[1, 2, 3, 4, 0, 6, 7, 5, 8],
+ [1, 2, 3, 4, 5, 6, 7, 0, 8],
+ [1, 2, 3, 4, 5, 6, 7, 8, 0]]</code></pre>
+</div>
+</div>
+</section>
+<section id="challenging-case" class="slide level2 scrollable">
+<h2>Challenging Case</h2>
+<div id="bfb94ff7" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>initial_state_8 <span class="op">=</span> [<span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">5</span>,</span>
+<span id="cb14-2"><a></a>                   <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">7</span>,</span>
+<span id="cb14-3"><a></a>                   <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>]</span>
+<span id="cb14-4"><a></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb14-5"><a></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb14-6"><a></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb14-7"><a></a></span>
+<span id="cb14-8"><a></a><span class="bu">print</span>(<span class="st">"Solving 8-puzzle with BFS..."</span>)</span>
+<span id="cb14-9"><a></a></span>
+<span id="cb14-10"><a></a>solution_8_bfs <span class="op">=</span> bfs(initial_state_8, goal_state_8)</span>
+<span id="cb14-11"><a></a></span>
+<span id="cb14-12"><a></a><span class="cf">if</span> solution_8_bfs:</span>
+<span id="cb14-13"><a></a>    <span class="bu">print</span>(<span class="ss">f"BFS Solution found in </span><span class="sc">{</span><span class="bu">len</span>(solution_8_bfs) <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> moves:"</span>)</span>
+<span id="cb14-14"><a></a>    print_solution(solution_8_bfs)</span>
+<span id="cb14-15"><a></a><span class="cf">else</span>:</span>
+<span id="cb14-16"><a></a>    <span class="bu">print</span>(<span class="st">"No solution found for 8-puzzle using BFS."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solving 8-puzzle with BFS...
+Number of iterations: 145605
+BFS Solution found in 25 moves:
+Step 0:
+6 4 5
+8 2 7
+1   3
+
+Step 1:
+6 4 5
+8 2 7
+  1 3
+
+Step 2:
+6 4 5
+  2 7
+8 1 3
+
+Step 3:
+6 4 5
+2   7
+8 1 3
+
+Step 4:
+6   5
+2 4 7
+8 1 3
+
+Step 5:
+  6 5
+2 4 7
+8 1 3
+
+Step 6:
+2 6 5
+  4 7
+8 1 3
+
+Step 7:
+2 6 5
+4   7
+8 1 3
+
+Step 8:
+2 6 5
+4 1 7
+8   3
+
+Step 9:
+2 6 5
+4 1 7
+  8 3
+
+Step 10:
+2 6 5
+  1 7
+4 8 3
+
+Step 11:
+2 6 5
+1   7
+4 8 3
+
+Step 12:
+2 6 5
+1 7  
+4 8 3
+
+Step 13:
+2 6 5
+1 7 3
+4 8  
+
+Step 14:
+2 6 5
+1 7 3
+4   8
+
+Step 15:
+2 6 5
+1   3
+4 7 8
+
+Step 16:
+2   5
+1 6 3
+4 7 8
+
+Step 17:
+2 5  
+1 6 3
+4 7 8
+
+Step 18:
+2 5 3
+1 6  
+4 7 8
+
+Step 19:
+2 5 3
+1   6
+4 7 8
+
+Step 20:
+2   3
+1 5 6
+4 7 8
+
+Step 21:
+  2 3
+1 5 6
+4 7 8
+
+Step 22:
+1 2 3
+  5 6
+4 7 8
+
+Step 23:
+1 2 3
+4 5 6
+  7 8
+
+Step 24:
+1 2 3
+4 5 6
+7   8
+
+Step 25:
+1 2 3
+4 5 6
+7 8  
+</code></pre>
+</div>
+</div>
+</section>
+<section id="bfs-search-tree" class="slide level2">
+<h2>BFS Search Tree</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_bfs-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="../../assets/images/search_bfs-00.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p>The search tree above illustrates the first 20 iterations of the breadth-first search (BFS) for the specified initial goal.</p>
+</div></aside></section></section>
+<section>
+<section id="depth-first-search" class="title-slide slide level1 center">
+<h1>Depth-First Search</h1>
+
+</section>
+<section id="depth-first-search-1" class="slide level2 scrollable">
+<h2>Depth-First Search</h2>
+<div id="15a44ce0" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a></a><span class="kw">def</span> dfs(initial_state, goal_state):</span>
+<span id="cb16-2"><a></a></span>
+<span id="cb16-3"><a></a>    frontier <span class="op">=</span> [(initial_state, [])]  <span class="co"># Each element is a tuple: (state, path)</span></span>
+<span id="cb16-4"><a></a></span>
+<span id="cb16-5"><a></a>    explored <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb16-6"><a></a>    explored.add(<span class="bu">tuple</span>(initial_state))</span>
+<span id="cb16-7"><a></a></span>
+<span id="cb16-8"><a></a>    iterations <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb16-9"><a></a></span>
+<span id="cb16-10"><a></a>    <span class="cf">while</span> <span class="kw">not</span> is_empty(frontier):</span>
+<span id="cb16-11"><a></a>        current_state, path <span class="op">=</span> frontier.pop()</span>
+<span id="cb16-12"><a></a></span>
+<span id="cb16-13"><a></a>        <span class="cf">if</span> is_goal(current_state, goal_state):</span>
+<span id="cb16-14"><a></a>            <span class="bu">print</span>(<span class="ss">f"Number of iterations: </span><span class="sc">{</span>iterations<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb16-15"><a></a>            <span class="cf">return</span> path <span class="op">+</span> [current_state]  <span class="co"># Return the successful path</span></span>
+<span id="cb16-16"><a></a></span>
+<span id="cb16-17"><a></a>        iterations <span class="op">=</span> iterations <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb16-18"><a></a></span>
+<span id="cb16-19"><a></a>        <span class="cf">for</span> neighbor <span class="kw">in</span> expand(current_state):</span>
+<span id="cb16-20"><a></a>            neighbor_tuple <span class="op">=</span> <span class="bu">tuple</span>(neighbor)</span>
+<span id="cb16-21"><a></a>            <span class="cf">if</span> neighbor_tuple <span class="kw">not</span> <span class="kw">in</span> explored:</span>
+<span id="cb16-22"><a></a>                explored.add(neighbor_tuple)</span>
+<span id="cb16-23"><a></a>                frontier.append((neighbor, path <span class="op">+</span> [current_state]))</span>
+<span id="cb16-24"><a></a></span>
+<span id="cb16-25"><a></a>    <span class="cf">return</span> <span class="va">None</span>  <span class="co"># No solution found</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<aside class="notes">
+<p><strong>Depth-First Search (DFS)</strong> consistently expands the deepest node.</p>
+<p>When does the deepening process halt?</p>
+<p>It ceases when all child nodes correspond to states that have already been visited.</p>
+<p>What happens next?</p>
+<p>The algorithm backtracks to the most recent frontier node.</p>
+<p>If all children of this node also correspond to previously visited states, the algorithm continues to backtrack further.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>What is the behaviour of <strong>depth-First Search (dfs)</strong>?</p>
+</div></aside></section>
+<section id="dfs-search-tree" class="slide level2">
+<h2>DFS Search Tree</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_dfs-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="../../assets/images/search_dfs-01.png" class="quarto-figure quarto-figure-center" height="525"></a></p>
+</figure>
+</div>
+</section>
+<section id="dfs-search-tree-1" class="slide level2">
+<h2>DFS Search Tree</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_dfs-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="../../assets/images/search_dfs-00.png" class="quarto-figure quarto-figure-center" height="525"></a></p>
+</figure>
+</div>
+</section>
+<section id="simple-case-1" class="slide level2">
+<h2>Simple Case</h2>
+<div id="15e88cbd" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of iterations: 2</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-18-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="slides_files/figure-revealjs/cell-18-output-2.png" class="quarto-figure quarto-figure-center" width="758" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="8b6ca798" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a></a>initial_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb18-2"><a></a>                    <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">6</span>,</span>
+<span id="cb18-3"><a></a>                    <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">8</span>]</span>
+<span id="cb18-4"><a></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb18-5"><a></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb18-6"><a></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb18-7"><a></a></span>
+<span id="cb18-8"><a></a>bfs(initial_state_8, goal_state_8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of iterations: 12</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>[[1, 2, 3, 4, 0, 6, 7, 5, 8],
+ [1, 2, 3, 4, 5, 6, 7, 0, 8],
+ [1, 2, 3, 4, 5, 6, 7, 8, 0]]</code></pre>
+</div>
+</div>
+</section>
+<section id="challenging-case-1" class="slide level2 scrollable">
+<h2>Challenging Case</h2>
+<div id="0fe09ffa" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>initial_state_8 <span class="op">=</span> [<span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">5</span>,</span>
+<span id="cb21-2"><a></a>                   <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">7</span>,</span>
+<span id="cb21-3"><a></a>                   <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>]</span>
+<span id="cb21-4"><a></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb21-5"><a></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb21-6"><a></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb21-7"><a></a></span>
+<span id="cb21-8"><a></a><span class="bu">print</span>(<span class="st">"Solving 8-puzzle with DFS..."</span>)</span>
+<span id="cb21-9"><a></a></span>
+<span id="cb21-10"><a></a>solution_8_bfs <span class="op">=</span> dfs(initial_state_8, goal_state_8)</span>
+<span id="cb21-11"><a></a></span>
+<span id="cb21-12"><a></a><span class="cf">if</span> solution_8_bfs:</span>
+<span id="cb21-13"><a></a>    <span class="bu">print</span>(<span class="ss">f"DFS Solution found in </span><span class="sc">{</span><span class="bu">len</span>(solution_8_bfs) <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> moves:"</span>)</span>
+<span id="cb21-14"><a></a>    print_solution(solution_8_bfs)</span>
+<span id="cb21-15"><a></a><span class="cf">else</span>:</span>
+<span id="cb21-16"><a></a>    <span class="bu">print</span>(<span class="st">"No solution found for 8-puzzle using DFS."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solving 8-puzzle with DFS...
+Number of iterations: 1187
+DFS Solution found in 1157 moves:
+Step 0:
+6 4 5
+8 2 7
+1   3
+
+Step 1:
+6 4 5
+8   7
+1 2 3
+
+Step 2:
+6   5
+8 4 7
+1 2 3
+
+Step 3:
+6 5  
+8 4 7
+1 2 3
+
+Step 4:
+6 5 7
+8 4  
+1 2 3
+
+Step 5:
+6 5 7
+8 4 3
+1 2  
+
+Step 6:
+6 5 7
+8 4 3
+1   2
+
+Step 7:
+6 5 7
+8   3
+1 4 2
+
+Step 8:
+6   7
+8 5 3
+1 4 2
+
+Step 9:
+6 7  
+8 5 3
+1 4 2
+
+Step 10:
+6 7 3
+8 5  
+1 4 2
+
+Step 11:
+6 7 3
+8 5 2
+1 4  
+
+Step 12:
+6 7 3
+8 5 2
+1   4
+
+Step 13:
+6 7 3
+8   2
+1 5 4
+
+Step 14:
+6   3
+8 7 2
+1 5 4
+
+Step 15:
+6 3  
+8 7 2
+1 5 4
+
+Step 16:
+6 3 2
+8 7  
+1 5 4
+
+Step 17:
+6 3 2
+8 7 4
+1 5  
+
+Step 18:
+6 3 2
+8 7 4
+1   5
+
+Step 19:
+6 3 2
+8   4
+1 7 5
+
+Step 20:
+6   2
+8 3 4
+1 7 5
+
+Step 21:
+6 2  
+8 3 4
+1 7 5
+
+Step 22:
+6 2 4
+8 3  
+1 7 5
+
+Step 23:
+6 2 4
+8 3 5
+1 7  
+
+Step 24:
+6 2 4
+8 3 5
+1   7
+
+Step 25:
+6 2 4
+8   5
+1 3 7
+
+Step 26:
+6   4
+8 2 5
+1 3 7
+
+Step 27:
+6 4  
+8 2 5
+1 3 7
+
+Step 28:
+6 4 5
+8 2  
+1 3 7
+
+Step 29:
+6 4 5
+8   2
+1 3 7
+
+Step 30:
+6 4 5
+8 3 2
+1   7
+
+Step 31:
+6 4 5
+8 3 2
+1 7  
+
+Step 32:
+6 4 5
+8 3  
+1 7 2
+
+Step 33:
+6 4  
+8 3 5
+1 7 2
+
+Step 34:
+6   4
+8 3 5
+1 7 2
+
+Step 35:
+6 3 4
+8   5
+1 7 2
+
+Step 36:
+6 3 4
+8 7 5
+1   2
+
+Step 37:
+6 3 4
+8 7 5
+1 2  
+
+Step 38:
+6 3 4
+8 7  
+1 2 5
+
+Step 39:
+6 3  
+8 7 4
+1 2 5
+
+Step 40:
+6   3
+8 7 4
+1 2 5
+
+Step 41:
+6 7 3
+8   4
+1 2 5
+
+Step 42:
+6 7 3
+8 2 4
+1   5
+
+Step 43:
+6 7 3
+8 2 4
+  1 5
+
+Step 44:
+6 7 3
+  2 4
+8 1 5
+
+Step 45:
+  7 3
+6 2 4
+8 1 5
+
+Step 46:
+7   3
+6 2 4
+8 1 5
+
+Step 47:
+7 2 3
+6   4
+8 1 5
+
+Step 48:
+7 2 3
+6 1 4
+8   5
+
+Step 49:
+7 2 3
+6 1 4
+8 5  
+
+Step 50:
+7 2 3
+6 1  
+8 5 4
+
+Step 51:
+7 2  
+6 1 3
+8 5 4
+
+Step 52:
+7   2
+6 1 3
+8 5 4
+
+Step 53:
+7 1 2
+6   3
+8 5 4
+
+Step 54:
+7 1 2
+6 5 3
+8   4
+
+Step 55:
+7 1 2
+6 5 3
+8 4  
+
+Step 56:
+7 1 2
+6 5  
+8 4 3
+
+Step 57:
+7 1  
+6 5 2
+8 4 3
+
+Step 58:
+7   1
+6 5 2
+8 4 3
+
+Step 59:
+7 5 1
+6   2
+8 4 3
+
+Step 60:
+7 5 1
+6 4 2
+8   3
+
+Step 61:
+7 5 1
+6 4 2
+8 3  
+
+Step 62:
+7 5 1
+6 4  
+8 3 2
+
+Step 63:
+7 5  
+6 4 1
+8 3 2
+
+Step 64:
+7   5
+6 4 1
+8 3 2
+
+Step 65:
+7 4 5
+6   1
+8 3 2
+
+Step 66:
+7 4 5
+6 3 1
+8   2
+
+Step 67:
+7 4 5
+6 3 1
+8 2  
+
+Step 68:
+7 4 5
+6 3  
+8 2 1
+
+Step 69:
+7 4  
+6 3 5
+8 2 1
+
+Step 70:
+7   4
+6 3 5
+8 2 1
+
+Step 71:
+7 3 4
+6   5
+8 2 1
+
+Step 72:
+7 3 4
+6 2 5
+8   1
+
+Step 73:
+7 3 4
+6 2 5
+8 1  
+
+Step 74:
+7 3 4
+6 2  
+8 1 5
+
+Step 75:
+7 3 4
+6   2
+8 1 5
+
+Step 76:
+7 3 4
+6 1 2
+8   5
+
+Step 77:
+7 3 4
+6 1 2
+8 5  
+
+Step 78:
+7 3 4
+6 1  
+8 5 2
+
+Step 79:
+7 3  
+6 1 4
+8 5 2
+
+Step 80:
+7   3
+6 1 4
+8 5 2
+
+Step 81:
+7 1 3
+6   4
+8 5 2
+
+Step 82:
+7 1 3
+6 5 4
+8   2
+
+Step 83:
+7 1 3
+6 5 4
+8 2  
+
+Step 84:
+7 1 3
+6 5  
+8 2 4
+
+Step 85:
+7 1  
+6 5 3
+8 2 4
+
+Step 86:
+7   1
+6 5 3
+8 2 4
+
+Step 87:
+7 5 1
+6   3
+8 2 4
+
+Step 88:
+7 5 1
+6 2 3
+8   4
+
+Step 89:
+7 5 1
+6 2 3
+  8 4
+
+Step 90:
+7 5 1
+  2 3
+6 8 4
+
+Step 91:
+  5 1
+7 2 3
+6 8 4
+
+Step 92:
+5   1
+7 2 3
+6 8 4
+
+Step 93:
+5 2 1
+7   3
+6 8 4
+
+Step 94:
+5 2 1
+7 8 3
+6   4
+
+Step 95:
+5 2 1
+7 8 3
+6 4  
+
+Step 96:
+5 2 1
+7 8  
+6 4 3
+
+Step 97:
+5 2  
+7 8 1
+6 4 3
+
+Step 98:
+5   2
+7 8 1
+6 4 3
+
+Step 99:
+5 8 2
+7   1
+6 4 3
+
+Step 100:
+5 8 2
+7 4 1
+6   3
+
+Step 101:
+5 8 2
+7 4 1
+6 3  
+
+Step 102:
+5 8 2
+7 4  
+6 3 1
+
+Step 103:
+5 8  
+7 4 2
+6 3 1
+
+Step 104:
+5   8
+7 4 2
+6 3 1
+
+Step 105:
+5 4 8
+7   2
+6 3 1
+
+Step 106:
+5 4 8
+7 3 2
+6   1
+
+Step 107:
+5 4 8
+7 3 2
+6 1  
+
+Step 108:
+5 4 8
+7 3  
+6 1 2
+
+Step 109:
+5 4  
+7 3 8
+6 1 2
+
+Step 110:
+5   4
+7 3 8
+6 1 2
+
+Step 111:
+5 3 4
+7   8
+6 1 2
+
+Step 112:
+5 3 4
+7 1 8
+6   2
+
+Step 113:
+5 3 4
+7 1 8
+6 2  
+
+Step 114:
+5 3 4
+7 1  
+6 2 8
+
+Step 115:
+5 3  
+7 1 4
+6 2 8
+
+Step 116:
+5   3
+7 1 4
+6 2 8
+
+Step 117:
+5 1 3
+7   4
+6 2 8
+
+Step 118:
+5 1 3
+7 2 4
+6   8
+
+Step 119:
+5 1 3
+7 2 4
+6 8  
+
+Step 120:
+5 1 3
+7 2  
+6 8 4
+
+Step 121:
+5 1 3
+7   2
+6 8 4
+
+Step 122:
+5 1 3
+7 8 2
+6   4
+
+Step 123:
+5 1 3
+7 8 2
+6 4  
+
+Step 124:
+5 1 3
+7 8  
+6 4 2
+
+Step 125:
+5 1  
+7 8 3
+6 4 2
+
+Step 126:
+5   1
+7 8 3
+6 4 2
+
+Step 127:
+5 8 1
+7   3
+6 4 2
+
+Step 128:
+5 8 1
+7 4 3
+6   2
+
+Step 129:
+5 8 1
+7 4 3
+6 2  
+
+Step 130:
+5 8 1
+7 4  
+6 2 3
+
+Step 131:
+5 8  
+7 4 1
+6 2 3
+
+Step 132:
+5   8
+7 4 1
+6 2 3
+
+Step 133:
+5 4 8
+7   1
+6 2 3
+
+Step 134:
+5 4 8
+7 2 1
+6   3
+
+Step 135:
+5 4 8
+7 2 1
+  6 3
+
+Step 136:
+5 4 8
+  2 1
+7 6 3
+
+Step 137:
+  4 8
+5 2 1
+7 6 3
+
+Step 138:
+4   8
+5 2 1
+7 6 3
+
+Step 139:
+4 2 8
+5   1
+7 6 3
+
+Step 140:
+4 2 8
+5 6 1
+7   3
+
+Step 141:
+4 2 8
+5 6 1
+7 3  
+
+Step 142:
+4 2 8
+5 6  
+7 3 1
+
+Step 143:
+4 2  
+5 6 8
+7 3 1
+
+Step 144:
+4   2
+5 6 8
+7 3 1
+
+Step 145:
+4 6 2
+5   8
+7 3 1
+
+Step 146:
+4 6 2
+5 3 8
+7   1
+
+Step 147:
+4 6 2
+5 3 8
+7 1  
+
+Step 148:
+4 6 2
+5 3  
+7 1 8
+
+Step 149:
+4 6  
+5 3 2
+7 1 8
+
+Step 150:
+4   6
+5 3 2
+7 1 8
+
+Step 151:
+4 3 6
+5   2
+7 1 8
+
+Step 152:
+4 3 6
+5 1 2
+7   8
+
+Step 153:
+4 3 6
+5 1 2
+7 8  
+
+Step 154:
+4 3 6
+5 1  
+7 8 2
+
+Step 155:
+4 3  
+5 1 6
+7 8 2
+
+Step 156:
+4   3
+5 1 6
+7 8 2
+
+Step 157:
+4 1 3
+5   6
+7 8 2
+
+Step 158:
+4 1 3
+5 8 6
+7   2
+
+Step 159:
+4 1 3
+5 8 6
+7 2  
+
+Step 160:
+4 1 3
+5 8  
+7 2 6
+
+Step 161:
+4 1  
+5 8 3
+7 2 6
+
+Step 162:
+4   1
+5 8 3
+7 2 6
+
+Step 163:
+4 8 1
+5   3
+7 2 6
+
+Step 164:
+4 8 1
+5 2 3
+7   6
+
+Step 165:
+4 8 1
+5 2 3
+7 6  
+
+Step 166:
+4 8 1
+5 2  
+7 6 3
+
+Step 167:
+4 8 1
+5   2
+7 6 3
+
+Step 168:
+4 8 1
+5 6 2
+7   3
+
+Step 169:
+4 8 1
+5 6 2
+7 3  
+
+Step 170:
+4 8 1
+5 6  
+7 3 2
+
+Step 171:
+4 8  
+5 6 1
+7 3 2
+
+Step 172:
+4   8
+5 6 1
+7 3 2
+
+Step 173:
+4 6 8
+5   1
+7 3 2
+
+Step 174:
+4 6 8
+5 3 1
+7   2
+
+Step 175:
+4 6 8
+5 3 1
+7 2  
+
+Step 176:
+4 6 8
+5 3  
+7 2 1
+
+Step 177:
+4 6  
+5 3 8
+7 2 1
+
+Step 178:
+4   6
+5 3 8
+7 2 1
+
+Step 179:
+4 3 6
+5   8
+7 2 1
+
+Step 180:
+4 3 6
+5 2 8
+7   1
+
+Step 181:
+4 3 6
+5 2 8
+  7 1
+
+Step 182:
+4 3 6
+  2 8
+5 7 1
+
+Step 183:
+  3 6
+4 2 8
+5 7 1
+
+Step 184:
+3   6
+4 2 8
+5 7 1
+
+Step 185:
+3 2 6
+4   8
+5 7 1
+
+Step 186:
+3 2 6
+4 7 8
+5   1
+
+Step 187:
+3 2 6
+4 7 8
+5 1  
+
+Step 188:
+3 2 6
+4 7  
+5 1 8
+
+Step 189:
+3 2  
+4 7 6
+5 1 8
+
+Step 190:
+3   2
+4 7 6
+5 1 8
+
+Step 191:
+3 7 2
+4   6
+5 1 8
+
+Step 192:
+3 7 2
+4 1 6
+5   8
+
+Step 193:
+3 7 2
+4 1 6
+5 8  
+
+Step 194:
+3 7 2
+4 1  
+5 8 6
+
+Step 195:
+3 7  
+4 1 2
+5 8 6
+
+Step 196:
+3   7
+4 1 2
+5 8 6
+
+Step 197:
+3 1 7
+4   2
+5 8 6
+
+Step 198:
+3 1 7
+4 8 2
+5   6
+
+Step 199:
+3 1 7
+4 8 2
+5 6  
+
+Step 200:
+3 1 7
+4 8  
+5 6 2
+
+Step 201:
+3 1  
+4 8 7
+5 6 2
+
+Step 202:
+3   1
+4 8 7
+5 6 2
+
+Step 203:
+3 8 1
+4   7
+5 6 2
+
+Step 204:
+3 8 1
+4 6 7
+5   2
+
+Step 205:
+3 8 1
+4 6 7
+5 2  
+
+Step 206:
+3 8 1
+4 6  
+5 2 7
+
+Step 207:
+3 8  
+4 6 1
+5 2 7
+
+Step 208:
+3   8
+4 6 1
+5 2 7
+
+Step 209:
+3 6 8
+4   1
+5 2 7
+
+Step 210:
+3 6 8
+4 2 1
+5   7
+
+Step 211:
+3 6 8
+4 2 1
+5 7  
+
+Step 212:
+3 6 8
+4 2  
+5 7 1
+
+Step 213:
+3 6 8
+4   2
+5 7 1
+
+Step 214:
+3 6 8
+4 7 2
+5   1
+
+Step 215:
+3 6 8
+4 7 2
+5 1  
+
+Step 216:
+3 6 8
+4 7  
+5 1 2
+
+Step 217:
+3 6  
+4 7 8
+5 1 2
+
+Step 218:
+3   6
+4 7 8
+5 1 2
+
+Step 219:
+3 7 6
+4   8
+5 1 2
+
+Step 220:
+3 7 6
+4 1 8
+5   2
+
+Step 221:
+3 7 6
+4 1 8
+5 2  
+
+Step 222:
+3 7 6
+4 1  
+5 2 8
+
+Step 223:
+3 7  
+4 1 6
+5 2 8
+
+Step 224:
+3   7
+4 1 6
+5 2 8
+
+Step 225:
+3 1 7
+4   6
+5 2 8
+
+Step 226:
+3 1 7
+4 2 6
+5   8
+
+Step 227:
+3 1 7
+4 2 6
+  5 8
+
+Step 228:
+3 1 7
+  2 6
+4 5 8
+
+Step 229:
+  1 7
+3 2 6
+4 5 8
+
+Step 230:
+1   7
+3 2 6
+4 5 8
+
+Step 231:
+1 2 7
+3   6
+4 5 8
+
+Step 232:
+1 2 7
+3 5 6
+4   8
+
+Step 233:
+1 2 7
+3 5 6
+4 8  
+
+Step 234:
+1 2 7
+3 5  
+4 8 6
+
+Step 235:
+1 2  
+3 5 7
+4 8 6
+
+Step 236:
+1   2
+3 5 7
+4 8 6
+
+Step 237:
+1 5 2
+3   7
+4 8 6
+
+Step 238:
+1 5 2
+3 8 7
+4   6
+
+Step 239:
+1 5 2
+3 8 7
+4 6  
+
+Step 240:
+1 5 2
+3 8  
+4 6 7
+
+Step 241:
+1 5  
+3 8 2
+4 6 7
+
+Step 242:
+1   5
+3 8 2
+4 6 7
+
+Step 243:
+1 8 5
+3   2
+4 6 7
+
+Step 244:
+1 8 5
+3 6 2
+4   7
+
+Step 245:
+1 8 5
+3 6 2
+4 7  
+
+Step 246:
+1 8 5
+3 6  
+4 7 2
+
+Step 247:
+1 8  
+3 6 5
+4 7 2
+
+Step 248:
+1   8
+3 6 5
+4 7 2
+
+Step 249:
+1 6 8
+3   5
+4 7 2
+
+Step 250:
+1 6 8
+3 7 5
+4   2
+
+Step 251:
+1 6 8
+3 7 5
+4 2  
+
+Step 252:
+1 6 8
+3 7  
+4 2 5
+
+Step 253:
+1 6  
+3 7 8
+4 2 5
+
+Step 254:
+1   6
+3 7 8
+4 2 5
+
+Step 255:
+1 7 6
+3   8
+4 2 5
+
+Step 256:
+1 7 6
+3 2 8
+4   5
+
+Step 257:
+1 7 6
+3 2 8
+4 5  
+
+Step 258:
+1 7 6
+3 2  
+4 5 8
+
+Step 259:
+1 7 6
+3   2
+4 5 8
+
+Step 260:
+1 7 6
+3 5 2
+4   8
+
+Step 261:
+1 7 6
+3 5 2
+4 8  
+
+Step 262:
+1 7 6
+3 5  
+4 8 2
+
+Step 263:
+1 7  
+3 5 6
+4 8 2
+
+Step 264:
+1   7
+3 5 6
+4 8 2
+
+Step 265:
+1 5 7
+3   6
+4 8 2
+
+Step 266:
+1 5 7
+3 8 6
+4   2
+
+Step 267:
+1 5 7
+3 8 6
+4 2  
+
+Step 268:
+1 5 7
+3 8  
+4 2 6
+
+Step 269:
+1 5  
+3 8 7
+4 2 6
+
+Step 270:
+1   5
+3 8 7
+4 2 6
+
+Step 271:
+1 8 5
+3   7
+4 2 6
+
+Step 272:
+1 8 5
+3 2 7
+4   6
+
+Step 273:
+1 8 5
+3 2 7
+  4 6
+
+Step 274:
+1 8 5
+  2 7
+3 4 6
+
+Step 275:
+  8 5
+1 2 7
+3 4 6
+
+Step 276:
+8   5
+1 2 7
+3 4 6
+
+Step 277:
+8 2 5
+1   7
+3 4 6
+
+Step 278:
+8 2 5
+1 4 7
+3   6
+
+Step 279:
+8 2 5
+1 4 7
+3 6  
+
+Step 280:
+8 2 5
+1 4  
+3 6 7
+
+Step 281:
+8 2  
+1 4 5
+3 6 7
+
+Step 282:
+8   2
+1 4 5
+3 6 7
+
+Step 283:
+8 4 2
+1   5
+3 6 7
+
+Step 284:
+8 4 2
+1 6 5
+3   7
+
+Step 285:
+8 4 2
+1 6 5
+3 7  
+
+Step 286:
+8 4 2
+1 6  
+3 7 5
+
+Step 287:
+8 4  
+1 6 2
+3 7 5
+
+Step 288:
+8   4
+1 6 2
+3 7 5
+
+Step 289:
+8 6 4
+1   2
+3 7 5
+
+Step 290:
+8 6 4
+1 7 2
+3   5
+
+Step 291:
+8 6 4
+1 7 2
+3 5  
+
+Step 292:
+8 6 4
+1 7  
+3 5 2
+
+Step 293:
+8 6  
+1 7 4
+3 5 2
+
+Step 294:
+8   6
+1 7 4
+3 5 2
+
+Step 295:
+8 7 6
+1   4
+3 5 2
+
+Step 296:
+8 7 6
+1 5 4
+3   2
+
+Step 297:
+8 7 6
+1 5 4
+3 2  
+
+Step 298:
+8 7 6
+1 5  
+3 2 4
+
+Step 299:
+8 7  
+1 5 6
+3 2 4
+
+Step 300:
+8   7
+1 5 6
+3 2 4
+
+Step 301:
+8 5 7
+1   6
+3 2 4
+
+Step 302:
+8 5 7
+1 2 6
+3   4
+
+Step 303:
+8 5 7
+1 2 6
+3 4  
+
+Step 304:
+8 5 7
+1 2  
+3 4 6
+
+Step 305:
+8 5 7
+1   2
+3 4 6
+
+Step 306:
+8 5 7
+1 4 2
+3   6
+
+Step 307:
+8 5 7
+1 4 2
+3 6  
+
+Step 308:
+8 5 7
+1 4  
+3 6 2
+
+Step 309:
+8 5  
+1 4 7
+3 6 2
+
+Step 310:
+8   5
+1 4 7
+3 6 2
+
+Step 311:
+8 4 5
+1   7
+3 6 2
+
+Step 312:
+8 4 5
+1 6 7
+3   2
+
+Step 313:
+8 4 5
+1 6 7
+3 2  
+
+Step 314:
+8 4 5
+1 6  
+3 2 7
+
+Step 315:
+8 4  
+1 6 5
+3 2 7
+
+Step 316:
+8   4
+1 6 5
+3 2 7
+
+Step 317:
+8 6 4
+1   5
+3 2 7
+
+Step 318:
+8 6 4
+1 2 5
+3   7
+
+Step 319:
+8 6 4
+1 2 5
+  3 7
+
+Step 320:
+8 6 4
+  2 5
+1 3 7
+
+Step 321:
+8 6 4
+2   5
+1 3 7
+
+Step 322:
+8 6 4
+2 3 5
+1   7
+
+Step 323:
+8 6 4
+2 3 5
+1 7  
+
+Step 324:
+8 6 4
+2 3  
+1 7 5
+
+Step 325:
+8 6  
+2 3 4
+1 7 5
+
+Step 326:
+8   6
+2 3 4
+1 7 5
+
+Step 327:
+8 3 6
+2   4
+1 7 5
+
+Step 328:
+8 3 6
+2 7 4
+1   5
+
+Step 329:
+8 3 6
+2 7 4
+1 5  
+
+Step 330:
+8 3 6
+2 7  
+1 5 4
+
+Step 331:
+8 3  
+2 7 6
+1 5 4
+
+Step 332:
+8   3
+2 7 6
+1 5 4
+
+Step 333:
+8 7 3
+2   6
+1 5 4
+
+Step 334:
+8 7 3
+2 5 6
+1   4
+
+Step 335:
+8 7 3
+2 5 6
+1 4  
+
+Step 336:
+8 7 3
+2 5  
+1 4 6
+
+Step 337:
+8 7  
+2 5 3
+1 4 6
+
+Step 338:
+8   7
+2 5 3
+1 4 6
+
+Step 339:
+8 5 7
+2   3
+1 4 6
+
+Step 340:
+8 5 7
+2 4 3
+1   6
+
+Step 341:
+8 5 7
+2 4 3
+1 6  
+
+Step 342:
+8 5 7
+2 4  
+1 6 3
+
+Step 343:
+8 5  
+2 4 7
+1 6 3
+
+Step 344:
+8   5
+2 4 7
+1 6 3
+
+Step 345:
+8 4 5
+2   7
+1 6 3
+
+Step 346:
+8 4 5
+2 6 7
+1   3
+
+Step 347:
+8 4 5
+2 6 7
+1 3  
+
+Step 348:
+8 4 5
+2 6  
+1 3 7
+
+Step 349:
+8 4 5
+2   6
+1 3 7
+
+Step 350:
+8 4 5
+2 3 6
+1   7
+
+Step 351:
+8 4 5
+2 3 6
+1 7  
+
+Step 352:
+8 4 5
+2 3  
+1 7 6
+
+Step 353:
+8 4  
+2 3 5
+1 7 6
+
+Step 354:
+8   4
+2 3 5
+1 7 6
+
+Step 355:
+8 3 4
+2   5
+1 7 6
+
+Step 356:
+8 3 4
+2 7 5
+1   6
+
+Step 357:
+8 3 4
+2 7 5
+1 6  
+
+Step 358:
+8 3 4
+2 7  
+1 6 5
+
+Step 359:
+8 3  
+2 7 4
+1 6 5
+
+Step 360:
+8   3
+2 7 4
+1 6 5
+
+Step 361:
+8 7 3
+2   4
+1 6 5
+
+Step 362:
+8 7 3
+2 6 4
+1   5
+
+Step 363:
+8 7 3
+2 6 4
+  1 5
+
+Step 364:
+8 7 3
+  6 4
+2 1 5
+
+Step 365:
+  7 3
+8 6 4
+2 1 5
+
+Step 366:
+7   3
+8 6 4
+2 1 5
+
+Step 367:
+7 6 3
+8   4
+2 1 5
+
+Step 368:
+7 6 3
+8 1 4
+2   5
+
+Step 369:
+7 6 3
+8 1 4
+2 5  
+
+Step 370:
+7 6 3
+8 1  
+2 5 4
+
+Step 371:
+7 6  
+8 1 3
+2 5 4
+
+Step 372:
+7   6
+8 1 3
+2 5 4
+
+Step 373:
+7 1 6
+8   3
+2 5 4
+
+Step 374:
+7 1 6
+8 5 3
+2   4
+
+Step 375:
+7 1 6
+8 5 3
+2 4  
+
+Step 376:
+7 1 6
+8 5  
+2 4 3
+
+Step 377:
+7 1  
+8 5 6
+2 4 3
+
+Step 378:
+7   1
+8 5 6
+2 4 3
+
+Step 379:
+7 5 1
+8   6
+2 4 3
+
+Step 380:
+7 5 1
+8 4 6
+2   3
+
+Step 381:
+7 5 1
+8 4 6
+2 3  
+
+Step 382:
+7 5 1
+8 4  
+2 3 6
+
+Step 383:
+7 5  
+8 4 1
+2 3 6
+
+Step 384:
+7   5
+8 4 1
+2 3 6
+
+Step 385:
+7 4 5
+8   1
+2 3 6
+
+Step 386:
+7 4 5
+8 3 1
+2   6
+
+Step 387:
+7 4 5
+8 3 1
+2 6  
+
+Step 388:
+7 4 5
+8 3  
+2 6 1
+
+Step 389:
+7 4  
+8 3 5
+2 6 1
+
+Step 390:
+7   4
+8 3 5
+2 6 1
+
+Step 391:
+7 3 4
+8   5
+2 6 1
+
+Step 392:
+7 3 4
+8 6 5
+2   1
+
+Step 393:
+7 3 4
+8 6 5
+2 1  
+
+Step 394:
+7 3 4
+8 6  
+2 1 5
+
+Step 395:
+7 3 4
+8   6
+2 1 5
+
+Step 396:
+7 3 4
+8 1 6
+2   5
+
+Step 397:
+7 3 4
+8 1 6
+2 5  
+
+Step 398:
+7 3 4
+8 1  
+2 5 6
+
+Step 399:
+7 3  
+8 1 4
+2 5 6
+
+Step 400:
+7   3
+8 1 4
+2 5 6
+
+Step 401:
+7 1 3
+8   4
+2 5 6
+
+Step 402:
+7 1 3
+8 5 4
+2   6
+
+Step 403:
+7 1 3
+8 5 4
+2 6  
+
+Step 404:
+7 1 3
+8 5  
+2 6 4
+
+Step 405:
+7 1  
+8 5 3
+2 6 4
+
+Step 406:
+7   1
+8 5 3
+2 6 4
+
+Step 407:
+7 5 1
+8   3
+2 6 4
+
+Step 408:
+7 5 1
+8 3  
+2 6 4
+
+Step 409:
+7 5 1
+8 3 4
+2 6  
+
+Step 410:
+7 5 1
+8 3 4
+2   6
+
+Step 411:
+7 5 1
+8 3 4
+  2 6
+
+Step 412:
+7 5 1
+  3 4
+8 2 6
+
+Step 413:
+  5 1
+7 3 4
+8 2 6
+
+Step 414:
+5   1
+7 3 4
+8 2 6
+
+Step 415:
+5 3 1
+7   4
+8 2 6
+
+Step 416:
+5 3 1
+7 2 4
+8   6
+
+Step 417:
+5 3 1
+7 2 4
+8 6  
+
+Step 418:
+5 3 1
+7 2  
+8 6 4
+
+Step 419:
+5 3  
+7 2 1
+8 6 4
+
+Step 420:
+5   3
+7 2 1
+8 6 4
+
+Step 421:
+5 2 3
+7   1
+8 6 4
+
+Step 422:
+5 2 3
+7 6 1
+8   4
+
+Step 423:
+5 2 3
+7 6 1
+8 4  
+
+Step 424:
+5 2 3
+7 6  
+8 4 1
+
+Step 425:
+5 2  
+7 6 3
+8 4 1
+
+Step 426:
+5   2
+7 6 3
+8 4 1
+
+Step 427:
+5 6 2
+7   3
+8 4 1
+
+Step 428:
+5 6 2
+7 4 3
+8   1
+
+Step 429:
+5 6 2
+7 4 3
+8 1  
+
+Step 430:
+5 6 2
+7 4  
+8 1 3
+
+Step 431:
+5 6  
+7 4 2
+8 1 3
+
+Step 432:
+5   6
+7 4 2
+8 1 3
+
+Step 433:
+5 4 6
+7   2
+8 1 3
+
+Step 434:
+5 4 6
+7 1 2
+8   3
+
+Step 435:
+5 4 6
+7 1 2
+8 3  
+
+Step 436:
+5 4 6
+7 1  
+8 3 2
+
+Step 437:
+5 4  
+7 1 6
+8 3 2
+
+Step 438:
+5   4
+7 1 6
+8 3 2
+
+Step 439:
+5 1 4
+7   6
+8 3 2
+
+Step 440:
+5 1 4
+7 3 6
+8   2
+
+Step 441:
+5 1 4
+7 3 6
+8 2  
+
+Step 442:
+5 1 4
+7 3  
+8 2 6
+
+Step 443:
+5 1 4
+7   3
+8 2 6
+
+Step 444:
+5 1 4
+7 2 3
+8   6
+
+Step 445:
+5 1 4
+7 2 3
+8 6  
+
+Step 446:
+5 1 4
+7 2  
+8 6 3
+
+Step 447:
+5 1  
+7 2 4
+8 6 3
+
+Step 448:
+5   1
+7 2 4
+8 6 3
+
+Step 449:
+5 2 1
+7   4
+8 6 3
+
+Step 450:
+5 2 1
+7 6 4
+8   3
+
+Step 451:
+5 2 1
+7 6 4
+8 3  
+
+Step 452:
+5 2 1
+7 6  
+8 3 4
+
+Step 453:
+5 2  
+7 6 1
+8 3 4
+
+Step 454:
+5   2
+7 6 1
+8 3 4
+
+Step 455:
+5 6 2
+7   1
+8 3 4
+
+Step 456:
+5 6 2
+7 3 1
+8   4
+
+Step 457:
+5 6 2
+7 3 1
+  8 4
+
+Step 458:
+5 6 2
+  3 1
+7 8 4
+
+Step 459:
+  6 2
+5 3 1
+7 8 4
+
+Step 460:
+6   2
+5 3 1
+7 8 4
+
+Step 461:
+6 3 2
+5   1
+7 8 4
+
+Step 462:
+6 3 2
+5 8 1
+7   4
+
+Step 463:
+6 3 2
+5 8 1
+7 4  
+
+Step 464:
+6 3 2
+5 8  
+7 4 1
+
+Step 465:
+6 3  
+5 8 2
+7 4 1
+
+Step 466:
+6   3
+5 8 2
+7 4 1
+
+Step 467:
+6 8 3
+5   2
+7 4 1
+
+Step 468:
+6 8 3
+5 4 2
+7   1
+
+Step 469:
+6 8 3
+5 4 2
+7 1  
+
+Step 470:
+6 8 3
+5 4  
+7 1 2
+
+Step 471:
+6 8  
+5 4 3
+7 1 2
+
+Step 472:
+6   8
+5 4 3
+7 1 2
+
+Step 473:
+6 4 8
+5   3
+7 1 2
+
+Step 474:
+6 4 8
+5 1 3
+7   2
+
+Step 475:
+6 4 8
+5 1 3
+7 2  
+
+Step 476:
+6 4 8
+5 1  
+7 2 3
+
+Step 477:
+6 4  
+5 1 8
+7 2 3
+
+Step 478:
+6   4
+5 1 8
+7 2 3
+
+Step 479:
+6 1 4
+5   8
+7 2 3
+
+Step 480:
+6 1 4
+5 2 8
+7   3
+
+Step 481:
+6 1 4
+5 2 8
+7 3  
+
+Step 482:
+6 1 4
+5 2  
+7 3 8
+
+Step 483:
+6 1  
+5 2 4
+7 3 8
+
+Step 484:
+6   1
+5 2 4
+7 3 8
+
+Step 485:
+6 2 1
+5   4
+7 3 8
+
+Step 486:
+6 2 1
+5 3 4
+7   8
+
+Step 487:
+6 2 1
+5 3 4
+7 8  
+
+Step 488:
+6 2 1
+5 3  
+7 8 4
+
+Step 489:
+6 2 1
+5   3
+7 8 4
+
+Step 490:
+6 2 1
+5 8 3
+7   4
+
+Step 491:
+6 2 1
+5 8 3
+7 4  
+
+Step 492:
+6 2 1
+5 8  
+7 4 3
+
+Step 493:
+6 2  
+5 8 1
+7 4 3
+
+Step 494:
+6   2
+5 8 1
+7 4 3
+
+Step 495:
+6 8 2
+5   1
+7 4 3
+
+Step 496:
+6 8 2
+5 4 1
+7   3
+
+Step 497:
+6 8 2
+5 4 1
+7 3  
+
+Step 498:
+6 8 2
+5 4  
+7 3 1
+
+Step 499:
+6 8  
+5 4 2
+7 3 1
+
+Step 500:
+6   8
+5 4 2
+7 3 1
+
+Step 501:
+6 4 8
+5   2
+7 3 1
+
+Step 502:
+6 4 8
+5 3 2
+7   1
+
+Step 503:
+6 4 8
+5 3 2
+  7 1
+
+Step 504:
+6 4 8
+  3 2
+5 7 1
+
+Step 505:
+  4 8
+6 3 2
+5 7 1
+
+Step 506:
+4   8
+6 3 2
+5 7 1
+
+Step 507:
+4 3 8
+6   2
+5 7 1
+
+Step 508:
+4 3 8
+6 7 2
+5   1
+
+Step 509:
+4 3 8
+6 7 2
+5 1  
+
+Step 510:
+4 3 8
+6 7  
+5 1 2
+
+Step 511:
+4 3  
+6 7 8
+5 1 2
+
+Step 512:
+4   3
+6 7 8
+5 1 2
+
+Step 513:
+4 7 3
+6   8
+5 1 2
+
+Step 514:
+4 7 3
+6 1 8
+5   2
+
+Step 515:
+4 7 3
+6 1 8
+5 2  
+
+Step 516:
+4 7 3
+6 1  
+5 2 8
+
+Step 517:
+4 7  
+6 1 3
+5 2 8
+
+Step 518:
+4   7
+6 1 3
+5 2 8
+
+Step 519:
+4 1 7
+6   3
+5 2 8
+
+Step 520:
+4 1 7
+6 2 3
+5   8
+
+Step 521:
+4 1 7
+6 2 3
+5 8  
+
+Step 522:
+4 1 7
+6 2  
+5 8 3
+
+Step 523:
+4 1  
+6 2 7
+5 8 3
+
+Step 524:
+4   1
+6 2 7
+5 8 3
+
+Step 525:
+4 2 1
+6   7
+5 8 3
+
+Step 526:
+4 2 1
+6 8 7
+5   3
+
+Step 527:
+4 2 1
+6 8 7
+5 3  
+
+Step 528:
+4 2 1
+6 8  
+5 3 7
+
+Step 529:
+4 2  
+6 8 1
+5 3 7
+
+Step 530:
+4   2
+6 8 1
+5 3 7
+
+Step 531:
+4 8 2
+6   1
+5 3 7
+
+Step 532:
+4 8 2
+6 3 1
+5   7
+
+Step 533:
+4 8 2
+6 3 1
+5 7  
+
+Step 534:
+4 8 2
+6 3  
+5 7 1
+
+Step 535:
+4 8 2
+6   3
+5 7 1
+
+Step 536:
+4 8 2
+6 7 3
+5   1
+
+Step 537:
+4 8 2
+6 7 3
+5 1  
+
+Step 538:
+4 8 2
+6 7  
+5 1 3
+
+Step 539:
+4 8  
+6 7 2
+5 1 3
+
+Step 540:
+4   8
+6 7 2
+5 1 3
+
+Step 541:
+4 7 8
+6   2
+5 1 3
+
+Step 542:
+4 7 8
+6 1 2
+5   3
+
+Step 543:
+4 7 8
+6 1 2
+5 3  
+
+Step 544:
+4 7 8
+6 1  
+5 3 2
+
+Step 545:
+4 7  
+6 1 8
+5 3 2
+
+Step 546:
+4   7
+6 1 8
+5 3 2
+
+Step 547:
+4 1 7
+6   8
+5 3 2
+
+Step 548:
+4 1 7
+6 3 8
+5   2
+
+Step 549:
+4 1 7
+6 3 8
+  5 2
+
+Step 550:
+4 1 7
+  3 8
+6 5 2
+
+Step 551:
+  1 7
+4 3 8
+6 5 2
+
+Step 552:
+1   7
+4 3 8
+6 5 2
+
+Step 553:
+1 3 7
+4   8
+6 5 2
+
+Step 554:
+1 3 7
+4 5 8
+6   2
+
+Step 555:
+1 3 7
+4 5 8
+6 2  
+
+Step 556:
+1 3 7
+4 5  
+6 2 8
+
+Step 557:
+1 3  
+4 5 7
+6 2 8
+
+Step 558:
+1   3
+4 5 7
+6 2 8
+
+Step 559:
+1 5 3
+4   7
+6 2 8
+
+Step 560:
+1 5 3
+4 2 7
+6   8
+
+Step 561:
+1 5 3
+4 2 7
+6 8  
+
+Step 562:
+1 5 3
+4 2  
+6 8 7
+
+Step 563:
+1 5  
+4 2 3
+6 8 7
+
+Step 564:
+1   5
+4 2 3
+6 8 7
+
+Step 565:
+1 2 5
+4   3
+6 8 7
+
+Step 566:
+1 2 5
+4 8 3
+6   7
+
+Step 567:
+1 2 5
+4 8 3
+6 7  
+
+Step 568:
+1 2 5
+4 8  
+6 7 3
+
+Step 569:
+1 2  
+4 8 5
+6 7 3
+
+Step 570:
+1   2
+4 8 5
+6 7 3
+
+Step 571:
+1 8 2
+4   5
+6 7 3
+
+Step 572:
+1 8 2
+4 7 5
+6   3
+
+Step 573:
+1 8 2
+4 7 5
+6 3  
+
+Step 574:
+1 8 2
+4 7  
+6 3 5
+
+Step 575:
+1 8  
+4 7 2
+6 3 5
+
+Step 576:
+1   8
+4 7 2
+6 3 5
+
+Step 577:
+1 7 8
+4   2
+6 3 5
+
+Step 578:
+1 7 8
+4 3 2
+6   5
+
+Step 579:
+1 7 8
+4 3 2
+6 5  
+
+Step 580:
+1 7 8
+4 3  
+6 5 2
+
+Step 581:
+1 7 8
+4   3
+6 5 2
+
+Step 582:
+1 7 8
+4 5 3
+6   2
+
+Step 583:
+1 7 8
+4 5 3
+6 2  
+
+Step 584:
+1 7 8
+4 5  
+6 2 3
+
+Step 585:
+1 7  
+4 5 8
+6 2 3
+
+Step 586:
+1   7
+4 5 8
+6 2 3
+
+Step 587:
+1 5 7
+4   8
+6 2 3
+
+Step 588:
+1 5 7
+4 2 8
+6   3
+
+Step 589:
+1 5 7
+4 2 8
+6 3  
+
+Step 590:
+1 5 7
+4 2  
+6 3 8
+
+Step 591:
+1 5  
+4 2 7
+6 3 8
+
+Step 592:
+1   5
+4 2 7
+6 3 8
+
+Step 593:
+1 2 5
+4   7
+6 3 8
+
+Step 594:
+1 2 5
+4 3 7
+6   8
+
+Step 595:
+1 2 5
+4 3 7
+  6 8
+
+Step 596:
+1 2 5
+  3 7
+4 6 8
+
+Step 597:
+  2 5
+1 3 7
+4 6 8
+
+Step 598:
+2   5
+1 3 7
+4 6 8
+
+Step 599:
+2 3 5
+1   7
+4 6 8
+
+Step 600:
+2 3 5
+1 6 7
+4   8
+
+Step 601:
+2 3 5
+1 6 7
+4 8  
+
+Step 602:
+2 3 5
+1 6  
+4 8 7
+
+Step 603:
+2 3  
+1 6 5
+4 8 7
+
+Step 604:
+2   3
+1 6 5
+4 8 7
+
+Step 605:
+2 6 3
+1   5
+4 8 7
+
+Step 606:
+2 6 3
+1 8 5
+4   7
+
+Step 607:
+2 6 3
+1 8 5
+4 7  
+
+Step 608:
+2 6 3
+1 8  
+4 7 5
+
+Step 609:
+2 6  
+1 8 3
+4 7 5
+
+Step 610:
+2   6
+1 8 3
+4 7 5
+
+Step 611:
+2 8 6
+1   3
+4 7 5
+
+Step 612:
+2 8 6
+1 7 3
+4   5
+
+Step 613:
+2 8 6
+1 7 3
+4 5  
+
+Step 614:
+2 8 6
+1 7  
+4 5 3
+
+Step 615:
+2 8  
+1 7 6
+4 5 3
+
+Step 616:
+2   8
+1 7 6
+4 5 3
+
+Step 617:
+2 7 8
+1   6
+4 5 3
+
+Step 618:
+2 7 8
+1 5 6
+4   3
+
+Step 619:
+2 7 8
+1 5 6
+4 3  
+
+Step 620:
+2 7 8
+1 5  
+4 3 6
+
+Step 621:
+2 7  
+1 5 8
+4 3 6
+
+Step 622:
+2   7
+1 5 8
+4 3 6
+
+Step 623:
+2 5 7
+1   8
+4 3 6
+
+Step 624:
+2 5 7
+1 3 8
+4   6
+
+Step 625:
+2 5 7
+1 3 8
+4 6  
+
+Step 626:
+2 5 7
+1 3  
+4 6 8
+
+Step 627:
+2 5 7
+1   3
+4 6 8
+
+Step 628:
+2 5 7
+1 6 3
+4   8
+
+Step 629:
+2 5 7
+1 6 3
+4 8  
+
+Step 630:
+2 5 7
+1 6  
+4 8 3
+
+Step 631:
+2 5  
+1 6 7
+4 8 3
+
+Step 632:
+2   5
+1 6 7
+4 8 3
+
+Step 633:
+2 6 5
+1   7
+4 8 3
+
+Step 634:
+2 6 5
+1 8 7
+4   3
+
+Step 635:
+2 6 5
+1 8 7
+4 3  
+
+Step 636:
+2 6 5
+1 8  
+4 3 7
+
+Step 637:
+2 6  
+1 8 5
+4 3 7
+
+Step 638:
+2   6
+1 8 5
+4 3 7
+
+Step 639:
+2 8 6
+1   5
+4 3 7
+
+Step 640:
+2 8 6
+1 3 5
+4   7
+
+Step 641:
+2 8 6
+1 3 5
+  4 7
+
+Step 642:
+2 8 6
+  3 5
+1 4 7
+
+Step 643:
+  8 6
+2 3 5
+1 4 7
+
+Step 644:
+8   6
+2 3 5
+1 4 7
+
+Step 645:
+8 3 6
+2   5
+1 4 7
+
+Step 646:
+8 3 6
+2 4 5
+1   7
+
+Step 647:
+8 3 6
+2 4 5
+  1 7
+
+Step 648:
+8 3 6
+  4 5
+2 1 7
+
+Step 649:
+  3 6
+8 4 5
+2 1 7
+
+Step 650:
+3   6
+8 4 5
+2 1 7
+
+Step 651:
+3 4 6
+8   5
+2 1 7
+
+Step 652:
+3 4 6
+8 1 5
+2   7
+
+Step 653:
+3 4 6
+8 1 5
+2 7  
+
+Step 654:
+3 4 6
+8 1  
+2 7 5
+
+Step 655:
+3 4  
+8 1 6
+2 7 5
+
+Step 656:
+3   4
+8 1 6
+2 7 5
+
+Step 657:
+3 1 4
+8   6
+2 7 5
+
+Step 658:
+3 1 4
+8 7 6
+2   5
+
+Step 659:
+3 1 4
+8 7 6
+2 5  
+
+Step 660:
+3 1 4
+8 7  
+2 5 6
+
+Step 661:
+3 1  
+8 7 4
+2 5 6
+
+Step 662:
+3   1
+8 7 4
+2 5 6
+
+Step 663:
+3 7 1
+8   4
+2 5 6
+
+Step 664:
+3 7 1
+8 5 4
+2   6
+
+Step 665:
+3 7 1
+8 5 4
+2 6  
+
+Step 666:
+3 7 1
+8 5  
+2 6 4
+
+Step 667:
+3 7  
+8 5 1
+2 6 4
+
+Step 668:
+3   7
+8 5 1
+2 6 4
+
+Step 669:
+3 5 7
+8   1
+2 6 4
+
+Step 670:
+3 5 7
+8 6 1
+2   4
+
+Step 671:
+3 5 7
+8 6 1
+2 4  
+
+Step 672:
+3 5 7
+8 6  
+2 4 1
+
+Step 673:
+3 5  
+8 6 7
+2 4 1
+
+Step 674:
+3   5
+8 6 7
+2 4 1
+
+Step 675:
+3 6 5
+8   7
+2 4 1
+
+Step 676:
+3 6 5
+8 4 7
+2   1
+
+Step 677:
+3 6 5
+8 4 7
+2 1  
+
+Step 678:
+3 6 5
+8 4  
+2 1 7
+
+Step 679:
+3 6 5
+8   4
+2 1 7
+
+Step 680:
+3 6 5
+8 1 4
+2   7
+
+Step 681:
+3 6 5
+8 1 4
+2 7  
+
+Step 682:
+3 6 5
+8 1  
+2 7 4
+
+Step 683:
+3 6  
+8 1 5
+2 7 4
+
+Step 684:
+3   6
+8 1 5
+2 7 4
+
+Step 685:
+3 1 6
+8   5
+2 7 4
+
+Step 686:
+3 1 6
+8 7 5
+2   4
+
+Step 687:
+3 1 6
+8 7 5
+2 4  
+
+Step 688:
+3 1 6
+8 7  
+2 4 5
+
+Step 689:
+3 1  
+8 7 6
+2 4 5
+
+Step 690:
+3   1
+8 7 6
+2 4 5
+
+Step 691:
+3 7 1
+8   6
+2 4 5
+
+Step 692:
+3 7 1
+8 4 6
+2   5
+
+Step 693:
+3 7 1
+8 4 6
+  2 5
+
+Step 694:
+3 7 1
+  4 6
+8 2 5
+
+Step 695:
+  7 1
+3 4 6
+8 2 5
+
+Step 696:
+7   1
+3 4 6
+8 2 5
+
+Step 697:
+7 4 1
+3   6
+8 2 5
+
+Step 698:
+7 4 1
+3 2 6
+8   5
+
+Step 699:
+7 4 1
+3 2 6
+8 5  
+
+Step 700:
+7 4 1
+3 2  
+8 5 6
+
+Step 701:
+7 4  
+3 2 1
+8 5 6
+
+Step 702:
+7   4
+3 2 1
+8 5 6
+
+Step 703:
+7 2 4
+3   1
+8 5 6
+
+Step 704:
+7 2 4
+3 5 1
+8   6
+
+Step 705:
+7 2 4
+3 5 1
+8 6  
+
+Step 706:
+7 2 4
+3 5  
+8 6 1
+
+Step 707:
+7 2  
+3 5 4
+8 6 1
+
+Step 708:
+7   2
+3 5 4
+8 6 1
+
+Step 709:
+7 5 2
+3   4
+8 6 1
+
+Step 710:
+7 5 2
+3 6 4
+8   1
+
+Step 711:
+7 5 2
+3 6 4
+8 1  
+
+Step 712:
+7 5 2
+3 6  
+8 1 4
+
+Step 713:
+7 5  
+3 6 2
+8 1 4
+
+Step 714:
+7   5
+3 6 2
+8 1 4
+
+Step 715:
+7 6 5
+3   2
+8 1 4
+
+Step 716:
+7 6 5
+3 1 2
+8   4
+
+Step 717:
+7 6 5
+3 1 2
+8 4  
+
+Step 718:
+7 6 5
+3 1  
+8 4 2
+
+Step 719:
+7 6  
+3 1 5
+8 4 2
+
+Step 720:
+7   6
+3 1 5
+8 4 2
+
+Step 721:
+7 1 6
+3   5
+8 4 2
+
+Step 722:
+7 1 6
+3 4 5
+8   2
+
+Step 723:
+7 1 6
+3 4 5
+8 2  
+
+Step 724:
+7 1 6
+3 4  
+8 2 5
+
+Step 725:
+7 1 6
+3   4
+8 2 5
+
+Step 726:
+7 1 6
+3 2 4
+8   5
+
+Step 727:
+7 1 6
+3 2 4
+8 5  
+
+Step 728:
+7 1 6
+3 2  
+8 5 4
+
+Step 729:
+7 1  
+3 2 6
+8 5 4
+
+Step 730:
+7   1
+3 2 6
+8 5 4
+
+Step 731:
+7 2 1
+3   6
+8 5 4
+
+Step 732:
+7 2 1
+3 5 6
+8   4
+
+Step 733:
+7 2 1
+3 5 6
+8 4  
+
+Step 734:
+7 2 1
+3 5  
+8 4 6
+
+Step 735:
+7 2  
+3 5 1
+8 4 6
+
+Step 736:
+7   2
+3 5 1
+8 4 6
+
+Step 737:
+7 5 2
+3   1
+8 4 6
+
+Step 738:
+7 5 2
+3 4 1
+8   6
+
+Step 739:
+7 5 2
+3 4 1
+  8 6
+
+Step 740:
+7 5 2
+  4 1
+3 8 6
+
+Step 741:
+  5 2
+7 4 1
+3 8 6
+
+Step 742:
+5   2
+7 4 1
+3 8 6
+
+Step 743:
+5 4 2
+7   1
+3 8 6
+
+Step 744:
+5 4 2
+7 8 1
+3   6
+
+Step 745:
+5 4 2
+7 8 1
+3 6  
+
+Step 746:
+5 4 2
+7 8  
+3 6 1
+
+Step 747:
+5 4  
+7 8 2
+3 6 1
+
+Step 748:
+5   4
+7 8 2
+3 6 1
+
+Step 749:
+5 8 4
+7   2
+3 6 1
+
+Step 750:
+5 8 4
+7 6 2
+3   1
+
+Step 751:
+5 8 4
+7 6 2
+3 1  
+
+Step 752:
+5 8 4
+7 6  
+3 1 2
+
+Step 753:
+5 8  
+7 6 4
+3 1 2
+
+Step 754:
+5   8
+7 6 4
+3 1 2
+
+Step 755:
+5 6 8
+7   4
+3 1 2
+
+Step 756:
+5 6 8
+7 1 4
+3   2
+
+Step 757:
+5 6 8
+7 1 4
+3 2  
+
+Step 758:
+5 6 8
+7 1  
+3 2 4
+
+Step 759:
+5 6  
+7 1 8
+3 2 4
+
+Step 760:
+5   6
+7 1 8
+3 2 4
+
+Step 761:
+5 1 6
+7   8
+3 2 4
+
+Step 762:
+5 1 6
+7 2 8
+3   4
+
+Step 763:
+5 1 6
+7 2 8
+3 4  
+
+Step 764:
+5 1 6
+7 2  
+3 4 8
+
+Step 765:
+5 1  
+7 2 6
+3 4 8
+
+Step 766:
+5   1
+7 2 6
+3 4 8
+
+Step 767:
+5 2 1
+7   6
+3 4 8
+
+Step 768:
+5 2 1
+7 4 6
+3   8
+
+Step 769:
+5 2 1
+7 4 6
+3 8  
+
+Step 770:
+5 2 1
+7 4  
+3 8 6
+
+Step 771:
+5 2 1
+7   4
+3 8 6
+
+Step 772:
+5 2 1
+7 8 4
+3   6
+
+Step 773:
+5 2 1
+7 8 4
+3 6  
+
+Step 774:
+5 2 1
+7 8  
+3 6 4
+
+Step 775:
+5 2  
+7 8 1
+3 6 4
+
+Step 776:
+5   2
+7 8 1
+3 6 4
+
+Step 777:
+5 8 2
+7   1
+3 6 4
+
+Step 778:
+5 8 2
+7 6 1
+3   4
+
+Step 779:
+5 8 2
+7 6 1
+3 4  
+
+Step 780:
+5 8 2
+7 6  
+3 4 1
+
+Step 781:
+5 8  
+7 6 2
+3 4 1
+
+Step 782:
+5   8
+7 6 2
+3 4 1
+
+Step 783:
+5 6 8
+7   2
+3 4 1
+
+Step 784:
+5 6 8
+7 4 2
+3   1
+
+Step 785:
+5 6 8
+7 4 2
+  3 1
+
+Step 786:
+5 6 8
+  4 2
+7 3 1
+
+Step 787:
+5 6 8
+4   2
+7 3 1
+
+Step 788:
+5 6 8
+4 3 2
+7   1
+
+Step 789:
+5 6 8
+4 3 2
+7 1  
+
+Step 790:
+5 6 8
+4 3  
+7 1 2
+
+Step 791:
+5 6  
+4 3 8
+7 1 2
+
+Step 792:
+5   6
+4 3 8
+7 1 2
+
+Step 793:
+5 3 6
+4   8
+7 1 2
+
+Step 794:
+5 3 6
+4 1 8
+7   2
+
+Step 795:
+5 3 6
+4 1 8
+7 2  
+
+Step 796:
+5 3 6
+4 1  
+7 2 8
+
+Step 797:
+5 3  
+4 1 6
+7 2 8
+
+Step 798:
+5   3
+4 1 6
+7 2 8
+
+Step 799:
+5 1 3
+4   6
+7 2 8
+
+Step 800:
+5 1 3
+4 2 6
+7   8
+
+Step 801:
+5 1 3
+4 2 6
+7 8  
+
+Step 802:
+5 1 3
+4 2  
+7 8 6
+
+Step 803:
+5 1  
+4 2 3
+7 8 6
+
+Step 804:
+5   1
+4 2 3
+7 8 6
+
+Step 805:
+5 2 1
+4   3
+7 8 6
+
+Step 806:
+5 2 1
+4 8 3
+7   6
+
+Step 807:
+5 2 1
+4 8 3
+7 6  
+
+Step 808:
+5 2 1
+4 8  
+7 6 3
+
+Step 809:
+5 2  
+4 8 1
+7 6 3
+
+Step 810:
+5   2
+4 8 1
+7 6 3
+
+Step 811:
+5 8 2
+4   1
+7 6 3
+
+Step 812:
+5 8 2
+4 6 1
+7   3
+
+Step 813:
+5 8 2
+4 6 1
+7 3  
+
+Step 814:
+5 8 2
+4 6  
+7 3 1
+
+Step 815:
+5 8 2
+4   6
+7 3 1
+
+Step 816:
+5 8 2
+4 3 6
+7   1
+
+Step 817:
+5 8 2
+4 3 6
+7 1  
+
+Step 818:
+5 8 2
+4 3  
+7 1 6
+
+Step 819:
+5 8  
+4 3 2
+7 1 6
+
+Step 820:
+5   8
+4 3 2
+7 1 6
+
+Step 821:
+5 3 8
+4   2
+7 1 6
+
+Step 822:
+5 3 8
+4 1 2
+7   6
+
+Step 823:
+5 3 8
+4 1 2
+7 6  
+
+Step 824:
+5 3 8
+4 1  
+7 6 2
+
+Step 825:
+5 3  
+4 1 8
+7 6 2
+
+Step 826:
+5   3
+4 1 8
+7 6 2
+
+Step 827:
+5 1 3
+4   8
+7 6 2
+
+Step 828:
+5 1 3
+4 6 8
+7   2
+
+Step 829:
+5 1 3
+4 6 8
+  7 2
+
+Step 830:
+5 1 3
+  6 8
+4 7 2
+
+Step 831:
+  1 3
+5 6 8
+4 7 2
+
+Step 832:
+1   3
+5 6 8
+4 7 2
+
+Step 833:
+1 6 3
+5   8
+4 7 2
+
+Step 834:
+1 6 3
+5 7 8
+4   2
+
+Step 835:
+1 6 3
+5 7 8
+4 2  
+
+Step 836:
+1 6 3
+5 7  
+4 2 8
+
+Step 837:
+1 6  
+5 7 3
+4 2 8
+
+Step 838:
+1   6
+5 7 3
+4 2 8
+
+Step 839:
+1 7 6
+5   3
+4 2 8
+
+Step 840:
+1 7 6
+5 2 3
+4   8
+
+Step 841:
+1 7 6
+5 2 3
+4 8  
+
+Step 842:
+1 7 6
+5 2  
+4 8 3
+
+Step 843:
+1 7  
+5 2 6
+4 8 3
+
+Step 844:
+1   7
+5 2 6
+4 8 3
+
+Step 845:
+1 2 7
+5   6
+4 8 3
+
+Step 846:
+1 2 7
+5 8 6
+4   3
+
+Step 847:
+1 2 7
+5 8 6
+4 3  
+
+Step 848:
+1 2 7
+5 8  
+4 3 6
+
+Step 849:
+1 2  
+5 8 7
+4 3 6
+
+Step 850:
+1   2
+5 8 7
+4 3 6
+
+Step 851:
+1 8 2
+5   7
+4 3 6
+
+Step 852:
+1 8 2
+5 3 7
+4   6
+
+Step 853:
+1 8 2
+5 3 7
+4 6  
+
+Step 854:
+1 8 2
+5 3  
+4 6 7
+
+Step 855:
+1 8  
+5 3 2
+4 6 7
+
+Step 856:
+1   8
+5 3 2
+4 6 7
+
+Step 857:
+1 3 8
+5   2
+4 6 7
+
+Step 858:
+1 3 8
+5 6 2
+4   7
+
+Step 859:
+1 3 8
+5 6 2
+4 7  
+
+Step 860:
+1 3 8
+5 6  
+4 7 2
+
+Step 861:
+1 3 8
+5   6
+4 7 2
+
+Step 862:
+1 3 8
+5 7 6
+4   2
+
+Step 863:
+1 3 8
+5 7 6
+4 2  
+
+Step 864:
+1 3 8
+5 7  
+4 2 6
+
+Step 865:
+1 3  
+5 7 8
+4 2 6
+
+Step 866:
+1   3
+5 7 8
+4 2 6
+
+Step 867:
+1 7 3
+5   8
+4 2 6
+
+Step 868:
+1 7 3
+5 2 8
+4   6
+
+Step 869:
+1 7 3
+5 2 8
+4 6  
+
+Step 870:
+1 7 3
+5 2  
+4 6 8
+
+Step 871:
+1 7  
+5 2 3
+4 6 8
+
+Step 872:
+1   7
+5 2 3
+4 6 8
+
+Step 873:
+1 2 7
+5   3
+4 6 8
+
+Step 874:
+1 2 7
+5 6 3
+4   8
+
+Step 875:
+1 2 7
+5 6 3
+  4 8
+
+Step 876:
+1 2 7
+  6 3
+5 4 8
+
+Step 877:
+  2 7
+1 6 3
+5 4 8
+
+Step 878:
+2   7
+1 6 3
+5 4 8
+
+Step 879:
+2 6 7
+1   3
+5 4 8
+
+Step 880:
+2 6 7
+1 4 3
+5   8
+
+Step 881:
+2 6 7
+1 4 3
+5 8  
+
+Step 882:
+2 6 7
+1 4  
+5 8 3
+
+Step 883:
+2 6  
+1 4 7
+5 8 3
+
+Step 884:
+2   6
+1 4 7
+5 8 3
+
+Step 885:
+2 4 6
+1   7
+5 8 3
+
+Step 886:
+2 4 6
+1 8 7
+5   3
+
+Step 887:
+2 4 6
+1 8 7
+5 3  
+
+Step 888:
+2 4 6
+1 8  
+5 3 7
+
+Step 889:
+2 4  
+1 8 6
+5 3 7
+
+Step 890:
+2   4
+1 8 6
+5 3 7
+
+Step 891:
+2 8 4
+1   6
+5 3 7
+
+Step 892:
+2 8 4
+1 3 6
+5   7
+
+Step 893:
+2 8 4
+1 3 6
+5 7  
+
+Step 894:
+2 8 4
+1 3  
+5 7 6
+
+Step 895:
+2 8  
+1 3 4
+5 7 6
+
+Step 896:
+2   8
+1 3 4
+5 7 6
+
+Step 897:
+2 3 8
+1   4
+5 7 6
+
+Step 898:
+2 3 8
+1 7 4
+5   6
+
+Step 899:
+2 3 8
+1 7 4
+5 6  
+
+Step 900:
+2 3 8
+1 7  
+5 6 4
+
+Step 901:
+2 3  
+1 7 8
+5 6 4
+
+Step 902:
+2   3
+1 7 8
+5 6 4
+
+Step 903:
+2 7 3
+1   8
+5 6 4
+
+Step 904:
+2 7 3
+1 6 8
+5   4
+
+Step 905:
+2 7 3
+1 6 8
+5 4  
+
+Step 906:
+2 7 3
+1 6  
+5 4 8
+
+Step 907:
+2 7 3
+1   6
+5 4 8
+
+Step 908:
+2 7 3
+1 4 6
+5   8
+
+Step 909:
+2 7 3
+1 4 6
+5 8  
+
+Step 910:
+2 7 3
+1 4  
+5 8 6
+
+Step 911:
+2 7  
+1 4 3
+5 8 6
+
+Step 912:
+2   7
+1 4 3
+5 8 6
+
+Step 913:
+2 4 7
+1   3
+5 8 6
+
+Step 914:
+2 4 7
+1 8 3
+5   6
+
+Step 915:
+2 4 7
+1 8 3
+5 6  
+
+Step 916:
+2 4 7
+1 8  
+5 6 3
+
+Step 917:
+2 4  
+1 8 7
+5 6 3
+
+Step 918:
+2   4
+1 8 7
+5 6 3
+
+Step 919:
+2 8 4
+1   7
+5 6 3
+
+Step 920:
+2 8 4
+1 6 7
+5   3
+
+Step 921:
+2 8 4
+1 6 7
+  5 3
+
+Step 922:
+2 8 4
+  6 7
+1 5 3
+
+Step 923:
+  8 4
+2 6 7
+1 5 3
+
+Step 924:
+8   4
+2 6 7
+1 5 3
+
+Step 925:
+8 6 4
+2   7
+1 5 3
+
+Step 926:
+8 6 4
+2 5 7
+1   3
+
+Step 927:
+8 6 4
+2 5 7
+  1 3
+
+Step 928:
+8 6 4
+  5 7
+2 1 3
+
+Step 929:
+  6 4
+8 5 7
+2 1 3
+
+Step 930:
+6   4
+8 5 7
+2 1 3
+
+Step 931:
+6 5 4
+8   7
+2 1 3
+
+Step 932:
+6 5 4
+8 1 7
+2   3
+
+Step 933:
+6 5 4
+8 1 7
+2 3  
+
+Step 934:
+6 5 4
+8 1  
+2 3 7
+
+Step 935:
+6 5  
+8 1 4
+2 3 7
+
+Step 936:
+6   5
+8 1 4
+2 3 7
+
+Step 937:
+6 1 5
+8   4
+2 3 7
+
+Step 938:
+6 1 5
+8 3 4
+2   7
+
+Step 939:
+6 1 5
+8 3 4
+2 7  
+
+Step 940:
+6 1 5
+8 3  
+2 7 4
+
+Step 941:
+6 1  
+8 3 5
+2 7 4
+
+Step 942:
+6   1
+8 3 5
+2 7 4
+
+Step 943:
+6 3 1
+8   5
+2 7 4
+
+Step 944:
+6 3 1
+8 7 5
+2   4
+
+Step 945:
+6 3 1
+8 7 5
+2 4  
+
+Step 946:
+6 3 1
+8 7  
+2 4 5
+
+Step 947:
+6 3  
+8 7 1
+2 4 5
+
+Step 948:
+6   3
+8 7 1
+2 4 5
+
+Step 949:
+6 7 3
+8   1
+2 4 5
+
+Step 950:
+6 7 3
+8 4 1
+2   5
+
+Step 951:
+6 7 3
+8 4 1
+2 5  
+
+Step 952:
+6 7 3
+8 4  
+2 5 1
+
+Step 953:
+6 7  
+8 4 3
+2 5 1
+
+Step 954:
+6   7
+8 4 3
+2 5 1
+
+Step 955:
+6 4 7
+8   3
+2 5 1
+
+Step 956:
+6 4 7
+8 5 3
+2   1
+
+Step 957:
+6 4 7
+8 5 3
+2 1  
+
+Step 958:
+6 4 7
+8 5  
+2 1 3
+
+Step 959:
+6 4 7
+8   5
+2 1 3
+
+Step 960:
+6 4 7
+8 1 5
+2   3
+
+Step 961:
+6 4 7
+8 1 5
+2 3  
+
+Step 962:
+6 4 7
+8 1  
+2 3 5
+
+Step 963:
+6 4  
+8 1 7
+2 3 5
+
+Step 964:
+6   4
+8 1 7
+2 3 5
+
+Step 965:
+6 1 4
+8   7
+2 3 5
+
+Step 966:
+6 1 4
+8 3 7
+2   5
+
+Step 967:
+6 1 4
+8 3 7
+2 5  
+
+Step 968:
+6 1 4
+8 3  
+2 5 7
+
+Step 969:
+6 1  
+8 3 4
+2 5 7
+
+Step 970:
+6   1
+8 3 4
+2 5 7
+
+Step 971:
+6 3 1
+8   4
+2 5 7
+
+Step 972:
+6 3 1
+8 5 4
+2   7
+
+Step 973:
+6 3 1
+8 5 4
+  2 7
+
+Step 974:
+6 3 1
+  5 4
+8 2 7
+
+Step 975:
+  3 1
+6 5 4
+8 2 7
+
+Step 976:
+3   1
+6 5 4
+8 2 7
+
+Step 977:
+3 5 1
+6   4
+8 2 7
+
+Step 978:
+3 5 1
+6 2 4
+8   7
+
+Step 979:
+3 5 1
+6 2 4
+8 7  
+
+Step 980:
+3 5 1
+6 2  
+8 7 4
+
+Step 981:
+3 5  
+6 2 1
+8 7 4
+
+Step 982:
+3   5
+6 2 1
+8 7 4
+
+Step 983:
+3 2 5
+6   1
+8 7 4
+
+Step 984:
+3 2 5
+6 7 1
+8   4
+
+Step 985:
+3 2 5
+6 7 1
+8 4  
+
+Step 986:
+3 2 5
+6 7  
+8 4 1
+
+Step 987:
+3 2  
+6 7 5
+8 4 1
+
+Step 988:
+3   2
+6 7 5
+8 4 1
+
+Step 989:
+3 7 2
+6   5
+8 4 1
+
+Step 990:
+3 7 2
+6 4 5
+8   1
+
+Step 991:
+3 7 2
+6 4 5
+8 1  
+
+Step 992:
+3 7 2
+6 4  
+8 1 5
+
+Step 993:
+3 7  
+6 4 2
+8 1 5
+
+Step 994:
+3   7
+6 4 2
+8 1 5
+
+Step 995:
+3 4 7
+6   2
+8 1 5
+
+Step 996:
+3 4 7
+6 1 2
+8   5
+
+Step 997:
+3 4 7
+6 1 2
+8 5  
+
+Step 998:
+3 4 7
+6 1  
+8 5 2
+
+Step 999:
+3 4  
+6 1 7
+8 5 2
+
+Step 1000:
+3   4
+6 1 7
+8 5 2
+
+Step 1001:
+3 1 4
+6   7
+8 5 2
+
+Step 1002:
+3 1 4
+6 5 7
+8   2
+
+Step 1003:
+3 1 4
+6 5 7
+8 2  
+
+Step 1004:
+3 1 4
+6 5  
+8 2 7
+
+Step 1005:
+3 1 4
+6   5
+8 2 7
+
+Step 1006:
+3 1 4
+6 2 5
+8   7
+
+Step 1007:
+3 1 4
+6 2 5
+8 7  
+
+Step 1008:
+3 1 4
+6 2  
+8 7 5
+
+Step 1009:
+3 1  
+6 2 4
+8 7 5
+
+Step 1010:
+3   1
+6 2 4
+8 7 5
+
+Step 1011:
+3 2 1
+6   4
+8 7 5
+
+Step 1012:
+3 2 1
+6 7 4
+8   5
+
+Step 1013:
+3 2 1
+6 7 4
+8 5  
+
+Step 1014:
+3 2 1
+6 7  
+8 5 4
+
+Step 1015:
+3 2  
+6 7 1
+8 5 4
+
+Step 1016:
+3   2
+6 7 1
+8 5 4
+
+Step 1017:
+3 7 2
+6   1
+8 5 4
+
+Step 1018:
+3 7 2
+6 5 1
+8   4
+
+Step 1019:
+3 7 2
+6 5 1
+  8 4
+
+Step 1020:
+3 7 2
+  5 1
+6 8 4
+
+Step 1021:
+  7 2
+3 5 1
+6 8 4
+
+Step 1022:
+7   2
+3 5 1
+6 8 4
+
+Step 1023:
+7 5 2
+3   1
+6 8 4
+
+Step 1024:
+7 5 2
+3 8 1
+6   4
+
+Step 1025:
+7 5 2
+3 8 1
+6 4  
+
+Step 1026:
+7 5 2
+3 8  
+6 4 1
+
+Step 1027:
+7 5  
+3 8 2
+6 4 1
+
+Step 1028:
+7   5
+3 8 2
+6 4 1
+
+Step 1029:
+7 8 5
+3   2
+6 4 1
+
+Step 1030:
+7 8 5
+3 4 2
+6   1
+
+Step 1031:
+7 8 5
+3 4 2
+6 1  
+
+Step 1032:
+7 8 5
+3 4  
+6 1 2
+
+Step 1033:
+7 8  
+3 4 5
+6 1 2
+
+Step 1034:
+7   8
+3 4 5
+6 1 2
+
+Step 1035:
+7 4 8
+3   5
+6 1 2
+
+Step 1036:
+7 4 8
+3 1 5
+6   2
+
+Step 1037:
+7 4 8
+3 1 5
+6 2  
+
+Step 1038:
+7 4 8
+3 1  
+6 2 5
+
+Step 1039:
+7 4  
+3 1 8
+6 2 5
+
+Step 1040:
+7   4
+3 1 8
+6 2 5
+
+Step 1041:
+7 1 4
+3   8
+6 2 5
+
+Step 1042:
+7 1 4
+3 2 8
+6   5
+
+Step 1043:
+7 1 4
+3 2 8
+6 5  
+
+Step 1044:
+7 1 4
+3 2  
+6 5 8
+
+Step 1045:
+7 1  
+3 2 4
+6 5 8
+
+Step 1046:
+7   1
+3 2 4
+6 5 8
+
+Step 1047:
+7 2 1
+3   4
+6 5 8
+
+Step 1048:
+7 2 1
+3 5 4
+6   8
+
+Step 1049:
+7 2 1
+3 5 4
+6 8  
+
+Step 1050:
+7 2 1
+3 5  
+6 8 4
+
+Step 1051:
+7 2 1
+3   5
+6 8 4
+
+Step 1052:
+7 2 1
+3 8 5
+6   4
+
+Step 1053:
+7 2 1
+3 8 5
+6 4  
+
+Step 1054:
+7 2 1
+3 8  
+6 4 5
+
+Step 1055:
+7 2  
+3 8 1
+6 4 5
+
+Step 1056:
+7   2
+3 8 1
+6 4 5
+
+Step 1057:
+7 8 2
+3   1
+6 4 5
+
+Step 1058:
+7 8 2
+3 4 1
+6   5
+
+Step 1059:
+7 8 2
+3 4 1
+6 5  
+
+Step 1060:
+7 8 2
+3 4  
+6 5 1
+
+Step 1061:
+7 8  
+3 4 2
+6 5 1
+
+Step 1062:
+7   8
+3 4 2
+6 5 1
+
+Step 1063:
+7 4 8
+3   2
+6 5 1
+
+Step 1064:
+7 4 8
+3 5 2
+6   1
+
+Step 1065:
+7 4 8
+3 5 2
+  6 1
+
+Step 1066:
+7 4 8
+  5 2
+3 6 1
+
+Step 1067:
+  4 8
+7 5 2
+3 6 1
+
+Step 1068:
+4   8
+7 5 2
+3 6 1
+
+Step 1069:
+4 5 8
+7   2
+3 6 1
+
+Step 1070:
+4 5 8
+7 6 2
+3   1
+
+Step 1071:
+4 5 8
+7 6 2
+3 1  
+
+Step 1072:
+4 5 8
+7 6  
+3 1 2
+
+Step 1073:
+4 5  
+7 6 8
+3 1 2
+
+Step 1074:
+4   5
+7 6 8
+3 1 2
+
+Step 1075:
+4 6 5
+7   8
+3 1 2
+
+Step 1076:
+4 6 5
+7 1 8
+3   2
+
+Step 1077:
+4 6 5
+7 1 8
+3 2  
+
+Step 1078:
+4 6 5
+7 1  
+3 2 8
+
+Step 1079:
+4 6  
+7 1 5
+3 2 8
+
+Step 1080:
+4   6
+7 1 5
+3 2 8
+
+Step 1081:
+4 1 6
+7   5
+3 2 8
+
+Step 1082:
+4 1 6
+7 2 5
+3   8
+
+Step 1083:
+4 1 6
+7 2 5
+3 8  
+
+Step 1084:
+4 1 6
+7 2  
+3 8 5
+
+Step 1085:
+4 1  
+7 2 6
+3 8 5
+
+Step 1086:
+4   1
+7 2 6
+3 8 5
+
+Step 1087:
+4 2 1
+7   6
+3 8 5
+
+Step 1088:
+4 2 1
+7 8 6
+3   5
+
+Step 1089:
+4 2 1
+7 8 6
+3 5  
+
+Step 1090:
+4 2 1
+7 8  
+3 5 6
+
+Step 1091:
+4 2  
+7 8 1
+3 5 6
+
+Step 1092:
+4   2
+7 8 1
+3 5 6
+
+Step 1093:
+4 8 2
+7   1
+3 5 6
+
+Step 1094:
+4 8 2
+7 5 1
+3   6
+
+Step 1095:
+4 8 2
+7 5 1
+3 6  
+
+Step 1096:
+4 8 2
+7 5  
+3 6 1
+
+Step 1097:
+4 8 2
+7   5
+3 6 1
+
+Step 1098:
+4 8 2
+7 6 5
+3   1
+
+Step 1099:
+4 8 2
+7 6 5
+3 1  
+
+Step 1100:
+4 8 2
+7 6  
+3 1 5
+
+Step 1101:
+4 8  
+7 6 2
+3 1 5
+
+Step 1102:
+4   8
+7 6 2
+3 1 5
+
+Step 1103:
+4 6 8
+7   2
+3 1 5
+
+Step 1104:
+4 6 8
+7 1 2
+3   5
+
+Step 1105:
+4 6 8
+7 1 2
+3 5  
+
+Step 1106:
+4 6 8
+7 1  
+3 5 2
+
+Step 1107:
+4 6  
+7 1 8
+3 5 2
+
+Step 1108:
+4   6
+7 1 8
+3 5 2
+
+Step 1109:
+4 1 6
+7   8
+3 5 2
+
+Step 1110:
+4 1 6
+7 5 8
+3   2
+
+Step 1111:
+4 1 6
+7 5 8
+  3 2
+
+Step 1112:
+4 1 6
+  5 8
+7 3 2
+
+Step 1113:
+  1 6
+4 5 8
+7 3 2
+
+Step 1114:
+1   6
+4 5 8
+7 3 2
+
+Step 1115:
+1 5 6
+4   8
+7 3 2
+
+Step 1116:
+1 5 6
+4 3 8
+7   2
+
+Step 1117:
+1 5 6
+4 3 8
+7 2  
+
+Step 1118:
+1 5 6
+4 3  
+7 2 8
+
+Step 1119:
+1 5  
+4 3 6
+7 2 8
+
+Step 1120:
+1   5
+4 3 6
+7 2 8
+
+Step 1121:
+1 3 5
+4   6
+7 2 8
+
+Step 1122:
+1 3 5
+4 2 6
+7   8
+
+Step 1123:
+1 3 5
+4 2 6
+7 8  
+
+Step 1124:
+1 3 5
+4 2  
+7 8 6
+
+Step 1125:
+1 3  
+4 2 5
+7 8 6
+
+Step 1126:
+1   3
+4 2 5
+7 8 6
+
+Step 1127:
+1 2 3
+4   5
+7 8 6
+
+Step 1128:
+1 2 3
+4 8 5
+7   6
+
+Step 1129:
+1 2 3
+4 8 5
+7 6  
+
+Step 1130:
+1 2 3
+4 8  
+7 6 5
+
+Step 1131:
+1 2  
+4 8 3
+7 6 5
+
+Step 1132:
+1   2
+4 8 3
+7 6 5
+
+Step 1133:
+1 8 2
+4   3
+7 6 5
+
+Step 1134:
+1 8 2
+4 6 3
+7   5
+
+Step 1135:
+1 8 2
+4 6 3
+7 5  
+
+Step 1136:
+1 8 2
+4 6  
+7 5 3
+
+Step 1137:
+1 8  
+4 6 2
+7 5 3
+
+Step 1138:
+1   8
+4 6 2
+7 5 3
+
+Step 1139:
+1 6 8
+4   2
+7 5 3
+
+Step 1140:
+1 6 8
+4 5 2
+7   3
+
+Step 1141:
+1 6 8
+4 5 2
+7 3  
+
+Step 1142:
+1 6 8
+4 5  
+7 3 2
+
+Step 1143:
+1 6 8
+4   5
+7 3 2
+
+Step 1144:
+1 6 8
+4 3 5
+7   2
+
+Step 1145:
+1 6 8
+4 3 5
+7 2  
+
+Step 1146:
+1 6 8
+4 3  
+7 2 5
+
+Step 1147:
+1 6  
+4 3 8
+7 2 5
+
+Step 1148:
+1   6
+4 3 8
+7 2 5
+
+Step 1149:
+1 3 6
+4   8
+7 2 5
+
+Step 1150:
+1 3 6
+4 2 8
+7   5
+
+Step 1151:
+1 3 6
+4 2 8
+7 5  
+
+Step 1152:
+1 3 6
+4 2  
+7 5 8
+
+Step 1153:
+1 3  
+4 2 6
+7 5 8
+
+Step 1154:
+1   3
+4 2 6
+7 5 8
+
+Step 1155:
+1 2 3
+4   6
+7 5 8
+
+Step 1156:
+1 2 3
+4 5 6
+7   8
+
+Step 1157:
+1 2 3
+4 5 6
+7 8  
+</code></pre>
+</div>
+</div>
+</section>
+<section id="remarks" class="slide level2">
+<h2>Remarks</h2>
+<ul>
+<li><p><strong>Breadth-first search (BFS)</strong> identifies the optimal solution, 25 moves, in 145,605 iterations.</p></li>
+<li><p><strong>Depth-first search (DFS)</strong> discovers a solution involving 1,157 moves in 1,187 iterations.</p></li>
+</ul>
+
+<aside class="notes">
+<p>Will <strong>Depth-First Search (DFS)</strong> invariably yield sub-optimal solutions?</p>
+<p>No, if the optimal solution lies along the path traversed by depth-first search (DFS) within the search tree, then DFS will indeed identify the optimal solution.</p>
+<p>Is it possible for DFS to discover solutions superior to the optimal solution?</p>
+<p>Certainly not; such solutions would either be invalid (involving impossible moves) or indicate an error in your estimation.</p>
+<p>Does this imply that depth-first search (DFS) has no practical applications?</p>
+<p>When is it appropriate to use DFS?</p>
+<p>Breadth-first search (BFS) expands its frontier systematically in all directions, leading to rapid growth in memory requirements.</p>
+<p>In contrast, the memory usage of DFS is constrained by the number of moves needed to reach its backtracking points or the path length of the first solution found. In all scenarios, DFS continues expanding the frontier in one direction.</p>
+<p>In certain applications where all possible solutions must be explored, the entire search space must be traversed. Using BFS in these cases would be prohibitively expensive in terms of memory. However, DFS can explore the entire space with minimal memory usage.</p>
+<p>The programming language Prolog includes a built-in backtracking algorithm that enumerates all possible solutions. Backtracking is a memory-efficient variant of DFS.</p>
+<p>Depth-limited and iterative deepening search would be alternative uninformed search algorithms.</p>
+<p>Finding solutions more efficiently requires domain knowledge.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>How can solutions be discovered <strong>more efficiently</strong>?</p>
+</div></aside></section></section>
+<section>
+<section id="prologue" class="title-slide slide level1 center">
+<h1>Prologue</h1>
+
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>Justification for Studying Search</li>
+<li>Key Terminology and Concepts</li>
+<li>Uninformed Search Algorithms
+<ul>
+<li>Breadth-First Search (BFS)</li>
+<li>Depth-First Search (DFS)</li>
+</ul></li>
+<li>Implementations</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><strong>Justification for Studying Search:</strong>
+<ul>
+<li>Emphasized the shift from solely focusing on machine learning to incorporating search algorithms.</li>
+<li>Highlighted the role of search in advanced AI systems like AlphaGo, AlphaZero, and MuZero.</li>
+<li>Noted that search algorithms are crucial for planning, reasoning, and will be increasingly significant.</li>
+</ul></li>
+<li><strong>Historical Timeline of Search Algorithms:</strong>
+<ul>
+<li>Presented a biased timeline from 1968’s A* algorithm to recent developments like MuZero and Agent57.</li>
+<li>Showed the evolution from heuristic-based search to integrating deep learning with search methods.</li>
+</ul></li>
+<li><strong>Applications of Search:</strong>
+<ul>
+<li><strong>Pathfinding and Navigation:</strong> Finding optimal paths in robotics and games.</li>
+<li><strong>Puzzle Solving:</strong> Solving problems like the 8-puzzle and Sudoku.</li>
+<li><strong>Network Analysis:</strong> Analyzing connectivity and shortest paths in networks.</li>
+<li><strong>Game Playing:</strong> Evaluating moves in games like chess or Go.</li>
+<li><strong>Scheduling and Resource Allocation:</strong> Planning tasks and allocating resources efficiently.</li>
+<li><strong>Configuration Problems:</strong> Assembling components to meet specific requirements.</li>
+<li><strong>Decision Making under Uncertainty:</strong> Making decisions in dynamic and uncertain environments.</li>
+<li><strong>Storytelling:</strong> Guiding language models with plans from automated planners.</li>
+</ul></li>
+<li><strong>Key Terminology and Concepts:</strong>
+<ul>
+<li><strong>Agent:</strong> An entity that performs actions to achieve goals.</li>
+<li><strong>Environment Characteristics:</strong> Fully observable, single-agent, deterministic, static, and discrete environments were focused on.</li>
+<li><strong>Search Problem Definition:</strong>
+<ul>
+<li><strong>State Space:</strong> All possible states.</li>
+<li><strong>Initial State:</strong> Where the agent starts.</li>
+<li><strong>Goal State(s):</strong> Desired outcome(s).</li>
+<li><strong>Actions:</strong> Possible moves from a state.</li>
+<li><strong>Transition Model:</strong> Rules determining state changes.</li>
+<li><strong>Action Cost Function:</strong> Cost associated with actions.</li>
+</ul></li>
+</ul></li>
+<li><strong>Uninformed Search Algorithms:</strong>
+<ul>
+<li><strong>Breadth-First Search (BFS):</strong>
+<ul>
+<li>Explores the search space level by level.</li>
+<li>Guarantees the shortest path but can be memory-intensive.</li>
+<li>Implemented using a queue.</li>
+</ul></li>
+<li><strong>Depth-First Search (DFS):</strong>
+<ul>
+<li>Explores as deep as possible along each branch before backtracking.</li>
+<li>Less memory usage but may not find the shortest path.</li>
+<li>Implemented using a stack.</li>
+</ul></li>
+</ul></li>
+<li><strong>Implementing Uninformed Search:</strong>
+<ul>
+<li>Used the <strong>8-Puzzle</strong> as an example problem.</li>
+<li>Represented states as lists of numbers, with <code>0</code> as the blank tile.</li>
+<li>Demonstrated BFS and DFS implementations in Python.</li>
+<li>Showed that BFS found the optimal solution in more iterations, while DFS found a suboptimal solution faster.</li>
+</ul></li>
+<li><strong>Limitations of Uninformed Search:</strong>
+<ul>
+<li>Inefficient for large or complex problems due to exhaustive nature.</li>
+<li>Lack of domain knowledge leads to unnecessary exploration.</li>
+</ul></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="next-lecture" class="slide level2">
+<h2>Next lecture</h2>
+<ul>
+<li>We will further explore heuristic functions and examine additional search algorithms.</li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Russell:2020aa" class="csl-entry" role="listitem">
+Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</span> Modern Approach</em>. 4th ed. Pearson. <a href="http://aima.cs.berkeley.edu/">http://aima.cs.berkeley.edu/</a>.
+</div>
+<div id="ref-10.1038/s41586-020-03051-4" class="csl-entry" role="listitem">
+Schrittwieser, Julian, Ioannis Antonoglou, Thomas Hubert, Karen Simonyan, Laurent Sifre, Simon Schmitt, Arthur Guez, et al. 2020. <span>“<span class="nocase">Mastering Atari, Go, chess and shogi by planning with a learned model</span>.”</span> <em>Nature</em> 588 (7839): 604–9. <a href="https://doi.org/10.1038/s41586-020-03051-4">https://doi.org/10.1038/s41586-020-03051-4</a>.
+</div>
+<div id="ref-Silver:2016aa" class="csl-entry" role="listitem">
+Silver, David, Aja Huang, Chris J. Maddison, Arthur Guez, Laurent Sifre, George van den Driessche, Julian Schrittwieser, et al. 2016. <span>“<span class="nocase">Mastering the game of Go with deep neural networks and tree search</span>.”</span> <em>Nature</em> 529 (7587): 484–89. <a href="https://doi.org/10.1038/nature16961">https://doi.org/10.1038/nature16961</a>.
+</div>
+<div id="ref-Simon:2024aa" class="csl-entry" role="listitem">
+Simon, Nisha, and Christian Muise. 2024. <span>“Want <span>To</span> <span>Choose</span> <span>Your</span> <span>Own</span> <span>Adventure</span>? <span>Then</span> <span>First</span> <span>Make</span> a <span>Plan</span>.”</span> <em>Proceedings of the Canadian Conference on Artificial Intelligence</em>.
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Marcel <strong>Turcotte</strong></p>
+<p><a href="mailto:Marcel.Turcotte@uOttawa.ca">Marcel.Turcotte@uOttawa.ca</a></p>
+<p>School of Electrical Engineering and <strong>Computer Science</strong> (EE<strong>CS</strong>)</p>
+<p>University of Ottawa</p>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../../assets/images/uottawa_hor_black.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p><a href="https://turcotte.xyz/teaching/csi-4106">turcotte.xyz/teaching/csi-4106</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/turcotte\.xyz\/teaching\/csi-4106");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+<script src="https://platform.twitter.com/widgets.js"></script>
+</body></html>

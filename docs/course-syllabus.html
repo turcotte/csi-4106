@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Marcel Turcotte">
+<meta name="dcterms.date" content="2025-08-29">
+
+<title>CSI 4106. Introduction to Articial Intelligence – Fall 2025 – CSI 4106 - Fall 2025</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./course-team.html" rel="next">
+<link href="./course-schedule.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-65b01cb044317b504b624fb405f1c8b9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="assets/css/styles.css">
+<meta property="og:title" content="CSI 4106. Introduction to Articial Intelligence – Fall 2025 – CSI 4106 - Fall 2025">
+<meta property="og:description" content="Homepage for CSI 4106 - Introduction to Artificial Intelligence at uOttawa, Fall 2025.">
+<meta property="og:site_name" content="CSI 4106 - Fall 2025">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><strong>Course information</strong></a></li><li class="breadcrumb-item"><a href="./course-syllabus.html">Syllabus</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">CSI 4106 - Fall 2025</a> 
+        <div class="sidebar-tools-main">
+    <div class="dropdown">
+      <a href="" title="uOttawa" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="uOttawa"><i class="bi bi-person-fill"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://uottawa.brightspace.com">
+            Brightspace
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://uozone2.uottawa.ca/">
+            uoZone
+            </a>
+          </li>
+      </ul>
+    </div>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Course information</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./course-schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./course-syllabus.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Syllabus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./course-team.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teaching team</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./course-links.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Useful links</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./course-faq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FAQ</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Glossary</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary/cross-entropy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cross-Entropy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary/entropy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Entropy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary/softmax.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Softmax</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Computing</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./computing/01/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorial 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#course-info" id="toc-course-info" class="nav-link active" data-scroll-target="#course-info">Course info</a></li>
+  <li><a href="#description-official" id="toc-description-official" class="nav-link" data-scroll-target="#description-official">Description (official)</a></li>
+  <li><a href="#approach" id="toc-approach" class="nav-link" data-scroll-target="#approach">Approach</a></li>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes">Learning outcomes</a></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a></li>
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
+  <li><a href="#material-and-resources" id="toc-material-and-resources" class="nav-link" data-scroll-target="#material-and-resources">Material and resources</a>
+  <ul class="collapse">
+  <li><a href="#monographs" id="toc-monographs" class="nav-link" data-scroll-target="#monographs">Monographs</a></li>
+  </ul></li>
+  <li><a href="#academic-integrity" id="toc-academic-integrity" class="nav-link" data-scroll-target="#academic-integrity">Academic integrity</a></li>
+  <li><a href="#student-services" id="toc-student-services" class="nav-link" data-scroll-target="#student-services">Student services</a>
+  <ul class="collapse">
+  <li><a href="#academic-writing-help" id="toc-academic-writing-help" class="nav-link" data-scroll-target="#academic-writing-help">Academic writing help</a></li>
+  <li><a href="#career-services" id="toc-career-services" class="nav-link" data-scroll-target="#career-services">Career services</a></li>
+  <li><a href="#counselling-service" id="toc-counselling-service" class="nav-link" data-scroll-target="#counselling-service">Counselling service</a></li>
+  <li><a href="#access-service" id="toc-access-service" class="nav-link" data-scroll-target="#access-service">Access Service</a></li>
+  </ul></li>
+  <li><a href="#policy-prevention-of-sexual-violence" id="toc-policy-prevention-of-sexual-violence" class="nav-link" data-scroll-target="#policy-prevention-of-sexual-violence">Policy – Prevention of sexual violence</a></li>
+  <li><a href="#information-sharing-and-copyright" id="toc-information-sharing-and-copyright" class="nav-link" data-scroll-target="#information-sharing-and-copyright">Information sharing and copyright</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="course-syllabus.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><strong>Course information</strong></a></li><li class="breadcrumb-item"><a href="./course-syllabus.html">Syllabus</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">CSI 4106. Introduction to Articial Intelligence – Fall 2025</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Marcel Turcotte </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 29, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="course-info" class="level1">
+<h1>Course info</h1>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Day</th>
+<th>Time</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Lecture 1</td>
+<td>Monday</td>
+<td>13:00-14:20</td>
+<td>CRX C240</td>
+</tr>
+<tr class="even">
+<td>Lecture 2</td>
+<td>Wednesday</td>
+<td>11:30-12:50</td>
+<td>CRX C240</td>
+</tr>
+<tr class="odd">
+<td>Office hours</td>
+<td>Monday</td>
+<td>15:00-16:20</td>
+<td>STE 5106</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="description-official" class="level1">
+<h1>Description (official)</h1>
+<p>The roots and scope of Artificial Intelligence. Knowledge and knowledge representation. Search, informed search, adversarial search. Deduction and reasoning. Uncertainty in Artificial Intelligence. Introduction to Natural Language Processing. Elements of planning. Basics of Machine Learning.</p>
+</section>
+<section id="approach" class="level1">
+<h1>Approach</h1>
+<p>Machine learning first. Unlike other artificial intelligence courses, this one is structured so that deep learning is presented as early as possible. This serves two purposes. First, this is because deep learning is such a dominant technology now that it would be difficult to grab students attention without studying this subject. Second, deep learning serves as a framework through which we can introduce and define key topics in artificial intelligence. In some cases, we will see how deep learning has displace other technologies, or replace parts of it. Whereas in other cases, this will be an opportunity to discuss the limitations of deep learning and see how previous technologies had been developed for solving specific problems. Finally, it is important to note that learning itself represents one of the earliest and most extensively understood milestones in the evolution of intelligence.</p>
+</section>
+<section id="learning-outcomes" class="level1">
+<h1>Learning outcomes</h1>
+<p>Upon completion of the course, you will be able to:</p>
+<ul>
+<li><strong>Explain</strong> the fundamental concepts of Artificial Intelligence (AI)</li>
+<li><strong>Apply</strong> problem-solving strategies using AI techniques</li>
+<li><strong>Critically analyze</strong> and <strong>compare</strong> different AI approaches</li>
+<li><strong>Demonstrate</strong> independent learning and exploration</li>
+</ul>
+</section>
+<section id="outline" class="level1">
+<h1>Outline</h1>
+<p>Given the widespread influence of deep learning in current Artificial Intelligence advancements, my aim is to incorporate it into the course curriculum at an early stage. Establishing this groundwork will facilitate our understanding of its significance, particularly as we delve into subjects such as Monte Carlo Tree Search (MCTS) or Reinforcement Learning (RL) later in the course. Below is a preliminary and ambitious course outline.</p>
+<ul>
+<li>Defining AI<br>
+</li>
+<li>Introduction to machine learning<br>
+</li>
+<li>Linear regression<br>
+</li>
+<li>Training<br>
+</li>
+<li>Logistic regression<br>
+</li>
+<li>Evaluation<br>
+</li>
+<li>Hyperparameter tuning<br>
+</li>
+<li>Bias-Variance tradeoff<br>
+</li>
+<li>Machine learning engineering<br>
+</li>
+<li>Introduction to artificial neural networks</li>
+<li>Backpropagation<br>
+</li>
+<li>Softmax, cross-entropy, regularization<br>
+</li>
+<li>Convolutional neural networks<br>
+</li>
+<li>Introduction to search<br>
+</li>
+<li>Informed search<br>
+</li>
+<li>Local search<br>
+</li>
+<li>Population-based metaheuristics<br>
+</li>
+<li>Adversarial search<br>
+</li>
+<li>Monte Carlo Tree Search<br>
+</li>
+<li>Formal Reasoning<br>
+</li>
+<li>Neuro-symbolic</li>
+</ul>
+</section>
+<section id="grading" class="level1">
+<h1>Grading</h1>
+<p>The final course grade will be calculated as follows:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Assignments</td>
+<td>40% (4 x 10%)</td>
+</tr>
+<tr class="even">
+<td>Quiz</td>
+<td>20%</td>
+</tr>
+<tr class="odd">
+<td>Final examination</td>
+<td>40%</td>
+</tr>
+</tbody>
+</table>
+<p>Consult the <a href="course-schedule.html">schedule</a> for the dates.</p>
+</section>
+<section id="material-and-resources" class="level1">
+<h1>Material and resources</h1>
+<ul>
+<li>Lecture notes (slides) and complementary resources will be posted on the course Web site: <a href="https://turcotte.xyz/teaching/csi-4106">turcotte.xyz/teaching/csi-4106/</a></li>
+</ul>
+<section id="monographs" class="level2">
+<h2 class="anchored" data-anchor-id="monographs">Monographs</h2>
+<p>I will draw upon insights from the two comprehensive textbooks listed below, as well as relevant scientific publications. All sources of information will be cited. For most people, I expect that my lecture notes will be sufficient.</p>
+<ul>
+<li>Russell, S., &amp; Norvig, P. (2020). <a href="https://aima.cs.berkeley.edu/"><em>Artificial Intelligence: A Modern Approach</em></a> (4th ed.). Pearson.</li>
+<li>Poole, D.L., &amp; Mackworth, A.K. (2023) <a href="https://artint.info"><em>Artificial Intelligence: Foundations of Computational Agents</em></a> (3rd ed.). Cambridge University Press. (Freely available online in <a href="https://artint.info/3e/html/ArtInt3e.html">HTML format</a>)</li>
+</ul>
+<p>The <a href="https://www.bkstr.com/ottawastore/home">Campus Store</a> has ordered a small number of copies of these books, for those interested.</p>
+</section>
+</section>
+<section id="academic-integrity" class="level1">
+<h1>Academic integrity</h1>
+<p>Academic fraud is an act by a student that may result in a false evaluation (including papers, tests, examinations, etc.). It is not tolerated by the University. Any person found guilty of academic fraud will be subject to sanctions.</p>
+<p>Here are some examples of academic fraud:</p>
+<ul>
+<li>Plagiarism or cheating of any kind;</li>
+<li>Present research data that has been falsified;</li>
+<li>Submit a work for which you are not the author, in whole or part;</li>
+<li>Submit the same piece of work for more than one course without the written consent of the professors concerned.</li>
+<li>Please consult <a href="https://www.uottawa.ca/about-us/provost/academic-integrity">this webpage</a>: it contains regulations and tools to help you avoid plagiarism.</li>
+</ul>
+<p>An individual who commits or attempts to commit academic fraud, or who is an accomplice, will be penalized. Here are some examples of possible sanctions:</p>
+<ul>
+<li>Receive an “F” for the work or in the course in question;</li>
+<li>Imposition of additional requirements (from 3 to 30 credits) to the program of study;</li>
+<li>Suspension or expulsion from the Faculty.</li>
+<li>You can refer to the regulations on <a href="https://www.uottawa.ca/about-us/policies-regulations/academic-regulations/a-4-academic-integrity-academic-misconduct">this web page</a></li>
+</ul>
+</section>
+<section id="student-services" class="level1">
+<h1>Student services</h1>
+<section id="academic-writing-help" class="level2">
+<h2 class="anchored" data-anchor-id="academic-writing-help">Academic writing help</h2>
+<p>At the Academic Writing Help Centre you will learn how to identify, correct and ultimately avoid errors in your writing and become an autonomous writer. In working with our Writing Advisors, you will be able to acquire the abilities, strategies and writing tools that will enable you to:</p>
+<ul>
+<li><strong>Master</strong> the written language of your choice</li>
+<li><strong>Expand</strong> your critical thinking abilities</li>
+<li><strong>Develop</strong> your argumentation skills</li>
+<li><strong>Learn</strong> what the expectations are for academic writing</li>
+</ul>
+<p>Further information is available here:</p>
+<ul>
+<li><a href="https://www.uottawa.ca/study/academic-support/academic-writing-help">www.uottawa.ca/study/academic-support/academic-writing-help</a></li>
+</ul>
+</section>
+<section id="career-services" class="level2">
+<h2 class="anchored" data-anchor-id="career-services">Career services</h2>
+<p>Career Services offers various services and a career development program to enable you to recognize and enhance the employability skills you need in today’s world of work.</p>
+<ul>
+<li><a href="https://www.uottawa.ca/current-students/career-experiential-learning/career-development">www.uottawa.ca/current-students/career-experiential-learning/career-development</a></li>
+</ul>
+</section>
+<section id="counselling-service" class="level2">
+<h2 class="anchored" data-anchor-id="counselling-service">Counselling service</h2>
+<p>Counselling and therapy is a confidential service for students who are facing life challenges. It is a safe space to explore new perspectives and build resilience.</p>
+<ul>
+<li><a href="https://www.uottawa.ca/campus-life/health-wellness/counselling-therapy">www.uottawa.ca/campus-life/health-wellness/counselling-therap</a></li>
+</ul>
+</section>
+<section id="access-service" class="level2">
+<h2 class="anchored" data-anchor-id="access-service">Access Service</h2>
+<p>The Access Service acts as an intermediary between students, their faculty and other University offices to ensure that the special needs of these students are addressed and that the best possible learning conditions are being offered.</p>
+<p>Note that the University of Ottawa is affiliated with <a href="https://alternativeresources.ca/Aero/Public/WelcomePage.aspx">AERO</a> and <a href="https://www.ocul.on.ca/node/2192">ACE</a> services for the adaptation of accessible academic materials for students with perceptual disabilities. If you have any questions, please contact the <a href="mailto:libadapt@uottawa.ca">Accessibility Librarian</a> or the <a href="https://www.uottawa.ca/study/academic-support/accommodation-services-available">Access services</a> for textbooks.</p>
+<ul>
+<li><a href="https://www.uottawa.ca/study/academic-support/accommodation-services-available">www.uottawa.ca/study/academic-support/accommodation-services-available</a></li>
+</ul>
+</section>
+</section>
+<section id="policy-prevention-of-sexual-violence" class="level1">
+<h1>Policy – Prevention of sexual violence</h1>
+<p>The University of Ottawa will not tolerate any act of sexual violence. This includes acts such as rape and sexual harassment, as well as misconduct that take place without consent, which includes cyberbullying. The University, as well as various employees and student groups, offers a variety of services and resources to ensure that all uOttawa community members have access to confidential support and information, and to procedures for reporting an incident or filing a complaint. For more information, please visit <a href="https://www.uottawa.ca/about-us/respect/sexual-violence-support-and-prevention">www.uOttawa.ca/sexual-violence-support-and-prevention</a>. See <a href="https://www.uottawa.ca/about-us/policies-regulations/policy-67b-prevention-sexual-violence">Policy 67b</a>.</p>
+</section>
+<section id="information-sharing-and-copyright" class="level1">
+<h1>Information sharing and copyright</h1>
+<p>All documents prepared by the course instructor, including assignments, course notes, and exams, are protected by copyright. Copying, digitizing, or publishing on a Web site is therefore a violation of copyright and is illegal.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/turcotte\.xyz\/teaching\/csi-4106");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./course-schedule.html" class="pagination-link" aria-label="Schedule">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Schedule</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./course-team.html" class="pagination-link" aria-label="Teaching team">
+        <span class="nav-page-text">Teaching team</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© Copyright 2024-25, Marcel Turcotte</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built using <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
