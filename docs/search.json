@@ -143,7 +143,7 @@
   {
     "objectID": "course-faq.html",
     "href": "course-faq.html",
-    "title": "FAQ - Frequently Asked Questions",
+    "title": "FAQ",
     "section": "",
     "text": "Forums on Brightspace: The preferred method for asking questions. Teaching assistants, other students, and the professor can promptly respond, benefiting the entire class.\nTeaching Assistants: Available during office hours or via email. Office hours are posted on my personal website and Brightspace. Email addresses are listed only on Brightspace to avoid web crawlers.\nProfessor: Office hours are posted on the course website and Brightspace. Due to a high workload and the large class size (320 students across two sections), direct responses from the professor may be limited.\nTimely Questions: Avoid waiting until the last minute to ask questions, especially close to assignment deadlines, as this creates undue pressure on the teaching team.",
     "crumbs": [
@@ -9668,7 +9668,7 @@
   {
     "objectID": "course-faq.html#method-from-the-preparation-pages",
     "href": "course-faq.html#method-from-the-preparation-pages",
-    "title": "FAQ - Frequently Asked Questions",
+    "title": "FAQ",
     "section": "Method from the “Preparation” pages",
     "text": "Method from the “Preparation” pages\n\nOn the Course Schedule page, you will find a column titled “Preparation” associated with each course session. Each entry in this column corresponds to a specific preparation page for the relevant course.\nFor example, for the course on Linear Regression and Gradient Descent, you can access the preparation page. In the section titled “Participate,” a link is provided to download a PDF version of the lecture notes.",
     "crumbs": [
@@ -9679,7 +9679,7 @@
   {
     "objectID": "course-faq.html#revealjs",
     "href": "course-faq.html#revealjs",
-    "title": "FAQ - Frequently Asked Questions",
+    "title": "FAQ",
     "section": "Revealjs",
     "text": "Revealjs\n\nHTML Document Menu: At the bottom left of each presentation page.\nMenu Options: Select Tools, then PDF Export Mode (shortcut ‘e’).\nPrint: The page will reload with a print-friendly stylesheet. Use your browser’s file menu to print the document as a PDF. You can adjust the layout to display multiple slides per page if desired.",
     "crumbs": [
