@@ -2697,9 +2697,9 @@
   {
     "objectID": "lectures/06/index.html#practice",
     "href": "lectures/06/index.html#practice",
-    "title": "Lecture 06",
+    "title": "Cross-entropy, geometric interpretation, and implementation",
     "section": "Practice",
-    "text": "Practice\nSuggested exercises will be inserted here."
+    "text": "Practice\n\nLogisticRegression - Here is an implementation of logistic regression, complemented by discussions on Receiver Operating Characteristic (ROC) curves and the Area Under the Curve (AUC). It also includes illustrative examples to demonstrate these concepts."
   },
   {
     "objectID": "lectures/07/slides.html#quote-of-the-day",
