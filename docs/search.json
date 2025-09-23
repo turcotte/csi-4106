@@ -11219,5 +11219,54 @@
     "title": "Model Evaluation and Hyperparameter Tuning",
     "section": "Message of the Day",
     "text": "Message of the Day\n\n\n\n\n\n\n\n\nEPFL, ETH Zurich and the Swiss National Supercomputing Centre (CSCS) released Apertus 2 September, Switzerland’s first large-scale, open, multilingual language model — a milestone in generative AI for transparency and diversity.\n\n\nwww.swiss-ai.org/apertus\nDownloads available at Hugging Face\nPublic access\n\nShould Canada undertake such an extensive project?\nCanada is recognized for its exceptional AI research, supported by several renowned research institutions and scholars. Notable examples include:\n\nThe Vector Institute in Toronto, which is home to distinguished researchers like Geoffrey Hinton, a recipient of the 2018 Turing Award for his pioneering work in deep learning and the 2024 Nobel Prize in Physics.\nMila in Montréal, led by Yoshua Bengio, another 2018 Turing Award laureate recognized for his contributions to deep learning.\nThe Alberta Machine Intelligence Institute (Amii), where Richard S. Sutton is a key figure and was awarded the 2024 Turing Award for his influential work in reinforcement learning.\n\nThese institutions and individuals underscore Canada’s leadership and ongoing commitment to advancing artificial intelligence research.\nThe Digital Research Alliance of Canada, supported by a $2 billion commitment from the Government of Canada in 2024, provides cutting-edge infrastructure for advanced research. Notably, the high-performance computing resource, Nibi, was launched on July 31, 2025. It features 134,400 CPU cores and 288 NVIDIA H100 GPUs, significantly enhancing computational capacity. For further technical specifications, please refer to the technical documentation.\n\n\nApertus: a fully open, transparent, multilingual language model, ETH Zürich, Press Release, 2025-09-02."
+  },
+  {
+    "objectID": "lectures/07/LogisticRegression.html",
+    "href": "lectures/07/LogisticRegression.html",
+    "title": "Logistic regression trained with (batch) gradient descent",
+    "section": "",
+    "text": "In this notebook, we develop a custom implementation of logistic regression, employing batch gradient descent for training. Additionally, we implement the compute_roc_curve and compute_auc functions. Subsequently, we analyze two realistic yet straightforward datasets utilizing scikit-learn libraries."
+  },
+  {
+    "objectID": "lectures/07/LogisticRegression.html#step-0-import-librairies-set-global-variables",
+    "href": "lectures/07/LogisticRegression.html#step-0-import-librairies-set-global-variables",
+    "title": "Logistic regression trained with (batch) gradient descent",
+    "section": "Step 0: Import librairies, set global variables",
+    "text": "Step 0: Import librairies, set global variables\n\nimport matplotlib.pyplot as plt\nfrom sklearn.datasets import make_blobs\nfrom sklearn.datasets import load_breast_cancer\nfrom sklearn.datasets import fetch_openml\nfrom sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay\nfrom sklearn.metrics import roc_curve, roc_auc_score\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LogisticRegression as SKLogisticRegression\n\nseed=42"
+  },
+  {
+    "objectID": "lectures/07/LogisticRegression.html#step-1-create-a-toy-dataset",
+    "href": "lectures/07/LogisticRegression.html#step-1-create-a-toy-dataset",
+    "title": "Logistic regression trained with (batch) gradient descent",
+    "section": "Step 1: Create a toy dataset",
+    "text": "Step 1: Create a toy dataset\n\nX, y = make_blobs(n_samples=1000, n_features=2, centers=2, cluster_std=2.5, random_state=42)\n\n# Split into train and test sets\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.3, random_state=42\n)\n\nVisualizing the training set.\n\n\nCode\nplt.figure(figsize=(7, 6))\n\nplt.scatter(\n    X_train[y_train == 0, 0], X_train[y_train == 0, 1],\n    color=\"tab:blue\", marker=\"o\", edgecolor=\"k\", alpha=0.8, label=\"Class 0 (train)\"\n)\nplt.scatter(\n    X_train[y_train == 1, 0], X_train[y_train == 1, 1],\n    color=\"tab:orange\", marker=\"o\", edgecolor=\"k\", alpha=0.8, label=\"Class 1 (train)\"\n)\n\nplt.xlabel(\"Feature 1\")\nplt.ylabel(\"Feature 2\")\nplt.title(\"Training Data Before Logistic Regression\")\nplt.legend()\nplt.grid(True)\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "lectures/07/LogisticRegression.html#step-2-train-our-logisticregression-class",
+    "href": "lectures/07/LogisticRegression.html#step-2-train-our-logisticregression-class",
+    "title": "Logistic regression trained with (batch) gradient descent",
+    "section": "Step 2: Train our LogisticRegression class",
+    "text": "Step 2: Train our LogisticRegression class\n\nmodel = LogisticRegression(learning_rate=0.1, max_iter=500, random_state=42)\nmodel.fit(X_train, y_train)\n\n&lt;__main__.LogisticRegression at 0x107bfffd0&gt;\n\n\n\n\nCode\n# --- Step 3: Predictions and classification report ---\ny_pred = model.predict(X_test)\nprint(\"Classification Report:\\n\")\nprint(classification_report(y_test, y_pred))\n\n\nClassification Report:\n\n              precision    recall  f1-score   support\n\n           0       0.98      0.99      0.99       151\n           1       0.99      0.98      0.99       149\n\n    accuracy                           0.99       300\n   macro avg       0.99      0.99      0.99       300\nweighted avg       0.99      0.99      0.99       300\n\n\n\n\n\nCode\n# --- Step 4: Plot the loss history ---\n\nlosses = model.get_loss_history()\n\nplt.figure(figsize=(7, 6)) \nplt.plot(losses, label=\"Training Loss (BCE)\")\nplt.xlabel(\"Iteration\")\nplt.ylabel(\"Loss\")\nplt.title(\"Logistic Regression Training Loss\")\nplt.legend()\nplt.grid(True)\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nCode\n# --- Step 5: Decision boundary (2D) ---\n# Works because we used n_features=2 above.\n# If you use more than 2 features, select two columns to visualize (e.g., X[:, :2]).\n\ndef plot_decision_boundary(model, X_train, y_train, X_test, y_test, h=0.02):\n    \"\"\"\n    Plot probability heatmap, 0.5 decision contour, and data points.\n\n    Parameters\n    ----------\n    model : fitted LogisticRegression (our class)\n    X_train, y_train : training data (2D features)\n    X_test, y_test   : test data (2D features)\n    h : float, grid step size (smaller -&gt; finer mesh)\n    \"\"\"\n    # 1) Build a mesh over the feature space (with padding for nicer margins)\n    x_min = min(X_train[:, 0].min(), X_test[:, 0].min()) - 0.5\n    x_max = max(X_train[:, 0].max(), X_test[:, 0].max()) + 0.5\n    y_min = min(X_train[:, 1].min(), X_test[:, 1].min()) - 0.5\n    y_max = max(X_train[:, 1].max(), X_test[:, 1].max()) + 0.5\n\n    xx, yy = np.meshgrid(\n        np.arange(x_min, x_max, h),\n        np.arange(y_min, y_max, h)\n    )\n    grid = np.c_[xx.ravel(), yy.ravel()]\n\n    # 2) Predict probabilities on the grid (class 1)\n    Z = model.predict_proba(grid).reshape(xx.shape)\n\n    # 3) Plot\n    plt.figure(figsize=(7, 6))\n\n    # Heatmap of P(y=1|x); levels=25 for smooth look\n    cntr = plt.contourf(xx, yy, Z, levels=25, alpha=0.8)\n    cbar = plt.colorbar(cntr)\n    cbar.set_label(\"P(class = 1)\")\n\n    # Decision boundary at probability 0.5\n    plt.contour(xx, yy, Z, levels=[0.5], linewidths=2)\n\n    # Training points\n    plt.scatter(\n        X_train[y_train == 0, 0], X_train[y_train == 0, 1],\n        marker=\"o\", edgecolor=\"k\", alpha=0.9, label=\"Train: class 0\"\n    )\n    plt.scatter(\n        X_train[y_train == 1, 0], X_train[y_train == 1, 1],\n        marker=\"o\", edgecolor=\"k\", alpha=0.9, label=\"Train: class 1\"\n    )\n\n    # Test points (different marker)\n    plt.scatter(\n        X_test[y_test == 0, 0], X_test[y_test == 0, 1],\n        marker=\"^\", edgecolor=\"k\", alpha=0.9, label=\"Test: class 0\"\n    )\n    plt.scatter(\n        X_test[y_test == 1, 0], X_test[y_test == 1, 1],\n        marker=\"^\", edgecolor=\"k\", alpha=0.9, label=\"Test: class 1\"\n    )\n\n    plt.xlabel(\"Feature 1\")\n    plt.ylabel(\"Feature 2\")\n    plt.title(\"Logistic Regression Decision Boundary (P=0.5)\")\n    plt.legend(loc=\"best\", frameon=True)\n    plt.tight_layout()\n    plt.show()\n\nplot_decision_boundary(model, X_train, y_train, X_test, y_test)"
+  },
+  {
+    "objectID": "lectures/07/LogisticRegression.html#implementation-auc-roc",
+    "href": "lectures/07/LogisticRegression.html#implementation-auc-roc",
+    "title": "Logistic regression trained with (batch) gradient descent",
+    "section": "Implementation: AUC ROC",
+    "text": "Implementation: AUC ROC\n\ndef compute_auc(fpr, tpr):\n    \"\"\"\n    Compute the Area Under the Curve (AUC) using the trapezoidal rule.\n    \n    fpr: array of false positive rates\n    tpr: array of true positive rates\n    \"\"\"\n    return np.trapezoid(tpr, fpr)"
+  },
+  {
+    "objectID": "lectures/07/LogisticRegression.html#example-plot",
+    "href": "lectures/07/LogisticRegression.html#example-plot",
+    "title": "Logistic regression trained with (batch) gradient descent",
+    "section": "Example: Plot",
+    "text": "Example: Plot\n\n\nCode\n# Compute predicted probabilities for the positive class on the test set\ny_probs = model.predict_proba(X_test)\n\n# Define a set of threshold values between 0 and 1 (e.g., 100 equally spaced thresholds)\nthresholds = np.linspace(0, 1, 100)\n\n# Compute the ROC curve (FPR and TPR for each threshold)\nfpr, tpr = compute_roc_curve(y_test, y_probs, thresholds)\nauc_value = compute_auc(fpr, tpr)\n\n# Plot the ROC curve\nplt.figure(figsize=(8, 6))\nplt.plot(fpr, tpr, color='blue', lw=2, label='ROC curve (AUC = %0.2f)' % auc_value)\nplt.plot([0, 1], [0, 1], color='gray', lw=1, linestyle='--', label='Random classifier')\nplt.xlabel('False Positive Rate')\nplt.ylabel('True Positive Rate')\nplt.title('Receiver Operating Characteristic (ROC) Curve')\nplt.legend(loc=\"lower right\")\nplt.show()"
+  },
+  {
+    "objectID": "lectures/07/index.html#practice",
+    "href": "lectures/07/index.html#practice",
+    "title": "Performance Evaluation",
+    "section": "Practice",
+    "text": "Practice\n\nLogisticRegression - Here is an implementation of logistic regression, complemented by discussions on Receiver Operating Characteristic (ROC) curves and the Area Under the Curve (AUC). It also includes illustrative examples to demonstrate these concepts."
   }
 ]

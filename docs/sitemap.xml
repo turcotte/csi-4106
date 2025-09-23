@@ -66,7 +66,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/02/index.html</loc>
-    <lastmod>2025-09-06T18:15:26.095Z</lastmod>
+    <lastmod>2025-09-23T20:57:30.190Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/03/slides.html</loc>
@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/03/index.html</loc>
-    <lastmod>2025-09-10T14:42:47.074Z</lastmod>
+    <lastmod>2025-09-23T20:57:20.605Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/04/slides.html</loc>
@@ -82,7 +82,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/04/index.html</loc>
-    <lastmod>2025-09-14T19:50:17.331Z</lastmod>
+    <lastmod>2025-09-23T20:57:03.684Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/05/slides.html</loc>
@@ -90,7 +90,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/05/index.html</loc>
-    <lastmod>2025-09-16T16:00:13.346Z</lastmod>
+    <lastmod>2025-09-23T20:56:54.954Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/06/slides.html</loc>
@@ -98,15 +98,15 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/06/index.html</loc>
-    <lastmod>2025-09-16T21:17:37.171Z</lastmod>
+    <lastmod>2025-09-23T20:56:42.697Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/07/slides.html</loc>
-    <lastmod>2025-09-21T16:33:32.299Z</lastmod>
+    <lastmod>2025-09-21T19:51:50.140Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/07/index.html</loc>
-    <lastmod>2025-09-20T21:04:19.708Z</lastmod>
+    <lastmod>2025-09-23T20:55:39.767Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/08/slides.html</loc>
@@ -114,7 +114,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/08/index.html</loc>
-    <lastmod>2025-09-21T19:56:18.547Z</lastmod>
+    <lastmod>2025-09-23T20:58:48.839Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/09/slides.html</loc>
@@ -295,5 +295,9 @@
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/computing/01/03_missing_library.html</loc>
     <lastmod>2025-09-05T13:21:20.291Z</lastmod>
+  </url>
+  <url>
+    <loc>https://turcotte.xyz/teaching/csi-4106/lectures/07/LogisticRegression.html</loc>
+    <lastmod>2025-09-23T20:50:44.476Z</lastmod>
   </url>
 </urlset>
