@@ -1,0 +1,6 @@
+# Do not put course sources or local rendered output on main
+*
+
+!.gitignore
+!README.md
+!_publish.yml
