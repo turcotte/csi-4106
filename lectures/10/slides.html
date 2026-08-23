@@ -223,7 +223,7 @@
   
   <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <meta property="og:title" content="Machine Learning Engineering – CSI 4106 - Fall 2026">
-<meta property="og:description" content="CSI 4106 - Fall 2025">
+<meta property="og:description" content="CSI 4106 - Fall 2026">
 <meta property="og:site_name" content="CSI 4106 - Fall 2026">
 </head>
 <body class="quarto-light">
@@ -232,7 +232,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Machine Learning Engineering</h1>
-  <p class="subtitle">CSI 4106 - Fall 2025</p>
+  <p class="subtitle">CSI 4106 - Fall 2026</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -242,7 +242,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Aug 8, 2026 10:03</p>
+  <p class="date">Version: Aug 10, 2026 11:53</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -350,7 +350,7 @@ Marcel Turcotte
 </section>
 <section id="dataset---adult" class="slide level2 scrollable">
 <h2>Dataset - Adult</h2>
-<div id="324e2ebc" class="cell" data-execution_count="2">
+<div id="daf41193" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a aria-label="2"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb1-3"><a aria-label="3"></a></span>
@@ -392,7 +392,7 @@ e-mail: ronnyk ‘@’ live.com for questions.</p>
 <p>Downloaded from openml.org.</p>
 </div></section><section id="adult---workclass" class="slide level2 scrollable">
 <h2>Adult - Workclass</h2>
-<div id="cdb54ea0" class="cell" data-execution_count="3">
+<div id="a91f3ce7" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a>adult.data[<span class="st">'workclass'</span>].unique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>['Private', 'Local-gov', NaN, 'Self-emp-not-inc', 'Federal-gov', 'State-gov', 'Self-emp-inc', 'Without-pay', 'Never-worked']
@@ -402,7 +402,7 @@ Categories (8, str): ['Federal-gov', 'Local-gov', 'Never-worked', 'Private', 'Se
 </section>
 <section id="adult---education" class="slide level2 scrollable">
 <h2>Adult - Education</h2>
-<div id="4a0e5c13" class="cell" data-execution_count="4">
+<div id="b22b593c" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a>adult.data[<span class="st">'education'</span>].unique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>['11th', 'HS-grad', 'Assoc-acdm', 'Some-college', '10th', ..., 'Assoc-voc', '9th', '12th', '1st-4th', 'Preschool']
@@ -413,7 +413,7 @@ Categories (16, str): ['10th', '11th', '12th', '1st-4th', ..., 'Masters', 'Presc
 </section>
 <section id="adult---marital-status" class="slide level2 scrollable">
 <h2>Adult - Marital Status</h2>
-<div id="f6af763f" class="cell" data-execution_count="5">
+<div id="67db7505" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>adult.data[<span class="st">'marital-status'</span>].unique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>['Never-married', 'Married-civ-spouse', 'Widowed', 'Divorced', 'Separated', 'Married-spouse-absent', 'Married-AF-spouse']
@@ -459,7 +459,7 @@ Categories (7, str): ['Divorced', 'Married-AF-spouse', 'Married-civ-spouse', 'Ma
 </div></aside></section>
 <section id="onehotencoder" class="slide level2">
 <h2>OneHotEncoder</h2>
-<div id="24bcf7fb" class="cell" data-execution_count="6">
+<div id="d923f4dc" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="im">from</span> numpy <span class="im">import</span> array</span>
 <span id="cb8-2"><a aria-label="2"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder</span>
 <span id="cb8-3"><a aria-label="3"></a></span>
@@ -547,7 +547,7 @@ Categories (7, str): ['Divorced', 'Married-AF-spouse', 'Married-civ-spouse', 'Ma
 </div></aside></section>
 <section id="case-study-1" class="slide level2 scrollable">
 <h2>Case Study</h2>
-<div id="5fad7512" class="cell" data-execution_count="7">
+<div id="cdbf4ee6" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb10-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb10-3"><a aria-label="3"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -616,7 +616,7 @@ Categories (7, str): ['Divorced', 'Married-AF-spouse', 'Married-civ-spouse', 'Ma
 </section>
 <section id="case-study---results" class="slide level2">
 <h2>Case study - results</h2>
-<div id="af946869" class="cell" data-execution_count="8">
+<div id="689f4a1e" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="co"># Predict and evaluate the model</span></span>
 <span id="cb11-2"><a aria-label="2"></a>y_pred <span class="op">=</span> model.predict(X_test_processed)</span>
 <span id="cb11-3"><a aria-label="3"></a></span>
@@ -636,7 +636,7 @@ weighted avg       0.90      0.90      0.90        61
 </section>
 <section id="case-study---chest-pain-cp" class="slide level2 smaller">
 <h2>Case study - chest pain (cp)</h2>
-<div id="f2ebf18a" class="cell" data-execution_count="9">
+<div id="7db0864b" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="co"># Retrieve feature names after transformation using get_feature_names_out()</span></span>
 <span id="cb13-2"><a aria-label="2"></a>feature_names <span class="op">=</span> column_transformer.get_feature_names_out()</span>
 <span id="cb13-3"><a aria-label="3"></a></span>
@@ -666,7 +666,7 @@ Coefficients associated with 'cp':
 </section>
 <section id="case-study---coefficients" class="slide level2">
 <h2>Case study - coefficients</h2>
-<div id="1c71ace2" class="cell" data-execution_count="10">
+<div id="7cc2c805" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a><span class="co"># Visualize the coefficients</span></span>
 <span id="cb15-2"><a aria-label="2"></a></span>
 <span id="cb15-3"><a aria-label="3"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
@@ -686,13 +686,13 @@ Coefficients associated with 'cp':
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides_files/figure-html/cell-10-output-1.png" class="quarto-figure quarto-figure-center" width="766" height="566"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides_files/figure-revealjs/cell-10-output-1.png" class="quarto-figure quarto-figure-center" width="766" height="566"></a></p>
 </figure>
 </div>
 </div>
 </div></section><section id="case-study---coefficients-sorted" class="slide level2">
 <h2>Case study - coefficients (sorted)</h2>
-<div id="7195725b" class="cell" data-execution_count="11">
+<div id="e73ee8d0" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="co"># Visualize the coefficients</span></span>
 <span id="cb16-2"><a aria-label="2"></a></span>
 <span id="cb16-3"><a aria-label="3"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
@@ -710,7 +710,7 @@ Coefficients associated with 'cp':
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-html/cell-11-output-1.png" class="quarto-figure quarto-figure-center" width="766" height="566"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-11-output-1.png" class="quarto-figure quarto-figure-center" width="766" height="566"></a></p>
 </figure>
 </div>
 </div>
@@ -723,7 +723,7 @@ Coefficients associated with 'cp':
 <p>For attributs with values such as <strong>‘Poor’</strong>, <strong>‘Average’</strong>, and <strong>‘Good’</strong>, an ordinal encoding would make sense.</p>
 <div class="fragment">
 <p>However!</p>
-<div id="6ae73543" class="cell" data-execution_count="12">
+<div id="82622259" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a><span class="im">from</span> numpy <span class="im">import</span> array</span>
 <span id="cb17-2"><a aria-label="2"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OrdinalEncoder</span>
 <span id="cb17-3"><a aria-label="3"></a></span>
@@ -745,7 +745,7 @@ Coefficients associated with 'cp':
 </section>
 <section id="ordinalencoder-revised" class="slide level2">
 <h2>OrdinalEncoder (revised)</h2>
-<div id="ca1282a3" class="cell" data-execution_count="13">
+<div id="024df625" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a><span class="im">from</span> numpy <span class="im">import</span> array</span>
 <span id="cb19-2"><a aria-label="2"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OrdinalEncoder</span>
 <span id="cb19-3"><a aria-label="3"></a></span>
@@ -821,7 +821,7 @@ Coefficients associated with 'cp':
 <aside><ol class="aside-footnotes"><li id="fn1"><p>Your instructor is concerned with your choice of cutoff <i class="fa-solid fa-face-smile-wink" aria-label="face-smile-wink"></i></p></li></ol></aside></section>
 <section id="functiontransformer" class="slide level2">
 <h2>FunctionTransformer</h2>
-<div id="016847b9" class="cell" data-execution_count="14">
+<div id="077cc874" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb21-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb21-3"><a aria-label="3"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> FunctionTransformer</span>
@@ -883,7 +883,7 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 </section>
 <section id="data-three-houses" class="slide level2 scrollable">
 <h2>Data (three houses)</h2>
-<div id="2cd75307" class="cell" data-execution_count="15">
+<div id="1e05725c" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb23-2"><a aria-label="2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb23-3"><a aria-label="3"></a></span>
@@ -994,7 +994,7 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 </div></section><section id="euclidean-distances-unscaled" class="slide level2">
 <h2>Euclidean distances (unscaled)</h2>
 <p>When one feature has a much larger scale (e.g., square footage), it can dominate the sum.</p>
-<div id="dfe31d75" class="cell" data-execution_count="16">
+<div id="883735a9" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> pairwise_distances</span>
 <span id="cb24-2"><a aria-label="2"></a></span>
 <span id="cb24-3"><a aria-label="3"></a>dist_unscaled <span class="op">=</span> pd.DataFrame(</span>
@@ -1004,7 +1004,7 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 <span id="cb24-7"><a aria-label="7"></a>dist_unscaled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
-<div id="6f5c9b90" class="cell" data-execution_count="17">
+<div id="790fa347" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="st">"Nearest to 'a' (unscaled):"</span>, dist_unscaled.loc[<span class="st">"a"</span>].drop(<span class="st">"a"</span>).idxmin())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Nearest to 'a' (unscaled): b</code></pre>
@@ -1064,7 +1064,7 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 </div></section><section id="proper-scaling-for-modeling" class="slide level2">
 <h2>Proper scaling for modeling</h2>
 <p>For a fair ML workflow, compute scaling parameters on the training data (<strong>b</strong>, <strong>c</strong>) only, then transform both train and query:</p>
-<div id="2334ac28" class="cell" data-execution_count="18">
+<div id="63faa2bc" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb27-2"><a aria-label="2"></a></span>
 <span id="cb27-3"><a aria-label="3"></a>train_idx <span class="op">=</span> [<span class="st">"b"</span>, <span class="st">"c"</span>]</span>
@@ -1131,7 +1131,7 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 </div>
 </div></section><section id="euclidean-distances-after-scaling" class="slide level2">
 <h2>Euclidean distances (after scaling)</h2>
-<div id="bd658999" class="cell" data-execution_count="19">
+<div id="c0ff4991" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a aria-label="1"></a>dist_scaled <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb28-2"><a aria-label="2"></a>    pairwise_distances(Z.values, metric<span class="op">=</span><span class="st">"euclidean"</span>),</span>
 <span id="cb28-3"><a aria-label="3"></a>    index<span class="op">=</span>Z.index, columns<span class="op">=</span>Z.index</span>
@@ -1187,7 +1187,7 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 </div>
 </div>
 </div>
-<div id="82bb5c7e" class="cell" data-execution_count="20">
+<div id="d7718415" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="st">"Nearest to 'a' (scaled):"</span>, dist_scaled.loc[<span class="st">"a"</span>].drop(<span class="st">"a"</span>).idxmin())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Nearest to 'a' (scaled): c</code></pre>
@@ -1197,7 +1197,7 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 <section id="knn-regressor" class="slide level2">
 <h2>KNN regressor</h2>
 <p>We’ll run a 1-NN regressor (so the prediction is exactly the nearest neighbor’s price) <strong>with and without</strong> scaling.</p>
-<div id="8fc970c2" class="cell" data-execution_count="21">
+<div id="4d961e28" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a aria-label="1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
 <span id="cb31-2"><a aria-label="2"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
 <span id="cb31-3"><a aria-label="3"></a></span>
@@ -1208,7 +1208,7 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 </section>
 <section id="knn-regressor-no-scaling" class="slide level2">
 <h2>KNN regressor (no scaling)</h2>
-<div id="060f30c6" class="cell" data-execution_count="22">
+<div id="c6e5f181" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a aria-label="1"></a><span class="co"># 1) No scaling</span></span>
 <span id="cb32-2"><a aria-label="2"></a></span>
 <span id="cb32-3"><a aria-label="3"></a>knn_plain <span class="op">=</span> KNeighborsRegressor(n_neighbors<span class="op">=</span><span class="dv">1</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>)</span>
@@ -1220,7 +1220,7 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 </section>
 <section id="knn-regressor-with-scaling" class="slide level2">
 <h2>KNN regressor (with scaling)</h2>
-<div id="cdcdf37f" class="cell" data-execution_count="23">
+<div id="82ee869b" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a aria-label="1"></a><span class="co"># 2) With scaling (pipeline fits scaler only on training, then KNN on scaled)</span></span>
 <span id="cb33-2"><a aria-label="2"></a></span>
 <span id="cb33-3"><a aria-label="3"></a>knn_scaled <span class="op">=</span> Pipeline([</span>
@@ -1248,7 +1248,7 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 </section>
 <section id="knn-regressor-results" class="slide level2">
 <h2>KNN regressor (results)</h2>
-<div id="f7f4f037" class="cell" data-execution_count="24">
+<div id="4ae08a6c" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a aria-label="1"></a>pd.DataFrame(</span>
 <span id="cb34-2"><a aria-label="2"></a>    {</span>
 <span id="cb34-3"><a aria-label="3"></a>        <span class="st">"prediction (no scaling)"</span>: [pred_plain],</span>
@@ -1391,7 +1391,7 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 </section>
 <section id="case-study---normal-distribution" class="slide level2">
 <h2>Case Study - Normal Distribution</h2>
-<div id="73c62556" class="cell" data-execution_count="25">
+<div id="2f580a0b" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb35-2"><a aria-label="2"></a>np.random.seed(<span class="dv">7</span>)</span>
 <span id="cb35-3"><a aria-label="3"></a></span>
@@ -1409,11 +1409,11 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 </section>
 <section id="case-study---normal-distribution-1" class="slide level2">
 <h2>Case Study - Normal Distribution</h2>
-<div id="be070f66" class="cell" data-execution_count="26">
+<div id="57ab98ec" class="cell" data-execution_count="26">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-html/cell-26-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-html/cell-26-output-1.png" width="598" height="451"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-26-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-revealjs/cell-26-output-1.png" width="817" height="451"></a></p>
 </figure>
 </div>
 </div>
@@ -1421,26 +1421,11 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 </section>
 <section id="normalization-1" class="slide level2">
 <h2>Normalization</h2>
-<div id="ccd132a5" class="cell" data-execution_count="27">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
-<span id="cb36-2"><a aria-label="2"></a></span>
-<span id="cb36-3"><a aria-label="3"></a>scaler <span class="op">=</span> MinMaxScaler()</span>
-<span id="cb36-4"><a aria-label="4"></a></span>
-<span id="cb36-5"><a aria-label="5"></a>minmax_norm_values <span class="op">=</span> scaler.fit_transform(norm_values.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb36-6"><a aria-label="6"></a></span>
-<span id="cb36-7"><a aria-label="7"></a><span class="co"># Plot the histogram</span></span>
-<span id="cb36-8"><a aria-label="8"></a>plt.hist(minmax_norm_values, bins<span class="op">=</span><span class="dv">20</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb36-9"><a aria-label="9"></a></span>
-<span id="cb36-10"><a aria-label="10"></a>plt.title(<span class="ss">f'MinMaxScaler'</span>)</span>
-<span id="cb36-11"><a aria-label="11"></a></span>
-<span id="cb36-12"><a aria-label="12"></a>plt.xlabel(<span class="st">'Value'</span>)</span>
-<span id="cb36-13"><a aria-label="13"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb36-14"><a aria-label="14"></a></span>
-<span id="cb36-15"><a aria-label="15"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="b2a22e94" class="cell" data-execution_count="27">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-html/cell-27-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides_files/figure-html/cell-27-output-1.png" width="594" height="451"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-27-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides_files/figure-revealjs/cell-27-output-1.png" width="817" height="451"></a></p>
 </figure>
 </div>
 </div>
@@ -1464,26 +1449,11 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 </div></aside></section>
 <section id="standardization-1" class="slide level2">
 <h2>Standardization</h2>
-<div id="356c7e02" class="cell" data-execution_count="28">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb37-2"><a aria-label="2"></a></span>
-<span id="cb37-3"><a aria-label="3"></a>scaler <span class="op">=</span> StandardScaler()</span>
-<span id="cb37-4"><a aria-label="4"></a></span>
-<span id="cb37-5"><a aria-label="5"></a>standard_norm_values <span class="op">=</span> scaler.fit_transform(norm_values.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb37-6"><a aria-label="6"></a></span>
-<span id="cb37-7"><a aria-label="7"></a><span class="co"># Plot the histogram</span></span>
-<span id="cb37-8"><a aria-label="8"></a>plt.hist(standard_norm_values, bins<span class="op">=</span><span class="dv">20</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb37-9"><a aria-label="9"></a></span>
-<span id="cb37-10"><a aria-label="10"></a>plt.title(<span class="ss">f'StandardScaler'</span>)</span>
-<span id="cb37-11"><a aria-label="11"></a></span>
-<span id="cb37-12"><a aria-label="12"></a>plt.xlabel(<span class="st">'Value'</span>)</span>
-<span id="cb37-13"><a aria-label="13"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb37-14"><a aria-label="14"></a></span>
-<span id="cb37-15"><a aria-label="15"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="e96ed8e2" class="cell" data-execution_count="28">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-html/cell-28-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides_files/figure-html/cell-28-output-1.png" width="594" height="451"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-28-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides_files/figure-revealjs/cell-28-output-1.png" width="817" height="451"></a></p>
 </figure>
 </div>
 </div>
@@ -1580,11 +1550,11 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 <section id="data-imputation-strategy" class="slide level2">
 <h2>Data Imputation Strategy</h2>
 <p>Replace missing values with <strong>mean</strong> or <strong>median</strong> of the <strong>attribute</strong>.</p>
-<div id="0e32ccbd" class="cell" data-execution_count="37">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a aria-label="1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
-<span id="cb43-2"><a aria-label="2"></a>imputer <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>)</span>
-<span id="cb43-3"><a aria-label="3"></a></span>
-<span id="cb43-4"><a aria-label="4"></a>X <span class="op">=</span> imputer.fit_transform(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="dfd74b3e" class="cell" data-execution_count="37">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a aria-label="1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb37-2"><a aria-label="2"></a>imputer <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>)</span>
+<span id="cb37-3"><a aria-label="3"></a></span>
+<span id="cb37-4"><a aria-label="4"></a>X <span class="op">=</span> imputer.fit_transform(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <ul>
@@ -1779,32 +1749,32 @@ w_j = \frac{N}{K \cdot n_j}
 </div></aside></section>
 <section id="exploration" class="slide level2">
 <h2>Exploration</h2>
-<div id="80c4ba11" class="cell" data-execution_count="38">
+<div id="5ce298ea" class="cell" data-execution_count="38">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb44-2"><a aria-label="2"></a></span>
-<span id="cb44-3"><a aria-label="3"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb44-4"><a aria-label="4"></a></span>
-<span id="cb44-5"><a aria-label="5"></a>X <span class="op">=</span> <span class="dv">6</span> <span class="op">*</span> np.random.rand(<span class="dv">100</span>, <span class="dv">1</span>) <span class="op">-</span> <span class="dv">3</span></span>
-<span id="cb44-6"><a aria-label="6"></a>y <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> X <span class="op">**</span> <span class="dv">2</span> <span class="op">-</span> X <span class="op">+</span> <span class="dv">2</span> <span class="op">+</span> np.random.randn(<span class="dv">100</span>, <span class="dv">1</span>)</span>
-<span id="cb44-7"><a aria-label="7"></a></span>
-<span id="cb44-8"><a aria-label="8"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
-<span id="cb44-9"><a aria-label="9"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb44-10"><a aria-label="10"></a></span>
-<span id="cb44-11"><a aria-label="11"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">4</span>))</span>
-<span id="cb44-12"><a aria-label="12"></a></span>
-<span id="cb44-13"><a aria-label="13"></a>plt.plot(X, y, <span class="st">"b."</span>)</span>
-<span id="cb44-14"><a aria-label="14"></a>plt.xlabel(<span class="st">"$x$"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb44-15"><a aria-label="15"></a>plt.ylabel(<span class="st">"$y$"</span>, rotation<span class="op">=</span><span class="dv">0</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb44-16"><a aria-label="16"></a>plt.axis([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">10</span>])</span>
-<span id="cb44-17"><a aria-label="17"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb44-18"><a aria-label="18"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb38-2"><a aria-label="2"></a></span>
+<span id="cb38-3"><a aria-label="3"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb38-4"><a aria-label="4"></a></span>
+<span id="cb38-5"><a aria-label="5"></a>X <span class="op">=</span> <span class="dv">6</span> <span class="op">*</span> np.random.rand(<span class="dv">100</span>, <span class="dv">1</span>) <span class="op">-</span> <span class="dv">3</span></span>
+<span id="cb38-6"><a aria-label="6"></a>y <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> X <span class="op">**</span> <span class="dv">2</span> <span class="op">-</span> X <span class="op">+</span> <span class="dv">2</span> <span class="op">+</span> np.random.randn(<span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb38-7"><a aria-label="7"></a></span>
+<span id="cb38-8"><a aria-label="8"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
+<span id="cb38-9"><a aria-label="9"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb38-10"><a aria-label="10"></a></span>
+<span id="cb38-11"><a aria-label="11"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">4</span>))</span>
+<span id="cb38-12"><a aria-label="12"></a></span>
+<span id="cb38-13"><a aria-label="13"></a>plt.plot(X, y, <span class="st">"b."</span>)</span>
+<span id="cb38-14"><a aria-label="14"></a>plt.xlabel(<span class="st">"$x$"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb38-15"><a aria-label="15"></a>plt.ylabel(<span class="st">"$y$"</span>, rotation<span class="op">=</span><span class="dv">0</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb38-16"><a aria-label="16"></a>plt.axis([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">10</span>])</span>
+<span id="cb38-17"><a aria-label="17"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb38-18"><a aria-label="18"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-38-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-html/cell-38-output-1.png" class="quarto-figure quarto-figure-center" width="509" height="372"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-38-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-revealjs/cell-38-output-1.png" class="quarto-figure quarto-figure-center" width="509" height="372"></a></p>
 </figure>
 </div>
 </div>
@@ -1833,30 +1803,30 @@ w_j = \frac{N}{K \cdot n_j}
 </div></aside></section>
 <section id="linear-regression" class="slide level2">
 <h2>Linear Regression</h2>
-<div id="95087fc7" class="cell" data-execution_count="39">
+<div id="32ab0e93" class="cell" data-execution_count="39">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a aria-label="1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb45-2"><a aria-label="2"></a></span>
-<span id="cb45-3"><a aria-label="3"></a>lin_reg <span class="op">=</span> LinearRegression()</span>
-<span id="cb45-4"><a aria-label="4"></a>lin_reg.fit(X, y)</span>
-<span id="cb45-5"><a aria-label="5"></a></span>
-<span id="cb45-6"><a aria-label="6"></a>X_new <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">3</span>], [<span class="dv">3</span>]])</span>
-<span id="cb45-7"><a aria-label="7"></a>y_pred <span class="op">=</span> lin_reg.predict(X_new)</span>
-<span id="cb45-8"><a aria-label="8"></a></span>
-<span id="cb45-9"><a aria-label="9"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">4</span>))</span>
-<span id="cb45-10"><a aria-label="10"></a></span>
-<span id="cb45-11"><a aria-label="11"></a>plt.plot(X, y, <span class="st">"b."</span>)</span>
-<span id="cb45-12"><a aria-label="12"></a>plt.plot(X_new, y_pred, <span class="st">"r-"</span>)</span>
-<span id="cb45-13"><a aria-label="13"></a>plt.xlabel(<span class="st">"$x$"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb45-14"><a aria-label="14"></a>plt.ylabel(<span class="st">"$y$"</span>, rotation<span class="op">=</span><span class="dv">0</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
-<span id="cb45-15"><a aria-label="15"></a>plt.axis([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">10</span>])</span>
-<span id="cb45-16"><a aria-label="16"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a aria-label="1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb39-2"><a aria-label="2"></a></span>
+<span id="cb39-3"><a aria-label="3"></a>lin_reg <span class="op">=</span> LinearRegression()</span>
+<span id="cb39-4"><a aria-label="4"></a>lin_reg.fit(X, y)</span>
+<span id="cb39-5"><a aria-label="5"></a></span>
+<span id="cb39-6"><a aria-label="6"></a>X_new <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">3</span>], [<span class="dv">3</span>]])</span>
+<span id="cb39-7"><a aria-label="7"></a>y_pred <span class="op">=</span> lin_reg.predict(X_new)</span>
+<span id="cb39-8"><a aria-label="8"></a></span>
+<span id="cb39-9"><a aria-label="9"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">4</span>))</span>
+<span id="cb39-10"><a aria-label="10"></a></span>
+<span id="cb39-11"><a aria-label="11"></a>plt.plot(X, y, <span class="st">"b."</span>)</span>
+<span id="cb39-12"><a aria-label="12"></a>plt.plot(X_new, y_pred, <span class="st">"r-"</span>)</span>
+<span id="cb39-13"><a aria-label="13"></a>plt.xlabel(<span class="st">"$x$"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb39-14"><a aria-label="14"></a>plt.ylabel(<span class="st">"$y$"</span>, rotation<span class="op">=</span><span class="dv">0</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb39-15"><a aria-label="15"></a>plt.axis([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">10</span>])</span>
+<span id="cb39-16"><a aria-label="16"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-39-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-html/cell-39-output-1.png" class="quarto-figure quarto-figure-center" width="509" height="372"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-39-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-revealjs/cell-39-output-1.png" class="quarto-figure quarto-figure-center" width="509" height="372"></a></p>
 </figure>
 </div>
 </div>
@@ -1894,23 +1864,23 @@ w_j = \frac{N}{K \cdot n_j}
 </section>
 <section id="polynomialfeatures" class="slide level2">
 <h2><code>PolynomialFeatures</code></h2>
-<div id="e7ee2e2d" class="cell" data-execution_count="40">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
-<span id="cb46-2"><a aria-label="2"></a></span>
-<span id="cb46-3"><a aria-label="3"></a>poly_features <span class="op">=</span> PolynomialFeatures(degree<span class="op">=</span><span class="dv">2</span>, include_bias<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb46-4"><a aria-label="4"></a>X_poly <span class="op">=</span> poly_features.fit_transform(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="dc16b8b7" class="cell" data-execution_count="40">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
+<span id="cb40-2"><a aria-label="2"></a></span>
+<span id="cb40-3"><a aria-label="3"></a>poly_features <span class="op">=</span> PolynomialFeatures(degree<span class="op">=</span><span class="dv">2</span>, include_bias<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb40-4"><a aria-label="4"></a>X_poly <span class="op">=</span> poly_features.fit_transform(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
-<div id="aa552af8" class="cell" data-execution_count="41">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a aria-label="1"></a>X[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="5f56536f" class="cell" data-execution_count="41">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a aria-label="1"></a>X[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="39">
 <pre><code>array([-0.75275929])</code></pre>
 </div>
 </div>
 </div>
 <div class="fragment">
-<div id="e18cf5c7" class="cell" data-execution_count="42">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a aria-label="1"></a>X_poly[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="f0f85d75" class="cell" data-execution_count="42">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a aria-label="1"></a>X_poly[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="40">
 <pre><code>array([-0.75275929,  0.56664654])</code></pre>
 </div>
@@ -1963,49 +1933,49 @@ w_j = \frac{N}{K \cdot n_j}
 </section>
 <section id="polynomial-regression" class="slide level2">
 <h2>Polynomial Regression</h2>
-<div id="060c0b56" class="cell" data-execution_count="43">
+<div id="86dabcab" class="cell" data-execution_count="43">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a aria-label="1"></a>lin_reg <span class="op">=</span> LinearRegression()</span>
-<span id="cb51-2"><a aria-label="2"></a>lin_reg <span class="op">=</span> lin_reg.fit(X_poly, y)</span>
-<span id="cb51-3"><a aria-label="3"></a></span>
-<span id="cb51-4"><a aria-label="4"></a>X_new <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>).reshape(<span class="dv">100</span>, <span class="dv">1</span>)</span>
-<span id="cb51-5"><a aria-label="5"></a>X_new_poly <span class="op">=</span> poly_features.transform(X_new)</span>
-<span id="cb51-6"><a aria-label="6"></a>y_new <span class="op">=</span> lin_reg.predict(X_new_poly)</span>
-<span id="cb51-7"><a aria-label="7"></a></span>
-<span id="cb51-8"><a aria-label="8"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb51-9"><a aria-label="9"></a>plt.plot(X, y, <span class="st">"b."</span>)</span>
-<span id="cb51-10"><a aria-label="10"></a>plt.plot(X_new, y_new, <span class="st">"r-"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Predictions"</span>)</span>
-<span id="cb51-11"><a aria-label="11"></a>plt.xlabel(<span class="st">"$x_1$"</span>)</span>
-<span id="cb51-12"><a aria-label="12"></a>plt.ylabel(<span class="st">"$y$"</span>, rotation<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb51-13"><a aria-label="13"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
-<span id="cb51-14"><a aria-label="14"></a>plt.axis([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">10</span>])</span>
-<span id="cb51-15"><a aria-label="15"></a>plt.grid()</span>
-<span id="cb51-16"><a aria-label="16"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a aria-label="1"></a>lin_reg <span class="op">=</span> LinearRegression()</span>
+<span id="cb45-2"><a aria-label="2"></a>lin_reg <span class="op">=</span> lin_reg.fit(X_poly, y)</span>
+<span id="cb45-3"><a aria-label="3"></a></span>
+<span id="cb45-4"><a aria-label="4"></a>X_new <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>).reshape(<span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb45-5"><a aria-label="5"></a>X_new_poly <span class="op">=</span> poly_features.transform(X_new)</span>
+<span id="cb45-6"><a aria-label="6"></a>y_new <span class="op">=</span> lin_reg.predict(X_new_poly)</span>
+<span id="cb45-7"><a aria-label="7"></a></span>
+<span id="cb45-8"><a aria-label="8"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb45-9"><a aria-label="9"></a>plt.plot(X, y, <span class="st">"b."</span>)</span>
+<span id="cb45-10"><a aria-label="10"></a>plt.plot(X_new, y_new, <span class="st">"r-"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Predictions"</span>)</span>
+<span id="cb45-11"><a aria-label="11"></a>plt.xlabel(<span class="st">"$x_1$"</span>)</span>
+<span id="cb45-12"><a aria-label="12"></a>plt.ylabel(<span class="st">"$y$"</span>, rotation<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb45-13"><a aria-label="13"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb45-14"><a aria-label="14"></a>plt.axis([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">10</span>])</span>
+<span id="cb45-15"><a aria-label="15"></a>plt.grid()</span>
+<span id="cb45-16"><a aria-label="16"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-43-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="slides_files/figure-html/cell-43-output-1.png" class="quarto-figure quarto-figure-center" width="431" height="287"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-43-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="slides_files/figure-revealjs/cell-43-output-1.png" class="quarto-figure quarto-figure-center" width="431" height="287"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p><code>LinearRegression</code> on <code>PolynomialFeatures</code></p>
-<div id="d3594fc5" class="cell" data-execution_count="44">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a aria-label="1"></a>lin_reg <span class="op">=</span> LinearRegression()</span>
-<span id="cb52-2"><a aria-label="2"></a>lin_reg.fit(X_poly, y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="d9281dd7" class="cell" data-execution_count="44">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a aria-label="1"></a>lin_reg <span class="op">=</span> LinearRegression()</span>
+<span id="cb46-2"><a aria-label="2"></a>lin_reg.fit(X_poly, y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="polynomial-regression-1" class="slide level2 smaller">
 <h2>Polynomial Regression</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<div id="87680457" class="cell" data-execution_count="45">
+<div id="b1d6e686" class="cell" data-execution_count="45">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-html/cell-45-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="slides_files/figure-html/cell-45-output-1.png" width="431" height="287"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-45-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="slides_files/figure-revealjs/cell-45-output-1.png" width="431" height="287"></a></p>
 </figure>
 </div>
 </div>
@@ -2020,8 +1990,8 @@ w_j = \frac{N}{K \cdot n_j}
   \hat{y} = 0.56 x^2 + (-1.06) x + 1.78
 \]</span></p>
 </div></div>
-<div id="0010eff0" class="cell" data-execution_count="46">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a aria-label="1"></a>lin_reg.coef_, lin_reg.intercept_</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="17b053eb" class="cell" data-execution_count="46">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a aria-label="1"></a>lin_reg.coef_, lin_reg.intercept_</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="43">
 <pre><code>(array([[-1.06633107,  0.56456263]]), array([1.78134581]))</code></pre>
 </div>
@@ -2203,24 +2173,24 @@ Shumailov, Ilia, Zakhar Shumaylov, Yiren Zhao, Nicolas Papernot, Ross Anderson, 
 </section>
 <section id="pipeline" class="slide level2">
 <h2>Pipeline</h2>
-<div id="6b4cc2da" class="cell" data-execution_count="47">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a aria-label="1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="cb55-2"><a aria-label="2"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb55-3"><a aria-label="3"></a></span>
-<span id="cb55-4"><a aria-label="4"></a>num_pipeline <span class="op">=</span> Pipeline([</span>
-<span id="cb55-5"><a aria-label="5"></a>        (<span class="st">'imputer'</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>)),</span>
-<span id="cb55-6"><a aria-label="6"></a>        (<span class="st">'attribs_adder'</span>, CombinedAttributesAdder()),</span>
-<span id="cb55-7"><a aria-label="7"></a>        (<span class="st">'std_scaler'</span>, StandardScaler()),</span>
-<span id="cb55-8"><a aria-label="8"></a>        ])</span>
-<span id="cb55-9"><a aria-label="9"></a></span>
-<span id="cb55-10"><a aria-label="10"></a>training_num_tr <span class="op">=</span> num_pipeline.fit_transform(training_num)</span>
-<span id="cb55-11"><a aria-label="11"></a></span>
-<span id="cb55-12"><a aria-label="12"></a>full_pipeline <span class="op">=</span> ColumnTransformer([</span>
-<span id="cb55-13"><a aria-label="13"></a>        (<span class="st">"num"</span>, num_pipeline, num_attribs),</span>
-<span id="cb55-14"><a aria-label="14"></a>        (<span class="st">"cat"</span>, OneHotEncoder(), [<span class="st">"sequence"</span>]),</span>
-<span id="cb55-15"><a aria-label="15"></a>    ])</span>
-<span id="cb55-16"><a aria-label="16"></a></span>
-<span id="cb55-17"><a aria-label="17"></a>training_prepared <span class="op">=</span> full_pipeline.fit_transform(training)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cb137d24" class="cell" data-execution_count="47">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a aria-label="1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb49-2"><a aria-label="2"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb49-3"><a aria-label="3"></a></span>
+<span id="cb49-4"><a aria-label="4"></a>num_pipeline <span class="op">=</span> Pipeline([</span>
+<span id="cb49-5"><a aria-label="5"></a>        (<span class="st">'imputer'</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>)),</span>
+<span id="cb49-6"><a aria-label="6"></a>        (<span class="st">'attribs_adder'</span>, CombinedAttributesAdder()),</span>
+<span id="cb49-7"><a aria-label="7"></a>        (<span class="st">'std_scaler'</span>, StandardScaler()),</span>
+<span id="cb49-8"><a aria-label="8"></a>        ])</span>
+<span id="cb49-9"><a aria-label="9"></a></span>
+<span id="cb49-10"><a aria-label="10"></a>training_num_tr <span class="op">=</span> num_pipeline.fit_transform(training_num)</span>
+<span id="cb49-11"><a aria-label="11"></a></span>
+<span id="cb49-12"><a aria-label="12"></a>full_pipeline <span class="op">=</span> ColumnTransformer([</span>
+<span id="cb49-13"><a aria-label="13"></a>        (<span class="st">"num"</span>, num_pipeline, num_attribs),</span>
+<span id="cb49-14"><a aria-label="14"></a>        (<span class="st">"cat"</span>, OneHotEncoder(), [<span class="st">"sequence"</span>]),</span>
+<span id="cb49-15"><a aria-label="15"></a>    ])</span>
+<span id="cb49-16"><a aria-label="16"></a></span>
+<span id="cb49-17"><a aria-label="17"></a>training_prepared <span class="op">=</span> full_pipeline.fit_transform(training)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section class="slide level2">

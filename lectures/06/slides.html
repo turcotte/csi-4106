@@ -218,7 +218,7 @@
     }
   </style>
 <meta property="og:title" content="Cross-entropy, geometric interpretation, and implementation – CSI 4106 - Fall 2026">
-<meta property="og:description" content="CSI 4106 - Fall 2025">
+<meta property="og:description" content="CSI 4106 - Fall 2026">
 <meta property="og:site_name" content="CSI 4106 - Fall 2026">
 </head>
 <body class="quarto-light">
@@ -227,7 +227,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Cross-entropy, geometric interpretation, and implementation</h1>
-  <p class="subtitle">CSI 4106 - Fall 2025</p>
+  <p class="subtitle">CSI 4106 - Fall 2026</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -237,7 +237,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Jan 30, 2026 12:30</p>
+  <p class="date">Version: Aug 10, 2026 11:53</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -554,7 +554,7 @@ J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \hat{y_i} + (1-y_i) \log (1 - \hat{
 </div></aside></section>
 <section id="for-each-example" class="slide level2">
 <h2>For Each Example</h2>
-<div id="2ce1d076" class="cell" data-execution_count="1">
+<div id="fc0bdb58" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -587,7 +587,7 @@ J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \hat{y_i} + (1-y_i) \log (1 - \hat{
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="slides_files/figure-html/cell-2-output-1.png" class="quarto-figure quarto-figure-center" width="428" height="382"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="slides_files/figure-revealjs/cell-2-output-1.png" class="quarto-figure quarto-figure-center" width="428" height="382"></a></p>
 </figure>
 </div>
 </div>
@@ -724,7 +724,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 <li>When <span class="math inline">\(t = 0\)</span>, <span class="math inline">\(e^{-t} = 0\)</span>, resulting in a denominator of 2, so <span class="math inline">\(\sigma(t) = 0.5\)</span>.</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="532fd576" class="cell" data-execution_count="2">
+<div id="89f59cbc" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Sigmoid function</span></span>
@@ -757,7 +757,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="slides_files/figure-html/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="590" height="430"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="slides_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="813" height="430"></a></p>
 </figure>
 </div>
 </div>
@@ -776,7 +776,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 <li class="fragment"><p><strong>Derivative Simplicity</strong>: For the logistic function <span class="math inline">\(\sigma(x) = \tfrac{1}{1 + e^{-x}}\)</span>, the derivative simplifies to <span class="math inline">\(\sigma'(x) = \sigma(x)(1 - \sigma(x))\)</span>. This elegant form arises because the exponential base <span class="math inline">\(e\)</span> has the unique property that <span class="math inline">\(\tfrac{d}{dx} e^x = e^x\)</span>, avoiding an extra multiplicative constant.</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
-<div id="61583646" class="cell" data-execution_count="3">
+<div id="7e438f3f" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="im">import</span> math</span>
@@ -803,7 +803,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides_files/figure-html/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="668" height="524"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides_files/figure-revealjs/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="668" height="524"></a></p>
 </figure>
 </div>
 </div>
@@ -831,7 +831,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
   \sigma(wx + b)
 \]</span></p>
 </div><div class="column" style="width:50%;">
-<div id="8fde7bd8" class="cell" data-execution_count="4">
+<div id="07d95caf" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="kw">def</span> logistic(x, w, b):</span>
@@ -858,7 +858,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-html/cell-5-output-1.png" class="quarto-figure quarto-figure-center" width="664" height="524"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-5-output-1.png" class="quarto-figure quarto-figure-center" width="664" height="524"></a></p>
 </figure>
 </div>
 </div>
@@ -873,7 +873,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
   \sigma(wx + b)
 \]</span></p>
 </div><div class="column" style="width:50%;">
-<div id="41bd7190" class="cell" data-execution_count="5">
+<div id="8e7622f9" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="co"># Plot 2: Varying b (horizontal shift) with w fixed at 1.</span></span>
@@ -894,7 +894,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-html/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="664" height="524"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="664" height="524"></a></p>
 </figure>
 </div>
 </div>
@@ -908,7 +908,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 </section>
 <section id="implementation-generating-data" class="slide level2">
 <h2>Implementation: Generating Data</h2>
-<div id="e388c6c4" class="cell" data-execution_count="6">
+<div id="19c96445" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="co"># Generate synthetic data for a binary classification problem</span></span>
 <span id="cb6-2"><a aria-label="2"></a></span>
 <span id="cb6-3"><a aria-label="3"></a>m <span class="op">=</span> <span class="dv">100</span>  <span class="co"># number of examples</span></span>
@@ -925,7 +925,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 </section>
 <section id="implementation-vizualization" class="slide level2">
 <h2>Implementation: Vizualization</h2>
-<div id="2eb99409" class="cell" data-execution_count="7">
+<div id="12c2a23d" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="co"># Visualize the decision boundary along with the data points</span></span>
@@ -942,7 +942,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides_files/figure-html/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="662" height="524"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="662" height="524"></a></p>
 </figure>
 </div>
 </div>
@@ -950,7 +950,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 </section>
 <section id="implementation-cost-function" class="slide level2">
 <h2>Implementation: Cost Function</h2>
-<div id="4a363e65" class="cell" data-execution_count="8">
+<div id="4d697d6b" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="co"># Sigmoid function</span></span>
 <span id="cb8-2"><a aria-label="2"></a><span class="kw">def</span> sigmoid(z):</span>
 <span id="cb8-3"><a aria-label="3"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>z))</span>
@@ -973,7 +973,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 </section>
 <section id="implementation-logistic-regression" class="slide level2">
 <h2>Implementation: Logistic Regression</h2>
-<div id="bf204e10" class="cell" data-execution_count="9">
+<div id="3c5c9b50" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="co"># Logistic regression training using gradient descent</span></span>
 <span id="cb9-2"><a aria-label="2"></a><span class="kw">def</span> logistic_regression(X, y, learning_rate<span class="op">=</span><span class="fl">0.1</span>, iterations<span class="op">=</span><span class="dv">1000</span>):</span>
 <span id="cb9-3"><a aria-label="3"></a>    m, n <span class="op">=</span> X.shape</span>
@@ -989,7 +989,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 </section>
 <section id="training" class="slide level2">
 <h2>Training</h2>
-<div id="3dce2fe2" class="cell" data-execution_count="10">
+<div id="dd7699f2" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="co"># Add intercept term (bias)</span></span>
 <span id="cb10-2"><a aria-label="2"></a>X_with_intercept <span class="op">=</span> np.hstack([np.ones((m, <span class="dv">1</span>)), X])</span>
 <span id="cb10-3"><a aria-label="3"></a></span>
@@ -1004,7 +1004,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 </section>
 <section id="cost-function-convergence" class="slide level2">
 <h2>Cost Function Convergence</h2>
-<div id="e6d9d1f9" class="cell" data-execution_count="11">
+<div id="2dbe0ce2" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
@@ -1018,7 +1018,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides_files/figure-html/cell-12-output-1.png" class="quarto-figure quarto-figure-center" width="672" height="525"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides_files/figure-revealjs/cell-12-output-1.png" class="quarto-figure quarto-figure-center" width="672" height="525"></a></p>
 </figure>
 </div>
 </div>
@@ -1026,7 +1026,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 </section>
 <section id="decision-boundary-and-data-points" class="slide level2">
 <h2>Decision Boundary and Data Points</h2>
-<div id="9b5a6173" class="cell" data-execution_count="12">
+<div id="b42b0fd8" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
@@ -1046,7 +1046,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-html/cell-13-output-1.png" class="quarto-figure quarto-figure-center" width="662" height="524"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-revealjs/cell-13-output-1.png" class="quarto-figure quarto-figure-center" width="662" height="524"></a></p>
 </figure>
 </div>
 </div>
@@ -1054,7 +1054,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 </section>
 <section id="implementation-continued" class="slide level2">
 <h2>Implementation (continued)</h2>
-<div id="4a979c85" class="cell" data-execution_count="13">
+<div id="23cd686b" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="co"># Predict function: returns class labels and probabilities for new data</span></span>
 <span id="cb14-2"><a aria-label="2"></a><span class="kw">def</span> predict(theta, X, threshold<span class="op">=</span><span class="fl">0.5</span>):</span>
 <span id="cb14-3"><a aria-label="3"></a>    probs <span class="op">=</span> sigmoid(X.dot(theta))</span>
@@ -1063,7 +1063,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 </section>
 <section id="predictions" class="slide level2">
 <h2>Predictions</h2>
-<div id="923fe8c6" class="cell" data-execution_count="14">
+<div id="f698aa10" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a><span class="co"># New examples must include the intercept term.</span></span>
 <span id="cb15-2"><a aria-label="2"></a></span>
 <span id="cb15-3"><a aria-label="3"></a><span class="co"># Negative example (likely class 0): Choose a point far in the negative quadrant.</span></span>
@@ -1094,7 +1094,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 </section>
 <section id="predictions-continued" class="slide level2">
 <h2>Predictions (continued)</h2>
-<div id="4c915738" class="cell" data-execution_count="15">
+<div id="bc4e8b9a" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="co"># Combine the examples into one array for prediction.</span></span>
 <span id="cb16-2"><a aria-label="2"></a>new_examples <span class="op">=</span> np.vstack([example_neg, example_pos, example_near])</span>
 <span id="cb16-3"><a aria-label="3"></a></span>
@@ -1123,7 +1123,7 @@ Near-boundary example [0.         0.11760374] -&gt; Prediction: 1 (Probability: 
 </section>
 <section id="visualizing-the-weight-vector-1" class="slide level2">
 <h2>Visualizing the Weight Vector</h2>
-<div id="b8593463" class="cell" data-execution_count="16">
+<div id="33ae4774" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a><span class="co"># Plot decision boundary and data points</span></span>
@@ -1171,7 +1171,7 @@ Near-boundary example [0.         0.11760374] -&gt; Prediction: 1 (Probability: 
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-17-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides_files/figure-html/cell-17-output-1.png" class="quarto-figure quarto-figure-center" width="596" height="524"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-17-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides_files/figure-revealjs/cell-17-output-1.png" class="quarto-figure quarto-figure-center" width="596" height="524"></a></p>
 </figure>
 </div>
 </div>
@@ -1179,7 +1179,7 @@ Near-boundary example [0.         0.11760374] -&gt; Prediction: 1 (Probability: 
 </section>
 <section id="near-the-decision-boundary" class="slide level2">
 <h2>Near the Decision Boundary</h2>
-<div id="7b91c363" class="cell" data-execution_count="17">
+<div id="4ece8cb8" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a><span class="co"># --- Visualization Setup ---</span></span>
@@ -1208,7 +1208,7 @@ Near-boundary example [0.         0.11760374] -&gt; Prediction: 1 (Probability: 
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-18-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="slides_files/figure-html/cell-18-output-1.png" class="quarto-figure quarto-figure-center" width="635" height="524"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-18-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="slides_files/figure-revealjs/cell-18-output-1.png" class="quarto-figure quarto-figure-center" width="635" height="524"></a></p>
 </figure>
 </div>
 </div>
@@ -1216,7 +1216,7 @@ Near-boundary example [0.         0.11760374] -&gt; Prediction: 1 (Probability: 
 </section>
 <section id="near-the-decision-boundary-1" class="slide level2">
 <h2>Near the Decision Boundary</h2>
-<div id="939ffa91" class="cell" data-execution_count="18">
+<div id="467d0f18" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a><span class="co"># --- Approach 1: 3D Surface Plot ---</span></span>
@@ -1233,7 +1233,7 @@ Near-boundary example [0.         0.11760374] -&gt; Prediction: 1 (Probability: 
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-19-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides_files/figure-html/cell-19-output-1.png" class="quarto-figure quarto-figure-center" width="738" height="631"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-19-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides_files/figure-revealjs/cell-19-output-1.png" class="quarto-figure quarto-figure-center" width="738" height="631"></a></p>
 </figure>
 </div>
 </div>

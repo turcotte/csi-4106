@@ -218,7 +218,7 @@
     }
   </style>
 <meta property="og:title" content="Logististic regression – CSI 4106 - Fall 2026">
-<meta property="og:description" content="CSI 4106 - Fall 2025">
+<meta property="og:description" content="CSI 4106 - Fall 2026">
 <meta property="og:site_name" content="CSI 4106 - Fall 2026">
 </head>
 <body class="quarto-light">
@@ -227,7 +227,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Logististic regression</h1>
-  <p class="subtitle">CSI 4106 - Fall 2025</p>
+  <p class="subtitle">CSI 4106 - Fall 2026</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -237,7 +237,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Jan 30, 2026 12:30</p>
+  <p class="date">Version: Aug 10, 2026 11:53</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -365,7 +365,7 @@ Marcel Turcotte
 </section>
 <section id="histogram" class="slide level2">
 <h2>Histogram</h2>
-<div id="b64c541a" class="cell" data-execution_count="1">
+<div id="a342693e" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -406,7 +406,7 @@ Marcel Turcotte
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="slides_files/figure-html/cell-2-output-1.png" class="quarto-figure quarto-figure-center" width="808" height="525"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="slides_files/figure-revealjs/cell-2-output-1.png" class="quarto-figure quarto-figure-center" width="808" height="525"></a></p>
 </figure>
 </div>
 </div>
@@ -446,7 +446,7 @@ Marcel Turcotte
 </section>
 <section id="visualizing-our-data" class="slide level2">
 <h2>Visualizing our data</h2>
-<div id="a000653c" class="cell" data-execution_count="2">
+<div id="6c773c04" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Scatter plot of flipper length vs. binary label (Gentoo or Not Gentoo)</span></span>
@@ -478,7 +478,7 @@ Marcel Turcotte
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides_files/figure-html/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="813" height="525"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="813" height="525"></a></p>
 </figure>
 </div>
 </div>
@@ -487,7 +487,7 @@ Marcel Turcotte
 <section id="intuition" class="slide level2">
 <h2>Intuition</h2>
 <p>Fitting a linear regression is not the answer, but <span class="math inline">\(\ldots\)</span></p>
-<div id="16ac9de4" class="cell" data-execution_count="3">
+<div id="ba13c899" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
@@ -514,7 +514,7 @@ Marcel Turcotte
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-html/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
 </figure>
 </div>
 </div>
@@ -524,11 +524,11 @@ Marcel Turcotte
 <h2>Intuition (continued)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="d38134a6" class="cell" data-execution_count="4">
+<div id="05dbfb2d" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-html/cell-5-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-revealjs/cell-5-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
 </figure>
 </div>
 </div>
@@ -545,11 +545,11 @@ Marcel Turcotte
 <h2>Intuition (continued)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="dfb28a33" class="cell" data-execution_count="5">
+<div id="d45e8dc0" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides_files/figure-html/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
 </figure>
 </div>
 </div>
@@ -565,11 +565,11 @@ Marcel Turcotte
 <h2>Intuition (continued)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="9f482356" class="cell" data-execution_count="7">
+<div id="e5413dfc" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides_files/figure-html/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
 </figure>
 </div>
 </div>
@@ -585,11 +585,11 @@ Marcel Turcotte
 <h2>Intuition (continued)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="bb2a76b4" class="cell" data-execution_count="8">
+<div id="d5856a2a" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-html/cell-9-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-revealjs/cell-9-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
 </figure>
 </div>
 </div>
@@ -614,7 +614,7 @@ Marcel Turcotte
   \sigma(t) = \frac{1}{1+e^{-t}}
 \]</span></p>
 </div><div class="column" style="width:60%;">
-<div id="62bff9e2" class="cell" data-execution_count="9">
+<div id="733fbdc6" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Sigmoid function</span></span>
@@ -647,7 +647,7 @@ Marcel Turcotte
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides_files/figure-html/cell-10-output-1.png" class="quarto-figure quarto-figure-center" width="590" height="430"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides_files/figure-revealjs/cell-10-output-1.png" class="quarto-figure quarto-figure-center" width="813" height="430"></a></p>
 </figure>
 </div>
 </div>
@@ -685,21 +685,21 @@ Marcel Turcotte
 <h2>Logistic Regression (intuition)</h2>
 <div class="columns">
 <div class="column" style="width:65%;">
-<div id="c32a72e9" class="cell" data-execution_count="10">
+<div id="d73d7afb" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="slides_files/figure-html/cell-11-output-1.png" class="quarto-figure quarto-figure-center" width="498" height="357"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="slides_files/figure-revealjs/cell-11-output-1.png" class="quarto-figure quarto-figure-center" width="498" height="357"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:35%;">
-<div id="afd77cc8" class="cell" data-execution_count="11">
+<div id="77dd585c" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides_files/figure-html/cell-12-output-1.png" class="quarto-figure quarto-figure-center" width="515" height="356"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides_files/figure-revealjs/cell-12-output-1.png" class="quarto-figure quarto-figure-center" width="515" height="356"></a></p>
 </figure>
 </div>
 </div>
@@ -719,7 +719,7 @@ Marcel Turcotte
   \sigma(t) = \frac{1}{1+e^{-t}}
 \]</span></p>
 </div><div class="column" style="width:40%;">
-<div id="091eef32" class="cell" data-execution_count="12">
+<div id="3638baf8" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="co"># Create a figure</span></span>
@@ -742,7 +742,7 @@ Marcel Turcotte
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="slides_files/figure-html/cell-13-output-1.png" class="quarto-figure quarto-figure-center" width="590" height="430"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="slides_files/figure-revealjs/cell-13-output-1.png" class="quarto-figure quarto-figure-center" width="813" height="430"></a></p>
 </figure>
 </div>
 </div>
@@ -788,11 +788,11 @@ Marcel Turcotte
 <h2>Logistic regression (two attributes)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="bed58aa1" class="cell" data-execution_count="13">
+<div id="b89b6866" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides_files/figure-html/cell-14-output-1.png" class="quarto-figure quarto-figure-center" width="751" height="377"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides_files/figure-revealjs/cell-14-output-1.png" class="quarto-figure quarto-figure-center" width="751" height="377"></a></p>
 </figure>
 </div>
 </div>
@@ -870,13 +870,13 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <section id="uci-ml-hand-written-digits-datasets" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Loading the dataset</p>
-<div id="ea8b187f" class="cell" data-execution_count="14">
+<div id="c49d177e" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_digits</span>
 <span id="cb6-2"><a aria-label="2"></a></span>
 <span id="cb6-3"><a aria-label="3"></a>digits <span class="op">=</span> load_digits()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>What is the type of <code>digits.data</code></p>
-<div id="a73698c8" class="cell" data-execution_count="15">
+<div id="c1e25780" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="bu">type</span>(digits.data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>numpy.ndarray</code></pre>
@@ -889,18 +889,18 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <section id="uci-ml-hand-written-digits-datasets-1" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>How many examples (<code>N</code>) and how many attributes (<code>D</code>)?</p>
-<div id="4792025f" class="cell" data-execution_count="16">
+<div id="6f1b702e" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>digits.data.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>(1797, 64)</code></pre>
 </div>
 </div>
 <p>Assigning <code>N</code> and <code>D</code></p>
-<div id="05015d25" class="cell" data-execution_count="17">
+<div id="d4e83bb7" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a>N, D <span class="op">=</span> digits.data.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>target</code> has the same number of entries (examples) as <code>data</code>?</p>
-<div id="3f6f5be6" class="cell" data-execution_count="18">
+<div id="c5d39d29" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>digits.target.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>(1797,)</code></pre>
@@ -910,21 +910,21 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <section id="uci-ml-hand-written-digits-datasets-2" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>What are the width and height of those images?</p>
-<div id="f44b4949" class="cell" data-execution_count="19">
+<div id="e299e82f" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>digits.images.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>(1797, 8, 8)</code></pre>
 </div>
 </div>
 <p>Assigning <code>width</code> and <code>height</code></p>
-<div id="5e667dee" class="cell" data-execution_count="20">
+<div id="f974af5d" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a>_, width, height <span class="op">=</span> digits.images.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="uci-ml-hand-written-digits-datasets-3" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Assigning <code>X</code> and <code>y</code></p>
-<div id="3fe65629" class="cell" data-execution_count="21">
+<div id="3d5cb414" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a>X <span class="op">=</span> digits.data</span>
 <span id="cb17-2"><a aria-label="2"></a>y <span class="op">=</span> digits.target</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -932,7 +932,7 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <section id="uci-ml-hand-written-digits-datasets-4" class="slide level2 smaller">
 <h2>UCI ML hand-written digits datasets</h2>
 <p><code>X[0]</code> is a vector of size <code>width * height = D</code> (<span class="math inline">\(8 \times 8 = 64\)</span>).</p>
-<div id="34f50992" class="cell" data-execution_count="22">
+<div id="16ad5d59" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a>X[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>array([ 0.,  0.,  5., 13.,  9.,  1.,  0.,  0.,  0.,  0., 13., 15., 10.,
@@ -944,7 +944,7 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 </div>
 <div class="fragment">
 <p>It corresponds to an <span class="math inline">\(8 \times 8 = 64\)</span> image.</p>
-<div id="96ce6ed7" class="cell" data-execution_count="23">
+<div id="65db1ccb" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a>X[<span class="dv">0</span>].reshape(width, height)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>array([[ 0.,  0.,  5., 13.,  9.,  1.,  0.,  0.],
@@ -962,7 +962,7 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <section id="uci-ml-hand-written-digits-datasets-5" class="slide level2 smaller">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Plot the first <code>n=5</code> examples</p>
-<div id="46b4981e" class="cell" data-execution_count="24">
+<div id="7505e1db" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb22-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb22-3"><a aria-label="3"></a></span>
@@ -976,7 +976,7 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-html/cell-25-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="slides_files/figure-html/cell-25-output-1.png" width="781" height="190"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-25-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="slides_files/figure-revealjs/cell-25-output-1.png" width="781" height="190"></a></p>
 </figure>
 </div>
 </div>
@@ -998,7 +998,7 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 </section>
 <section id="uci-ml-hand-written-digits-datasets-6" class="slide level2 smaller">
 <h2>UCI ML hand-written digits datasets</h2>
-<div id="5cfdd69d" class="cell" data-execution_count="25">
+<div id="80fc6cd5" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1014,7 +1014,7 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-html/cell-26-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-html/cell-26-output-1.png" width="781" height="190"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-26-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-revealjs/cell-26-output-1.png" width="781" height="190"></a></p>
 </figure>
 </div>
 </div>
@@ -1027,11 +1027,11 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 </section>
 <section id="uci-ml-hand-written-digits-datasets-7" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
-<div id="3da2c989" class="cell" data-execution_count="26">
+<div id="cf1be408" class="cell" data-execution_count="26">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-html/cell-27-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-html/cell-27-output-1.png" width="781" height="190"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-27-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-revealjs/cell-27-output-1.png" width="781" height="190"></a></p>
 </figure>
 </div>
 </div>
@@ -1044,7 +1044,7 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <section id="uci-ml-hand-written-digits-datasets-8" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Preparing for our machine learning experiment</p>
-<div id="bac52671" class="cell" data-execution_count="27">
+<div id="0f8411da" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb24-2"><a aria-label="2"></a></span>
 <span id="cb24-3"><a aria-label="3"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.1</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1053,7 +1053,7 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <section id="uci-ml-hand-written-digits-datasets-9" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Optimization algorithms generally work best when the attributes have similar ranges.</p>
-<div id="917265a7" class="cell" data-execution_count="28">
+<div id="58f18bde" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb25-2"><a aria-label="2"></a></span>
 <span id="cb25-3"><a aria-label="3"></a>scaler <span class="op">=</span> StandardScaler()</span>
@@ -1095,7 +1095,7 @@ z = (x - \mu) / \sigma
 </div></aside></section>
 <section id="uci-ml-hand-written-digits-datasets-10" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
-<div id="33f1a762" class="cell" data-execution_count="29">
+<div id="baea153a" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
 <span id="cb26-2"><a aria-label="2"></a><span class="im">from</span> sklearn.multiclass <span class="im">import</span> OneVsRestClassifier</span>
 <span id="cb26-3"><a aria-label="3"></a></span>
@@ -1122,7 +1122,7 @@ z = (x - \mu) / \sigma
 <section id="uci-ml-hand-written-digits-datasets-11" class="slide level2 smaller">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Applying the classifier to our test set</p>
-<div id="80f1b026" class="cell" data-execution_count="30">
+<div id="47d6a731" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-label="1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
 <span id="cb27-2"><a aria-label="2"></a></span>
 <span id="cb27-3"><a aria-label="3"></a>y_pred <span class="op">=</span> clf.predict(X_test)</span>
@@ -1152,7 +1152,7 @@ weighted avg       0.98      0.98      0.98       180
 <section id="visualization" class="slide level2">
 <h2>Visualization</h2>
 <p>How many classes?</p>
-<div id="59663ad3" class="cell" data-execution_count="31">
+<div id="0f693f43" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-label="1"></a>clf.classes_</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="30">
 <pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</code></pre>
@@ -1160,7 +1160,7 @@ weighted avg       0.98      0.98      0.98       180
 </div>
 <div class="fragment">
 <p>The coefficients and intercepts are in distinct arrays.</p>
-<div id="4bf198e7" class="cell" data-execution_count="32">
+<div id="90495439" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a aria-label="1"></a>(clf.estimators_[<span class="dv">0</span>].coef_.shape, clf.estimators_[<span class="dv">0</span>].intercept_.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>((1, 64), (1,))</code></pre>
@@ -1176,7 +1176,7 @@ weighted avg       0.98      0.98      0.98       180
 </div></aside></section>
 <section id="visualization-1" class="slide level2">
 <h2>Visualization</h2>
-<div id="3820b822" class="cell" data-execution_count="33">
+<div id="156616d0" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a aria-label="1"></a>clf.estimators_[<span class="dv">0</span>].coef_[<span class="dv">0</span>].<span class="bu">round</span>(<span class="dv">2</span>).reshape(width, height)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>array([[ 0.  , -0.25,  0.04,  0.21,  0.02, -0.58, -0.36, -0.05],
@@ -1192,13 +1192,13 @@ weighted avg       0.98      0.98      0.98       180
 </section>
 <section id="visualization-2" class="slide level2">
 <h2>Visualization</h2>
-<div id="3c8b694c" class="cell" data-execution_count="34">
+<div id="27293d6c" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a aria-label="1"></a>coef <span class="op">=</span> clf.estimators_[<span class="dv">0</span>].coef_</span>
 <span id="cb35-2"><a aria-label="2"></a>plt.imshow(coef[<span class="dv">0</span>].reshape(width,height))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-html/cell-35-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-html/cell-35-output-1.png" width="407" height="411"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-35-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-revealjs/cell-35-output-1.png" width="407" height="411"></a></p>
 </figure>
 </div>
 </div>
@@ -1206,7 +1206,7 @@ weighted avg       0.98      0.98      0.98       180
 </section>
 <section id="visualization-3" class="slide level2">
 <h2>Visualization</h2>
-<div id="f97bf84b" class="cell" data-execution_count="35">
+<div id="1f6100c3" class="cell" data-execution_count="35">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
@@ -1220,7 +1220,7 @@ weighted avg       0.98      0.98      0.98       180
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-html/cell-36-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="slides_files/figure-html/cell-36-output-1.png" width="781" height="392"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-36-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="slides_files/figure-revealjs/cell-36-output-1.png" width="781" height="392"></a></p>
 </figure>
 </div>
 </div>
@@ -1243,7 +1243,7 @@ weighted avg       0.98      0.98      0.98       180
 </section>
 <section id="visualization-4" class="slide level2">
 <h2>Visualization</h2>
-<div id="62c2159b" class="cell" data-execution_count="36">
+<div id="dbf6e5a3" class="cell" data-execution_count="36">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
@@ -1258,7 +1258,7 @@ weighted avg       0.98      0.98      0.98       180
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-html/cell-37-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="slides_files/figure-html/cell-37-output-1.png" width="781" height="392"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-37-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="slides_files/figure-revealjs/cell-37-output-1.png" width="781" height="392"></a></p>
 </figure>
 </div>
 </div>
@@ -1309,7 +1309,7 @@ Wu, Qianfan, Adel Boueiz, Alican Bozkurt, et al. 2018. <span>“<a href="https:/
 </section>
 <section id="one-vs-all-classifier-complete" class="slide level2">
 <h2>One-vs-All classifier (complete)</h2>
-<div id="95c79307" class="cell" data-execution_count="37">
+<div id="0916fda3" class="cell" data-execution_count="37">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a aria-label="1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_iris</span>
 <span id="cb38-2"><a aria-label="2"></a></span>
 <span id="cb38-3"><a aria-label="3"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
@@ -1328,7 +1328,7 @@ Wu, Qianfan, Adel Boueiz, Alican Bozkurt, et al. 2018. <span>“<a href="https:/
 </section>
 <section id="one-vs-all-classifier-complete-1" class="slide level2">
 <h2>One-vs-All classifier (complete)</h2>
-<div id="5f6c7d8c" class="cell" data-execution_count="38">
+<div id="ed29ff06" class="cell" data-execution_count="38">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a aria-label="1"></a><span class="co"># Train a One-vs-All classifier for each class</span></span>
 <span id="cb39-2"><a aria-label="2"></a></span>
 <span id="cb39-3"><a aria-label="3"></a>classifiers <span class="op">=</span> []</span>
@@ -1343,7 +1343,7 @@ Wu, Qianfan, Adel Boueiz, Alican Bozkurt, et al. 2018. <span>“<a href="https:/
 </div></aside></section>
 <section id="one-vs-all-classifier-complete-2" class="slide level2">
 <h2>One-vs-All classifier (complete)</h2>
-<div id="e3ad4456" class="cell" data-execution_count="39">
+<div id="3b15488f" class="cell" data-execution_count="39">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a aria-label="1"></a><span class="co"># Predict on a new sample</span></span>
 <span id="cb40-2"><a aria-label="2"></a>new_sample <span class="op">=</span> X_test[<span class="dv">0</span>].reshape(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
 <span id="cb40-3"><a aria-label="3"></a>confidences <span class="op">=</span> [clf.decision_function(new_sample) <span class="cf">for</span> clf <span class="kw">in</span> classifiers]</span>
@@ -1362,7 +1362,7 @@ True class: versicolor</code></pre>
 </section>
 <section id="label_binarized" class="slide level2 smaller">
 <h2><code>label_binarized</code></h2>
-<div id="8016d25f" class="cell" data-execution_count="40">
+<div id="7a5c48ef" class="cell" data-execution_count="40">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> label_binarize</span>
 <span id="cb42-2"><a aria-label="2"></a></span>
 <span id="cb42-3"><a aria-label="3"></a><span class="co"># Original class labels</span></span>

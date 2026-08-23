@@ -221,7 +221,7 @@
   
   <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 <meta property="og:title" content="Linear regression and gradient descent – CSI 4106 - Fall 2026">
-<meta property="og:description" content="CSI 4106 - Fall 2025">
+<meta property="og:description" content="CSI 4106 - Fall 2026">
 <meta property="og:site_name" content="CSI 4106 - Fall 2026">
 </head>
 <body class="quarto-light">
@@ -230,7 +230,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Linear regression and gradient descent</h1>
-  <p class="subtitle">CSI 4106 - Fall 2025</p>
+  <p class="subtitle">CSI 4106 - Fall 2026</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -240,7 +240,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Jan 30, 2026 12:30</p>
+  <p class="date">Version: Aug 10, 2026 11:53</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -456,7 +456,7 @@ Marcel Turcotte
 </section>
 <section id="old-faithful-eruptions" class="slide level2">
 <h2>Old Faithful Eruptions</h2>
-<div id="92980de9" class="cell" data-execution_count="1">
+<div id="3130a847" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a aria-label="2"></a></span>
 <span id="cb1-3"><a aria-label="3"></a>WOLFRAM_CSV <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/turcotte/csi4106-f25/refs/heads/main/datasets/old_faithful_eruptions/Sample-Data-Old-Faithful-Eruptions.csv"</span></span>
@@ -571,7 +571,7 @@ Marcel Turcotte
 </div></aside></section>
 <section id="quick-visualization" class="slide level2">
 <h2>Quick Visualization</h2>
-<div id="33a9f9e0" class="cell" data-execution_count="2">
+<div id="8628613a" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -587,7 +587,7 @@ Marcel Turcotte
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="slides_files/figure-html/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="567" height="374"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="slides_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="567" height="374"></a></p>
 </figure>
 </div>
 </div>
@@ -701,7 +701,7 @@ Marcel Turcotte
 </div></aside></section>
 <section id="learning" class="slide level2">
 <h2>Learning</h2>
-<div id="d7fc5910" class="cell" data-execution_count="3">
+<div id="4ad93b38" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> SGDRegressor</span>
@@ -748,7 +748,7 @@ Test R²  = 0.671</code></pre>
 </section>
 <section id="visualization" class="slide level2">
 <h2>Visualization</h2>
-<div id="e96fc69e" class="cell" data-execution_count="4">
+<div id="0ef6f500" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -772,7 +772,7 @@ Test R²  = 0.671</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-html/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-html/cell-5-output-1.png" width="567" height="374"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-5-output-1.png" width="567" height="374"></a></p>
 </figure>
 </div>
 </div>
@@ -857,11 +857,11 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 </div></aside></section>
 <section id="hypothesis-vs-parameter-space" class="slide level2">
 <h2>Hypothesis vs Parameter Space</h2>
-<div id="5e096a67" class="cell" data-execution_count="5">
+<div id="3007f661" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-html/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="1128" height="451"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="1128" height="451"></a></p>
 </figure>
 </div>
 </div>
@@ -885,11 +885,11 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 </section>
 <section id="hypothesis-vs-parameter-space-1" class="slide level2">
 <h2>Hypothesis vs Parameter Space</h2>
-<div id="4960793d" class="cell" data-execution_count="6">
+<div id="a3f01956" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides_files/figure-html/cell-7-output-1.png" class="quarto-figure quarto-figure-center" width="1144" height="421"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides_files/figure-revealjs/cell-7-output-1.png" class="quarto-figure quarto-figure-center" width="1144" height="421"></a></p>
 </figure>
 </div>
 </div>
@@ -917,11 +917,11 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 <h2>Derivative</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div id="2759b99a" class="cell" data-execution_count="7">
+<div id="08b5c7b8" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides_files/figure-html/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="470" height="469"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="470" height="469"></a></p>
 </figure>
 </div>
 </div>
@@ -936,7 +936,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 </section>
 <section id="source-code" class="slide level2">
 <h2>Source code</h2>
-<div id="88216db6" class="cell" data-execution_count="8">
+<div id="98dfd81c" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="im">from</span> sympy <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb7-2"><a aria-label="2"></a></span>
 <span id="cb7-3"><a aria-label="3"></a>x <span class="op">=</span> symbols(<span class="st">'t'</span>)</span>
@@ -953,11 +953,11 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 <h2>Derivative</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div id="1d765948" class="cell" data-execution_count="9">
+<div id="1884c00c" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-html/cell-10-output-1.png" class="quarto-figure quarto-figure-center" width="579" height="444"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-revealjs/cell-10-output-1.png" class="quarto-figure quarto-figure-center" width="802" height="444"></a></p>
 </figure>
 </div>
 </div>
@@ -988,11 +988,11 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 <h2>Derivative</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div id="829da150" class="cell" data-execution_count="10">
+<div id="28605290" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides_files/figure-html/cell-11-output-1.png" class="quarto-figure quarto-figure-center" width="578" height="444"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides_files/figure-revealjs/cell-11-output-1.png" class="quarto-figure quarto-figure-center" width="801" height="444"></a></p>
 </figure>
 </div>
 </div>
@@ -1008,11 +1008,11 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 <h2>Derivative</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div id="e2e86e24" class="cell" data-execution_count="11">
+<div id="742ba9ed" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="slides_files/figure-html/cell-12-output-1.png" class="quarto-figure quarto-figure-center" width="578" height="444"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="slides_files/figure-revealjs/cell-12-output-1.png" class="quarto-figure quarto-figure-center" width="801" height="444"></a></p>
 </figure>
 </div>
 </div>
@@ -1028,11 +1028,11 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 <h2>Derivative</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div id="97312201" class="cell" data-execution_count="12">
+<div id="187f0b37" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides_files/figure-html/cell-13-output-1.png" class="quarto-figure quarto-figure-center" width="578" height="444"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides_files/figure-revealjs/cell-13-output-1.png" class="quarto-figure quarto-figure-center" width="801" height="444"></a></p>
 </figure>
 </div>
 </div>
@@ -1046,7 +1046,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 </section>
 <section id="source-code-1" class="slide level2">
 <h2>Source code</h2>
-<div id="e9cc1426" class="cell" data-execution_count="13">
+<div id="e66451fd" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
 <span id="cb8-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb8-3"><a aria-label="3"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1147,7 +1147,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 <h2>Gradient Descent - Single Value</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div id="75ac6ec1" class="cell" data-execution_count="14">
+<div id="79659144" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
@@ -1191,7 +1191,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-15-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="slides_files/figure-html/cell-15-output-1.png" class="quarto-figure quarto-figure-center" width="579" height="446"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-15-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="slides_files/figure-revealjs/cell-15-output-1.png" class="quarto-figure quarto-figure-center" width="802" height="446"></a></p>
 </figure>
 </div>
 </div>
@@ -1211,7 +1211,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 <h2>Gradient Descent - Single Value</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div id="1e0f5fb0" class="cell" data-execution_count="15">
+<div id="9eb5b448" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
@@ -1255,7 +1255,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-16-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides_files/figure-html/cell-16-output-1.png" class="quarto-figure quarto-figure-center" width="579" height="446"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-16-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides_files/figure-revealjs/cell-16-output-1.png" class="quarto-figure quarto-figure-center" width="802" height="446"></a></p>
 </figure>
 </div>
 </div>
@@ -1292,7 +1292,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_1^N [h(x_i) - y_i]^2 = \frac{1}{N}\sum_1
 </section>
 <section id="partial-derivate-sympy" class="slide level2">
 <h2>Partial derivate (SymPy)</h2>
-<div id="8d255945" class="cell" data-execution_count="16">
+<div id="6bb3ce7d" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Math, display</span>
 <span id="cb11-2"><a aria-label="2"></a><span class="im">from</span> sympy <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb11-3"><a aria-label="3"></a></span>
@@ -1317,7 +1317,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_1^N [h(x_i) - y_i]^2 = \frac{1}{N}\sum_1
 </section>
 <section id="partial-derivate-sympy-1" class="slide level2">
 <h2>Partial derivate (SymPy)</h2>
-<div id="8b2c42db" class="cell" data-execution_count="17">
+<div id="9fc85a18" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a>N <span class="op">=</span> Symbol(<span class="st">'N'</span>, integer<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb13-2"><a aria-label="2"></a></span>
 <span id="cb13-3"><a aria-label="3"></a><span class="co"># Define the loss function (mean squared error)</span></span>
@@ -1337,7 +1337,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_1^N [h(x_i) - y_i]^2 = \frac{1}{N}\sum_1
 </section>
 <section id="partial-derivate-sympy-2" class="slide level2">
 <h2>Partial derivate (SymPy)</h2>
-<div id="fb6e948f" class="cell" data-execution_count="18">
+<div id="4a6c8ca7" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a><span class="co"># Calculate the partial derivative with respect to theta_0</span></span>
 <span id="cb15-2"><a aria-label="2"></a></span>
 <span id="cb15-3"><a aria-label="3"></a>partial_derivative_theta_0 <span class="op">=</span> diff(J, theta_0)</span>
@@ -1355,7 +1355,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_1^N [h(x_i) - y_i]^2 = \frac{1}{N}\sum_1
 </section>
 <section id="partial-derivate-sympy-3" class="slide level2">
 <h2>Partial derivate (SymPy)</h2>
-<div id="379385b3" class="cell" data-execution_count="19">
+<div id="a374ac2a" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a><span class="co"># Calculate the partial derivative with respect to theta_1</span></span>
 <span id="cb17-2"><a aria-label="2"></a></span>
 <span id="cb17-3"><a aria-label="3"></a>partial_derivative_theta_1 <span class="op">=</span> diff(J, theta_1)</span>
@@ -1496,7 +1496,7 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 </div></aside></section>
 <section id="convergence" class="slide level2">
 <h2>Convergence</h2>
-<div id="b0c5b32e" class="cell" data-execution_count="20">
+<div id="3c33e112" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a><span class="co"># 1. Define the symbolic variable and the function</span></span>
@@ -1542,7 +1542,7 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-21-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-html/cell-21-output-1.png" class="quarto-figure quarto-figure-center" width="660" height="371"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-21-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-revealjs/cell-21-output-1.png" class="quarto-figure quarto-figure-center" width="660" height="371"></a></p>
 </figure>
 </div>
 </div>
@@ -1571,11 +1571,11 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 <h2>Learning Rate</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<div id="2da8964f" class="cell" data-execution_count="21">
+<div id="454df1ff" class="cell" data-execution_count="21">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-22-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-html/cell-22-output-1.png" class="quarto-figure quarto-figure-center" width="470" height="469"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-22-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-revealjs/cell-22-output-1.png" class="quarto-figure quarto-figure-center" width="470" height="469"></a></p>
 </figure>
 </div>
 </div>
@@ -1590,7 +1590,7 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 </section>
 <section id="learning-rate-1" class="slide level2 scrollable">
 <h2>Learning Rate</h2>
-<div id="989454bc" class="cell" data-execution_count="22">
+<div id="7ff01195" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1649,7 +1649,7 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-23-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-html/cell-23-output-1.png" class="quarto-figure quarto-figure-center" width="503" height="444"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-23-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-revealjs/cell-23-output-1.png" class="quarto-figure quarto-figure-center" width="503" height="444"></a></p>
 </figure>
 </div>
 </div>
@@ -1722,7 +1722,7 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 </section>
 <section id="quick-visualization-1" class="slide level2">
 <h2>Quick Visualization</h2>
-<div id="112d673a" class="cell" data-execution_count="23">
+<div id="143f582c" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1738,7 +1738,7 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-html/cell-24-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="slides_files/figure-html/cell-24-output-1.png" class="quarto-figure quarto-figure-center" width="567" height="374"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-24-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="slides_files/figure-revealjs/cell-24-output-1.png" class="quarto-figure quarto-figure-center" width="567" height="374"></a></p>
 </figure>
 </div>
 </div>
@@ -1900,16 +1900,16 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 </section>
 <section id="linearregression" class="slide level2">
 <h2>LinearRegression</h2>
-<div id="0f0e85e7" class="cell" data-execution_count="24">
+<div id="1e7b832e" class="cell" data-execution_count="24">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-html/cell-25-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="slides_files/figure-html/cell-25-output-1.png" width="576" height="439"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-25-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="slides_files/figure-revealjs/cell-25-output-1.png" width="799" height="439"></a></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="890b191d" class="cell" data-execution_count="25">
+<div id="8ebc395d" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
 <span id="cb23-2"><a aria-label="2"></a></span>
 <span id="cb23-3"><a aria-label="3"></a>lin_reg <span class="op">=</span> LinearRegression()</span>
@@ -1931,7 +1931,7 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 </section>
 <section id="source-code-2" class="slide level2">
 <h2>Source code</h2>
-<div id="21491073" class="cell" data-execution_count="26">
+<div id="68dc04a1" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb24-2"><a aria-label="2"></a></span>
 <span id="cb24-3"><a aria-label="3"></a>X <span class="op">=</span> <span class="dv">6</span> <span class="op">*</span> np.random.rand(<span class="dv">100</span>, <span class="dv">1</span>) <span class="op">-</span> <span class="dv">4</span></span>
@@ -1970,19 +1970,19 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 <p><strong>User</strong>: Explain the code on the previous slide line by line.</p>
 <div class="fragment">
 <p><strong>AI</strong>: Certainly! Here is a line-by-line explanation of the provided code:</p>
-<div id="e0aefeaa" class="cell" data-execution_count="27">
+<div id="149a3831" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><strong>Explanation</strong>: This line imports the NumPy library, which is a fundamental package for numerical computations in Python. It is commonly used for working with arrays and matrices, as well as for performing a variety of mathematical operations.</li>
 </ul>
-<div id="482ebbfc" class="cell" data-execution_count="28">
+<div id="82cc569f" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a>X <span class="op">=</span> <span class="dv">6</span> <span class="op">*</span> np.random.rand(<span class="dv">100</span>, <span class="dv">1</span>) <span class="op">-</span> <span class="dv">4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><strong>Explanation</strong>: This line generates a NumPy array <code>X</code> containing 100 rows and 1 column of random numbers. The <code>np.random.rand(100, 1)</code> function generates uniformly distributed random numbers between 0 and 1. Multiplying by 6 scales these numbers to the range [0, 6), and subtracting 4 shifts the range to [-4, 2).</li>
 </ul>
-<div id="135ab273" class="cell" data-execution_count="29">
+<div id="78b08282" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-label="1"></a>y <span class="op">=</span> X <span class="op">**</span> <span class="dv">2</span> <span class="op">-</span> <span class="dv">4</span> <span class="op">*</span> X <span class="op">+</span> <span class="dv">5</span> <span class="op">+</span> np.random.randn(<span class="dv">100</span>, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
@@ -1994,31 +1994,31 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 <li><code>+ np.random.randn(100, 1)</code> adds Gaussian noise with a mean of 0 and standard deviation of 1 to each element, making the data more realistic by introducing some randomness.</li>
 </ul></li>
 </ul>
-<div id="f7ba3d85" class="cell" data-execution_count="30">
+<div id="49ee2583" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a aria-label="1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><strong>Explanation</strong>: This line imports the <code>LinearRegression</code> class from the <code>sklearn.linear_model</code> module, which is part of the Scikit-Learn library. Scikit-Learn is widely used for machine learning in Python.</li>
 </ul>
-<div id="e56cdb76" class="cell" data-execution_count="31">
+<div id="b1290f8c" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-label="1"></a>lin_reg <span class="op">=</span> LinearRegression()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><strong>Explanation</strong>: This line creates an instance of the <code>LinearRegression</code> class and assigns it to the variable <code>lin_reg</code>. This object will be used to fit the linear regression model to the data.</li>
 </ul>
-<div id="db6ba1c3" class="cell" data-execution_count="32">
+<div id="e6c39258" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a aria-label="1"></a>lin_reg.fit(X, y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><strong>Explanation</strong>: This line fits the linear regression model to the data by finding the best-fitting line through the points <code>(X, y)</code>. The <code>fit</code> method trains the model using the provided features <code>X</code> and target variable <code>y</code>.</li>
 </ul>
-<div id="4d92e7a2" class="cell" data-execution_count="33">
+<div id="a7b53530" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a aria-label="1"></a>X_new <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">4</span>], [<span class="dv">2</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
 <li><strong>Explanation</strong>: This line creates a new NumPy array <code>X_new</code> with two values: -4 and 2. These values represent new data points for which we want to predict the target variable using the trained model.</li>
 </ul>
-<div id="3ebcd995" class="cell" data-execution_count="34">
+<div id="9db9b470" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a aria-label="1"></a>y_pred <span class="op">=</span> lin_reg.predict(X_new)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ul>
@@ -2029,7 +2029,7 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 </section>
 <section id="source-code-continued" class="slide level2">
 <h2>Source code (continued)</h2>
-<div id="4e2ff7fb" class="cell" data-execution_count="35">
+<div id="ce238bba" class="cell" data-execution_count="35">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a aria-label="1"></a><span class="im">import</span> os</span>
 <span id="cb33-2"><a aria-label="2"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
 <span id="cb33-3"><a aria-label="3"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -2044,7 +2044,7 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 </section>
 <section id="source-code-continued-1" class="slide level2">
 <h2>Source code (continued)</h2>
-<div id="5e62f78d" class="cell" data-execution_count="36">
+<div id="27fbc0a4" class="cell" data-execution_count="36">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a aria-label="1"></a>plt.plot(X, y, <span class="st">"b."</span>)</span>
 <span id="cb34-2"><a aria-label="2"></a>plt.plot(X_new, y_pred, <span class="st">"r-"</span>)</span>
 <span id="cb34-3"><a aria-label="3"></a>plt.xlabel(<span class="st">"$x$"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>

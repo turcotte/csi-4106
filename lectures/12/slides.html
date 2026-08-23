@@ -218,7 +218,7 @@
     }
   </style>
 <meta property="og:title" content="Training Artificial Neural Networks (Part 1) – CSI 4106 - Fall 2026">
-<meta property="og:description" content="CSI 4106 - Fall 2025">
+<meta property="og:description" content="CSI 4106 - Fall 2026">
 <meta property="og:site_name" content="CSI 4106 - Fall 2026">
 </head>
 <body class="quarto-light">
@@ -227,7 +227,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Training Artificial Neural Networks (Part 1)</h1>
-  <p class="subtitle">CSI 4106 - Fall 2025</p>
+  <p class="subtitle">CSI 4106 - Fall 2026</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -237,7 +237,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Jan 30, 2026 12:30</p>
+  <p class="date">Version: Aug 10, 2026 11:53</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -422,7 +422,7 @@ Marcel Turcotte
 </div></aside></section>
 <section id="common-activation-functions" class="slide level2">
 <h2>Common Activation Functions</h2>
-<div id="5255036f" class="cell" data-execution_count="1">
+<div id="5255036f" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="co"># Attribution: https://github.com/ageron/handson-ml3/blob/main/10_neural_nets_with_keras.ipynb</span></span>
@@ -545,7 +545,7 @@ Marcel Turcotte
 </section>
 <section id="data" class="slide level2">
 <h2>Data</h2>
-<div id="5e19b086" class="cell" data-execution_count="2">
+<div id="5e19b086" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Generate and plot the "circles" dataset</span></span>
@@ -618,7 +618,7 @@ Marcel Turcotte
 </section>
 <section id="utilities" class="slide level2">
 <h2>Utilities</h2>
-<div id="a09fb044" class="cell" data-execution_count="3">
+<div id="a09fb044" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="kw">def</span> sigmoid(z):</span>
 <span id="cb3-2"><a aria-label="2"></a>    <span class="cf">return</span> <span class="fl">1.0</span> <span class="op">/</span> (<span class="fl">1.0</span> <span class="op">+</span> np.exp(<span class="op">-</span>z))</span>
 <span id="cb3-3"><a aria-label="3"></a></span>
@@ -649,7 +649,7 @@ Marcel Turcotte
 <section id="naïvemlp" class="slide level2">
 <h2>NaïveMLP</h2>
 <p>The complete implementation is presented below and will be examined in the subsequent slides.</p>
-<div id="826c6036" class="cell" data-execution_count="4">
+<div id="826c6036" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="kw">class</span> NaiveMLP:</span>
@@ -784,7 +784,7 @@ Marcel Turcotte
 </div></aside></section>
 <section id="class-definition" class="slide level2">
 <h2>Class Definition</h2>
-<div id="d60ef6ae" class="cell" data-execution_count="5">
+<div id="d60ef6ae" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="kw">class</span> NaiveMLP:</span>
 <span id="cb5-2"><a aria-label="2"></a></span>
 <span id="cb5-3"><a aria-label="3"></a>    <span class="co">"""</span></span>
@@ -798,7 +798,7 @@ Marcel Turcotte
 </section>
 <section id="constructor" class="slide level2">
 <h2>Constructor</h2>
-<div id="f3109690" class="cell" data-execution_count="6">
+<div id="f3109690" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, layer_sizes, step<span class="op">=</span><span class="fl">0.1</span>, seed<span class="op">=</span><span class="va">None</span>):</span>
 <span id="cb6-2"><a aria-label="2"></a>        </span>
 <span id="cb6-3"><a aria-label="3"></a>        <span class="va">self</span>.sizes <span class="op">=</span> <span class="bu">list</span>(layer_sizes)</span>
@@ -818,7 +818,7 @@ Marcel Turcotte
 </div></aside></section>
 <section id="python" class="slide level2">
 <h2>Python</h2>
-<div id="57ca50df" class="cell" data-execution_count="7">
+<div id="57ca50df" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a>seed <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb7-2"><a aria-label="2"></a></span>
 <span id="cb7-3"><a aria-label="3"></a>rng <span class="op">=</span> np.random.default_rng(seed)</span>
@@ -831,7 +831,7 @@ Marcel Turcotte
 </div>
 </div>
 <div class="fragment">
-<div id="cfb7746d" class="cell" data-execution_count="8">
+<div id="cfb7746d" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>[rng.standard_normal(size<span class="op">=</span>(in_d, out_d)) <span class="op">*</span> <span class="fl">0.5</span> <span class="cf">for</span> in_d, out_d <span class="kw">in</span> <span class="bu">zip</span>(layer_sizes[:<span class="op">-</span><span class="dv">1</span>], layer_sizes[<span class="dv">1</span>:])]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>[array([[ 0.06286511, -0.06605243,  0.32021133,  0.05245006],
@@ -863,14 +863,14 @@ Marcel Turcotte
 </section>
 <section id="python-1" class="slide level2">
 <h2>Python</h2>
-<div id="0450f777" class="cell" data-execution_count="9">
+<div id="0450f777" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a>[out_d <span class="cf">for</span> out_d <span class="kw">in</span> layer_sizes[<span class="dv">1</span>:]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>[4, 4, 1]</code></pre>
 </div>
 </div>
 <div class="fragment">
-<div id="b559b133" class="cell" data-execution_count="10">
+<div id="b559b133" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a>[np.zeros(out_d) <span class="cf">for</span> out_d <span class="kw">in</span> layer_sizes[<span class="dv">1</span>:]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>[array([0., 0., 0., 0.]), array([0., 0., 0., 0.]), array([0.])]</code></pre>
@@ -894,7 +894,7 @@ Marcel Turcotte
 </section>
 <section id="forward-pass" class="slide level2">
 <h2>Forward Pass</h2>
-<div id="427a6afb" class="cell" data-execution_count="11">
+<div id="427a6afb" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, X):</span>
 <span id="cb15-2"><a aria-label="2"></a></span>
 <span id="cb15-3"><a aria-label="3"></a>        <span class="co">"""</span></span>
@@ -934,7 +934,7 @@ Marcel Turcotte
 </div></aside></section>
 <section id="making-predictions" class="slide level2">
 <h2>Making predictions</h2>
-<div id="1af877d9" class="cell" data-execution_count="12">
+<div id="1af877d9" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, X, threshold<span class="op">=</span><span class="fl">0.5</span>):</span>
 <span id="cb16-2"><a aria-label="2"></a></span>
 <span id="cb16-3"><a aria-label="3"></a>        <span class="cf">return</span> (<span class="va">self</span>.forward(X) <span class="op">&gt;=</span> threshold).astype(<span class="bu">int</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -959,7 +959,7 @@ Marcel Turcotte
 </div></aside></section>
 <section id="computing-the-loss" class="slide level2">
 <h2>Computing the loss</h2>
-<div id="36949bb0" class="cell" data-execution_count="13">
+<div id="36949bb0" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a>    <span class="kw">def</span> loss(<span class="va">self</span>, X, y):</span>
 <span id="cb17-2"><a aria-label="2"></a></span>
 <span id="cb17-3"><a aria-label="3"></a>        <span class="cf">return</span> bce_loss(y, <span class="va">self</span>.forward(X))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1026,7 +1026,7 @@ Marcel Turcotte
 </div></aside></section>
 <section id="python-2" class="slide level2">
 <h2>Python</h2>
-<div id="e37600d6" class="cell" data-execution_count="14">
+<div id="e37600d6" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a>    <span class="kw">def</span> _all_param_tags(<span class="va">self</span>):</span>
 <span id="cb19-2"><a aria-label="2"></a></span>
 <span id="cb19-3"><a aria-label="3"></a>        <span class="co">"""</span></span>
@@ -1045,14 +1045,14 @@ Marcel Turcotte
 <p>The above implements a generator, which is a Python concept that look simple, but packs a lot of power.</p>
 <p>A <strong>generator</strong> is a kind of function that can <em>pause</em> its execution and <em>resume later</em>. It produces a sequence of values, one at a time, without storing them all in memory. You create one using the <code>yield</code> keyword.</p>
 <p>Here is an example.</p>
-<div id="81d569a9" class="cell" data-execution_count="15">
+<div id="81d569a9" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a><span class="kw">def</span> countdown(n):</span>
 <span id="cb20-2"><a aria-label="2"></a>    <span class="cf">while</span> n <span class="op">&gt;</span> <span class="dv">0</span>:</span>
 <span id="cb20-3"><a aria-label="3"></a>        <span class="cf">yield</span> n      <span class="co"># "yield" a value and pause</span></span>
 <span id="cb20-4"><a aria-label="4"></a>        n <span class="op">-=</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>You can call it three times, then it will raise <code>StopIteration</code>.</p>
-<div id="2de3262f" class="cell" data-execution_count="16">
+<div id="2de3262f" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>c <span class="op">=</span> countdown(<span class="dv">3</span>)</span>
 <span id="cb21-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="bu">next</span>(c))  <span class="co"># 3</span></span>
 <span id="cb21-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="bu">next</span>(c))  <span class="co"># 2</span></span>
@@ -1069,7 +1069,7 @@ Caught StopIteration.</code></pre>
 </div>
 </div>
 <p>Generators are often in <code>for</code> loops.</p>
-<div id="f68d1107" class="cell" data-execution_count="17">
+<div id="f68d1107" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="cf">for</span> value <span class="kw">in</span> countdown(<span class="dv">3</span>):</span>
 <span id="cb23-2"><a aria-label="2"></a>    <span class="bu">print</span>(value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1093,7 +1093,7 @@ Caught StopIteration.</code></pre>
 </section>
 <section id="python-3" class="slide level2 scrollable">
 <h2>Python</h2>
-<div id="e37337af" class="cell" data-execution_count="18">
+<div id="e37337af" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a aria-label="1"></a><span class="kw">class</span> Demo:</span>
@@ -1125,13 +1125,13 @@ Caught StopIteration.</code></pre>
 <span id="cb25-27"><a aria-label="27"></a>        <span class="bu">print</span>(tag)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="01fc1b23" class="cell" data-execution_count="19">
+<div id="01fc1b23" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a>d <span class="op">=</span> Demo([<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">1</span>])</span>
 <span id="cb26-2"><a aria-label="2"></a>d.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
-<section id="python-3-output" class="slide level2 scrollable output-location-slide"><h2>Python</h2><div class="cell output-location-slide" data-execution_count="19">
+<section id="python-3-output" class="slide level2 scrollable output-location-slide"><h2>Python</h2><div class="cell output-location-slide" data-execution_count="20">
 <div class="cell-output cell-output-stdout">
 <pre><code>('W', 0, 0, 0)
 ('W', 0, 0, 1)
@@ -1173,7 +1173,7 @@ Caught StopIteration.</code></pre>
 </div>
 </div></section><section id="python-4" class="slide level2">
 <h2>Python</h2>
-<div id="122775d3" class="cell" data-execution_count="20">
+<div id="122775d3" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a aria-label="1"></a>    <span class="kw">def</span> _get_param(<span class="va">self</span>, tag):</span>
 <span id="cb28-2"><a aria-label="2"></a>        kind <span class="op">=</span> tag[<span class="dv">0</span>]</span>
 <span id="cb28-3"><a aria-label="3"></a>        <span class="cf">if</span> kind <span class="op">==</span> <span class="st">'W'</span>:</span>
@@ -1189,7 +1189,7 @@ Caught StopIteration.</code></pre>
 </div></aside></section>
 <section id="python-5" class="slide level2">
 <h2>Python</h2>
-<div id="8f28ee16" class="cell" data-execution_count="21">
+<div id="8f28ee16" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-label="1"></a>    <span class="kw">def</span> _set_param(<span class="va">self</span>, tag, val):</span>
 <span id="cb29-2"><a aria-label="2"></a>        kind <span class="op">=</span> tag[<span class="dv">0</span>]</span>
 <span id="cb29-3"><a aria-label="3"></a>        <span class="cf">if</span> kind <span class="op">==</span> <span class="st">'W'</span>:</span>
@@ -1205,7 +1205,7 @@ Caught StopIteration.</code></pre>
 </div></aside></section>
 <section id="training-learning" class="slide level2 scrollable">
 <h2>Training (learning)</h2>
-<div id="6faf322c" class="cell" data-execution_count="22">
+<div id="6faf322c" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a aria-label="1"></a>    <span class="kw">def</span> train(<span class="va">self</span>, X, y, epochs<span class="op">=</span><span class="dv">10</span>, verbose<span class="op">=</span><span class="va">True</span>):</span>
 <span id="cb30-2"><a aria-label="2"></a></span>
 <span id="cb30-3"><a aria-label="3"></a>        <span class="cf">for</span> ep <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, epochs <span class="op">+</span> <span class="dv">1</span>):</span>
@@ -1262,7 +1262,7 @@ Caught StopIteration.</code></pre>
 <section id="ouf" class="slide level2 scrollable">
 <h2>Ouf!</h2>
 <p>Does it work?</p>
-<div id="1f3bf9dd" class="cell" data-execution_count="23">
+<div id="1f3bf9dd" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a aria-label="1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb31-2"><a aria-label="2"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
 <span id="cb31-3"><a aria-label="3"></a></span>
@@ -1400,7 +1400,7 @@ Test acc:  1.0</code></pre>
 </section>
 <section id="vizulalization" class="slide level2">
 <h2>Vizulalization</h2>
-<div id="97022e76" class="cell" data-execution_count="24">
+<div id="97022e76" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a aria-label="1"></a><span class="co"># Plot helper: decision boundary in the original (x1, x2) plane</span></span>
@@ -1446,7 +1446,7 @@ Test acc:  1.0</code></pre>
 </section>
 <section id="xor-like-data" class="slide level2">
 <h2>XOR-like data</h2>
-<div id="74bf14d3" class="cell" data-execution_count="25">
+<div id="74bf14d3" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a aria-label="1"></a>n_samples <span class="op">=</span> <span class="dv">800</span></span>
@@ -1500,7 +1500,7 @@ Test acc:  1.0</code></pre>
 </section>
 <section id="xor-like-data-continued" class="slide level2 scrollable">
 <h2>XOR-like data (continued)</h2>
-<div id="ff845656" class="cell" data-execution_count="26">
+<div id="ff845656" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a aria-label="1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
 <span id="cb35-2"><a aria-label="2"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.25</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>y</span>
 <span id="cb35-3"><a aria-label="3"></a>)</span>
@@ -1525,7 +1525,7 @@ Test acc:  0.99</code></pre>
 </section>
 <section id="xor-like-data-continued-1" class="slide level2">
 <h2>XOR-like data (continued)</h2>
-<div id="ad8e9333" class="cell" data-execution_count="27">
+<div id="ad8e9333" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a aria-label="1"></a>plot_decision_boundary(model, X, y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">

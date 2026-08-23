@@ -218,7 +218,7 @@
     }
   </style>
 <meta property="og:title" content="Softmax, cross-entropy, regularization – CSI 4106 - Fall 2026">
-<meta property="og:description" content="CSI 4106 - Fall 2025">
+<meta property="og:description" content="CSI 4106 - Fall 2026">
 <meta property="og:site_name" content="CSI 4106 - Fall 2026">
 </head>
 <body class="quarto-light">
@@ -227,7 +227,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Softmax, cross-entropy, regularization</h1>
-  <p class="subtitle">CSI 4106 - Fall 2025</p>
+  <p class="subtitle">CSI 4106 - Fall 2026</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -237,7 +237,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Jan 30, 2026 12:30</p>
+  <p class="date">Version: Aug 10, 2026 11:53</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -600,7 +600,7 @@ J(W) = -\sum_{k=1}^{K} y_k \log(\hat{y}_k)
 </section>
 <section id="case-one-example" class="slide level2">
 <h2>Case: one example</h2>
-<div id="08662cca" class="cell" data-execution_count="1">
+<div id="08662cca" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -737,7 +737,7 @@ L = -\frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} y_{i,k} \log(\hat{y}_{i,k})
 </div></aside></section>
 <section id="keras-example" class="slide level2">
 <h2>Keras example</h2>
-<div id="81af00e6" class="cell" data-execution_count="2">
+<div id="81af00e6" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
 <span id="cb1-2"><a aria-label="2"></a><span class="im">from</span> tensorflow.python.keras.layers <span class="im">import</span> Dense</span>
 <span id="cb1-3"><a aria-label="3"></a></span>
@@ -788,7 +788,7 @@ L = -\frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} y_{i,k} \log(\hat{y}_{i,k})
 </section>
 <section id="keras" class="slide level2">
 <h2>Keras</h2>
-<div id="006337fa" class="cell" data-execution_count="3">
+<div id="006337fa" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="im">import</span> keras</span>
 <span id="cb2-2"><a aria-label="2"></a><span class="im">from</span> keras.models <span class="im">import</span> Sequential</span>
 <span id="cb2-3"><a aria-label="3"></a><span class="im">from</span> keras.layers <span class="im">import</span> InputLayer, Dropout, Flatten, Dense</span>
@@ -830,7 +830,7 @@ L = -\frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} y_{i,k} \log(\hat{y}_{i,k})
 </div></aside></section>
 <section id="early-stopping" class="slide level2">
 <h2>Early Stopping</h2>
-<div id="1352b8cb" class="cell" data-execution_count="4">
+<div id="1352b8cb" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
