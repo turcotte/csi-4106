@@ -12,4 +12,5 @@ CSI4106 Introduction to Artificial Intelligence
 
 ## Practice
 
+- [Predicting Mean Ribosome Load with a 1D Convolutional Neural Network](../../lectures/15/tang_cnn_tutorial.llms.md)
 - [ConvNetJS: Deep Learning in your browser](https://cs.stanford.edu/people/karpathy/convnetjs/)

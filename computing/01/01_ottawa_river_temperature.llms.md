@@ -14,7 +14,7 @@ University of Ottawa
 
 Published
 
-January 30, 2026
+August 31, 2026
 
 # Learning objectives
 
@@ -28,13 +28,13 @@ January 30, 2026
 
 While the specifics of the code will be discussed in subsequent notebooks, it is important to note that this notebook requires the installation of both [pandas](https://pandas.pydata.org) and [matplotlib](https://matplotlib.org). These libraries are pre-installed on [Google Colab](https://colab.research.google.com), facilitating immediate use. However, a Google account is needed in order to execute the code!
 
-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/turcotte/csi4106-f25/blob/main/notebooks/computing/01/01_ottawa_river_temperature.ipynb)
+- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/turcotte/csi4106-f26/blob/main/notebooks/computing/01/01_ottawa_river_temperature.ipynb)
 
 If you are viewing this document on the course website, you are seeing the result of converting a Jupyter Notebook to HTML. You can download the corresponding Jupyter Notebook from the table of contents, typically located in the upper right corner when browsing on a computer. Alternatively, you can download it directly [here](01_ottawa_river_temperature.ipynb).
 
 ## Look at this notebook, without executing any code
 
-- [![Open In nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/turcotte/csi4106-f25/blob/main/notebooks/computing/01/01_ottawa_river_temperature.ipynb)
+- [![Open In nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/turcotte/csi4106-f26/blob/main/notebooks/computing/01/01_ottawa_river_temperature.ipynb)
 
 # Concepts
 

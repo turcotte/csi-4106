@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <meta name="author" content="Marcel Turcotte">
+  <title>CSI 4106 - Fall 2026 – Neural Networks Architectures</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+<meta property="og:title" content="Neural Networks Architectures – CSI 4106 - Fall 2026">
+<meta property="og:description" content="CSI 4106 - Fall 2026">
+<meta property="og:site_name" content="CSI 4106 - Fall 2026">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Neural Networks Architectures</h1>
+  <p class="subtitle">CSI 4106 - Fall 2026</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Marcel Turcotte
+</div>
+</div>
+</div>
+
+  <p class="date">Version: Aug 28, 2026 09:19</p>
+</section>
+<section>
+<section id="preamble" class="title-slide slide level1 center">
+<h1>Preamble</h1>
+
+</section>
+<section id="message-of-the-day" class="slide level2">
+<h2>Message of the Day</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/78xby7PtGC8" width="889" height="500" title="Will transformers drive AI in 10 years? – Andrej Karpathy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<aside class="notes">
+<p><a href="https://karpathy.ai">Andrej Karpathy</a> is a Slovak-Canadian computer scientist born in 1986 in Bratislava, who moved to Toronto with his family at the age of 15. He obtained a bachelor’s degree in computer science and physics from the University of Toronto (2009) and a master’s degree from the University of British Columbia (2011), where he worked with his advisor Michiel van de Panne on learning controllers for physically simulated figures. He then completed a Ph.D.&nbsp;at Stanford University under the supervision of <a href="https://profiles.stanford.edu/fei-fei-li">Fei-Fei Li</a>, focusing on the intersection of computer vision and natural language processing.</p>
+<ul>
+<li>Founding member and researcher at <strong>OpenAI</strong> (2015 – 2017).</li>
+<li>Senior Director of AI and Autopilot Vision at <strong>Tesla, Inc.</strong> (2017 – 2022).</li>
+<li>Returned to <strong>OpenAI</strong> in 2023 to lead a small team working on improving models (notably <strong>GPT-4</strong>), before leaving the company in 2024.</li>
+<li>Founder of <strong>Eureka Labs</strong> (since 2024), a startup focused on AI and education.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><a href="https://www.youtube.com/watch?v=78xby7PtGC8">Will transformers drive AI in 10 years?</a>, Andrej Karpathy, 2025-10-27.</p>
+</div></aside></section>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning objectives</h2>
+<ul>
+<li><strong>Define</strong> inductive bias and explain how local connectivity and parameter sharing mitigate the parameter scaling limitations of fully connected architectures.</li>
+<li><strong>Derive</strong> the forward pass arithmetic and the associated backpropagation gradients (<span class="math inline">\(\nabla_W L\)</span>, <span class="math inline">\(\nabla_X L\)</span>, and <span class="math inline">\(db\)</span>) for a convolutional layer.</li>
+<li><strong>Distinguish</strong> between translation equivariance and translation invariance, identifying the respective mathematical roles of the convolutional kernel and the max-pooling operator.</li>
+</ul>
+</section>
+<section id="convolutional-neural-network-cnn" class="slide level2">
+<h2>Convolutional Neural Network (CNN)</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/QzY57FaENXg" width="889" height="500" title="What are Convolutional Neural Networks (CNNs)?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<aside><div>
+<p>An excellent high-level overview of CNNs.</p>
+</div></aside></section>
+<section id="motivation" class="slide level2">
+<h2>Motivation</h2>
+<blockquote>
+<p>“An MLP with just <strong>one hidden layer</strong> can theoretically model even the most <strong>complex functions</strong>, provided it <strong>has enough neurons</strong>. But for complex problems, <strong>deep networks</strong> have a much <strong>higher parameter efficiency</strong> than shallow ones: they can model complex functions <strong>using exponentially fewer neurons</strong> than shallow nets, allowing them to reach much <strong>better performance</strong> with the same amount of training data.”</p>
+</blockquote>
+
+<aside class="notes">
+<p>The neural networks discussed thus far comprise neurons arranged in layers, with each unit in a given layer fully connected to every unit in the immediately subsequent layer. Although the number of layers and the number of neurons within each layer may vary, this organizational principle remains consistent throughout the network.</p>
+<p>In theory, such a neural network can approximate any complex function under moderate, reasonable constraints. However, in practice, the number of weights grows rapidly, and the resulting networks can be difficult to train.</p>
+<p>To address these challenges, architectures with explicit <strong>inductive biases</strong> have been proposed. Foundational model families include sequence and temporal architectures, such as recurrent neural networks (e.g., LSTM and GRU) and transformers. Another major class comprises generative models, including autoencoders, generative adversarial networks, and diffusion models. Finally, graph neural networks form a broader class of models designed to operate on relational data.</p>
+<p>Inductive bias refers to the prior assumptions that a learning algorithm relies on to generalize from training data to unseen examples. It constrains or shapes the hypothesis space, enabling the model to preferentially select among multiple plausible solutions that may fit the observed data equally well. Without such bias, an algorithm cannot reliably generalize beyond the exact examples on which it was trained.</p>
+<p>For example, logistic regression exhibits a strong inductive bias because it assumes that the input-output relationship can be adequately modeled by a linear function. In contrast, a high-degree polynomial imposes a weaker prior assumption, as its parameters allow it to represent substantially more complex relationships.</p>
+<p>Convolutional neural networks (ConvNets, CNNs) are a class of neural networks characterized by a strong inductive bias, making them highly effective for tasks that align with this bias. CNNs underpin many modern vision systems, including those used in autonomous vehicles.</p>
+<p>We therefore use convolutional neural networks to introduce the concept of <strong>architectural design</strong>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><span class="citation" data-cites="Geron:2019aa">Géron (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> § 10</p>
+</div></aside></section>
+<section id="motivation-continued" class="slide level2">
+<h2>Motivation (continued)</h2>
+<ul>
+<li class="fragment">Consider an <strong>RGB image</strong> with dimensions <span class="math inline">\(224 \times 224\)</span>, which is relatively small by contemporary benchmarks.</li>
+<li class="fragment">The image consists of <span class="math inline">\(224 \times 224 \times 3 = 150,528\)</span> <strong>input features</strong>.</li>
+<li class="fragment">A neural network with merely a <strong>single hidden dense layer</strong> would require over 22,658,678,784 (<strong>22 billion</strong>) parameters, highlighting the computational complexity involved.</li>
+</ul>
+<aside class="notes">
+<p>Here, we assume that the hidden layer contains the same number of units as the input layer.</p>
+<p>In a fully connected feedforward neural network with <span class="math inline">\(k\)</span> layers, if each layer contains <span class="math inline">\(n\)</span> units, the number of parameters scales as <span class="math inline">\(\mathcal{O}(k n^2)\)</span>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="concepts" class="slide level2">
+<h2>Concepts</h2>
+<p>Our discussion will center around the following <strong>key concepts</strong>.</p>
+<ul>
+<li><strong>Inductive bias</strong> and topological priors</li>
+<li>Local connectivity and <strong>sparse interactions</strong></li>
+<li><strong>Parameter sharing</strong> and equivariance</li>
+<li>Hierarchical <strong>feature composition</strong></li>
+<li><strong>Spatial invariance</strong> via pooling</li>
+</ul>
+<aside class="notes">
+<p><strong>Pedagogical approach</strong></p>
+<p>Beginning with classical 2D image processing provides an intuitive entry point and establishes motivation before introducing the underlying methodology. This approach effectively distinguishes the <strong>visual intuition* of convolution from the </strong>matrix operations** required for neural network implementation.</p>
+<p><strong>Phase 1: The Intuition (2D Historical Context)</strong></p>
+<p><strong>Goal:</strong> Establish what a filter actually does using immediate visual feedback.</p>
+<ul>
+<li><strong>The Content:</strong> Demonstrate classic, hand-crafted 2D filters (e.g., Sobel edge detection, Gaussian blur) on a standard grayscale image.</li>
+<li><strong>The Takeaway:</strong> A small, sliding weight matrix transforms the input into a feature map. The notion of the receptive field is introduced intuitively, while channels, batches, and backpropagation are initially omitted.</li>
+</ul>
+<p>2D CNNs are the prevailing standard. However, 1D CNNs are also widely used. 3D CNNs are well established and are primarily applied to volumetric data, such as MRI and CT images in medical imaging. To keep the equations and visual representation as simple as possible, we begin with 1D CNNs.</p>
+<p><strong>Phase 2: The Mechanics (1D Neural Networks)</strong></p>
+<p><strong>Goal:</strong> Isolate the mathematics of channels and kernels.</p>
+<ul>
+<li><strong>The Pivot:</strong> State that while classic computer vision relied on humans guessing the correct matrix weights, convolutional layers <em>learn</em> them. To implement this learning mathematically—specifically how we handle deep representations—you strip away the spatial complexity.</li>
+<li><strong>The Content:</strong> Execute the 1D audio/signal progression (Single Channel -&gt; Multi-Channel -&gt; Multiple Kernels -&gt; Stacked Layers).</li>
+<li><strong>The Takeaway:</strong> Master the underlying dot-product arithmetic and the strict dimensional rules governing <span class="math inline">\(C_{in}\)</span> and <span class="math inline">\(C_{out}\)</span>.</li>
+</ul>
+<p><strong>Phase 3: The Synthesis (2D Neural Networks)</strong></p>
+<p><strong>Goal:</strong> Re-introduce spatial dimensions to the rigorous tensor math.</p>
+<ul>
+<li><strong>The Content:</strong> Bring the math from Phase 2 back to the images from Phase 1. Show the 3D tensor math for an RGB image, or the output of a previous hidden layer.</li>
+<li><strong>The Takeaway:</strong> Realize that moving to 2D simply adds an iterator to existing, well-understood 1D channel logic.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="kernel" class="title-slide slide level1 center">
+<h1>Kernel</h1>
+
+</section>
+<section id="intuition2d-historical-context" class="slide level2">
+<h2>Intuition/2D Historical Context</h2>
+<ul>
+<li><strong>Classical 2D image processing</strong> establishes <strong>motivation</strong> before introducing the underlying <strong>methodology</strong>.</li>
+<li>Distinguishes the <strong>visual intuition</strong> from the <strong>matrix operations</strong>.</li>
+</ul>
+
+<aside><div>
+<p>We will introduce <strong>learning concepts</strong> later; for now, we are simply processing images.</p>
+</div></aside></section>
+<section id="kernel-filter" class="slide level2">
+<h2>Kernel (filter)</h2>
+<div id="819eace6" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides-dev_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="slides-dev_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="868" height="374"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside class="notes">
+<p>The definition of a <strong>convolution</strong> will be introduced shortly. For now, consider systematically the ways in which the kernel can overlap the input matrix.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>A <strong>kernel</strong> (aka filter) is a small matrix, usually <span class="math inline">\(3 \times 3\)</span>, <span class="math inline">\(5 \times 5\)</span>, or similar in size, that <strong>slides over</strong> the input data (such as an image) to perform <strong>convolution</strong>.</p>
+</div></aside></section>
+<section id="kernel-1" class="slide level2">
+<h2>Kernel</h2>
+<div id="4dde87d5" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides-dev_files/figure-revealjs/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="slides-dev_files/figure-revealjs/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="868" height="374"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside class="notes">
+<p>The detailed computational process will be elaborated upon subsequently. At this stage, it is sufficient to observe that the kernel is systematically traversed across the input matrix, generating a distinct output with each iteration.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Beginning with the kernel positioned to overlap the upper-left corner of the input matrix.</p>
+</div></aside></section>
+<section id="kernel-2" class="slide level2">
+<h2>Kernel</h2>
+<div id="b3c78aa9" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides-dev_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides-dev_files/figure-revealjs/cell-5-output-1.png" class="quarto-figure quarto-figure-center" width="868" height="374"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside><div>
+<p>It can be moved to the right three times.</p>
+</div></aside></section>
+<section id="kernel-3" class="slide level2">
+<h2>Kernel</h2>
+<div id="55e7f5ad" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides-dev_files/figure-revealjs/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides-dev_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="868" height="374"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="kernel-4" class="slide level2">
+<h2>Kernel</h2>
+<div id="55da0410" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides-dev_files/figure-revealjs/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides-dev_files/figure-revealjs/cell-7-output-1.png" class="quarto-figure quarto-figure-center" width="868" height="374"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="kernel-5" class="slide level2">
+<h2>Kernel</h2>
+<div id="dc590d99" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides-dev_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides-dev_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="868" height="374"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside class="notes">
+<p>How many placements of the kernel over the input matrix are there? <span class="math inline">\(4 \times 4 = 16\)</span>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>The kernel can then be moved to the second row of the input matrix, and moved to the right three times.</p>
+</div></aside></section>
+<section id="kernel-placements" class="slide level2 scrollable">
+<h2>Kernel Placements</h2>
+<div id="7caca8aa" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides-dev_files/figure-revealjs/cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides-dev_files/figure-revealjs/cell-9-output-1.png" class="quarto-figure quarto-figure-center" width="1121" height="1142"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="kernel-6" class="slide level2">
+<h2>Kernel</h2>
+<div id="ca6c8904" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides-dev_files/figure-revealjs/cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides-dev_files/figure-revealjs/cell-10-output-1.png" class="quarto-figure quarto-figure-center" width="868" height="374"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside><div>
+<p>With the kernel placed over a specific region of the input matrix, the <strong>convolution</strong> is <strong>element-wise multiplication</strong> (each element of the kernel is multiplied by the corresponding element of the input matrix region it overlaps) followed by a <strong>summation</strong> of the results to produce a <strong>single scalar value</strong>.</p>
+</div></aside></section>
+<section id="kernel-7" class="slide level2">
+<h2>Kernel</h2>
+<div id="7c07584f" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides-dev_files/figure-revealjs/cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides-dev_files/figure-revealjs/cell-11-output-1.png" class="quarto-figure quarto-figure-center" width="868" height="374"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside><div>
+<p><span class="math inline">\(1 \times 1 + 2 \times 0 + 3 \times (-1) + 6 \times 1 + 5 \times 0 + 4 \times (-1) + 1 \times 1 + 2 \times 0 + 3 \times (-1) = -2\)</span></p>
+</div></aside></section>
+<section id="kernel-8" class="slide level2">
+<h2>Kernel</h2>
+<div id="0e3d1355" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides-dev_files/figure-revealjs/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="slides-dev_files/figure-revealjs/cell-12-output-1.png" width="1129" height="391"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside class="notes">
+<p>It is referred to as a feature map because these outputs serve as features for the subsequent layer. In CNNs, the term “feature map” refers to the output of a convolutional layer after applying filters to the input data. These feature maps capture various patterns or features from the input, such as edges or textures in image data.</p>
+<p>The output feature maps of one layer become the input for the next layer, effectively serving as features that the subsequent layer can use to learn more complex patterns. This hierarchical feature extraction process is a key characteristic of CNNs, allowing them to build progressively more abstract and high-level representations of the input data as the network depth increases.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>The 16 resulting values can be organized into an <strong>output matrix</strong>. The element at position (0,0) in this output matrix represents the result of applying the convolution operation with the kernel at the initial position on the input matrix. In convolutional neural networks, the output matrix is referred to as a <strong>feature map</strong>.</p>
+</div></aside></section>
+<section id="classical-image-processing" class="slide level2">
+<h2>Classical Image Processing</h2>
+<p>We now consider <strong>grayscale images</strong> as <strong>input matrices</strong> and examine two <strong>hand-crafted 2D filters</strong>: Gaussian blurring and Sobel edge detection.</p>
+
+<aside><div>
+<p><strong>No</strong> machine learning is involved.</p>
+</div></aside></section>
+<section id="blurring" class="slide level2 smaller">
+<h2>Blurring</h2>
+<div id="926d3c0a" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
+<span id="cb1-3"><a aria-label="3"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a aria-label="4"></a><span class="im">from</span> scipy.ndimage <span class="im">import</span> convolve</span>
+<span id="cb1-5"><a aria-label="5"></a></span>
+<span id="cb1-6"><a aria-label="6"></a><span class="kw">def</span> apply_kernel_to_image(image_path, kernel):</span>
+<span id="cb1-7"><a aria-label="7"></a>    <span class="co"># Load the image and convert it to grayscale</span></span>
+<span id="cb1-8"><a aria-label="8"></a>    image <span class="op">=</span> Image.<span class="bu">open</span>(image_path).convert(<span class="st">'L'</span>)</span>
+<span id="cb1-9"><a aria-label="9"></a>    image_array <span class="op">=</span> np.array(image)</span>
+<span id="cb1-10"><a aria-label="10"></a></span>
+<span id="cb1-11"><a aria-label="11"></a>    <span class="co"># Apply the convolution using the provided kernel</span></span>
+<span id="cb1-12"><a aria-label="12"></a>    convolved_array <span class="op">=</span> convolve(image_array, kernel, mode<span class="op">=</span><span class="st">'reflect'</span>)</span>
+<span id="cb1-13"><a aria-label="13"></a></span>
+<span id="cb1-14"><a aria-label="14"></a>    <span class="co"># Convert the convolved array back to an image</span></span>
+<span id="cb1-15"><a aria-label="15"></a>    convolved_image <span class="op">=</span> Image.fromarray(convolved_array)</span>
+<span id="cb1-16"><a aria-label="16"></a></span>
+<span id="cb1-17"><a aria-label="17"></a>    <span class="co"># Display the original and convolved images</span></span>
+<span id="cb1-18"><a aria-label="18"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb1-19"><a aria-label="19"></a></span>
+<span id="cb1-20"><a aria-label="20"></a>    plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb1-21"><a aria-label="21"></a>    plt.title(<span class="st">'Original Image'</span>)</span>
+<span id="cb1-22"><a aria-label="22"></a>    plt.imshow(image_array, cmap<span class="op">=</span><span class="st">'gray'</span>)</span>
+<span id="cb1-23"><a aria-label="23"></a>    plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb1-24"><a aria-label="24"></a></span>
+<span id="cb1-25"><a aria-label="25"></a>    plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb1-26"><a aria-label="26"></a>    plt.title(<span class="st">'Convolved Image'</span>)</span>
+<span id="cb1-27"><a aria-label="27"></a>    plt.imshow(convolved_image, cmap<span class="op">=</span><span class="st">'gray'</span>)</span>
+<span id="cb1-28"><a aria-label="28"></a>    plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb1-29"><a aria-label="29"></a></span>
+<span id="cb1-30"><a aria-label="30"></a>    plt.tight_layout()</span>
+<span id="cb1-31"><a aria-label="31"></a>    plt.show()</span>
+<span id="cb1-32"><a aria-label="32"></a></span>
+<span id="cb1-33"><a aria-label="33"></a><span class="co"># Example of a 3x3 averaging kernel</span></span>
+<span id="cb1-34"><a aria-label="34"></a></span>
+<span id="cb1-35"><a aria-label="35"></a>kernel <span class="op">=</span> np.array([</span>
+<span id="cb1-36"><a aria-label="36"></a>    [<span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>],</span>
+<span id="cb1-37"><a aria-label="37"></a>    [<span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>],</span>
+<span id="cb1-38"><a aria-label="38"></a>    [<span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>]</span>
+<span id="cb1-39"><a aria-label="39"></a>])</span>
+<span id="cb1-40"><a aria-label="40"></a></span>
+<span id="cb1-41"><a aria-label="41"></a><span class="kw">def</span> make_kernel(size):</span>
+<span id="cb1-42"><a aria-label="42"></a>    <span class="cf">return</span> np.full((size, size), <span class="dv">1</span> <span class="op">/</span> (size <span class="op">**</span> <span class="dv">2</span>))</span>
+<span id="cb1-43"><a aria-label="43"></a></span>
+<span id="cb1-44"><a aria-label="44"></a>kernel <span class="op">=</span> make_kernel(<span class="dv">15</span>)</span>
+<span id="cb1-45"><a aria-label="45"></a></span>
+<span id="cb1-46"><a aria-label="46"></a><span class="co"># Apply the kernel to the image (provide your image path here)</span></span>
+<span id="cb1-47"><a aria-label="47"></a>image_path <span class="op">=</span> <span class="st">'../../assets/images/uottawa_hor_black.png'</span></span>
+<span id="cb1-48"><a aria-label="48"></a>apply_kernel_to_image(image_path, kernel)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides-dev_files/figure-revealjs/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides-dev_files/figure-revealjs/cell-13-output-1.png" width="950" height="162"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="6ebf4a4b" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># 3x3 averaging kernel</span></span>
+<span id="cb2-2"><a aria-label="2"></a></span>
+<span id="cb2-3"><a aria-label="3"></a>kernel <span class="op">=</span> np.array([</span>
+<span id="cb2-4"><a aria-label="4"></a>    [<span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>],</span>
+<span id="cb2-5"><a aria-label="5"></a>    [<span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>],</span>
+<span id="cb2-6"><a aria-label="6"></a>    [<span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">9</span>]</span>
+<span id="cb2-7"><a aria-label="7"></a>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<aside class="notes">
+<p>The application of kernels to images has been a longstanding practice in the field of image processing.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>A pixel is transformed into the <strong>average of itself and its eight surrounding neighbors</strong>, resulting in a blurred effect on the image.</p>
+</div></aside></section>
+<section id="vertical-edge-detection" class="slide level2">
+<h2>Vertical Edge Detection</h2>
+<div id="dd3bf29d" class="cell" data-execution_count="15">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides-dev_files/figure-revealjs/cell-15-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="slides-dev_files/figure-revealjs/cell-15-output-1.png" width="950" height="162"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="c2003219" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Define the 3x3 kernel</span></span>
+<span id="cb3-2"><a aria-label="2"></a></span>
+<span id="cb3-3"><a aria-label="3"></a>kernel <span class="op">=</span> np.array([</span>
+<span id="cb3-4"><a aria-label="4"></a>    [<span class="op">-</span><span class="fl">0.25</span>, <span class="dv">0</span>, <span class="fl">0.25</span>],</span>
+<span id="cb3-5"><a aria-label="5"></a>    [<span class="op">-</span><span class="fl">0.25</span>, <span class="dv">0</span>, <span class="fl">0.25</span>],</span>
+<span id="cb3-6"><a aria-label="6"></a>    [<span class="op">-</span><span class="fl">0.25</span>, <span class="dv">0</span>, <span class="fl">0.25</span>]</span>
+<span id="cb3-7"><a aria-label="7"></a>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<aside class="notes">
+<p>This is a type of <strong>edge detection kernel</strong>, specifically a horizontal gradient filter or a Sobel operator. It’s designed to detect changes in intensity along the horizontal axis, emphasizing vertical edges in an image.</p>
+<p>When this kernel is convolved with an image:</p>
+<ul>
+<li>It highlights vertical edges by calculating the difference in pixel intensity between the left and right sides of a point.</li>
+<li>The negative values (-1) on the left subtract intensity, while the positive values (1) on the right add intensity, effectively measuring the horizontal gradient.</li>
+<li>The zeros in the middle ignore the central pixel’s contribution, focusing only on the contrast between left and right neighbors.</li>
+</ul>
+<p>The result is an image where:</p>
+<ul>
+<li>Vertical edges (e.g., the boundary between a dark object and a light background) appear bright or dark, depending on the direction of the intensity change.</li>
+<li>Horizontal edges or uniform areas tend to be suppressed (close to zero).</li>
+</ul>
+<p>Imagine sliding this kernel over an image like a scanner. For each pixel:</p>
+<ul>
+<li><p>It looks at the pixels to its left (subtracting their value with -1) and to its right (adding their value with 1).</p></li>
+<li><p>If the left and right sides are similar (e.g., same color), the result is near zero (no edge).</p></li>
+<li><p>If the left is dark and the right is light (or vice versa), the result is a strong positive or negative value, showing a vertical edge.</p></li>
+</ul>
+<p>This is useful in computer vision (like in Tesla’s CNNs) to help detect object boundaries or lane lines by emphasizing where pixel values change sharply in the horizontal direction.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>This kernel detects vertical edges by <strong>emphasizing differences in intensity between adjacent columns</strong>. It subtracts pixel values on the left from those on the right, enhancing vertical transitions and suppressing uniform regions.</p>
+</div></aside></section>
+<section id="horizontal-edge-detection" class="slide level2">
+<h2>Horizontal Edge Detection</h2>
+<div id="90929b72" class="cell" data-execution_count="17">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides-dev_files/figure-revealjs/cell-17-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides-dev_files/figure-revealjs/cell-17-output-1.png" width="950" height="162"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="3657e4aa" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Define the 3x3 averaging kernel</span></span>
+<span id="cb4-2"><a aria-label="2"></a></span>
+<span id="cb4-3"><a aria-label="3"></a>kernel <span class="op">=</span> np.array([</span>
+<span id="cb4-4"><a aria-label="4"></a>    [<span class="op">-</span><span class="fl">0.25</span>, <span class="op">-</span><span class="fl">0.25</span>, <span class="op">-</span><span class="fl">0.25</span>],</span>
+<span id="cb4-5"><a aria-label="5"></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb4-6"><a aria-label="6"></a>    [<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>]</span>
+<span id="cb4-7"><a aria-label="7"></a>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<aside><div>
+<p>This kernel detects horizontal edges by <strong>highlighting differences in intensity between adjacent rows</strong>. It subtracts pixel values in the upper row from those in the lower row, accentuating horizontal transitions while minimizing uniform areas.</p>
+</div></aside></section>
+<section id="convolutions-in-image-processing" class="slide level2">
+<h2>Convolutions in Image Processing</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/8rrHTtUzyZA" width="889" height="500" title="Convolutions in Image Processing" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<aside><div>
+<p>Uses the <strong><a href="https://julialang.org">Julia</a></strong> programming language.</p>
+</div></aside></section>
+<section id="but-what-is-a-convolution" class="slide level2">
+<h2>But what is a convolution?</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/KuXjwB4LzSA" width="889" height="500" title="But what is a convolution?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<aside><div>
+<p><strong>Convolution</strong> extending beyond its application in image processing.</p>
+</div></aside></section>
+<section id="kernels" class="slide level2">
+<h2>Kernels</h2>
+<p>In contrast to image processing, where kernels are manually defined by the user, in <strong>convolutional networks</strong>, the <strong>kernels are automatically learned</strong> by the network.</p>
+
+<aside><div>
+<p>To be continued <span class="math inline">\(\ldots\)</span></p>
+</div></aside></section></section>
+<section>
+<section id="conv1d" class="title-slide slide level1 center">
+<h1>Conv1D</h1>
+
+</section>
+<section id="definition" class="slide level2">
+<h2>Definition</h2>
+<p>For a 1D input array <span class="math inline">\(x\)</span>, a (learned) weight vector <span class="math inline">\(w \in \mathbb{R}^K\)</span>, and a scalar bias <span class="math inline">\(b\)</span>, the discrete 1D cross-correlation (convolution) output <span class="math inline">\(y\)</span> at index <span class="math inline">\(i\)</span> is defined as:</p>
+<p><span class="math display">\[
+    y[i] = b + \sum_{j=0}^{K-1} w[j] x[i+j]
+\]</span></p>
+<aside class="notes">
+<p>Given the above definition, discuss the length of <span class="math inline">\(y\)</span>.</p>
+<p><strong>Cross-Correlation vs.&nbsp;True Convolution</strong></p>
+<p>In signal processing, a formal mathematical convolution requires the kernel to be mirrored (spatially flipped) before the sliding dot product is computed:</p>
+<p><span class="math display">\[
+    y_{conv}[i] = \sum_{j=0}^{K-1} x[i+j] w[K-1-j]
+\]</span> Deep learning libraries omit this kernel flip, opting for cross-correlation. Because the weight values in <span class="math inline">\(w\)</span> are randomly initialized and learned via gradient descent, the mathematical flip is redundant; the optimization algorithm simply learns the “pre-flipped” representation of the optimal filter.</p>
+<p><strong>Mechanics</strong></p>
+<ul>
+<li><strong>Alignment:</strong> The weight array <span class="math inline">\(w\)</span> is placed over the first <span class="math inline">\(K\)</span> elements of the input array <span class="math inline">\(x\)</span>.</li>
+<li><strong>Dot Product:</strong> An element-wise multiplication is performed between the aligned values, and the results are summed. The bias <span class="math inline">\(b\)</span> is added to this scalar sum.</li>
+<li><strong>Translation:</strong> The weight array shifts by a designated increment (stride) across the input sequence, repeating the dot product at each valid position to populate the output array <span class="math inline">\(y\)</span> (the feature map).</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="applications" class="slide level2">
+<h2>Applications</h2>
+<aside class="notes">
+<h3 id="time-series-analysis-and-forecasting">Time-Series Analysis and Forecasting</h3>
+<p>1D CNNs efficiently capture temporal dependencies without the sequential processing bottleneck of Recurrent Neural Networks (RNNs).</p>
+<ul>
+<li><strong>Medical Diagnostics:</strong> Classifying anomalies in continuous physiological signals, such as Electrocardiogram (ECG) or Electroencephalogram (EEG) waveforms.</li>
+<li><strong>Predictive Maintenance:</strong> Detecting industrial equipment degradation by processing high-frequency sensor telemetry (e.g., vibration or temperature logs).</li>
+<li><strong>Financial Modeling:</strong> Forecasting market movements or volatility from historical price and volume sequences.</li>
+<li><strong>Climate Modeling:</strong> Predicting localized weather patterns from historical meteorological time-series data.</li>
+</ul>
+<h3 id="natural-language-processing-nlp">Natural Language Processing (NLP)</h3>
+<p>While Transformers dominate large-scale NLP, 1D CNNs remain highly efficient for localized, syntax-driven text processing using word or character embeddings.</p>
+<ul>
+<li><strong>Document Classification:</strong> Performing sentiment analysis, topic categorization, or spam detection by extracting local n-gram features (e.g., Yoon Kim’s CNN for sentence classification).</li>
+<li><strong>Token-Level Tasks:</strong> Executing part-of-speech (POS) tagging and named entity recognition (NER) by assessing words within their immediate local context.</li>
+<li><strong>Intent Recognition:</strong> Identifying user intent in conversational AI agents where low-latency inference is critical.</li>
+</ul>
+<h3 id="digital-signal-processing-and-audio">Digital Signal Processing and Audio</h3>
+<p>Raw audio waveforms or pre-processed spectrogram slices function as 1D inputs where filters learn to isolate specific frequencies or phonetic structures.</p>
+<ul>
+<li><strong>Speech Recognition:</strong> Processing Mel-frequency cepstral coefficients (MFCCs) for acoustic modeling and phoneme transcription.</li>
+<li><strong>Wake-Word Detection:</strong> Operating low-power, low-latency models on edge devices to identify specific audio triggers (e.g., “Hey Siri”).</li>
+<li><strong>Environmental Audio Classification:</strong> Identifying specific ambient sounds, such as breaking glass, sirens, or wildlife calls, from raw waveform data.</li>
+<li><strong>Music Analysis:</strong> Classifying genres, extracting BPM, or performing automated instrument transcription.</li>
+</ul>
+<p>Would you like to detail the tensor dimensions or architectural specifics for one of these biological sequence problems for your lecture slides?</p>
+<h3 id="computational-biology-and-bioinformatics">Computational Biology and Bioinformatics</h3>
+<p>Biological sequences naturally align with 1D convolutions, where the input length represents the nucleotide or amino acid chain, and the channels encode the vocabulary.</p>
+<ul>
+<li><strong>Motif Discovery:</strong> Identifying cell type-specific DNA signatures of transcription factor binding by sliding kernels over one-hot encoded genomic sequences.</li>
+<li><strong>Sequence Categorization:</strong> Classifying non-coding RNA sequences based on primary structural motifs.</li>
+<li><strong>Predictive Virology:</strong> Determining RNA virus-host susceptibility by extracting localized sequence adaptations.</li>
+<li><strong>Protein Effector Prediction:</strong> Mapping primary amino acid sequences to predict functional properties or structural domains before resorting to heavier language models.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="theory" class="title-slide slide level1 center">
+<h1>Theory</h1>
+
+</section>
+<section id="what-do-you-see" class="slide level2">
+<h2>What do you see?</h2>
+<p>(keep with discussion on invariance)</p>
+<div id="e0ad062a" class="cell" data-execution_count="19">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a aria-label="2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-3"><a aria-label="3"></a><span class="im">from</span> skimage <span class="im">import</span> data, transform</span>
+<span id="cb5-4"><a aria-label="4"></a><span class="im">from</span> skimage.util <span class="im">import</span> img_as_float</span>
+<span id="cb5-5"><a aria-label="5"></a></span>
+<span id="cb5-6"><a aria-label="6"></a><span class="co"># Load a sample image (Chelsea the cat)</span></span>
+<span id="cb5-7"><a aria-label="7"></a>image <span class="op">=</span> img_as_float(data.chelsea())</span>
+<span id="cb5-8"><a aria-label="8"></a></span>
+<span id="cb5-9"><a aria-label="9"></a><span class="co"># Define transformations</span></span>
+<span id="cb5-10"><a aria-label="10"></a><span class="kw">def</span> translate(image, tx<span class="op">=</span><span class="dv">50</span>, ty<span class="op">=</span><span class="dv">30</span>):</span>
+<span id="cb5-11"><a aria-label="11"></a>    tform <span class="op">=</span> transform.AffineTransform(translation<span class="op">=</span>(tx, ty))</span>
+<span id="cb5-12"><a aria-label="12"></a>    <span class="cf">return</span> transform.warp(image, tform.inverse)</span>
+<span id="cb5-13"><a aria-label="13"></a></span>
+<span id="cb5-14"><a aria-label="14"></a><span class="kw">def</span> rotate(image, angle<span class="op">=</span><span class="dv">30</span>):</span>
+<span id="cb5-15"><a aria-label="15"></a>    <span class="cf">return</span> transform.rotate(image, angle, resize<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-16"><a aria-label="16"></a></span>
+<span id="cb5-17"><a aria-label="17"></a><span class="kw">def</span> shear(image, shear_deg<span class="op">=</span><span class="dv">15</span>):</span>
+<span id="cb5-18"><a aria-label="18"></a>    shear_rad <span class="op">=</span> np.deg2rad(shear_deg)</span>
+<span id="cb5-19"><a aria-label="19"></a>    tform <span class="op">=</span> transform.AffineTransform(shear<span class="op">=</span>shear_rad)</span>
+<span id="cb5-20"><a aria-label="20"></a>    <span class="cf">return</span> transform.warp(image, tform.inverse)</span>
+<span id="cb5-21"><a aria-label="21"></a></span>
+<span id="cb5-22"><a aria-label="22"></a><span class="co"># Apply transformations</span></span>
+<span id="cb5-23"><a aria-label="23"></a>rotated <span class="op">=</span> rotate(image, <span class="dv">30</span>)</span>
+<span id="cb5-24"><a aria-label="24"></a>translated <span class="op">=</span> translate(image, <span class="dv">60</span>, <span class="dv">30</span>)</span>
+<span id="cb5-25"><a aria-label="25"></a>sheared <span class="op">=</span> shear(image, <span class="dv">15</span>)</span>
+<span id="cb5-26"><a aria-label="26"></a></span>
+<span id="cb5-27"><a aria-label="27"></a><span class="co"># Create 2x2 grid</span></span>
+<span id="cb5-28"><a aria-label="28"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">5</span>))</span>
+<span id="cb5-29"><a aria-label="29"></a>axes <span class="op">=</span> axes.ravel()</span>
+<span id="cb5-30"><a aria-label="30"></a>titles <span class="op">=</span> [<span class="st">'Original'</span>, <span class="st">'Rotated (30°)'</span>, <span class="st">'Translated (60, 30)'</span>, <span class="st">'Sheared (15°)'</span>]</span>
+<span id="cb5-31"><a aria-label="31"></a>images <span class="op">=</span> [image, rotated, translated, sheared]</span>
+<span id="cb5-32"><a aria-label="32"></a></span>
+<span id="cb5-33"><a aria-label="33"></a><span class="cf">for</span> ax, img, title <span class="kw">in</span> <span class="bu">zip</span>(axes, images, titles):</span>
+<span id="cb5-34"><a aria-label="34"></a>    ax.imshow(img)</span>
+<span id="cb5-35"><a aria-label="35"></a>    ax.set_title(title)</span>
+<span id="cb5-36"><a aria-label="36"></a>    ax.axis(<span class="st">'off'</span>)</span>
+<span id="cb5-37"><a aria-label="37"></a></span>
+<span id="cb5-38"><a aria-label="38"></a>plt.tight_layout()</span>
+<span id="cb5-39"><a aria-label="39"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides-dev_files/figure-revealjs/cell-19-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="slides-dev_files/figure-revealjs/cell-19-output-1.png" class="quarto-figure quarto-figure-center" width="470" height="429"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Even though these images look quite different in pixel space, you can still recognize the cat. A convolutional neural network learns filters that are robust to these transformations — that’s why it’s so powerful for vision tasks.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="prologue" class="title-slide slide level1 center">
+<h1>Prologue</h1>
+
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+</section>
+<section id="further-reading" class="slide level2">
+<h2>Further Reading</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+</section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
+<ul>
+<li><strong>A guide to convolution arithmetic for deep learning</strong></li>
+<li>Authors: Vincent Dumoulin and Francesco Visin</li>
+<li>Last revised: 11 Jan 2018
+<ul>
+<li><a href="https://arxiv.org/abs/1603.07285">arXiv:1603.07285</a></li>
+<li><a href="https://github.com/vdumoulin/conv_arithmetic/">GitHub Repository</a></li>
+</ul></li>
+</ul>
+</section>
+<section id="next-lecture" class="slide level2">
+<h2>Next lecture</h2>
+<ul>
+<li>We will introduce solution spaces.</li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Geron:2019aa" class="csl-entry" role="listitem">
+Géron, Aurélien. 2019. <em>Hands-on Machine Learning with Scikit-Learn, Keras, and TensorFlow</em>. 2nd ed. O’Reilly Media.
+</div>
+<div id="ref-Russell:2020aa" class="csl-entry" role="listitem">
+Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</span> Modern Approach</em>. 4th ed. Pearson. <a href="http://aima.cs.berkeley.edu/">http://aima.cs.berkeley.edu/</a>.
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Marcel <strong>Turcotte</strong></p>
+<p><a href="mailto:Marcel.Turcotte@uOttawa.ca">Marcel.Turcotte@uOttawa.ca</a></p>
+<p>School of Electrical Engineering and <strong>Computer Science</strong> (EE<strong>CS</strong>)</p>
+<p>University of Ottawa</p>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../../assets/images/uottawa_hor_black.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p><a href="https://turcotte.xyz/teaching/csi-4106">turcotte.xyz/teaching/csi-4106</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/turcotte\.xyz\/teaching\/csi-4106");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+</body></html>
