@@ -500,7 +500,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">8</span> References</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="tang_cnn_tutorial.ipynb" download="tang_cnn_tutorial.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="tang_cnn_tutorial.ipynb" download="tang_cnn_tutorial.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li><li><a href="tang_cnn_tutorial.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -526,7 +526,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Version: Aug 30, 2026 21:06</p>
+      <p class="date">Version: Aug 31, 2026 14:55</p>
     </div>
   </div>
   
@@ -576,7 +576,7 @@ window.Quarto = {
 <section id="preparation" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Preparation</h1>
 <p>We use Keras with TensorFlow as its backend. NumPy and pandas support data processing, while Matplotlib and seaborn support visualization. Scikit-learn and SciPy provide familiar preprocessing and evaluation functions.</p>
-<div id="imports" class="cell" data-execution_count="1">
+<div id="imports" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> contextlib <span class="im">import</span> redirect_stderr, redirect_stdout</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> io <span class="im">import</span> StringIO</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
@@ -596,7 +596,7 @@ window.Quarto = {
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras <span class="im">import</span> callbacks, layers</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>All important choices are collected in one configuration cell. Keeping these values together makes the experiment easier to inspect and reproduce.</p>
-<div id="configuration" class="cell" data-execution_count="2">
+<div id="configuration" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">42</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>SEQUENCE_LENGTH <span class="op">=</span> <span class="dv">50</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -647,7 +647,7 @@ window.Quarto = {
 </div>
 </div>
 <p>The helper below downloads a dataset only when it is not already available. <code>keras.utils.get_file</code> also returns the local path, which we can pass directly to pandas. Its progress display is suppressed by default because terminal control characters can produce long outputs in a rendered notebook. Passing <code>show_progress=True</code> restores the interactive progress bar.</p>
-<div id="download-helper" class="cell" data-execution_count="3">
+<div id="download-helper" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> download_dataset(filename, show_progress<span class="op">=</span><span class="va">False</span>):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Download one of the configured datasets and return its local path."""</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> filename <span class="kw">not</span> <span class="kw">in</span> DATASETS:</span>
@@ -672,7 +672,7 @@ window.Quarto = {
 <section id="loading-and-validating-the-main-dataset" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Loading and validating the main dataset</h1>
 <p>The source files use slightly different column names. We standardize them at the boundary of our program so that all subsequent functions can use the same simple vocabulary: <code>utr</code>, <code>mrl</code>, and <code>read_count</code>.</p>
-<div id="load-helper" class="cell" data-execution_count="4">
+<div id="load-helper" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_utr_dataset(path, expected_length<span class="op">=</span>SEQUENCE_LENGTH):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Load and validate a processed UTR dataset.</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -729,7 +729,7 @@ window.Quarto = {
 <span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> data.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-load-main-data" class="cell" data-execution_count="5">
+<div id="cell-load-main-data" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>main_path <span class="op">=</span> download_dataset(<span class="st">"GSM3130435_egfp_unmod_1.csv.gz"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>main_data <span class="op">=</span> load_utr_dataset(main_path)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -789,7 +789,7 @@ window.Quarto = {
 </div>
 </div>
 <p>The target and read counts are measured on very different scales. A compact summary gives us an initial view of both variables.</p>
-<div id="cell-summarize-main-data" class="cell" data-execution_count="6">
+<div id="cell-summarize-main-data" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>main_data[[<span class="st">"mrl"</span>, <span class="st">"read_count"</span>]].describe(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    percentiles<span class="op">=</span>[<span class="fl">0.01</span>, <span class="fl">0.25</span>, <span class="fl">0.50</span>, <span class="fl">0.75</span>, <span class="fl">0.99</span>]</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>).<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -866,7 +866,7 @@ window.Quarto = {
 <section id="filtering-measurements-by-read-count" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Filtering measurements by read count</h1>
 <p>Measurements based on very few reads are less precise. We therefore retain exactly the 275,000 sequences with the highest read counts.</p>
-<div id="select-top-helper" class="cell" data-execution_count="7">
+<div id="select-top-helper" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> select_top_by_reads(data, n):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return the n highest-read rows and the read count at the boundary."""</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> <span class="dv">0</span> <span class="op">&lt;</span> n <span class="op">&lt;=</span> <span class="bu">len</span>(data):</span>
@@ -890,7 +890,7 @@ Retained: 275,000 sequences (84.3%)</code></pre>
 </div>
 </div>
 <p>Read counts are strongly right-skewed. We plot <span class="math inline">\(log_{10}(\text{reads}+1)\)</span> so that both low- and high-coverage measurements remain visible. The red line is the read count of the 275,000th ranked sequence.</p>
-<div id="cell-plot-read-histogram" class="cell" data-execution_count="8">
+<div id="cell-plot-read-histogram" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>log_read_counts <span class="op">=</span> np.log10(main_data[<span class="st">"read_count"</span>].to_numpy() <span class="op">+</span> <span class="dv">1</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>log_cutoff <span class="op">=</span> np.log10(read_cutoff <span class="op">+</span> <span class="dv">1</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -987,7 +987,7 @@ Note
 </tbody>
 </table>
 <p>A string of length 50 consequently becomes a <span class="math inline">\(50 \times 4\)</span> matrix.</p>
-<div id="one-hot-helper" class="cell" data-execution_count="9">
+<div id="one-hot-helper" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> one_hot_encode(sequences, sequence_length<span class="op">=</span>SEQUENCE_LENGTH):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Encode nucleotide strings as an (n, sequence_length, 4) array."""</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    sequences <span class="op">=</span> pd.Series(sequences, dtype<span class="op">=</span><span class="st">"string"</span>).<span class="bu">str</span>.upper()</span>
@@ -1015,7 +1015,7 @@ Note
 <span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> encoded</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We visualize the beginning of one sequence before encoding the complete dataset.</p>
-<div id="cell-visualize-one-hot" class="cell" data-execution_count="10">
+<div id="cell-visualize-one-hot" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>example_sequence <span class="op">=</span> retained_data.loc[<span class="dv">0</span>, <span class="st">"utr"</span>]</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>example_encoding <span class="op">=</span> one_hot_encode([example_sequence])[<span class="dv">0</span>]</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>positions_to_show <span class="op">=</span> <span class="dv">12</span></span>
@@ -1068,7 +1068,7 @@ Encoded shape: (50, 4)</code></pre>
 <li>27,500 sequences for the final evaluation.</li>
 </ul>
 <p>The test set remains untouched until training is complete.</p>
-<div id="random-partition-helper" class="cell" data-execution_count="11">
+<div id="random-partition-helper" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> random_partition(data, seed<span class="op">=</span>SEED):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Create the agreed random training, validation, and test partitions."""</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(data) <span class="op">!=</span> N_RETAINED:</span>
@@ -1106,7 +1106,7 @@ Encoded shape: (50, 4)</code></pre>
 <span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>train_data, validation_data, test_data <span class="op">=</span> random_partition(retained_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The three partitions should have similar MRL and read-count distributions. This small table is a useful check on the randomization.</p>
-<div id="cell-summarize-random-partitions" class="cell" data-execution_count="12">
+<div id="cell-summarize-random-partitions" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> summarize_partitions(partitions):</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Summarize the size and target distribution of named partitions."""</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> []</span>
@@ -1181,7 +1181,7 @@ Encoded shape: (50, 4)</code></pre>
 </div>
 </div>
 <p>We standardize the training targets to have mean zero and standard deviation one. The same transformation is then applied to validation and test targets. Fitting this transformation on training data only prevents information from the validation and test sets from leaking into model development.</p>
-<div id="prepare-arrays" class="cell" data-execution_count="13">
+<div id="prepare-arrays" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>target_scaler <span class="op">=</span> StandardScaler()</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> target_scaler.fit_transform(</span>
@@ -1213,7 +1213,7 @@ Training targets: (220000, 1) float32</code></pre>
 <section id="building-the-convolutional-neural-network" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="building-the-convolutional-neural-network"><span class="header-section-number">6.2</span> Building the convolutional neural network</h2>
 <p>The input shape is <code>(50, 4)</code>: 50 positions and four nucleotide channels. Keras uses this channels-last representation directly, so no tensor permutation is required.</p>
-<div id="model-helper" class="cell" data-execution_count="14">
+<div id="model-helper" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_mrl_cnn(</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    sequence_length<span class="op">=</span>SEQUENCE_LENGTH,</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    n_filters<span class="op">=</span><span class="dv">160</span>,</span>
@@ -1330,7 +1330,7 @@ Training targets: (220000, 1) float32</code></pre>
 <section id="training-the-model" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="training-the-model"><span class="header-section-number">6.3</span> Training the model</h2>
 <p>Keras provides a streaming implementation of <span class="math inline">\(R^2\)</span>. We implement Pearson correlation in the same way by accumulating the sufficient statistics over an entire epoch. Calculating correlation separately in each mini-batch and then averaging those values would not equal the correlation over the full dataset.</p>
-<div id="pearson-metric" class="cell" data-execution_count="15">
+<div id="pearson-metric" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="at">@keras.utils.register_keras_serializable</span>(package<span class="op">=</span><span class="st">"CSI4106"</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> PearsonCorrelation(keras.metrics.Metric):</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Pearson correlation accumulated over all examples in an epoch."""</span></span>
@@ -1382,7 +1382,7 @@ Training targets: (220000, 1) float32</code></pre>
 <span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>            variable.assign(<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Mean squared error is both our optimization objective and the loss displayed during training. Pearson correlation and <span class="math inline">\(R^2\)</span> are monitoring metrics; they do not change the gradient updates.</p>
-<div id="compile-model" class="cell" data-execution_count="16">
+<div id="compile-model" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compile_mrl_cnn(model):</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Configure the optimizer, loss, and epoch-level metrics."""</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    model.<span class="bu">compile</span>(</span>
@@ -1412,7 +1412,7 @@ Training targets: (220000, 1) float32</code></pre>
 <p>This is the most computationally expensive cell in the notebook. Runtime depends strongly on the available TensorFlow accelerator. The cell trains on all 220,000 examples and may take several minutes.</p>
 </div>
 </div>
-<div id="train-model" class="cell" data-execution_count="17">
+<div id="train-model" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>random_split_model_path <span class="op">=</span> MODEL_DIR <span class="op">/</span> <span class="st">"mrl_cnn_random_split.keras"</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>training_callbacks <span class="op">=</span> [</span>
@@ -1489,7 +1489,7 @@ Restoring model weights from the end of the best epoch: 14.</code></pre>
 <section id="visualizing-learning-dynamics" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="visualizing-learning-dynamics"><span class="header-section-number">6.4</span> Visualizing learning dynamics</h2>
 <p>The Keras <code>History</code> object records every loss and metric named during model compilation. We display three complementary views of learning.</p>
-<div id="history-plot-helper" class="cell" data-execution_count="18">
+<div id="history-plot-helper" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_training_history(history):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Plot training and validation loss, Pearson r, and R-squared."""</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    values <span class="op">=</span> history.history</span>
@@ -1530,7 +1530,7 @@ Restoring model weights from the end of the best epoch: 14.</code></pre>
 <span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    fig.tight_layout()</span>
 <span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig, axes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-plot-training-history" class="cell" data-execution_count="19">
+<div id="cell-plot-training-history" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>plot_training_history(history)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1546,7 +1546,7 @@ Restoring model weights from the end of the best epoch: 14.</code></pre>
 <section id="evaluating-the-test-set" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="evaluating-the-test-set"><span class="header-section-number">6.5</span> Evaluating the test set</h2>
 <p>The network predicts standardized MRL. We transform its output back to the original experimental scale before calculating final metrics or plotting the results.</p>
-<div id="evaluation-helpers" class="cell" data-execution_count="20">
+<div id="evaluation-helpers" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> predict_mrl(model, encoded_sequences, scaler, batch_size<span class="op">=</span>BATCH_SIZE):</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Predict MRL and return values on the original experimental scale."""</span></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    scaled_predictions <span class="op">=</span> model.predict(</span>
@@ -1570,7 +1570,7 @@ Restoring model weights from the end of the best epoch: 14.</code></pre>
 <span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"RMSE"</span>: np.sqrt(mean_squared_error(observed, predicted)),</span>
 <span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-evaluate-test-set" class="cell" data-execution_count="21">
+<div id="cell-evaluate-test-set" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>test_observed <span class="op">=</span> test_data[<span class="st">"mrl"</span>].to_numpy()</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>test_predicted <span class="op">=</span> predict_mrl(model, x_test, target_scaler)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1607,7 +1607,7 @@ Restoring model weights from the end of the best epoch: 14.</code></pre>
 </div>
 </div>
 <p>With tens of thousands of points, an ordinary scatter plot suffers from severe overplotting. A hexagonal density plot shows where observations concentrate, while marginal histograms show the distribution along each axis.</p>
-<div id="prediction-plot-helper" class="cell" data-execution_count="22">
+<div id="prediction-plot-helper" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_observed_vs_predicted(</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    observed,</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    predicted,</span>
@@ -1683,7 +1683,7 @@ Restoring model weights from the end of the best epoch: 14.</code></pre>
 <span id="cb28-73"><a href="#cb28-73" aria-hidden="true" tabindex="-1"></a>    grid.fig.suptitle(title, y<span class="op">=</span><span class="fl">1.02</span>, fontsize<span class="op">=</span><span class="dv">15</span>)</span>
 <span id="cb28-74"><a href="#cb28-74" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> grid</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-plot-test-predictions" class="cell" data-execution_count="23">
+<div id="cell-plot-test-predictions" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>plot_observed_vs_predicted(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    test_observed,</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    test_predicted,</span>
@@ -1712,7 +1712,7 @@ Restoring model weights from the end of the best epoch: 14.</code></pre>
 }{n_1+n_2},
 \]</span></p>
 <p>where <span class="math inline">\(n_1\)</span> and <span class="math inline">\(n_2\)</span> are the replicate read counts.</p>
-<div id="merge-replicates-helper" class="cell" data-execution_count="24">
+<div id="merge-replicates-helper" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> merge_replicates(replicate_1, replicate_2):</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Outer-join two replicates and calculate read-weighted MRL."""</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    first <span class="op">=</span> replicate_1.rename(</span>
@@ -1759,7 +1759,7 @@ Restoring model weights from the end of the best epoch: 14.</code></pre>
 <span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a>        drop<span class="op">=</span><span class="va">True</span></span>
 <span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="load-and-merge-tcell" class="cell" data-execution_count="25">
+<div id="load-and-merge-tcell" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>tcell_r1_path <span class="op">=</span> download_dataset(</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"GSE232927_processed_defined_end_tcell_r1.csv.gz"</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1787,7 +1787,7 @@ Read-count boundary: 888</code></pre>
 </div>
 </div>
 <p>The independent data must not influence preprocessing. We reuse both the one-hot encoder and the target scaler fitted during the original experiment.</p>
-<div id="cell-evaluate-tcell" class="cell" data-execution_count="26">
+<div id="cell-evaluate-tcell" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x_tcell <span class="op">=</span> one_hot_encode(tcell_data[<span class="st">"utr"</span>])</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>tcell_observed <span class="op">=</span> tcell_data[<span class="st">"mrl"</span>].to_numpy()</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>tcell_predicted <span class="op">=</span> predict_mrl(model, x_tcell, target_scaler)</span>
@@ -1837,7 +1837,7 @@ Read-count boundary: 888</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-plot-tcell-predictions" class="cell" data-execution_count="27">
+<div id="cell-plot-tcell-predictions" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plot_observed_vs_predicted(</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    tcell_observed,</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    tcell_predicted,</span>
@@ -1888,7 +1888,7 @@ R^2
 <section id="saving-the-reusable-predictor" class="level2" data-number="6.7">
 <h2 data-number="6.7" class="anchored" data-anchor-id="saving-the-reusable-predictor"><span class="header-section-number">6.7</span> Saving the reusable predictor</h2>
 <p>The best model was saved during training. We also save the two numbers required to transform predictions back to the original MRL scale. These artifacts will allow a later genetic-algorithm notebook to score new strings without loading the experimental training data.</p>
-<div id="save-artifacts" class="cell" data-execution_count="28">
+<div id="save-artifacts" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>scaler_path <span class="op">=</span> MODEL_DIR <span class="op">/</span> <span class="st">"mrl_target_scaler.npz"</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>np.savez(</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    scaler_path,</span>
@@ -1904,7 +1904,7 @@ Saved target transformation: models/mrl_target_scaler.npz</code></pre>
 </div>
 </div>
 <p>The complete prediction interface is now: validate strings, one-hot encode them, apply the model, and undo target standardization.</p>
-<div id="cell-predict-literal-sequences" class="cell" data-execution_count="29">
+<div id="cell-predict-literal-sequences" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>example_sequences <span class="op">=</span> pd.Series(</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    [</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"A"</span> <span class="op">*</span> SEQUENCE_LENGTH,</span>
@@ -1972,7 +1972,7 @@ Saved target transformation: models/mrl_target_scaler.npz</code></pre>
 <li>the final 27,500 sequences form the validation set.</li>
 </ul>
 <p>Only the rule used to select the test set changes.</p>
-<div id="cell-read-count-partition-helper" class="cell" data-execution_count="30">
+<div id="cell-read-count-partition-helper" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_count_partition(data, seed<span class="op">=</span>SEED):</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Reserve the highest-read rows for testing, then split the remainder."""</span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(data) <span class="op">!=</span> N_RETAINED:</span>
@@ -2063,7 +2063,7 @@ Saved target transformation: models/mrl_target_scaler.npz</code></pre>
 </div>
 </div>
 <p>The distributions below show that choosing the test set by read count changes both measurement coverage and, potentially, the target distribution.</p>
-<div id="cell-compare-read-partitions" class="cell" data-execution_count="31">
+<div id="cell-compare-read-partitions" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>partition_plot_data <span class="op">=</span> pd.concat(</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    [</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>        read_train_data[[<span class="st">"mrl"</span>, <span class="st">"read_count"</span>]].assign(</span>
@@ -2132,7 +2132,7 @@ Saved target transformation: models/mrl_target_scaler.npz</code></pre>
 </div>
 </div>
 <p>We now retrain the same architecture from scratch. The target transformation is again fitted using training data only.</p>
-<div id="prepare-read-count-arrays" class="cell" data-execution_count="32">
+<div id="prepare-read-count-arrays" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>read_target_scaler <span class="op">=</span> StandardScaler()</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>read_y_train <span class="op">=</span> read_target_scaler.fit_transform(</span>
@@ -2169,7 +2169,7 @@ Test features: (27500, 50, 4) float32</code></pre>
 <p>This cell performs a second complete model fit and therefore approximately doubles the total training time of the notebook.</p>
 </div>
 </div>
-<div id="train-read-count-model" class="cell" data-execution_count="33">
+<div id="train-read-count-model" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reset the random state before constructing the second model.</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>keras.utils.set_random_seed(SEED)</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>read_count_model <span class="op">=</span> compile_mrl_cnn(build_mrl_cnn())</span>
@@ -2249,7 +2249,7 @@ Restoring model weights from the end of the best epoch: 17.</code></pre>
 </div>
 </div>
 <p>We first inspect the learning dynamics and verify that early stopping selected a model with stable validation performance.</p>
-<div id="cell-plot-read-count-training-history" class="cell" data-execution_count="34">
+<div id="cell-plot-read-count-training-history" class="cell" data-execution_count="35">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>plot_training_history(read_history)</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -2262,7 +2262,7 @@ Restoring model weights from the end of the best epoch: 17.</code></pre>
 </div>
 </div>
 <p>The final evaluation uses the 27,500 sequences with the highest read counts. The comparison table places its results beside those from the random test set.</p>
-<div id="cell-evaluate-read-count-test-set" class="cell" data-execution_count="35">
+<div id="cell-evaluate-read-count-test-set" class="cell" data-execution_count="36">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>read_test_observed <span class="op">=</span> read_test_data[<span class="st">"mrl"</span>].to_numpy()</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>read_test_predicted <span class="op">=</span> predict_mrl(</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    read_count_model,</span>
@@ -2316,7 +2316,7 @@ Restoring model weights from the end of the best epoch: 17.</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-plot-read-count-test-predictions" class="cell" data-execution_count="36">
+<div id="cell-plot-read-count-test-predictions" class="cell" data-execution_count="37">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>plot_observed_vs_predicted(</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    read_test_observed,</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    read_test_predicted,</span>
@@ -2335,7 +2335,7 @@ Restoring model weights from the end of the best epoch: 17.</code></pre>
 <section id="evaluation-on-the-independent-t-cell-experiment" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="evaluation-on-the-independent-t-cell-experiment"><span class="header-section-number">7.1</span> Evaluation on the independent T-cell experiment</h2>
 <p>We now apply the second model to the same 100,000 merged T-cell sequences used to evaluate Experiment 1. Reusing an identical external evaluation set lets us compare the effect of the training-partition strategy directly. Predictions from the second model must be returned to the experimental MRL scale using the target transformation fitted on its own training partition.</p>
-<div id="cell-evaluate-read-count-model-on-tcell" class="cell" data-execution_count="37">
+<div id="cell-evaluate-read-count-model-on-tcell" class="cell" data-execution_count="38">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>read_tcell_predicted <span class="op">=</span> predict_mrl(</span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    read_count_model,</span>
 <span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    x_tcell,</span>
@@ -2395,7 +2395,7 @@ Restoring model weights from the end of the best epoch: 17.</code></pre>
 </div>
 </div>
 </div>
-<div id="cell-plot-read-count-model-tcell-predictions" class="cell" data-execution_count="38">
+<div id="cell-plot-read-count-model-tcell-predictions" class="cell" data-execution_count="39">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>plot_observed_vs_predicted(</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    tcell_observed,</span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    read_tcell_predicted,</span>
@@ -2412,7 +2412,7 @@ Restoring model weights from the end of the best epoch: 17.</code></pre>
 </div>
 </div>
 <p>Finally, we save the target transformation associated with the second model. The best model itself was saved by <code>ModelCheckpoint</code> during training.</p>
-<div id="save-read-count-artifacts" class="cell" data-execution_count="39">
+<div id="save-read-count-artifacts" class="cell" data-execution_count="40">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>read_scaler_path <span class="op">=</span> MODEL_DIR <span class="op">/</span> <span class="st">"mrl_target_scaler_read_count_split.npz"</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>np.savez(</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    read_scaler_path,</span>

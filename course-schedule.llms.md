@@ -6,7 +6,7 @@ Marcel Turcotte
 
 Published
 
-August 10, 2026
+September 3, 2026
 
 This page contains an outline of the topics, content, and assignments for the semester.
 
@@ -33,7 +33,7 @@ Note that this schedule will be updated as the semester progresses, with all cha
 | Oct. 28 | Reading week - no lecture | \- | \- | \- | \- |
 | Nov. 2 | Training Artificial Neural Networks (Part 2) | [](lectures/13/index.llms.md) | [](lectures/13/slides.llms.md) | \- | \- |
 | Nov. 4 | Sofmax, cross-entropy and regularization | [](lectures/14/index.llms.md) | [](lectures/14/slides.llms.md) | \- | \- |
-| Nov. 9 | Convolutional Neural Networks | [](lectures/15/index.llms.md) | [](lectures/15/slides.llms.md) | \- | \- |
+| Nov. 9 | Neural Network Architectures | [](lectures/15/index.llms.md) | [](lectures/15/slides.llms.md) | \- | \- |
 | Nov. 11 | Introduction to Search | [](lectures/16/index.llms.md) | [](lectures/16/slides.llms.md) | \- | \- |
 | Nov. 16 | Informed Search | [](lectures/17/index.llms.md) | [](lectures/17/slides.llms.md) | \- | \- |
 | Nov. 16 | \- | \- | \- | A3: DL | \- |
