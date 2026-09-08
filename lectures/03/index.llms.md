@@ -4,7 +4,7 @@ CSI4106 Introduction to Artificial Intelligence
 
 ## Prepare
 
-- [CSI4106 Jupyter Notebooks and Google Colab Tutorial](../../computing/01/index.llms.md)
+- [CSI4106 Jupyter Notebooks and Google Colab Tutorial ](../../computing/01/index.llms.md)
 
 ## Participate
 

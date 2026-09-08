@@ -6,7 +6,7 @@ Marcel Turcotte
 
 Published
 
-August 23, 2026
+September 8, 2026
 
 # Datasets
 
@@ -35,6 +35,7 @@ Here is a list of websites with datasets relevant to class concepts, enhancing y
 
 # Jobs
 
+- [How AI Is Eroding the First Rung of the Tech Job Ladder](https://youtu.be/0yWr-L1CecE), Bloomberg Tech, posted on YouTube on 2026-09-04.
 - [There will be no AI jobpocalypse](https://info.deeplearning.ai/seedance-makes-splash-nvidias-ai-guided-chip-designs-helping-robots-not-forget), The Batch, Andrew Ng, 2026-05-08.
 - [At \$250 million, top AI salaries dwarf those of the Manhattan Project and the Space Race](https://arstechnica.com/ai/2025/08/at-250-million-top-ai-salaries-dwarf-those-of-the-manhattan-project-and-the-space-race/), Ars Technica, Aug 1, 2025.
 - [Shopify CEO says no new hires without proof AI can’t do the job](https://www.theverge.com/news/644943/shopify-ceo-memo-ai-hires-job), **The Verge**, by Jay Peters, Apr 7, 2025.

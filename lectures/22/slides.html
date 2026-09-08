@@ -1194,7 +1194,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="game" class="slide level2">
 <h2><code>Game</code></h2>
-<div id="9e92a721" class="cell" data-execution_count="4">
+<div id="9e92a721" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="im">import</span> math</span>
@@ -1275,7 +1275,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="tictactoe" class="slide level2">
 <h2><code>TicTacToe</code></h2>
-<div id="2b7a1d78" class="cell" data-execution_count="5">
+<div id="2b7a1d78" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="kw">class</span> TicTacToe(Game):</span>
@@ -1417,7 +1417,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="solver" class="slide level2">
 <h2><code>Solver</code></h2>
-<div id="b06ae7c1" class="cell" data-execution_count="6">
+<div id="b06ae7c1" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="kw">class</span> Solver:</span>
@@ -1480,7 +1480,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="randomsolver" class="slide level2">
 <h2><code>RandomSolver</code></h2>
-<div id="82e36c9a" class="cell" data-execution_count="7">
+<div id="82e36c9a" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="kw">class</span> RandomSolver(Solver):</span>
@@ -1512,7 +1512,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="gamerunner" class="slide level2">
 <h2><code>GameRunner</code></h2>
-<div id="798dfc38" class="cell" data-execution_count="8">
+<div id="798dfc38" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="kw">class</span> GameRunner:</span>
@@ -1573,7 +1573,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="evaluate_solvers" class="slide level2">
 <h2><code>evaluate_solvers</code></h2>
-<div id="2bf7d5e1" class="cell" data-execution_count="9">
+<div id="2bf7d5e1" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="kw">def</span> evaluate_solvers(game, solver_X, solver_O, num_games, verbose<span class="op">=</span><span class="va">False</span>):</span>
@@ -1643,7 +1643,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="minimaxsolver" class="slide level2">
 <h2><code>MinimaxSolver</code></h2>
-<div id="80c5441e" class="cell" data-execution_count="10">
+<div id="80c5441e" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="im">from</span> functools <span class="im">import</span> lru_cache</span>
@@ -1749,7 +1749,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="minimaxalphabetasolver" class="slide level2">
 <h2><code>MinimaxAlphaBetaSolver</code></h2>
-<div id="681a583a" class="cell" data-execution_count="11">
+<div id="681a583a" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="kw">class</span> MinimaxAlphaBetaSolver(Solver):</span>
@@ -1880,7 +1880,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="sanity-check" class="slide level2">
 <h2>Sanity Check</h2>
-<div id="2ea9c250" class="cell" data-execution_count="12">
+<div id="2ea9c250" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>game <span class="op">=</span> TicTacToe()</span>
 <span id="cb12-2"><a aria-label="2"></a></span>
 <span id="cb12-3"><a aria-label="3"></a>a <span class="op">=</span> RandomSolver(<span class="dv">7</span>)</span>
@@ -1896,7 +1896,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="sanity-check-1" class="slide level2">
 <h2>Sanity Check</h2>
-<div id="7be89da7" class="cell" data-execution_count="13">
+<div id="7be89da7" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>game <span class="op">=</span> TicTacToe()</span>
 <span id="cb14-2"><a aria-label="2"></a></span>
 <span id="cb14-3"><a aria-label="3"></a>a <span class="op">=</span> RandomSolver(<span class="dv">7</span>)</span>
@@ -1917,7 +1917,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="mctsclassicsolver" class="slide level2">
 <h2>MCTSClassicSolver</h2>
-<div id="796f2841" class="cell" data-execution_count="14">
+<div id="796f2841" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="kw">class</span> MCTSClassicSolver(Solver):</span>
@@ -2169,7 +2169,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="node" class="slide level2">
 <h2><code>Node</code></h2>
-<div id="8e8109b5" class="cell" data-execution_count="15">
+<div id="8e8109b5" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a><span class="kw">class</span> MCTSClassicSolver(Solver):</span>
 <span id="cb17-2"><a aria-label="2"></a>    </span>
 <span id="cb17-3"><a aria-label="3"></a>    <span class="kw">class</span> Node:</span>
@@ -2190,7 +2190,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div></aside></section>
 <section id="init__" class="slide level2">
 <h2><code>__init__</code></h2>
-<div id="d86ff233" class="cell" data-execution_count="16">
+<div id="d86ff233" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, num_simulations<span class="op">=</span><span class="dv">500</span>, exploration_c<span class="op">=</span>math.sqrt(<span class="dv">2</span>), seed<span class="op">=</span><span class="va">None</span>):</span>
 <span id="cb18-2"><a aria-label="2"></a></span>
 <span id="cb18-3"><a aria-label="3"></a>        <span class="va">self</span>.num_simulations <span class="op">=</span> num_simulations</span>
@@ -2203,7 +2203,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="public-solver-interface" class="slide level2">
 <h2>Public Solver interface</h2>
-<div id="9f50ad95" class="cell" data-execution_count="17">
+<div id="9f50ad95" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a>    <span class="kw">def</span> select_move(<span class="va">self</span>, game, state, player):</span>
 <span id="cb19-2"><a aria-label="2"></a></span>
 <span id="cb19-3"><a aria-label="3"></a>        <span class="va">self</span>.game <span class="op">=</span> game</span>
@@ -2230,14 +2230,14 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="public-solver-interface-1" class="slide level2">
 <h2>Public Solver interface</h2>
-<div id="ec3e729f" class="cell" data-execution_count="18">
+<div id="ec3e729f" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a>    <span class="kw">def</span> opponent_played(<span class="va">self</span>, move):</span>
 <span id="cb20-2"><a aria-label="2"></a>        <span class="cf">pass</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="run_simulation" class="slide level2">
 <h2><code>_run_simulation</code></h2>
-<div id="7667d8eb" class="cell" data-execution_count="19">
+<div id="7667d8eb" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>    <span class="kw">def</span> _run_simulation(<span class="va">self</span>):</span>
 <span id="cb21-2"><a aria-label="2"></a></span>
 <span id="cb21-3"><a aria-label="3"></a>        node <span class="op">=</span> <span class="va">self</span>.root</span>
@@ -2278,7 +2278,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="select_child" class="slide level2">
 <h2><code>_select_child</code></h2>
-<div id="61b969c0" class="cell" data-execution_count="20">
+<div id="61b969c0" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a>    <span class="kw">def</span> _select_child(<span class="va">self</span>, node):</span>
 <span id="cb22-2"><a aria-label="2"></a></span>
 <span id="cb22-3"><a aria-label="3"></a>        parent_visits <span class="op">=</span> node.N</span>
@@ -2311,7 +2311,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="rollout" class="slide level2">
 <h2><code>_rollout</code></h2>
-<div id="fe4b3e17" class="cell" data-execution_count="21">
+<div id="fe4b3e17" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a>    <span class="kw">def</span> _rollout(<span class="va">self</span>, state, player_to_move):</span>
 <span id="cb23-2"><a aria-label="2"></a></span>
 <span id="cb23-3"><a aria-label="3"></a>        current_state <span class="op">=</span> state.copy()</span>
@@ -2328,7 +2328,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="backpropagate" class="slide level2">
 <h2><code>_backpropagate</code></h2>
-<div id="7bc93e98" class="cell" data-execution_count="22">
+<div id="7bc93e98" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a>    <span class="kw">def</span> _backpropagate(<span class="va">self</span>, node, outcome):</span>
 <span id="cb24-2"><a aria-label="2"></a></span>
 <span id="cb24-3"><a aria-label="3"></a>        current <span class="op">=</span> node</span>
@@ -2346,7 +2346,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="visualize_tree" class="slide level2">
 <h2><code>visualize_tree</code></h2>
-<div id="481ff9ca" class="cell" data-execution_count="25">
+<div id="481ff9ca" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a aria-label="1"></a><span class="im">from</span> graphviz <span class="im">import</span> Digraph</span>
@@ -2428,7 +2428,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="search-tree-num_simulations10" class="slide level2">
 <h2>Search Tree (<code>num_simulations=10</code>)</h2>
-<div id="593a94ae" class="cell" data-execution_count="26">
+<div id="593a94ae" class="cell" data-execution_count="27">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a>game <span class="op">=</span> TicTacToe()</span>
@@ -2457,7 +2457,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="search-tree-num_simulations500" class="slide level2">
 <h2>Search Tree (<code>num_simulations=500</code>)</h2>
-<div id="b578ee6a" class="cell" data-execution_count="27">
+<div id="b578ee6a" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a aria-label="1"></a>game <span class="op">=</span> TicTacToe()</span>
@@ -2486,7 +2486,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="search-tree-nexploration_cmath.sqrt22" class="slide level2">
 <h2>Search Tree (<code>nexploration_c=math.sqrt(2)/2</code>)</h2>
-<div id="10fff0e9" class="cell" data-execution_count="28">
+<div id="10fff0e9" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a aria-label="1"></a>game <span class="op">=</span> TicTacToe()</span>
@@ -2515,7 +2515,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="search-tree-nexploration_c0.1" class="slide level2">
 <h2>Search Tree (<code>nexploration_c=0.1</code>)</h2>
-<div id="3fa23e9a" class="cell" data-execution_count="29">
+<div id="3fa23e9a" class="cell" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a aria-label="1"></a>game <span class="op">=</span> TicTacToe()</span>
@@ -2544,7 +2544,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="search-tree-nexploration_c1000" class="slide level2">
 <h2>Search Tree (<code>nexploration_c=1000</code>)</h2>
-<div id="4511acdf" class="cell" data-execution_count="30">
+<div id="4511acdf" class="cell" data-execution_count="31">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a aria-label="1"></a>game <span class="op">=</span> TicTacToe()</span>
@@ -2573,7 +2573,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="search-tree-num_simulations500-1" class="slide level2">
 <h2>Search Tree (<code>num_simulations=500</code>)</h2>
-<div id="e31e490e" class="cell" data-execution_count="31">
+<div id="e31e490e" class="cell" data-execution_count="32">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a aria-label="1"></a>game <span class="op">=</span> TicTacToe()</span>
@@ -2605,7 +2605,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div></aside></section>
 <section id="search-tree-num_simulations10-1" class="slide level2">
 <h2>Search Tree (<code>num_simulations=10</code>)</h2>
-<div id="df50392a" class="cell" data-execution_count="32">
+<div id="df50392a" class="cell" data-execution_count="33">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a aria-label="1"></a>game <span class="op">=</span> TicTacToe()</span>
@@ -2650,7 +2650,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div></aside></section>
 <section id="search-tree-num_simulations50" class="slide level2">
 <h2>Search Tree (<code>num_simulations=50</code>)</h2>
-<div id="6a82e5de" class="cell" data-execution_count="33">
+<div id="6a82e5de" class="cell" data-execution_count="34">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a aria-label="1"></a>game <span class="op">=</span> TicTacToe()</span>
@@ -2677,7 +2677,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="search-tree-num_simulations250" class="slide level2">
 <h2>Search Tree (<code>num_simulations=250</code>)</h2>
-<div id="7be079af" class="cell" data-execution_count="34">
+<div id="7be079af" class="cell" data-execution_count="35">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a aria-label="1"></a>game <span class="op">=</span> TicTacToe()</span>
@@ -2704,7 +2704,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="search-tree-num_simulations500-2" class="slide level2">
 <h2>Search Tree (<code>num_simulations=500</code>)</h2>
-<div id="6d91a290" class="cell" data-execution_count="35">
+<div id="6d91a290" class="cell" data-execution_count="36">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a aria-label="1"></a>game <span class="op">=</span> TicTacToe()</span>
@@ -2731,7 +2731,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="search-tree-num_sims1000" class="slide level2">
 <h2>Search Tree (<code>num_sims=1000</code>)</h2>
-<div id="caa2efc0" class="cell" data-execution_count="36">
+<div id="caa2efc0" class="cell" data-execution_count="37">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a aria-label="1"></a>game <span class="op">=</span> TicTacToe()</span>
@@ -2758,7 +2758,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="move-preference-vs-num_simulations" class="slide level2">
 <h2>Move Preference vs <code>num_simulations</code></h2>
-<div id="074d855a" class="cell" data-execution_count="37">
+<div id="074d855a" class="cell" data-execution_count="38">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a aria-label="1"></a><span class="kw">def</span> mcts_heatmaps(game, solver_class, simulations_list, player<span class="op">=</span><span class="st">"X"</span>, seed<span class="op">=</span><span class="dv">0</span>):</span>
@@ -2828,7 +2828,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <span id="cb48-65"><a aria-label="65"></a>    plt.close(fig)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="57f5e4eb" class="cell" data-execution_count="38">
+<div id="57f5e4eb" class="cell" data-execution_count="39">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a aria-label="1"></a>game <span class="op">=</span> TicTacToe()</span>
@@ -2854,7 +2854,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div></aside></section>
 <section id="tallies-by-xs-first-move" class="slide level2 smaller scrollable">
 <h2>Tallies by X’s first move</h2>
-<div id="9370f4e8" class="cell" data-execution_count="39">
+<div id="9370f4e8" class="cell" data-execution_count="40">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a aria-label="1"></a><span class="kw">def</span> tally_scores(game):</span>
@@ -3042,7 +3042,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="evaluate_solvers_with_plot" class="slide level2">
 <h2><code>evaluate_solvers_with_plot</code></h2>
-<div id="1b6e2258" class="cell" data-execution_count="40">
+<div id="1b6e2258" class="cell" data-execution_count="41">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a aria-label="1"></a><span class="kw">def</span> evaluate_solvers_with_plot(game, solver_X, solver_O, num_games):</span>
@@ -3111,7 +3111,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="random-vs-mcts" class="slide level2">
 <h2>Random vs MCTS</h2>
-<div id="4cd8a763" class="cell" data-execution_count="41">
+<div id="4cd8a763" class="cell" data-execution_count="42">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a aria-label="1"></a>rand <span class="op">=</span> RandomSolver(seed<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb52-2"><a aria-label="2"></a>mcts <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">10</span>, seed<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb52-3"><a aria-label="3"></a></span>
@@ -3123,7 +3123,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <aside><div>
 <p><code>num_simulations=10</code></p>
 </div></aside></section>
-<section id="random-vs-mcts-output" class="slide level2 output-location-slide"><h2>Random vs MCTS</h2><div class="cell output-location-slide" data-execution_count="41">
+<section id="random-vs-mcts-output" class="slide level2 output-location-slide"><h2>Random vs MCTS</h2><div class="cell output-location-slide" data-execution_count="42">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3136,7 +3136,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="random-vs-mcts-1" class="slide level2">
 <h2>Random vs MCTS</h2>
-<div id="25eafcb1" class="cell" data-execution_count="42">
+<div id="25eafcb1" class="cell" data-execution_count="43">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a aria-label="1"></a>rand <span class="op">=</span> RandomSolver(seed<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb54-2"><a aria-label="2"></a>mcts <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">100</span>, seed<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb54-3"><a aria-label="3"></a></span>
@@ -3148,7 +3148,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <aside><div>
 <p><code>num_simulations=100</code></p>
 </div></aside></section>
-<section id="random-vs-mcts-1-output" class="slide level2 output-location-slide"><h2>Random vs MCTS</h2><div class="cell output-location-slide" data-execution_count="42">
+<section id="random-vs-mcts-1-output" class="slide level2 output-location-slide"><h2>Random vs MCTS</h2><div class="cell output-location-slide" data-execution_count="43">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3161,7 +3161,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="mcts-vs-random" class="slide level2">
 <h2>MCTS vs Random</h2>
-<div id="31ce6ee3" class="cell" data-execution_count="43">
+<div id="31ce6ee3" class="cell" data-execution_count="44">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a aria-label="1"></a>mcts <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">10</span>, seed<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb56-2"><a aria-label="2"></a>rand <span class="op">=</span> RandomSolver(seed<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb56-3"><a aria-label="3"></a></span>
@@ -3173,7 +3173,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <aside><div>
 <p><code>num_simulations=10</code></p>
 </div></aside></section>
-<section id="mcts-vs-random-output" class="slide level2 output-location-slide"><h2>MCTS vs Random</h2><div class="cell output-location-slide" data-execution_count="43">
+<section id="mcts-vs-random-output" class="slide level2 output-location-slide"><h2>MCTS vs Random</h2><div class="cell output-location-slide" data-execution_count="44">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3186,7 +3186,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="mcts-vs-random-1" class="slide level2">
 <h2>MCTS vs Random</h2>
-<div id="82a9e6cf" class="cell" data-execution_count="44">
+<div id="82a9e6cf" class="cell" data-execution_count="45">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a aria-label="1"></a>mcts <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">100</span>, seed<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb58-2"><a aria-label="2"></a>rand <span class="op">=</span> RandomSolver(seed<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb58-3"><a aria-label="3"></a></span>
@@ -3211,7 +3211,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <aside><div>
 <p><code>num_simulations=100</code></p>
 </div></aside></section>
-<section id="mcts-vs-random-1-output" class="slide level2 output-location-slide"><h2>MCTS vs Random</h2><div class="cell output-location-slide" data-execution_count="44">
+<section id="mcts-vs-random-1-output" class="slide level2 output-location-slide"><h2>MCTS vs Random</h2><div class="cell output-location-slide" data-execution_count="45">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3224,7 +3224,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="minimax-vs-mcts" class="slide level2">
 <h2>Minimax vs MCTS</h2>
-<div id="4b2ecbbd" class="cell" data-execution_count="45">
+<div id="4b2ecbbd" class="cell" data-execution_count="46">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a aria-label="1"></a>minimax <span class="op">=</span> MinimaxSolver()</span>
 <span id="cb60-2"><a aria-label="2"></a>mcts <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">10</span>, seed<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb60-3"><a aria-label="3"></a></span>
@@ -3236,7 +3236,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <aside><div>
 <p><code>num_simulations=10</code></p>
 </div></aside></section>
-<section id="minimax-vs-mcts-output" class="slide level2 output-location-slide"><h2>Minimax vs MCTS</h2><div class="cell output-location-slide" data-execution_count="45">
+<section id="minimax-vs-mcts-output" class="slide level2 output-location-slide"><h2>Minimax vs MCTS</h2><div class="cell output-location-slide" data-execution_count="46">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3249,7 +3249,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="minimax-vs-mcts-1" class="slide level2">
 <h2>Minimax vs MCTS</h2>
-<div id="4159c5e4" class="cell" data-execution_count="46">
+<div id="4159c5e4" class="cell" data-execution_count="47">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a aria-label="1"></a>minimax <span class="op">=</span> MinimaxSolver()</span>
 <span id="cb62-2"><a aria-label="2"></a>mcts <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">100</span>, seed<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb62-3"><a aria-label="3"></a></span>
@@ -3261,7 +3261,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <aside><div>
 <p><code>num_simulations=100</code></p>
 </div></aside></section>
-<section id="minimax-vs-mcts-1-output" class="slide level2 output-location-slide"><h2>Minimax vs MCTS</h2><div class="cell output-location-slide" data-execution_count="46">
+<section id="minimax-vs-mcts-1-output" class="slide level2 output-location-slide"><h2>Minimax vs MCTS</h2><div class="cell output-location-slide" data-execution_count="47">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3274,7 +3274,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="minimax-vs-mcts-2" class="slide level2">
 <h2>Minimax vs MCTS</h2>
-<div id="f43d7883" class="cell" data-execution_count="47">
+<div id="f43d7883" class="cell" data-execution_count="48">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a aria-label="1"></a>minimax <span class="op">=</span> MinimaxSolver()</span>
 <span id="cb64-2"><a aria-label="2"></a>mcts <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">500</span>, seed<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb64-3"><a aria-label="3"></a></span>
@@ -3286,7 +3286,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <aside><div>
 <p><code>num_simulations=500</code></p>
 </div></aside></section>
-<section id="minimax-vs-mcts-2-output" class="slide level2 output-location-slide"><h2>Minimax vs MCTS</h2><div class="cell output-location-slide" data-execution_count="47">
+<section id="minimax-vs-mcts-2-output" class="slide level2 output-location-slide"><h2>Minimax vs MCTS</h2><div class="cell output-location-slide" data-execution_count="48">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3299,7 +3299,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="mcts-vs-minimax" class="slide level2">
 <h2>MCTS vs Minimax</h2>
-<div id="185155b4" class="cell" data-execution_count="48">
+<div id="185155b4" class="cell" data-execution_count="49">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a aria-label="1"></a>mcts <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">10</span>, seed<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb66-2"><a aria-label="2"></a>minimax <span class="op">=</span> MinimaxSolver()</span>
 <span id="cb66-3"><a aria-label="3"></a></span>
@@ -3311,7 +3311,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <aside><div>
 <p><code>num_simulations=10</code></p>
 </div></aside></section>
-<section id="mcts-vs-minimax-output" class="slide level2 output-location-slide"><h2>MCTS vs Minimax</h2><div class="cell output-location-slide" data-execution_count="48">
+<section id="mcts-vs-minimax-output" class="slide level2 output-location-slide"><h2>MCTS vs Minimax</h2><div class="cell output-location-slide" data-execution_count="49">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3324,7 +3324,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="mcts-vs-minimax-1" class="slide level2">
 <h2>MCTS vs Minimax</h2>
-<div id="0423ba2f" class="cell" data-execution_count="49">
+<div id="0423ba2f" class="cell" data-execution_count="50">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a aria-label="1"></a>mcts <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">100</span>, seed<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb68-2"><a aria-label="2"></a>minimax <span class="op">=</span> MinimaxSolver()</span>
 <span id="cb68-3"><a aria-label="3"></a></span>
@@ -3336,7 +3336,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <aside><div>
 <p><code>num_simulations=100</code></p>
 </div></aside></section>
-<section id="mcts-vs-minimax-1-output" class="slide level2 output-location-slide"><h2>MCTS vs Minimax</h2><div class="cell output-location-slide" data-execution_count="49">
+<section id="mcts-vs-minimax-1-output" class="slide level2 output-location-slide"><h2>MCTS vs Minimax</h2><div class="cell output-location-slide" data-execution_count="50">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3349,7 +3349,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="mcts-vs-minimax-2" class="slide level2">
 <h2>MCTS vs Minimax</h2>
-<div id="3577167d" class="cell" data-execution_count="50">
+<div id="3577167d" class="cell" data-execution_count="51">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a aria-label="1"></a>mcts <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">500</span>, seed<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb70-2"><a aria-label="2"></a>minimax <span class="op">=</span> MinimaxSolver()</span>
 <span id="cb70-3"><a aria-label="3"></a></span>
@@ -3361,7 +3361,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <aside><div>
 <p><code>num_simulations=500</code></p>
 </div></aside></section>
-<section id="mcts-vs-minimax-2-output" class="slide level2 output-location-slide"><h2>MCTS vs Minimax</h2><div class="cell output-location-slide" data-execution_count="50">
+<section id="mcts-vs-minimax-2-output" class="slide level2 output-location-slide"><h2>MCTS vs Minimax</h2><div class="cell output-location-slide" data-execution_count="51">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3374,7 +3374,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="mcts-few-sims-vs-mcts-few-sims" class="slide level2">
 <h2>MCTS (few sims) vs MCTS (few sims)</h2>
-<div id="f3d34747" class="cell" data-execution_count="51">
+<div id="f3d34747" class="cell" data-execution_count="52">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a aria-label="1"></a>mcts_a <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">10</span>, seed<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb72-2"><a aria-label="2"></a>mcts_b <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">10</span>, seed<span class="op">=</span><span class="dv">4</span>)</span>
 <span id="cb72-3"><a aria-label="3"></a></span>
@@ -3383,7 +3383,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 
 </section>
-<section id="mcts-few-sims-vs-mcts-few-sims-output" class="slide level2 output-location-slide"><h2>MCTS (few sims) vs MCTS (few sims)</h2><div class="cell output-location-slide" data-execution_count="51">
+<section id="mcts-few-sims-vs-mcts-few-sims-output" class="slide level2 output-location-slide"><h2>MCTS (few sims) vs MCTS (few sims)</h2><div class="cell output-location-slide" data-execution_count="52">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3396,7 +3396,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="mcts-few-sims-vs-mcts-many-sims" class="slide level2">
 <h2>MCTS (few sims) vs MCTS (many sims)</h2>
-<div id="90bcc1e5" class="cell" data-execution_count="52">
+<div id="90bcc1e5" class="cell" data-execution_count="53">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a aria-label="1"></a>mcts_a <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">10</span>, seed<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb74-2"><a aria-label="2"></a>mcts_b <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">500</span>, seed<span class="op">=</span><span class="dv">4</span>)</span>
 <span id="cb74-3"><a aria-label="3"></a></span>
@@ -3405,7 +3405,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 
 </section>
-<section id="mcts-few-sims-vs-mcts-many-sims-output" class="slide level2 output-location-slide"><h2>MCTS (few sims) vs MCTS (many sims)</h2><div class="cell output-location-slide" data-execution_count="52">
+<section id="mcts-few-sims-vs-mcts-many-sims-output" class="slide level2 output-location-slide"><h2>MCTS (few sims) vs MCTS (many sims)</h2><div class="cell output-location-slide" data-execution_count="53">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3418,7 +3418,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="learning-across-moves-and-games" class="slide level2">
 <h2>Learning Across Moves and Games</h2>
-<div id="25fb1a0b" class="cell" data-execution_count="53">
+<div id="25fb1a0b" class="cell" data-execution_count="54">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a aria-label="1"></a><span class="kw">class</span> MCTSSolver(Solver):</span>
@@ -3762,7 +3762,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="same-computational-budget" class="slide level2">
 <h2>Same Computational Budget</h2>
-<div id="7d0c78f1" class="cell" data-execution_count="54">
+<div id="7d0c78f1" class="cell" data-execution_count="55">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a aria-label="1"></a>mcts_a <span class="op">=</span> MCTSSolver(num_simulations<span class="op">=</span><span class="dv">10</span>, seed<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb77-2"><a aria-label="2"></a>mcts_c <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">10</span>, seed<span class="op">=</span><span class="dv">4</span>)</span>
 <span id="cb77-3"><a aria-label="3"></a>results, _, _ <span class="op">=</span> evaluate_solvers_with_plot(game, mcts_a, mcts_c, num_games<span class="op">=</span><span class="dv">100</span>)</span>
@@ -3770,7 +3770,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 
 </section>
-<section id="same-computational-budget-output" class="slide level2 output-location-slide"><h2>Same Computational Budget</h2><div class="cell output-location-slide" data-execution_count="54">
+<section id="same-computational-budget-output" class="slide level2 output-location-slide"><h2>Same Computational Budget</h2><div class="cell output-location-slide" data-execution_count="55">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3783,7 +3783,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="learner-vs-thinker" class="slide level2">
 <h2>Learner vs Thinker</h2>
-<div id="830cdb17" class="cell" data-execution_count="55">
+<div id="830cdb17" class="cell" data-execution_count="56">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a aria-label="1"></a>a <span class="op">=</span> MCTSSolver(num_simulations<span class="op">=</span><span class="dv">10</span>, seed<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb79-2"><a aria-label="2"></a>b <span class="op">=</span> MCTSClassicSolver(num_simulations<span class="op">=</span><span class="dv">40</span>, seed<span class="op">=</span><span class="dv">4</span>)</span>
 <span id="cb79-3"><a aria-label="3"></a></span>
@@ -3805,7 +3805,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
           display:block!important;
       }</style></aside>
 </section>
-<section id="learner-vs-thinker-output" class="slide level2 output-location-slide"><h2>Learner vs Thinker</h2><div class="cell output-location-slide" data-execution_count="55">
+<section id="learner-vs-thinker-output" class="slide level2 output-location-slide"><h2>Learner vs Thinker</h2><div class="cell output-location-slide" data-execution_count="56">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3818,7 +3818,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="learner-vs-minimax" class="slide level2">
 <h2>Learner vs Minimax</h2>
-<div id="3ebe66ae" class="cell" data-execution_count="56">
+<div id="3ebe66ae" class="cell" data-execution_count="57">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a aria-label="1"></a>a <span class="op">=</span> MCTSSolver(num_simulations<span class="op">=</span><span class="dv">10</span>, seed<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb81-2"><a aria-label="2"></a>b <span class="op">=</span> MinimaxSolver()</span>
 <span id="cb81-3"><a aria-label="3"></a></span>
@@ -3827,7 +3827,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 
 </section>
-<section id="learner-vs-minimax-output" class="slide level2 output-location-slide"><h2>Learner vs Minimax</h2><div class="cell output-location-slide" data-execution_count="56">
+<section id="learner-vs-minimax-output" class="slide level2 output-location-slide"><h2>Learner vs Minimax</h2><div class="cell output-location-slide" data-execution_count="57">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3840,7 +3840,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="learner-vs-minimax-1" class="slide level2">
 <h2>Learner vs Minimax</h2>
-<div id="39c7b969" class="cell" data-execution_count="57">
+<div id="39c7b969" class="cell" data-execution_count="58">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb83-1"><a aria-label="1"></a>a <span class="op">=</span> MCTSSolver(num_simulations<span class="op">=</span><span class="dv">20</span>, seed<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb83-2"><a aria-label="2"></a>b <span class="op">=</span> MinimaxSolver()</span>
 <span id="cb83-3"><a aria-label="3"></a></span>
@@ -3849,7 +3849,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 
 </section>
-<section id="learner-vs-minimax-1-output" class="slide level2 output-location-slide"><h2>Learner vs Minimax</h2><div class="cell output-location-slide" data-execution_count="57">
+<section id="learner-vs-minimax-1-output" class="slide level2 output-location-slide"><h2>Learner vs Minimax</h2><div class="cell output-location-slide" data-execution_count="58">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -3862,7 +3862,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 </div></section><section id="learner-vs-minimax-2" class="slide level2">
 <h2>Learner vs Minimax</h2>
-<div id="fae10f0b" class="cell" data-execution_count="58">
+<div id="fae10f0b" class="cell" data-execution_count="59">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a aria-label="1"></a>a <span class="op">=</span> MCTSSolver(num_simulations<span class="op">=</span><span class="dv">50</span>, seed<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb85-2"><a aria-label="2"></a>b <span class="op">=</span> MinimaxSolver()</span>
 <span id="cb85-3"><a aria-label="3"></a></span>
@@ -3871,7 +3871,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 
 </section>
-<section id="learner-vs-minimax-2-output" class="slide level2 output-location-slide"><h2>Learner vs Minimax</h2><div class="cell output-location-slide" data-execution_count="58">
+<section id="learner-vs-minimax-2-output" class="slide level2 output-location-slide"><h2>Learner vs Minimax</h2><div class="cell output-location-slide" data-execution_count="59">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -4155,7 +4155,7 @@ Silver, David, Aja Huang, Chris J. Maddison, et al. 2016. <span>“<span class="
 </section>
 <section id="sec-numerical-integration" class="slide level2 appendix">
 <h2>Numerical Integration</h2>
-<div id="5d4b57ef" class="cell" data-execution_count="59">
+<div id="5d4b57ef" class="cell" data-execution_count="60">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb87-1"><a aria-label="1"></a><span class="im">import</span> random</span>
@@ -4239,7 +4239,7 @@ Silver, David, Aja Huang, Chris J. Maddison, et al. 2016. <span>“<span class="
 </section>
 <section id="numerical-integration" class="slide level2">
 <h2>Numerical Integration</h2>
-<div id="9339454e" class="cell" data-execution_count="60">
+<div id="9339454e" class="cell" data-execution_count="61">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a aria-label="1"></a><span class="kw">def</span> monte_carlo_integrate(f, a, b, n_samples, seed<span class="op">=</span><span class="va">None</span>):</span>

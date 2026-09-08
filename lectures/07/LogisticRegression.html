@@ -538,7 +538,7 @@ window.Quarto = {
 <section id="logistic-regression" class="level1">
 <h1>Logistic Regression</h1>
 <p>The logistic regression implementation presented in the lecture notes has some practical limitations, notably the need for users to manually add a column of ones to the matrix <span class="math inline">\(X\)</span> to account for the intercept term, <span class="math inline">\(\theta_0\)</span>. Such a requirement can be considered suboptimal as it exposes users to unnecessary implementation details. To address this issue, I propose an object-oriented implementation that improves both clarity and usability. This implementation efficiently utilizes the <a href="https://numpy.org">NumPy</a> library.</p>
-<div id="328bad38" class="cell" data-execution_count="1">
+<div id="328bad38" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LogisticRegression:</span>
@@ -712,7 +712,7 @@ window.Quarto = {
 <h1>Example 1</h1>
 <section id="step-0-import-librairies-set-global-variables" class="level2">
 <h2 class="anchored" data-anchor-id="step-0-import-librairies-set-global-variables">Step 0: Import librairies, set global variables</h2>
-<div id="551bf94a" class="cell" data-execution_count="2">
+<div id="551bf94a" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_blobs</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
@@ -728,7 +728,7 @@ window.Quarto = {
 </section>
 <section id="step-1-create-a-toy-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-create-a-toy-dataset">Step 1: Create a toy dataset</h2>
-<div id="34038fca" class="cell" data-execution_count="3">
+<div id="34038fca" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_blobs(n_samples<span class="op">=</span><span class="dv">1000</span>, n_features<span class="op">=</span><span class="dv">2</span>, centers<span class="op">=</span><span class="dv">2</span>, cluster_std<span class="op">=</span><span class="fl">2.5</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Split into train and test sets</span></span>
@@ -737,7 +737,7 @@ window.Quarto = {
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Visualizing the training set.</p>
-<div id="3da18b38" class="cell" data-execution_count="4">
+<div id="3da18b38" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">6</span>))</span>
@@ -770,14 +770,14 @@ window.Quarto = {
 </section>
 <section id="step-2-train-our-logisticregression-class" class="level2">
 <h2 class="anchored" data-anchor-id="step-2-train-our-logisticregression-class">Step 2: Train our LogisticRegression class</h2>
-<div id="a2d44bfa" class="cell" data-execution_count="5">
+<div id="a2d44bfa" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LogisticRegression(learning_rate<span class="op">=</span><span class="fl">0.1</span>, max_iter<span class="op">=</span><span class="dv">500</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>&lt;__main__.LogisticRegression at 0x11b7f3aa0&gt;</code></pre>
 </div>
 </div>
-<div id="edc59fed" class="cell" data-execution_count="6">
+<div id="edc59fed" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Step 3: Predictions and classification report ---</span></span>
@@ -799,7 +799,7 @@ weighted avg       0.99      0.99      0.99       300
 </code></pre>
 </div>
 </div>
-<div id="15c1311b" class="cell" data-execution_count="7">
+<div id="15c1311b" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Step 4: Plot the loss history ---</span></span>
@@ -823,7 +823,7 @@ weighted avg       0.99      0.99      0.99       300
 </div>
 </div>
 </div>
-<div id="ba724d40" class="cell" data-execution_count="8">
+<div id="ba724d40" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Step 5: Decision boundary (2D) ---</span></span>
@@ -908,7 +908,7 @@ weighted avg       0.99      0.99      0.99       300
 </section>
 <section id="implementating-rocauc" class="level1">
 <h1>Implementating ROC/AUC</h1>
-<div id="a3206584" class="cell" data-execution_count="9">
+<div id="a3206584" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_roc_curve(y_true, y_scores, thresholds):</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    tpr_list, fpr_list <span class="op">=</span> [], []</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> thresh <span class="kw">in</span> thresholds:</span>
@@ -930,7 +930,7 @@ weighted avg       0.99      0.99      0.99       300
 </div>
 <section id="implementation-auc-roc" class="level2">
 <h2 class="anchored" data-anchor-id="implementation-auc-roc">Implementation: AUC ROC</h2>
-<div id="1b39fdde" class="cell" data-execution_count="10">
+<div id="1b39fdde" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_auc(fpr, tpr):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Compute the Area Under the Curve (AUC) using the trapezoidal rule.</span></span>
@@ -943,7 +943,7 @@ weighted avg       0.99      0.99      0.99       300
 </section>
 <section id="example-plot" class="level2">
 <h2 class="anchored" data-anchor-id="example-plot">Example: Plot</h2>
-<div id="229a3e2e" class="cell" data-execution_count="11">
+<div id="229a3e2e" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute predicted probabilities for the positive class on the test set</span></span>
@@ -979,7 +979,7 @@ weighted avg       0.99      0.99      0.99       300
 <section id="example-2-breast-cancer" class="level1">
 <h1>Example 2 (breast cancer)</h1>
 <p>In this example, we use logistic regression from the scikit-learn library, and the breast cancer dataset, also available through scikit-learn. You are encouraged to modify the provided code to evaluate whether the previously introduced model achieves comparable performance. As can be seen, in this example, the classes are easily seperable by a linear decision boundary.</p>
-<div id="ed3486a4" class="cell" data-execution_count="12">
+<div id="ed3486a4" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Goal: Classify tumors as malignant (1) or benign (0)</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataset: sklearn.datasets.load_breast_cancer</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Model: Logistic Regression (scikit-learn)</span></span>
@@ -1061,7 +1061,7 @@ worst radius               -0.948</code></pre>
 <section id="example-3-pima-indians-diabetes" class="level1">
 <h1>Example 3 (Pima Indians Diabetes)</h1>
 <p>In this third example, logistic regression faces a greater challenge. Achieving a true positive rate (TPR) or recall of 85% necessitates a significant trade-off, resulting in a false positive rate (FPR) where 31% of true negative instances are incorrectly classified as positive.</p>
-<div id="576bcbd5" class="cell" data-execution_count="13">
+<div id="576bcbd5" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ROC demo: Logistic Regression on Pima Indians Diabetes</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Fetches the Pima dataset from OpenML</span></span>
