@@ -237,7 +237,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Aug 10, 2026 11:53</p>
+  <p class="date">Version: Sep 13, 2026 14:23</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -246,21 +246,23 @@ Marcel Turcotte
 </section>
 <section id="message-of-the-day" class="slide level2">
 <h2>Message of the Day</h2>
-<iframe data-external="1" src="https://www.youtube.com/embed/OmzzoJM5YQM" width="889" height="500" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://aiguide.substack.com/p/misleading-metaphors-and-real-risks"><img data-src="../../assets/images/ab8a7594-11f7-498c-88cd-5092270c590f_1920x1493.png" class="quarto-figure quarto-figure-center" height="475"></a></p>
+</figure>
+</div>
 
 <aside class="notes">
-<p>Large language models exhibit remarkable linguistic capabilities, prompting an increasing number of individuals to engage in personal dialogues with them. Murray Shanahan, affiliated with Google DeepMind and Imperial College, introduces an compelling framework for examining the “behavior” of these models. He conceptualizes their interactions through the lens of role play, as discussed in his recent work <a href="https://www.nature.com/articles/s41586-023-06647-8">published in Nature</a>.</p>
+<p>There is substantial hype and noise surrounding AI in both traditional and online media. Dramatic stories attract attention, and AI companies have products and particular visions of the future to promote. We should therefore look beyond headlines, examine the evidence, and ask who is making each claim.</p>
+<p>The public debate includes a wide range of views. Researchers such as Gary Marcus, Geoffrey Hinton, Stuart Russell, and Yoshua Bengio often foreground serious limitations or risks, although their arguments and proposed responses differ. Melanie Mitchell generally offers a more measured, evidence-centred perspective. She frequently distinguishes what an AI system demonstrably did from the anthropomorphic language used to describe it, while still recognizing real technical and societal risks.</p>
+<p>In this article, Mitchell examines descriptions of AI agents as having “gone rogue,” “escaped,” or formed a “swarm.” She argues that these metaphors suggest human-like intentions and a literal loss of control that the reported events do not establish. At the same time, she identifies concrete risks involving weak cybersecurity, insufficient oversight, persistent reinforcement-learning agents, and reward hacking. Her broader point is that misleading metaphors can obscure the human engineering and policy decisions that require attention.</p>
+<p>When encountering an alarming or triumphant AI story, it is often useful to check whether Mitchell has written about it. This is not because any one person should be treated as the final authority, but because her discussions commonly present competing interpretations and connect claims to scientific evidence.</p>
+<p><strong>Brief biography.</strong> Melanie Mitchell is the James B. Alley Jr.&nbsp;Professor at the Santa Fe Institute. Her work bridges artificial intelligence, cognitive science, and complex systems, with particular interests in abstraction, analogy-making, and reasoning in humans and machines. She is the author of several books, including <em>Complexity: A Guided Tour</em> and <em>Artificial Intelligence: A Guide for Thinking Humans</em>.</p>
+<p>Additional resources:</p>
 <ul>
-<li><a href="https://www.youtube.com/watch?v=v1Py_hWcmkU">Consciousness, reasoning and the philosophy of AI with Murray Shanahan</a>, in this Google DeepMind podcast, Hannah Fry interviews Murray Shanahan, 2025-04-24.</li>
-</ul>
-<p>Depending on the context of their interaction prompts, these models can adopt personas that simulate malevolent individuals, potentially offering advice with harmful consequences.</p>
-<ul>
-<li><a href="">OpenAI Eagerly Trying To Reduce AI Psychosis And Squash Co-Creation Of Human-AI Delusions When Using ChatGPT And GPT-5</a>, by Lance Eliot, Forbes, 2025-09-02.</li>
-<li><a href="https://www.pbs.org/newshour/show/what-to-know-about-ai-psychosis-and-the-effect-of-ai-chatbots-on-mental-health">What to know about ‘AI psychosis’ and the effect of AI chatbots on mental health</a>, PBS News, 2025-08-31.</li>
-</ul>
-<p>Here is a reminder for the University of Ottawa’s wellness page, which offers a comprehensive array of resources, including medical and mental health-care services, designed to support your well-being and that of those around you.</p>
-<ul>
-<li><a href="https://www.uottawa.ca/campus-life/health-wellness">Student Health and Wellness</a></li>
+<li><a href="https://melaniemitchell.me/">Melanie Mitchell’s website</a></li>
+<li><a href="https://www.santafe.edu/culture/podcasts"><em>The Nature of Intelligence</em></a>, a six-episode season of the Santa Fe Institute’s <em>Complexity</em> podcast, published from September to December 2024</li>
+<li><a href="https://www.youtube.com/watch?v=cSZo8GZIUYI"><em>Are We Thinking Correctly About AI Intelligence?</em></a>, <em>The Joy of Why</em>, 2026-08-20</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -274,203 +276,18 @@ Marcel Turcotte
           display:block!important;
       }</style></aside>
 <aside><div>
-<p><a href="https://www.youtube.com/watch?v=OmzzoJM5YQM">Microsoft boss troubled by rise in reports of ‘AI psychosis’</a>, BBC News, 2025-08-21.</p>
+<p><a href="https://aiguide.substack.com/p/misleading-metaphors-and-real-risks">“Misleading Metaphors and Real Risks”</a>, Melanie Mitchell, 2026-09-10.</p>
 </div></aside></section>
 <section id="learning-outcomes" class="slide level2">
 <h2>Learning outcomes</h2>
 <ul>
 <li><strong>Differentiate</strong> between model, objective, and optimizer in learning algorithms.</li>
+<li><strong>Describe</strong> decision trees and <strong>apply</strong> entropy to select a split.</li>
 <li><strong>Explain</strong> KNN for classification and regression, including uniform and distance-weighted prediction.</li>
-<li><strong>Describe</strong> decision trees and <strong>apply</strong> the split criterion using impurity measures such as Gini.</li>
 <li><strong>Interpret</strong> decision boundaries and the concept of linear separability.</li>
 </ul>
 <aside class="notes">
-<p>As indicated in the introductory lecture, I aim to present a series of concepts leading to deep learning. As a starting point, linear regression would be a logical choice as a primary learning algorithm to examine. Nonetheless, it is equally critical to possess a high-level understanding of various other learning algorithms, as they differ significantly in model structures and training processes. Therefore, I will briefly discuss k-nearest neighbours and decision trees, before introducing linear regression.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section>
-<section id="knn" class="title-slide slide level1 center">
-<h1>KNN</h1>
-
-</section>
-<section id="k-nearest-neighbours-knn" class="slide level2 scrollable">
-<h2>k-nearest neighbours (KNN)</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="https://scikit-learn.org/stable/_images/sphx_glr_plot_classification_001.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="https://scikit-learn.org/stable/_images/sphx_glr_plot_classification_001.png" class="quarto-figure quarto-figure-center" height="300"></a></p>
-</figure>
-</div>
-<ul>
-<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html#sklearn.neighbors.KNeighborsClassifier">KNeighborsClassifier</a>, <a href="https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html">examples</a></li>
-<li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html">KNeighborsRegressor</a>, <a href="https://scikit-learn.org/stable/auto_examples/neighbors/plot_regression.html">exemples</a></li>
-</ul>
-
-<aside><div>
-<p><strong>Attribution</strong>: <a href="https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html">Nearest Neighbors Classification</a>.</p>
-</div></aside></section>
-<section id="knn---learning" class="slide level2">
-<h2>KNN - Learning</h2>
-<ul>
-<li><em>Lazy learning</em>: no explicit training</li>
-<li>The “model” is the dataset</li>
-</ul>
-<aside class="notes">
-<p>The <strong>k-nearest neighbour</strong> (KNN) algorithm simply stores its training data. There is no explicit training. We call this “lazy learning”.</p>
-<p>When the number of examples is large, the low-dimensional data can be stored in a specialized data structure, such as kd-tree or ball tree, to accelerate the computation at inference time. For high-dimensional data, techniques, such as approximate nearest neighbour (ANN) have been developped.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="knn---inference" class="slide level2">
-<h2>KNN - Inference</h2>
-<ul>
-<li>Classify/regress based on the labels/values of the <span class="math inline">\(k\)</span> closest examples in feature space</li>
-</ul>
-
-<aside class="notes">
-<p>Although the inference cost may seem low, being linear with respect to the number of examples. It is important to remember that the typical workflow for a machine learning project is to train a model once and use that model for every query, where the number of queries can be quite large.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-<aside><div>
-<p>Cost is <span class="math inline">\(\mathcal{O}(ND)\)</span> per query (naïve), where <span class="math inline">\(N\)</span> = number of examples, <span class="math inline">\(D\)</span> = dimensions</p>
-</div></aside></section>
-<section id="formal-definition" class="slide level2">
-<h2>Formal Definition</h2>
-<p>Given <strong>dataset</strong> <span class="math inline">\(\{(x_i, y_i)\}_1^{N}\)</span> and an <strong>unseen example</strong> <span class="math inline">\(x\)</span>:</p>
-<ul>
-<li>Compute <strong>distances</strong> <span class="math inline">\(d(x, x_i)\)</span></li>
-<li>Select the <strong><span class="math inline">\(k\)</span> smallest distances</strong></li>
-<li>Classification: <strong>majority vote</strong> (possibly weighted by <span class="math inline">\(1/d\)</span>)</li>
-<li>Regression: <strong>average</strong> (possibly weighted)</li>
-</ul>
-<aside class="notes">
-<p>The <strong>k-nearest neighbour</strong> (KNN) algorithm is a simple, <strong>non-parametric</strong>, <strong>instance-based</strong> learning method used for classification and regression. It classifies a data point based on the majority label of its <span class="math inline">\(k\)</span> nearest neighbours in the feature space, where <span class="math inline">\(k\)</span> is a user-defined constant. Distance metrics like Euclidean distance are commonly used to determine the nearest neighbours.</p>
-<p>In the context of regression, the predicted value <span class="math inline">\(\hat{y}(x)\)</span> is calculated as a weighted sum of the labels of its <span class="math inline">\(k\)</span> nearest neighbours. The weights can be uniform or based on distance, reflecting the proximity of each neighbour to the query point <span class="math inline">\(x\)</span>.</p>
-<p>For a query point <span class="math inline">\(x\)</span>, let its <span class="math inline">\(k\)</span> nearest neighbours have targets <span class="math inline">\(y_1, \dots, y_k\)</span> and distances <span class="math inline">\(d_1, \dots, d_k\)</span>.</p>
-<ul>
-<li><strong>Uniform weights (default)</strong>:</li>
-</ul>
-<p><span class="math display">\[
-\hat{y}(x) = \frac{1}{k} \sum_{i=1}^k y_i
-\]</span></p>
-<ul>
-<li><strong>Distance weights</strong> (the built-in option <code>"distance"</code>):</li>
-</ul>
-<p><span class="math display">\[
-\hat{y}(x) = \frac{\sum_{i=1}^k \frac{1}{d_i} \, y_i}{\sum_{i=1}^k \frac{1}{d_i}}
-\]</span></p>
-<p>In the above, as the distance <span class="math inline">\(d_i\)</span> between the example <span class="math inline">\(x_i\)</span> and the example <span class="math inline">\(x\)</span> increases, the reciprocal <span class="math inline">\(\frac{1}{d_i}\)</span> decreases. Consequently, examples that are farther from <span class="math inline">\(x\)</span> exert less influence on the predicted outcome, <span class="math inline">\(\hat{y}(x)\)</span>.</p>
-<p>In both cases, convex combination property guarantees that:</p>
-<p><span class="math display">\[
-\min(y_1, \dots, y_k) \;\; \leq \;\; \hat{y}(x) \;\; \leq \;\; \max(y_1, \dots, y_k).
-\]</span></p>
-<p>A <strong>non-parametric</strong> algorithm does not make any assumptions about the underlying data distribution and does not learn a fixed set of parameters or a model during the training phase. Instead, it relies directly on the training data to make decisions at the time of classification or regression, making it flexible and adaptive to various data shapes but potentially computationally expensive at prediction time.</p>
-<p>KNN has clear limitations:</p>
-<ol type="1">
-<li><strong>Computational cost</strong>
-<ul>
-<li>Prediction requires computing distances to all training points, <span class="math inline">\(O(n)\)</span> per query.</li>
-</ul></li>
-<li><strong>Curse of dimensionality</strong>
-<ul>
-<li>In high-dimensional spaces, distance metrics lose discriminative power.</li>
-</ul></li>
-<li><strong>Choice of <span class="math inline">\(k\)</span> and distance metric</strong>
-<ul>
-<li>Small <span class="math inline">\(k\)</span>: high variance, sensitive to noise/outliers.</li>
-<li>Large <span class="math inline">\(k\)</span>: high bias, oversmoothing.</li>
-</ul></li>
-<li><strong>Sensitivity to feature scaling</strong>
-<ul>
-<li>Distances are scale-dependent; variables with larger ranges dominate unless features are normalized/standardized.</li>
-</ul></li>
-<li><strong>Imbalanced data</strong>
-<ul>
-<li>In classification, if one class is much more frequent, KNN can be biased toward that class since neighbours are more likely to belong to it.</li>
-</ul></li>
-<li><strong>Not extrapolative</strong>
-<ul>
-<li>Predictions are always convex combinations (in regression) or majority votes (in classification) of training labels.</li>
-<li>This means KNN cannot extrapolate trends outside the range of observed training data.</li>
-</ul></li>
-</ol>
-<p>In scikit-learn, several models are commonly used for regression tasks. Here are some of the main models:</p>
-<ol type="1">
-<li><strong>Linear Regression</strong> (<code>LinearRegression</code>):
-<ul>
-<li>A simple linear approach that models the relationship between the independent variables and the dependent variable by fitting a linear equation to the observed data.</li>
-</ul></li>
-<li><strong>Support Vector Regression</strong> (<code>SVR</code>):
-<ul>
-<li>An extension of Support Vector Machines (SVM) for regression tasks, which tries to fit the best line within a specified margin of tolerance.</li>
-</ul></li>
-<li><strong>Decision Tree Regression</strong> (<code>DecisionTreeRegressor</code>):
-<ul>
-<li>Uses decision trees to model the relationship between the input features and the target variable by recursively splitting the data into subsets.</li>
-</ul></li>
-<li><strong>Random Forest Regression</strong> (<code>RandomForestRegressor</code>):
-<ul>
-<li>An ensemble method that uses multiple decision trees to improve predictive accuracy and control overfitting.</li>
-</ul></li>
-<li><strong>Gradient Boosting Regression</strong> (<code>GradientBoostingRegressor</code>):
-<ul>
-<li>Another ensemble method that builds sequential decision trees, where each tree corrects the errors of the previous one.</li>
-</ul></li>
-<li><strong>K-Nearest Neighbors Regression</strong> (<code>KNeighborsRegressor</code>):
-<ul>
-<li>A non-parametric method that predicts the target variable based on the average of the k-nearest neighbours in the feature space.</li>
-</ul></li>
-</ol>
-<p>These models offer a range of approaches to handle different types of regression problems, each with its own strengths and suitable applications.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="exercises" class="slide level2">
-<h2>Exercises</h2>
-<p>Download these examples to experiment with code variations. Notably, examine how <strong>changes in <span class="math inline">\(k\)</span></strong> impact <strong>classification decision boundaries</strong> and <strong>regression line smoothness</strong>.</p>
-<ul>
-<li><a href="https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html">Nearest Neighbors Classification</a></li>
-<li><a href="https://scikit-learn.org/stable/auto_examples/neighbors/plot_regression.html">Nearest Neighbors Regression</a></li>
-<li><a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html">Importance of Feature Scaling</a></li>
-</ul>
-<aside class="notes">
-<p>The scikit-learn website offers <a href="https://scikit-learn.org/stable/auto_examples/index.html">examples</a> in Jupyter Notebook format, accessible via desktop browsers with links on the right.</p>
+<p>As indicated in the introductory lecture, I aim to present a series of concepts leading to deep learning. As a starting point, linear regression would be a logical choice as a primary learning algorithm to examine. Nonetheless, it is equally critical to possess a high-level understanding of various other learning algorithms, as they differ significantly in model structures and training processes. Therefore, I will discuss decision trees and k-nearest neighbours before introducing linear regression.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -492,7 +309,7 @@ Marcel Turcotte
 <h2>Interpretable</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="https://www.canada.ca/content/dam/phac-aspc/images/services/reports-publications/health-promotion-chronic-disease-prevention-canada-research-policy-practice/vol-43-no-2-2023/a3f1-en.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="https://www.canada.ca/content/dam/phac-aspc/images/services/reports-publications/health-promotion-chronic-disease-prevention-canada-research-policy-practice/vol-43-no-2-2023/a3f1-en.jpg" class="quarto-figure quarto-figure-center" height="475"></a></p>
+<p><a href="https://www.canada.ca/content/dam/phac-aspc/images/services/reports-publications/health-promotion-chronic-disease-prevention-canada-research-policy-practice/vol-43-no-2-2023/a3f1-en.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="https://www.canada.ca/content/dam/phac-aspc/images/services/reports-publications/health-promotion-chronic-disease-prevention-canada-research-policy-practice/vol-43-no-2-2023/a3f1-en.jpg" class="quarto-figure quarto-figure-center" height="475"></a></p>
 </figure>
 </div>
 
@@ -515,9 +332,9 @@ Marcel Turcotte
 <section id="what-is-a-decision-tree" class="slide level2">
 <h2>What is a Decision Tree?</h2>
 <ul>
-<li class="fragment">A decision tree is a <strong>hierarchical structure</strong> represented as a directed acyclic graph, used for <strong>classification</strong> and <strong>regression</strong> tasks.</li>
-<li class="fragment">Each <strong>internal node</strong> performs a binary test on a particular feature (<span class="math inline">\(j\)</span>), such as evaluating whether the number of connections at a school surpasses a specified threshold.</li>
-<li class="fragment">The <strong>leaves</strong> function as decision nodes.</li>
+<li class="fragment">A decision tree is a <strong>rooted, hierarchical structure</strong> used for <strong>classification</strong> and <strong>regression</strong> tasks.</li>
+<li class="fragment">Each <strong>internal node</strong> is a decision node that performs a binary test on a particular feature (<span class="math inline">\(j\)</span>), such as evaluating whether the number of connections at a school surpasses a specified threshold.</li>
+<li class="fragment">Each <strong>leaf</strong> produces a prediction: a class label or class probabilities for classification, or a numerical value for regression.</li>
 </ul>
 
 <aside class="notes">
@@ -565,9 +382,9 @@ Marcel Turcotte
 <h1>Decision Boundary</h1>
 
 </section>
-<section id="palmer-pinguins-dataset" class="slide level2 scrollable">
-<h2>Palmer Pinguins Dataset</h2>
-<div id="7ba91be1" class="cell" data-execution_count="2">
+<section id="palmer-penguins-dataset" class="slide level2 scrollable nostretch">
+<h2>Palmer Penguins Dataset</h2>
+<div id="7c371bd6" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="co"># Loading our dataset</span></span>
 <span id="cb1-2"><a aria-label="2"></a></span>
 <span id="cb1-3"><a aria-label="3"></a><span class="cf">try</span>:</span>
@@ -589,11 +406,11 @@ Marcel Turcotte
 </div>
 
 </section>
-<section id="palmer-pinguins-dataset-output" class="slide level2 scrollable output-location-slide"><h2>Palmer Pinguins Dataset</h2><div class="cell output-location-slide" data-execution_count="2">
+<section id="palmer-penguins-dataset-output" class="slide level2 scrollable nostretch output-location-slide"><h2>Palmer Penguins Dataset</h2><div class="cell output-location-slide" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides_files/figure-revealjs/cell-2-output-1.png" width="1306" height="1181"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="slides_files/figure-revealjs/cell-2-output-1.png" width="1306" height="1181"></a></p>
 </figure>
 </div>
 </div>
@@ -601,7 +418,7 @@ Marcel Turcotte
 <h2>Binary Classification Problem</h2>
 <ul>
 <li>Several scatter plots reveal a distinct clustering of <strong>Gentoo</strong> instances.</li>
-<li>To illustrate our next exemple, we propose a <strong>binary classification</strong> model: <strong>Gentoo</strong> versus <strong>non-Gentoo</strong>.</li>
+<li>To illustrate our next example, we propose a <strong>binary classification</strong> model: <strong>Gentoo</strong> versus <strong>non-Gentoo</strong>.</li>
 <li>Our analysis will concentrate on two key features: <strong>body mass</strong> and <strong>bill depth</strong>.</li>
 </ul>
 </section>
@@ -615,7 +432,7 @@ Marcel Turcotte
 <section id="decision-boundary-1" class="slide level2">
 <h2>Decision Boundary</h2>
 <p>The decision boundary between these attributes can be represented as a <strong>line</strong>.</p>
-<div id="d387f04c" class="cell" data-execution_count="3">
+<div id="4507212c" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Import necessary libraries</span></span>
@@ -647,21 +464,23 @@ Marcel Turcotte
 <span id="cb2-27"><a aria-label="27"></a>y <span class="op">=</span> df[<span class="st">'species_binary'</span>].values</span>
 <span id="cb2-28"><a aria-label="28"></a></span>
 <span id="cb2-29"><a aria-label="29"></a><span class="co"># Split the data into training and testing sets</span></span>
-<span id="cb2-30"><a aria-label="30"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb2-31"><a aria-label="31"></a></span>
-<span id="cb2-32"><a aria-label="32"></a><span class="co"># Function to plot initial scatter of data</span></span>
-<span id="cb2-33"><a aria-label="33"></a><span class="kw">def</span> plot_scatter(X, y):</span>
-<span id="cb2-34"><a aria-label="34"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
-<span id="cb2-35"><a aria-label="35"></a>    plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'orange'</span>, edgecolors<span class="op">=</span><span class="st">'k'</span>, marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span><span class="st">'Gentoo'</span>)</span>
-<span id="cb2-36"><a aria-label="36"></a>    plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, edgecolors<span class="op">=</span><span class="st">'k'</span>, marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span><span class="st">'Not Gentoo'</span>)</span>
-<span id="cb2-37"><a aria-label="37"></a>    plt.xlabel(<span class="st">'Bill Depth (mm)'</span>)</span>
-<span id="cb2-38"><a aria-label="38"></a>    plt.ylabel(<span class="st">'Body Mass (g)'</span>)</span>
-<span id="cb2-39"><a aria-label="39"></a>    plt.title(<span class="st">'Scatter Plot of Bill Depth vs. Body Mass'</span>)</span>
-<span id="cb2-40"><a aria-label="40"></a>    plt.legend()</span>
-<span id="cb2-41"><a aria-label="41"></a>    plt.show()</span>
-<span id="cb2-42"><a aria-label="42"></a>    </span>
-<span id="cb2-43"><a aria-label="43"></a><span class="co"># Plot the initial scatter plot</span></span>
-<span id="cb2-44"><a aria-label="44"></a>plot_scatter(X_train, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-30"><a aria-label="30"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb2-31"><a aria-label="31"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>y</span>
+<span id="cb2-32"><a aria-label="32"></a>)</span>
+<span id="cb2-33"><a aria-label="33"></a></span>
+<span id="cb2-34"><a aria-label="34"></a><span class="co"># Function to plot initial scatter of data</span></span>
+<span id="cb2-35"><a aria-label="35"></a><span class="kw">def</span> plot_scatter(X, y):</span>
+<span id="cb2-36"><a aria-label="36"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb2-37"><a aria-label="37"></a>    plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'orange'</span>, edgecolors<span class="op">=</span><span class="st">'k'</span>, marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span><span class="st">'Gentoo'</span>)</span>
+<span id="cb2-38"><a aria-label="38"></a>    plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, edgecolors<span class="op">=</span><span class="st">'k'</span>, marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span><span class="st">'Not Gentoo'</span>)</span>
+<span id="cb2-39"><a aria-label="39"></a>    plt.xlabel(<span class="st">'Bill Depth (mm)'</span>)</span>
+<span id="cb2-40"><a aria-label="40"></a>    plt.ylabel(<span class="st">'Body Mass (g)'</span>)</span>
+<span id="cb2-41"><a aria-label="41"></a>    plt.title(<span class="st">'Scatter Plot of Bill Depth vs. Body Mass'</span>)</span>
+<span id="cb2-42"><a aria-label="42"></a>    plt.legend()</span>
+<span id="cb2-43"><a aria-label="43"></a>    plt.show()</span>
+<span id="cb2-44"><a aria-label="44"></a>    </span>
+<span id="cb2-45"><a aria-label="45"></a><span class="co"># Plot the initial scatter plot</span></span>
+<span id="cb2-46"><a aria-label="46"></a>plot_scatter(X_train, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 
@@ -670,14 +489,14 @@ Marcel Turcotte
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="751" height="451"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="751" height="451"></a></p>
 </figure>
 </div>
 </div>
 </div></section><section id="decision-boundary-2" class="slide level2">
 <h2>Decision Boundary</h2>
 <p>The decision boundary between these attributes can be represented as a <strong>line</strong>.</p>
-<div id="daf425e8" class="cell" data-execution_count="4">
+<div id="6434fc71" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Train a logistic regression model</span></span>
@@ -688,23 +507,25 @@ Marcel Turcotte
 <span id="cb3-6"><a aria-label="6"></a><span class="kw">def</span> plot_decision_boundary(X, y, model):</span>
 <span id="cb3-7"><a aria-label="7"></a>    x_min, x_max <span class="op">=</span> X[:, <span class="dv">0</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="dv">1</span>, X[:, <span class="dv">0</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">1</span></span>
 <span id="cb3-8"><a aria-label="8"></a>    y_min, y_max <span class="op">=</span> X[:, <span class="dv">1</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="dv">1</span>, X[:, <span class="dv">1</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb3-9"><a aria-label="9"></a>    xx, yy <span class="op">=</span> np.meshgrid(np.arange(x_min, x_max, <span class="fl">0.1</span>),</span>
-<span id="cb3-10"><a aria-label="10"></a>                         np.arange(y_min, y_max, <span class="fl">0.1</span>))</span>
-<span id="cb3-11"><a aria-label="11"></a>    Z <span class="op">=</span> model.predict(np.c_[xx.ravel(), yy.ravel()])</span>
-<span id="cb3-12"><a aria-label="12"></a>    Z <span class="op">=</span> Z.reshape(xx.shape)</span>
-<span id="cb3-13"><a aria-label="13"></a>    </span>
-<span id="cb3-14"><a aria-label="14"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
-<span id="cb3-15"><a aria-label="15"></a>    plt.contourf(xx, yy, Z, alpha<span class="op">=</span><span class="fl">0.3</span>, cmap<span class="op">=</span><span class="st">'RdYlBu'</span>)</span>
-<span id="cb3-16"><a aria-label="16"></a>    plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'orange'</span>, edgecolors<span class="op">=</span><span class="st">'k'</span>, marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span><span class="st">'Gentoo'</span>)</span>
-<span id="cb3-17"><a aria-label="17"></a>    plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, edgecolors<span class="op">=</span><span class="st">'k'</span>, marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span><span class="st">'Not Gentoo'</span>)</span>
-<span id="cb3-18"><a aria-label="18"></a>    plt.xlabel(<span class="st">'Bill Depth (mm)'</span>)</span>
-<span id="cb3-19"><a aria-label="19"></a>    plt.ylabel(<span class="st">'Body Mass (g)'</span>)</span>
-<span id="cb3-20"><a aria-label="20"></a>    plt.title(<span class="st">'Logistic Regression Decision Boundary'</span>)</span>
-<span id="cb3-21"><a aria-label="21"></a>    plt.legend()</span>
-<span id="cb3-22"><a aria-label="22"></a>    plt.show()</span>
-<span id="cb3-23"><a aria-label="23"></a></span>
-<span id="cb3-24"><a aria-label="24"></a><span class="co"># Plot the decision boundary on the training set</span></span>
-<span id="cb3-25"><a aria-label="25"></a>plot_decision_boundary(X_train, y_train, model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-9"><a aria-label="9"></a>    xx, yy <span class="op">=</span> np.meshgrid(</span>
+<span id="cb3-10"><a aria-label="10"></a>        np.linspace(x_min, x_max, <span class="dv">300</span>),</span>
+<span id="cb3-11"><a aria-label="11"></a>        np.linspace(y_min, y_max, <span class="dv">300</span>)</span>
+<span id="cb3-12"><a aria-label="12"></a>    )</span>
+<span id="cb3-13"><a aria-label="13"></a>    Z <span class="op">=</span> model.predict(np.c_[xx.ravel(), yy.ravel()])</span>
+<span id="cb3-14"><a aria-label="14"></a>    Z <span class="op">=</span> Z.reshape(xx.shape)</span>
+<span id="cb3-15"><a aria-label="15"></a>    </span>
+<span id="cb3-16"><a aria-label="16"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb3-17"><a aria-label="17"></a>    plt.contourf(xx, yy, Z, alpha<span class="op">=</span><span class="fl">0.3</span>, cmap<span class="op">=</span><span class="st">'RdYlBu'</span>)</span>
+<span id="cb3-18"><a aria-label="18"></a>    plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'orange'</span>, edgecolors<span class="op">=</span><span class="st">'k'</span>, marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span><span class="st">'Gentoo'</span>)</span>
+<span id="cb3-19"><a aria-label="19"></a>    plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, edgecolors<span class="op">=</span><span class="st">'k'</span>, marker<span class="op">=</span><span class="st">'o'</span>, label<span class="op">=</span><span class="st">'Not Gentoo'</span>)</span>
+<span id="cb3-20"><a aria-label="20"></a>    plt.xlabel(<span class="st">'Bill Depth (mm)'</span>)</span>
+<span id="cb3-21"><a aria-label="21"></a>    plt.ylabel(<span class="st">'Body Mass (g)'</span>)</span>
+<span id="cb3-22"><a aria-label="22"></a>    plt.title(<span class="st">'Logistic Regression Decision Boundary'</span>)</span>
+<span id="cb3-23"><a aria-label="23"></a>    plt.legend()</span>
+<span id="cb3-24"><a aria-label="24"></a>    plt.show()</span>
+<span id="cb3-25"><a aria-label="25"></a></span>
+<span id="cb3-26"><a aria-label="26"></a><span class="co"># Plot the decision boundary on the training set</span></span>
+<span id="cb3-27"><a aria-label="27"></a>plot_decision_boundary(X_train, y_train, model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 
@@ -713,7 +534,7 @@ Marcel Turcotte
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-revealjs/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="751" height="451"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="751" height="451"></a></p>
 </figure>
 </div>
 </div>
@@ -721,17 +542,15 @@ Marcel Turcotte
 <h2>Definition</h2>
 <p>We say that the data is <strong>linearly separable</strong> when two classes of data can be perfectly separated by a <strong>single linear boundary</strong>, such as a <strong>line</strong> in <strong>two-dimensional space</strong> or a <strong>hyperplane in higher dimensions</strong>.</p>
 </section>
-<section id="simple-decision-doundary" class="slide level2">
-<h2>Simple Decision Doundary</h2>
+<section id="simple-decision-boundary" class="slide level2">
+<h2>Simple Decision Boundary</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="../../assets/images/geurts-2009fq_fig1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="../../assets/images/geurts-2009fq_fig1.png" class="quarto-figure quarto-figure-center"></a></p>
+<p><a href="../../assets/images/geurts-2009fq_fig1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="../../assets/images/geurts-2009fq_fig1.png" class="quarto-figure quarto-figure-center"></a></p>
 </figure>
 </div>
 <p><em>(a)</em> training data, <em>(b)</em> quadratic curve, and <em>(c)</em> linear function.</p>
-<div class="asside">
-<p><strong>Attribution:</strong> <span class="citation" data-cites="Geurts:2009aa">(<a href="#/references" role="doc-biblioref" onclick="">Geurts et al. 2009</a>)</span></p>
-</div>
+
 <aside class="notes">
 <p>The table on the left presents training data for a hypothetical <strong>binary classification task</strong> in a medical context, where the two attributes, <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>, are used to predict the target variable, <span class="math inline">\(y\)</span>, which can take on two values: <em>sick</em> and <em>healthy</em>. You can imagine that <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are measurements, such as blood pressure and heart rate or cholesterol and glucose levels.</p>
 <p><strong>Logistic regression</strong> (c) employs a linear <strong>decision boundary</strong>. In this specific example, the decision boundary is represented by a straight line. Employing logistic regression for this problem results in several classification errors: red dots above the line, which should be classified as ‘sick’, are incorrectly predicted as ‘healthy’. Conversely, green dots below the line, which should be classified as ‘healthy’, are incorrectly predicted as ‘sick’.</p>
@@ -746,18 +565,18 @@ Marcel Turcotte
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
+<aside><div>
+<p><strong>Attribution:</strong> <span class="citation" data-cites="Geurts:2009aa">(<a href="#/references" role="doc-biblioref" onclick="">Geurts et al. 2009</a>)</span></p>
+</div></aside></section>
 <section id="complex-decision-boundary" class="slide level2">
 <h2>Complex Decision Boundary</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="../../assets/images/geurts-2009fq_fig2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="../../assets/images/geurts-2009fq_fig2.png" class="quarto-figure quarto-figure-center" height="375"></a></p>
+<p><a href="../../assets/images/geurts-2009fq_fig2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="../../assets/images/geurts-2009fq_fig2.png" class="quarto-figure quarto-figure-center" height="375"></a></p>
 </figure>
 </div>
 <p><strong>Decision trees</strong> are capable of generating <strong>irregular</strong> and <strong>non-linear</strong> decision boundaries.</p>
-<div class="asside">
-<p><strong>Attribution:</strong> <em>ibidem</em>.</p>
-</div>
+
 <aside class="notes">
 <p>Make sure to understand the relationships between the eight decision rules delineated in the decision tree and the nine line segments represented in the scatter plot.</p>
 <style type="text/css">
@@ -771,7 +590,9 @@ Marcel Turcotte
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
+<aside><div>
+<p><strong>Attribution:</strong> <em>ibidem</em>.</p>
+</div></aside></section>
 <section id="definition-revised" class="slide level2">
 <h2>Definition (revised)</h2>
 <p>A <strong>decision boundary</strong> is a hypersurface that partitions the underlying feature space into <strong>regions</strong> corresponding to <strong>different class labels</strong>.</p>
@@ -848,72 +669,17 @@ Marcel Turcotte
 <li>These split points are typically the <strong>midpoints</strong> between two consecutive, <strong>sorted unique values</strong> of the feature.</li>
 </ul>
 </section>
-<section id="constructing-a-decision-tree-4" class="slide level2">
-<h2>Constructing a Decision Tree</h2>
+<section id="how-mixed-is-a-node" class="slide level2">
+<h2>How Mixed Is a Node?</h2>
 <ul>
-<li>For a <strong>categorical feature</strong> with <span class="math inline">\(k\)</span> unique values, the algorithm considers <strong>all possible ways</strong> of splitting the categories into two groups.</li>
-<li>For instance, if the feature (forecast) has values, ‘Rainy’, ‘Cloudy’, and ‘Sunny’, it evaluates the following splits:
-<ul>
-<li><span class="math inline">\(\{\mathrm{Rainy}\}\)</span> vs.&nbsp;<span class="math inline">\(\{\mathrm{Cloudy}, \mathrm{Sunny}\}\)</span>,</li>
-<li><span class="math inline">\(\{\mathrm{Cloudy}\}\)</span> vs.&nbsp;<span class="math inline">\(\{\mathrm{Rainy}, \mathrm{Sunny}\}\)</span> ,</li>
-<li><span class="math inline">\(\{\mathrm{Sunny}\}\)</span> vs.&nbsp;<span class="math inline">\(\{\mathrm{Rainy}, \mathrm{Cloudy}\}\)</span>.</li>
-</ul></li>
+<li class="fragment">A <strong>pure node</strong> contains examples from a single class.</li>
+<li class="fragment">A <strong>mixed node</strong> contains examples from several classes.</li>
+<li class="fragment">A useful split produces children that are <strong>less mixed</strong> than their parent.</li>
 </ul>
-</section>
-<section id="evaluation" class="slide level2">
-<h2>Evaluation</h2>
-<p>What defines a <strong>“good” data split</strong>?</p>
-<div class="{incremental}">
-<ul>
-<li><span class="math inline">\(\{\mathrm{Rainy}\}\)</span> vs.&nbsp;<span class="math inline">\(\{\mathrm{Cloudy}, \mathrm{Sunny}\}\)</span> : <span class="math inline">\([20,10,5]\)</span> and <span class="math inline">\([10,10,15]\)</span>.</li>
-<li><span class="math inline">\(\{\mathrm{Cloudy}\}\)</span> vs.&nbsp;<span class="math inline">\(\{\mathrm{Rainy}, \mathrm{Sunny}\}\)</span> : <span class="math inline">\([40,0,0]\)</span> and <span class="math inline">\([0,30,0]\)</span>.</li>
-</ul>
-</div>
-
-<aside><div>
-<p>Where <span class="math inline">\([20,10,5]\)</span> indicates that the subgroup contains 20 examples of the ‘Poor’, 10 for ‘Average’, and 5 for ‘Excellent’, for our predictive model to classify the likelihood of a successful fishing day.</p>
-</div></aside></section>
-<section id="evaluation-1" class="slide level2">
-<h2>Evaluation</h2>
-<ul>
-<li class="fragment"><p><strong>Heterogeneity</strong> (also referred to as <strong>impurity</strong>) and <strong>homogeneity</strong> are critical metrics for evaluating the composition of resulting data partitions.</p></li>
-<li class="fragment"><p>Optimally, each of these partitions should contain data entries from a <strong>single class</strong> to achieve maximum homogeneity.</p></li>
-<li class="fragment"><p><strong>Entropy</strong> and the <strong>Gini index</strong> are two widely utilized metrics for assessing these characteristics.</p></li>
-</ul>
-</section>
-<section id="evalution" class="slide level2 smaller">
-<h2>Evalution</h2>
-<p>Objective function for <strong>sklearn.tree.DecisionTreeClassifier</strong> (CART):</p>
-<p><span class="math display">\[
-  J(k,t_k) = \frac{N_{\text{left}}}{N_{\text{parent}}} G_{\text{left}} + \frac{N_{\text{right}}}{N_{\text{parent}}} G_{\text{right}}
-\]</span></p>
-<ul>
-<li><p>The cost of partitioning the data using <strong>feature</strong> <span class="math inline">\(k\)</span> and <strong>threshold</strong> <span class="math inline">\(t_k\)</span>.</p></li>
-<li><p><span class="math inline">\(N_{\text{left}}\)</span> and <span class="math inline">\(N_{\text{right}}\)</span> is the <strong>number of examples</strong> in the <strong>left</strong> and <strong>right</strong> subsets, respectively, and <span class="math inline">\(N_{\text{parent}}\)</span> is the number of examples before splitting the data.</p></li>
-<li><p><span class="math inline">\(G_{\text{left}}\)</span> and <span class="math inline">\(G_{\text{right}}\)</span> is the <strong>impurity</strong> of the <strong>left</strong> and <strong>right</strong> subsets, respectively.</p></li>
-</ul>
-
-<aside><div>
-<p>Minimize or maximize <span class="math inline">\(J\)</span>?</p>
-</div></aside></section>
-<section id="gini-index" class="slide level2">
-<h2>Gini Index</h2>
-<ul>
-<li><strong>Gini index</strong> (default)</li>
-</ul>
-<p><span class="math display">\[
-  G_i = 1 - \sum_{k=1}^n p_{i,k}^2
-\]</span></p>
-<ul>
-<li><p><span class="math inline">\(p_{i,k}\)</span> is the proportion of the examples from this class <span class="math inline">\(k\)</span> in the node <span class="math inline">\(i\)</span>.</p></li>
-<li><p>What is the <strong>maximum</strong> value of the Gini index?</p></li>
-</ul>
+<p>For node <span class="math inline">\(i\)</span>, let <span class="math inline">\(p_{i,k}\)</span> be the proportion of examples from class <span class="math inline">\(k\)</span>.</p>
 <aside class="notes">
-<ul>
-<li><p>The value of the Gini index is maximum when all the classes are equiprobable, i.e.&nbsp;the proportions are the same.</p></li>
-<li><p>For a binary classification, <span class="math inline">\(1 - [\frac{1}{2}^2 + \frac{1}{2}^2] = 0.5\)</span>.</p></li>
-<li><p>For the general case, <span class="math inline">\(1 - n \times \frac{1}{n}^2 = 1 - \frac{1}{n}\)</span>, as <span class="math inline">\(n \to \infty\)</span>, <span class="math inline">\(\frac{1}{n} \to 0\)</span>, and the Gini index tends to 1.</p></li>
-</ul>
+<p>We need a numerical score so that candidate splits can be compared. The score should be zero for a pure node and increase as the class proportions become more evenly balanced.</p>
+<p>At this stage, students can treat the score as a recipe for measuring how mixed a node is. Its deeper interpretation will be developed in later lectures.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -926,48 +692,21 @@ Marcel Turcotte
           display:block!important;
       }</style></aside>
 </section>
-<section id="gini-index-1" class="slide level2">
-<h2>Gini Index</h2>
-<p>Considering a <strong>binary classification</strong> problem:</p>
+<section id="entropy" class="slide level2">
+<h2>Entropy</h2>
+<p>The <strong>entropy</strong> of node <span class="math inline">\(i\)</span> is</p>
+<p><span class="math display">\[
+H_i = -\sum_{k=1}^{K} p_{i,k}\log_2 p_{i,k}.
+\]</span></p>
 <ul>
-<li><span class="math inline">\(1 - [(0/100)^2 + (100/100)^2] = 0\)</span> (pure)</li>
-<li><span class="math inline">\(1 - [(25/100)^2 + (75/100)^2] = 0.375\)</span></li>
-<li><span class="math inline">\(1 - [(50/100)^2 + (50/100)^2] = 0.5\)</span></li>
+<li class="fragment"><span class="math inline">\(H_i=0\)</span> when the node is <strong>pure</strong>.</li>
+<li class="fragment"><span class="math inline">\(H_i\)</span> increases as the classes become <strong>more evenly represented</strong>.</li>
+<li class="fragment">Therefore, a <strong>smaller</strong> value is better.</li>
 </ul>
+
 <aside class="notes">
-<p>Based on the above, are we solving a minimization or maximization problem?</p>
-<p>When the problem is formulated as follows:</p>
-<ul>
-<li>For each candidate split <span class="math inline">\((k, t_k)\)</span>, compute</li>
-</ul>
-<p><span class="math display">\[
-  J(k,t_k) = \frac{N_{\text{left}}}{N_{\text{parent}}} G_{\text{left}} + \frac{N_{\text{right}}}{N_{\text{parent}}} G_{\text{right}}
-\]</span></p>
-<ul>
-<li>The algorithm then chooses the split with the <strong>lowest</strong> <span class="math inline">\(J\)</span>, i.e.&nbsp;the split that yields the smallest weighted impurity.</li>
-</ul>
-<p>Many textbooks describe this as <strong>maximizing impurity reduction (information gain)</strong>, which is just</p>
-<p><span class="math display">\[
-\Delta G = G_{\text{parent}} - J(k,t_k).
-\]</span></p>
-<p>Maximizing <span class="math inline">\(\Delta G\)</span> has benefits.</p>
-<p>If no potential split for a given parent node leads to a reduction in impurity, the recursive process of node splitting halts. In this scenario, the classification performance of the parent node surpasses that of any possible split.</p>
-<p>If the algorithm is considering splitting a parent node, it means the <span class="math inline">\(G_{\text{parent}} &gt; 0\)</span>, otherwise the process would have stopped.</p>
-<p>What about <span class="math inline">\(\frac{N_{\text{left}}}{N_{\text{parent}}}\)</span> and <span class="math inline">\(\frac{N_{\text{right}}}{N_{\text{parent}}}\)</span>?</p>
-<p>What happens if the number of examples in one child is very small?</p>
-<p>Suppose we isolate 1 sample (pure) into the left child, and leave <span class="math inline">\(N-1\)</span> mixed in the right child.</p>
-<ul>
-<li>Left child: <span class="math inline">\(G_{left} = 0\)</span>, weight = <span class="math inline">\(1/N\)</span>.</li>
-<li>Right child: <span class="math inline">\(G_{right} \approx G_{parent}\)</span>, weighted by <span class="math inline">\((N-1)/N\)</span>.</li>
-</ul>
-<p>Thus <span class="math display">\[
-   J(k,t_k) \;\approx\; \frac{N-1}{N} \, G_{\textrm{parent}} ,
-\]</span></p>
-<p>therefore</p>
-<p><span class="math display">\[
-\Delta \;\approx\; \, G_{\textrm{parent}} - \frac{N-1}{N} \, G_{\textrm{parent}} = \frac{1}{N} \, G_{\textrm{parent}}.
-\]</span></p>
-<p>That’s only a tiny gain (shrinks as <span class="math inline">\(N\)</span> grows).</p>
+<p>Students do not need an information-theory background here. Operationally, entropy is simply a numerical measure of how uncertain the class label remains within a node.</p>
+<p>The base of the logarithm changes the units and rescales all entropy values, but it does not change which candidate split has the smallest score. Base 2 gives the intuitive unit <em>bit</em>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -979,53 +718,622 @@ Marcel Turcotte
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="gini-index-2" class="slide level2">
-<h2>Gini Index</h2>
-<div id="5e6bf05f" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="kw">def</span> gini_index(p):</span>
-<span id="cb4-2"><a aria-label="2"></a>    <span class="co">"""Calculate the Gini index."""</span></span>
-<span id="cb4-3"><a aria-label="3"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> (p<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> p)<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb4-4"><a aria-label="4"></a></span>
-<span id="cb4-5"><a aria-label="5"></a><span class="co"># Probability values for class 1</span></span>
-<span id="cb4-6"><a aria-label="6"></a>p_values <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">100</span>)</span>
-<span id="cb4-7"><a aria-label="7"></a></span>
-<span id="cb4-8"><a aria-label="8"></a><span class="co"># Calculate Gini index for each probability</span></span>
-<span id="cb4-9"><a aria-label="9"></a>gini_values <span class="op">=</span> [gini_index(p) <span class="cf">for</span> p <span class="kw">in</span> p_values]</span>
-<span id="cb4-10"><a aria-label="10"></a></span>
-<span id="cb4-11"><a aria-label="11"></a><span class="co"># Plot the Gini index</span></span>
-<span id="cb4-12"><a aria-label="12"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb4-13"><a aria-label="13"></a>plt.plot(p_values, gini_values, label<span class="op">=</span><span class="st">'Gini Index'</span>, color<span class="op">=</span><span class="st">'b'</span>)</span>
-<span id="cb4-14"><a aria-label="14"></a>plt.title(<span class="st">'Gini Index for Binary Classification'</span>)</span>
-<span id="cb4-15"><a aria-label="15"></a>plt.xlabel(<span class="st">'Probability of Class 1 (p)'</span>)</span>
-<span id="cb4-16"><a aria-label="16"></a>plt.ylabel(<span class="st">'Gini Index'</span>)</span>
-<span id="cb4-17"><a aria-label="17"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb4-18"><a aria-label="18"></a>plt.legend()</span>
-<span id="cb4-19"><a aria-label="19"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
+<aside><div>
+<p>We use the convention <span class="math inline">\(0\log_2 0=0\)</span>.</p>
+</div></aside></section>
+<section id="binary-entropy" class="slide level2 nostretch">
+<h2>Binary Entropy</h2>
+<p>If <span class="math inline">\(p\)</span> is the proportion of Gentoo penguins, then</p>
+<p><span class="math display">\[
+H(p)=-p\log_2 p-(1-p)\log_2(1-p).
+\]</span></p>
+<div id="cell-decision-tree-binary-entropy" class="cell" data-fig-height="2.8" data-fig-width="2.8" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-revealjs/cell-5-output-1.png" class="quarto-figure quarto-figure-center" width="664" height="525"></a></p>
+<p><a href="slides_files/figure-revealjs/decision-tree-binary-entropy-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides_files/figure-revealjs/decision-tree-binary-entropy-output-1.png" id="decision-tree-binary-entropy" class="quarto-figure quarto-figure-center" width="439" height="431"></a></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="iris-dataset" class="slide level2">
-<h2>Iris Dataset</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p><a href="../../assets/images/geron-2019_6_1_dt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="../../assets/images/geron-2019_6_1_dt.png"></a></p>
-</div><div class="column" style="width:60%;">
-<p><a href="../../assets/images/geron-2019_6_2_dtdt.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="../../assets/images/geron-2019_6_2_dtdt.png"></a></p>
-</div></div>
 
+<aside class="notes">
+<p>At <span class="math inline">\(p=0\)</span> or <span class="math inline">\(p=1\)</span>, the class is certain and entropy is zero. At <span class="math inline">\(p=0.5\)</span>, neither class is more likely and entropy reaches its maximum of one bit.</p>
+<p>This curve supplies an intuitive meaning for the node score without requiring a broader treatment of information theory.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <aside><div>
-<p><strong>Attribution:</strong> <span class="citation" data-cites="Geron:2019aa">(<a href="#/references" role="doc-biblioref" onclick="">Géron 2019</a>)</span>, Figures 6.1 and 6.2</p>
+<p>Entropy is greatest when the two classes are <strong>equally likely</strong>.</p>
 </div></aside></section>
+<section id="entropy-in-python" class="slide level2">
+<h2>Entropy in Python</h2>
+<div id="decision-tree-entropy" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a aria-label="2"></a></span>
+<span id="cb4-3"><a aria-label="3"></a><span class="kw">def</span> class_probabilities(y, classes):</span>
+<span id="cb4-4"><a aria-label="4"></a>    <span class="co">"""Return the fraction of examples belonging to each class."""</span></span>
+<span id="cb4-5"><a aria-label="5"></a>    <span class="cf">return</span> np.array([np.mean(y <span class="op">==</span> label) <span class="cf">for</span> label <span class="kw">in</span> classes])</span>
+<span id="cb4-6"><a aria-label="6"></a></span>
+<span id="cb4-7"><a aria-label="7"></a><span class="kw">def</span> entropy(y, classes):</span>
+<span id="cb4-8"><a aria-label="8"></a>    <span class="co">"""Measure how mixed the classes are; zero means a pure node."""</span></span>
+<span id="cb4-9"><a aria-label="9"></a>    probabilities <span class="op">=</span> class_probabilities(y, classes)</span>
+<span id="cb4-10"><a aria-label="10"></a>    probabilities <span class="op">=</span> probabilities[probabilities <span class="op">&gt;</span> <span class="dv">0</span>]</span>
+<span id="cb4-11"><a aria-label="11"></a>    <span class="cf">if</span> <span class="bu">len</span>(probabilities) <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb4-12"><a aria-label="12"></a>        <span class="cf">return</span> <span class="fl">0.0</span></span>
+<span id="cb4-13"><a aria-label="13"></a>    <span class="cf">return</span> <span class="bu">float</span>(<span class="op">-</span>np.<span class="bu">sum</span>(probabilities <span class="op">*</span> np.log2(probabilities)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<aside class="notes">
+<p>This implementation works directly with class labels. Probabilities equal to zero are removed before applying the logarithm, which implements the convention <span class="math inline">\(0\log_2 0=0\)</span>.</p>
+<p>The function supports two or more classes. The <code>classes</code> array fixes the order of the returned probabilities and will later be stored by the classifier.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="evaluating-a-split" class="slide level2 smaller">
+<h2>Evaluating a Split</h2>
+<p>A split using <strong>feature</strong> <span class="math inline">\(j\)</span> and <strong>threshold</strong> <span class="math inline">\(t\)</span> produces two children:</p>
+<p><span class="math display">\[
+X_{\text{left}}=\{x:x^{(j)}\leq t\}, \qquad
+X_{\text{right}}=\{x:x^{(j)}&gt;t\}.
+\]</span></p>
+<p>Its score is the <strong>weighted entropy</strong>:</p>
+<p><span class="math display">\[
+J(j,t)=
+\frac{N_{\text{left}}}{N_{\text{parent}}}H_{\text{left}}
++
+\frac{N_{\text{right}}}{N_{\text{parent}}}H_{\text{right}}.
+\]</span></p>
+<p>Choose the feature and threshold that <strong>minimize</strong> <span class="math inline">\(J(j,t)\)</span>.</p>
+
+<aside class="notes">
+<p>The weights matter. Isolating a single pure example should not outweigh leaving almost all examples in a highly mixed child. Each child’s influence is therefore proportional to the number of examples it contains.</p>
+<p>Because the parent is the same for all candidate splits, we can compare the weighted entropy of their children directly.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Later, <strong>cross-entropy</strong> will use the same logarithmic idea to evaluate a model’s predicted probabilities.</p>
+</div></aside></section>
+<section id="three-candidate-splits" class="slide level2 smaller">
+<h2>Three Candidate Splits</h2>
+<p>Suppose the parent contains <strong>5 Gentoo</strong> and <strong>5 non-Gentoo</strong> penguins.</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Candidate</th>
+<th style="text-align: right;">Left child</th>
+<th style="text-align: right;"><span class="math inline">\(H_{\text{left}}\)</span></th>
+<th style="text-align: right;">Right child</th>
+<th style="text-align: right;"><span class="math inline">\(H_{\text{right}}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Messy</td>
+<td style="text-align: right;">3 G, 2 non-G</td>
+<td style="text-align: right;"><span class="math inline">\(0.971\)</span></td>
+<td style="text-align: right;">2 G, 3 non-G</td>
+<td style="text-align: right;"><span class="math inline">\(0.971\)</span></td>
+</tr>
+<tr class="even">
+<td>Isolate one</td>
+<td style="text-align: right;">1 G, 0 non-G</td>
+<td style="text-align: right;"><span class="math inline">\(0\)</span></td>
+<td style="text-align: right;">4 G, 5 non-G</td>
+<td style="text-align: right;"><span class="math inline">\(0.991\)</span></td>
+</tr>
+<tr class="odd">
+<td>Useful</td>
+<td style="text-align: right;">4 G, 1 non-G</td>
+<td style="text-align: right;"><span class="math inline">\(0.722\)</span></td>
+<td style="text-align: right;">1 G, 4 non-G</td>
+<td style="text-align: right;"><span class="math inline">\(0.722\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The isolated child is pure—but it contains only one example.</p>
+<aside class="notes">
+<p>All three candidates split the same parent, whose entropy is one bit. In the messy candidate, both children remain nearly as uncertain as the parent.</p>
+<p>The second candidate creates one perfectly pure child, but achieves this by isolating only one example. Most examples remain together in a highly mixed child. The useful candidate makes both children substantially cleaner.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="why-weight-the-children" class="slide level2 smaller">
+<h2>Why Weight the Children?</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 36%">
+<col style="width: 36%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Candidate</th>
+<th style="text-align: right;">Unweighted average</th>
+<th style="text-align: right;">Weighted entropy <span class="math inline">\(J\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Messy</td>
+<td style="text-align: right;"><span class="math inline">\((0.971+0.971)/2=0.971\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(\frac{5}{10}(0.971)+\frac{5}{10}(0.971)=0.971\)</span></td>
+</tr>
+<tr class="even">
+<td>Isolate one</td>
+<td style="text-align: right;"><span class="math inline">\((0+0.991)/2=\mathbf{0.496}\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(\frac{1}{10}(0)+\frac{9}{10}(0.991)=0.892\)</span></td>
+</tr>
+<tr class="odd">
+<td>Useful</td>
+<td style="text-align: right;"><span class="math inline">\((0.722+0.722)/2=0.722\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(\frac{5}{10}(0.722)+\frac{5}{10}(0.722)=\mathbf{0.722}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Without weights, isolating one pure example appears best. With weights, the large mixed child receives the influence it deserves.</p>
+<aside class="notes">
+<p>The unweighted average treats a child containing one example as though it were as important as a child containing nine. It would therefore choose the isolate-one candidate. Weighted entropy correctly prefers the useful split, which improves the classification of many examples.</p>
+<p>The weights do not prohibit unbalanced splits. They ensure that a child’s contribution is proportional to the number of examples it contains.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="evaluating-a-split-in-python" class="slide level2">
+<h2>Evaluating a Split in Python</h2>
+<div id="decision-tree-split-score" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="kw">def</span> weighted_entropy(y_left, y_right, classes):</span>
+<span id="cb5-2"><a aria-label="2"></a>    <span class="co">"""Return the weighted entropy produced by a split."""</span></span>
+<span id="cb5-3"><a aria-label="3"></a>    n_left <span class="op">=</span> <span class="bu">len</span>(y_left)</span>
+<span id="cb5-4"><a aria-label="4"></a>    n_right <span class="op">=</span> <span class="bu">len</span>(y_right)</span>
+<span id="cb5-5"><a aria-label="5"></a>    n_parent <span class="op">=</span> n_left <span class="op">+</span> n_right</span>
+<span id="cb5-6"><a aria-label="6"></a></span>
+<span id="cb5-7"><a aria-label="7"></a>    <span class="cf">return</span> (</span>
+<span id="cb5-8"><a aria-label="8"></a>        n_left <span class="op">/</span> n_parent <span class="op">*</span> entropy(y_left, classes)</span>
+<span id="cb5-9"><a aria-label="9"></a>        <span class="op">+</span> n_right <span class="op">/</span> n_parent <span class="op">*</span> entropy(y_right, classes)</span>
+<span id="cb5-10"><a aria-label="10"></a>    )</span>
+<span id="cb5-11"><a aria-label="11"></a></span>
+<span id="cb5-12"><a aria-label="12"></a><span class="kw">def</span> candidate_thresholds(values):</span>
+<span id="cb5-13"><a aria-label="13"></a>    <span class="co">"""Return midpoints between consecutive distinct feature values."""</span></span>
+<span id="cb5-14"><a aria-label="14"></a>    values <span class="op">=</span> np.unique(values)</span>
+<span id="cb5-15"><a aria-label="15"></a>    <span class="cf">return</span> (values[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> values[<span class="dv">1</span>:]) <span class="op">/</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<aside class="notes">
+<p>For a numerical feature, the candidate thresholds are the midpoints between consecutive distinct values. A threshold anywhere between those two values would produce the same partition; the midpoint provides a deterministic representative.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="greedy-split-search" class="slide level2">
+<h2>Greedy Split Search</h2>
+<p>For the examples that reach the current node:</p>
+<ol type="1">
+<li class="fragment">For every <strong>feature</strong>, generate its candidate thresholds.</li>
+<li class="fragment">For every <strong>threshold</strong>, divide the examples into left and right children.</li>
+<li class="fragment">Reject splits that create children smaller than <code>min_samples_leaf</code>.</li>
+<li class="fragment">Compute the <strong>weighted entropy</strong>.</li>
+<li class="fragment">Retain the feature and threshold with the <strong>smallest</strong> score.</li>
+</ol>
+<aside class="notes">
+<p>This is a greedy search: it selects the best immediate split and does not reconsider earlier decisions. Consequently, it is not guaranteed to find the best possible tree.</p>
+<p>This teaching implementation recomputes masks and class proportions for every candidate. At a node containing <span class="math inline">\(n\)</span> examples and <span class="math inline">\(D\)</span> features, it performs up to <span class="math inline">\(D(n-1)\)</span> candidate evaluations, each requiring another scan of the data. The resulting cost is approximately <span class="math inline">\(\mathcal{O}(Dn^2)\)</span> at that node.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="greedy-split-search-in-python" class="slide level2 smaller">
+<h2>Greedy Split Search in Python</h2>
+<div id="decision-tree-best-split" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="kw">def</span> find_best_split(X, y, classes, min_samples_leaf):</span>
+<span id="cb6-2"><a aria-label="2"></a>    best_split <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb6-3"><a aria-label="3"></a>    best_score <span class="op">=</span> entropy(y, classes)</span>
+<span id="cb6-4"><a aria-label="4"></a>    n_candidates <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-5"><a aria-label="5"></a></span>
+<span id="cb6-6"><a aria-label="6"></a>    <span class="cf">for</span> feature <span class="kw">in</span> <span class="bu">range</span>(X.shape[<span class="dv">1</span>]):</span>
+<span id="cb6-7"><a aria-label="7"></a>        <span class="cf">for</span> threshold <span class="kw">in</span> candidate_thresholds(X[:, feature]):</span>
+<span id="cb6-8"><a aria-label="8"></a>            go_left <span class="op">=</span> X[:, feature] <span class="op">&lt;=</span> threshold</span>
+<span id="cb6-9"><a aria-label="9"></a>            n_left <span class="op">=</span> np.<span class="bu">sum</span>(go_left)</span>
+<span id="cb6-10"><a aria-label="10"></a>            n_right <span class="op">=</span> <span class="bu">len</span>(y) <span class="op">-</span> n_left</span>
+<span id="cb6-11"><a aria-label="11"></a></span>
+<span id="cb6-12"><a aria-label="12"></a>            <span class="cf">if</span> <span class="bu">min</span>(n_left, n_right) <span class="op">&lt;</span> min_samples_leaf:</span>
+<span id="cb6-13"><a aria-label="13"></a>                <span class="cf">continue</span></span>
+<span id="cb6-14"><a aria-label="14"></a></span>
+<span id="cb6-15"><a aria-label="15"></a>            n_candidates <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb6-16"><a aria-label="16"></a>            score <span class="op">=</span> weighted_entropy(</span>
+<span id="cb6-17"><a aria-label="17"></a>                y[go_left], y[<span class="op">~</span>go_left], classes</span>
+<span id="cb6-18"><a aria-label="18"></a>            )</span>
+<span id="cb6-19"><a aria-label="19"></a>            <span class="cf">if</span> score <span class="op">&lt;</span> best_score:</span>
+<span id="cb6-20"><a aria-label="20"></a>                best_score <span class="op">=</span> score</span>
+<span id="cb6-21"><a aria-label="21"></a>                best_split <span class="op">=</span> (feature, <span class="bu">float</span>(threshold), go_left)</span>
+<span id="cb6-22"><a aria-label="22"></a></span>
+<span id="cb6-23"><a aria-label="23"></a>    <span class="cf">return</span> best_split, n_candidates</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<aside class="notes">
+<p>The code follows the five steps from the preceding slide directly. The Boolean array <code>go_left</code> records the examples assigned to the left child; its complement selects the right child.</p>
+<p><code>best_score</code> begins with the entropy of the unsplit node. Consequently, the function returns <code>None</code> if no candidate reduces the score.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="complete-implementation" class="slide level2 hide-code-toggle scrollable smaller">
+<h2>Complete Implementation</h2>
+<p>The complete class combines the preceding operations. Input validation and text formatting are supporting code and are not part of the central algorithm.</p>
+<p><a href="decision_tree_classifier.html">Read the tutorial</a> · <a href="decision_tree_classifier.ipynb">Download the notebook</a> · <a href="https://colab.research.google.com/github/turcotte/csi-4106/blob/gh-pages/lectures/03/decision_tree_classifier.ipynb">Open in Colab</a></p>
+<div id="decision-tree-complete-implementation" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Show complete implementation</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="im">from</span> dataclasses <span class="im">import</span> dataclass</span>
+<span id="cb7-2"><a aria-label="2"></a></span>
+<span id="cb7-3"><a aria-label="3"></a><span class="at">@dataclass</span></span>
+<span id="cb7-4"><a aria-label="4"></a><span class="kw">class</span> Node:</span>
+<span id="cb7-5"><a aria-label="5"></a>    probabilities: np.ndarray</span>
+<span id="cb7-6"><a aria-label="6"></a>    n_samples: <span class="bu">int</span></span>
+<span id="cb7-7"><a aria-label="7"></a>    loss: <span class="bu">float</span></span>
+<span id="cb7-8"><a aria-label="8"></a>    feature: <span class="bu">int</span> <span class="op">|</span> <span class="va">None</span> <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-9"><a aria-label="9"></a>    threshold: <span class="bu">float</span> <span class="op">|</span> <span class="va">None</span> <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-10"><a aria-label="10"></a>    left: <span class="st">"Node | None"</span> <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-11"><a aria-label="11"></a>    right: <span class="st">"Node | None"</span> <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-12"><a aria-label="12"></a></span>
+<span id="cb7-13"><a aria-label="13"></a>    <span class="at">@property</span></span>
+<span id="cb7-14"><a aria-label="14"></a>    <span class="kw">def</span> is_leaf(<span class="va">self</span>):</span>
+<span id="cb7-15"><a aria-label="15"></a>        <span class="cf">return</span> <span class="va">self</span>.feature <span class="kw">is</span> <span class="va">None</span></span>
+<span id="cb7-16"><a aria-label="16"></a></span>
+<span id="cb7-17"><a aria-label="17"></a></span>
+<span id="cb7-18"><a aria-label="18"></a><span class="kw">class</span> SimpleDecisionTreeClassifier:</span>
+<span id="cb7-19"><a aria-label="19"></a>    <span class="co">"""A didactic classifier with a small scikit-learn-like interface."""</span></span>
+<span id="cb7-20"><a aria-label="20"></a></span>
+<span id="cb7-21"><a aria-label="21"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(</span>
+<span id="cb7-22"><a aria-label="22"></a>        <span class="va">self</span>,</span>
+<span id="cb7-23"><a aria-label="23"></a>        max_depth<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb7-24"><a aria-label="24"></a>        min_samples_split<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb7-25"><a aria-label="25"></a>        min_samples_leaf<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb7-26"><a aria-label="26"></a>    ):</span>
+<span id="cb7-27"><a aria-label="27"></a>        <span class="va">self</span>.max_depth <span class="op">=</span> max_depth</span>
+<span id="cb7-28"><a aria-label="28"></a>        <span class="va">self</span>.min_samples_split <span class="op">=</span> min_samples_split</span>
+<span id="cb7-29"><a aria-label="29"></a>        <span class="va">self</span>.min_samples_leaf <span class="op">=</span> min_samples_leaf</span>
+<span id="cb7-30"><a aria-label="30"></a></span>
+<span id="cb7-31"><a aria-label="31"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, X, y):</span>
+<span id="cb7-32"><a aria-label="32"></a>        X <span class="op">=</span> np.asarray(X, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb7-33"><a aria-label="33"></a>        y <span class="op">=</span> np.asarray(y)</span>
+<span id="cb7-34"><a aria-label="34"></a>        <span class="va">self</span>._validate_training_data(X, y)</span>
+<span id="cb7-35"><a aria-label="35"></a></span>
+<span id="cb7-36"><a aria-label="36"></a>        <span class="va">self</span>.classes_ <span class="op">=</span> np.unique(y)</span>
+<span id="cb7-37"><a aria-label="37"></a>        <span class="va">self</span>.n_features_in_ <span class="op">=</span> X.shape[<span class="dv">1</span>]</span>
+<span id="cb7-38"><a aria-label="38"></a>        <span class="va">self</span>.n_candidate_splits_ <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-39"><a aria-label="39"></a>        <span class="va">self</span>.tree_ <span class="op">=</span> <span class="va">self</span>._grow_tree(X, y, depth<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb7-40"><a aria-label="40"></a>        <span class="cf">return</span> <span class="va">self</span></span>
+<span id="cb7-41"><a aria-label="41"></a></span>
+<span id="cb7-42"><a aria-label="42"></a>    <span class="kw">def</span> _grow_tree(<span class="va">self</span>, X, y, depth):</span>
+<span id="cb7-43"><a aria-label="43"></a>        probabilities <span class="op">=</span> class_probabilities(y, <span class="va">self</span>.classes_)</span>
+<span id="cb7-44"><a aria-label="44"></a>        node <span class="op">=</span> Node(</span>
+<span id="cb7-45"><a aria-label="45"></a>            probabilities<span class="op">=</span>probabilities,</span>
+<span id="cb7-46"><a aria-label="46"></a>            n_samples<span class="op">=</span><span class="bu">len</span>(y),</span>
+<span id="cb7-47"><a aria-label="47"></a>            loss<span class="op">=</span>entropy(y, <span class="va">self</span>.classes_),</span>
+<span id="cb7-48"><a aria-label="48"></a>        )</span>
+<span id="cb7-49"><a aria-label="49"></a></span>
+<span id="cb7-50"><a aria-label="50"></a>        depth_limit <span class="op">=</span> <span class="va">self</span>.max_depth <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> depth <span class="op">&gt;=</span> <span class="va">self</span>.max_depth</span>
+<span id="cb7-51"><a aria-label="51"></a>        pure_node <span class="op">=</span> np.count_nonzero(probabilities) <span class="op">==</span> <span class="dv">1</span></span>
+<span id="cb7-52"><a aria-label="52"></a>        too_small <span class="op">=</span> <span class="bu">len</span>(y) <span class="op">&lt;</span> <span class="va">self</span>.min_samples_split</span>
+<span id="cb7-53"><a aria-label="53"></a></span>
+<span id="cb7-54"><a aria-label="54"></a>        <span class="cf">if</span> pure_node <span class="kw">or</span> depth_limit <span class="kw">or</span> too_small:</span>
+<span id="cb7-55"><a aria-label="55"></a>            <span class="cf">return</span> node</span>
+<span id="cb7-56"><a aria-label="56"></a></span>
+<span id="cb7-57"><a aria-label="57"></a>        split, n_candidates <span class="op">=</span> find_best_split(</span>
+<span id="cb7-58"><a aria-label="58"></a>            X, y, <span class="va">self</span>.classes_, <span class="va">self</span>.min_samples_leaf</span>
+<span id="cb7-59"><a aria-label="59"></a>        )</span>
+<span id="cb7-60"><a aria-label="60"></a>        <span class="va">self</span>.n_candidate_splits_ <span class="op">+=</span> n_candidates</span>
+<span id="cb7-61"><a aria-label="61"></a>        <span class="cf">if</span> split <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb7-62"><a aria-label="62"></a>            <span class="cf">return</span> node</span>
+<span id="cb7-63"><a aria-label="63"></a></span>
+<span id="cb7-64"><a aria-label="64"></a>        node.feature, node.threshold, go_left <span class="op">=</span> split</span>
+<span id="cb7-65"><a aria-label="65"></a>        node.left <span class="op">=</span> <span class="va">self</span>._grow_tree(X[go_left], y[go_left], depth <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb7-66"><a aria-label="66"></a>        node.right <span class="op">=</span> <span class="va">self</span>._grow_tree(X[<span class="op">~</span>go_left], y[<span class="op">~</span>go_left], depth <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb7-67"><a aria-label="67"></a>        <span class="cf">return</span> node</span>
+<span id="cb7-68"><a aria-label="68"></a></span>
+<span id="cb7-69"><a aria-label="69"></a>    <span class="kw">def</span> _find_leaf(<span class="va">self</span>, x):</span>
+<span id="cb7-70"><a aria-label="70"></a>        node <span class="op">=</span> <span class="va">self</span>.tree_</span>
+<span id="cb7-71"><a aria-label="71"></a>        <span class="cf">while</span> <span class="kw">not</span> node.is_leaf:</span>
+<span id="cb7-72"><a aria-label="72"></a>            <span class="cf">if</span> x[node.feature] <span class="op">&lt;=</span> node.threshold:</span>
+<span id="cb7-73"><a aria-label="73"></a>                node <span class="op">=</span> node.left</span>
+<span id="cb7-74"><a aria-label="74"></a>            <span class="cf">else</span>:</span>
+<span id="cb7-75"><a aria-label="75"></a>                node <span class="op">=</span> node.right</span>
+<span id="cb7-76"><a aria-label="76"></a>        <span class="cf">return</span> node</span>
+<span id="cb7-77"><a aria-label="77"></a></span>
+<span id="cb7-78"><a aria-label="78"></a>    <span class="kw">def</span> predict_proba(<span class="va">self</span>, X):</span>
+<span id="cb7-79"><a aria-label="79"></a>        X <span class="op">=</span> <span class="va">self</span>._validate_prediction_data(X)</span>
+<span id="cb7-80"><a aria-label="80"></a>        <span class="cf">return</span> np.vstack([<span class="va">self</span>._find_leaf(x).probabilities <span class="cf">for</span> x <span class="kw">in</span> X])</span>
+<span id="cb7-81"><a aria-label="81"></a></span>
+<span id="cb7-82"><a aria-label="82"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, X):</span>
+<span id="cb7-83"><a aria-label="83"></a>        probabilities <span class="op">=</span> <span class="va">self</span>.predict_proba(X)</span>
+<span id="cb7-84"><a aria-label="84"></a>        <span class="cf">return</span> <span class="va">self</span>.classes_[np.argmax(probabilities, axis<span class="op">=</span><span class="dv">1</span>)]</span>
+<span id="cb7-85"><a aria-label="85"></a></span>
+<span id="cb7-86"><a aria-label="86"></a>    <span class="kw">def</span> score(<span class="va">self</span>, X, y):</span>
+<span id="cb7-87"><a aria-label="87"></a>        <span class="cf">return</span> <span class="bu">float</span>(np.mean(<span class="va">self</span>.predict(X) <span class="op">==</span> np.asarray(y)))</span>
+<span id="cb7-88"><a aria-label="88"></a></span>
+<span id="cb7-89"><a aria-label="89"></a>    <span class="kw">def</span> export_text(<span class="va">self</span>, feature_names<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb7-90"><a aria-label="90"></a>        <span class="cf">if</span> feature_names <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb7-91"><a aria-label="91"></a>            feature_names <span class="op">=</span> [<span class="ss">f"x[</span><span class="sc">{</span>j<span class="sc">}</span><span class="ss">]"</span> <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="va">self</span>.n_features_in_)]</span>
+<span id="cb7-92"><a aria-label="92"></a>        <span class="cf">if</span> <span class="bu">len</span>(feature_names) <span class="op">!=</span> <span class="va">self</span>.n_features_in_:</span>
+<span id="cb7-93"><a aria-label="93"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"feature_names must match the number of features"</span>)</span>
+<span id="cb7-94"><a aria-label="94"></a></span>
+<span id="cb7-95"><a aria-label="95"></a>        lines <span class="op">=</span> []</span>
+<span id="cb7-96"><a aria-label="96"></a></span>
+<span id="cb7-97"><a aria-label="97"></a>        <span class="kw">def</span> visit(node, indent):</span>
+<span id="cb7-98"><a aria-label="98"></a>            <span class="cf">if</span> node.is_leaf:</span>
+<span id="cb7-99"><a aria-label="99"></a>                prediction <span class="op">=</span> <span class="va">self</span>.classes_[np.argmax(node.probabilities)]</span>
+<span id="cb7-100"><a aria-label="100"></a>                <span class="cf">if</span> <span class="bu">isinstance</span>(prediction, np.generic):</span>
+<span id="cb7-101"><a aria-label="101"></a>                    prediction <span class="op">=</span> prediction.item()</span>
+<span id="cb7-102"><a aria-label="102"></a>                probabilities <span class="op">=</span> np.<span class="bu">round</span>(node.probabilities, <span class="dv">3</span>)</span>
+<span id="cb7-103"><a aria-label="103"></a>                lines.append(</span>
+<span id="cb7-104"><a aria-label="104"></a>                    <span class="ss">f"</span><span class="sc">{</span>indent<span class="sc">}</span><span class="ss">predict </span><span class="sc">{</span>prediction<span class="sc">!r}</span><span class="ss"> "</span></span>
+<span id="cb7-105"><a aria-label="105"></a>                    <span class="ss">f"(p=</span><span class="sc">{</span>probabilities<span class="sc">}</span><span class="ss">, n=</span><span class="sc">{</span>node<span class="sc">.</span>n_samples<span class="sc">}</span><span class="ss">)"</span></span>
+<span id="cb7-106"><a aria-label="106"></a>                )</span>
+<span id="cb7-107"><a aria-label="107"></a>                <span class="cf">return</span></span>
+<span id="cb7-108"><a aria-label="108"></a></span>
+<span id="cb7-109"><a aria-label="109"></a>            name <span class="op">=</span> feature_names[node.feature]</span>
+<span id="cb7-110"><a aria-label="110"></a>            lines.append(<span class="ss">f"</span><span class="sc">{</span>indent<span class="sc">}</span><span class="ss">if </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss"> &lt;= </span><span class="sc">{</span>node<span class="sc">.</span>threshold<span class="sc">:.3f}</span><span class="ss">:"</span>)</span>
+<span id="cb7-111"><a aria-label="111"></a>            visit(node.left, indent <span class="op">+</span> <span class="st">"    "</span>)</span>
+<span id="cb7-112"><a aria-label="112"></a>            lines.append(<span class="ss">f"</span><span class="sc">{</span>indent<span class="sc">}</span><span class="ss">else:"</span>)</span>
+<span id="cb7-113"><a aria-label="113"></a>            visit(node.right, indent <span class="op">+</span> <span class="st">"    "</span>)</span>
+<span id="cb7-114"><a aria-label="114"></a></span>
+<span id="cb7-115"><a aria-label="115"></a>        visit(<span class="va">self</span>.tree_, <span class="st">""</span>)</span>
+<span id="cb7-116"><a aria-label="116"></a>        <span class="cf">return</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(lines)</span>
+<span id="cb7-117"><a aria-label="117"></a></span>
+<span id="cb7-118"><a aria-label="118"></a>    <span class="kw">def</span> _validate_training_data(<span class="va">self</span>, X, y):</span>
+<span id="cb7-119"><a aria-label="119"></a>        <span class="cf">if</span> X.ndim <span class="op">!=</span> <span class="dv">2</span> <span class="kw">or</span> y.ndim <span class="op">!=</span> <span class="dv">1</span> <span class="kw">or</span> <span class="bu">len</span>(X) <span class="op">!=</span> <span class="bu">len</span>(y):</span>
+<span id="cb7-120"><a aria-label="120"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"X must be 2-D and y must be 1-D with matching rows"</span>)</span>
+<span id="cb7-121"><a aria-label="121"></a>        <span class="cf">if</span> <span class="bu">len</span>(y) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb7-122"><a aria-label="122"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"the training set cannot be empty"</span>)</span>
+<span id="cb7-123"><a aria-label="123"></a>        <span class="cf">if</span> <span class="kw">not</span> np.isfinite(X).<span class="bu">all</span>():</span>
+<span id="cb7-124"><a aria-label="124"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"missing and non-finite feature values are unsupported"</span>)</span>
+<span id="cb7-125"><a aria-label="125"></a>        <span class="cf">if</span> <span class="va">self</span>.max_depth <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> <span class="va">self</span>.max_depth <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb7-126"><a aria-label="126"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"max_depth must be non-negative or None"</span>)</span>
+<span id="cb7-127"><a aria-label="127"></a>        <span class="cf">if</span> <span class="va">self</span>.min_samples_split <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb7-128"><a aria-label="128"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"min_samples_split must be at least 2"</span>)</span>
+<span id="cb7-129"><a aria-label="129"></a>        <span class="cf">if</span> <span class="va">self</span>.min_samples_leaf <span class="op">&lt;</span> <span class="dv">1</span>:</span>
+<span id="cb7-130"><a aria-label="130"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"min_samples_leaf must be at least 1"</span>)</span>
+<span id="cb7-131"><a aria-label="131"></a></span>
+<span id="cb7-132"><a aria-label="132"></a>    <span class="kw">def</span> _validate_prediction_data(<span class="va">self</span>, X):</span>
+<span id="cb7-133"><a aria-label="133"></a>        X <span class="op">=</span> np.asarray(X, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb7-134"><a aria-label="134"></a>        <span class="cf">if</span> X.ndim <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb7-135"><a aria-label="135"></a>            X <span class="op">=</span> X.reshape(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb7-136"><a aria-label="136"></a>        <span class="cf">if</span> X.ndim <span class="op">!=</span> <span class="dv">2</span> <span class="kw">or</span> X.shape[<span class="dv">1</span>] <span class="op">!=</span> <span class="va">self</span>.n_features_in_:</span>
+<span id="cb7-137"><a aria-label="137"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"X has the wrong number of features"</span>)</span>
+<span id="cb7-138"><a aria-label="138"></a>        <span class="cf">if</span> <span class="kw">not</span> np.isfinite(X).<span class="bu">all</span>():</span>
+<span id="cb7-139"><a aria-label="139"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"missing and non-finite feature values are unsupported"</span>)</span>
+<span id="cb7-140"><a aria-label="140"></a>        <span class="cf">return</span> X</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<aside class="notes">
+<p>The code shown by default in the preceding slides is the conceptual core. The defensive validation functions are included so that the notebook fails with clear messages when it receives unsupported input, but they do not need to be discussed in class.</p>
+<p>The implementation supports numeric features, binary threshold splits, and two or more classes. It deliberately omits missing values, categorical features, sample weights, optimized split search, and pruning.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="training-on-palmer-penguins" class="slide level2 smaller">
+<h2>Training on Palmer Penguins</h2>
+<div id="cell-decision-tree-penguins" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb8-2"><a aria-label="2"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb8-3"><a aria-label="3"></a></span>
+<span id="cb8-4"><a aria-label="4"></a>feature_names <span class="op">=</span> [<span class="st">"bill_depth_mm"</span>, <span class="st">"body_mass_g"</span>]</span>
+<span id="cb8-5"><a aria-label="5"></a>penguins_tree <span class="op">=</span> load_penguins()</span>
+<span id="cb8-6"><a aria-label="6"></a>penguins_tree <span class="op">=</span> penguins_tree[</span>
+<span id="cb8-7"><a aria-label="7"></a>    feature_names <span class="op">+</span> [<span class="st">"species"</span>]</span>
+<span id="cb8-8"><a aria-label="8"></a>].dropna().copy()</span>
+<span id="cb8-9"><a aria-label="9"></a></span>
+<span id="cb8-10"><a aria-label="10"></a>X <span class="op">=</span> penguins_tree[feature_names].to_numpy()</span>
+<span id="cb8-11"><a aria-label="11"></a>y <span class="op">=</span> np.where(</span>
+<span id="cb8-12"><a aria-label="12"></a>    penguins_tree[<span class="st">"species"</span>].to_numpy() <span class="op">==</span> <span class="st">"Gentoo"</span>,</span>
+<span id="cb8-13"><a aria-label="13"></a>    <span class="st">"Gentoo"</span>,</span>
+<span id="cb8-14"><a aria-label="14"></a>    <span class="st">"Not Gentoo"</span>,</span>
+<span id="cb8-15"><a aria-label="15"></a>)</span>
+<span id="cb8-16"><a aria-label="16"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb8-17"><a aria-label="17"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>y</span>
+<span id="cb8-18"><a aria-label="18"></a>)</span>
+<span id="cb8-19"><a aria-label="19"></a></span>
+<span id="cb8-20"><a aria-label="20"></a>model <span class="op">=</span> SimpleDecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">2</span>, min_samples_leaf<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb8-21"><a aria-label="21"></a>model.fit(X_train, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="decision-tree-penguins" class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>&lt;__main__.SimpleDecisionTreeClassifier at 0x11a113800&gt;</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>The implementation itself supports multiple classes, but this example retains the lecture’s existing binary question: Gentoo versus non-Gentoo. Using only two features also lets us draw the learned decision regions.</p>
+<p><code>max_depth=2</code> limits the model to two decisions along any path. <code>min_samples_leaf=5</code> prevents a split from creating a leaf with fewer than five training examples.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-did-the-tree-learn" class="slide level2 smaller">
+<h2>What Did the Tree Learn?</h2>
+<div id="decision-tree-penguins-results" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="ss">f"Test accuracy: </span><span class="sc">{</span>model<span class="sc">.</span>score(X_test, y_test)<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb10-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="ss">f"Candidate splits evaluated: </span><span class="sc">{</span>model<span class="sc">.</span>n_candidate_splits_<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="ss">f"Class order: </span><span class="sc">{</span>model<span class="sc">.</span>classes_<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Learned rules:</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb10-5"><a aria-label="5"></a><span class="bu">print</span>(model.export_text(feature_names))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Test accuracy: 1.000
+Candidate splits evaluated: 312
+Class order: ['Gentoo' 'Not Gentoo']
+
+Learned rules:
+
+if bill_depth_mm &lt;= 16.450:
+    if body_mass_g &lt;= 3750.000:
+        predict 'Not Gentoo' (p=[0. 1.], n=5)
+    else:
+        predict 'Gentoo' (p=[1. 0.], n=92)
+else:
+    if body_mass_g &lt;= 5100.000:
+        predict 'Not Gentoo' (p=[0. 1.], n=170)
+    else:
+        predict 'Gentoo' (p=[1. 0.], n=6)</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>The probability vector at every leaf follows the order displayed by <code>model.classes_</code>. With this split of the data, the depth-two model classifies all test examples correctly. This is a result for one small dataset and one train/test split, not a general guarantee.</p>
+<p>The number of evaluated candidates makes the cost of the exhaustive search visible. Optimized libraries can learn the same kind of model much more efficiently.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="decision-regions" class="slide level2 hide-code-toggle">
+<h2>Decision Regions</h2>
+<div id="cell-decision-tree-penguins-boundary" class="cell" data-fig-height="5" data-fig-width="9" data-execution_count="12">
+<details class="code-fold">
+<summary>Show plotting code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="kw">def</span> plot_tree_boundary(X, y, model, feature_names):</span>
+<span id="cb12-2"><a aria-label="2"></a>    x0 <span class="op">=</span> np.linspace(X[:, <span class="dv">0</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="dv">1</span>, X[:, <span class="dv">0</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">1</span>, <span class="dv">300</span>)</span>
+<span id="cb12-3"><a aria-label="3"></a>    x1 <span class="op">=</span> np.linspace(X[:, <span class="dv">1</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="dv">200</span>, X[:, <span class="dv">1</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">200</span>, <span class="dv">300</span>)</span>
+<span id="cb12-4"><a aria-label="4"></a>    xx0, xx1 <span class="op">=</span> np.meshgrid(x0, x1)</span>
+<span id="cb12-5"><a aria-label="5"></a></span>
+<span id="cb12-6"><a aria-label="6"></a>    grid <span class="op">=</span> np.column_stack([xx0.ravel(), xx1.ravel()])</span>
+<span id="cb12-7"><a aria-label="7"></a>    predicted <span class="op">=</span> model.predict(grid)</span>
+<span id="cb12-8"><a aria-label="8"></a>    regions <span class="op">=</span> np.array([</span>
+<span id="cb12-9"><a aria-label="9"></a>        np.flatnonzero(model.classes_ <span class="op">==</span> label)[<span class="dv">0</span>]</span>
+<span id="cb12-10"><a aria-label="10"></a>        <span class="cf">for</span> label <span class="kw">in</span> predicted</span>
+<span id="cb12-11"><a aria-label="11"></a>    ]).reshape(xx0.shape)</span>
+<span id="cb12-12"><a aria-label="12"></a></span>
+<span id="cb12-13"><a aria-label="13"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb12-14"><a aria-label="14"></a>    plt.contourf(xx0, xx1, regions, alpha<span class="op">=</span><span class="fl">0.25</span>, cmap<span class="op">=</span><span class="st">"Set2"</span>)</span>
+<span id="cb12-15"><a aria-label="15"></a>    <span class="cf">for</span> label <span class="kw">in</span> model.classes_:</span>
+<span id="cb12-16"><a aria-label="16"></a>        selected <span class="op">=</span> y <span class="op">==</span> label</span>
+<span id="cb12-17"><a aria-label="17"></a>        plt.scatter(</span>
+<span id="cb12-18"><a aria-label="18"></a>            X[selected, <span class="dv">0</span>], X[selected, <span class="dv">1</span>],</span>
+<span id="cb12-19"><a aria-label="19"></a>            edgecolor<span class="op">=</span><span class="st">"black"</span>, label<span class="op">=</span>label</span>
+<span id="cb12-20"><a aria-label="20"></a>        )</span>
+<span id="cb12-21"><a aria-label="21"></a>    plt.xlabel(feature_names[<span class="dv">0</span>])</span>
+<span id="cb12-22"><a aria-label="22"></a>    plt.ylabel(feature_names[<span class="dv">1</span>])</span>
+<span id="cb12-23"><a aria-label="23"></a>    plt.title(<span class="st">"Decision Tree Classification Regions"</span>)</span>
+<span id="cb12-24"><a aria-label="24"></a>    plt.legend()</span>
+<span id="cb12-25"><a aria-label="25"></a>    plt.tight_layout()</span>
+<span id="cb12-26"><a aria-label="26"></a>    plt.show()</span>
+<span id="cb12-27"><a aria-label="27"></a></span>
+<span id="cb12-28"><a aria-label="28"></a>plot_tree_boundary(X_train, y_train, model, feature_names)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/decision-tree-penguins-boundary-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-revealjs/decision-tree-penguins-boundary-output-1.png" id="decision-tree-penguins-boundary" class="quarto-figure quarto-figure-center" width="856" height="470"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Every decision compares one feature with one threshold. In two dimensions, each decision is therefore a vertical or horizontal line. Combining several decisions produces rectangular classification regions and a non-linear overall decision boundary.</p>
+<p>The plotting function is supporting code. Students can reveal it in the interactive materials, but it does not need to be discussed in class.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="complete-example" class="slide level2">
 <h2>Complete Example</h2>
 <iframe data-external="1" src="https://www.youtube.com/embed/_L39rN6gz7Y" width="889" height="500" title="Decision and Classification Trees, Clearly Explained!!!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
@@ -1038,7 +1346,7 @@ Marcel Turcotte
 <ul>
 <li>All the examples in a given node belong to the <strong>same class</strong>.</li>
 <li>Depth of the tree would exceed <strong>max_depth</strong>.</li>
-<li>Number of examples in the node is <strong>min_sample_split</strong> or less.</li>
+<li>Number of examples in the node is less than <strong>min_samples_split</strong>.</li>
 <li>None of the splits decreases impurity sufficiently (<strong>min_impurity_decrease</strong>).</li>
 <li>See documentation for other criteria.</li>
 </ul>
@@ -1059,7 +1367,7 @@ Marcel Turcotte
 <h2>Large Trees</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="../../assets/images/stiglic-2012cs_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="../../assets/images/stiglic-2012cs_2.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
+<p><a href="../../assets/images/stiglic-2012cs_2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="../../assets/images/stiglic-2012cs_2.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
 </figure>
 </div>
 
@@ -1068,113 +1376,72 @@ Marcel Turcotte
 </div></aside></section>
 <section id="small-changes-to-the-dataset" class="slide level2 scrollable">
 <h2>Small Changes to the Dataset</h2>
-<div id="10e8fece" class="cell" data-execution_count="6">
+<div id="6dee0174" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span>
-<span id="cb5-2"><a aria-label="2"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report, accuracy_score</span>
-<span id="cb5-3"><a aria-label="3"></a></span>
-<span id="cb5-4"><a aria-label="4"></a><span class="co"># Loading the dataset</span></span>
-<span id="cb5-5"><a aria-label="5"></a></span>
-<span id="cb5-6"><a aria-label="6"></a>X, y <span class="op">=</span> load_penguins(return_X_y <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb5-7"><a aria-label="7"></a></span>
-<span id="cb5-8"><a aria-label="8"></a>target_names <span class="op">=</span> [<span class="st">'Adelie'</span>,<span class="st">'Chinstrap'</span>,<span class="st">'Gentoo'</span>]</span>
-<span id="cb5-9"><a aria-label="9"></a></span>
-<span id="cb5-10"><a aria-label="10"></a><span class="co"># Split the dataset into training and testing sets</span></span>
-<span id="cb5-11"><a aria-label="11"></a></span>
-<span id="cb5-12"><a aria-label="12"></a><span class="cf">for</span> seed <span class="kw">in</span> (<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">90</span>, <span class="dv">96</span>, <span class="dv">99</span>, <span class="dv">2</span>):</span>
-<span id="cb5-13"><a aria-label="13"></a></span>
-<span id="cb5-14"><a aria-label="14"></a>  <span class="bu">print</span>(<span class="ss">f'Seed: </span><span class="sc">{</span>seed<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb5-15"><a aria-label="15"></a></span>
-<span id="cb5-16"><a aria-label="16"></a>  <span class="co"># Create new training and test sets based on a different random seed</span></span>
-<span id="cb5-17"><a aria-label="17"></a></span>
-<span id="cb5-18"><a aria-label="18"></a>  X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span>seed)</span>
-<span id="cb5-19"><a aria-label="19"></a></span>
-<span id="cb5-20"><a aria-label="20"></a>  <span class="co"># Creating a new classifier</span></span>
-<span id="cb5-21"><a aria-label="21"></a></span>
-<span id="cb5-22"><a aria-label="22"></a>  clf <span class="op">=</span> tree.DecisionTreeClassifier(random_state<span class="op">=</span>seed)</span>
-<span id="cb5-23"><a aria-label="23"></a></span>
-<span id="cb5-24"><a aria-label="24"></a>  <span class="co"># Training</span></span>
-<span id="cb5-25"><a aria-label="25"></a></span>
-<span id="cb5-26"><a aria-label="26"></a>  clf.fit(X_train, y_train)</span>
-<span id="cb5-27"><a aria-label="27"></a></span>
-<span id="cb5-28"><a aria-label="28"></a>  <span class="co"># Make predictions</span></span>
-<span id="cb5-29"><a aria-label="29"></a></span>
-<span id="cb5-30"><a aria-label="30"></a>  y_pred <span class="op">=</span> clf.predict(X_test)</span>
-<span id="cb5-31"><a aria-label="31"></a></span>
-<span id="cb5-32"><a aria-label="32"></a>  <span class="co"># Plotting the tree</span></span>
-<span id="cb5-33"><a aria-label="33"></a></span>
-<span id="cb5-34"><a aria-label="34"></a>  tree.plot_tree(clf, </span>
-<span id="cb5-35"><a aria-label="35"></a>               feature_names <span class="op">=</span> X.columns,</span>
-<span id="cb5-36"><a aria-label="36"></a>               class_names <span class="op">=</span> target_names,</span>
-<span id="cb5-37"><a aria-label="37"></a>               filled <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb5-38"><a aria-label="38"></a>  plt.show()</span>
-<span id="cb5-39"><a aria-label="39"></a></span>
-<span id="cb5-40"><a aria-label="40"></a>  <span class="co"># Evaluating the model</span></span>
-<span id="cb5-41"><a aria-label="41"></a></span>
-<span id="cb5-42"><a aria-label="42"></a>  accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
-<span id="cb5-43"><a aria-label="43"></a></span>
-<span id="cb5-44"><a aria-label="44"></a>  report <span class="op">=</span> classification_report(y_test, y_pred, target_names<span class="op">=</span>target_names)</span>
-<span id="cb5-45"><a aria-label="45"></a></span>
-<span id="cb5-46"><a aria-label="46"></a>  <span class="bu">print</span>(<span class="ss">f'Accuracy: </span><span class="sc">{</span>accuracy<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
-<span id="cb5-47"><a aria-label="47"></a>  <span class="bu">print</span>(<span class="st">'Classification Report:'</span>)</span>
-<span id="cb5-48"><a aria-label="48"></a>  <span class="bu">print</span>(report)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="im">from</span> sklearn <span class="im">import</span> tree</span>
+<span id="cb13-2"><a aria-label="2"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report, accuracy_score</span>
+<span id="cb13-3"><a aria-label="3"></a></span>
+<span id="cb13-4"><a aria-label="4"></a><span class="co"># Loading the dataset</span></span>
+<span id="cb13-5"><a aria-label="5"></a></span>
+<span id="cb13-6"><a aria-label="6"></a>X, y <span class="op">=</span> load_penguins(return_X_y <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb13-7"><a aria-label="7"></a></span>
+<span id="cb13-8"><a aria-label="8"></a>target_names <span class="op">=</span> [<span class="st">'Adelie'</span>,<span class="st">'Chinstrap'</span>,<span class="st">'Gentoo'</span>]</span>
+<span id="cb13-9"><a aria-label="9"></a></span>
+<span id="cb13-10"><a aria-label="10"></a><span class="co"># Split the dataset into training and testing sets</span></span>
+<span id="cb13-11"><a aria-label="11"></a></span>
+<span id="cb13-12"><a aria-label="12"></a><span class="cf">for</span> seed <span class="kw">in</span> (<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">90</span>, <span class="dv">96</span>, <span class="dv">99</span>, <span class="dv">2</span>):</span>
+<span id="cb13-13"><a aria-label="13"></a></span>
+<span id="cb13-14"><a aria-label="14"></a>  <span class="bu">print</span>(<span class="ss">f'Seed: </span><span class="sc">{</span>seed<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb13-15"><a aria-label="15"></a></span>
+<span id="cb13-16"><a aria-label="16"></a>  <span class="co"># Create new training and test sets based on a different random seed</span></span>
+<span id="cb13-17"><a aria-label="17"></a></span>
+<span id="cb13-18"><a aria-label="18"></a>  X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb13-19"><a aria-label="19"></a>      X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span>seed, stratify<span class="op">=</span>y</span>
+<span id="cb13-20"><a aria-label="20"></a>  )</span>
+<span id="cb13-21"><a aria-label="21"></a></span>
+<span id="cb13-22"><a aria-label="22"></a>  <span class="co"># Creating a new classifier</span></span>
+<span id="cb13-23"><a aria-label="23"></a></span>
+<span id="cb13-24"><a aria-label="24"></a>  clf <span class="op">=</span> tree.DecisionTreeClassifier(</span>
+<span id="cb13-25"><a aria-label="25"></a>      criterion<span class="op">=</span><span class="st">"entropy"</span>, random_state<span class="op">=</span>seed</span>
+<span id="cb13-26"><a aria-label="26"></a>  )</span>
+<span id="cb13-27"><a aria-label="27"></a></span>
+<span id="cb13-28"><a aria-label="28"></a>  <span class="co"># Training</span></span>
+<span id="cb13-29"><a aria-label="29"></a></span>
+<span id="cb13-30"><a aria-label="30"></a>  clf.fit(X_train, y_train)</span>
+<span id="cb13-31"><a aria-label="31"></a></span>
+<span id="cb13-32"><a aria-label="32"></a>  <span class="co"># Make predictions</span></span>
+<span id="cb13-33"><a aria-label="33"></a></span>
+<span id="cb13-34"><a aria-label="34"></a>  y_pred <span class="op">=</span> clf.predict(X_test)</span>
+<span id="cb13-35"><a aria-label="35"></a></span>
+<span id="cb13-36"><a aria-label="36"></a>  <span class="co"># Plotting the tree</span></span>
+<span id="cb13-37"><a aria-label="37"></a></span>
+<span id="cb13-38"><a aria-label="38"></a>  tree.plot_tree(clf, </span>
+<span id="cb13-39"><a aria-label="39"></a>               feature_names <span class="op">=</span> X.columns,</span>
+<span id="cb13-40"><a aria-label="40"></a>               class_names <span class="op">=</span> target_names,</span>
+<span id="cb13-41"><a aria-label="41"></a>               filled <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb13-42"><a aria-label="42"></a>  plt.show()</span>
+<span id="cb13-43"><a aria-label="43"></a></span>
+<span id="cb13-44"><a aria-label="44"></a>  <span class="co"># Evaluating the model</span></span>
+<span id="cb13-45"><a aria-label="45"></a></span>
+<span id="cb13-46"><a aria-label="46"></a>  accuracy <span class="op">=</span> accuracy_score(y_test, y_pred)</span>
+<span id="cb13-47"><a aria-label="47"></a></span>
+<span id="cb13-48"><a aria-label="48"></a>  report <span class="op">=</span> classification_report(y_test, y_pred, target_names<span class="op">=</span>target_names)</span>
+<span id="cb13-49"><a aria-label="49"></a></span>
+<span id="cb13-50"><a aria-label="50"></a>  <span class="bu">print</span>(<span class="ss">f'Accuracy: </span><span class="sc">{</span>accuracy<span class="sc">:.2f}</span><span class="ss">'</span>)</span>
+<span id="cb13-51"><a aria-label="51"></a>  <span class="bu">print</span>(<span class="st">'Classification Report:'</span>)</span>
+<span id="cb13-52"><a aria-label="52"></a>  <span class="bu">print</span>(report)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 
-</section>
-<section id="small-changes-to-the-dataset-output" class="slide level2 scrollable output-location-slide"><h2>Small Changes to the Dataset</h2><div class="cell output-location-slide" data-execution_count="6">
+</section><section id="small-changes-to-the-dataset-output" class="slide level2 scrollable output-location-slide"><h2>Small Changes to the Dataset</h2><div class="cell output-location-slide" data-execution_count="13">
 <div class="cell-output cell-output-stdout">
 <pre><code>Seed: 4</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-6-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="slides_files/figure-revealjs/cell-6-output-2.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Accuracy: 1.00
-Classification Report:
-              precision    recall  f1-score   support
-
-      Adelie       1.00      1.00      1.00        36
-   Chinstrap       1.00      1.00      1.00        17
-      Gentoo       1.00      1.00      1.00        16
-
-    accuracy                           1.00        69
-   macro avg       1.00      1.00      1.00        69
-weighted avg       1.00      1.00      1.00        69
-
-Seed: 7</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="slides_files/figure-revealjs/cell-6-output-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides_files/figure-revealjs/cell-6-output-4.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Accuracy: 0.91
-Classification Report:
-              precision    recall  f1-score   support
-
-      Adelie       0.96      0.83      0.89        30
-   Chinstrap       0.83      1.00      0.91        15
-      Gentoo       0.92      0.96      0.94        24
-
-    accuracy                           0.91        69
-   macro avg       0.90      0.93      0.91        69
-weighted avg       0.92      0.91      0.91        69
-
-Seed: 90</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="slides_files/figure-revealjs/cell-6-output-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="slides_files/figure-revealjs/cell-6-output-6.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-13-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="slides_files/figure-revealjs/cell-13-output-2.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
 </figure>
 </div>
 </div>
@@ -1183,42 +1450,42 @@ Seed: 90</code></pre>
 Classification Report:
               precision    recall  f1-score   support
 
-      Adelie       0.93      1.00      0.96        26
-   Chinstrap       0.94      0.94      0.94        16
-      Gentoo       1.00      0.93      0.96        27
+      Adelie       1.00      0.90      0.95        30
+   Chinstrap       0.88      1.00      0.93        14
+      Gentoo       0.96      1.00      0.98        25
 
     accuracy                           0.96        69
-   macro avg       0.96      0.95      0.95        69
+   macro avg       0.95      0.97      0.95        69
 weighted avg       0.96      0.96      0.96        69
 
-Seed: 96</code></pre>
+Seed: 7</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-6-output-8.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-revealjs/cell-6-output-8.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-13-output-4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides_files/figure-revealjs/cell-13-output-4.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Accuracy: 0.90
+<pre><code>Accuracy: 0.94
 Classification Report:
               precision    recall  f1-score   support
 
-      Adelie       0.83      0.97      0.89        30
-   Chinstrap       1.00      0.67      0.80        15
-      Gentoo       0.96      0.96      0.96        24
+      Adelie       0.93      0.93      0.93        30
+   Chinstrap       0.88      1.00      0.93        14
+      Gentoo       1.00      0.92      0.96        25
 
-    accuracy                           0.90        69
-   macro avg       0.93      0.86      0.88        69
-weighted avg       0.91      0.90      0.90        69
+    accuracy                           0.94        69
+   macro avg       0.94      0.95      0.94        69
+weighted avg       0.95      0.94      0.94        69
 
-Seed: 99</code></pre>
+Seed: 90</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-6-output-10.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-revealjs/cell-6-output-10.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-13-output-6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="slides_files/figure-revealjs/cell-13-output-6.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
 </figure>
 </div>
 </div>
@@ -1227,43 +1494,504 @@ Seed: 99</code></pre>
 Classification Report:
               precision    recall  f1-score   support
 
-      Adelie       1.00      0.97      0.98        31
-   Chinstrap       1.00      1.00      1.00        12
-      Gentoo       0.96      1.00      0.98        26
+      Adelie       0.97      1.00      0.98        30
+   Chinstrap       1.00      1.00      1.00        14
+      Gentoo       1.00      0.96      0.98        25
 
     accuracy                           0.99        69
    macro avg       0.99      0.99      0.99        69
 weighted avg       0.99      0.99      0.99        69
+
+Seed: 96</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-13-output-8.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides_files/figure-revealjs/cell-13-output-8.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy: 0.96
+Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.97      0.93      0.95        30
+   Chinstrap       0.88      1.00      0.93        14
+      Gentoo       1.00      0.96      0.98        25
+
+    accuracy                           0.96        69
+   macro avg       0.95      0.96      0.95        69
+weighted avg       0.96      0.96      0.96        69
+
+Seed: 99</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-13-output-10.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="slides_files/figure-revealjs/cell-13-output-10.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy: 0.93
+Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.96      0.90      0.93        30
+   Chinstrap       0.81      0.93      0.87        14
+      Gentoo       0.96      0.96      0.96        25
+
+    accuracy                           0.93        69
+   macro avg       0.91      0.93      0.92        69
+weighted avg       0.93      0.93      0.93        69
 
 Seed: 2</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-6-output-12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-revealjs/cell-6-output-12.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-13-output-12.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-revealjs/cell-13-output-12.png" class="quarto-figure quarto-figure-center" width="763" height="389"></a></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Accuracy: 0.91
+<pre><code>Accuracy: 0.97
 Classification Report:
               precision    recall  f1-score   support
 
-      Adelie       0.93      0.87      0.90        30
-   Chinstrap       0.80      0.80      0.80        10
-      Gentoo       0.94      1.00      0.97        29
+      Adelie       1.00      0.93      0.97        30
+   Chinstrap       0.88      1.00      0.93        14
+      Gentoo       1.00      1.00      1.00        25
 
-    accuracy                           0.91        69
-   macro avg       0.89      0.89      0.89        69
-weighted avg       0.91      0.91      0.91        69
+    accuracy                           0.97        69
+   macro avg       0.96      0.98      0.97        69
+weighted avg       0.97      0.97      0.97        69
 </code></pre>
 </div>
-</div></section><section id="summary" class="slide level2">
+</div></section></section>
+<section>
+<section id="knn" class="title-slide slide level1 center">
+<h1>KNN</h1>
+
+</section>
+<section id="k-nearest-neighbours-knn" class="slide level2 scrollable">
+<h2>k-nearest neighbours (KNN)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://scikit-learn.org/stable/_images/sphx_glr_plot_classification_001.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="https://scikit-learn.org/stable/_images/sphx_glr_plot_classification_001.png" class="quarto-figure quarto-figure-center" height="275"></a></p>
+</figure>
+</div>
+<ul>
+<li class="fragment"><strong>Instance-based</strong>: the training examples are the model.</li>
+<li class="fragment"><strong>Non-parametric</strong>: the model does not have a fixed number of learned parameters.</li>
+<li class="fragment">Prediction assumes that nearby examples tend to have similar targets.</li>
+</ul>
+
+<aside class="notes">
+<p>KNN provides a useful contrast with decision trees. A decision tree constructs a hierarchy of rules during learning. KNN constructs no rules and estimates no coefficients: it retains the examples and postpones most computation until a prediction is requested.</p>
+<p>Non-parametric does not mean assumption-free. KNN assumes that the chosen distance makes proximity meaningful and that nearby examples tend to have similar targets.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Attribution:</strong> <a href="https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html">Nearest Neighbors Classification</a>, scikit-learn.</p>
+</div></aside></section>
+<section id="learning-store-the-data" class="slide level2">
+<h2>Learning: Store the Data</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a><span class="kw">def</span> fit(<span class="va">self</span>, X, y):</span>
+<span id="cb21-2"><a aria-label="2"></a>    <span class="va">self</span>.X_train_ <span class="op">=</span> X.copy()</span>
+<span id="cb21-3"><a aria-label="3"></a>    <span class="va">self</span>.y_train_ <span class="op">=</span> y.copy()</span>
+<span id="cb21-4"><a aria-label="4"></a>    <span class="cf">return</span> <span class="va">self</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+<aside class="notes">
+<p>KNN is often called a <em>lazy learning</em> algorithm. The classifier’s learning step is reduced to storing the training set. Retaining a copy requires <span class="math inline">\(\mathcal{O}(ND)\)</span> memory for <span class="math inline">\(N\)</span> examples with <span class="math inline">\(D\)</span> features.</p>
+<p>Data preparation and hyperparameter selection can still involve learning. For example, a standardization step estimates means and standard deviations from the training data. The point here is that the KNN classifier itself does not fit model parameters.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>No tree is constructed and no coefficients are estimated.</p>
+</div></aside></section>
+<section id="finding-the-nearest-neighbours" class="slide level2 smaller">
+<h2>Finding the Nearest Neighbours</h2>
+<p>For a query <span class="math inline">\(x\)</span> and training example <span class="math inline">\(x_i\)</span>, Euclidean distance is</p>
+<p><span class="math display">\[
+d(x,x_i)=\sqrt{\sum_{j=1}^{D}\left(x^{(j)}-x_i^{(j)}\right)^2}.
+\]</span></p>
+<div id="knn-nearest-neighbors" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb22-2"><a aria-label="2"></a></span>
+<span id="cb22-3"><a aria-label="3"></a><span class="kw">def</span> nearest_neighbors(X_train, x, n_neighbors):</span>
+<span id="cb22-4"><a aria-label="4"></a>    distances <span class="op">=</span> np.sqrt(np.<span class="bu">sum</span>((X_train <span class="op">-</span> x) <span class="op">**</span> <span class="dv">2</span>, axis<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb22-5"><a aria-label="5"></a>    indices <span class="op">=</span> np.argsort(distances, kind<span class="op">=</span><span class="st">"stable"</span>)[:n_neighbors]</span>
+<span id="cb22-6"><a aria-label="6"></a>    <span class="cf">return</span> indices, distances[indices]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<aside class="notes">
+<p>Computing all distances costs <span class="math inline">\(\mathcal{O}(ND)\)</span> and sorting them costs <span class="math inline">\(\mathcal{O}(N\log N)\)</span>. A production implementation can select the nearest items without a complete sort and can sometimes use structures such as a kd-tree or ball tree.</p>
+<p>The stable sort gives deterministic behaviour when two examples are at the same distance. This is a simple implementation choice rather than an essential part of KNN.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>The straightforward full-sort implementation costs <span class="math inline">\(\mathcal{O}(ND+N\log N)\)</span> per query.</p>
+</div></aside></section>
+<section id="voting-and-averaging" class="slide level2">
+<h2>Voting and Averaging</h2>
+<p>After selecting the <span class="math inline">\(k\)</span> nearest examples:</p>
+<ul>
+<li class="fragment"><strong>Classification:</strong> each neighbour votes for its class.</li>
+<li class="fragment"><strong>Regression:</strong> average the neighbours’ numerical targets.</li>
+<li class="fragment"><strong>Uniform weights:</strong> every neighbour has the same influence.</li>
+<li class="fragment"><strong>Distance weights:</strong> closer neighbours receive weight <span class="math inline">\(w_i=1/d_i\)</span>.</li>
+</ul>
+<p>For distance-weighted regression,</p>
+<p><span class="math display">\[
+\hat y(x)=\frac{\sum_{i=1}^{k}w_i y_i}{\sum_{i=1}^{k}w_i}.
+\]</span></p>
+<aside class="notes">
+<p>The neighbourhood search is identical for classification and regression; only the aggregation step changes. Classification totals votes by class, whereas regression averages numerical values.</p>
+<p>Distance weighting lets the closest examples have greater influence. If a query exactly matches one or more training examples, the implementation lets only those exact matches vote. This avoids division by zero and has an intuitive interpretation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="voting-in-python" class="slide level2 smaller">
+<h2>Voting in Python</h2>
+<div id="knn-voting" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="kw">def</span> voting_weights(distances, mode):</span>
+<span id="cb23-2"><a aria-label="2"></a>    <span class="cf">if</span> mode <span class="op">==</span> <span class="st">"uniform"</span>:</span>
+<span id="cb23-3"><a aria-label="3"></a>        <span class="cf">return</span> np.ones(<span class="bu">len</span>(distances))</span>
+<span id="cb23-4"><a aria-label="4"></a></span>
+<span id="cb23-5"><a aria-label="5"></a>    exact_matches <span class="op">=</span> distances <span class="op">==</span> <span class="dv">0</span></span>
+<span id="cb23-6"><a aria-label="6"></a>    <span class="cf">if</span> np.<span class="bu">any</span>(exact_matches):</span>
+<span id="cb23-7"><a aria-label="7"></a>        <span class="cf">return</span> exact_matches.astype(<span class="bu">float</span>)</span>
+<span id="cb23-8"><a aria-label="8"></a></span>
+<span id="cb23-9"><a aria-label="9"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> distances</span>
+<span id="cb23-10"><a aria-label="10"></a></span>
+<span id="cb23-11"><a aria-label="11"></a><span class="kw">def</span> vote_probabilities(labels, weights, classes):</span>
+<span id="cb23-12"><a aria-label="12"></a>    scores <span class="op">=</span> np.array([</span>
+<span id="cb23-13"><a aria-label="13"></a>        np.<span class="bu">sum</span>(weights[labels <span class="op">==</span> label])</span>
+<span id="cb23-14"><a aria-label="14"></a>        <span class="cf">for</span> label <span class="kw">in</span> classes</span>
+<span id="cb23-15"><a aria-label="15"></a>    ])</span>
+<span id="cb23-16"><a aria-label="16"></a>    <span class="cf">return</span> scores <span class="op">/</span> np.<span class="bu">sum</span>(scores)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<aside class="notes">
+<p>The comparisons <code>labels == label</code> select the neighbours belonging to each class. Their weights are added and then normalized so that the resulting scores sum to one.</p>
+<p>With uniform weights, these are simply class proportions among the neighbours. With distance weights, they are normalized weighted votes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="complete-implementation-1" class="slide level2 hide-code-toggle scrollable smaller">
+<h2>Complete Implementation</h2>
+<p><a href="knn_classifier.html">Read the tutorial</a> · <a href="knn_classifier.ipynb">Download the notebook</a> · <a href="https://colab.research.google.com/github/turcotte/csi-4106/blob/gh-pages/lectures/03/knn_classifier.ipynb">Open in Colab</a></p>
+<div id="knn-complete-implementation" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Show complete implementation</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a><span class="kw">class</span> SimpleKNeighborsClassifier:</span>
+<span id="cb24-2"><a aria-label="2"></a>    <span class="co">"""A didactic classifier with a small scikit-learn-like interface."""</span></span>
+<span id="cb24-3"><a aria-label="3"></a></span>
+<span id="cb24-4"><a aria-label="4"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, n_neighbors<span class="op">=</span><span class="dv">5</span>, weights<span class="op">=</span><span class="st">"uniform"</span>):</span>
+<span id="cb24-5"><a aria-label="5"></a>        <span class="va">self</span>.n_neighbors <span class="op">=</span> n_neighbors</span>
+<span id="cb24-6"><a aria-label="6"></a>        <span class="va">self</span>.weights <span class="op">=</span> weights</span>
+<span id="cb24-7"><a aria-label="7"></a></span>
+<span id="cb24-8"><a aria-label="8"></a>    <span class="kw">def</span> fit(<span class="va">self</span>, X, y):</span>
+<span id="cb24-9"><a aria-label="9"></a>        X <span class="op">=</span> np.asarray(X, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb24-10"><a aria-label="10"></a>        y <span class="op">=</span> np.asarray(y)</span>
+<span id="cb24-11"><a aria-label="11"></a>        <span class="va">self</span>._validate_training_data(X, y)</span>
+<span id="cb24-12"><a aria-label="12"></a></span>
+<span id="cb24-13"><a aria-label="13"></a>        <span class="va">self</span>.X_train_ <span class="op">=</span> X.copy()</span>
+<span id="cb24-14"><a aria-label="14"></a>        <span class="va">self</span>.y_train_ <span class="op">=</span> y.copy()</span>
+<span id="cb24-15"><a aria-label="15"></a>        <span class="va">self</span>.classes_ <span class="op">=</span> np.unique(y)</span>
+<span id="cb24-16"><a aria-label="16"></a>        <span class="va">self</span>.n_features_in_ <span class="op">=</span> X.shape[<span class="dv">1</span>]</span>
+<span id="cb24-17"><a aria-label="17"></a>        <span class="cf">return</span> <span class="va">self</span></span>
+<span id="cb24-18"><a aria-label="18"></a></span>
+<span id="cb24-19"><a aria-label="19"></a>    <span class="kw">def</span> _predict_proba_one(<span class="va">self</span>, x):</span>
+<span id="cb24-20"><a aria-label="20"></a>        indices, distances <span class="op">=</span> nearest_neighbors(</span>
+<span id="cb24-21"><a aria-label="21"></a>            <span class="va">self</span>.X_train_, x, <span class="va">self</span>.n_neighbors</span>
+<span id="cb24-22"><a aria-label="22"></a>        )</span>
+<span id="cb24-23"><a aria-label="23"></a>        labels <span class="op">=</span> <span class="va">self</span>.y_train_[indices]</span>
+<span id="cb24-24"><a aria-label="24"></a>        weights <span class="op">=</span> voting_weights(distances, <span class="va">self</span>.weights)</span>
+<span id="cb24-25"><a aria-label="25"></a>        <span class="cf">return</span> vote_probabilities(labels, weights, <span class="va">self</span>.classes_)</span>
+<span id="cb24-26"><a aria-label="26"></a></span>
+<span id="cb24-27"><a aria-label="27"></a>    <span class="kw">def</span> predict_proba(<span class="va">self</span>, X):</span>
+<span id="cb24-28"><a aria-label="28"></a>        X <span class="op">=</span> <span class="va">self</span>._validate_prediction_data(X)</span>
+<span id="cb24-29"><a aria-label="29"></a>        <span class="cf">return</span> np.vstack([<span class="va">self</span>._predict_proba_one(x) <span class="cf">for</span> x <span class="kw">in</span> X])</span>
+<span id="cb24-30"><a aria-label="30"></a></span>
+<span id="cb24-31"><a aria-label="31"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, X):</span>
+<span id="cb24-32"><a aria-label="32"></a>        probabilities <span class="op">=</span> <span class="va">self</span>.predict_proba(X)</span>
+<span id="cb24-33"><a aria-label="33"></a>        <span class="cf">return</span> <span class="va">self</span>.classes_[np.argmax(probabilities, axis<span class="op">=</span><span class="dv">1</span>)]</span>
+<span id="cb24-34"><a aria-label="34"></a></span>
+<span id="cb24-35"><a aria-label="35"></a>    <span class="kw">def</span> score(<span class="va">self</span>, X, y):</span>
+<span id="cb24-36"><a aria-label="36"></a>        <span class="cf">return</span> <span class="bu">float</span>(np.mean(<span class="va">self</span>.predict(X) <span class="op">==</span> np.asarray(y)))</span>
+<span id="cb24-37"><a aria-label="37"></a></span>
+<span id="cb24-38"><a aria-label="38"></a>    <span class="kw">def</span> _validate_training_data(<span class="va">self</span>, X, y):</span>
+<span id="cb24-39"><a aria-label="39"></a>        <span class="cf">if</span> X.ndim <span class="op">!=</span> <span class="dv">2</span> <span class="kw">or</span> y.ndim <span class="op">!=</span> <span class="dv">1</span> <span class="kw">or</span> <span class="bu">len</span>(X) <span class="op">!=</span> <span class="bu">len</span>(y):</span>
+<span id="cb24-40"><a aria-label="40"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(</span>
+<span id="cb24-41"><a aria-label="41"></a>                <span class="st">"X must be 2-D and y must be 1-D with matching rows"</span></span>
+<span id="cb24-42"><a aria-label="42"></a>            )</span>
+<span id="cb24-43"><a aria-label="43"></a>        <span class="cf">if</span> <span class="bu">len</span>(y) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb24-44"><a aria-label="44"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"the training set cannot be empty"</span>)</span>
+<span id="cb24-45"><a aria-label="45"></a>        <span class="cf">if</span> <span class="kw">not</span> np.isfinite(X).<span class="bu">all</span>():</span>
+<span id="cb24-46"><a aria-label="46"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(</span>
+<span id="cb24-47"><a aria-label="47"></a>                <span class="st">"missing and non-finite feature values are unsupported"</span></span>
+<span id="cb24-48"><a aria-label="48"></a>            )</span>
+<span id="cb24-49"><a aria-label="49"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(<span class="va">self</span>.n_neighbors, (<span class="bu">int</span>, np.integer)):</span>
+<span id="cb24-50"><a aria-label="50"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"n_neighbors must be an integer"</span>)</span>
+<span id="cb24-51"><a aria-label="51"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="dv">1</span> <span class="op">&lt;=</span> <span class="va">self</span>.n_neighbors <span class="op">&lt;=</span> <span class="bu">len</span>(y):</span>
+<span id="cb24-52"><a aria-label="52"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"n_neighbors must be between 1 and len(y)"</span>)</span>
+<span id="cb24-53"><a aria-label="53"></a>        <span class="cf">if</span> <span class="va">self</span>.weights <span class="kw">not</span> <span class="kw">in</span> {<span class="st">"uniform"</span>, <span class="st">"distance"</span>}:</span>
+<span id="cb24-54"><a aria-label="54"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"weights must be 'uniform' or 'distance'"</span>)</span>
+<span id="cb24-55"><a aria-label="55"></a></span>
+<span id="cb24-56"><a aria-label="56"></a>    <span class="kw">def</span> _validate_prediction_data(<span class="va">self</span>, X):</span>
+<span id="cb24-57"><a aria-label="57"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">hasattr</span>(<span class="va">self</span>, <span class="st">"X_train_"</span>):</span>
+<span id="cb24-58"><a aria-label="58"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"call fit before making predictions"</span>)</span>
+<span id="cb24-59"><a aria-label="59"></a>        X <span class="op">=</span> np.asarray(X, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb24-60"><a aria-label="60"></a>        <span class="cf">if</span> X.ndim <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb24-61"><a aria-label="61"></a>            X <span class="op">=</span> X.reshape(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb24-62"><a aria-label="62"></a>        <span class="cf">if</span> X.ndim <span class="op">!=</span> <span class="dv">2</span> <span class="kw">or</span> X.shape[<span class="dv">1</span>] <span class="op">!=</span> <span class="va">self</span>.n_features_in_:</span>
+<span id="cb24-63"><a aria-label="63"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"X has the wrong number of features"</span>)</span>
+<span id="cb24-64"><a aria-label="64"></a>        <span class="cf">if</span> <span class="kw">not</span> np.isfinite(X).<span class="bu">all</span>():</span>
+<span id="cb24-65"><a aria-label="65"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(</span>
+<span id="cb24-66"><a aria-label="66"></a>                <span class="st">"missing and non-finite feature values are unsupported"</span></span>
+<span id="cb24-67"><a aria-label="67"></a>            )</span>
+<span id="cb24-68"><a aria-label="68"></a>        <span class="cf">return</span> X</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<aside class="notes">
+<p>The student-facing algorithm is contained in <code>fit</code>, <code>_predict_proba_one</code>, and the three helper functions on the preceding slides. Validation is included so the notebook produces clear messages for unsupported inputs, but it need not be discussed in class.</p>
+<p>When weighted votes are tied, <code>np.argmax</code> chooses the first class in the sorted <code>classes_</code> array. Production software may offer different tie-breaking rules.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="knn-on-palmer-penguins" class="slide level2 smaller">
+<h2>KNN on Palmer Penguins</h2>
+<div id="knn-penguins" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a aria-label="1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb25-2"><a aria-label="2"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb25-3"><a aria-label="3"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb25-4"><a aria-label="4"></a></span>
+<span id="cb25-5"><a aria-label="5"></a>knn_features <span class="op">=</span> [<span class="st">"bill_length_mm"</span>, <span class="st">"bill_depth_mm"</span>]</span>
+<span id="cb25-6"><a aria-label="6"></a>penguins_knn <span class="op">=</span> load_penguins()</span>
+<span id="cb25-7"><a aria-label="7"></a>penguins_knn <span class="op">=</span> penguins_knn[</span>
+<span id="cb25-8"><a aria-label="8"></a>    knn_features <span class="op">+</span> [<span class="st">"species"</span>]</span>
+<span id="cb25-9"><a aria-label="9"></a>].dropna().copy()</span>
+<span id="cb25-10"><a aria-label="10"></a></span>
+<span id="cb25-11"><a aria-label="11"></a>X_knn <span class="op">=</span> penguins_knn[knn_features].to_numpy()</span>
+<span id="cb25-12"><a aria-label="12"></a>y_knn <span class="op">=</span> penguins_knn[<span class="st">"species"</span>].to_numpy()</span>
+<span id="cb25-13"><a aria-label="13"></a>X_knn_train, X_knn_test, y_knn_train, y_knn_test <span class="op">=</span> train_test_split(</span>
+<span id="cb25-14"><a aria-label="14"></a>    X_knn, y_knn, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>y_knn</span>
+<span id="cb25-15"><a aria-label="15"></a>)</span>
+<span id="cb25-16"><a aria-label="16"></a></span>
+<span id="cb25-17"><a aria-label="17"></a>knn_scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb25-18"><a aria-label="18"></a>X_knn_train_scaled <span class="op">=</span> knn_scaler.fit_transform(X_knn_train)</span>
+<span id="cb25-19"><a aria-label="19"></a>X_knn_test_scaled <span class="op">=</span> knn_scaler.transform(X_knn_test)</span>
+<span id="cb25-20"><a aria-label="20"></a></span>
+<span id="cb25-21"><a aria-label="21"></a><span class="cf">for</span> mode <span class="kw">in</span> (<span class="st">"uniform"</span>, <span class="st">"distance"</span>):</span>
+<span id="cb25-22"><a aria-label="22"></a>    knn <span class="op">=</span> SimpleKNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">5</span>, weights<span class="op">=</span>mode)</span>
+<span id="cb25-23"><a aria-label="23"></a>    knn.fit(X_knn_train_scaled, y_knn_train)</span>
+<span id="cb25-24"><a aria-label="24"></a>    <span class="bu">print</span>(<span class="ss">f"weights='</span><span class="sc">{</span>mode<span class="sc">}</span><span class="ss">': </span><span class="sc">{</span>knn<span class="sc">.</span>score(X_knn_test_scaled, y_knn_test)<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>weights='uniform': 0.957
+weights='distance': 0.957</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>This example retains all three penguin species. Bill length and bill depth make the differences among the decision boundaries easier to see than the earlier, nearly separable Gentoo-versus-non-Gentoo problem.</p>
+<p>KNN is sensitive to feature scale because its predictions depend directly on distance. The scaler is fitted using only the training data, preventing information from the test set from influencing preprocessing.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="knn-decision-boundaries" class="slide level2 hide-code-toggle scrollable nostretch">
+<h2>KNN Decision Boundaries</h2>
+<div id="cell-knn-decision-boundaries" class="cell" data-fig-height="7" data-fig-width="11" data-execution_count="18">
+<details class="code-fold">
+<summary>Show scikit-learn plotting code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb27-2"><a aria-label="2"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> DecisionBoundaryDisplay</span>
+<span id="cb27-3"><a aria-label="3"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
+<span id="cb27-4"><a aria-label="4"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb27-5"><a aria-label="5"></a></span>
+<span id="cb27-6"><a aria-label="6"></a>configurations <span class="op">=</span> [</span>
+<span id="cb27-7"><a aria-label="7"></a>    (<span class="dv">1</span>, <span class="st">"uniform"</span>),</span>
+<span id="cb27-8"><a aria-label="8"></a>    (<span class="dv">5</span>, <span class="st">"uniform"</span>),</span>
+<span id="cb27-9"><a aria-label="9"></a>    (<span class="dv">25</span>, <span class="st">"uniform"</span>),</span>
+<span id="cb27-10"><a aria-label="10"></a>    (<span class="dv">5</span>, <span class="st">"distance"</span>),</span>
+<span id="cb27-11"><a aria-label="11"></a>]</span>
+<span id="cb27-12"><a aria-label="12"></a>classes, y_encoded <span class="op">=</span> np.unique(y_knn_train, return_inverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb27-13"><a aria-label="13"></a></span>
+<span id="cb27-14"><a aria-label="14"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">7</span>), sharex<span class="op">=</span><span class="va">True</span>, sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb27-15"><a aria-label="15"></a><span class="cf">for</span> ax, (n_neighbors, weights) <span class="kw">in</span> <span class="bu">zip</span>(axes.ravel(), configurations):</span>
+<span id="cb27-16"><a aria-label="16"></a>    sklearn_knn <span class="op">=</span> make_pipeline(</span>
+<span id="cb27-17"><a aria-label="17"></a>        StandardScaler(),</span>
+<span id="cb27-18"><a aria-label="18"></a>        KNeighborsClassifier(n_neighbors<span class="op">=</span>n_neighbors, weights<span class="op">=</span>weights),</span>
+<span id="cb27-19"><a aria-label="19"></a>    )</span>
+<span id="cb27-20"><a aria-label="20"></a>    sklearn_knn.fit(X_knn_train, y_encoded)</span>
+<span id="cb27-21"><a aria-label="21"></a>    DecisionBoundaryDisplay.from_estimator(</span>
+<span id="cb27-22"><a aria-label="22"></a>        sklearn_knn,</span>
+<span id="cb27-23"><a aria-label="23"></a>        X_knn_train,</span>
+<span id="cb27-24"><a aria-label="24"></a>        response_method<span class="op">=</span><span class="st">"predict"</span>,</span>
+<span id="cb27-25"><a aria-label="25"></a>        multiclass_colors<span class="op">=</span><span class="st">"Set2"</span>,</span>
+<span id="cb27-26"><a aria-label="26"></a>        alpha<span class="op">=</span><span class="fl">0.25</span>,</span>
+<span id="cb27-27"><a aria-label="27"></a>        ax<span class="op">=</span>ax,</span>
+<span id="cb27-28"><a aria-label="28"></a>    )</span>
+<span id="cb27-29"><a aria-label="29"></a></span>
+<span id="cb27-30"><a aria-label="30"></a>    <span class="cf">for</span> label, name <span class="kw">in</span> <span class="bu">enumerate</span>(classes):</span>
+<span id="cb27-31"><a aria-label="31"></a>        selected <span class="op">=</span> y_encoded <span class="op">==</span> label</span>
+<span id="cb27-32"><a aria-label="32"></a>        ax.scatter(</span>
+<span id="cb27-33"><a aria-label="33"></a>            X_knn_train[selected, <span class="dv">0</span>],</span>
+<span id="cb27-34"><a aria-label="34"></a>            X_knn_train[selected, <span class="dv">1</span>],</span>
+<span id="cb27-35"><a aria-label="35"></a>            color<span class="op">=</span>plt.get_cmap(<span class="st">"Set2"</span>)(label),</span>
+<span id="cb27-36"><a aria-label="36"></a>            edgecolor<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb27-37"><a aria-label="37"></a>            s<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb27-38"><a aria-label="38"></a>            label<span class="op">=</span>name,</span>
+<span id="cb27-39"><a aria-label="39"></a>        )</span>
+<span id="cb27-40"><a aria-label="40"></a></span>
+<span id="cb27-41"><a aria-label="41"></a>    ax.set_title(<span class="ss">f"k=</span><span class="sc">{</span>n_neighbors<span class="sc">}</span><span class="ss">, weights='</span><span class="sc">{</span>weights<span class="sc">}</span><span class="ss">'"</span>)</span>
+<span id="cb27-42"><a aria-label="42"></a>    ax.set_xlabel(<span class="st">"Bill length (mm)"</span>)</span>
+<span id="cb27-43"><a aria-label="43"></a>    ax.set_ylabel(<span class="st">"Bill depth (mm)"</span>)</span>
+<span id="cb27-44"><a aria-label="44"></a></span>
+<span id="cb27-45"><a aria-label="45"></a>handles, labels <span class="op">=</span> axes[<span class="dv">0</span>, <span class="dv">0</span>].get_legend_handles_labels()</span>
+<span id="cb27-46"><a aria-label="46"></a>fig.legend(handles, labels, loc<span class="op">=</span><span class="st">"upper center"</span>, ncols<span class="op">=</span><span class="bu">len</span>(classes))</span>
+<span id="cb27-47"><a aria-label="47"></a>fig.tight_layout(rect<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.93</span>))</span>
+<span id="cb27-48"><a aria-label="48"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/knn-decision-boundaries-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-revealjs/knn-decision-boundaries-output-1.png" id="knn-decision-boundaries" class="quarto-figure quarto-figure-center" width="1047" height="670"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>With <span class="math inline">\(k=1\)</span>, every training observation controls a small surrounding region, so the boundary is irregular and sensitive to individual examples. Increasing <span class="math inline">\(k\)</span> smooths the boundary because a larger neighbourhood must agree.</p>
+<p>Distance weighting gives the closest observations greater influence. Its boundary with <span class="math inline">\(k=5\)</span> can therefore retain more local detail than uniform voting with the same <span class="math inline">\(k\)</span>.</p>
+<p>The diagram deliberately uses scikit-learn rather than extending the teaching implementation with plotting machinery. The pipeline standardizes the features internally while keeping the axes in their original units.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="knn-limitations" class="slide level2">
+<h2>KNN Limitations</h2>
+<ul>
+<li class="fragment">Prediction retains and searches the training data.</li>
+<li class="fragment">Distances are sensitive to <strong>feature scaling</strong> and the chosen metric.</li>
+<li class="fragment">Neighbourhoods become less informative in high-dimensional spaces.</li>
+<li class="fragment">Small <span class="math inline">\(k\)</span> can be sensitive to noise; large <span class="math inline">\(k\)</span> can hide local structure.</li>
+<li class="fragment">Class imbalance can dominate a neighbourhood’s vote.</li>
+</ul>
+<aside class="notes">
+<p>The loss of useful distance contrast in high-dimensional spaces is commonly called the <em>curse of dimensionality</em>. KNN can also require substantial memory and prediction time because its effective model grows with the training set.</p>
+<p>For regression, predictions are averages of observed neighbour targets and therefore do not extrapolate beyond the observed target range.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="knn-exercises-and-resources" class="slide level2">
+<h2>KNN Exercises and Resources</h2>
+<p>Experiment with changes in <span class="math inline">\(k\)</span>, voting weights, distance, and feature scaling:</p>
+<ul>
+<li><a href="https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html">Nearest Neighbors Classification</a></li>
+<li><a href="https://scikit-learn.org/stable/auto_examples/neighbors/plot_regression.html">Nearest Neighbors Regression</a></li>
+<li><a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html">Importance of Feature Scaling</a></li>
+</ul>
+<aside class="notes">
+<p>The scikit-learn examples are downloadable as Jupyter notebooks. Students can also modify the executable notebook produced from this lecture—for example, by changing the four configurations in the decision-boundary cell.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
-<li>The lecture surveyed three learning algorithms, <strong>k-nearest neighbours (KNN)</strong>, <strong>decision trees</strong>, and <strong>linear regression</strong>, and framed them via model, objective, and optimization.</li>
-<li>We then <strong>constructed decision trees</strong>, showed that regression leaves returned the sample mean, minimized the weighted impurity <span class="math inline">\(J\)</span>, and analyzed the Gini index.</li>
-<li><strong>Decision boundaries</strong> were illustrated for linear and non-linear models.</li>
+<li>The lecture surveyed <strong>decision trees</strong> and <strong>k-nearest neighbours (KNN)</strong>, and used <strong>logistic regression</strong> to illustrate a linear decision boundary.</li>
+<li>We constructed a decision tree that greedily minimizes weighted entropy and a KNN classifier that <strong>stores, searches, and votes</strong>.</li>
+<li>The Palmer Penguins examples illustrated how different learning algorithms produce different <strong>decision boundaries</strong>.</li>
 </ul>
 </section></section>
 <section>
@@ -1282,9 +2010,6 @@ weighted avg       0.91      0.91      0.91        69
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-Geron:2019aa" class="csl-entry" role="listitem">
-Géron, Aurélien. 2019. <em>Hands-on Machine Learning with Scikit-Learn, Keras, and TensorFlow</em>. 2nd ed. O’Reilly Media.
-</div>
 <div id="ref-Geurts:2009aa" class="csl-entry" role="listitem">
 Geurts, Pierre, Alexandre Irrthum, and Louis Wehenkel. 2009. <span>“Supervised Learning with Decision Tree-Based Methods in Computational and Systems Biology.”</span> <em>Molecular bioSystems</em> 5 (12): 1593–605. <a href="https://doi.org/10.1039/b907946g">https://doi.org/10.1039/b907946g</a>.
 </div>

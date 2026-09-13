@@ -239,7 +239,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Sep 8, 2026 17:47</p>
+  <p class="date">Version: Sep 11, 2026 12:09</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -385,7 +385,7 @@ Marcel Turcotte
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> [Legg:2007aa]</strong></p>
+<p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Wang:2019ao">(<a href="#/references" role="doc-biblioref" onclick="">Wang 2019</a>)</span></strong></p>
 </div>
 <div class="callout-content">
 <p>To the larger community of computer science and information technology, <strong>AI</strong> is usually <strong>identified by the techniques grown from it</strong>, which at <strong>different periods</strong> may include <strong>theorem proving</strong>, <strong>heuristic search</strong>, <strong>game playing</strong>, <strong>expert systems</strong>, <strong>neural networks</strong>, <strong>Bayesian networks</strong>, <strong>data mining</strong>, <strong>agents</strong>, and recently, <strong>deep learning</strong>.</p>
@@ -396,8 +396,8 @@ Marcel Turcotte
 <li><strong>Deep learning</strong> is so dominant that I have chosen to structure everything around it</li>
 </ul>
 </section>
-<section id="what-does-it-means" class="slide level2">
-<h2>What does it means?</h2>
+<section id="what-does-this-mean" class="slide level2">
+<h2>What does this mean?</h2>
 <p><strong>Good Old-Fashioned AI</strong> (<strong>GOFAI</strong>) relied on <strong>hand-crafted knowledge engineering</strong>, but it has been largely displaced by <strong>machine learning</strong> due to the increased availability of data, computing resources, and new algorithms.</p>
 <div class="fragment">
 <p><strong>Deep learning</strong> has significantly impacted various domains, including natural language processing, robotics, and computer vision.</p>
@@ -532,7 +532,7 @@ This entails employing a **bottom-up** methodology to some degree.
 <h2>Beta testers</h2>
 <p>This will be my third iteration of this content. Your help identifying what works and what doesn’t will be most appreciated.</p>
 </section>
-<section id="warnings" class="slide level2">
+<section id="warnings" class="slide level2 smaller">
 <h2>Warnings</h2>
 <p>CSI 4106 is an introductory course on artificial intelligence, offering a brief overview of various topics within this broad field. <strong>Each topic covered could be explored in much greater depth through one or more graduate-level courses.</strong> The primary objective of CSI 4106 is to provide students with a foundational understanding of the core areas that constitute artificial intelligence.</p>
 <div class="fragment">
@@ -542,6 +542,11 @@ This entails employing a **bottom-up** methodology to some degree.
 <p>This is not a course on the impact of AI on society, including ethics, fairness, trust and safety.</p>
 <aside class="notes">
 <p>This warning is actually for myself. These are topics I am passionate about, and I would love to share everything I know with you. However, that is obviously not possible. Generally, I will try to focus on a small number of approaches to thoroughly understand the subjects, rather than adopting an exhaustive approach.</p>
+<p>The University of Ottawa offers courses on the ethics of artificial intelligence. I present here two that I am familiar with.</p>
+<ul>
+<li><a href="https://catalogue.uottawa.ca/search/?P=CSI%205195">CSI 5195 Ethics for Artificial Intelligence</a></li>
+<li><a href="https://catalogue.uottawa.ca/search/?P=IAI%205130">IAI 5130 Ethics for Design, AI and Robotics</a></li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -585,15 +590,15 @@ This entails employing a **bottom-up** methodology to some degree.
 <aside><div>
 <p><strong>Attribution:</strong> Lily Popova Zhuhadar, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons, 2026-09-08.</p>
 </div></aside></section>
-<section id="schools-of-thought" class="slide level2">
-<h2>Schools of thought</h2>
+<section id="influential-approaches" class="slide level2">
+<h2>Influential Approaches</h2>
 <ul>
-<li><strong>Symbolic AI</strong> (includes approaches based on logic)</li>
-<li><strong>Connectionists</strong> (mostly neural networks)</li>
+<li><strong>Symbolic AI:</strong> represents knowledge using explicit <strong>symbols</strong> and <strong>structures</strong>, manipulated through <strong>rules</strong>, <strong>inference</strong>, or <strong>search</strong>.</li>
+<li><strong>Connectionist AI:</strong> represents knowledge through <strong>patterns of activity</strong> and <strong>connection weights in networks</strong> of computational units.</li>
 </ul>
 
 <aside class="notes">
-<p>At the outset of this course, it is important to recognize that two main schools of thought exist in AI: <strong>symbolic AI</strong> and <strong>connectionism</strong>. Initially, the symbolic approach was dominant in the field of AI, but today, the connectionist approach prevails.</p>
+<p>At the outset of this course, it is important to recognize that two main approaches exist in AI: <strong>symbolic AI</strong> and <strong>connectionism</strong>. Initially, the symbolic approach was dominant in the field of AI, but today, the connectionist approach prevails.</p>
 <p>Any attempt to impose a rigid taxonomy on complex concepts is likely to obscure as much as it reveals. In <em>The Master Algorithm: How the Quest for the Ultimate Learning Machine Will Remake Our World</em> <span class="citation" data-cites="Domingos:2018aa">(<a href="#/references" role="doc-biblioref" onclick="">Domingos 2018</a>)</span>, Pedro Domingos identifies five “tribes” of machine learning: symbolists, connectionists, evolutionaries, Bayesians, and analogizers. Inevitably, some concepts and algorithms do not fit neatly into any single category. Moreover, some approaches are intentionally designed as hybrid methods.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -607,8 +612,49 @@ This entails employing a **bottom-up** methodology to some degree.
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>Long seen as mutually exclusive.</p>
+<p>These approaches can be combined, and they do not encompass all of AI.</p>
 </div></aside></section>
+<section id="symbolic-systems-in-mathematics" class="slide level2">
+<h2>Symbolic systems in mathematics</h2>
+<ul>
+<li><strong>Algebra</strong>
+<ul>
+<li><span class="math inline">\(x + 3 = 7\)</span>, here <span class="math inline">\(x\)</span> represents a quantity, <span class="math inline">\(x\)</span> is a symbol.</li>
+</ul></li>
+<li><strong>Calculus</strong>
+<ul>
+<li>Symbolic differentiation of <span class="math inline">\(x^2\)</span> into <span class="math inline">\(2x\)</span>, <span class="math inline">\(x\)</span> is a symbol.</li>
+</ul></li>
+<li><strong>Logic</strong>
+<ul>
+<li>We might use <span class="math inline">\(P\)</span> to mean “It is raining” and <span class="math inline">\(Q\)</span> mean “The ground is wet.” <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are symbols.</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>You already work with symbolic systems in mathematics. In algebra, <span class="math inline">\(x\)</span> represents a quantity, and rules let you transform expressions such as <span class="math inline">\(x + 3 = 7\)</span> into <span class="math inline">\(x = 4\)</span>. In symbolic AI, symbols can also represent objects and relationships. For example, <code>Parent(alan, chris)</code> represents a relationship, and a rule can infer a grandparent relationship from two parent relationships.</p>
+<p><strong>Modus ponens</strong> (from logic) gives a simple example of symbols and a rule of inference:</p>
+<p>Let <span class="math inline">\(P\)</span> mean “It is raining” and <span class="math inline">\(Q\)</span> to mean “The ground is wet.”</p>
+<p><span class="math display">\[
+P \rightarrow Q \qquad \text{If it is raining, the ground is wet.}
+\]</span> <span class="math display">\[
+P \qquad \text{It is raining.}
+\]</span> <span class="math display">\[
+\therefore Q \qquad \text{Therefore, the ground is wet.}
+\]</span></p>
+<p>Here, <strong><span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> represent propositions</strong>, and <strong><span class="math inline">\(\rightarrow\)</span> expresses implication</strong>. The inference rule operates on this explicit structure: from <span class="math inline">\(P \rightarrow Q\)</span> and <span class="math inline">\(P\)</span>, infer <span class="math inline">\(Q\)</span>.</p>
+<p>We also use algebra and calculus to design neural networks. What makes an approach symbolic is its explicit representation and manipulation of meaningful expressions, not simply its use of mathematical notation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="towers-of-hanoi" class="slide level2 nostretch">
 <h2>Towers of Hanoi</h2>
 <p>(for your information only)</p>
@@ -800,7 +846,7 @@ This entails employing a **bottom-up** methodology to some degree.
 <li>Easy to extend with electives, co-requisites, or anti-requisites.</li>
 <li>Produces <strong>auditable recommendations</strong> (why/why not).</li>
 </ul>
-<p>Negation as failure, which is represented as <code>\+</code> (backslash-plus), Prolog.</p>
+<p>In Prolog, negation as failure is represented as <code>\+</code> (backslash-plus).</p>
 <ul>
 <li><code>\+ Goal</code> succeeds if <code>Goal</code> cannot be proven.</li>
 <li>Semantics: <strong>closed-world assumption</strong> — if it’s not in the knowledge base, we assume it’s false.</li>
@@ -828,15 +874,15 @@ This entails employing a **bottom-up** methodology to some degree.
           display:block!important;
       }</style></aside>
 </section>
-<section id="symbolic-ai" class="slide level2">
-<h2>Symbolic AI</h2>
+<section id="symbolic-ai-historical-perspective" class="slide level2">
+<h2>Symbolic AI: historical perspective</h2>
 <ul>
 <li class="fragment">“Their founding tenet held that <strong>knowledge</strong> can be represented by a <strong>set of rules</strong>, and computer programs can use <strong>logic</strong> to manipulate that knowledge.” <span class="citation" data-cites="Strickland:2021aa">(<a href="#/references" role="doc-biblioref" onclick="">Strickland 2021</a>)</span></li>
 <li class="fragment">“Researchers developing symbolic AI set out to <strong>explicitly teach computers</strong> about the world.” <span class="citation" data-cites="Strickland:2021aa">(<a href="#/references" role="doc-biblioref" onclick="">Strickland 2021</a>)</span></li>
 <li class="fragment">“(<span class="math inline">\(\ldots\)</span>) a <strong>physical symbol system</strong> has the <strong>necessary</strong> and <strong>sufficient</strong> means for <strong>general intelligent action</strong>.”<br> <span class="citation" data-cites="Newell:1976aa">(<a href="#/references" role="doc-biblioref" onclick="">Newell and Herbert A. Simon 1976b</a>)</span></li>
 </ul>
 <aside class="notes">
-<p>Note the importance of the word “explicitly” in this statement. It is not about providing examples to the computer, but rather about describing human knowledge using logic.</p>
+<p>In these early systems, people often supplied knowledge explicitly as facts and rules. However, symbolic representations can also be learned from examples. The defining distinction is the use of explicit symbols and operations over them, rather than whether learning occurs.</p>
 <p>The researchers of the time were convinced that the symbolic approach was the key to success.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -850,7 +896,7 @@ This entails employing a **bottom-up** methodology to some degree.
           display:block!important;
       }</style></aside>
 </section>
-<section id="symbolic-ai-1" class="slide level2">
+<section id="symbolic-ai" class="slide level2">
 <h2>Symbolic AI</h2>
 <ul>
 <li>What do you think made <strong>symbolic AI</strong> <strong>difficult</strong> in practice?</li>
@@ -882,9 +928,9 @@ This entails employing a **bottom-up** methodology to some degree.
 <ul>
 <li>Humans rely on vast amounts of implicit commonsense knowledge that is difficult to formalize explicitly <span class="citation" data-cites="McCarthy:1969aa">(<a href="#/references" role="doc-biblioref" onclick="">McCarthy and Hayes 1969</a>)</span>.</li>
 </ul></li>
-<li><strong>Learning from data</strong>
+<li><strong>Acquiring knowledge:</strong>
 <ul>
-<li>Pure symbolic systems typically do not learn as flexibly from examples as modern data-driven approaches <span class="citation" data-cites="Rumelhart:1986ab">(<a href="#/references" role="doc-biblioref" onclick="">Rumelhart et al. 1986</a>)</span>.</li>
+<li>Manually engineered systems require people to supply and maintain their knowledge. Symbolic learning methods can acquire rules from examples, although choosing suitable representations remains a challenge.</li>
 </ul></li>
 <li><strong>Context sensitivity</strong>
 <ul>
@@ -906,13 +952,18 @@ This entails employing a **bottom-up** methodology to some degree.
 </section>
 <section id="connectionist" class="slide level2">
 <h2>Connectionist</h2>
-<p>Inspired by biology, <strong>artificial neural networks</strong> (<strong>ANNs</strong>) are computational models designed to <strong>mimic the human brain’s network of neurons</strong>. They consist of layers of <strong>interconnected nodes (neurons)</strong>, each <strong>connection</strong> having an associated <strong>weight</strong>.</p>
+<p><strong>Artificial neural networks (ANNs)</strong> are computational models loosely inspired by biological neural systems. They consist of interconnected computational units with weighted connections.</p>
 <div class="fragment">
-<p>ANNs process input data through these weighted connections, and <strong>learning</strong> occurs by <strong>adjusting the weights</strong> based on <strong>errors</strong> in the <strong>training data</strong>.</p>
+<p>During <strong>training</strong>, their parameters, including connection weights, are adjusted to improve performance on a specified objective.</p>
+</div>
+<div class="fragment">
+<p><strong>Knowledge</strong> is encoded in the <strong>network’s parameters</strong> and <strong>patterns of activity</strong>, rather than primarily as explicit facts and rules.</p>
 
 <aside class="notes">
 <p>The term “connectionists” comes from the idea that nodes in these models are interconnected. Instead of being explicitly programmed, these models learn their behavior through training.</p>
+<p>Designers still choose the architecture, training objective, and learning procedure. Training adjusts parameters rather than requiring designers to specify every input–output response. These models are not detailed simulations of the human brain.</p>
 <p>Deep learning is a connectionist approach.</p>
+<p><strong>A hybrid system:</strong> A neural network identifies objects in an image; a symbolic planner uses those objects and explicit action rules to construct a plan.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -940,8 +991,8 @@ This entails employing a **bottom-up** methodology to some degree.
 <p><strong>Attribution</strong>: LeNail, (2019). NN-SVG: Publication-Ready Neural Network Architecture Schematics. Journal of Open Source Software, 4(33), 747, https://doi.org/10.21105/joss.00747 (<a href="https://github.com/alexlenail/NN-SVG">GitHub</a>)</p>
 </div></aside></section></section>
 <section>
-<section id="definnig-ai" class="title-slide slide level1 center">
-<h1>Definnig AI</h1>
+<section id="definig-ai" class="title-slide slide level1 center">
+<h1>Definig AI</h1>
 
 </section>
 <section id="survey" class="slide level2">
@@ -971,8 +1022,8 @@ This entails employing a **bottom-up** methodology to some degree.
           display:block!important;
       }</style></aside>
 </section>
-<section id="why-definning-ai" class="slide level2">
-<h2>Why definning AI?</h2>
+<section id="why-defining-ai" class="slide level2">
+<h2>Why defining AI?</h2>
 <ul>
 <li class="fragment"><p><strong>Enhancing Clarity and Communication:</strong> Establishing a mutual understanding of evaluation criteria, benchmarking tests, and milestones.</p></li>
 <li class="fragment"><p><strong>Addressing Ethical, Social, and Legal Implications:</strong> Enabling policymakers to develop regulations that minimize AI-related risks.</p></li>
@@ -1026,9 +1077,9 @@ This entails employing a **bottom-up** methodology to some degree.
 </div></aside></section>
 <section id="days-ago" class="slide level2 scrollable">
 <h2>4 days ago</h2>
-<p></p><div id="tweet-84325"></div><script>tweet={"url":"https:\/\/x.com\/ChaseLochmiller\/status\/2096445087505055891","author_name":"Chase Lochmiller","author_url":"https:\/\/x.com\/ChaseLochmiller","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003ECongratulations to our friends at \u003Ca href=\"https:\/\/x.com\/OpenAI?ref_src=twsrc%5Etfw\"\u003E@OpenAI\u003C\/a\u003E! I guess this makes Abilene the birthplace of AGI! \u003Ca href=\"https:\/\/t.co\/d9kp1qxCdz\"\u003Ehttps:\/\/t.co\/d9kp1qxCdz\u003C\/a\u003E \u003Ca href=\"https:\/\/t.co\/HDeLY5oTfS\"\u003Epic.twitter.com\/HDeLY5oTfS\u003C\/a\u003E\u003C\/p\u003E&mdash; Chase Lochmiller (@ChaseLochmiller) \u003Ca href=\"https:\/\/x.com\/ChaseLochmiller\/status\/2096445087505055891?ref_src=twsrc%5Etfw\"\u003ESeptember 6, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-84325").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-17283"></div><script>tweet={"url":"https:\/\/x.com\/ChaseLochmiller\/status\/2096445087505055891","author_name":"Chase Lochmiller","author_url":"https:\/\/x.com\/ChaseLochmiller","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003ECongratulations to our friends at \u003Ca href=\"https:\/\/x.com\/OpenAI?ref_src=twsrc%5Etfw\"\u003E@OpenAI\u003C\/a\u003E! I guess this makes Abilene the birthplace of AGI! \u003Ca href=\"https:\/\/t.co\/d9kp1qxCdz\"\u003Ehttps:\/\/t.co\/d9kp1qxCdz\u003C\/a\u003E \u003Ca href=\"https:\/\/t.co\/HDeLY5oTfS\"\u003Epic.twitter.com\/HDeLY5oTfS\u003C\/a\u003E\u003C\/p\u003E&mdash; Chase Lochmiller (@ChaseLochmiller) \u003Ca href=\"https:\/\/x.com\/ChaseLochmiller\/status\/2096445087505055891?ref_src=twsrc%5Etfw\"\u003ESeptember 6, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-17283").innerHTML = tweet["html"];</script><p></p>
 </section>
-<section id="question" class="slide level2 scrollable">
+<section id="question" class="slide level2 scrollable smaller">
 <h2>Question</h2>
 <p><strong>User:</strong> The man and the goat want to enjoy a picnic near a river, but there’s a wolf. What to do with the zucchini?</p>
 <div class="fragment">
@@ -1054,7 +1105,7 @@ This entails employing a **bottom-up** methodology to some degree.
 </div>
 </div>
 </section>
-<section id="question-1" class="slide level2 scrollable">
+<section id="question-1" class="slide level2 scrollable smaller">
 <h2>Question</h2>
 <p><strong>User:</strong> Surgeon but child, hopsital, it have a no, why it so?</p>
 <div class="fragment">
@@ -1069,6 +1120,19 @@ This entails employing a **bottom-up** methodology to some degree.
 <div class="{aside}">
 <p><strong>Attribution:</strong> Andriy Burkov, published on <a href="https://www.linkedin.com/posts/andriyburkov_when-its-a-word-pattern-matcher-its-a-activity-7360444799662923776-BKUt?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAAAFnW4wBVjZqAGXTDClUO4u_oEKrFR3kMUI">LinkedIn</a> 3 weeks ago.</p>
 </div>
+<aside class="notes">
+<p>These two examples illustrate that large language models generate output by leveraging statistical associations between words (tokens).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="the-complex-nature-of-intelligence" class="slide level2">
@@ -1105,7 +1169,7 @@ This entails employing a **bottom-up** methodology to some degree.
 </section>
 <section id="thinking-acting-humanly-rationally" class="slide level2">
 <h2>Thinking, acting, humanly, rationally</h2>
-<p>Russell &amp; Norvig considers two axes: thinking vs behaviour, human vs rationality.</p>
+<p>Russell and Norvig considers two axes: thinking vs behaviour, human vs rationality.</p>
 <table class="caption-top">
 <colgroup>
 <col style="width: 16%">
@@ -1182,7 +1246,7 @@ This entails employing a **bottom-up** methodology to some degree.
 <aside><div>
 <p><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/measuring-agi-cognitive-framework/"><strong>Deconstructing general intelligence</strong></a></p>
 </div></aside></section>
-<section id="cognitive-taxonomy-continued" class="slide level2">
+<section id="cognitive-taxonomy-continued" class="slide level2 smaller">
 <h2>Cognitive Taxonomy (continued)</h2>
 <ul>
 <li><strong>Perception:</strong>
@@ -1195,19 +1259,19 @@ This entails employing a **bottom-up** methodology to some degree.
 </ul></li>
 <li><strong>Attention:</strong>
 <ul>
-<li>The ability to <strong>focus</strong> cognitive resources on specific aspects of perceptual stimuli, thoughts,or task demands.</li>
+<li>The ability to <strong>focus</strong> cognitive resources on specific aspects of perceptual stimuli, thoughts, or task demands.</li>
 </ul></li>
 </ul>
 
 <aside><div>
 <p><span class="citation" data-cites="Burnell:2026aa">Burnell et al. (<a href="#/references" role="doc-biblioref" onclick="">2026</a>)</span></p>
 </div></aside></section>
-<section id="cognitive-taxonomy-continued-1" class="slide level2">
+<section id="cognitive-taxonomy-continued-1" class="slide level2 smaller">
 <h2>Cognitive Taxonomy (continued)</h2>
 <ul>
 <li><strong>Learning:</strong>
 <ul>
-<li>The ability to <strong>acquire</strong> new <strong>knowledge</strong>, <strong>skills</strong>, or <strong>understanding</strong> through <strong>experience</strong>, <strong>study</strong>,or <strong>instruction</strong>.</li>
+<li>The ability to <strong>acquire</strong> new <strong>knowledge</strong>, <strong>skills</strong>, or <strong>understanding</strong> through <strong>experience</strong>, <strong>study</strong>, or <strong>instruction</strong>.</li>
 </ul></li>
 <li><strong>Memory:</strong>
 <ul>
@@ -1222,7 +1286,7 @@ This entails employing a **bottom-up** methodology to some degree.
 <aside><div>
 <p><span class="citation" data-cites="Burnell:2026aa">Burnell et al. (<a href="#/references" role="doc-biblioref" onclick="">2026</a>)</span></p>
 </div></aside></section>
-<section id="cognitive-taxonomy-continued-2" class="slide level2">
+<section id="cognitive-taxonomy-continued-2" class="slide level2 smaller">
 <h2>Cognitive Taxonomy (continued)</h2>
 <ul>
 <li><strong>Metacognition:</strong>
@@ -1231,14 +1295,14 @@ This entails employing a **bottom-up** methodology to some degree.
 </ul></li>
 <li><strong>Executive functions:</strong>
 <ul>
-<li>Abilities that facilitate <strong>goal-directed behavior</strong>. Includes <strong>planning</strong>, <strong>inhibition</strong>,and cognitive flexibility.</li>
+<li>Abilities that facilitate <strong>goal-directed behavior</strong>. Includes <strong>planning</strong>, <strong>inhibition</strong>, and cognitive flexibility.</li>
 </ul></li>
 </ul>
 
 <aside><div>
 <p><span class="citation" data-cites="Burnell:2026aa">Burnell et al. (<a href="#/references" role="doc-biblioref" onclick="">2026</a>)</span></p>
 </div></aside></section>
-<section id="cognitive-taxonomy-continued-3" class="slide level2">
+<section id="cognitive-taxonomy-continued-3" class="slide level2 smaller">
 <h2>Cognitive Taxonomy (continued)</h2>
 <ul>
 <li><strong>Problem solving:</strong>
@@ -1308,28 +1372,15 @@ This entails employing a **bottom-up** methodology to some degree.
 <h1>Narrow vs General AI</h1>
 
 </section>
-<section id="open-ai-gpt-6-astra" class="slide level2">
-<h2>Open AI GPT-6 Astra</h2>
+<section id="openai-gpt-6-astra" class="slide level2">
+<h2>OpenAI GPT-6 Astra</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p></p><div id="tweet-21348"></div><script>tweet={"url":"https:\/\/x.com\/sama\/status\/2095600005772104059","author_name":"Sam Altman","author_url":"https:\/\/x.com\/sama","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EGPT-6 Astra is here.\u003Cbr\u003E\u003Cbr\u003EWe hope it will begin to enable a new generation of entrepreneurship, scientific discovery, and building.\u003Cbr\u003E\u003Cbr\u003EWe believe it is the best model in the world for computer use, professional work, science, coding, cybersecurity, and more.\u003Cbr\u003E\u003Cbr\u003EIt took us some extra time…\u003C\/p\u003E&mdash; Sam Altman (@sama) \u003Ca href=\"https:\/\/x.com\/sama\/status\/2095600005772104059?ref_src=twsrc%5Etfw\"\u003ESeptember 3, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-21348").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-41425"></div><script>tweet={"url":"https:\/\/x.com\/sama\/status\/2095600005772104059","author_name":"Sam Altman","author_url":"https:\/\/x.com\/sama","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EGPT-6 Astra is here.\u003Cbr\u003E\u003Cbr\u003EWe hope it will begin to enable a new generation of entrepreneurship, scientific discovery, and building.\u003Cbr\u003E\u003Cbr\u003EWe believe it is the best model in the world for computer use, professional work, science, coding, cybersecurity, and more.\u003Cbr\u003E\u003Cbr\u003EIt took us some extra time…\u003C\/p\u003E&mdash; Sam Altman (@sama) \u003Ca href=\"https:\/\/x.com\/sama\/status\/2095600005772104059?ref_src=twsrc%5Etfw\"\u003ESeptember 3, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-41425").innerHTML = tweet["html"];</script><p></p>
 </div><div class="column" style="width:40%;">
-<p></p><div id="tweet-65656"></div><script>tweet={"url":"https:\/\/x.com\/ChaseLochmiller\/status\/2096445087505055891","author_name":"Chase Lochmiller","author_url":"https:\/\/x.com\/ChaseLochmiller","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003ECongratulations to our friends at \u003Ca href=\"https:\/\/x.com\/OpenAI?ref_src=twsrc%5Etfw\"\u003E@OpenAI\u003C\/a\u003E! I guess this makes Abilene the birthplace of AGI! \u003Ca href=\"https:\/\/t.co\/d9kp1qxCdz\"\u003Ehttps:\/\/t.co\/d9kp1qxCdz\u003C\/a\u003E \u003Ca href=\"https:\/\/t.co\/HDeLY5oTfS\"\u003Epic.twitter.com\/HDeLY5oTfS\u003C\/a\u003E\u003C\/p\u003E&mdash; Chase Lochmiller (@ChaseLochmiller) \u003Ca href=\"https:\/\/x.com\/ChaseLochmiller\/status\/2096445087505055891?ref_src=twsrc%5Etfw\"\u003ESeptember 6, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-65656").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-75590"></div><script>tweet={"url":"https:\/\/x.com\/arcprize\/status\/2095597602545025138","author_name":"ARC Prize","author_url":"https:\/\/x.com\/arcprize","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EGPT-6 Astra by \u003Ca href=\"https:\/\/x.com\/OpenAI?ref_src=twsrc%5Etfw\"\u003E@OpenAI\u003C\/a\u003E achieves SOTA on ARC-AGI:\u003Cbr\u003E\u003Cbr\u003E- Astra scores 63% on ARC-AGI-3, 99% via a new provider adapter harness\u003Cbr\u003E- It surpasses human performance on 96% of ARC-AGI-3 levels\u003Cbr\u003E- It builds the most precise symbolic model of novel environments we&#39;ve seen\u003Cbr\u003E\u003Cbr\u003EOur analysis: \u003Ca href=\"https:\/\/t.co\/GX77KsRNer\"\u003Epic.twitter.com\/GX77KsRNer\u003C\/a\u003E\u003C\/p\u003E&mdash; ARC Prize (@arcprize) \u003Ca href=\"https:\/\/x.com\/arcprize\/status\/2095597602545025138?ref_src=twsrc%5Etfw\"\u003ESeptember 3, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-75590").innerHTML = tweet["html"];</script><p></p>
 </div></div>
 
-<aside class="notes">
-<p></p><div id="tweet-85314"></div><script>tweet={"url":"https:\/\/x.com\/arcprize\/status\/2095597602545025138","author_name":"ARC Prize","author_url":"https:\/\/x.com\/arcprize","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EGPT-6 Astra by \u003Ca href=\"https:\/\/x.com\/OpenAI?ref_src=twsrc%5Etfw\"\u003E@OpenAI\u003C\/a\u003E achieves SOTA on ARC-AGI:\u003Cbr\u003E\u003Cbr\u003E- Astra scores 63% on ARC-AGI-3, 99% via a new provider adapter harness\u003Cbr\u003E- It surpasses human performance on 96% of ARC-AGI-3 levels\u003Cbr\u003E- It builds the most precise symbolic model of novel environments we&#39;ve seen\u003Cbr\u003E\u003Cbr\u003EOur analysis: \u003Ca href=\"https:\/\/t.co\/GX77KsRNer\"\u003Epic.twitter.com\/GX77KsRNer\u003C\/a\u003E\u003C\/p\u003E&mdash; ARC Prize (@arcprize) \u003Ca href=\"https:\/\/x.com\/arcprize\/status\/2095597602545025138?ref_src=twsrc%5Etfw\"\u003ESeptember 3, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-85314").innerHTML = tweet["html"];</script><p></p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 <aside><div>
 <p><a href="https://openai.com/index/gpt-6-astra/">OpenAI GPT-6 Astra</a> achieves SOTA on <a href="https://arcprize.org/arc-agi">ARC-AGI</a></p>
 </div></aside></section>
@@ -1337,19 +1388,19 @@ This entails employing a **bottom-up** methodology to some degree.
 <h2>Artificial General Intelligence (AGI)</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p></p><div id="tweet-43205"></div><script>tweet={"url":"https:\/\/x.com\/tdietterich\/status\/1760901693305479405","author_name":"Thomas G. Dietterich","author_url":"https:\/\/x.com\/tdietterich","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003ENobody even can define AGI in a non-anthropomorphic way, let alone achieve it. The whole concept is unscientific, and people should be embarrassed to even use the term.\u003C\/p\u003E&mdash; Thomas G. Dietterich (@tdietterich) \u003Ca href=\"https:\/\/x.com\/tdietterich\/status\/1760901693305479405?ref_src=twsrc%5Etfw\"\u003EFebruary 23, 2024\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-43205").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-15633"></div><script>tweet={"url":"https:\/\/x.com\/tdietterich\/status\/1760901693305479405","author_name":"Thomas G. Dietterich","author_url":"https:\/\/x.com\/tdietterich","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003ENobody even can define AGI in a non-anthropomorphic way, let alone achieve it. The whole concept is unscientific, and people should be embarrassed to even use the term.\u003C\/p\u003E&mdash; Thomas G. Dietterich (@tdietterich) \u003Ca href=\"https:\/\/x.com\/tdietterich\/status\/1760901693305479405?ref_src=twsrc%5Etfw\"\u003EFebruary 23, 2024\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-15633").innerHTML = tweet["html"];</script><p></p>
 </div><div class="column" style="width:50%;">
 <p>Artificial general intelligence (AGI) refers to a form of artificial intelligence (AI) that either <strong>equals</strong> or <strong>exceeds human proficiency</strong> across a <strong>diverse array of cognitive functions</strong>.</p>
 </div></div>
 
 <aside><div>
-<p>AKA <strong>human-level intelligence</strong>. As opposed to <strong>narrow intelligence</strong>, the current status of AI, which is designed to perform a specific task or a limited range of tasks, operating under predefined constraints and without general cognitive abilities.</p>
+<p>AKA <strong>human-level intelligence</strong>. As opposed to <strong>narrow intelligence</strong>, the current status of AI, which is designed to perform a specific task or a limited range of tasks.</p>
 </div></aside></section>
 <section id="alphafold-1-2-3" class="slide level2">
 <h2>AlphaFold (1, 2, &amp; 3)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<p></p><div id="tweet-11587"></div><script>tweet={"url":"https:\/\/x.com\/Nature\/status\/1430934970789400587","author_name":"nature","author_url":"https:\/\/x.com\/Nature","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EProtein Power: AI network predicts highly accurate 3D structures for the human proteome. Browse this week’s issue of Nature: \u003Ca href=\"https:\/\/t.co\/ihA52BlziB\"\u003Ehttps:\/\/t.co\/ihA52BlziB\u003C\/a\u003E \u003Ca href=\"https:\/\/t.co\/XUTcbbKL3q\"\u003Epic.twitter.com\/XUTcbbKL3q\u003C\/a\u003E\u003C\/p\u003E&mdash; nature (@Nature) \u003Ca href=\"https:\/\/x.com\/Nature\/status\/1430934970789400587?ref_src=twsrc%5Etfw\"\u003EAugust 26, 2021\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-11587").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-14636"></div><script>tweet={"url":"https:\/\/x.com\/Nature\/status\/1430934970789400587","author_name":"nature","author_url":"https:\/\/x.com\/Nature","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EProtein Power: AI network predicts highly accurate 3D structures for the human proteome. Browse this week’s issue of Nature: \u003Ca href=\"https:\/\/t.co\/ihA52BlziB\"\u003Ehttps:\/\/t.co\/ihA52BlziB\u003C\/a\u003E \u003Ca href=\"https:\/\/t.co\/XUTcbbKL3q\"\u003Epic.twitter.com\/XUTcbbKL3q\u003C\/a\u003E\u003C\/p\u003E&mdash; nature (@Nature) \u003Ca href=\"https:\/\/x.com\/Nature\/status\/1430934970789400587?ref_src=twsrc%5Etfw\"\u003EAugust 26, 2021\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-14636").innerHTML = tweet["html"];</script><p></p>
 </div><div class="column" style="width:65%;">
 <p>I repeat, <strong>there is nothing wrong with narrow AI</strong>.</p>
 <ul>
@@ -1361,6 +1412,12 @@ This entails employing a **bottom-up** methodology to some degree.
 </div></div>
 <aside class="notes">
 <p>In narrow AI, several systems already surpass human performance in specific domains, including <a href="https://deepmind.google/research/alphazero-and-muzero/">AlphaZero</a>, <a href="https://stockfishchess.org/">Stockfish</a>, and <a href="https://deepmind.google/science/alphafold/">AlphaFold</a>.</p>
+<p>Accurate weather prediction is crucial because it provides advanced warning of severe events, enabling timely evacuations and reducing casualties and damage. It also supports key sectors such as agriculture, aviation, shipping, logistics, and energy, while helping manage public health risks like disease spread, poor air quality, and heat-related crises. Physics-based models are computationally intensive, limiting forecast generation frequency. In recent years, AI-based weather models have been developed that achieve strong medium-range forecasting performance while offering substantial computational efficiency. Google DeepMind recently released WeatherNext3, which demonstrates improved spatial and temporal coverage. WeatherNext3 is an example of narrow artificial intelligence.</p>
+<ul>
+<li><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/introducing-weathernext-3/">Introducing WeatherNext 3, our most advanced and accurate global weather AI model</a> (blog)</li>
+<li><a href="https://www.youtube.com/watch?v=_6jZlnRsXXQ">WeatherNext 3: More accurate, timely, and local weather forecasts</a> (video)</li>
+<li><a href="https://storage.googleapis.com/deepmind-media/papers/weathernext_3.pdf">WeatherNext 3: Increasing resolution and performance of global weather models with raw observations</a> (paper)</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1388,7 +1445,7 @@ This entails employing a **bottom-up** methodology to some degree.
 <aside class="notes">
 <p>The paradox of AI is quite fascinating. In the early days of AI, researchers focused on problems like differential equations or chess.</p>
 <p>Each time a computer solves one of these major problems, we come to think that perhaps that problem didn’t really require intelligence to be solved after all.</p>
-<p>The defeat of Garry Kasparov at the hands of IBM’s Watson is a perfect example.</p>
+<p>The defeat of Garry Kasparov at the hands of IBM’s Deep Blue is a perfect example.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1418,8 +1475,8 @@ For this course, **artificial intelligence (AI)** refers to the branch of comput
 <h1>Impact</h1>
 
 </section>
-<section id="economical" class="slide level2">
-<h2>Economical</h2>
+<section id="economy" class="slide level2">
+<h2>Economy</h2>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1499,8 +1556,8 @@ For this course, **artificial intelligence (AI)** refers to the branch of comput
 </ul>
 <aside class="notes">
 <p>For me, an interesting definition of intelligence would be similar in nature to that of computation.</p>
-<p>Using <strong>computation</strong> as an analogous concept can help clarify this question. Theoretically, computation is often considered in an abstract manner, independent of any physical implementation. The <strong>Church-Turing theorem</strong>, a fundamental principle in computer science, states that any computation that can be performed by a machine (specifically, a Turing machine) is universally applicable. This implies that the concept of computation can exist independently of its hardware or specific physical form.</p>
-<p>I must confess: until 2022, I was rather skeptical. I often drew a parallel between artificial intelligence and alchemy. Alchemists never succeeded in transmuting lead into gold because it is a physical process, but their approach led to the development of chemistry. Similarly, we may never be able to replicate human intelligence, but the impacts of AI are immense and often unexpected, like the garbage collector introduced by Lisp.</p>
+<p>Using <strong>computation</strong> as an analogous concept can help clarify this question. Theoretically, computation is often considered in an abstract manner, independent of any physical implementation. The Church–Turing thesis states that any effectively calculable function can be computed by a Turing machine. This provides a way to discuss computation abstractly, without committing to a particular physical implementation.</p>
+<p>I must confess: until 2022, I was rather skeptical. I often drew a parallel between artificial intelligence and alchemy. Alchemists never succeeded in transmuting lead into gold because changing lead into gold requires nuclear transformation, not ordinary chemical reactions, but their approach led to the development of chemistry. Similarly, we may never be able to replicate human intelligence, but the impacts of AI are immense and often unexpected, like the garbage collector introduced by Lisp.</p>
 <p>Then, it struck me: I am a scientist, and I wondered what it would mean if we were not able to produce intelligence comparable to that of humans.</p>
 <p>Richard Feynman, who received the Nobel Prize in Physics in 1965, famously said, “What I cannot build. I do not understand.”</p>
 <p>Why seek to dissociate intelligence from other concepts such as agency, consciousness, and emotions? A computer system devoid of these attributes seems, indeed, far less daunting.</p>
@@ -1537,7 +1594,7 @@ For this course, **artificial intelligence (AI)** refers to the branch of comput
 <ul>
 <li><strong>Discussed</strong> the syllabus</li>
 <li><strong>Distinguish</strong> the concept of artificial intelligence from the concept of machine learning</li>
-<li><strong>Distinguish</strong> symbolic AI from connectionnist AI</li>
+<li><strong>Distinguish</strong> symbolic AI from connectionist AI</li>
 <li><strong>Explored</strong> the various definitions of “artificial intelligence”</li>
 </ul>
 </section>
@@ -1598,11 +1655,11 @@ Newell, Allen, and Herbert A Simon. 1976a. <span>“Computer Science as Empirica
 <div id="ref-Newell:1976aa" class="csl-entry" role="listitem">
 Newell, Allen, and Herbert A. Simon. 1976b. <span>“Computer Science as Empirical Inquiry: Symbols and Search.”</span> <em>Commun. ACM</em> (New York, NY, USA) 19 (3): 113–26. <a href="https://doi.org/10.1145/360018.360022">https://doi.org/10.1145/360018.360022</a>.
 </div>
+<div id="ref-Nilsson:2005aa" class="csl-entry" role="listitem">
+Nilsson, Nils J. 2005. <span>“Human-Level Artificial Intelligence? Be Serious!”</span> <em><span>AI</span> Mag.</em> 26 (4): 68–75. <a href="https://doi.org/10.1609/AIMAG.V26I4.1850">https://doi.org/10.1609/AIMAG.V26I4.1850</a>.
+</div>
 <div id="ref-Pearl:1988aa" class="csl-entry" role="listitem">
 Pearl, Judea. 1988. <em>Probabilistic Reasoning in Intelligent Systems: Networks of Plausible Inference</em>. Morgan Kaufmann.
-</div>
-<div id="ref-Rumelhart:1986ab" class="csl-entry" role="listitem">
-Rumelhart, David E, James L McClelland, and PDP Research Group. 1986. <em>Parallel Distributed Processing: Explorations in the Microstructure of Cognition, Volume 1: Foundations</em>. MIT Press.
 </div>
 <div id="ref-Russell:2020aa" class="csl-entry" role="listitem">
 Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</span> Modern Approach</em>. 4th ed. Pearson. <a href="http://aima.cs.berkeley.edu/">http://aima.cs.berkeley.edu/</a>.
@@ -1719,7 +1776,7 @@ p_i^C \approx p_j^H, a_i^C \approx a_j^H
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> [Nilsson:2005aa]</strong></p>
+<p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Nilsson:2005aa">(<a href="#/references" role="doc-biblioref" onclick="">Nilsson 2005</a>)</span></strong></p>
 </div>
 <div class="callout-content">
 <p>“I suggest we replace the Turing test by something I will call the ‘employment test.’ To pass the employment test, <strong>AI programs must be able to perform the jobs ordinarily performed by humans</strong>. Progress toward human-level AI could then be measured by the fraction of these jobs that can be acceptably performed by machines”</p>
@@ -1754,7 +1811,7 @@ a_i^C \approx f^C(p_i^C), a_j^H \approx f^H(p_j^H), f^C \approx f^H
 </div>
 </section>
 <section id="principle-ai-rationality-logicist" class="slide level2">
-<h2>6. Principle-AI (rationality, logicist)</h2>
+<h2>5. Principle-AI (rationality, logicist)</h2>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1781,8 +1838,7 @@ A^C = F^C(P^C), A^H = F^H(P^H), F^C \approx F^H
 </section>
 <section id="code-of-the-day" class="slide level2">
 <h2>Code of the day</h2>
-<div id="06fa5473" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="co">#!/usr/bin/env python3</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="co">#!/usr/bin/env python3</span></span>
 <span id="cb13-2"><a aria-label="2"></a><span class="co"># -*- Mode: Python -*-</span></span>
 <span id="cb13-3"><a aria-label="3"></a><span class="co"># ai_lecture-01.py</span></span>
 <span id="cb13-4"><a aria-label="4"></a><span class="co"># Author          : Marcel Turcotte &amp; ChatGPT 5</span></span>
@@ -2160,7 +2216,6 @@ A^C = F^C(P^C), A^H = F^H(P^H), F^C \approx F^H
 <span id="cb13-376"><a aria-label="376"></a>    args <span class="op">=</span> parser.parse_args()</span>
 <span id="cb13-377"><a aria-label="377"></a></span>
 <span id="cb13-378"><a aria-label="378"></a>    <span class="cf">raise</span> <span class="pp">SystemExit</span>(main(args.<span class="bu">format</span>, args.voice, args.tone))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 </section>
 <section class="slide level2">
 
@@ -2212,7 +2267,7 @@ A^C = F^C(P^C), A^H = F^H(P^H), F^C \approx F^H
 'jumpToSlide': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
-'multiplex': {"secret":null,"id":"b8411997cba388d83b36610dad1715d64aab293f326ce8bdaaa759b4e25fa591","url":"https://multiplex.up.railway.app/"},
+'multiplex': {"secret":null,"id":"a8fc98b608794124aeca959a87cb5c5c6fa1fcda70d5c8b7f9e17e61ad7248bf","url":"https://multiplex.up.railway.app/"},
 'smaller': false,
  
         // Display controls in the bottom right corner

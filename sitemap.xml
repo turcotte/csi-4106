@@ -90,11 +90,11 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/03/index.html</loc>
-    <lastmod>2026-09-05T21:11:35.758Z</lastmod>
+    <lastmod>2026-09-13T21:31:55.217Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/01/index.html</loc>
-    <lastmod>2026-09-05T20:46:36.496Z</lastmod>
+    <lastmod>2026-09-13T21:25:45.767Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/25/slides.html</loc>
@@ -118,7 +118,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/15/slides.html</loc>
-    <lastmod>2026-09-03T20:07:00.851Z</lastmod>
+    <lastmod>2026-09-13T20:21:37.899Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/13/slides.html</loc>
@@ -142,11 +142,11 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/03/slides.html</loc>
-    <lastmod>2026-08-10T15:53:42.504Z</lastmod>
+    <lastmod>2026-09-13T18:23:35.386Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/01/slides.html</loc>
-    <lastmod>2026-09-08T21:47:46.438Z</lastmod>
+    <lastmod>2026-09-11T16:09:33.288Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/computing/01/slides.html</loc>
@@ -182,7 +182,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/02/slides.html</loc>
-    <lastmod>2026-08-09T15:37:56.982Z</lastmod>
+    <lastmod>2026-09-13T20:50:57.694Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/04/slides.html</loc>
@@ -234,7 +234,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/02/index.html</loc>
-    <lastmod>2026-08-08T14:16:53.490Z</lastmod>
+    <lastmod>2026-09-13T21:35:11.257Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/04/index.html</loc>
@@ -335,5 +335,13 @@
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/15/tang_cnn_tutorial-pytorch.html</loc>
     <lastmod>2026-09-01T01:13:11.195Z</lastmod>
+  </url>
+  <url>
+    <loc>https://turcotte.xyz/teaching/csi-4106/lectures/03/decision_tree_classifier.html</loc>
+    <lastmod>2026-09-13T21:47:12.998Z</lastmod>
+  </url>
+  <url>
+    <loc>https://turcotte.xyz/teaching/csi-4106/lectures/03/knn_classifier.html</loc>
+    <lastmod>2026-09-13T21:47:18.568Z</lastmod>
   </url>
 </urlset>
