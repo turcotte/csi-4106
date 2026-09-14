@@ -6570,7 +6570,7 @@
     "href": "computing/01/index.html#sample-jupyter-notebooks",
     "title": "Jupyter Notebooks and Google Colab",
     "section": "Sample Jupyter Notebooks",
-    "text": "Sample Jupyter Notebooks\n\n01_ottawa_river_temperature (Jupyter Notebook)\n02_empty (Jupyter Notebook)\n03_missing_library (Jupyter Notebook)\n04_stock_price (Jupyter Notebook)\n05_central_limit (Jupyter Notebook)\n\nThree notebooks from Aurélien Géron introducing essential concepts for machine learning. In the coming weeks, you might want to go through these at your own pace.\n\nnumpy – a fundamental library centered around N-dimensional array objects.\npandas – powerfull data analysis tools, centered around the DataFrame.\nvisualization – demonstrates how to use the matplotlib to produce beautiful graphs.",
+    "text": "Sample Jupyter Notebooks\n\n01_ottawa_river_temperature  (Jupyter Notebook)\n02_empty  (Jupyter Notebook)\n03_missing_library  (Jupyter Notebook)\n04_stock_price  (Jupyter Notebook)\n05_central_limit  (Jupyter Notebook)\n\nThree notebooks from Aurélien Géron introducing essential concepts for machine learning. In the coming weeks, you might want to go through these at your own pace.\n\nnumpy – a fundamental library centred on N-dimensional array objects.\npandas – powerful data-analysis tools centred on the DataFrame.\nvisualization – demonstrates how to use matplotlib to produce effective graphs.",
     "crumbs": [
       "**Computing**",
       "Tutorial 1"
