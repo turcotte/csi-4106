@@ -127,6 +127,22 @@
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
   <link rel="stylesheet" href="../../assets/css/reveal-common.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -243,7 +259,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Sep 13, 2026 16:50</p>
+  <p class="date">Version: Sep 15, 2026 11:59</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -385,7 +401,7 @@ Marcel Turcotte
 <p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Mitchell:1997aa">Mitchell (<a href="#/references" role="doc-biblioref" onclick="">1997</a>)</span>, page 2</strong></p>
 </div>
 <div class="callout-content">
-<p>A computer program is said to <strong>learn</strong> from <strong>experience <span class="math inline">\(E\)</span></strong> with respect to some class of <strong>tasks <span class="math inline">\(T\)</span></strong> and <strong>performance measure <span class="math inline">\(P\)</span></strong>, if its performance at tasks in <span class="math inline">\(T\)</span>, as measured by <span class="math inline">\(P\)</span>, improves with experience <span class="math inline">\(E\)</span>.</p>
+<p>A computer program is said to <strong>learn</strong> from <strong>experience <span class="math inline">E</span></strong> with respect to some class of <strong>tasks <span class="math inline">T</span></strong> and <strong>performance measure <span class="math inline">P</span></strong>, if its performance at tasks in <span class="math inline">T</span>, as measured by <span class="math inline">P</span>, improves with experience <span class="math inline">E</span>.</p>
 </div>
 </div>
 </div>
@@ -426,7 +442,7 @@ Marcel Turcotte
 </section>
 <section id="unsupervised-learning" class="slide level2 hide-code-toggle">
 <h2>Unsupervised Learning</h2>
-<p><strong>Given:</strong> feature vectors <span class="math inline">\(x_1, x_2, \ldots, x_N\)</span>, but <strong>no target labels</strong> <span class="math inline">\(y_i\)</span>.</p>
+<p><strong>Given:</strong> feature vectors <span class="math inline">x_1, x_2, \ldots, x_N</span>, but <strong>no target labels</strong> <span class="math inline">y_i</span>.</p>
 <div id="cell-unsupervised-clusters" class="cell" data-fig-height="3.8" data-fig-width="6" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
@@ -776,7 +792,7 @@ Marcel Turcotte
 </tbody>
 </table>
 <div class="{aside}">
-<p>The <strong>data</strong> is often presented in a tabular (matrix) format, where each row represents an <strong>attribute vector</strong> (feature vector), typically denoted as <span class="math inline">\(x_i\)</span>, which corresponds to the <span class="math inline">\(i\)</span>-th example in the training set.</p>
+<p>The <strong>data</strong> is often presented in a tabular (matrix) format, where each row represents an <strong>attribute vector</strong> (feature vector), typically denoted as <span class="math inline">x_i</span>, which corresponds to the <span class="math inline">i</span>-th example in the training set.</p>
 </div>
 </section>
 <section id="training-data-label-representation" class="slide level2 smaller">
@@ -809,7 +825,7 @@ Marcel Turcotte
 </tbody>
 </table>
 <div class="{aside}">
-<p>The <strong>labels</strong> are generally represented as a column vector, with <span class="math inline">\(y_i\)</span> denoting the label for the <span class="math inline">\(i\)</span>-th example.</p>
+<p>The <strong>labels</strong> are generally represented as a column vector, with <span class="math inline">y_i</span> denoting the label for the <span class="math inline">i</span>-th example.</p>
 </div>
 </section>
 <section id="model-training" class="slide level2">
@@ -898,15 +914,15 @@ Marcel Turcotte
 <h2>Supervised learning (notation)</h2>
 <p>The <strong>dataset</strong> (“experience”) is a collection of labelled examples.</p>
 <ul>
-<li class="fragment"><span class="math inline">\(\{(x_i, y_i)\}_{i=1}^N\)</span>
+<li class="fragment"><span class="math inline">\{(x_i, y_i)\}_{i=1}^N</span>
 <ul>
-<li class="fragment">Each <span class="math inline">\(x_i\)</span> is a <strong>feature</strong> (<strong>attribute</strong>) vector with <span class="math inline">\(D\)</span> dimensions.</li>
-<li class="fragment"><span class="math inline">\(x_i^{(j)}\)</span> is the value of feature <span class="math inline">\(j\)</span> for example <span class="math inline">\(i\)</span>, where <span class="math inline">\(j \in \{1, \ldots, D\}\)</span> and <span class="math inline">\(i \in \{1, \ldots, N\}\)</span>.</li>
-<li class="fragment">The <strong>target</strong> <span class="math inline">\(y_i\)</span> may be a <strong>class</strong> from a finite set <span class="math inline">\(\{1, 2, \ldots, C\}\)</span>, a <strong>real number</strong>, or a <strong>structured object</strong> such as a sequence, tree, or graph.</li>
+<li class="fragment">Each <span class="math inline">x_i</span> is a <strong>feature</strong> (<strong>attribute</strong>) vector with <span class="math inline">D</span> dimensions.</li>
+<li class="fragment"><span class="math inline">x_i^{(j)}</span> is the value of feature <span class="math inline">j</span> for example <span class="math inline">i</span>, where <span class="math inline">j \in \{1, \ldots, D\}</span> and <span class="math inline">i \in \{1, \ldots, N\}</span>.</li>
+<li class="fragment">The <strong>target</strong> <span class="math inline">y_i</span> may be a <strong>class</strong> from a finite set <span class="math inline">\{1, 2, \ldots, C\}</span>, a <strong>real number</strong>, or a <strong>structured object</strong> such as a sequence, tree, or graph.</li>
 </ul></li>
 </ul>
 <div class="fragment">
-<p><strong>Problem:</strong> Given the dataset, create a <strong>model</strong> that can predict the value of <span class="math inline">\(y\)</span> for an unseen <span class="math inline">\(x\)</span>.</p>
+<p><strong>Problem:</strong> Given the dataset, create a <strong>model</strong> that can predict the value of <span class="math inline">y</span> for an unseen <span class="math inline">x</span>.</p>
 <aside class="notes">
 <p>This notation follows that of <a href="https://themlbook.com"><strong>The Hundred-Page Machine Learning Book</strong></a> by Andriy Burkov.</p>
 <style type="text/css">
@@ -925,13 +941,13 @@ Marcel Turcotte
 <section id="supervised-learning-notation-continued" class="slide level2">
 <h2>Supervised learning (notation, continued)</h2>
 <ul>
-<li class="fragment"><p>When the <strong>target</strong> <span class="math inline">\(y_i\)</span> is a <strong>class</strong>, taken from a finite list of classes, <span class="math inline">\(\{1, 2, \ldots, C\}\)</span>, we call the task a <strong>classification</strong> task.</p></li>
-<li class="fragment"><p>When the <strong>target</strong> <span class="math inline">\(y_i\)</span> is a <strong>real number</strong>, we call the task a <strong>regression</strong> task.</p></li>
+<li class="fragment"><p>When the <strong>target</strong> <span class="math inline">y_i</span> is a <strong>class</strong>, taken from a finite list of classes, <span class="math inline">\{1, 2, \ldots, C\}</span>, we call the task a <strong>classification</strong> task.</p></li>
+<li class="fragment"><p>When the <strong>target</strong> <span class="math inline">y_i</span> is a <strong>real number</strong>, we call the task a <strong>regression</strong> task.</p></li>
 </ul>
 <aside class="notes">
 <p>Anil Ananthaswamy, in his book <a href="https://www.penguinrandomhouse.com/books/677608/why-machines-learn-by-anil-ananthaswamy/">Why Machines Learn: The Elegant Math Behind Modern AI</a>, offers an example inspired by the COVID-19 pandemic.</p>
-<p>In this advanced scenario, hospitals globally are systematically compiling patient data from the early stages of the COVID-19 pandemic. Each patient is characterized by six key variables: <span class="math inline">\(x_1\)</span> representing age, <span class="math inline">\(x_2\)</span> indicating body mass index, <span class="math inline">\(x_3\)</span> denoting difficulty breathing (encoded as 1 for yes and 0 for no), <span class="math inline">\(x_4\)</span> signifying the presence of fever (yes/no), <span class="math inline">\(x_5\)</span> for diabetes status (yes/no), and <span class="math inline">\(x_6\)</span> describing chest CT scan results (0 for clear, 1 for mild infection, 2 for severe infection). These variables collectively form a six-dimensional vector for each patient.</p>
-<p>Clinicians have observed that patients typically follow one of two trajectories: they either stabilize and are discharged approximately three days after admission, or their condition deteriorates, necessitating ventilator support. Consequently, each patient is assigned an outcome variable, <span class="math inline">\(y\)</span>, where <span class="math inline">\(y = -1\)</span> indicates no need for ventilator support after three days, and <span class="math inline">\(y = 1\)</span> indicates the requirement for ventilator support after three days.</p>
+<p>In this advanced scenario, hospitals globally are systematically compiling patient data from the early stages of the COVID-19 pandemic. Each patient is characterized by six key variables: <span class="math inline">x_1</span> representing age, <span class="math inline">x_2</span> indicating body mass index, <span class="math inline">x_3</span> denoting difficulty breathing (encoded as 1 for yes and 0 for no), <span class="math inline">x_4</span> signifying the presence of fever (yes/no), <span class="math inline">x_5</span> for diabetes status (yes/no), and <span class="math inline">x_6</span> describing chest CT scan results (0 for clear, 1 for mild infection, 2 for severe infection). These variables collectively form a six-dimensional vector for each patient.</p>
+<p>Clinicians have observed that patients typically follow one of two trajectories: they either stabilize and are discharged approximately three days after admission, or their condition deteriorates, necessitating ventilator support. Consequently, each patient is assigned an outcome variable, <span class="math inline">y</span>, where <span class="math inline">y = -1</span> indicates no need for ventilator support after three days, and <span class="math inline">y = 1</span> indicates the requirement for ventilator support after three days.</p>
 <p>Can you think of examples of regression tasks? The defining feature is that the target is a numerical quantity. Examples include:</p>
 <ul>
 <li>estimating the selling price of a house;</li>
@@ -1496,7 +1512,7 @@ weighted avg       1.00      1.00      1.00       342
 
 <aside class="notes">
 <p>What insights can be drawn from examining the graphs?</p>
-<p>The figure presents pairwise plots of the Palmer Penguins features, with the diagonal showing the distribution of each individual feature. Each dot represents an example (<span class="math inline">\(x\)</span>), and the colours indicate its label (<span class="math inline">\(y\)</span>).</p>
+<p>The figure presents pairwise plots of the Palmer Penguins features, with the diagonal showing the distribution of each individual feature. Each dot represents an example (<span class="math inline">x</span>), and the colours indicate its label (<span class="math inline">y</span>).</p>
 <p>Let’s first consider the diagonal elements:</p>
 <ul>
 <li>Is it possible to classify the examples using a single feature?</li>
@@ -2188,7 +2204,7 @@ max            2.500000  </code></pre>
 
 <aside class="notes">
 <p>What insights can be drawn from examining the graphs?</p>
-<p>The figure presents pairwise plots of the Iris features, with the diagonal showing the distribution of each individual feature. Each dot represents an example (<span class="math inline">\(x\)</span>), and the colours indicate its label (<span class="math inline">\(y\)</span>).</p>
+<p>The figure presents pairwise plots of the Iris features, with the diagonal showing the distribution of each individual feature. Each dot represents an example (<span class="math inline">x</span>), and the colours indicate its label (<span class="math inline">y</span>).</p>
 <p>Let’s first consider the diagonal elements:</p>
 <ul>
 <li>Is it possible to classify the examples using a single feature?</li>
@@ -2335,13 +2351,14 @@ weighted avg       0.93      0.93      0.93        30
   <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
   <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/multiplex/socket.io.js"></script>
+  <script src="../../site_libs/revealjs/plugin/multiplex/multiplex.js"></script>
   <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -2358,6 +2375,7 @@ weighted avg       0.93      0.93      0.93        30
 'jumpToSlide': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'chalkboard': {"buttons":true},
+'multiplex': {"secret":null,"id":"e63683497fe187552a633090b2b61d6e6d0fc718592ecf8cd1322ea9f113cb94","url":"https://multiplex.up.railway.app/"},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -2510,28 +2528,10 @@ weighted avg       0.93      0.93      0.93        30
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
-          RevealNotes,
+          
           RevealSearch,
           RevealZoom
         ]
