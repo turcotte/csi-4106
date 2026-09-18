@@ -124,6 +124,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -274,9 +290,9 @@ Marcel Turcotte
 <li class="fragment"><p>A collection of <strong>states</strong>, referred to as the <strong>state space</strong>.</p></li>
 <li class="fragment"><p>An <strong>initial state</strong> where the agent begins.</p></li>
 <li class="fragment"><p>One or more <strong>goal states</strong> that define successful outcomes.</p></li>
-<li class="fragment"><p>A set of <strong>actions</strong> available in a given state <span class="math inline">\(s\)</span>.</p></li>
+<li class="fragment"><p>A set of <strong>actions</strong> available in a given state <span class="math inline">s</span>.</p></li>
 <li class="fragment"><p>A <strong>transition model</strong> that determines the next state based on the current state and selected action.</p></li>
-<li class="fragment"><p>An <strong>action cost function</strong> that specifies the cost of performing action <span class="math inline">\(a\)</span> in state <span class="math inline">\(s\)</span> to reach state <span class="math inline">\(s'\)</span>.</p></li>
+<li class="fragment"><p>An <strong>action cost function</strong> that specifies the cost of performing action <span class="math inline">a</span> in state <span class="math inline">s</span> to reach state <span class="math inline">s'</span>.</p></li>
 </ul>
 </section>
 <section id="definitions" class="slide level2">
@@ -442,7 +458,7 @@ Marcel Turcotte
 <p>If no solution exists, the algorithm stops when the frontier becomes empty.</p>
 <p>The frontier always contains at least one node that might lead to the goal.</p>
 <p>In the context of the 8-puzzle, the generated board admits a solution. From this board, we generate all possible neighbours.</p>
-<p>Each time a node <span class="math inline">\(n\)</span> is removed from the frontier, we generate all its neighbours. This operation applies to all nodes, including those located on an optimal path.</p>
+<p>Each time a node <span class="math inline">n</span> is removed from the frontier, we generate all its neighbours. This operation applies to all nodes, including those located on an optimal path.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -686,7 +702,7 @@ Marcel Turcotte
 </section>
 <section id="heuristic-search-1" class="slide level2">
 <h2>Heuristic Search</h2>
-<p>Let <span class="math inline">\(f(n)\)</span> be a <strong>heuristic function</strong> that estimates the <strong>cost of the cheapest path</strong> from the current state or node <span class="math inline">\(n\)</span> to the goal.</p>
+<p>Let <span class="math inline">f(n)</span> be a <strong>heuristic function</strong> that estimates the <strong>cost of the cheapest path</strong> from the current state or node <span class="math inline">n</span> to the goal.</p>
 
 <aside><div>
 <p>This approach is termed <strong>best-first search</strong>.</p>
@@ -755,7 +771,7 @@ Marcel Turcotte
 </div>
 
 <aside class="notes">
-<p>The initial state is Arad, with a heuristic value of 366. Since no path has been traversed yet, the total estimated cost for this state is the sum of the traveled cost, which is 0, and the direct Euclidean distance to Bucharest, which is <span class="math inline">\(366\)</span>.</p>
+<p>The initial state is Arad, with a heuristic value of 366. Since no path has been traversed yet, the total estimated cost for this state is the sum of the traveled cost, which is 0, and the direct Euclidean distance to Bucharest, which is <span class="math inline">366</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -907,7 +923,7 @@ Marcel Turcotte
 <ul>
 <li class="fragment"><p>How can the existing <strong>breadth-first</strong> and <strong>depth-first search</strong> algorithms be modified to implement <strong>best-first search</strong>?</p>
 <ul>
-<li class="fragment">This can be achieved by employing a <strong>priority queue</strong>, which is sorted according to the values of the <strong>heuristic function</strong> <span class="math inline">\(h(n)\)</span>.</li>
+<li class="fragment">This can be achieved by employing a <strong>priority queue</strong>, which is sorted according to the values of the <strong>heuristic function</strong> <span class="math inline">h(n)</span>.</li>
 </ul></li>
 </ul>
 <div class="fragment">
@@ -918,7 +934,7 @@ Marcel Turcotte
 </section>
 <section id="remark" class="slide level2">
 <h2>Remark</h2>
-<p><strong>Breadth-first</strong> search can be interpreted as a form of <strong>best-first search</strong>, where the heuristic function <span class="math inline">\(f(n)\)</span> is defined as the <strong>depth of the node within the search tree</strong>, corresponding to the path length.</p>
+<p><strong>Breadth-first</strong> search can be interpreted as a form of <strong>best-first search</strong>, where the heuristic function <span class="math inline">f(n)</span> is defined as the <strong>depth of the node within the search tree</strong>, corresponding to the path length.</p>
 <aside class="notes">
 <p>Is this solution viable? The answer is nuanced. It is useful for examining the properties of the algorithm, but using a queue will likely provide a more efficient implementation.</p>
 <p>Can you think of a way to implement depth-first-search as a best-first-search?</p>
@@ -936,18 +952,18 @@ Marcel Turcotte
 </section>
 <section id="a-star" class="slide level2">
 <h2>A-star</h2>
-<p><span class="math inline">\(A^\star\)</span> (a-star) is the <strong>most common informed search</strong>.</p>
-<p><span class="math display">\[
+<p><span class="math inline">A^\star</span> (a-star) is the <strong>most common informed search</strong>.</p>
+<p><span class="math display">
     f(n) = g(n) + h(n)
-\]</span></p>
+</span></p>
 <p>where</p>
 <ul>
-<li><span class="math inline">\(g(n)\)</span> is the path cost from the <em>initial state</em> to <span class="math inline">\(n\)</span>.</li>
-<li><span class="math inline">\(h(n)\)</span> is an <strong>estimate</strong> of the cost of the shortest path from <span class="math inline">\(n\)</span> to the <em>goal state</em>.</li>
+<li><span class="math inline">g(n)</span> is the path cost from the <em>initial state</em> to <span class="math inline">n</span>.</li>
+<li><span class="math inline">h(n)</span> is an <strong>estimate</strong> of the cost of the shortest path from <span class="math inline">n</span> to the <em>goal state</em>.</li>
 </ul>
 
 <aside class="notes">
-<p>It is clear that <span class="math inline">\(g(n)\)</span> is a known value and not an estimate. Consequently, the accuracy of <span class="math inline">\(f(n)\)</span> improves as the execution progresses.</p>
+<p>It is clear that <span class="math inline">g(n)</span> is a known value and not an estimate. Consequently, the accuracy of <span class="math inline">f(n)</span> improves as the execution progresses.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -966,10 +982,10 @@ Marcel Turcotte
 <h2>Admissibility</h2>
 <p>A heuristic is <strong>admissible</strong> if <em>it never overestimates the true cost to reach the goal from any node in the search space</em>.</p>
 <div class="fragment">
-<p>This ensures that the <span class="math inline">\(A^\star\)</span> algorithm finds an optimal solution, as it guarantees that the estimated cost is always a lower bound on the actual cost.</p>
+<p>This ensures that the <span class="math inline">A^\star</span> algorithm finds an optimal solution, as it guarantees that the estimated cost is always a lower bound on the actual cost.</p>
 
 <aside class="notes">
-<p>If a heuristic were to overestimate the cost of the shortest path from <span class="math inline">\(n\)</span> to the goal, then <span class="math inline">\(A^\star\)</span> might ignore or delay expanding nodes that actually lie on the optimal path, because their <span class="math inline">\(f\)</span> values look artificially expensive. The algorithm may still find a solution, but not necessarily the shortest one!</p>
+<p>If a heuristic were to overestimate the cost of the shortest path from <span class="math inline">n</span> to the goal, then <span class="math inline">A^\star</span> might ignore or delay expanding nodes that actually lie on the optimal path, because their <span class="math inline">f</span> values look artificially expensive. The algorithm may still find a solution, but not necessarily the shortest one!</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -983,33 +999,33 @@ Marcel Turcotte
       }</style></aside>
 </div>
 <aside><div>
-<p>What would happen if a heuristic were to <strong>overestimate the cost</strong> of the shortest path from <span class="math inline">\(n\)</span> to the goal?</p>
+<p>What would happen if a heuristic were to <strong>overestimate the cost</strong> of the shortest path from <span class="math inline">n</span> to the goal?</p>
 </div></aside></section>
 <section id="admissibility-1" class="slide level2">
 <h2>Admissibility</h2>
-<p>Formally, a heuristic <span class="math inline">\(h(n)\)</span> is admissible if: <span class="math display">\[
+<p>Formally, a heuristic <span class="math inline">h(n)</span> is admissible if: <span class="math display">
 h(n) \leq h^\star(n)
-\]</span> where:</p>
+</span> where:</p>
 <ul>
-<li><span class="math inline">\(h(n)\)</span> is the heuristic estimate of the cost from node <span class="math inline">\(n\)</span> to the goal.</li>
-<li><span class="math inline">\(h^\star(n)\)</span> is the actual cost of the optimal path from node <span class="math inline">\(n\)</span> to the goal.</li>
+<li><span class="math inline">h(n)</span> is the heuristic estimate of the cost from node <span class="math inline">n</span> to the goal.</li>
+<li><span class="math inline">h^\star(n)</span> is the actual cost of the optimal path from node <span class="math inline">n</span> to the goal.</li>
 </ul>
 </section>
 <section id="cost-optimality" class="slide level2">
 <h2>Cost Optimality</h2>
 <p><strong>Cost optimality</strong> refers to an algorithm’s ability to find the least-cost solution among all possible solutions.</p>
 <div class="fragment">
-<p>In the context of search algorithms like <span class="math inline">\(A^\star\)</span>, cost optimality means that the algorithm will identify the path with the lowest total cost from the start to the goal, assuming an admissible heuristic is used.</p>
+<p>In the context of search algorithms like <span class="math inline">A^\star</span>, cost optimality means that the algorithm will identify the path with the lowest total cost from the start to the goal, assuming an admissible heuristic is used.</p>
 </div>
 </section>
 <section id="theorem" class="slide level2">
 <h2>Theorem</h2>
-<p>Let <span class="math inline">\(h\)</span> be <strong>admissible</strong>, i.e., <span class="math inline">\(0\le h(n)\le h^\star(n)\)</span> for all nodes <span class="math inline">\(n\)</span>, where <span class="math inline">\(h^\star(n)\)</span> is the true cost from <span class="math inline">\(n\)</span> to a goal.</p>
+<p>Let <span class="math inline">h</span> be <strong>admissible</strong>, i.e., <span class="math inline">0\le h(n)\le h^\star(n)</span> for all nodes <span class="math inline">n</span>, where <span class="math inline">h^\star(n)</span> is the true cost from <span class="math inline">n</span> to a goal.</p>
 <div class="fragment">
-<p>Assume non-negative action costs and that <span class="math inline">\(A^\star\)</span> <strong>terminates when a goal is selected for expansion</strong> (i.e., removed from the <strong>frontier</strong>).</p>
+<p>Assume non-negative action costs and that <span class="math inline">A^\star</span> <strong>terminates when a goal is selected for expansion</strong> (i.e., removed from the <strong>frontier</strong>).</p>
 </div>
 <div class="fragment">
-<p>Then <span class="math inline">\(A^\star\)</span> returns an optimal solution.</p>
+<p>Then <span class="math inline">A^\star</span> returns an optimal solution.</p>
 
 </div>
 <aside><div>
@@ -1020,32 +1036,32 @@ h(n) \leq h^\star(n)
 <ol type="1">
 <li><strong>Assume for contradiction</strong></li>
 </ol>
-<p>Suppose <span class="math inline">\(A^\star\)</span> returns a suboptimal goal <span class="math inline">\(G\)</span> with cost <span class="math inline">\(C &gt; C^\star\)</span>, where <span class="math inline">\(C^*\)</span> is the optimal solution cost.</p>
-<p>When <span class="math inline">\(A^\star\)</span> halts, <span class="math inline">\(G\)</span> has just been selected from the frontier with <span class="math inline">\(f(G)=g(G)=C\)</span>.</p>
+<p>Suppose <span class="math inline">A^\star</span> returns a suboptimal goal <span class="math inline">G</span> with cost <span class="math inline">C &gt; C^\star</span>, where <span class="math inline">C^*</span> is the optimal solution cost.</p>
+<p>When <span class="math inline">A^\star</span> halts, <span class="math inline">G</span> has just been selected from the frontier with <span class="math inline">f(G)=g(G)=C</span>.</p>
 </section>
 <section id="proof-1" class="slide level2">
 <h2>Proof</h2>
 <ol start="2" type="1">
 <li><strong>Lower bound along any optimal path</strong></li>
 </ol>
-<p>Consider any node <span class="math inline">\(n\)</span> on an optimal path to an optimal goal <span class="math inline">\(G^\star\)</span> (cost <span class="math inline">\(C^\star\)</span>).</p>
+<p>Consider any node <span class="math inline">n</span> on an optimal path to an optimal goal <span class="math inline">G^\star</span> (cost <span class="math inline">C^\star</span>).</p>
 <p>By admissibility,</p>
-<p><span class="math display">\[
+<p><span class="math display">
    f(n) = g(n) + h(n)\ \le\ g(n) + h^\star(n) = C^\star
-\]</span></p>
-<p>Thus every node on an optimal path has <span class="math inline">\(f(n) \le C^\star\)</span>.</p>
+</span></p>
+<p>Thus every node on an optimal path has <span class="math inline">f(n) \le C^\star</span>.</p>
 </section>
 <section id="proof-2" class="slide level2">
 <h2>Proof</h2>
 <ol start="3" type="1">
 <li><strong>The first-unexpanded node is in frontier</strong></li>
 </ol>
-<p>When <span class="math inline">\(G\)</span> is chosen, walk from the start along an optimal path to <span class="math inline">\(G^\star\)</span> until you reach the <strong>first node <span class="math inline">\(n\)</span> that has not yet been expanded</strong>.</p>
+<p>When <span class="math inline">G</span> is chosen, walk from the start along an optimal path to <span class="math inline">G^\star</span> until you reach the <strong>first node <span class="math inline">n</span> that has not yet been expanded</strong>.</p>
 <div class="fragment">
-<p>Its parent on that path has been expanded (by definition of “first”), so <span class="math inline">\(n\)</span> has been <strong>generated</strong> and is therefore in <strong>frontier</strong>.</p>
+<p>Its parent on that path has been expanded (by definition of “first”), so <span class="math inline">n</span> has been <strong>generated</strong> and is therefore in <strong>frontier</strong>.</p>
 </div>
 <div class="fragment">
-<p>From Step 2, <span class="math inline">\(f(n)\le C^\star\)</span>. Since <span class="math inline">\(C^\star &lt; C = f(G)\)</span>, <span class="math inline">\(A^\star\)</span>’s best-first rule should choose <span class="math inline">\(n\)</span> (or another node with <span class="math inline">\(f \le C^\star\)</span>) before <span class="math inline">\(G\)</span>, a contradiction.</p>
+<p>From Step 2, <span class="math inline">f(n)\le C^\star</span>. Since <span class="math inline">C^\star &lt; C = f(G)</span>, <span class="math inline">A^\star</span>’s best-first rule should choose <span class="math inline">n</span> (or another node with <span class="math inline">f \le C^\star</span>) before <span class="math inline">G</span>, a contradiction.</p>
 </div>
 </section>
 <section id="proof-3" class="slide level2">
@@ -1053,16 +1069,16 @@ h(n) \leq h^\star(n)
 <ol start="4" type="1">
 <li><strong>Conclude optimality</strong></li>
 </ol>
-<p>The contradiction shows <span class="math inline">\(A^\star\)</span> cannot return a goal with cost <span class="math inline">\(&gt;C^\star\)</span>; hence the returned solution is optimal.</p>
+<p>The contradiction shows <span class="math inline">A^\star</span> cannot return a goal with cost <span class="math inline">&gt;C^\star</span>; hence the returned solution is optimal.</p>
 <p>Q.E.D.</p>
 </section>
 <section id="puzzle" class="slide level2">
 <h2>8-Puzzle</h2>
-<p>Can you think of a heuristic function, <span class="math inline">\(h(n)\)</span>, for the 8-Puzzle?</p>
+<p>Can you think of a heuristic function, <span class="math inline">h(n)</span>, for the 8-Puzzle?</p>
 </section>
 <section id="number-of-inversions-distance" class="slide level2 smaller">
 <h2>Number of Inversions Distance</h2>
-<p>Can the number of inversions be used as a heuristic function, <span class="math inline">\(h(n)\)</span>, for the 8-Puzzle?</p>
+<p>Can the number of inversions be used as a heuristic function, <span class="math inline">h(n)</span>, for the 8-Puzzle?</p>
 <div class="fragment">
 <div id="58f36ac0" class="cell" data-execution_count="12">
 <details class="code-fold">
@@ -1097,12 +1113,12 @@ h(n) \leq h^\star(n)
 </div>
 </div>
 <ul>
-<li>Calculate <span class="math inline">\(h(s)\)</span> and <span class="math inline">\(h^\star(s)\)</span>.</li>
+<li>Calculate <span class="math inline">h(s)</span> and <span class="math inline">h^\star(s)</span>.</li>
 <li>What do you conclude?</li>
 </ul>
 <aside class="notes">
 <p>Intuitively, counting the number of inversions in the 8-Puzzle seems like it could serve as a heuristic — configurations with many inversions appear farther from the goal, which has none. However, since each move changes the inversion count by 0 or 2, it fails to provide a consistent or admissible measure of progress toward the goal.</p>
-<p>For the initial board configuration, the heuristic function <span class="math inline">\(h(s)\)</span> has a value of 2, while the optimal cost, denoted <span class="math inline">\(h^\star(s)\)</span>, is 1. Hence, <span class="math inline">\(h(s) = 2 &gt; h^\star(s) = 1\)</span>. As the inversion count can overestimate the true cost, it cannot be considered an admissible heuristic. This is because a single move can alter the relative order of the moved tile with respect to multiple other tiles, potentially decreasing the inversion count by more than 1 per move. Consequently, the inversion count fails to provide a valid lower bound on the number of actions required.</p>
+<p>For the initial board configuration, the heuristic function <span class="math inline">h(s)</span> has a value of 2, while the optimal cost, denoted <span class="math inline">h^\star(s)</span>, is 1. Hence, <span class="math inline">h(s) = 2 &gt; h^\star(s) = 1</span>. As the inversion count can overestimate the true cost, it cannot be considered an admissible heuristic. This is because a single move can alter the relative order of the moved tile with respect to multiple other tiles, potentially decreasing the inversion count by more than 1 per move. Consequently, the inversion count fails to provide a valid lower bound on the number of actions required.</p>
 <p>Be careful when constructing examples to reason about the problem. For instance, it may seem that the permutation “1, 2, 3, 4, 5, 6, 0, 8, 7” is only one move away from the goal, since it contains just one inversion. However, recall that the parity of the inversion count is invariant — each move changes it by 0 or 2. Because this configuration has an odd number of inversions, no sequence of actions can transform it into the goal state (the identity permutation).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1131,8 +1147,8 @@ h(n) \leq h^\star(n)
 
 <aside class="notes">
 <p>Consider any single legal move. It slides exactly one tile into the blank. That move can fix <strong>at most one tile</strong> that was previously misplaced; all other tiles keep their “misplaced vs.&nbsp;placed” status.</p>
-<p>Therefore, along any solution path that uses <span class="math inline">\(k\)</span> moves, the number of misplaced tiles can drop by at most <span class="math inline">\(k\)</span>. If the start has <span class="math inline">\(h(x)\)</span> misplaced tiles, any solution must have length at least <span class="math inline">\(h(s)\)</span> steps.</p>
-<p>Hence <span class="math inline">\(h(s) \leq h^\star(s)\)</span>, i.e.&nbsp;the heuristic is admissible.</p>
+<p>Therefore, along any solution path that uses <span class="math inline">k</span> moves, the number of misplaced tiles can drop by at most <span class="math inline">k</span>. If the start has <span class="math inline">h(x)</span> misplaced tiles, any solution must have length at least <span class="math inline">h(s)</span> steps.</p>
+<p>Hence <span class="math inline">h(s) \leq h^\star(s)</span>, i.e.&nbsp;the heuristic is admissible.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1447,9 +1463,9 @@ Step 25:
 <span id="cb22-9"><a aria-label="9"></a>        distance <span class="op">+=</span> <span class="bu">abs</span>(x1 <span class="op">-</span> x2) <span class="op">+</span> <span class="bu">abs</span>(y1 <span class="op">-</span> y2)</span>
 <span id="cb22-10"><a aria-label="10"></a>    <span class="cf">return</span> distance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><span class="math display">\[
+<p><span class="math display">
     h_{\mathrm{Manathan}}(s) = \sum_{t \in \{1,\ldots,8\}} (|x_t - x_t^\star| + |y_t - y_t^\star|)
-\]</span></p>
+</span></p>
 
 <aside class="notes">
 <p>Consider a relaxed version of the 8-puzzle in which a tile may move to any adjacent square (up/down/left/right) without needing the blank. In that relaxed puzzle, the exact number of moves needed from a state is precisely the total Manhattan distance (each move reduces one tile’s distance by 1 and you can always move the needed tile directly). The optimal cost of any relaxed problem is a lower bound on the optimal cost of the original problem, therefore the Manathan distance is admissible for the real 8-puzzle.</p>
@@ -1663,8 +1679,8 @@ Step 25:
 <span id="cb26-32"><a aria-label="32"></a>    <span class="cf">return</span> <span class="va">None</span>  <span class="co"># No solution found</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <aside class="notes">
-<p>When expanding a node in the search tree, it is crucial to note that we do not immediately evaluate its descendant nodes to determine if they are goal nodes. Instead, these descendants are added to the frontier, which is a priority queue. This allows their <span class="math inline">\(f(n)\)</span> values to be compared with those of other nodes in the frontier, ensuring that the most promising nodes are considered first based on their estimated total cost.</p>
-<p>Consequently, it is possible for the frontier to include nodes that are goal nodes. However, their <span class="math inline">\(f(n)\)</span> values may be higher than those of other nodes deemed more promising, as these other nodes might lead to a shorter path to the goal.</p>
+<p>When expanding a node in the search tree, it is crucial to note that we do not immediately evaluate its descendant nodes to determine if they are goal nodes. Instead, these descendants are added to the frontier, which is a priority queue. This allows their <span class="math inline">f(n)</span> values to be compared with those of other nodes in the frontier, ensuring that the most promising nodes are considered first based on their estimated total cost.</p>
+<p>Consequently, it is possible for the frontier to include nodes that are goal nodes. However, their <span class="math inline">f(n)</span> values may be higher than those of other nodes deemed more promising, as these other nodes might lead to a shorter path to the goal.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2048,14 +2064,14 @@ Step 25:
 <ol type="1">
 <li>Generate a random configuration of the 8-Puzzle.</li>
 <li>Determine the shortest path using breadth-first search.</li>
-<li>Identify the optimal solution using the <span class="math inline">\(A^\star\)</span> algorithm.</li>
-<li>Compare the costs of the solutions obtained in steps 2 and 3. There should be no discrepancy if <span class="math inline">\(A^\star\)</span> identifies cost-optimal solutions.</li>
+<li>Identify the optimal solution using the <span class="math inline">A^\star</span> algorithm.</li>
+<li>Compare the costs of the solutions obtained in steps 2 and 3. There should be no discrepancy if <span class="math inline">A^\star</span> identifies cost-optimal solutions.</li>
 <li>Repeat the process.</li>
 </ol>
 </section>
 <section id="exploration-1" class="slide level2 smaller">
 <h2>Exploration</h2>
-<p>The heuristic <span class="math inline">\(h(n) = 0\)</span> is considered admissible, yet it typically results in inefficient exploration of the search space. Develop a program to investigate this concept. Demonstrate that when all actions are assumed to have unit cost, both <span class="math inline">\(A^\star\)</span> and breadth-first search (BFS) explore the search space similarly. Specifically, they examine all paths of length one, followed by paths of length two, and so forth.</p>
+<p>The heuristic <span class="math inline">h(n) = 0</span> is considered admissible, yet it typically results in inefficient exploration of the search space. Develop a program to investigate this concept. Demonstrate that when all actions are assumed to have unit cost, both <span class="math inline">A^\star</span> and breadth-first search (BFS) explore the search space similarly. Specifically, they examine all paths of length one, followed by paths of length two, and so forth.</p>
 </section>
 <section id="remarks-1" class="slide level2">
 <h2>Remarks</h2>
@@ -2100,7 +2116,7 @@ Step 25:
 
 <aside class="notes">
 <ul>
-<li>What is the time and space complexity of breadth-first-search? <span class="math inline">\(\mathcal{O}(b^d)\)</span></li>
+<li>What is the time and space complexity of breadth-first-search? <span class="math inline">\mathcal{O}(b^d)</span></li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2114,7 +2130,7 @@ Step 25:
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>Alternatively, complexity can be evaluated based on the <strong>depth</strong> (<span class="math inline">\(d\)</span>) and <strong>branching factor</strong> (<span class="math inline">\(b\)</span>) of the search tree, instead of the number of states (nodes) and actions (edges) in the state space.</p>
+<p>Alternatively, complexity can be evaluated based on the <strong>depth</strong> (<span class="math inline">d</span>) and <strong>branching factor</strong> (<span class="math inline">b</span>) of the search tree, instead of the number of states (nodes) and actions (edges) in the state space.</p>
 </div></aside></section>
 <section id="videos-by-sebastian-lague" class="slide level2 smaller scrollable">
 <h2>Videos by Sebastian Lague</h2>
@@ -2133,7 +2149,7 @@ Step 25:
 </ul>
 </section>
 <section id="a-resource-dedicated-to-astar" class="slide level2">
-<h2>A resource dedicated to <span class="math inline">\(A^\star\)</span></h2>
+<h2>A resource dedicated to <span class="math inline">A^\star</span></h2>
 <ul>
 <li><a href="http://theory.stanford.edu/~amitp/GameProgramming/">Amit’s A* Pages</a></li>
 </ul>
@@ -2236,7 +2252,6 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -2405,27 +2420,9 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

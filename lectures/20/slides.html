@@ -126,6 +126,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -259,7 +275,7 @@ Marcel Turcotte
 <p>AlphaEvolve is an agent capable of evolving complete codebases and developing complex algorithms. As illustrated in the following publication, AlphaEvolve is also able to discover innovative mathematical structures.</p>
 <ul>
 <li><p><a href="https://arxiv.org/abs/2511.02864">Mathematical exploration and discovery at scale</a>, <span class="citation" data-cites="Georgiev:2025aa">Georgiev et al. (<a href="#/references" role="doc-biblioref" onclick="">2025</a>)</span>.</p></li>
-<li><p>It discovered a way to multiply two <span class="math inline">\(4\times 4\)</span> complex matrices using only 48 scalar multiplications, the first recorded improvement on this problem in 56 years.</p></li>
+<li><p>It discovered a way to multiply two <span class="math inline">4\times 4</span> complex matrices using only 48 scalar multiplications, the first recorded improvement on this problem in 56 years.</p></li>
 <li><p>By devising more efficient decompositions of large matrix-multiplication subproblems, it accelerated a key Gemini training kernel by 23%, yielding a roughly 1% reduction in overall training time.</p></li>
 <li><p>It improved the FlashAttention kernel used in Transformer models, achieving speedups of up to 32.5%.</p></li>
 </ul>
@@ -402,7 +418,7 @@ Marcel Turcotte
 </div></aside></section>
 <section id="trends-in-ai" class="slide level2">
 <h2>Trends in AI</h2>
-<p></p><div id="tweet-96459"></div><script>tweet={"url":"https:\/\/x.com\/fchollet\/status\/1854246566753890733","author_name":"François Chollet","author_url":"https:\/\/x.com\/fchollet","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003ESimilarly, there are several research directions today seen as long-abandoned failures, that are only waiting for the right amount of attention and the right level of compute scale to shine. Genetic algorithms are one of them.\u003C\/p\u003E&mdash; François Chollet (@fchollet) \u003Ca href=\"https:\/\/x.com\/fchollet\/status\/1854246566753890733?ref_src=twsrc%5Etfw\"\u003ENovember 6, 2024\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-96459").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-37841"></div><script>tweet={"url":"https:\/\/x.com\/fchollet\/status\/1854246566753890733","author_name":"François Chollet","author_url":"https:\/\/x.com\/fchollet","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003ESimilarly, there are several research directions today seen as long-abandoned failures, that are only waiting for the right amount of attention and the right level of compute scale to shine. Genetic algorithms are one of them.\u003C\/p\u003E&mdash; François Chollet (@fchollet) \u003Ca href=\"https:\/\/x.com\/fchollet\/status\/1854246566753890733?ref_src=twsrc%5Etfw\"\u003ENovember 6, 2024\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-37841").innerHTML = tweet["html"];</script><p></p>
 </section>
 <section id="applications" class="slide level2">
 <h2>Applications</h2>
@@ -581,13 +597,13 @@ Marcel Turcotte
 </div></aside></section>
 <section id="problem-continued" class="slide level2">
 <h2>Problem (continued)</h2>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
 &amp; \text { maximize } \sum_{i=1}^n x_i \cdot v_i  \\
 &amp; \text { subject to } \sum_{i=1}^n x_i \cdot w_i  \leq W \text { and } x_i \in\{0,1\} .
 \end{aligned}
-\]</span></p>
-<p>where <span class="math inline">\(v_i\)</span> and <span class="math inline">\(w_i\)</span> represent the <strong>value</strong> and the <strong>weight</strong> of item <span class="math inline">\(i\)</span>, respectively, <span class="math inline">\(W\)</span> represents the <strong>fixed maximum weight</strong>, <span class="math inline">\(x_i\)</span> is a binary variable indicating if item <span class="math inline">\(i\)</span> is <strong>included (1)</strong> or <strong>excluded (0)</strong>, and there are <span class="math inline">\(n\)</span> items.</p>
+</span></p>
+<p>where <span class="math inline">v_i</span> and <span class="math inline">w_i</span> represent the <strong>value</strong> and the <strong>weight</strong> of item <span class="math inline">i</span>, respectively, <span class="math inline">W</span> represents the <strong>fixed maximum weight</strong>, <span class="math inline">x_i</span> is a binary variable indicating if item <span class="math inline">i</span> is <strong>included (1)</strong> or <strong>excluded (0)</strong>, and there are <span class="math inline">n</span> items.</p>
 </section>
 <section id="applications-1" class="slide level2 scrollable">
 <h2>Applications</h2>
@@ -667,7 +683,7 @@ Marcel Turcotte
 <ul>
 <li>What is the time complexity of this method?
 <ul>
-<li><span class="math inline">\(\mathcal{O}(n \log n)\)</span> due to sorting.</li>
+<li><span class="math inline">\mathcal{O}(n \log n)</span> due to sorting.</li>
 </ul></li>
 <li>Is this strategy relevant?
 <ul>
@@ -734,7 +750,7 @@ Weight: 817</code></pre>
 <ul>
 <li>What is the time complexity of this method?
 <ul>
-<li><span class="math inline">\(\mathcal{O}(n \log n)\)</span> due to sorting.</li>
+<li><span class="math inline">\mathcal{O}(n \log n)</span> due to sorting.</li>
 </ul></li>
 <li>Is this strategy relevant?
 <ul>
@@ -791,7 +807,7 @@ Weight: 849</code></pre>
 </div>
 
 <aside><div>
-<p>The most <strong>straightforward representation</strong> for each <strong>chromosome</strong> (<strong>state</strong>) is an array of size <span class="math inline">\(n\)</span>, where <span class="math inline">\(n\)</span> represents the number of items. Each element <span class="math inline">\(i\)</span> in the array indicates whether item <span class="math inline">\(i\)</span> is <strong>included (1)</strong> or <strong>excluded (0)</strong>.</p>
+<p>The most <strong>straightforward representation</strong> for each <strong>chromosome</strong> (<strong>state</strong>) is an array of size <span class="math inline">n</span>, where <span class="math inline">n</span> represents the number of items. Each element <span class="math inline">i</span> in the array indicates whether item <span class="math inline">i</span> is <strong>included (1)</strong> or <strong>excluded (0)</strong>.</p>
 </div></aside></section>
 <section id="population" class="slide level2">
 <h2>Population</h2>
@@ -1582,7 +1598,7 @@ Packed_weights: [7, 0, 22, 80, 11, 59, 18, 0, 3, 8, 15, 42, 9, 0, 47, 52, 26, 6,
 <li><p><strong>Values encoding</strong>. In this encoding, integer, real, or character values are used. Example: learning the parameters of a polynomical in a regression problem.</p></li>
 </ul>
 <aside class="notes">
-<p>In the context of binary encoding, it specifically refers to the numerical representation in base two. For instance, to determine the optimal value of the function <span class="math inline">\(f(x) = x + \| \sin(32 x) \|\)</span> in the interval <span class="math inline">\(0 \le x &lt; \pi\)</span>, we use a population of numbers represented in binary form.</p>
+<p>In the context of binary encoding, it specifically refers to the numerical representation in base two. For instance, to determine the optimal value of the function <span class="math inline">f(x) = x + \| \sin(32 x) \|</span> in the interval <span class="math inline">0 \le x &lt; \pi</span>, we use a population of numbers represented in binary form.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1697,8 +1713,8 @@ Packed_weights: [7, 0, 22, 80, 11, 59, 18, 0, 3, 8, 15, 42, 9, 0, 47, 52, 26, 6,
 
 <aside class="notes">
 <ul>
-<li>Smaller <span class="math inline">\(k\)</span> (e.g., <span class="math inline">\(k = 2\)</span>): Low selection pressure promotes diversity and exploration, useful in early generations.</li>
-<li>Larger <span class="math inline">\(k\)</span> (e.g., <span class="math inline">\(k = 5\)</span>): High selection pressure accelerates convergence, emphasizing exploitation, ideal in later generations.</li>
+<li>Smaller <span class="math inline">k</span> (e.g., <span class="math inline">k = 2</span>): Low selection pressure promotes diversity and exploration, useful in early generations.</li>
+<li>Larger <span class="math inline">k</span> (e.g., <span class="math inline">k = 5</span>): High selection pressure accelerates convergence, emphasizing exploitation, ideal in later generations.</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1918,12 +1934,12 @@ Weight: 850</code></pre>
 <li><strong>Single</strong> or <strong>k-point</strong> cross-over.</li>
 </ul>
 <aside class="notes">
-<p>K-point crossover is a genetic algorithm technique used for combining two parent solutions to generate offspring. It involves selecting <span class="math inline">\(k\)</span> crossover points and swapping segments of the parents between these points. Here are some scenarios where k-point crossover might be particularly useful:</p>
+<p>K-point crossover is a genetic algorithm technique used for combining two parent solutions to generate offspring. It involves selecting <span class="math inline">k</span> crossover points and swapping segments of the parents between these points. Here are some scenarios where k-point crossover might be particularly useful:</p>
 <ol type="1">
 <li><p><strong>Complex Solution Spaces</strong>: When the problem domain involves complex interdependencies between variables, k-point crossover can help explore the solution space more thoroughly by allowing multiple segments to be exchanged between parents.</p></li>
-<li><p><strong>Diverse Genetic Material</strong>: By increasing <span class="math inline">\(k\)</span>, more genetic material from both parents is mixed, which can introduce greater diversity into the offspring. This can be beneficial in avoiding premature convergence on suboptimal solutions.</p></li>
+<li><p><strong>Diverse Genetic Material</strong>: By increasing <span class="math inline">k</span>, more genetic material from both parents is mixed, which can introduce greater diversity into the offspring. This can be beneficial in avoiding premature convergence on suboptimal solutions.</p></li>
 <li><p><strong>Balancing Exploration and Exploitation</strong>: K-point crossover provides a balance between exploration (by introducing new combinations of genetic material) and exploitation (by maintaining some continuity with the parent solutions). This can be advantageous in maintaining a healthy diversity in the population.</p></li>
-<li><p><strong>Tuning Genetic Algorithm Performance</strong>: Adjusting the number of crossover points (<span class="math inline">\(k\)</span>) allows for fine-tuning the genetic algorithm’s performance. A higher <span class="math inline">\(k\)</span> can be used to increase diversity, while a lower <span class="math inline">\(k\)</span> can focus on exploiting known good solutions.</p></li>
+<li><p><strong>Tuning Genetic Algorithm Performance</strong>: Adjusting the number of crossover points (<span class="math inline">k</span>) allows for fine-tuning the genetic algorithm’s performance. A higher <span class="math inline">k</span> can be used to increase diversity, while a lower <span class="math inline">k</span> can focus on exploiting known good solutions.</p></li>
 <li><p><strong>Large Solution Representations</strong>: In problems with large solution representations, such as long binary strings or large arrays, k-point crossover allows for more nuanced mixing of genetic material, potentially leading to more effective search and optimization.</p></li>
 <li><p><strong>Empirical Testing</strong>: Sometimes, k-point crossover is chosen based on empirical results, where experimentation shows that it performs better for a specific problem or dataset compared to other crossover methods.</p></li>
 </ol>
@@ -2200,14 +2216,14 @@ Weight: 850</code></pre>
 <ul>
 <li><p><strong>Bit Flip Mutation:</strong> This involves flipping the value of a bit at a selected position within the chromosome.</p>
 <ul>
-<li><strong>Mutation Rate:</strong> A typical mutation rate is <span class="math inline">\(1/n\)</span>, where <span class="math inline">\(n\)</span> represents the length of the chromosome.</li>
+<li><strong>Mutation Rate:</strong> A typical mutation rate is <span class="math inline">1/n</span>, where <span class="math inline">n</span> represents the length of the chromosome.</li>
 </ul></li>
 </ul>
 </section>
 <section id="mutation-2" class="slide level2">
 <h2>Mutation</h2>
 <ul>
-<li><strong>Replacement or Random Resetting:</strong> For integer and real-valued chromosomes, employ a random selection from the uniform distribution <span class="math inline">\(U(a, b)\)</span> to choose a new value within the interval <span class="math inline">\([a, b]\)</span>. Similar to the bit flip operator, determine for each position whether a mutation should occur, then apply the replacement if necessary.</li>
+<li><strong>Replacement or Random Resetting:</strong> For integer and real-valued chromosomes, employ a random selection from the uniform distribution <span class="math inline">U(a, b)</span> to choose a new value within the interval <span class="math inline">[a, b]</span>. Similar to the bit flip operator, determine for each position whether a mutation should occur, then apply the replacement if necessary.</li>
 </ul>
 </section>
 <section id="mutation-3" class="slide level2">
@@ -2277,7 +2293,7 @@ Weight: 850</code></pre>
 <p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Skiena:2008aa">(<a href="#/references" role="doc-biblioref" onclick="">Skiena 2008, 267</a>)</span></strong></p>
 </div>
 <div class="callout-content">
-<p>[I]t is quite <strong>unnatural</strong> to model applications in terms of genetic operators like mutation and crossover on bit strings. The <strong>pseudobiology</strong> adds another level of <strong>complexity</strong> between you and your problem. Second, genetic algorithms <strong>take a very long time on nontrivial problems</strong>. [<span class="math inline">\(\ldots\)</span>] [T]he analogy with evolution – where significant progress require [sic] millions of years –&nbsp;can be quite appropriate. […]</p>
+<p>[I]t is quite <strong>unnatural</strong> to model applications in terms of genetic operators like mutation and crossover on bit strings. The <strong>pseudobiology</strong> adds another level of <strong>complexity</strong> between you and your problem. Second, genetic algorithms <strong>take a very long time on nontrivial problems</strong>. [<span class="math inline">\ldots</span>] [T]he analogy with evolution – where significant progress require [sic] millions of years –&nbsp;can be quite appropriate. […]</p>
 <p><strong>I have never encountered any problem where genetic algorithms seemed to me the right way to attack it.</strong> Further, I have never seen any computational results reported using genetic algorithms that have favorably impressed me. Stick to&nbsp;simulated annealing&nbsp;for your heuristic search <strong>voodoo</strong> needs.</p>
 </div>
 </div>
@@ -2711,7 +2727,6 @@ Skiena, Steven S. 2008. <em>The Algorithm Design Manual</em>. Springer. <a href=
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -2880,27 +2895,9 @@ Skiena, Steven S. 2008. <em>The Algorithm Design Manual</em>. Springer. <a href=
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

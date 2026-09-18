@@ -71,7 +71,7 @@ print(f"Classes: {np.unique(y_train)}")
 
 Euclidean distance depends on numerical scale. We therefore standardize each feature using the training-set mean and standard deviation:
 
-\\ z=\frac{x-\mu\_{\mathrm{train}}}{\sigma\_{\mathrm{train}}}. \\
+z=\frac{x-\mu\_{\mathrm{train}}}{\sigma\_{\mathrm{train}}}.
 
 The scaler is fitted only on the training data. The test data must not influence preprocessing choices made during learning.
 
@@ -83,11 +83,11 @@ X_test_scaled = scaler.transform(X_test)
 
 # Searching for Neighbours
 
-For a query \\x\\ and a training example \\x_i\\, Euclidean distance is
+For a query x and a training example x_i, Euclidean distance is
 
-\\ d(x,x_i)=\sqrt{\sum\_{j=1}^{D}\left(x^{(j)}-x_i^{(j)}\right)^2}. \\
+d(x,x_i)=\sqrt{\sum\_{j=1}^{D}\left(x^{(j)}-x_i^{(j)}\right)^2}.
 
-The most direct implementation computes every distance, sorts them, and keeps the first \\k\\ indices.
+The most direct implementation computes every distance, sorts them, and keeps the first k indices.
 
 ``` python
 def nearest_neighbors(X_train, x, n_neighbors):
@@ -101,11 +101,11 @@ The stable sort makes the result deterministic when two training examples are eq
 
 # Voting
 
-With uniform voting, all selected neighbours receive weight 1. With distance weighting, neighbour \\i\\ receives weight
+With uniform voting, all selected neighbours receive weight 1. With distance weighting, neighbour i receives weight
 
-\\ w_i=\frac{1}{d_i}. \\
+w_i=\frac{1}{d_i}.
 
-An exact match requires special handling because \\1/0\\ is undefined. If exact matches exist, our implementation lets only those observations vote.
+An exact match requires special handling because 1/0 is undefined. If exact matches exist, our implementation lets only those observations vote.
 
 ``` python
 def voting_weights(distances, mode):
@@ -308,7 +308,7 @@ plt.show()
 
 ![](knn_classifier_files/figure-html/decision-boundaries-output-1.png)
 
-With \\k=1\\, individual training observations control small regions, producing a highly irregular boundary. Increasing \\k\\ smooths the boundary because a larger neighbourhood must agree. Distance weighting allows nearby observations to retain greater local influence.
+With k=1, individual training observations control small regions, producing a highly irregular boundary. Increasing k smooths the boundary because a larger neighbourhood must agree. Distance weighting allows nearby observations to retain greater local influence.
 
 # Regression
 
@@ -324,13 +324,13 @@ Since the result is an average of observed neighbour targets, ordinary KNN regre
 
 # Complexity and Limitations
 
-For each query, this straightforward implementation computes distances in \\\mathcal{O}(ND)\\ and performs a complete \\\mathcal{O}(N\log N)\\ sort. It also retains the \\\mathcal{O}(ND)\\ training set in memory.
+For each query, this straightforward implementation computes distances in \mathcal{O}(ND) and performs a complete \mathcal{O}(N\log N) sort. It also retains the \mathcal{O}(ND) training set in memory.
 
 Other important limitations include:
 
 - distances are sensitive to feature scaling and the selected metric;
 - neighbourhoods become less informative in high-dimensional spaces;
-- small \\k\\ can be sensitive to noise, whereas large \\k\\ can hide local structure; and
+- small k can be sensitive to noise, whereas large k can hide local structure; and
 - class imbalance can dominate a neighbourhood’s vote.
 
 # Suggested Experiments

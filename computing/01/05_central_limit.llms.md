@@ -22,7 +22,7 @@ This example is derived from my personal notes. Jupyter notebooks can be effecti
 
 The Central Limit Theorem is a fundamental statistical concept that states that the distribution of sample means approximates a normal distribution (bell-shaped curve) as the sample size becomes large, regardless of the shape of the population distribution, provided that the samples are independent and identically distributed.
 
-\\ \text{sample standard deviation} = \frac{\text{population standard deviation}}{\sqrt{\text{sample size}}} \\
+\text{sample standard deviation} = \frac{\text{population standard deviation}}{\sqrt{\text{sample size}}}
 
 Let’s illustrate the concept with two popular but dissimilar probability distributions.
 
@@ -48,7 +48,7 @@ plt.show()
 
 ![](05_central_limit_files/figure-html/cell-2-output-1.png)
 
-In this first example, 1000 samples are generated each with 31 values sampled from a uniform distribution with range \\\[0,1\]\\
+In this first example, 1000 samples are generated each with 31 values sampled from a uniform distribution with range \[0,1\]
 
 ``` python
 import numpy as np
@@ -73,7 +73,7 @@ plt.show()
 
 The above histogram has the characteristic bell shape.
 
-For the next example, we will turn our attention to the exponential probability distribution. Again, we will refresh our memory. The following shows the histogram for 1000 values generated from an exponential distribution with rate \\\lambda = \frac{1}{4}\\. Hence, the scale, \\\beta=\frac{1}{\lambda}\\, is \\4\\.
+For the next example, we will turn our attention to the exponential probability distribution. Again, we will refresh our memory. The following shows the histogram for 1000 values generated from an exponential distribution with rate \lambda = \frac{1}{4}. Hence, the scale, \beta=\frac{1}{\lambda}, is 4.
 
 ``` python
 import numpy as np

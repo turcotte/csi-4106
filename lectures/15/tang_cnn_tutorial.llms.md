@@ -34,7 +34,7 @@ By the end of this notebook, you should be able to:
 - explain how a `Conv1D` layer processes a sequence;
 - distinguish training, validation, and test data;
 - use early stopping to control neural-network training;
-- interpret loss, Pearson correlation, and \\R^2\\ learning curves; and
+- interpret loss, Pearson correlation, and R^2 learning curves; and
 - explain how predictions can be highly correlated with observations while remaining poorly calibrated.
 
 # 2 Preparation
@@ -265,7 +265,7 @@ print(f"Retained: {N_RETAINED:,} sequences ({retained_fraction:.1%})")
     Read-count boundary: 294
     Retained: 275,000 sequences (84.3%)
 
-Read counts are strongly right-skewed. We plot \\log\_{10}(\text{reads}+1)\\ so that both low- and high-coverage measurements remain visible. The red line is the read count of the 275,000th ranked sequence.
+Read counts are strongly right-skewed. We plot log\_{10}(\text{reads}+1) so that both low- and high-coverage measurements remain visible. The red line is the read count of the 275,000th ranked sequence.
 
 ``` python
 log_read_counts = np.log10(main_data["read_count"].to_numpy() + 1)
@@ -311,7 +311,7 @@ A neural network operates on numbers rather than characters. We represent each n
 | T           |   0 |   0 |   0 |   1 |
 | N (unknown) |   0 |   0 |   0 |   0 |
 
-A string of length 50 consequently becomes a \\50 \times 4\\ matrix.
+A string of length 50 consequently becomes a 50 \times 4 matrix.
 
 ``` python
 def one_hot_encode(sequences, sequence_length=SEQUENCE_LENGTH):
@@ -617,7 +617,7 @@ Every convolution uses a kernel width of eight and `padding="same"`. Consequentl
 
 ## 6.3 Training the model
 
-Keras provides a streaming implementation of \\R^2\\. We implement Pearson correlation in the same way by accumulating the sufficient statistics over an entire epoch. Calculating correlation separately in each mini-batch and then averaging those values would not equal the correlation over the full dataset.
+Keras provides a streaming implementation of R^2. We implement Pearson correlation in the same way by accumulating the sufficient statistics over an entire epoch. Calculating correlation separately in each mini-batch and then averaging those values would not equal the correlation over the full dataset.
 
 ``` python
 @keras.utils.register_keras_serializable(package="CSI4106")
@@ -671,7 +671,7 @@ class PearsonCorrelation(keras.metrics.Metric):
             variable.assign(0)
 ```
 
-Mean squared error is both our optimization objective and the loss displayed during training. Pearson correlation and \\R^2\\ are monitoring metrics; they do not change the gradient updates.
+Mean squared error is both our optimization objective and the loss displayed during training. Pearson correlation and R^2 are monitoring metrics; they do not change the gradient updates.
 
 ``` python
 def compile_mrl_cnn(model):
@@ -963,9 +963,9 @@ The preceding test set came from the same experiment and filtered population as 
 
 Two biological replicates are available. A sequence measured more deeply in one replicate should receive more influence from that replicate. We therefore combine replicate MRLs using their read counts as weights:
 
-\\ \operatorname{MRL}\_{\mathrm{merged}} = \frac{ \operatorname{MRL}\_1 n_1 + \operatorname{MRL}\_2 n_2 }{n_1+n_2}, \\
+\operatorname{MRL}\_{\mathrm{merged}} = \frac{ \operatorname{MRL}\_1 n_1 + \operatorname{MRL}\_2 n_2 }{n_1+n_2},
 
-where \\n_1\\ and \\n_2\\ are the replicate read counts.
+where n_1 and n_2 are the replicate read counts.
 
 ``` python
 def merge_replicates(replicate_1, replicate_2):
@@ -1083,11 +1083,11 @@ The two red and white reference lines answer different questions:
 - The dashed red identity line represents perfect numerical predictions.
 - The fitted white line represents the linear relationship actually present in the data.
 
-Pearson correlation measures the strength of a linear relationship. It is unchanged when every prediction receives the same offset and positive scaling. Predictive \\R^2\\ is stricter:
+Pearson correlation measures the strength of a linear relationship. It is unchanged when every prediction receives the same offset and positive scaling. Predictive R^2 is stricter:
 
-\\ R^2 = 1- \frac{\sum_i(y_i-\hat{y}\_i)^2} {\sum_i(y_i-\bar{y})^2}. \\
+R^2 = 1- \frac{\sum_i(y_i-\hat{y}\_i)^2} {\sum_i(y_i-\bar{y})^2}.
 
-It therefore penalizes offsets and scaling errors. The independent data can exhibit a high Pearson correlation while obtaining a lower \\R^2\\ when the white fitted line differs from the red identity line.
+It therefore penalizes offsets and scaling errors. The independent data can exhibit a high Pearson correlation while obtaining a lower R^2 when the white fitted line differs from the red identity line.
 
 Spearman correlation, included in the results table, measures monotonic rank-order agreement more directly. This is useful for our eventual design application: a genetic algorithm primarily needs the model to rank promising candidate sequences effectively.
 
@@ -1497,7 +1497,7 @@ print("Saved target transformation:", read_scaler_path)
     Saved model: models/mrl_cnn_read_count_split.keras
     Saved target transformation: models/mrl_target_scaler_read_count_split.npz
 
-The two experiments estimate different forms of generalization. Their scores should therefore be interpreted alongside the displayed target distributions. In particular, \\R^2\\ depends on the variance of the observed values in its test set, so a change in \\R^2\\ cannot automatically be attributed solely to a change in model quality.
+The two experiments estimate different forms of generalization. Their scores should therefore be interpreted alongside the displayed target distributions. In particular, R^2 depends on the variance of the observed values in its test set, so a change in R^2 cannot automatically be attributed solely to a change in model quality.
 
 # 8 References
 

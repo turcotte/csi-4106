@@ -8,7 +8,7 @@ Marcel Turcotte
 
 Published
 
-September 13, 2026
+September 15, 2026
 
 # Introduction
 
@@ -74,9 +74,9 @@ print(f"Test examples: {len(X_test)}")
 
 # Entropy
 
-For a node containing class proportions \\p_1,\ldots,p_K\\, entropy is
+For a node containing class proportions p_1,\ldots,p_K, entropy is
 
-\\ H=-\sum\_{k=1}^{K}p_k\log_2p_k. \\
+H=-\sum\_{k=1}^{K}p_k\log_2p_k.
 
 A pure node has entropy zero. Entropy increases as the class proportions become more evenly balanced.
 
@@ -114,7 +114,7 @@ print(f"Pure node: {entropy(pure, binary_classes):.3f} bits")
 
 A candidate split creates left and right children. We score it using their weighted entropy:
 
-\\ J= \frac{N\_{\mathrm{left}}}{N\_{\mathrm{parent}}}H\_{\mathrm{left}} + \frac{N\_{\mathrm{right}}}{N\_{\mathrm{parent}}}H\_{\mathrm{right}}. \\
+J= \frac{N\_{\mathrm{left}}}{N\_{\mathrm{parent}}}H\_{\mathrm{left}} + \frac{N\_{\mathrm{right}}}{N\_{\mathrm{parent}}}H\_{\mathrm{right}}.
 
 The weights prevent a tiny pure child from having the same influence as a much larger mixed child.
 
@@ -407,11 +407,9 @@ def plot_decision_boundary(X, y, model, feature_names):
     xx0, xx1 = np.meshgrid(x0, x1)
 
     grid = np.column_stack([xx0.ravel(), xx1.ravel()])
-    predicted = model.predict(grid)
-    regions = np.array([
-        np.flatnonzero(model.classes_ == label)[0]
-        for label in predicted
-    ]).reshape(xx0.shape)
+    regions = np.argmax(
+        model.predict_proba(grid), axis=1
+    ).reshape(xx0.shape)
 
     plt.figure(figsize=(9, 5))
     plt.contourf(xx0, xx1, regions, alpha=0.25, cmap="Set2")
@@ -423,8 +421,8 @@ def plot_decision_boundary(X, y, model, feature_names):
             edgecolor="black",
             label=label,
         )
-    plt.xlabel("Bill depth (mm)")
-    plt.ylabel("Body mass (g)")
+    plt.xlabel(feature_names[0])
+    plt.ylabel(feature_names[1])
     plt.title("Decision Tree Classification Regions")
     plt.legend()
     plt.tight_layout()
@@ -438,7 +436,7 @@ plt.show()
 
 # Complexity and Limitations
 
-At a node containing \\n\\ examples and \\D\\ features, this implementation tests up to \\D(n-1)\\ thresholds. Each test scans the examples again, so finding one split is approximately \\\mathcal{O}(Dn^2)\\. Production implementations reuse sorted values and sufficient statistics to avoid much of this work.
+At a node containing n examples and D features, this implementation tests up to D(n-1) thresholds. Each test scans the examples again, so finding one split is approximately \mathcal{O}(Dn^2). Production implementations reuse sorted values and sufficient statistics to avoid much of this work.
 
 Other important limitations include:
 

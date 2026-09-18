@@ -124,6 +124,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -340,9 +356,9 @@ Marcel Turcotte
 <aside class="notes">
 <p>Have you previously encountered the term “Monte Carlo algorithm”? If so, please provide representative examples of Monte Carlo methods.</p>
 <p>Monte Carlo integration, approximating integrals via random sampling, is a canonical example of Monte Carlo methods.</p>
-<p>The method draws <span class="math inline">\(x \sim \mathrm{Uniform}(a,b)\)</span>, then uses <span class="math display">\[
+<p>The method draws <span class="math inline">x \sim \mathrm{Uniform}(a,b)</span>, then uses <span class="math display">
   \int_a^b f(x),dx \approx (b-a),\frac{1}{n}\sum_{i=1}^n f(X_i).
-\]</span></p>
+</span></p>
 <p>See <a href="#/sec-numerical-integration" class="quarto-xref">Section&nbsp;6.1</a> for examples of source code.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -422,7 +438,7 @@ Marcel Turcotte
 </section>
 <section id="discussion" class="slide level2">
 <h2>Discussion</h2>
-<p>Like other algorithms previously discussed, such as <strong>BFS</strong>, <strong>DFS</strong>, and <span class="math inline">\(A^\star\)</span>, Monte Carlo Tree Search (MCTS) maintains a <strong>frontier</strong> of unexpanded nodes.</p>
+<p>Like other algorithms previously discussed, such as <strong>BFS</strong>, <strong>DFS</strong>, and <span class="math inline">A^\star</span>, Monte Carlo Tree Search (MCTS) maintains a <strong>frontier</strong> of unexpanded nodes.</p>
 <aside class="notes">
 <p>Examining the relationship between MCTS and previous search algorithms offers valuable insights into their similarities and differences, providing an excellent opportunity to synthesize key concepts.</p>
 <style type="text/css">
@@ -439,8 +455,8 @@ Marcel Turcotte
 </section>
 <section id="discussion-1" class="slide level2">
 <h2>Discussion</h2>
-<p>Similar to <span class="math inline">\(A^\star\)</span>, Monte Carlo Tree Search (MCTS) employs a heuristic, referred to as a <strong>policy</strong>, to determine the <strong>next node for expansion</strong>.</p>
-<p>However, in <span class="math inline">\(A^\star\)</span>, the heuristic is typically a <strong>static</strong> function estimating cost to a goal, whereas in MCTS, the “policy” involves <strong>dynamic</strong> evaluation.</p>
+<p>Similar to <span class="math inline">A^\star</span>, Monte Carlo Tree Search (MCTS) employs a heuristic, referred to as a <strong>policy</strong>, to determine the <strong>next node for expansion</strong>.</p>
+<p>However, in <span class="math inline">A^\star</span>, the heuristic is typically a <strong>static</strong> function estimating cost to a goal, whereas in MCTS, the “policy” involves <strong>dynamic</strong> evaluation.</p>
 <aside class="notes">
 <p>By “static evaluation,” we mean a function that yields the same result for a given state, irrespective of the moment the function is called within the program’s execution.</p>
 <style type="text/css">
@@ -462,8 +478,8 @@ Marcel Turcotte
 <section id="discussion-3" class="slide level2">
 <h2>Discussion</h2>
 <ul>
-<li>MCTS <strong>leverages all visited nodes</strong> in its <strong>decision-making process</strong>, unlike <span class="math inline">\(A^\star\)</span>, which primarily focuses on the current frontier.</li>
-<li>Additionally, <strong>MCTS iteratively updates the value of its nodes based on simulations</strong>, whereas <span class="math inline">\(A^\star\)</span> typically uses a <strong>static</strong> heuristic.</li>
+<li>MCTS <strong>leverages all visited nodes</strong> in its <strong>decision-making process</strong>, unlike <span class="math inline">A^\star</span>, which primarily focuses on the current frontier.</li>
+<li>Additionally, <strong>MCTS iteratively updates the value of its nodes based on simulations</strong>, whereas <span class="math inline">A^\star</span> typically uses a <strong>static</strong> heuristic.</li>
 </ul>
 
 <aside><div>
@@ -502,7 +518,7 @@ Marcel Turcotte
 <aside class="notes">
 <p>We begin by providing an overview of the algorithm’s execution, followed by an in-depth analysis of its individual components.</p>
 <p>The accompanying diagram illustrates the algorithm’s operation after four iterations. Before delving into the specifics of each iteration, it is essential to elucidate the fundamental concepts.</p>
-<p>In the diagram, the blue and purple nodes depict the explicit search tree constructed by Monte Carlo Tree Search (MCTS) during each iteration. Each node maintains a record of the number of visits and its cumulative score. The edges between nodes are annotated with actions. For example, at the algorithm’s initiation, two actions are available. Upon selecting action <span class="math inline">\(a_1\)</span>, two additional actions become accessible.</p>
+<p>In the diagram, the blue and purple nodes depict the explicit search tree constructed by Monte Carlo Tree Search (MCTS) during each iteration. Each node maintains a record of the number of visits and its cumulative score. The edges between nodes are annotated with actions. For example, at the algorithm’s initiation, two actions are available. Upon selecting action <span class="math inline">a_1</span>, two additional actions become accessible.</p>
 <p>The algorithm employs the UCB1 (Upper Confidence Bound 1) formula to select the subsequent node to visit, thereby guiding the descent process.</p>
 <p>Upon reaching a leaf node, the algorithm conducts a simulation, known as a rollout, to estimate the node’s potential utility.</p>
 <style type="text/css">
@@ -528,8 +544,8 @@ Marcel Turcotte
 </div>
 
 <aside><div>
-<p>Each node keeps track of the number of visits (<span class="math inline">\(n\)</span>) and a total score (<span class="math inline">\(t\)</span>).</p>
-<p><span class="math inline">\(S_0\)</span> is the initial state.</p>
+<p>Each node keeps track of the number of visits (<span class="math inline">n</span>) and a total score (<span class="math inline">t</span>).</p>
+<p><span class="math inline">S_0</span> is the initial state.</p>
 </div></aside></section>
 <section id="walk-through-2" class="slide level2">
 <h2>Walk-through</h2>
@@ -540,7 +556,7 @@ Marcel Turcotte
 </div>
 
 <aside><div>
-<p>Adding the available actions, <span class="math inline">\(a_1\)</span> and <span class="math inline">\(a_2\)</span>, as well as the corresponding states, <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span>.</p>
+<p>Adding the available actions, <span class="math inline">a_1</span> and <span class="math inline">a_2</span>, as well as the corresponding states, <span class="math inline">S_1</span> and <span class="math inline">S_2</span>.</p>
 </div></aside></section>
 <section id="walk-through-1.1" class="slide level2">
 <h2>Walk-through (1.1)</h2>
@@ -562,7 +578,7 @@ Marcel Turcotte
 </div>
 
 <aside><div>
-<p>1.1 The UCB1 score of <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are both <span class="math inline">\(\infty\)</span> since <span class="math inline">\(n_1 = n_2 = 0\)</span>.</p>
+<p>1.1 The UCB1 score of <span class="math inline">S_1</span> and <span class="math inline">S_2</span> are both <span class="math inline">\infty</span> since <span class="math inline">n_1 = n_2 = 0</span>.</p>
 <p>We can select the either node.</p>
 </div></aside></section>
 <section id="walk-through-1.1-2" class="slide level2">
@@ -574,7 +590,7 @@ Marcel Turcotte
 </div>
 
 <aside><div>
-<p>1.1 We reached a leaf node, <span class="math inline">\(S_1\)</span>.</p>
+<p>1.1 We reached a leaf node, <span class="math inline">S_1</span>.</p>
 </div></aside></section>
 <section id="walk-through-1.2" class="slide level2">
 <h2>Walk-through (1.2)</h2>
@@ -585,7 +601,7 @@ Marcel Turcotte
 </div>
 
 <aside class="notes">
-<p>The node’s unvisited status is indicated by <span class="math inline">\(n=0\)</span>. Prior to expanding the node, it is essential to evaluate its utility, which is accomplished through a rollout in the subsequent step.</p>
+<p>The node’s unvisited status is indicated by <span class="math inline">n=0</span>. Prior to expanding the node, it is essential to evaluate its utility, which is accomplished through a rollout in the subsequent step.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -669,8 +685,8 @@ Marcel Turcotte
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>2.1 Selection. Computing the UCB1 value of <span class="math inline">\(S_1 = 20 + 2 \sqrt{\frac{\ln(1)}{1}}\)</span> and <span class="math inline">\(S_2  = \infty\)</span>.</p>
-<p>We select <span class="math inline">\(S_2\)</span>.</p>
+<p>2.1 Selection. Computing the UCB1 value of <span class="math inline">S_1 = 20 + 2 \sqrt{\frac{\ln(1)}{1}}</span> and <span class="math inline">S_2  = \infty</span>.</p>
+<p>We select <span class="math inline">S_2</span>.</p>
 </div></aside></section>
 <section id="walk-through-2.2" class="slide level2">
 <h2>Walk-through (2.2)</h2>
@@ -737,8 +753,8 @@ Marcel Turcotte
 
 <aside><div>
 <p>3.1 Selection.</p>
-<p>Computing the UCB1 value of <span class="math inline">\(S_1 = 20 + 2 \sqrt{\frac{\ln(2)}{1}} = 21.67\)</span> and <span class="math inline">\(S_2  = 10 + 2 \sqrt{\frac{\ln(2)}{1}} = 11.67\)</span>.</p>
-<p>Selecting <span class="math inline">\(S_1\)</span></p>
+<p>Computing the UCB1 value of <span class="math inline">S_1 = 20 + 2 \sqrt{\frac{\ln(2)}{1}} = 21.67</span> and <span class="math inline">S_2  = 10 + 2 \sqrt{\frac{\ln(2)}{1}} = 11.67</span>.</p>
+<p>Selecting <span class="math inline">S_1</span></p>
 </div></aside></section>
 <section id="walk-through-3.2" class="slide level2">
 <h2>Walk-through (3.2)</h2>
@@ -760,7 +776,7 @@ Marcel Turcotte
 </div>
 
 <aside><div>
-<p>3.2 Node expansion. Since <span class="math inline">\(n_1 \gt 0\)</span>, the node is expanded.</p>
+<p>3.2 Node expansion. Since <span class="math inline">n_1 \gt 0</span>, the node is expanded.</p>
 </div></aside></section>
 <section id="walk-through-3.3" class="slide level2">
 <h2>Walk-through (3.3)</h2>
@@ -815,8 +831,8 @@ Marcel Turcotte
 </div>
 
 <aside><div>
-<p>Computing the UCB1 value of <span class="math inline">\(S_1 = \frac{20}{2} + 2 \sqrt{\frac{\ln(3)}{2}} = 10 + 2 \sqrt{\frac{\ln(3)}{2}} = 11.48\)</span> and <span class="math inline">\(S_2  == 10 + 2 \sqrt{\frac{\ln(3)}{1}} = 12.10\)</span>.</p>
-<p>Selecting <span class="math inline">\(S_2\)</span></p>
+<p>Computing the UCB1 value of <span class="math inline">S_1 = \frac{20}{2} + 2 \sqrt{\frac{\ln(3)}{2}} = 10 + 2 \sqrt{\frac{\ln(3)}{2}} = 11.48</span> and <span class="math inline">S_2  == 10 + 2 \sqrt{\frac{\ln(3)}{1}} = 12.10</span>.</p>
+<p>Selecting <span class="math inline">S_2</span></p>
 </div></aside></section>
 <section id="walk-through-4.2" class="slide level2">
 <h2>Walk-through (4.2)</h2>
@@ -838,8 +854,8 @@ Marcel Turcotte
 </div>
 
 <aside><div>
-<p>4.2 Expansion. Both nodes have the same USCB1 value, <span class="math inline">\(\infty\)</span>.</p>
-<p>Selecting <span class="math inline">\(S_6\)</span>.</p>
+<p>4.2 Expansion. Both nodes have the same USCB1 value, <span class="math inline">\infty</span>.</p>
+<p>Selecting <span class="math inline">S_6</span>.</p>
 </div></aside></section>
 <section id="walk-through-4.3" class="slide level2">
 <h2>Walk-through (4.3)</h2>
@@ -908,7 +924,7 @@ Marcel Turcotte
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>If the algorithm halts at this stage, it will recommend <span class="math inline">\(a_2\)</span> as the optimal move, given that <span class="math inline">\(S_2\)</span> possesses the highest average score.</p>
+<p>If the algorithm halts at this stage, it will recommend <span class="math inline">a_2</span> as the optimal move, given that <span class="math inline">S_2</span> possesses the highest average score.</p>
 </div></aside></section>
 <section id="russell-and-norvig" class="slide level2">
 <h2>Russell and Norvig</h2>
@@ -939,7 +955,7 @@ Marcel Turcotte
 </div></aside></section>
 <section id="summary-tree-building" class="slide level2">
 <h2>Summary: tree building</h2>
-<p>Initially, the tree has one node, it is <span class="math inline">\(S_0\)</span>.</p>
+<p>Initially, the tree has one node, it is <span class="math inline">S_0</span>.</p>
 <p>We add its descendants and we are ready to start.</p>
 <p>The Monte Carlo Tree Search slowly builds its search tree.</p>
 </section>
@@ -948,7 +964,7 @@ Marcel Turcotte
 <p>With each iteration, the following steps occur:</p>
 <ol type="1">
 <li><p><strong>Selection</strong>: Identify the “best” node by descending a single path in the tree, guided by UCB1.</p></li>
-<li><p><strong>Expansion</strong>: Expand the node if it is a leaf in the MCTS Tree and <span class="math inline">\(n \gt 0\)</span>.</p></li>
+<li><p><strong>Expansion</strong>: Expand the node if it is a leaf in the MCTS Tree and <span class="math inline">n \gt 0</span>.</p></li>
 <li><p><strong>Rollout</strong>: Simulate a game from the current state to a terminal state by randomly selecting actions.</p></li>
 <li><p><strong>Backpropagation</strong>: Use the obtained information to update the current node and all parent nodes up to the root.</p></li>
 </ol>
@@ -960,91 +976,91 @@ Marcel Turcotte
 </section>
 <section id="summary-exploration-vs-exploitation" class="slide level2 smaller">
 <h2>Summary: exploration vs exploitation</h2>
-<p><span class="math display">\[
+<p><span class="math display">
 \mathrm{UCB1}(S_i) = \overline{V_i} + C \sqrt{\frac{\ln(N)}{n_i}}
-\]</span></p>
-<p>The usual value for <span class="math inline">\(C\)</span> is <span class="math inline">\(\sqrt{2}\)</span>.</p>
-<p><strong>Exploration</strong> essentially occurs when <strong>two nodes</strong> have approximately the <strong>same average score</strong>, then MCTS favours nodes with <strong>fewer visits</strong> (dividing by <span class="math inline">\(n\)</span>).</p>
-<p>For <span class="math inline">\(n \lt \ln(N)\)</span>, the value of the ratio is greater than 1, whereas for <span class="math inline">\(n \gt \ln(N)\)</span>, the ratio becomes less than 1.</p>
-<p>So there is a small fraction of the time where exploration kicks in. But even then, the contribution of the ratio is quite tame, we’re taking the square root of that ratio, multiplied by <span class="math inline">\(\sqrt{2} \sim 1.414213562\)</span>.</p>
+</span></p>
+<p>The usual value for <span class="math inline">C</span> is <span class="math inline">\sqrt{2}</span>.</p>
+<p><strong>Exploration</strong> essentially occurs when <strong>two nodes</strong> have approximately the <strong>same average score</strong>, then MCTS favours nodes with <strong>fewer visits</strong> (dividing by <span class="math inline">n</span>).</p>
+<p>For <span class="math inline">n \lt \ln(N)</span>, the value of the ratio is greater than 1, whereas for <span class="math inline">n \gt \ln(N)</span>, the ratio becomes less than 1.</p>
+<p>So there is a small fraction of the time where exploration kicks in. But even then, the contribution of the ratio is quite tame, we’re taking the square root of that ratio, multiplied by <span class="math inline">\sqrt{2} \sim 1.414213562</span>.</p>
 </section>
 <section id="summary-exploration-vs-exploitation-1" class="slide level2">
 <h2>Summary: exploration vs exploitation</h2>
 <p>In <strong>simulated annealing</strong>, the initial temperature and the scale of the objective function are linked.</p>
-<p>Acceptance rule for a candidate move with score change <span class="math inline">\(\Delta E = E_{\text{new}} - E_{\text{old}}\)</span>:</p>
+<p>Acceptance rule for a candidate move with score change <span class="math inline">\Delta E = E_{\text{new}} - E_{\text{old}}</span>:</p>
 <ul>
-<li>If <span class="math inline">\(\Delta E \le 0\)</span>: always accept (better or equal solution).</li>
-<li>If <span class="math inline">\(\Delta E &gt; 0\)</span>: accept with probability</li>
+<li>If <span class="math inline">\Delta E \le 0</span>: always accept (better or equal solution).</li>
+<li>If <span class="math inline">\Delta E &gt; 0</span>: accept with probability</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
   p = \exp(-\Delta E / T).
-\]</span></p>
+</span></p>
 </section>
 <section id="summary-exploration-vs-exploitation-2" class="slide level2 smaller">
 <h2>Summary: exploration vs exploitation</h2>
 <p>In <strong>Simulated Annealing</strong>:</p>
 <ul>
-<li><p><strong><span class="math inline">\(T\)</span></strong> defines how “big” a bad move has to be before it is unlikely to be accepted.</p></li>
-<li><p>If <span class="math inline">\(T\)</span> is large compared to typical <span class="math inline">\(\Delta E\)</span>:</p>
+<li><p><strong><span class="math inline">T</span></strong> defines how “big” a bad move has to be before it is unlikely to be accepted.</p></li>
+<li><p>If <span class="math inline">T</span> is large compared to typical <span class="math inline">\Delta E</span>:</p>
 <ul>
 <li>Even sizeable worsening moves have reasonable probability.</li>
 <li>Very exploratory.</li>
 </ul></li>
-<li><p>If <span class="math inline">\(T\)</span> is small:</p>
+<li><p>If <span class="math inline">T</span> is small:</p>
 <ul>
 <li>Only very small worsening moves are accepted.</li>
 <li>Mostly exploitative / hill-climbing.</li>
 </ul></li>
 </ul>
-<p>That’s why you often pick initial <span class="math inline">\(T\)</span> using the <em>distribution</em> of <span class="math inline">\(\Delta E\)</span> on random states: e.g., “set <span class="math inline">\(T_0\)</span> so that a typical <span class="math inline">\(\Delta E\)</span> has, say, 60-80% acceptance.” It’s explicitly <strong>tied to the scale of the scoring function</strong>.</p>
+<p>That’s why you often pick initial <span class="math inline">T</span> using the <em>distribution</em> of <span class="math inline">\Delta E</span> on random states: e.g., “set <span class="math inline">T_0</span> so that a typical <span class="math inline">\Delta E</span> has, say, 60-80% acceptance.” It’s explicitly <strong>tied to the scale of the scoring function</strong>.</p>
 </section>
 <section id="summary-c-as-an-exploration-scale" class="slide level2">
 <h2>Summary: C as an exploration scale</h2>
 <p>In UCT (UCB1) we’re using</p>
-<p><span class="math display">\[
+<p><span class="math display">
 \text{score}(i)
 = V_i + C \sqrt{\frac{\ln N}{n_i}},
-\]</span></p>
+</span></p>
 <p>where:</p>
 <ul>
-<li><span class="math inline">\(V_i\)</span>: average playout value of child <span class="math inline">\(i\)</span> (exploitation term),</li>
-<li><span class="math inline">\(N\)</span>: total visits to the parent node,</li>
-<li><span class="math inline">\(n_i\)</span>: visits to child <span class="math inline">\(i\)</span>,</li>
-<li><span class="math inline">\(C\)</span>: exploration constant.</li>
+<li><span class="math inline">V_i</span>: average playout value of child <span class="math inline">i</span> (exploitation term),</li>
+<li><span class="math inline">N</span>: total visits to the parent node,</li>
+<li><span class="math inline">n_i</span>: visits to child <span class="math inline">i</span>,</li>
+<li><span class="math inline">C</span>: exploration constant.</li>
 </ul>
 </section>
 <section id="summary-c-as-an-exploration-scale-1" class="slide level2">
 <h2>Summary: C as an exploration scale</h2>
 <p>At a given node:</p>
 <ul>
-<li>The child with largest <span class="math inline">\(\text{score}(i)\)</span> is selected.</li>
-<li>The second term <span class="math display">\[
+<li>The child with largest <span class="math inline">\text{score}(i)</span> is selected.</li>
+<li>The second term <span class="math display">
 C \sqrt{\frac{\ln N}{n_i}}
-\]</span> is <strong>pure exploration</strong>: large when <span class="math inline">\(n_i\)</span> is small, shrinking as you visit that child.</li>
+</span> is <strong>pure exploration</strong>: large when <span class="math inline">n_i</span> is small, shrinking as you visit that child.</li>
 </ul>
 </section>
 <section id="summary-c-as-an-exploration-scale-2" class="slide level2">
 <h2>Summary: C as an exploration scale</h2>
 <p>Consider two children, 1 and 2. You choose 2 instead of 1 when:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 V_2 + C\sqrt{\frac{\ln N}{n_2}} &gt; V_1 + C\sqrt{\frac{\ln N}{n_1}}.
-\]</span></p>
+</span></p>
 <p>Rearrange:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right).
-\]</span></p>
+</span></p>
 </section>
 <section id="summary-c-as-an-exploration-scale-3" class="slide level2">
 <h2>Summary: C as an exploration scale</h2>
 <ul>
-<li>The <strong>difference in average playout values</strong> that can be “overruled” by exploration is proportional to <span class="math inline">\(C\)</span>.</li>
-<li><strong>Larger</strong> <span class="math inline">\(C\)</span> → <strong>exploration</strong> term dominates more → you’re willing to try a child whose <span class="math inline">\(V_i\)</span> is significantly worse, just because it’s under-explored.</li>
-<li><strong>Smaller</strong> <span class="math inline">\(C\)</span> → you stick more to the <strong>currently best-looking</strong> <span class="math inline">\(V_i\)</span>.</li>
+<li>The <strong>difference in average playout values</strong> that can be “overruled” by exploration is proportional to <span class="math inline">C</span>.</li>
+<li><strong>Larger</strong> <span class="math inline">C</span> → <strong>exploration</strong> term dominates more → you’re willing to try a child whose <span class="math inline">V_i</span> is significantly worse, just because it’s under-explored.</li>
+<li><strong>Smaller</strong> <span class="math inline">C</span> → you stick more to the <strong>currently best-looking</strong> <span class="math inline">V_i</span>.</li>
 </ul>
 <aside class="notes">
 <h3 id="extreme-cases">1. Extreme cases</h3>
 <ul>
-<li><p><strong><span class="math inline">\(C = 0\)</span></strong> (no exploration term)</p>
+<li><p><strong><span class="math inline">C = 0</span></strong> (no exploration term)</p>
 <ul>
 <li><p>UCT score = purely the average value.</p></li>
 <li><p>The algorithm becomes <strong>greedy</strong>:</p>
@@ -1059,7 +1075,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <li>With noisy rollouts and few simulations, play can be surprisingly bad.</li>
 </ul></li>
 </ul></li>
-<li><p><strong><span class="math inline">\(C\)</span> very large</strong></p>
+<li><p><strong><span class="math inline">C</span> very large</strong></p>
 <ul>
 <li><p>Exploration bonus dominates:</p>
 <ul>
@@ -1074,10 +1090,10 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </ul></li>
 </ul></li>
 </ul>
-<h3 id="moderate-c-what-actually-changes-as-you-vary-it">2. Moderate <span class="math inline">\(C\)</span>: what actually changes as you vary it</h3>
-<p>For a sensible interval (say <span class="math inline">\(C\)</span> in <span class="math inline">\([0.5, 2]\)</span> for tic-tac-toe with rewards in <span class="math inline">\([-1,1]\)</span>):</p>
+<h3 id="moderate-c-what-actually-changes-as-you-vary-it">2. Moderate <span class="math inline">C</span>: what actually changes as you vary it</h3>
+<p>For a sensible interval (say <span class="math inline">C</span> in <span class="math inline">[0.5, 2]</span> for tic-tac-toe with rewards in <span class="math inline">[-1,1]</span>):</p>
 <ul>
-<li><p><strong>Smaller <span class="math inline">\(C\)</span> (e.g.&nbsp;0.3–0.7)</strong>:</p>
+<li><p><strong>Smaller <span class="math inline">C</span> (e.g.&nbsp;0.3–0.7)</strong>:</p>
 <ul>
 <li><p>Faster <strong>commitment</strong> to the currently best-looking move.</p></li>
 <li><p>Tree shape: <strong>few branches highly explored</strong>, others barely touched.</p></li>
@@ -1089,7 +1105,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </ul></li>
 <li><p>Risk: can <strong>miss</strong> strong but initially unlucky moves.</p></li>
 </ul></li>
-<li><p><strong>Larger <span class="math inline">\(C\)</span> (e.g.&nbsp;1.0–2.0)</strong>:</p>
+<li><p><strong>Larger <span class="math inline">C</span> (e.g.&nbsp;1.0–2.0)</strong>:</p>
 <ul>
 <li><p>More <strong>balanced coverage</strong> of children:</p>
 <ul>
@@ -1106,7 +1122,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </ul>
 <p>In aggregate metrics (e.g.&nbsp;win rate vs Random for fixed number of simulations):</p>
 <ul>
-<li><p>As you <strong>increase <span class="math inline">\(C\)</span> from 0</strong>:</p>
+<li><p>As you <strong>increase <span class="math inline">C</span> from 0</strong>:</p>
 <ul>
 <li>Performance usually <strong>improves</strong> at first (you stop being myopic).</li>
 </ul></li>
@@ -1117,7 +1133,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </ul>
 <p>So you typically see a <strong>U-shaped curve</strong> in performance as a function of (C): too little exploration is bad, too much is bad, there’s a “sweet spot” that depends on the game, rollout noise, and simulation budget.</p>
 <h3 id="what-to-look-for-in-tic-tac-toe">3. What to look for in tic-tac-toe</h3>
-<p>If you vary <span class="math inline">\(C\)</span> and watch:</p>
+<p>If you vary <span class="math inline">C</span> and watch:</p>
 <ul>
 <li><p><strong>Tree statistics</strong>:</p>
 <ul>
@@ -1126,12 +1142,12 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </ul></li>
 <li><p><strong>Game outcomes</strong> vs a fixed opponent (e.g.&nbsp;Random or Minimax):</p>
 <ul>
-<li>With small <span class="math inline">\(C\)</span>, you may see odd blunders due to “early over-commitment”.</li>
-<li>With large <span class="math inline">\(C\)</span>, you may see “too much experimentation”, especially with few simulations.</li>
-<li>For a mid-range <span class="math inline">\(C\)</span>, the solver stabilizes into strong, consistent play.</li>
+<li>With small <span class="math inline">C</span>, you may see odd blunders due to “early over-commitment”.</li>
+<li>With large <span class="math inline">C</span>, you may see “too much experimentation”, especially with few simulations.</li>
+<li>For a mid-range <span class="math inline">C</span>, the solver stabilizes into strong, consistent play.</li>
 </ul></li>
 </ul>
-<p>That’s the concrete, observable effect of changing <span class="math inline">\(C\)</span>: it reshapes the trade-off between <strong>digging deep into what looks good now</strong> versus <strong>giving other moves a fair chance</strong>.</p>
+<p>That’s the concrete, observable effect of changing <span class="math inline">C</span>: it reshapes the trade-off between <strong>digging deep into what looks good now</strong> versus <strong>giving other moves a fair chance</strong>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1146,16 +1162,16 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </section>
 <section id="summary-c-as-an-exploration-scale-4" class="slide level2">
 <h2>Summary: C as an exploration scale</h2>
-<p>In the <strong>classical UCB1 theory</strong>, rewards are assumed to be in <span class="math inline">\([0,1]\)</span>, and there’s a specific recommended constant (e.g.&nbsp;<span class="math inline">\(\sqrt{2}\)</span>). If your reward scale is different (say in <span class="math inline">\([-1,1]\)</span> or large magnitude), you essentially <strong>rescale</strong> that constant; in practice people tune <span class="math inline">\(C\)</span> empirically.</p>
+<p>In the <strong>classical UCB1 theory</strong>, rewards are assumed to be in <span class="math inline">[0,1]</span>, and there’s a specific recommended constant (e.g.&nbsp;<span class="math inline">\sqrt{2}</span>). If your reward scale is different (say in <span class="math inline">[-1,1]</span> or large magnitude), you essentially <strong>rescale</strong> that constant; in practice people tune <span class="math inline">C</span> empirically.</p>
 </section>
 <section id="summary-c-as-an-exploration-scale-5" class="slide level2">
 <h2>Summary: C as an exploration scale</h2>
 <p><strong>Analogy:</strong></p>
 <ul>
-<li>Simulated annealing’s <span class="math inline">\(T\)</span> and MCTS’s <span class="math inline">\(C\)</span> both <strong>balance exploration vs exploitation</strong>.</li>
+<li>Simulated annealing’s <span class="math inline">T</span> and MCTS’s <span class="math inline">C</span> both <strong>balance exploration vs exploitation</strong>.</li>
 <li>In both cases, their <em>effective</em> meaning depends on the <strong>scale of the objective / rewards</strong>.</li>
 <li>In SA: “how bad can a move be and still often be accepted?”</li>
-<li>In MCTS: “how much worse can a child’s current <span class="math inline">\(V_i\)</span> be and still get chosen for exploration?”</li>
+<li>In MCTS: “how much worse can a child’s current <span class="math inline">V_i</span> be and still get chosen for exploration?”</li>
 </ul>
 </section>
 <section id="summary-c-as-an-exploration-scale-6" class="slide level2">
@@ -1165,7 +1181,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <li><p><strong>Simulated Annealing</strong>:</p>
 <ul>
 <li>Single trajectory.</li>
-<li><span class="math inline">\(T\)</span> is <strong>explicitly scheduled</strong> (high to low) over time.</li>
+<li><span class="math inline">T</span> is <strong>explicitly scheduled</strong> (high to low) over time.</li>
 <li>Balances local moves in a single search path.</li>
 </ul></li>
 </ul>
@@ -1176,10 +1192,10 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <li><p><strong>MCTS (UCT)</strong>:</p>
 <ul>
 <li><p>Tree of many paths.</p></li>
-<li><p><span class="math inline">\(C\)</span> is constant, but exploration <strong>decays automatically</strong> via <span class="math inline">\(\sqrt{\ln N / n_i}\)</span>:</p>
+<li><p><span class="math inline">C</span> is constant, but exploration <strong>decays automatically</strong> via <span class="math inline">\sqrt{\ln N / n_i}</span>:</p>
 <ul>
-<li><strong>Early</strong>: <span class="math inline">\(n_i\)</span> small → high exploration.</li>
-<li><strong>Late</strong>: <span class="math inline">\(n_i\)</span> big → exploration term shrinks, behavior gets more greedy.</li>
+<li><strong>Early</strong>: <span class="math inline">n_i</span> small → high exploration.</li>
+<li><strong>Late</strong>: <span class="math inline">n_i</span> big → exploration term shrinks, behavior gets more greedy.</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -2850,7 +2866,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 </div>
 
 <aside><div>
-<p><code>num_simulations</code> <span class="math inline">\(\in\)</span> 50, 200, 500, 1000, 5000.</p>
+<p><code>num_simulations</code> <span class="math inline">\in</span> 50, 200, 500, 1000, 5000.</p>
 </div></aside></section>
 <section id="tallies-by-xs-first-move" class="slide level2 smaller scrollable">
 <h2>Tallies by X’s first move</h2>
@@ -3886,7 +3902,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <h2>Exploration</h2>
 <ul>
 <li><p>Incorporate heuristics to detect when a <strong>winning move is achievable in a single step</strong>.</p></li>
-<li><p>Experiment with varying the number of iterations and the <strong>constant</strong> <span class="math inline">\(C\)</span>.</p></li>
+<li><p>Experiment with varying the number of iterations and the <strong>constant</strong> <span class="math inline">C</span>.</p></li>
 </ul>
 </section>
 <section id="monte-carlo-tree-search" class="slide level2">
@@ -4087,7 +4103,7 @@ V_2 - V_1 &gt; C\left(\sqrt{\frac{\ln N}{n_1}} - \sqrt{\frac{\ln N}{n_2}}\right)
 <li>MCTS maintains an <strong>explicit search tree</strong>, updating node values iteratively based on simulations.</li>
 <li>The algorithm has <strong>wide-ranging applications</strong>, including AI gaming, drug design, circuit routing, and autonomous driving.</li>
 <li>Introduced in 2008, MCTS gained prominence with its use in AlphaGo in 2016.</li>
-<li>Unlike traditional algorithms like <span class="math inline">\(A^\star\)</span>, MCTS uses <strong>dynamic policies</strong> and leverages all visited nodes for decision-making.</li>
+<li>Unlike traditional algorithms like <span class="math inline">A^\star</span>, MCTS uses <strong>dynamic policies</strong> and leverages all visited nodes for decision-making.</li>
 <li>Implementing MCTS involves tracking node statistics and applying the <strong>UCB1</strong> formula to <strong>guide search</strong>.</li>
 <li>A practical example of MCTS is demonstrated through implementing <strong>Tic-Tac-Toe</strong>.</li>
 <li>Further exploration includes integrating <strong>MCTS</strong> with <strong>deep learning models</strong> like AlphaZero and MuZero.</li>
@@ -4324,7 +4340,6 @@ n = 100000 → estimate ≈ 1.996149 (delta = 0.003851)</code></pre>
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -4493,27 +4508,9 @@ n = 100000 → estimate ≈ 1.996149 (delta = 0.003851)</code></pre>
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Marcel Turcotte">
-<meta name="dcterms.date" content="2026-09-13">
+<meta name="dcterms.date" content="2026-09-15">
 
 <title>Building a Decision Tree Classifier – CSI 4106 - Fall 2026</title>
 <style>
@@ -114,8 +114,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -513,7 +527,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 13, 2026</p>
+      <p class="date">September 15, 2026</p>
     </div>
   </div>
   
@@ -588,10 +602,10 @@ Test examples: 69</code></pre>
 </section>
 <section id="entropy" class="level1">
 <h1>Entropy</h1>
-<p>For a node containing class proportions <span class="math inline">\(p_1,\ldots,p_K\)</span>, entropy is</p>
-<p><span class="math display">\[
+<p>For a node containing class proportions <span class="math inline">p_1,\ldots,p_K</span>, entropy is</p>
+<p><span class="math display">
 H=-\sum_{k=1}^{K}p_k\log_2p_k.
-\]</span></p>
+</span></p>
 <p>A pure node has entropy zero. Entropy increases as the class proportions become more evenly balanced.</p>
 <div id="entropy" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> class_probabilities(y, classes):</span>
@@ -625,12 +639,12 @@ Pure node: 0.000 bits</code></pre>
 <section id="evaluating-a-split" class="level1">
 <h1>Evaluating a Split</h1>
 <p>A candidate split creates left and right children. We score it using their weighted entropy:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 J=
 \frac{N_{\mathrm{left}}}{N_{\mathrm{parent}}}H_{\mathrm{left}}
 +
 \frac{N_{\mathrm{right}}}{N_{\mathrm{parent}}}H_{\mathrm{right}}.
-\]</span></p>
+</span></p>
 <p>The weights prevent a tiny pure child from having the same influence as a much larger mixed child.</p>
 <div id="split-score" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> weighted_entropy(y_left, y_right, classes):</span>
@@ -916,31 +930,29 @@ else:
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    xx0, xx1 <span class="op">=</span> np.meshgrid(x0, x1)</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    grid <span class="op">=</span> np.column_stack([xx0.ravel(), xx1.ravel()])</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    predicted <span class="op">=</span> model.predict(grid)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    regions <span class="op">=</span> np.array([</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        np.flatnonzero(model.classes_ <span class="op">==</span> label)[<span class="dv">0</span>]</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> label <span class="kw">in</span> predicted</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    ]).reshape(xx0.shape)</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    plt.contourf(xx0, xx1, regions, alpha<span class="op">=</span><span class="fl">0.25</span>, cmap<span class="op">=</span><span class="st">"Set2"</span>)</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> label <span class="kw">in</span> model.classes_:</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        selected <span class="op">=</span> y <span class="op">==</span> label</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        plt.scatter(</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>            X[selected, <span class="dv">0</span>],</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>            X[selected, <span class="dv">1</span>],</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>            edgecolor<span class="op">=</span><span class="st">"black"</span>,</span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>            label<span class="op">=</span>label,</span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"Bill depth (mm)"</span>)</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Body mass (g)"</span>)</span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">"Decision Tree Classification Regions"</span>)</span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>plot_decision_boundary(X_train, y_train, tree_model, feature_names)</span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    regions <span class="op">=</span> np.argmax(</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        model.predict_proba(grid), axis<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    ).reshape(xx0.shape)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    plt.contourf(xx0, xx1, regions, alpha<span class="op">=</span><span class="fl">0.25</span>, cmap<span class="op">=</span><span class="st">"Set2"</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> label <span class="kw">in</span> model.classes_:</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        selected <span class="op">=</span> y <span class="op">==</span> label</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        plt.scatter(</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>            X[selected, <span class="dv">0</span>],</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>            X[selected, <span class="dv">1</span>],</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>            edgecolor<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>            label<span class="op">=</span>label,</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(feature_names[<span class="dv">0</span>])</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(feature_names[<span class="dv">1</span>])</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">"Decision Tree Classification Regions"</span>)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>plot_decision_boundary(X_train, y_train, tree_model, feature_names)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -953,7 +965,7 @@ else:
 </section>
 <section id="complexity-and-limitations" class="level1">
 <h1>Complexity and Limitations</h1>
-<p>At a node containing <span class="math inline">\(n\)</span> examples and <span class="math inline">\(D\)</span> features, this implementation tests up to <span class="math inline">\(D(n-1)\)</span> thresholds. Each test scans the examples again, so finding one split is approximately <span class="math inline">\(\mathcal{O}(Dn^2)\)</span>. Production implementations reuse sorted values and sufficient statistics to avoid much of this work.</p>
+<p>At a node containing <span class="math inline">n</span> examples and <span class="math inline">D</span> features, this implementation tests up to <span class="math inline">D(n-1)</span> thresholds. Each test scans the examples again, so finding one split is approximately <span class="math inline">\mathcal{O}(Dn^2)</span>. Production implementations reuse sorted values and sufficient statistics to avoid much of this work.</p>
 <p>Other important limitations include:</p>
 <ul>
 <li>only numerical features and binary threshold splits are supported;</li>

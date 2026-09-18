@@ -17,4 +17,4 @@ CSI4106 Introduction to Artificial Intelligence
 
 ## Practice
 
-- [LogisticRegression](../../lectures/07/LogisticRegression.llms.md) - Here is an implementation of logistic regression, complemented by discussions on Receiver Operating Characteristic (ROC) curves and the Area Under the Curve (AUC). It also includes illustrative examples to demonstrate these concepts.
+- [LogisticRegression ](../../lectures/07/LogisticRegression.llms.md) - Here is an implementation of logistic regression, complemented by discussions on Receiver Operating Characteristic (ROC) curves and the Area Under the Curve (AUC). It also includes illustrative examples to demonstrate these concepts.

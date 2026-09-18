@@ -126,6 +126,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -384,7 +400,7 @@ Marcel Turcotte
 </div></div>
 
 <aside class="notes">
-<p>For an <span class="math inline">\(8 \times 8\)</span> chessboard, there exist precisely 92 distinct solutions. Eliminating symmetry, one finds 12 fondamental solutions. In the more general scenario of an <span class="math inline">\(n \times n\)</span> chessboard, the exact number of solutions has been determined for all <span class="math inline">\(n\)</span> values up to and including 27.</p>
+<p>For an <span class="math inline">8 \times 8</span> chessboard, there exist precisely 92 distinct solutions. Eliminating symmetry, one finds 12 fondamental solutions. In the more general scenario of an <span class="math inline">n \times n</span> chessboard, the exact number of solutions has been determined for all <span class="math inline">n</span> values up to and including 27.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -397,7 +413,7 @@ Marcel Turcotte
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>The <strong><a href="https://en.wikipedia.org/wiki/Eight_queens_puzzle">8-Queens problem</a></strong> involves placing eight queens on an <span class="math inline">\(8 \times 8\)</span> chessboard such that <strong>no two queens threaten each other</strong>, meaning no two queens share the same row, column, or diagonal.</p>
+<p>The <strong><a href="https://en.wikipedia.org/wiki/Eight_queens_puzzle">8-Queens problem</a></strong> involves placing eight queens on an <span class="math inline">8 \times 8</span> chessboard such that <strong>no two queens threaten each other</strong>, meaning no two queens share the same row, column, or diagonal.</p>
 </div></aside></section>
 <section id="definition" class="slide level2">
 <h2>Definition</h2>
@@ -456,7 +472,7 @@ Marcel Turcotte
 <li><p><strong>while</strong> <em>not done</em> <strong>do</strong></p>
 <ul>
 <li><em>nighbour</em> is the highest-valued successor state of <em>current</em></li>
-<li>if value(<em>neighbour</em>) <span class="math inline">\(\le\)</span> value(<em>current</em>) the <strong>return</strong> <em>current</em></li>
+<li>if value(<em>neighbour</em>) <span class="math inline">\le</span> value(<em>current</em>) the <strong>return</strong> <em>current</em></li>
 <li>set <em>current</em> to <em>neighbour</em></li>
 </ul></li>
 </ul>
@@ -485,8 +501,8 @@ Marcel Turcotte
 <p>A grid representation <strong>permits the illegal placement</strong> of two queens in the same column.</p>
 </div>
 <div class="fragment">
-<p>Instead, we can represent the state as a list (<span class="math inline">\(\mathrm{state}\)</span>), where each element corresponds to the row position of the queen in its respective column.</p>
-<p>In other words, <span class="math inline">\(\mathrm{state}[i]\)</span> is the row of the queen is column <span class="math inline">\(i\)</span>.</p>
+<p>Instead, we can represent the state as a list (<span class="math inline">\mathrm{state}</span>), where each element corresponds to the row position of the queen in its respective column.</p>
+<p>In other words, <span class="math inline">\mathrm{state}[i]</span> is the row of the queen is column <span class="math inline">i</span>.</p>
 </div>
 </section>
 <section id="state-representation" class="slide level2">
@@ -565,11 +581,11 @@ Marcel Turcotte
 </section>
 <section id="representation-of-8-queens" class="slide level2 smaller">
 <h2>Representation of 8-Queens</h2>
-<p><span class="math inline">\(8 \times 8\)</span> chessboard.</p>
+<p><span class="math inline">8 \times 8</span> chessboard.</p>
 <ul>
-<li><p><strong>Unconstrained Placement</strong>: <span class="math inline">\(\binom{64}{8} = 4,426,165,368\)</span> possible configurations, representing the selection of 8 squares from 64.</p></li>
-<li><p><strong>Column Constraint</strong>: Use a list of length 8, with each entry indicating the row of a queen in its respective column, resulting in <span class="math inline">\(8^8 = 16,777,216\)</span> configurations.</p></li>
-<li><p><strong>Row and Column Constraints</strong>: Model board states as permutations of the 8 row indices, reducing configurations to <span class="math inline">\(8! = 40,320\)</span>.</p></li>
+<li><p><strong>Unconstrained Placement</strong>: <span class="math inline">\binom{64}{8} = 4,426,165,368</span> possible configurations, representing the selection of 8 squares from 64.</p></li>
+<li><p><strong>Column Constraint</strong>: Use a list of length 8, with each entry indicating the row of a queen in its respective column, resulting in <span class="math inline">8^8 = 16,777,216</span> configurations.</p></li>
+<li><p><strong>Row and Column Constraints</strong>: Model board states as permutations of the 8 row indices, reducing configurations to <span class="math inline">8! = 40,320</span>.</p></li>
 </ul>
 
 <aside><div>
@@ -682,7 +698,7 @@ Marcel Turcotte
 </div>
 
 <aside><div>
-<p><span class="citation" data-cites="Russell:2020aa">Russell and Norvig (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, <span class="math inline">\(8 \times 7 = 56\)</span> neighbours</p>
+<p><span class="citation" data-cites="Russell:2020aa">Russell and Norvig (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, <span class="math inline">8 \times 7 = 56</span> neighbours</p>
 </div></aside></section>
 <section id="get_neighbors_rn-1" class="slide level2">
 <h2><code>get_neighbors_rn</code></h2>
@@ -789,7 +805,7 @@ Marcel Turcotte
 </div>
 
 <aside><div>
-<p><span class="math inline">\(\frac{8 \times 7}{2} = 28\)</span> neighbours</p>
+<p><span class="math inline">\frac{8 \times 7}{2} = 28</span> neighbours</p>
 </div></aside></section>
 <section id="get_neighbors-1" class="slide level2">
 <h2><code>get_neighbors</code></h2>
@@ -1051,7 +1067,7 @@ Marcel Turcotte
 </section>
 <section id="solve-40-queens" class="slide level2 scrollable">
 <h2>Solve 40-Queens</h2>
-<p><span class="math inline">\(40! = 8.1591528325 \times 10^{47}\)</span></p>
+<p><span class="math inline">40! = 8.1591528325 \times 10^{47}</span></p>
 <div class="fragment">
 <div id="28a28a55" class="cell" data-execution_count="26">
 <details class="code-fold">
@@ -1327,7 +1343,7 @@ Marcel Turcotte
 <li class="fragment">Successful attempts average 4 steps to a solution.</li>
 </ul></li>
 <li class="fragment">Permitting <strong>100 lateral moves</strong> boosts success rate from 14% to 94%.</li>
-<li class="fragment">The problem space comprises <span class="math inline">\(8^8 = 16,777,216\)</span> states.
+<li class="fragment">The problem space comprises <span class="math inline">8^8 = 16,777,216</span> states.
 <ul>
 <li class="fragment">Implementation from Russell &amp; Norvig</li>
 </ul></li>
@@ -1422,7 +1438,7 @@ Marcel Turcotte
 <ol type="1">
 <li><p>This algorithm resembles hill climbing but differs by randomly selecting the next state rather than choosing the optimal move.</p></li>
 <li><p>If the move results in a lower objective function value, it is accepted unconditionally.</p></li>
-<li><p>Otherwise, acceptance is probabilistic, contingent on both <span class="math inline">\(\Delta E\)</span> and <span class="math inline">\(T\)</span>.</p></li>
+<li><p>Otherwise, acceptance is probabilistic, contingent on both <span class="math inline">\Delta E</span> and <span class="math inline">T</span>.</p></li>
 </ol>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1439,7 +1455,7 @@ Marcel Turcotte
 <p><strong>Attribution</strong>: <span class="citation" data-cites="Russell:2020aa">(<a href="#/references" role="doc-biblioref" onclick="">Russell and Norvig 2020, 115</a>)</span></p>
 </div></aside></section>
 <section id="varying-delta-e" class="slide level2">
-<h2>Varying <span class="math inline">\(\Delta E\)</span></h2>
+<h2>Varying <span class="math inline">\Delta E</span></h2>
 <div id="9122eb79" class="cell columns column-output-location" data-execution_count="32">
 <div class="column">
 <details class="code-fold">
@@ -1482,7 +1498,7 @@ Marcel Turcotte
 <p>Moves resulting in <strong>significant negative changes</strong> (worse) to the objective function are <strong>less likely to be accepted</strong>.</p>
 </div></aside></section>
 <section id="varying-the-temperature-t" class="slide level2">
-<h2>Varying the temperature, <span class="math inline">\(T\)</span></h2>
+<h2>Varying the temperature, <span class="math inline">T</span></h2>
 <div id="e139b7df" class="cell columns column-output-location" data-execution_count="33">
 <div class="column">
 <details class="code-fold">
@@ -1522,10 +1538,10 @@ Marcel Turcotte
 </div></div>
 
 <aside><div>
-<p>For a fixed <span class="math inline">\(\Delta E\)</span> (here <span class="math inline">\(0.1\)</span>), changes are more likely to be accepted whe <span class="math inline">\(T\)</span> is high, at the start of the algorithm.</p>
+<p>For a fixed <span class="math inline">\Delta E</span> (here <span class="math inline">0.1</span>), changes are more likely to be accepted whe <span class="math inline">T</span> is high, at the start of the algorithm.</p>
 </div></aside></section>
 <section id="varying-the-temperature-and-delta-e" class="slide level2">
-<h2>Varying the temperature and <span class="math inline">\(\Delta E\)</span></h2>
+<h2>Varying the temperature and <span class="math inline">\Delta E</span></h2>
 <div id="46a20d7a" class="cell columns column-output-location" data-execution_count="34">
 <div class="column">
 <details class="code-fold">
@@ -1565,7 +1581,7 @@ Marcel Turcotte
 </div>
 </div></div>
 <aside class="notes">
-<p>Bad moves are more likely to be accepted at the start when <span class="math inline">\(T\)</span> is high, and less likely as <span class="math inline">\(T\)</span> decreases.</p>
+<p>Bad moves are more likely to be accepted at the start when <span class="math inline">T</span> is high, and less likely as <span class="math inline">T</span> decreases.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1579,7 +1595,7 @@ Marcel Turcotte
       }</style></aside>
 </section>
 <section id="varying-the-temperature-and-delta-e-1" class="slide level2">
-<h2>Varying the temperature and <span class="math inline">\(\Delta E\)</span></h2>
+<h2>Varying the temperature and <span class="math inline">\Delta E</span></h2>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb43" data-startfrom="1089" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 1088;"><span id="cb43-1089"><a aria-label="1089"></a><span class="im">import</span> { Inputs<span class="op">,</span> Plot } <span class="im">from</span> <span class="st">"@observablehq/plot"</span></span>
 <span id="cb43-1090"><a aria-label="1090"></a></span>
@@ -1663,7 +1679,7 @@ Marcel Turcotte
 <p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Russell:2020aa">(<a href="#/references" role="doc-biblioref" onclick="">Russell and Norvig 2020, 114</a>)</span></strong></p>
 </div>
 <div class="callout-content">
-<p>If the schedule lowers <span class="math inline">\(T\)</span> to 0 slowly enough, then a property of the <strong>Boltzmann</strong> (aka <strong>Gibbs</strong>) distribution, <span class="math inline">\(e^{\frac{\Delta E}{T}}\)</span>, is that all the probability is concentrated on the global maxima, which the algorithm will find with probability approaching 1.</p>
+<p>If the schedule lowers <span class="math inline">T</span> to 0 slowly enough, then a property of the <strong>Boltzmann</strong> (aka <strong>Gibbs</strong>) distribution, <span class="math inline">e^{\frac{\Delta E}{T}}</span>, is that all the probability is concentrated on the global maxima, which the algorithm will find with probability approaching 1.</p>
 </div>
 </div>
 </div>
@@ -1968,13 +1984,13 @@ Marcel Turcotte
 <section id="remarks" class="slide level2">
 <h2>Remarks</h2>
 <ul>
-<li>As <span class="math inline">\(t \to \infty\)</span>, the algorithm exhibits behavior characteristic of a <strong>random walk</strong>. During this phase, any neighboring state, regardless of whether it improves the objective function, is accepted. This facilitates exploration and occurs at the start of the algorithm’s execution.</li>
+<li>As <span class="math inline">t \to \infty</span>, the algorithm exhibits behavior characteristic of a <strong>random walk</strong>. During this phase, any neighboring state, regardless of whether it improves the objective function, is accepted. This facilitates exploration and occurs at the start of the algorithm’s execution.</li>
 </ul>
 </section>
 <section id="remarks-1" class="slide level2">
 <h2>Remarks</h2>
 <ul>
-<li>Conversely, as <span class="math inline">\(t \to 0\)</span>, the algorithm behaves like <strong>hill climbing</strong>. In this phase, only those states that enhance the objective function’s value are accepted, ensuring that the algorithm consistently moves towards optimal solutions—specifically, towards lower values in minimization problems. This phase emphasizes the exploitation of promising solutions and occurs towards the algorithm’s conclusion.</li>
+<li>Conversely, as <span class="math inline">t \to 0</span>, the algorithm behaves like <strong>hill climbing</strong>. In this phase, only those states that enhance the objective function’s value are accepted, ensuring that the algorithm consistently moves towards optimal solutions—specifically, towards lower values in minimization problems. This phase emphasizes the exploitation of promising solutions and occurs towards the algorithm’s conclusion.</li>
 </ul>
 
 <aside class="notes">
@@ -2029,9 +2045,9 @@ Marcel Turcotte
 <ul>
 <li class="fragment"><strong>Introduced</strong>: 1962 by Held, Karp, and independently by Bellman.</li>
 <li class="fragment"><strong>Problem</strong>: Solves the Traveling Salesman Problem (TSP) using <strong>dynamic programming</strong>.</li>
-<li class="fragment"><strong>Time Complexity</strong>: <span class="math inline">\(\Theta(2^n n^2)\)</span>.</li>
-<li class="fragment"><strong>Space Complexity</strong>: <span class="math inline">\(\Theta(2^n n)\)</span>.</li>
-<li class="fragment"><strong>Efficiency</strong>: Better than brute-force <span class="math inline">\(\Theta(n!)\)</span>, yet still <strong>exponential</strong>.</li>
+<li class="fragment"><strong>Time Complexity</strong>: <span class="math inline">\Theta(2^n n^2)</span>.</li>
+<li class="fragment"><strong>Space Complexity</strong>: <span class="math inline">\Theta(2^n n)</span>.</li>
+<li class="fragment"><strong>Efficiency</strong>: Better than brute-force <span class="math inline">\Theta(n!)</span>, yet still <strong>exponential</strong>.</li>
 </ul>
 </section>
 <section id="heldkarp-algorithm-1" class="slide level2">
@@ -2333,14 +2349,14 @@ Marcel Turcotte
 </section>
 <section id="initial-temperature" class="slide level2">
 <h2>Initial Temperature</h2>
-<p><strong>Influence</strong>: Since the probability of accepting a new state is given by <span class="math inline">\(e^{-\frac{\Delta E}{T}}\)</span>, the selection of the <strong>initial temperature</strong> is directly influenced by <span class="math inline">\(\Delta E\)</span> and consequently by the <strong>objective function value for a random state</strong>, <span class="math inline">\(f(s)\)</span>.</p>
+<p><strong>Influence</strong>: Since the probability of accepting a new state is given by <span class="math inline">e^{-\frac{\Delta E}{T}}</span>, the selection of the <strong>initial temperature</strong> is directly influenced by <span class="math inline">\Delta E</span> and consequently by the <strong>objective function value for a random state</strong>, <span class="math inline">f(s)</span>.</p>
 </section>
 <section id="initial-temperature-1" class="slide level2">
 <h2>Initial Temperature</h2>
 <ul>
-<li><p><strong>Example Problems</strong>: Consider two scenarios: problem <span class="math inline">\(a\)</span> with <span class="math inline">\(f(a) = 1,000\)</span> and problem <span class="math inline">\(b\)</span> with <span class="math inline">\(f(b) = 100\)</span>.</p></li>
-<li><p><strong>Energy Difference</strong>: Accepting a state that is 10% worse results in energy differences <span class="math inline">\(\Delta E = 0.1 \cdot f(a) = 100\)</span> for problem <span class="math inline">\(a\)</span> and <span class="math inline">\(\Delta E = 0.1 \cdot f(b) = 10\)</span> for problem <span class="math inline">\(b\)</span>.</p></li>
-<li><p><strong>Acceptance Probability</strong>: To accept such state 60% of the time, set <span class="math inline">\(e^{-\frac{\Delta E}{T}} = 0.6\)</span>. Solving for <span class="math inline">\(T\)</span> yields initial temperatures of approximately <span class="math inline">\(T \approx 195.8\)</span> for problem <span class="math inline">\(a\)</span> and <span class="math inline">\(T \approx 19.58\)</span> for problem <span class="math inline">\(b\)</span>.</p></li>
+<li><p><strong>Example Problems</strong>: Consider two scenarios: problem <span class="math inline">a</span> with <span class="math inline">f(a) = 1,000</span> and problem <span class="math inline">b</span> with <span class="math inline">f(b) = 100</span>.</p></li>
+<li><p><strong>Energy Difference</strong>: Accepting a state that is 10% worse results in energy differences <span class="math inline">\Delta E = 0.1 \cdot f(a) = 100</span> for problem <span class="math inline">a</span> and <span class="math inline">\Delta E = 0.1 \cdot f(b) = 10</span> for problem <span class="math inline">b</span>.</p></li>
+<li><p><strong>Acceptance Probability</strong>: To accept such state 60% of the time, set <span class="math inline">e^{-\frac{\Delta E}{T}} = 0.6</span>. Solving for <span class="math inline">T</span> yields initial temperatures of approximately <span class="math inline">T \approx 195.8</span> for problem <span class="math inline">a</span> and <span class="math inline">T \approx 19.58</span> for problem <span class="math inline">b</span>.</p></li>
 </ul>
 </section>
 <section id="initial-temperature-2" class="slide level2">
@@ -2362,11 +2378,11 @@ Marcel Turcotte
 <h2>Linear Cooling</h2>
 <ul>
 <li><strong>Description</strong>: The temperature decreases linearly with each iteration.</li>
-<li><strong>Formula</strong>: <span class="math inline">\(T = T_0 - \alpha \cdot k\)</span>
+<li><strong>Formula</strong>: <span class="math inline">T = T_0 - \alpha \cdot k</span>
 <ul>
-<li><span class="math inline">\(T_0\)</span>: Initial temperature</li>
-<li><span class="math inline">\(\alpha\)</span>: A constant decrement</li>
-<li><span class="math inline">\(k\)</span>: Current iteration</li>
+<li><span class="math inline">T_0</span>: Initial temperature</li>
+<li><span class="math inline">\alpha</span>: A constant decrement</li>
+<li><span class="math inline">k</span>: Current iteration</li>
 </ul></li>
 <li><strong>Pros</strong>: Simple to implement and understand.</li>
 <li><strong>Cons</strong>: Often leads to <strong>premature convergence</strong> because the temperature decreases too quickly.</li>
@@ -2379,13 +2395,13 @@ Marcel Turcotte
 <h2>Geometric (Exponential) Cooling</h2>
 <ul>
 <li><strong>Description</strong>: The temperature decreases exponentially with each iteration.</li>
-<li><strong>Formula</strong>: <span class="math inline">\(T = T_0 \cdot \alpha^k\)</span>
+<li><strong>Formula</strong>: <span class="math inline">T = T_0 \cdot \alpha^k</span>
 <ul>
-<li><span class="math inline">\(\alpha\)</span>: Cooling rate, typically between 0.8 and 0.99</li>
-<li><span class="math inline">\(k\)</span>: Current iteration</li>
+<li><span class="math inline">\alpha</span>: Cooling rate, typically between 0.8 and 0.99</li>
+<li><span class="math inline">k</span>: Current iteration</li>
 </ul></li>
 <li><strong>Pros</strong>: Widely used due to its simplicity and effectiveness.</li>
-<li><strong>Cons</strong>: The choice of <span class="math inline">\(\alpha\)</span> is critical; if it’s too small, the temperature drops too fast, and if it’s too large, convergence can be slow.</li>
+<li><strong>Cons</strong>: The choice of <span class="math inline">\alpha</span> is critical; if it’s too small, the temperature drops too fast, and if it’s too large, convergence can be slow.</li>
 </ul>
 <div id="b9693b2f" class="cell" data-execution_count="52">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a aria-label="1"></a>temperature <span class="op">=</span> initial_temp <span class="op">*</span> (cooling_rate <span class="op">**</span> iteration)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2395,10 +2411,10 @@ Marcel Turcotte
 <h2>Logarithmic Cooling</h2>
 <ul>
 <li><strong>Description</strong>: The temperature decreases slowly following a logarithmic function.</li>
-<li><strong>Formula</strong>: <span class="math inline">\(T = \frac{\alpha \cdot T_0}{\log(1+k)}\)</span>
+<li><strong>Formula</strong>: <span class="math inline">T = \frac{\alpha \cdot T_0}{\log(1+k)}</span>
 <ul>
-<li><span class="math inline">\(\alpha\)</span>: A scaling constant</li>
-<li><span class="math inline">\(k\)</span>: Current iteration</li>
+<li><span class="math inline">\alpha</span>: A scaling constant</li>
+<li><span class="math inline">k</span>: Current iteration</li>
 </ul></li>
 <li><strong>Pros</strong>: Provides a slower cooling rate, which is useful for problems that require extensive exploration of the solution space.</li>
 <li><strong>Cons</strong>: Convergence can be very slow, requiring many iterations.</li>
@@ -2411,13 +2427,13 @@ Marcel Turcotte
 <h2>Inverse Cooling</h2>
 <ul>
 <li><strong>Description</strong>: The temperature decreases as an inverse function of the iteration number.</li>
-<li><strong>Formula</strong>: <span class="math inline">\(T = \frac{T_0}{1+\alpha \cdot K}\)</span>
+<li><strong>Formula</strong>: <span class="math inline">T = \frac{T_0}{1+\alpha \cdot K}</span>
 <ul>
-<li><span class="math inline">\(\alpha\)</span>: A scaling constant</li>
-<li><span class="math inline">\(k\)</span>: Current iteration</li>
+<li><span class="math inline">\alpha</span>: A scaling constant</li>
+<li><span class="math inline">k</span>: Current iteration</li>
 </ul></li>
 <li><strong>Pros</strong>: Allows for a more controlled cooling process, balancing exploration and exploitation.</li>
-<li><strong>Cons</strong>: May require careful tuning of <span class="math inline">\(\alpha\)</span> to be effective.</li>
+<li><strong>Cons</strong>: May require careful tuning of <span class="math inline">\alpha</span> to be effective.</li>
 </ul>
 <div id="449b13a0" class="cell" data-execution_count="54">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a aria-label="1"></a>temperature <span class="op">=</span> initial_temp <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> alpha <span class="op">*</span> iteration)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2644,7 +2660,6 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -2813,27 +2828,9 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

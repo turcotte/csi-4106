@@ -126,6 +126,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -619,29 +635,29 @@ This entails employing a **bottom-up** methodology to some degree.
 <ul>
 <li><strong>Algebra</strong>
 <ul>
-<li><span class="math inline">\(x + 3 = 7\)</span>, here <span class="math inline">\(x\)</span> represents a quantity, <span class="math inline">\(x\)</span> is a symbol.</li>
+<li><span class="math inline">x + 3 = 7</span>, here <span class="math inline">x</span> represents a quantity, <span class="math inline">x</span> is a symbol.</li>
 </ul></li>
 <li><strong>Calculus</strong>
 <ul>
-<li>Symbolic differentiation of <span class="math inline">\(x^2\)</span> into <span class="math inline">\(2x\)</span>, <span class="math inline">\(x\)</span> is a symbol.</li>
+<li>Symbolic differentiation of <span class="math inline">x^2</span> into <span class="math inline">2x</span>, <span class="math inline">x</span> is a symbol.</li>
 </ul></li>
 <li><strong>Logic</strong>
 <ul>
-<li>We might use <span class="math inline">\(P\)</span> to mean “It is raining” and <span class="math inline">\(Q\)</span> mean “The ground is wet.” <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> are symbols.</li>
+<li>We might use <span class="math inline">P</span> to mean “It is raining” and <span class="math inline">Q</span> mean “The ground is wet.” <span class="math inline">P</span> and <span class="math inline">Q</span> are symbols.</li>
 </ul></li>
 </ul>
 <aside class="notes">
-<p>You already work with symbolic systems in mathematics. In algebra, <span class="math inline">\(x\)</span> represents a quantity, and rules let you transform expressions such as <span class="math inline">\(x + 3 = 7\)</span> into <span class="math inline">\(x = 4\)</span>. In symbolic AI, symbols can also represent objects and relationships. For example, <code>Parent(alan, chris)</code> represents a relationship, and a rule can infer a grandparent relationship from two parent relationships.</p>
+<p>You already work with symbolic systems in mathematics. In algebra, <span class="math inline">x</span> represents a quantity, and rules let you transform expressions such as <span class="math inline">x + 3 = 7</span> into <span class="math inline">x = 4</span>. In symbolic AI, symbols can also represent objects and relationships. For example, <code>Parent(alan, chris)</code> represents a relationship, and a rule can infer a grandparent relationship from two parent relationships.</p>
 <p><strong>Modus ponens</strong> (from logic) gives a simple example of symbols and a rule of inference:</p>
-<p>Let <span class="math inline">\(P\)</span> mean “It is raining” and <span class="math inline">\(Q\)</span> to mean “The ground is wet.”</p>
-<p><span class="math display">\[
+<p>Let <span class="math inline">P</span> mean “It is raining” and <span class="math inline">Q</span> to mean “The ground is wet.”</p>
+<p><span class="math display">
 P \rightarrow Q \qquad \text{If it is raining, the ground is wet.}
-\]</span> <span class="math display">\[
+</span> <span class="math display">
 P \qquad \text{It is raining.}
-\]</span> <span class="math display">\[
+</span> <span class="math display">
 \therefore Q \qquad \text{Therefore, the ground is wet.}
-\]</span></p>
-<p>Here, <strong><span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> represent propositions</strong>, and <strong><span class="math inline">\(\rightarrow\)</span> expresses implication</strong>. The inference rule operates on this explicit structure: from <span class="math inline">\(P \rightarrow Q\)</span> and <span class="math inline">\(P\)</span>, infer <span class="math inline">\(Q\)</span>.</p>
+</span></p>
+<p>Here, <strong><span class="math inline">P</span> and <span class="math inline">Q</span> represent propositions</strong>, and <strong><span class="math inline">\rightarrow</span> expresses implication</strong>. The inference rule operates on this explicit structure: from <span class="math inline">P \rightarrow Q</span> and <span class="math inline">P</span>, infer <span class="math inline">Q</span>.</p>
 <p>We also use algebra and calculus to design neural networks. What makes an approach symbolic is its explicit representation and manipulation of meaningful expressions, not simply its use of mathematical notation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -879,7 +895,7 @@ P \qquad \text{It is raining.}
 <ul>
 <li class="fragment">“Their founding tenet held that <strong>knowledge</strong> can be represented by a <strong>set of rules</strong>, and computer programs can use <strong>logic</strong> to manipulate that knowledge.” <span class="citation" data-cites="Strickland:2021aa">(<a href="#/references" role="doc-biblioref" onclick="">Strickland 2021</a>)</span></li>
 <li class="fragment">“Researchers developing symbolic AI set out to <strong>explicitly teach computers</strong> about the world.” <span class="citation" data-cites="Strickland:2021aa">(<a href="#/references" role="doc-biblioref" onclick="">Strickland 2021</a>)</span></li>
-<li class="fragment">“(<span class="math inline">\(\ldots\)</span>) a <strong>physical symbol system</strong> has the <strong>necessary</strong> and <strong>sufficient</strong> means for <strong>general intelligent action</strong>.”<br> <span class="citation" data-cites="Newell:1976aa">(<a href="#/references" role="doc-biblioref" onclick="">Newell and Herbert A. Simon 1976b</a>)</span></li>
+<li class="fragment">“(<span class="math inline">\ldots</span>) a <strong>physical symbol system</strong> has the <strong>necessary</strong> and <strong>sufficient</strong> means for <strong>general intelligent action</strong>.”<br> <span class="citation" data-cites="Newell:1976aa">(<a href="#/references" role="doc-biblioref" onclick="">Newell and Herbert A. Simon 1976b</a>)</span></li>
 </ul>
 <aside class="notes">
 <p>In these early systems, people often supplied knowledge explicitly as facts and rules. However, symbolic representations can also be learned from examples. The defining distinction is the use of explicit symbols and operations over them, rather than whether learning occurs.</p>
@@ -1077,7 +1093,7 @@ P \qquad \text{It is raining.}
 </div></aside></section>
 <section id="days-ago" class="slide level2 scrollable">
 <h2>4 days ago</h2>
-<p></p><div id="tweet-17283"></div><script>tweet={"url":"https:\/\/x.com\/ChaseLochmiller\/status\/2096445087505055891","author_name":"Chase Lochmiller","author_url":"https:\/\/x.com\/ChaseLochmiller","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003ECongratulations to our friends at \u003Ca href=\"https:\/\/x.com\/OpenAI?ref_src=twsrc%5Etfw\"\u003E@OpenAI\u003C\/a\u003E! I guess this makes Abilene the birthplace of AGI! \u003Ca href=\"https:\/\/t.co\/d9kp1qxCdz\"\u003Ehttps:\/\/t.co\/d9kp1qxCdz\u003C\/a\u003E \u003Ca href=\"https:\/\/t.co\/HDeLY5oTfS\"\u003Epic.twitter.com\/HDeLY5oTfS\u003C\/a\u003E\u003C\/p\u003E&mdash; Chase Lochmiller (@ChaseLochmiller) \u003Ca href=\"https:\/\/x.com\/ChaseLochmiller\/status\/2096445087505055891?ref_src=twsrc%5Etfw\"\u003ESeptember 6, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-17283").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-85297"></div><script>tweet={"url":"https:\/\/x.com\/ChaseLochmiller\/status\/2096445087505055891","author_name":"Chase Lochmiller","author_url":"https:\/\/x.com\/ChaseLochmiller","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003ECongratulations to our friends at \u003Ca href=\"https:\/\/x.com\/OpenAI?ref_src=twsrc%5Etfw\"\u003E@OpenAI\u003C\/a\u003E! I guess this makes Abilene the birthplace of AGI! \u003Ca href=\"https:\/\/t.co\/d9kp1qxCdz\"\u003Ehttps:\/\/t.co\/d9kp1qxCdz\u003C\/a\u003E \u003Ca href=\"https:\/\/t.co\/HDeLY5oTfS\"\u003Epic.twitter.com\/HDeLY5oTfS\u003C\/a\u003E\u003C\/p\u003E&mdash; Chase Lochmiller (@ChaseLochmiller) \u003Ca href=\"https:\/\/x.com\/ChaseLochmiller\/status\/2096445087505055891?ref_src=twsrc%5Etfw\"\u003ESeptember 6, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-85297").innerHTML = tweet["html"];</script><p></p>
 </section>
 <section id="question" class="slide level2 scrollable smaller">
 <h2>Question</h2>
@@ -1376,9 +1392,9 @@ P \qquad \text{It is raining.}
 <h2>OpenAI GPT-6 Astra</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p></p><div id="tweet-41425"></div><script>tweet={"url":"https:\/\/x.com\/sama\/status\/2095600005772104059","author_name":"Sam Altman","author_url":"https:\/\/x.com\/sama","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EGPT-6 Astra is here.\u003Cbr\u003E\u003Cbr\u003EWe hope it will begin to enable a new generation of entrepreneurship, scientific discovery, and building.\u003Cbr\u003E\u003Cbr\u003EWe believe it is the best model in the world for computer use, professional work, science, coding, cybersecurity, and more.\u003Cbr\u003E\u003Cbr\u003EIt took us some extra time…\u003C\/p\u003E&mdash; Sam Altman (@sama) \u003Ca href=\"https:\/\/x.com\/sama\/status\/2095600005772104059?ref_src=twsrc%5Etfw\"\u003ESeptember 3, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-41425").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-71881"></div><script>tweet={"url":"https:\/\/x.com\/sama\/status\/2095600005772104059","author_name":"Sam Altman","author_url":"https:\/\/x.com\/sama","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EGPT-6 Astra is here.\u003Cbr\u003E\u003Cbr\u003EWe hope it will begin to enable a new generation of entrepreneurship, scientific discovery, and building.\u003Cbr\u003E\u003Cbr\u003EWe believe it is the best model in the world for computer use, professional work, science, coding, cybersecurity, and more.\u003Cbr\u003E\u003Cbr\u003EIt took us some extra time…\u003C\/p\u003E&mdash; Sam Altman (@sama) \u003Ca href=\"https:\/\/x.com\/sama\/status\/2095600005772104059?ref_src=twsrc%5Etfw\"\u003ESeptember 3, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-71881").innerHTML = tweet["html"];</script><p></p>
 </div><div class="column" style="width:40%;">
-<p></p><div id="tweet-75590"></div><script>tweet={"url":"https:\/\/x.com\/arcprize\/status\/2095597602545025138","author_name":"ARC Prize","author_url":"https:\/\/x.com\/arcprize","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EGPT-6 Astra by \u003Ca href=\"https:\/\/x.com\/OpenAI?ref_src=twsrc%5Etfw\"\u003E@OpenAI\u003C\/a\u003E achieves SOTA on ARC-AGI:\u003Cbr\u003E\u003Cbr\u003E- Astra scores 63% on ARC-AGI-3, 99% via a new provider adapter harness\u003Cbr\u003E- It surpasses human performance on 96% of ARC-AGI-3 levels\u003Cbr\u003E- It builds the most precise symbolic model of novel environments we&#39;ve seen\u003Cbr\u003E\u003Cbr\u003EOur analysis: \u003Ca href=\"https:\/\/t.co\/GX77KsRNer\"\u003Epic.twitter.com\/GX77KsRNer\u003C\/a\u003E\u003C\/p\u003E&mdash; ARC Prize (@arcprize) \u003Ca href=\"https:\/\/x.com\/arcprize\/status\/2095597602545025138?ref_src=twsrc%5Etfw\"\u003ESeptember 3, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-75590").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-91084"></div><script>tweet={"url":"https:\/\/x.com\/arcprize\/status\/2095597602545025138","author_name":"ARC Prize","author_url":"https:\/\/x.com\/arcprize","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EGPT-6 Astra by \u003Ca href=\"https:\/\/x.com\/OpenAI?ref_src=twsrc%5Etfw\"\u003E@OpenAI\u003C\/a\u003E achieves SOTA on ARC-AGI:\u003Cbr\u003E\u003Cbr\u003E- Astra scores 63% on ARC-AGI-3, 99% via a new provider adapter harness\u003Cbr\u003E- It surpasses human performance on 96% of ARC-AGI-3 levels\u003Cbr\u003E- It builds the most precise symbolic model of novel environments we&#39;ve seen\u003Cbr\u003E\u003Cbr\u003EOur analysis: \u003Ca href=\"https:\/\/t.co\/GX77KsRNer\"\u003Epic.twitter.com\/GX77KsRNer\u003C\/a\u003E\u003C\/p\u003E&mdash; ARC Prize (@arcprize) \u003Ca href=\"https:\/\/x.com\/arcprize\/status\/2095597602545025138?ref_src=twsrc%5Etfw\"\u003ESeptember 3, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-91084").innerHTML = tweet["html"];</script><p></p>
 </div></div>
 
 <aside><div>
@@ -1388,7 +1404,7 @@ P \qquad \text{It is raining.}
 <h2>Artificial General Intelligence (AGI)</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p></p><div id="tweet-15633"></div><script>tweet={"url":"https:\/\/x.com\/tdietterich\/status\/1760901693305479405","author_name":"Thomas G. Dietterich","author_url":"https:\/\/x.com\/tdietterich","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003ENobody even can define AGI in a non-anthropomorphic way, let alone achieve it. The whole concept is unscientific, and people should be embarrassed to even use the term.\u003C\/p\u003E&mdash; Thomas G. Dietterich (@tdietterich) \u003Ca href=\"https:\/\/x.com\/tdietterich\/status\/1760901693305479405?ref_src=twsrc%5Etfw\"\u003EFebruary 23, 2024\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-15633").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-13458"></div><script>tweet={"url":"https:\/\/x.com\/tdietterich\/status\/1760901693305479405","author_name":"Thomas G. Dietterich","author_url":"https:\/\/x.com\/tdietterich","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003ENobody even can define AGI in a non-anthropomorphic way, let alone achieve it. The whole concept is unscientific, and people should be embarrassed to even use the term.\u003C\/p\u003E&mdash; Thomas G. Dietterich (@tdietterich) \u003Ca href=\"https:\/\/x.com\/tdietterich\/status\/1760901693305479405?ref_src=twsrc%5Etfw\"\u003EFebruary 23, 2024\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-13458").innerHTML = tweet["html"];</script><p></p>
 </div><div class="column" style="width:50%;">
 <p>Artificial general intelligence (AGI) refers to a form of artificial intelligence (AI) that either <strong>equals</strong> or <strong>exceeds human proficiency</strong> across a <strong>diverse array of cognitive functions</strong>.</p>
 </div></div>
@@ -1400,7 +1416,7 @@ P \qquad \text{It is raining.}
 <h2>AlphaFold (1, 2, &amp; 3)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<p></p><div id="tweet-14636"></div><script>tweet={"url":"https:\/\/x.com\/Nature\/status\/1430934970789400587","author_name":"nature","author_url":"https:\/\/x.com\/Nature","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EProtein Power: AI network predicts highly accurate 3D structures for the human proteome. Browse this week’s issue of Nature: \u003Ca href=\"https:\/\/t.co\/ihA52BlziB\"\u003Ehttps:\/\/t.co\/ihA52BlziB\u003C\/a\u003E \u003Ca href=\"https:\/\/t.co\/XUTcbbKL3q\"\u003Epic.twitter.com\/XUTcbbKL3q\u003C\/a\u003E\u003C\/p\u003E&mdash; nature (@Nature) \u003Ca href=\"https:\/\/x.com\/Nature\/status\/1430934970789400587?ref_src=twsrc%5Etfw\"\u003EAugust 26, 2021\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-14636").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-66036"></div><script>tweet={"url":"https:\/\/x.com\/Nature\/status\/1430934970789400587","author_name":"nature","author_url":"https:\/\/x.com\/Nature","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EProtein Power: AI network predicts highly accurate 3D structures for the human proteome. Browse this week’s issue of Nature: \u003Ca href=\"https:\/\/t.co\/ihA52BlziB\"\u003Ehttps:\/\/t.co\/ihA52BlziB\u003C\/a\u003E \u003Ca href=\"https:\/\/t.co\/XUTcbbKL3q\"\u003Epic.twitter.com\/XUTcbbKL3q\u003C\/a\u003E\u003C\/p\u003E&mdash; nature (@Nature) \u003Ca href=\"https:\/\/x.com\/Nature\/status\/1430934970789400587?ref_src=twsrc%5Etfw\"\u003EAugust 26, 2021\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-66036").innerHTML = tweet["html"];</script><p></p>
 </div><div class="column" style="width:65%;">
 <p>I repeat, <strong>there is nothing wrong with narrow AI</strong>.</p>
 <ul>
@@ -1438,7 +1454,7 @@ P \qquad \text{It is raining.}
 <p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Wang:2019ao">(<a href="#/references" role="doc-biblioref" onclick="">Wang 2019</a>)</span></strong></p>
 </div>
 <div class="callout-content">
-<p>(<span class="math inline">\(\ldots\)</span>) as soon as a computer system is built to solve a problem successfully, the problem is no longer “only solvable by the human mind,” so does not need intelligence anymore. Consequently, “<strong>AI is whatever hasn’t been done yet</strong>” (Hofstadter, 1979; Schank, 1991), which is known as “<strong>the AI Effect</strong>” <span class="citation" data-cites="McCorduck:2004aa">(<a href="#/references" role="doc-biblioref" onclick="">McCorduck 2004</a>)</span>.</p>
+<p>(<span class="math inline">\ldots</span>) as soon as a computer system is built to solve a problem successfully, the problem is no longer “only solvable by the human mind,” so does not need intelligence anymore. Consequently, “<strong>AI is whatever hasn’t been done yet</strong>” (Hofstadter, 1979; Schank, 1991), which is known as “<strong>the AI Effect</strong>” <span class="citation" data-cites="McCorduck:2004aa">(<a href="#/references" role="doc-biblioref" onclick="">McCorduck 2004</a>)</span>.</p>
 </div>
 </div>
 </div>
@@ -1682,15 +1698,15 @@ Wang, Pei. 2019. <span>“<span>On Defining Artificial Intelligence</span>.”</
 </section>
 <section id="wang2019ao" class="slide level2">
 <h2><span class="citation" data-cites="Wang:2019ao">Wang (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span></h2>
-<p>An <strong>agent</strong> and its <strong>interaction with the environment</strong> are specified as a tuple: <span class="math display">\[
+<p>An <strong>agent</strong> and its <strong>interaction with the environment</strong> are specified as a tuple: <span class="math display">
 \langle P,S,A \rangle
-\]</span> where</p>
+</span> where</p>
 <ul>
-<li><span class="math inline">\(P\)</span> represents a sequence of <strong>input signals</strong>, <span class="math inline">\(P = \langle p_0,\ldots,p_t \rangle\)</span></li>
-<li><span class="math inline">\(S\)</span> represents a sequence of <strong>internal states</strong>, <span class="math inline">\(S = \langle s_0,\ldots,s_t \rangle\)</span></li>
-<li><span class="math inline">\(A\)</span> represents a sequence of <strong>actions</strong>, <span class="math inline">\(A = \langle a_0,\ldots,a_t \rangle\)</span></li>
+<li><span class="math inline">P</span> represents a sequence of <strong>input signals</strong>, <span class="math inline">P = \langle p_0,\ldots,p_t \rangle</span></li>
+<li><span class="math inline">S</span> represents a sequence of <strong>internal states</strong>, <span class="math inline">S = \langle s_0,\ldots,s_t \rangle</span></li>
+<li><span class="math inline">A</span> represents a sequence of <strong>actions</strong>, <span class="math inline">A = \langle a_0,\ldots,a_t \rangle</span></li>
 </ul>
-<p>For a sequence of moments, <span class="math inline">\(0,\ldots,t\)</span>.</p>
+<p>For a sequence of moments, <span class="math inline">0,\ldots,t</span>.</p>
 </section>
 <section id="human-h-vs-computer-c" class="slide level2">
 <h2>Human (H) vs Computer (C)</h2>
@@ -1704,9 +1720,9 @@ Wang, Pei. 2019. <span>“<span>On Defining Artificial Intelligence</span>.”</
 </div>
 </div>
 </div>
-<p><span class="math display">\[
+<p><span class="math display">
 \langle P^H,S^H,A^H \rangle \approx \langle P^C,S^C,A^C \rangle
-\]</span></p>
+</span></p>
 <div class="fragment">
 <p><span class="citation" data-cites="Wang:2019ao">Wang (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span> proposes 5 perspectives: <strong>Structure-AI</strong>, <strong>Behavior-AI</strong>, <strong>Capability-AI</strong>, <strong>Function-AI</strong>, and <strong>Principle-AI</strong>.</p>
 </div>
@@ -1724,9 +1740,9 @@ Wang, Pei. 2019. <span>“<span>On Defining Artificial Intelligence</span>.”</
 </div>
 </div>
 </div>
-<p><span class="math display">\[
+<p><span class="math display">
 P^H \approx P^C, S^H \approx S^C, A^H \approx A^C
-\]</span></p>
+</span></p>
 </section>
 <section id="behaviour-ai" class="slide level2">
 <h2>2. Behaviour-AI</h2>
@@ -1741,9 +1757,9 @@ P^H \approx P^C, S^H \approx S^C, A^H \approx A^C
 </div>
 </div>
 </div>
-<p><span class="math display">\[
+<p><span class="math display">
 P^H \approx P^C, A^H \approx A^C
-\]</span></p>
+</span></p>
 </section>
 <section id="capability-ai-employment-test" class="slide level2">
 <h2>3. Capability-AI (Employment Test)</h2>
@@ -1753,20 +1769,20 @@ P^H \approx P^C, A^H \approx A^C
 <p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Wang:2019ao">(<a href="#/references" role="doc-biblioref" onclick="">Wang 2019</a>)</span></strong></p>
 </div>
 <div class="callout-content">
-<p>In the agent framework, it means that <span class="math inline">\(C\)</span> is similar to <span class="math inline">\(H\)</span> in the sense that there are moments <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> that:</p>
+<p>In the agent framework, it means that <span class="math inline">C</span> is similar to <span class="math inline">H</span> in the sense that there are moments <span class="math inline">i</span> and <span class="math inline">j</span> that:</p>
 </div>
 </div>
 </div>
-<p><span class="math display">\[
+<p><span class="math display">
 p_i^C \approx p_j^H, a_i^C \approx a_j^H
-\]</span></p>
+</span></p>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Wang:2019ao">(<a href="#/references" role="doc-biblioref" onclick="">Wang 2019</a>)</span></strong></p>
 </div>
 <div class="callout-content">
-<p>the action (solution) the computer produces for a percept (problem) is similar to the action produced by a human to a similar percept (<span class="math inline">\(\ldots\)</span>) In this way, <strong>the intelligence of a system is identified by a set of problems it can solve</strong>, <u>while whether they are solved in the “human way” does not matter</u>.</p>
+<p>the action (solution) the computer produces for a percept (problem) is similar to the action produced by a human to a similar percept (<span class="math inline">\ldots</span>) In this way, <strong>the intelligence of a system is identified by a set of problems it can solve</strong>, <u>while whether they are solved in the “human way” does not matter</u>.</p>
 </div>
 </div>
 </div>
@@ -1792,13 +1808,13 @@ p_i^C \approx p_j^H, a_i^C \approx a_j^H
 <p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Wang:2019ao">(<a href="#/references" role="doc-biblioref" onclick="">Wang 2019</a>)</span></strong></p>
 </div>
 <div class="callout-content">
-<p>In the agent framework, this <strong>“Function-AI”</strong> perspective takes <span class="math inline">\(C\)</span> to be similar to <span class="math inline">\(H\)</span> in the sense that there are moments <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> that:</p>
+<p>In the agent framework, this <strong>“Function-AI”</strong> perspective takes <span class="math inline">C</span> to be similar to <span class="math inline">H</span> in the sense that there are moments <span class="math inline">i</span> and <span class="math inline">j</span> that:</p>
 </div>
 </div>
 </div>
-<p><span class="math display">\[
+<p><span class="math display">
 a_i^C \approx f^C(p_i^C), a_j^H \approx f^H(p_j^H), f^C \approx f^H
-\]</span></p>
+</span></p>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1818,20 +1834,20 @@ a_i^C \approx f^C(p_i^C), a_j^H \approx f^H(p_j^H), f^C \approx f^H
 <p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Wang:2019ao">(<a href="#/references" role="doc-biblioref" onclick="">Wang 2019</a>)</span></strong></p>
 </div>
 <div class="callout-content">
-<p>As in any field, there are researchers in AI trying to find <strong>fundamental principles</strong> that can uniformly explain the relevant phenomena. Here the idea comes from the usage of intelligence as a form of <em>rationality</em> (<span class="math inline">\(\ldots\)</span>) that can make the <strong>best-possible decision</strong> in various situations, according to the experience or history of the system.</p>
+<p>As in any field, there are researchers in AI trying to find <strong>fundamental principles</strong> that can uniformly explain the relevant phenomena. Here the idea comes from the usage of intelligence as a form of <em>rationality</em> (<span class="math inline">\ldots</span>) that can make the <strong>best-possible decision</strong> in various situations, according to the experience or history of the system.</p>
 </div>
 </div>
 </div>
-<p><span class="math display">\[
+<p><span class="math display">
 A^C = F^C(P^C), A^H = F^H(P^H), F^C \approx F^H
-\]</span></p>
+</span></p>
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Wang:2019ao">(<a href="#/references" role="doc-biblioref" onclick="">Wang 2019</a>)</span></strong></p>
 </div>
 <div class="callout-content">
-<p>The above <span class="math inline">\(F\)</span> is often not formally specified, but described informally as a certain <strong>“principle,”</strong> which is not merely about a single type of problem and its solution, but about <strong>the agent’s life-long history in various situations</strong>, when dealing with various types of problems.</p>
+<p>The above <span class="math inline">F</span> is often not formally specified, but described informally as a certain <strong>“principle,”</strong> which is not merely about a single type of problem and its solution, but about <strong>the agent’s life-long history in various situations</strong>, when dealing with various types of problems.</p>
 </div>
 </div>
 </div>
@@ -2250,7 +2266,6 @@ A^C = F^C(P^C), A^H = F^H(P^H), F^C \approx F^H
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -2420,27 +2435,9 @@ A^C = F^C(P^C), A^H = F^H(P^H), F^C \approx F^H
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

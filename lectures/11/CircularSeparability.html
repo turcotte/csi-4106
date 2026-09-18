@@ -123,8 +123,22 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 <script type="module">import "https://cdn.plot.ly/plotly-3.7.0.min"</script>
 
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -574,46 +588,46 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Clearly, this dataset is not linearly separable in <span class="math inline">\((x_1, x_2)\)</span>!</p>
+<p>Clearly, this dataset is not linearly separable in <span class="math inline">(x_1, x_2)</span>!</p>
 </section>
 <section id="feature-engineering" class="level2">
 <h2 class="anchored" data-anchor-id="feature-engineering">Feature engineering</h2>
 <p>When using a linear classifier like <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html"><code>LogisticRegression</code></a>, it is not possible to derive parameters that enable accurate classification of the given examples.</p>
-<p>In TensorFlow Playground, users can incorporate two additional features, <span class="math inline">\(x_1^2\)</span> and <span class="math inline">\(x_2^2\)</span>. This allows for the classification of examples using a straightforward network configuration with no hidden layers and a single output node. When employing the sigmoïd function as the activation, this setup effectively functions as logistic regression. However, the feature space becomes four-dimensional, complicating direct visualization.</p>
-<p>In this notebook, we introduce a single feature specifically designed to facilitate visualization. <span class="math display">\[
+<p>In TensorFlow Playground, users can incorporate two additional features, <span class="math inline">x_1^2</span> and <span class="math inline">x_2^2</span>. This allows for the classification of examples using a straightforward network configuration with no hidden layers and a single output node. When employing the sigmoïd function as the activation, this setup effectively functions as logistic regression. However, the feature space becomes four-dimensional, complicating direct visualization.</p>
+<p>In this notebook, we introduce a single feature specifically designed to facilitate visualization. <span class="math display">
 r = x_1^2 + x_2^2,
-\]</span> <strong>(r)</strong> represents the <strong>squared distance from the origin</strong> — essentially the <strong>radius squared</strong> in polar coordinates.</p>
+</span> <strong>(r)</strong> represents the <strong>squared distance from the origin</strong> — essentially the <strong>radius squared</strong> in polar coordinates.</p>
 <section id="intuition" class="level3">
 <h3 class="anchored" data-anchor-id="intuition">Intuition</h3>
 <ul>
-<li>Each point in the original 2-D plane has coordinates <span class="math inline">\((x_1, x_2)\)</span>.</li>
+<li>Each point in the original 2-D plane has coordinates <span class="math inline">(x_1, x_2)</span>.</li>
 <li>If you express those same coordinates in polar form, you have</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
   x_1 = r^{1/2} \cos\theta, \quad x_2 = r^{1/2} \sin\theta,
-\]</span> or more conventionally, <span class="math inline">\(r_{\text{polar}} = \sqrt{x_1^2 + x_2^2}\)</span>.</p>
+</span> or more conventionally, <span class="math inline">r_{\text{polar}} = \sqrt{x_1^2 + x_2^2}</span>.</p>
 <ul>
-<li>Here, we define <span class="math inline">\(r = x_1^2 + x_2^2\)</span>, i.e., the <strong>square</strong> of that radius.</li>
+<li>Here, we define <span class="math inline">r = x_1^2 + x_2^2</span>, i.e., the <strong>square</strong> of that radius.</li>
 </ul>
-<p>Using <span class="math inline">\(r\)</span> instead of <span class="math inline">\(\sqrt{r}\)</span> keeps the mapping differentiable and avoids square roots in the model.</p>
+<p>Using <span class="math inline">r</span> instead of <span class="math inline">\sqrt{r}</span> keeps the mapping differentiable and avoids square roots in the model.</p>
 </section>
 <section id="why-its-useful" class="level3">
 <h3 class="anchored" data-anchor-id="why-its-useful">Why it’s useful</h3>
 <p>In the “circle vs.&nbsp;ring” dataset:</p>
 <ul>
-<li>Points from the <strong>inner circle</strong> are close to the origin, small <span class="math inline">\(r\)</span>.</li>
-<li>Points from the <strong>outer ring</strong> are farther away, large <span class="math inline">\(r\)</span>.</li>
+<li>Points from the <strong>inner circle</strong> are close to the origin, small <span class="math inline">r</span>.</li>
+<li>Points from the <strong>outer ring</strong> are farther away, large <span class="math inline">r</span>.</li>
 </ul>
-<p>Thus, the problem that is <strong>non-linear</strong> in <span class="math inline">\((x_1, x_2)\)</span> becomes <strong>linearly separable</strong> in <span class="math inline">\(r\)</span>:</p>
-<p><span class="math display">\[
+<p>Thus, the problem that is <strong>non-linear</strong> in <span class="math inline">(x_1, x_2)</span> becomes <strong>linearly separable</strong> in <span class="math inline">r</span>:</p>
+<p><span class="math display">
 \text{inner if } r &lt; r^*, \quad \text{outer if } r &gt; r^*.
-\]</span></p>
-<p>So <span class="math inline">\(r\)</span> is a <strong>feature encoding the radial distance</strong>, allowing a linear model like logistic regression to separate the classes with a single threshold in 1-D.</p>
+</span></p>
+<p>So <span class="math inline">r</span> is a <strong>feature encoding the radial distance</strong>, allowing a linear model like logistic regression to separate the classes with a single threshold in 1-D.</p>
 </section>
 </section>
 <section id="d-view" class="level2">
 <h2 class="anchored" data-anchor-id="d-view">3D view</h2>
-<p><span class="math inline">\((x_1,x_2,r)\)</span> with <span class="math inline">\(r=x_1^2+x_2^2\)</span></p>
+<p><span class="math inline">(x_1,x_2,r)</span> with <span class="math inline">r=x_1^2+x_2^2</span></p>
 <div id="9f0d20b8" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_circles</span>
@@ -696,7 +710,7 @@ if (outputEl) {{
 </section>
 <section id="linear-separability-in-1d-r-space" class="level2">
 <h2 class="anchored" data-anchor-id="linear-separability-in-1d-r-space">Linear separability in 1D (r-space)</h2>
-<p>Comparing two models, <code>clf_r</code> uses a single attribute, <span class="math inline">\(r=x_1^2+x_2^2\)</span>, whereas <code>quad</code> includes degree 2 polynomial features.</p>
+<p>Comparing two models, <code>clf_r</code> uses a single attribute, <span class="math inline">r=x_1^2+x_2^2</span>, whereas <code>quad</code> includes degree 2 polynomial features.</p>
 <div id="35e4ae4e" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
@@ -814,7 +828,7 @@ if (outputEl) {{
 </section>
 <section id="neural-network" class="level2">
 <h2 class="anchored" data-anchor-id="neural-network">Neural network</h2>
-<p>To further our understanding of neural networks behavior, let’s configure a model to use only the features <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>. We will set up two hidden layers, each consisting of four neurons. In my experiments, the <code>Tanh</code> activation function led to rapid network convergence. The <code>Sigmoid</code> function also converged, though at a slower pace. Meanwhile, the <code>ReLU</code> activation function enabled quick convergence but produced a decision boundary comprised of linear segments.</p>
+<p>To further our understanding of neural networks behavior, let’s configure a model to use only the features <span class="math inline">x_1</span> and <span class="math inline">x_2</span>. We will set up two hidden layers, each consisting of four neurons. In my experiments, the <code>Tanh</code> activation function led to rapid network convergence. The <code>Sigmoid</code> function also converged, though at a slower pace. Meanwhile, the <code>ReLU</code> activation function enabled quick convergence but produced a decision boundary comprised of linear segments.</p>
 <div id="de825df9" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>

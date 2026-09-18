@@ -126,6 +126,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -436,8 +452,8 @@ Categories (7, str): ['Divorced', 'Married-AF-spouse', 'Married-civ-spouse', 'Ma
 </ul>
 <ol type="1">
 <li class="fragment"><code>w</code> = 1, 2, 3, 4, 5, 6, 7, or 8</li>
-<li class="fragment"><code>w</code> = [0,0,0], [0,0,1], [0,1,0], <span class="math inline">\(\ldots\)</span>, or [1,1,1]</li>
-<li class="fragment"><code>w</code> = [1,0,0,0,0,0,0,0], [0,1,0,0,0,0,0,0], <span class="math inline">\(\ldots\)</span>, or [0,0,0,0,0,0,0,1]</li>
+<li class="fragment"><code>w</code> = [0,0,0], [0,0,1], [0,1,0], <span class="math inline">\ldots</span>, or [1,1,1]</li>
+<li class="fragment"><code>w</code> = [1,0,0,0,0,0,0,0], [0,1,0,0,0,0,0,0], <span class="math inline">\ldots</span>, or [0,0,0,0,0,0,0,1]</li>
 </ol>
 </section>
 <section id="encoding-for-categorical-data" class="slide level2 smaller">
@@ -529,7 +545,7 @@ Categories (7, str): ['Divorced', 'Married-AF-spouse', 'Married-civ-spouse', 'Ma
 <p>Here are some suggestions for further investigation:</p>
 <ul>
 <li>Assess the impact of omitting missing values on the dataset.</li>
-<li>Implement hyperparameter tuning to determine whether <span class="math inline">\(L_1\)</span> or <span class="math inline">\(L_2\)</span> regularization enhances model performance.</li>
+<li>Implement hyperparameter tuning to determine whether <span class="math inline">L_1</span> or <span class="math inline">L_2</span> regularization enhances model performance.</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -860,7 +876,7 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 <p>Scaling attributes ensures that their values fall within comparable ranges. Numerous studies indicate that this transformation improves model performance.</p>
 <p>Some algorithms, such as k-nearest neighbors, experience reduced efficiency when faced with significant disparities in attribute scales. Consider two attributes: one representing a proportion as a real number between 0 and 1, and the other measuring a volume in milliliters. In this case, the distance calculated between two examples will be primarily influenced by variations in volume rather than those in proportion. Tree-based algorithms are typically insensitive to the scale of the data, and therefore, scaling is not necessary.</p>
 <p>Furthermore, optimization methods, such as gradient descent, reach convergence more quickly when the attributes have been scaled.</p>
-<p>Normalization can be significantly influenced by the presence of outliers, which often compresses the data into a narrower range. To mitigate this effect, a common approach is to clip the data within a fixed interval, <span class="math inline">\([a, b]\)</span>. In this method, values below <span class="math inline">\(a\)</span> are set to <span class="math inline">\(a\)</span>, and values exceeding <span class="math inline">\(b\)</span> are set to <span class="math inline">\(b\)</span>. Typically, the clipping thresholds are chosen based on percentile values, such as the 5th and 95th percentiles, to ensure a balanced trimming of extreme values.</p>
+<p>Normalization can be significantly influenced by the presence of outliers, which often compresses the data into a narrower range. To mitigate this effect, a common approach is to clip the data within a fixed interval, <span class="math inline">[a, b]</span>. In this method, values below <span class="math inline">a</span> are set to <span class="math inline">a</span>, and values exceeding <span class="math inline">b</span> are set to <span class="math inline">b</span>. Typically, the clipping thresholds are chosen based on percentile values, such as the 5th and 95th percentiles, to ensure a balanced trimming of extreme values.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -877,8 +893,8 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 <h2>Scenario</h2>
 <p>We pretend to predict a house price using <strong>k-Nearest Neighbors (KNN) regression</strong> with two features:</p>
 <ul>
-<li><span class="math inline">\(x_1\)</span>: number of rooms (small scale)</li>
-<li><span class="math inline">\(x_2\)</span>: square footage (large scale)</li>
+<li><span class="math inline">x_1</span>: number of rooms (small scale)</li>
+<li><span class="math inline">x_2</span>: square footage (large scale)</li>
 </ul>
 </section>
 <section id="data-three-houses" class="slide level2 scrollable">
@@ -1305,19 +1321,19 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 <ul>
 <li>This accelerates optimization (e.g., gradient descent).</li>
 </ul>
-<p><strong>Normalization</strong>: <span class="math display">\[
+<p><strong>Normalization</strong>: <span class="math display">
   \frac{x_i^{(j)} - \min^{(j)}}{\max^{(j)} - \min^{(j)}}
-\]</span></p>
+</span></p>
 
 <aside><div>
 <p><strong>See:</strong> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html">sklearn.preprocessing.MinMaxScaler</a></p>
 </div></aside></section>
 <section id="standardization" class="slide level2">
 <h2>Standardization</h2>
-<p>Standardization (AKA z-score normalization) transforms each feature to have a <strong>normal distribution</strong> with a mean (<span class="math inline">\(\mu\)</span>) of 0 and a standard deviation (<span class="math inline">\(\sigma\)</span>) of 1.</p>
-<p><span class="math display">\[
+<p>Standardization (AKA z-score normalization) transforms each feature to have a <strong>normal distribution</strong> with a mean (<span class="math inline">\mu</span>) of 0 and a standard deviation (<span class="math inline">\sigma</span>) of 1.</p>
+<p><span class="math display">
 \frac{x_i^{(j)} - \mu^{(j)}}{\sigma^{(j)}}
-\]</span></p>
+</span></p>
 <p><strong>Note</strong>: The range of values is not bounded!</p>
 
 <aside><div>
@@ -1608,9 +1624,9 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 <li class="fragment">Have you encountered this kind of problem before?</li>
 <li class="fragment"><strong>Relevance</strong>: This can be framed as a supervised learning problem.
 <ul>
-<li class="fragment">Let <span class="math inline">\(\hat{x_i}\)</span> be a new example: <span class="math inline">\([x_i^{(1)}, x_i^{(2)}, \ldots, x_i^{(j-1)}, x_i^{(j+1)}, \ldots, x_i^{(D)}]\)</span>.</li>
-<li class="fragment">Let <span class="math inline">\(\hat{y}_i = x_i^{j}\)</span>.</li>
-<li class="fragment"><strong>Training Set</strong>: Use examples where <span class="math inline">\(x_i^{j}\)</span> is not missing.</li>
+<li class="fragment">Let <span class="math inline">\hat{x_i}</span> be a new example: <span class="math inline">[x_i^{(1)}, x_i^{(2)}, \ldots, x_i^{(j-1)}, x_i^{(j+1)}, \ldots, x_i^{(D)}]</span>.</li>
+<li class="fragment">Let <span class="math inline">\hat{y}_i = x_i^{j}</span>.</li>
+<li class="fragment"><strong>Training Set</strong>: Use examples where <span class="math inline">x_i^{j}</span> is not missing.</li>
 <li class="fragment"><strong>Method</strong>: Train a classifier on this set to predict (impute) the missing values.</li>
 </ul></li>
 </ul>
@@ -1620,7 +1636,7 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 <ol type="1">
 <li class="fragment"><p><strong>Instance-Based Method</strong>:</p>
 <ul>
-<li class="fragment">Use <span class="math inline">\(k\)</span> nearest neighbors (k-NN) to find the <span class="math inline">\(k\)</span> closest examples and impute using the non-missing values from the neighborhood.</li>
+<li class="fragment">Use <span class="math inline">k</span> nearest neighbors (k-NN) to find the <span class="math inline">k</span> closest examples and impute using the non-missing values from the neighborhood.</li>
 </ul></li>
 <li class="fragment"><p><strong>Model-Based Methods</strong>:</p>
 <ul>
@@ -1693,8 +1709,8 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 <h3 id="how-it-affects-training-intuitively">How it affects training (intuitively)</h3>
 <ol type="1">
 <li><p>Suppose you have classes (A) and (B). You set <code>class_weight = {A: w_A, B: w_B}</code> (or use <code>"balanced"</code> to compute weights automatically).</p></li>
-<li><p>During SGD, for a training instance ((x, y)), the loss term (<span class="math inline">\(\ell(y, f(x))\)</span>) is multiplied by the class weight (<span class="math inline">\(w_y\)</span>).</p></li>
-<li><p>The gradient / parameter update for that training point is scaled by (<span class="math inline">\(w_y\)</span>).</p>
+<li><p>During SGD, for a training instance ((x, y)), the loss term (<span class="math inline">\ell(y, f(x))</span>) is multiplied by the class weight (<span class="math inline">w_y</span>).</p></li>
+<li><p>The gradient / parameter update for that training point is scaled by (<span class="math inline">w_y</span>).</p>
 <ul>
 <li>So samples of class (A) with higher (w_A) “pull harder” on the model.</li>
 </ul></li>
@@ -1702,13 +1718,13 @@ Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior 
 </ol>
 <h3 id="automatic-balancing-class_weight-balanced">Automatic balancing: <code>class_weight = "balanced"</code></h3>
 <ul>
-<li>If you set <code>class_weight="balanced"</code>, <code>SGDClassifier</code> will internally compute class weights as <span class="math display">\[
+<li>If you set <code>class_weight="balanced"</code>, <code>SGDClassifier</code> will internally compute class weights as <span class="math display">
 w_j = \frac{N}{K \cdot n_j}
-\]</span> where
+</span> where
 <ul>
-<li><span class="math inline">\(N\)</span> = total number of samples</li>
-<li><span class="math inline">\(K\)</span> = number of classes</li>
-<li><span class="math inline">\(n_j\)</span> = count of samples in class (<span class="math inline">\(j\)</span>)</li>
+<li><span class="math inline">N</span> = total number of samples</li>
+<li><span class="math inline">K</span> = number of classes</li>
+<li><span class="math inline">n_j</span> = count of samples in class (<span class="math inline">j</span>)</li>
 </ul></li>
 <li>Thus rarer classes get higher weights.</li>
 </ul>
@@ -1893,7 +1909,7 @@ w_j = \frac{N}{K \cdot n_j}
 <p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html">sklearn.preprocessing.PolynomialFeatures</a></strong></p>
 </div>
 <div class="callout-content">
-<p>Generate a new feature matrix consisting of all polynomial combinations of the features with degree less than or equal to the specified degree. For example, if an input sample is two dimensional and of the form <span class="math inline">\([a, b]\)</span>, the degree-2 polynomial features are <span class="math inline">\([1, a, b, a^2, ab, b^2]\)</span>.</p>
+<p>Generate a new feature matrix consisting of all polynomial combinations of the features with degree less than or equal to the specified degree. For example, if an input sample is two dimensional and of the form <span class="math inline">[a, b]</span>, the degree-2 polynomial features are <span class="math inline">[1, a, b, a^2, ab, b^2]</span>.</p>
 </div>
 </div>
 </div>
@@ -1901,7 +1917,7 @@ w_j = \frac{N}{K \cdot n_j}
 </section>
 <section id="polynomialfeatures-1" class="slide level2">
 <h2><code>PolynomialFeatures</code></h2>
-<p>Given two features <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, <code>PolynomialFeatures</code> with <code>degree=3</code> would add <span class="math inline">\(a^2\)</span>, <span class="math inline">\(a^3\)</span>, <span class="math inline">\(b^2\)</span>, <span class="math inline">\(b^3\)</span>, as well as, <span class="math inline">\(ab\)</span>, <span class="math inline">\(a^2b\)</span>, <span class="math inline">\(ab^2\)</span>!</p>
+<p>Given two features <span class="math inline">a</span> and <span class="math inline">b</span>, <code>PolynomialFeatures</code> with <code>degree=3</code> would add <span class="math inline">a^2</span>, <span class="math inline">a^3</span>, <span class="math inline">b^2</span>, <span class="math inline">b^3</span>, as well as, <span class="math inline">ab</span>, <span class="math inline">a^2b</span>, <span class="math inline">ab^2</span>!</p>
 <div class="fragment">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
@@ -1912,7 +1928,7 @@ w_j = \frac{N}{K \cdot n_j}
 <p><strong>Warning</strong></p>
 </div>
 <div class="callout-content">
-<p><code>PolynomialFeatures(degree=d)</code> adds <span class="math inline">\(\frac{(D+d)!}{d!D!}\)</span> features, where <span class="math inline">\(D\)</span> is the original number of features.</p>
+<p><code>PolynomialFeatures(degree=d)</code> adds <span class="math inline">\frac{(D+d)!}{d!D!}</span> features, where <span class="math inline">D</span> is the original number of features.</p>
 </div>
 </div>
 </div>
@@ -1982,13 +1998,13 @@ w_j = \frac{N}{K \cdot n_j}
 </div>
 </div><div class="column" style="width:50%;">
 <p>The data was generated according to the following equation, with the inclusion of Gaussian noise.</p>
-<p><span class="math display">\[
+<p><span class="math display">
   y = 0.5 x^2 - 1.0 x + 2.0
-\]</span></p>
+</span></p>
 <p>Presented below is the learned model.</p>
-<p><span class="math display">\[
+<p><span class="math display">
   \hat{y} = 0.56 x^2 + (-1.06) x + 1.78
-\]</span></p>
+</span></p>
 </div></div>
 <div id="17b053eb" class="cell" data-execution_count="46">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a aria-label="1"></a>lin_reg.coef_, lin_reg.intercept_</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2002,18 +2018,18 @@ w_j = \frac{N}{K \cdot n_j}
 <li>Logistic regression is linear in its <strong>parameters</strong> (weights).</li>
 <li>The decision boundary comes from:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \hat{y_i} = \sigma(\theta_0 + \theta_1 z_i^{(1)} + \theta_2 z_i^{(2)} + \dots + \theta_{D'} z_i^{(D')})
-\]</span></p>
-<p>where each <span class="math inline">\(z_i^{(j)}\)</span> is a feature.</p>
+</span></p>
+<p>where each <span class="math inline">z_i^{(j)}</span> is a feature.</p>
 <ul>
-<li>If you define <span class="math inline">\(z_i^{(j)}\)</span> to be a polynomial function of the original variables (e.g.&nbsp;<span class="math inline">\(z_i^{(3)} = (x_i^{(1)})^2\)</span>), the model is still <em>linear in the <span class="math inline">\(z_i^{(j)}\)</span></em>.</li>
+<li>If you define <span class="math inline">z_i^{(j)}</span> to be a polynomial function of the original variables (e.g.&nbsp;<span class="math inline">z_i^{(3)} = (x_i^{(1)})^2</span>), the model is still <em>linear in the <span class="math inline">z_i^{(j)}</span></em>.</li>
 </ul>
 <h3 id="polynomialfeatures-only-changes-the-feature-space">2. <strong>PolynomialFeatures only changes the feature space</strong></h3>
 <ul>
-<li><code>PolynomialFeatures</code> maps input <span class="math inline">\((x_i^{(1)}, x_i^{(2)})\)</span> to a new vector: <span class="math inline">\((x_i^{(1)}, x_i^{(2)}, (x_i^{(1)})^2, x_i^{(1)}x_i^{(2)}, (x_i^{(2)})^2, \ldots)\)</span>.</li>
+<li><code>PolynomialFeatures</code> maps input <span class="math inline">(x_i^{(1)}, x_i^{(2)})</span> to a new vector: <span class="math inline">(x_i^{(1)}, x_i^{(2)}, (x_i^{(1)})^2, x_i^{(1)}x_i^{(2)}, (x_i^{(2)})^2, \ldots)</span>.</li>
 <li>Logistic regression then finds a linear decision boundary in this <strong>expanded feature space</strong>.</li>
-<li>When you map it back to the original <span class="math inline">\((x_i^{(1)}, x_i^{(2)})\)</span> space, that “linear” decision surface can appear curved or wiggly, but mathematically it’s still a hyperplane in the transformed space.</li>
+<li>When you map it back to the original <span class="math inline">(x_i^{(1)}, x_i^{(2)})</span> space, that “linear” decision surface can appear curved or wiggly, but mathematically it’s still a hyperplane in the transformed space.</li>
 </ul>
 <p><strong>Key message:</strong></p>
 <p>“Logistic regression always finds a linear boundary in the features you give it. If you feed it polynomials, the linear boundary in that space looks nonlinear in the original space.”</p>
@@ -2257,7 +2273,6 @@ Shumailov, Ilia, Zakhar Shumaylov, Yiren Zhao, Nicolas Papernot, Ross Anderson, 
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -2426,27 +2441,9 @@ Shumailov, Ilia, Zakhar Shumaylov, Yiren Zhao, Nicolas Papernot, Ross Anderson, 
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

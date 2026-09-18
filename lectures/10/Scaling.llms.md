@@ -20,8 +20,8 @@ January 30, 2026
 
 We pretend to predict a house price using **k-Nearest Neighbors (KNN) regression** with two features:
 
-- \\x_1\\: number of rooms (small scale)
-- \\x_2\\: square footage (large scale)
+- x_1: number of rooms (small scale)
+- x_2: square footage (large scale)
 
 We create three examples **a**, **b**, **c** chosen so that:
 
@@ -65,7 +65,7 @@ display(prices.to_frame())
 
 ## Euclidean distances (unscaled)
 
-The (squared) Euclidean distance between \\u\\ and \\v\\ is \\ \\u-v\\\_2^2 = \sum_j (u_j - v_j)^2. \\
+The (squared) Euclidean distance between u and v is \\u-v\\\_2^2 = \sum_j (u_j - v_j)^2.
 
 When one feature has a much larger scale (e.g., square footage), it can dominate the sum.
 
@@ -97,7 +97,7 @@ print("Nearest to 'a' (unscaled):", dist_unscaled.loc["a"].drop("a").idxmin())
 
 For a fair ML workflow, compute scaling parameters on the training data (**b**, **c**) only, then transform both train and query:
 
-\\ z(x) = \frac{x-\mu\_{\text{train}}}{\sigma\_{\text{train}}}. \\
+z(x) = \frac{x-\mu\_{\text{train}}}{\sigma\_{\text{train}}}.
 
 ``` python
 from sklearn.preprocessing import StandardScaler
@@ -198,10 +198,10 @@ Same model and data; just **feature scale** changed the neighbor—and the predi
 
 - (Squared) Euclidean distance aggregates per-feature squared differences:
 
-\\ \|u-v\|\_2^2 = \sum_j (u_j - v_j)^2. \\
+\|u-v\|\_2^2 = \sum_j (u_j - v_j)^2.
 
 - A large-scale feature (e.g., **sqft**) can dwarf small-scale features (e.g., **rooms**), so KNN effectively “ignores” the smaller-scale dimensions.
-- **Standardization** (\\z\\-scores) or **min-max scaling** puts dimensions on comparable footing.
+- **Standardization** (z-scores) or **min-max scaling** puts dimensions on comparable footing.
 - **Rule of thumb:** For distance-based methods (KNN, k-means, RBF kernels, etc.), always **scale** features.
 
 ## Show the distance to neighbors only
@@ -235,9 +235,9 @@ display(show_pair("a", ["b", "c"], dist_scaled))
 
 ## Switch to Manhattan distance?
 
-Even with \\L_1\\ distance, scale still matters:
+Even with L_1 distance, scale still matters:
 
-\\ \|u-v\|\_1 = \sum_j \|u_j - v_j\|. \\
+\|u-v\|\_1 = \sum_j \|u_j - v_j\|.
 
 Try replacing `metric="euclidean"` with `metric="manhattan"`—you’ll see the same sensitivity to feature scale.
 

@@ -45,43 +45,43 @@ plt.show()
 
 ![](CircularSeparability_files/figure-html/cell-2-output-1.png)
 
-Clearly, this dataset is not linearly separable in \\(x_1, x_2)\\!
+Clearly, this dataset is not linearly separable in (x_1, x_2)!
 
 ## Feature engineering
 
 When using a linear classifier like [`LogisticRegression`](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html), it is not possible to derive parameters that enable accurate classification of the given examples.
 
-In TensorFlow Playground, users can incorporate two additional features, \\x_1^2\\ and \\x_2^2\\. This allows for the classification of examples using a straightforward network configuration with no hidden layers and a single output node. When employing the sigmoïd function as the activation, this setup effectively functions as logistic regression. However, the feature space becomes four-dimensional, complicating direct visualization.
+In TensorFlow Playground, users can incorporate two additional features, x_1^2 and x_2^2. This allows for the classification of examples using a straightforward network configuration with no hidden layers and a single output node. When employing the sigmoïd function as the activation, this setup effectively functions as logistic regression. However, the feature space becomes four-dimensional, complicating direct visualization.
 
-In this notebook, we introduce a single feature specifically designed to facilitate visualization. \\ r = x_1^2 + x_2^2, \\ **(r)** represents the **squared distance from the origin** — essentially the **radius squared** in polar coordinates.
+In this notebook, we introduce a single feature specifically designed to facilitate visualization. r = x_1^2 + x_2^2, **(r)** represents the **squared distance from the origin** — essentially the **radius squared** in polar coordinates.
 
 ### Intuition
 
-- Each point in the original 2-D plane has coordinates \\(x_1, x_2)\\.
+- Each point in the original 2-D plane has coordinates (x_1, x_2).
 - If you express those same coordinates in polar form, you have
 
-\\ x_1 = r^{1/2} \cos\theta, \quad x_2 = r^{1/2} \sin\theta, \\ or more conventionally, \\r\_{\text{polar}} = \sqrt{x_1^2 + x_2^2}\\.
+x_1 = r^{1/2} \cos\theta, \quad x_2 = r^{1/2} \sin\theta, or more conventionally, r\_{\text{polar}} = \sqrt{x_1^2 + x_2^2}.
 
-- Here, we define \\r = x_1^2 + x_2^2\\, i.e., the **square** of that radius.
+- Here, we define r = x_1^2 + x_2^2, i.e., the **square** of that radius.
 
-Using \\r\\ instead of \\\sqrt{r}\\ keeps the mapping differentiable and avoids square roots in the model.
+Using r instead of \sqrt{r} keeps the mapping differentiable and avoids square roots in the model.
 
 ### Why it’s useful
 
 In the “circle vs. ring” dataset:
 
-- Points from the **inner circle** are close to the origin, small \\r\\.
-- Points from the **outer ring** are farther away, large \\r\\.
+- Points from the **inner circle** are close to the origin, small r.
+- Points from the **outer ring** are farther away, large r.
 
-Thus, the problem that is **non-linear** in \\(x_1, x_2)\\ becomes **linearly separable** in \\r\\:
+Thus, the problem that is **non-linear** in (x_1, x_2) becomes **linearly separable** in r:
 
-\\ \text{inner if } r \< r^\*, \quad \text{outer if } r \> r^\*. \\
+\text{inner if } r \< r^\*, \quad \text{outer if } r \> r^\*.
 
-So \\r\\ is a **feature encoding the radial distance**, allowing a linear model like logistic regression to separate the classes with a single threshold in 1-D.
+So r is a **feature encoding the radial distance**, allowing a linear model like logistic regression to separate the classes with a single threshold in 1-D.
 
 ## 3D view
 
-\\(x_1,x_2,r)\\ with \\r=x_1^2+x_2^2\\
+(x_1,x_2,r) with r=x_1^2+x_2^2
 
 ``` python
 import numpy as np
@@ -137,7 +137,7 @@ fig
 
 ## Linear separability in 1D (r-space)
 
-Comparing two models, `clf_r` uses a single attribute, \\r=x_1^2+x_2^2\\, whereas `quad` includes degree 2 polynomial features.
+Comparing two models, `clf_r` uses a single attribute, r=x_1^2+x_2^2, whereas `quad` includes degree 2 polynomial features.
 
 ``` python
 from sklearn.pipeline import Pipeline
@@ -239,7 +239,7 @@ plt.xlabel("x₁"); plt.ylabel("x₂"); plt.tight_layout(); plt.show()
 
 ## Neural network
 
-To further our understanding of neural networks behavior, let’s configure a model to use only the features \\x_1\\ and \\x_2\\. We will set up two hidden layers, each consisting of four neurons. In my experiments, the `Tanh` activation function led to rapid network convergence. The `Sigmoid` function also converged, though at a slower pace. Meanwhile, the `ReLU` activation function enabled quick convergence but produced a decision boundary comprised of linear segments.
+To further our understanding of neural networks behavior, let’s configure a model to use only the features x_1 and x_2. We will set up two hidden layers, each consisting of four neurons. In my experiments, the `Tanh` activation function led to rapid network convergence. The `Sigmoid` function also converged, though at a slower pace. Meanwhile, the `ReLU` activation function enabled quick convergence but produced a decision boundary comprised of linear segments.
 
 ``` python
 from sklearn.model_selection import train_test_split

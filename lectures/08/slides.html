@@ -126,6 +126,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -297,7 +313,7 @@ Marcel Turcotte
 <li><strong>Explain Cross-Validation Techniques:</strong>
 <ul>
 <li>Define cross-validation and its importance in model evaluation.</li>
-<li>Illustrate the process of <span class="math inline">\(k\)</span>-fold cross-validation and its advantages over a single train-test split.</li>
+<li>Illustrate the process of <span class="math inline">k</span>-fold cross-validation and its advantages over a single train-test split.</li>
 <li>Discuss the concepts of underfitting and overfitting in the context of cross-validation.</li>
 </ul></li>
 <li><strong>Hyperparameter Tuning:</strong>
@@ -551,17 +567,17 @@ Name: count, dtype: int64</code></pre>
 <section id="k-fold-cross-validation" class="slide level2">
 <h2>k-fold cross-validation</h2>
 <ol type="1">
-<li class="fragment"><strong>Divide</strong> the dataset into <strong><span class="math inline">\(k\)</span> equally sized parts</strong> (folds).</li>
+<li class="fragment"><strong>Divide</strong> the dataset into <strong><span class="math inline">k</span> equally sized parts</strong> (folds).</li>
 <li class="fragment">T<strong>raining and validation:</strong>
 <ul>
-<li class="fragment">For each iteration, <strong>one fold is used as the validation set</strong>, the remaining <strong><span class="math inline">\(k\)</span>-1 folds are used as the training set</strong>.</li>
+<li class="fragment">For each iteration, <strong>one fold is used as the validation set</strong>, the remaining <strong><span class="math inline">k</span>-1 folds are used as the training set</strong>.</li>
 </ul></li>
-<li class="fragment"><strong>Evaluation:</strong> The model’s performance is evaluated in each iteration, resulting in <span class="math inline">\(k\)</span> performance measures.</li>
-<li class="fragment"><strong>Aggregation:</strong> Statistics are calculated based on <span class="math inline">\(k\)</span> performance measures.</li>
+<li class="fragment"><strong>Evaluation:</strong> The model’s performance is evaluated in each iteration, resulting in <span class="math inline">k</span> performance measures.</li>
+<li class="fragment"><strong>Aggregation:</strong> Statistics are calculated based on <span class="math inline">k</span> performance measures.</li>
 </ol>
 
 <aside class="notes">
-<p>In science, to estimate the value of a constant, it is common to repeat the experiment multiple times in order to calculate the mean and standard deviation of the obtained measurements. A high variance raises questions about the reliability of the experiment. Similarly, <strong><span class="math inline">\(k\)</span>-fold cross-validation</strong> generates <span class="math inline">\(k\)</span> distinct evaluations. This method not only provides a more accurate estimate of the model’s performance but also assesses its robustness against data variability.</p>
+<p>In science, to estimate the value of a constant, it is common to repeat the experiment multiple times in order to calculate the mean and standard deviation of the obtained measurements. A high variance raises questions about the reliability of the experiment. Similarly, <strong><span class="math inline">k</span>-fold cross-validation</strong> generates <span class="math inline">k</span> distinct evaluations. This method not only provides a more accurate estimate of the model’s performance but also assesses its robustness against data variability.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -574,7 +590,7 @@ Name: count, dtype: int64</code></pre>
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>Common choices for the value of <span class="math inline">\(k\)</span> are 3, 5, 7, and 10.</p>
+<p>Common choices for the value of <span class="math inline">k</span> are 3, 5, 7, and 10.</p>
 </div></aside></section>
 <section id="fold-cross-validation" class="slide level2">
 <h2>3-Fold Cross-validation</h2>
@@ -589,7 +605,7 @@ Name: count, dtype: int64</code></pre>
 </div>
 
 <aside class="notes">
-<p>Each row of the table represents an iteration within the <span class="math inline">\(k\)</span>-fold cross-validation process, with the number of iterations equating to the number of folds. In each iteration, one fold is designated for validation, while the remaining <span class="math inline">\(k-1\)</span> folds are utilized for training the model.</p>
+<p>Each row of the table represents an iteration within the <span class="math inline">k</span>-fold cross-validation process, with the number of iterations equating to the number of folds. In each iteration, one fold is designated for validation, while the remaining <span class="math inline">k-1</span> folds are utilized for training the model.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -602,7 +618,7 @@ Name: count, dtype: int64</code></pre>
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>With each iteration, <span class="math inline">\(2/3\)</span> of the dataset is used for training and <span class="math inline">\(1/3\)</span> for validation.</p>
+<p>With each iteration, <span class="math inline">2/3</span> of the dataset is used for training and <span class="math inline">1/3</span> for validation.</p>
 </div></aside></section>
 <section id="fold-cross-validation-1" class="slide level2">
 <h2>5-Fold Cross-validation</h2>
@@ -617,14 +633,14 @@ Name: count, dtype: int64</code></pre>
 </div>
 
 <aside><div>
-<p>With each iteration, <span class="math inline">\(4/5\)</span> of the dataset is used for training and <span class="math inline">\(1/5\)</span> for validation.</p>
+<p>With each iteration, <span class="math inline">4/5</span> of the dataset is used for training and <span class="math inline">1/5</span> for validation.</p>
 </div></aside></section>
 <section id="more-reliable-model-evaluation" class="slide level2">
 <h2>More Reliable Model Evaluation</h2>
 <ul>
 <li>More <strong>reliable</strong> estimate of model performance compared to a single train-test split.</li>
 <li><strong>Reduces the variability</strong> associated with a single split, leading to a <strong>more stable and unbiased evaluation</strong>.</li>
-<li>For large values of <span class="math inline">\(k\)</span><sup>1</sup>, consider the <strong>average</strong>, <strong>variance</strong>, and <strong>confidence interval</strong>.</li>
+<li>For large values of <span class="math inline">k</span><sup>1</sup>, consider the <strong>average</strong>, <strong>variance</strong>, and <strong>confidence interval</strong>.</li>
 </ul>
 <aside><ol class="aside-footnotes"><li id="fn1"><p>10-fold cross-validation.</p></li></ol></aside></section>
 <section id="better-generalization" class="slide level2">
@@ -785,7 +801,7 @@ Standard deviation: 0.04</code></pre>
 <p>A <strong>hyperparameter</strong> is a configuration <strong>external to the model</strong> that is <strong>set prior to the training process</strong> and governs the learning process, influencing model performance and complexity.</p>
 
 <aside><div>
-<p>The <strong>weights of a model</strong>, which are learned by the learning algorithm, are often referred to as the <strong>model’s parameters</strong>. To avoid confusion, <strong>user-defined parameters</strong>, such as the learning rate <span class="math inline">\(\alpha\)</span>, are termed <strong>hyperparameters</strong>. Unlike model parameters, hyperparameters are <em>not</em> learned by the learning algorithm.</p>
+<p>The <strong>weights of a model</strong>, which are learned by the learning algorithm, are often referred to as the <strong>model’s parameters</strong>. To avoid confusion, <strong>user-defined parameters</strong>, such as the learning rate <span class="math inline">\alpha</span>, are termed <strong>hyperparameters</strong>. Unlike model parameters, hyperparameters are <em>not</em> learned by the learning algorithm.</p>
 </div></aside></section>
 <section id="hyperparameters---decision-tree" class="slide level2">
 <h2>Hyperparameters - Decision Tree</h2>
@@ -812,7 +828,7 @@ Standard deviation: 0.04</code></pre>
 <section id="hyperparameters---knn" class="slide level2">
 <h2>Hyperparameters - KNN</h2>
 <ul>
-<li><code>n_neighbors</code>: number of neighbors to use for <span class="math inline">\(k\)</span>-neighbors queries.</li>
+<li><code>n_neighbors</code>: number of neighbors to use for <span class="math inline">k</span>-neighbors queries.</li>
 <li><code>weights</code>: <code>uniform</code> or <code>distance</code>, equal weight or distance-based weight.</li>
 </ul>
 
@@ -1008,7 +1024,7 @@ Standard deviation: 0.04</code></pre>
 </ul>
 
 <aside class="notes">
-<p>The <strong>training set</strong> referred to here is <strong>different</strong> from the one previously mentioned. In each iteration of the <span class="math inline">\(k\)</span>-fold cross-validation process, a <strong>unique</strong> <strong>training</strong> and <strong>validation set</strong> is created.</p>
+<p>The <strong>training set</strong> referred to here is <strong>different</strong> from the one previously mentioned. In each iteration of the <span class="math inline">k</span>-fold cross-validation process, a <strong>unique</strong> <strong>training</strong> and <strong>validation set</strong> is created.</p>
 <p>In some contexts, the <strong>choice of the model</strong> itself can be considered a hyperparameter. For instance, when performing model selection within a machine learning pipeline, different algorithms (e.g., decision trees, support vector machines, neural networks) can be treated as hyperparameters. This approach allows for the selection of the best-performing model through automated processes such as grid search or random search, alongside the tuning of other hyperparameters.</p>
 <p>Thus, while traditionally hyperparameters refer to settings within a specific model, the model choice can also be incorporated into hyperparameter optimization frameworks.</p>
 <p>As will be discussed later, the choice of the <strong>number of layers</strong> and the <strong>number of nodes</strong> are often considered hyperparameters when training <strong>deep learning</strong> algorithms.</p>
@@ -1240,7 +1256,6 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1409,27 +1424,9 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

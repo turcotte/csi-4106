@@ -117,8 +117,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -531,7 +545,7 @@ window.Quarto = {
 <ul>
 <li>Kong, Y. &amp; Yu, T. (2018). A graph-embedded deep feedforward network for disease outcome classification and feature selection using gene expression data. <em>Bioinformatics (Oxford, England)</em>, <em>34</em>(21), 3727–3737.</li>
 </ul>
-<p>We constructed a dataset comprising 5000 attributes, of which only 40 are relevant to determining the value of <code>y</code>. Our results demonstrate that a neural network with a single hidden layer containing just one node is capable of identifying 20 of these 40 critical attributes when using <span class="math inline">\(l_1\)</span> and <span class="math inline">\(l_2\)</span> regularization. This approach yields excellent classification performance.</p>
+<p>We constructed a dataset comprising 5000 attributes, of which only 40 are relevant to determining the value of <code>y</code>. Our results demonstrate that a neural network with a single hidden layer containing just one node is capable of identifying 20 of these 40 critical attributes when using <span class="math inline">l_1</span> and <span class="math inline">l_2</span> regularization. This approach yields excellent classification performance.</p>
 <section id="summary-of-work" class="level1">
 <h1>Summary of Work</h1>
 <ul>
@@ -1103,7 +1117,7 @@ weighted avg       0.91      0.91      0.91       400
 </div>
 </div>
 </div>
-<p>The following extracts the weights from the hidden layer, subsequently revealing that 20 out of the 40 attributes utilized in model construction are among the top 40 highest weights. This exemplifies the efficacy of <span class="math inline">\(l_1\)</span> regularization in feature selection. The model achieves an accuracy of 93% when regularization is applied, compared to an accuracy of 78% in the absence of regularization.</p>
+<p>The following extracts the weights from the hidden layer, subsequently revealing that 20 out of the 40 attributes utilized in model construction are among the top 40 highest weights. This exemplifies the efficacy of <span class="math inline">l_1</span> regularization in feature selection. The model achieves an accuracy of 93% when regularization is applied, compared to an accuracy of 78% in the absence of regularization.</p>
 <div id="17aeb7aa" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>W, b <span class="op">=</span> baseline_model.get_layer(<span class="st">"baseline_fc1"</span>).get_weights()</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>w_0 <span class="op">=</span> W[:, <span class="dv">0</span>]</span>

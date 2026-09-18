@@ -126,6 +126,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -428,7 +444,7 @@ Marcel Turcotte
 </div>
 </div>
 <aside class="notes">
-<p>The dot product between an input vector <span class="math inline">\(\mathbf{x}\)</span> and a weight matrix <span class="math inline">\(\mathbf{W}\)</span>, combined with a bias term and passed through a nonlinear activation function (e.g., the logistic function), defines a decision hyperplane in the input space. In isolation, such a computation is extremely limited. However, when millions or billions of these simple operations are composed into layered networks, qualitatively new behavior emerges: the ability to detect complex patterns, generate coherent language, and perform limited forms of reasoning.</p>
+<p>The dot product between an input vector <span class="math inline">\mathbf{x}</span> and a weight matrix <span class="math inline">\mathbf{W}</span>, combined with a bias term and passed through a nonlinear activation function (e.g., the logistic function), defines a decision hyperplane in the input space. In isolation, such a computation is extremely limited. However, when millions or billions of these simple operations are composed into layered networks, qualitatively new behavior emerges: the ability to detect complex patterns, generate coherent language, and perform limited forms of reasoning.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -505,13 +521,13 @@ Marcel Turcotte
 <p><a href="../../assets/images/ann_threhold_unit.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="../../assets/images/ann_threhold_unit.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></a></p>
 </figure>
 </div>
-<p>where <span class="math inline">\(x_1, x_2 \in \{0,1\}\)</span> and <span class="math inline">\(f(z)\)</span> is an <strong>indicator function</strong>: <span class="math display">\[
+<p>where <span class="math inline">x_1, x_2 \in \{0,1\}</span> and <span class="math inline">f(z)</span> is an <strong>indicator function</strong>: <span class="math display">
 f(z)= \begin{cases}0, &amp; z&lt;\theta \\ 1, &amp; z \geq \theta\end{cases}
-\]</span></p>
+</span></p>
 
 <aside class="notes">
 <p>To better understand the development of modern neural networks, it is instructive to examine two earlier implementations that laid the groundwork for current advancements. This brief retrospective aims to introduce fundamental concepts relevant to contemporary networks. In this analysis, we will primarily focus on the computational aspects of neural networks, reserving the discussion on learning mechanisms for further exploration.</p>
-<p>In mathematics, <span class="math inline">\(f(z)\)</span>, as defined above, is known as an <strong>indicator function</strong> or a <strong>characteristic function</strong>.</p>
+<p>In mathematics, <span class="math inline">f(z)</span>, as defined above, is known as an <strong>indicator function</strong> or a <strong>characteristic function</strong>.</p>
 <p>These neurodes have one or more binary inputs, taking a value of 0 or 1, and one binary output.</p>
 <p>They showed that such units could implement Boolean functions such as <strong>AND</strong>, <strong>OR</strong>, and <strong>NOT</strong>.</p>
 <p>But also that networks of such units can compute any logical proposition.</p>
@@ -531,21 +547,21 @@ f(z)= \begin{cases}0, &amp; z&lt;\theta \\ 1, &amp; z \geq \theta\end{cases}
 </div></aside></section>
 <section id="computations-with-neurodes-1" class="slide level2">
 <h2>Computations with neurodes</h2>
-<p><span class="math display">\[
+<p><span class="math display">
 f(x_1 + x_2)= \begin{cases}0, &amp; x_1 + x_2 &lt;\theta \\ 1, &amp; x_1 + x_2 \geq \theta\end{cases}
-\]</span></p>
+</span></p>
 <ul>
-<li><p>With <span class="math inline">\(\theta = 2\)</span>, the neurode implements an <strong>AND</strong> logic gate.</p></li>
-<li><p>With <span class="math inline">\(\theta = 1\)</span>, the neurode implements an <strong>OR</strong> logic gate.</p></li>
+<li><p>With <span class="math inline">\theta = 2</span>, the neurode implements an <strong>AND</strong> logic gate.</p></li>
+<li><p>With <span class="math inline">\theta = 1</span>, the neurode implements an <strong>OR</strong> logic gate.</p></li>
 </ul>
 
 <aside class="notes">
 <p>Alternatively,</p>
-<p><span class="math display">\[
+<p><span class="math display">
 g(x)= \begin{cases}1, &amp; x &lt; \theta \\ 0, &amp; x \geq \theta\end{cases}
-\]</span></p>
+</span></p>
 <ul>
-<li>With <span class="math inline">\(\theta = 1\)</span>, the neurode implements a <strong>NOT</strong> logic gate.</li>
+<li>With <span class="math inline">\theta = 1</span>, the neurode implements a <strong>NOT</strong> logic gate.</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -565,7 +581,7 @@ g(x)= \begin{cases}1, &amp; x &lt; \theta \\ 0, &amp; x \geq \theta\end{cases}
 <h2>Computations with neurodes</h2>
 <ul>
 <li class="fragment"><p><strong>Digital computations</strong> can be broken down into a <strong>sequence of logical operations</strong>, enabling neurode networks to <strong>execute any computation</strong>.</p></li>
-<li class="fragment"><p><span class="citation" data-cites="McCulloch:1943ab">McCulloch and Pitts (<a href="#/references" role="doc-biblioref" onclick="">1943</a>)</span> did <strong>not</strong> focus on <strong>learning</strong> parameter <span class="math inline">\(\theta\)</span>.</p></li>
+<li class="fragment"><p><span class="citation" data-cites="McCulloch:1943ab">McCulloch and Pitts (<a href="#/references" role="doc-biblioref" onclick="">1943</a>)</span> did <strong>not</strong> focus on <strong>learning</strong> parameter <span class="math inline">\theta</span>.</p></li>
 <li class="fragment"><p>They introduced a machine that <strong>computes any function</strong> but <strong>cannot learn</strong>.</p></li>
 </ul>
 <aside class="notes">
@@ -626,14 +642,14 @@ g(x)= \begin{cases}1, &amp; x &lt; \theta \\ 0, &amp; x \geq \theta\end{cases}
 <aside class="notes">
 <p>In 1957, Frank Rosenblatt developed a conceptually distinct model of a neuron known as the <strong>threshold logic unit</strong>, which he published in 1958.</p>
 <p>In this model, both the inputs and the output of the neuron are represented as <strong>real values</strong>. Notably, each input connection has an associated weight.</p>
-<p>The left section of the neuron, denoted by the sigma symbol, represents the computation of a weighted sum of its inputs, expressed as <span class="math inline">\(\theta_1 x^{(1)} + \theta_2 x^{(2)} + \ldots + \theta_D x^{(D)} + b\)</span>.</p>
+<p>The left section of the neuron, denoted by the sigma symbol, represents the computation of a weighted sum of its inputs, expressed as <span class="math inline">\theta_1 x^{(1)} + \theta_2 x^{(2)} + \ldots + \theta_D x^{(D)} + b</span>.</p>
 <p>This sum is then processed through a step function, right section of the neuron, to generate the output.</p>
-<p>Here, <span class="math inline">\(x^T \theta\)</span> represents the dot product of two vectors: <span class="math inline">\(x\)</span> and <span class="math inline">\(\theta\)</span>. Here, <span class="math inline">\(x^T\)</span> denotes the transpose of the vector <span class="math inline">\(x\)</span>, converting it from a row vector to a column vector, allowing the dot product operation to be performed with the vector <span class="math inline">\(\theta\)</span>.</p>
-<p>The dot product <span class="math inline">\(x^T \theta\)</span> is then a scalar given by:</p>
-<p><span class="math display">\[
+<p>Here, <span class="math inline">x^T \theta</span> represents the dot product of two vectors: <span class="math inline">x</span> and <span class="math inline">\theta</span>. Here, <span class="math inline">x^T</span> denotes the transpose of the vector <span class="math inline">x</span>, converting it from a row vector to a column vector, allowing the dot product operation to be performed with the vector <span class="math inline">\theta</span>.</p>
+<p>The dot product <span class="math inline">x^T \theta</span> is then a scalar given by:</p>
+<p><span class="math display">
 x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
-\]</span></p>
-<p>where <span class="math inline">\(x^{(j)}\)</span> and <span class="math inline">\(theta_j\)</span> are the components of the vectors <span class="math inline">\(x\)</span> and <span class="math inline">\(\theta\)</span>, respectively.</p>
+</span></p>
+<p>where <span class="math inline">x^{(j)}</span> and <span class="math inline">theta_j</span> are the components of the vectors <span class="math inline">x</span> and <span class="math inline">\theta</span>, respectively.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -657,10 +673,10 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
 <p><a href="../../assets/images/heavyside.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="../../assets/images/heavyside.png" class="nostretch quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
-<p><strong><span class="math inline">\(\text{Heaviside}(t)\)</span> =</strong></p>
+<p><strong><span class="math inline">\text{Heaviside}(t)</span> =</strong></p>
 <ul>
-<li><p>1, if <span class="math inline">\(t \geq 0\)</span></p></li>
-<li><p>0, if <span class="math inline">\(t &lt; 0\)</span></p></li>
+<li><p>1, if <span class="math inline">t \geq 0</span></p></li>
+<li><p>0, if <span class="math inline">t &lt; 0</span></p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="quarto-figure quarto-figure-center">
@@ -668,11 +684,11 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
 <p><a href="../../assets/images/sign.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="../../assets/images/sign.png" class="nostretch quarto-figure quarto-figure-center" style="width:50.0%"></a></p>
 </figure>
 </div>
-<p><strong><span class="math inline">\(\text{sign}(t)\)</span> =</strong></p>
+<p><strong><span class="math inline">\text{sign}(t)</span> =</strong></p>
 <ul>
-<li><p>1, if <span class="math inline">\(t &gt; 0\)</span></p></li>
-<li><p>0, if <span class="math inline">\(t = 0\)</span></p></li>
-<li><p>-1, if <span class="math inline">\(t &lt; 0\)</span></p></li>
+<li><p>1, if <span class="math inline">t &gt; 0</span></p></li>
+<li><p>0, if <span class="math inline">t = 0</span></p></li>
+<li><p>-1, if <span class="math inline">t &lt; 0</span></p></li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -698,7 +714,7 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
 </div>
 
 <aside><div>
-<p>Add an extra feature with a fixed value of 1 to the input. Associate it with weight <span class="math inline">\(b = \theta_{0}\)</span>, where <span class="math inline">\(b\)</span> is the bias/intercept term.</p>
+<p>Add an extra feature with a fixed value of 1 to the input. Associate it with weight <span class="math inline">b = \theta_{0}</span>, where <span class="math inline">b</span> is the bias/intercept term.</p>
 </div></aside></section>
 <section id="notation-1" class="slide level2">
 <h2>Notation</h2>
@@ -722,7 +738,7 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
           display:block!important;
       }</style></aside>
 <aside><div>
-<p><span class="math inline">\(\theta_{0} = b\)</span> is the bias/intercept term.</p>
+<p><span class="math inline">\theta_{0} = b</span> is the bias/intercept term.</p>
 </div></aside></section>
 <section id="perceptron-2" class="slide level2">
 <h2>Perceptron</h2>
@@ -794,18 +810,18 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
 </div>
 
 <aside><div>
-<p>As before, introduce an additional feature with a value of 1 to the input. <strong>Assign a bias <span class="math inline">\(b\)</span> to each neuron.</strong> Each incoming connection <strong>implicitly</strong> has an associated weight.</p>
+<p>As before, introduce an additional feature with a value of 1 to the input. <strong>Assign a bias <span class="math inline">b</span> to each neuron.</strong> Each incoming connection <strong>implicitly</strong> has an associated weight.</p>
 </div></aside></section>
 <section id="notation-3" class="slide level2">
 <h2>Notation</h2>
 <ul>
-<li class="fragment"><p><span class="math inline">\(X\)</span> is the input <strong>data matrix</strong> where <strong>each row corresponds to an example</strong> and <strong>each column represents one of the <span class="math inline">\(D\)</span> features</strong>.</p></li>
-<li class="fragment"><p><span class="math inline">\(W\)</span> is the <strong>weight matrix</strong>, structured with one <strong>row per input (feature)</strong> and <strong>one column per neuron</strong>.</p></li>
-<li class="fragment"><p><strong>Bias terms</strong> can be represented separately; both approaches appear in the literature. Here, <span class="math inline">\(b\)</span> is a vector with a <strong>length equal to the number of neurons</strong>.</p></li>
+<li class="fragment"><p><span class="math inline">X</span> is the input <strong>data matrix</strong> where <strong>each row corresponds to an example</strong> and <strong>each column represents one of the <span class="math inline">D</span> features</strong>.</p></li>
+<li class="fragment"><p><span class="math inline">W</span> is the <strong>weight matrix</strong>, structured with one <strong>row per input (feature)</strong> and <strong>one column per neuron</strong>.</p></li>
+<li class="fragment"><p><strong>Bias terms</strong> can be represented separately; both approaches appear in the literature. Here, <span class="math inline">b</span> is a vector with a <strong>length equal to the number of neurons</strong>.</p></li>
 </ul>
 
 <aside><div>
-<p>With neural networks, the <strong>parameters</strong> of the model are often reffered to as <span class="math inline">\(w\)</span> (vector) or <span class="math inline">\(W\)</span> (matrix), rather than <span class="math inline">\(\theta\)</span>.</p>
+<p>With neural networks, the <strong>parameters</strong> of the model are often reffered to as <span class="math inline">w</span> (vector) or <span class="math inline">W</span> (matrix), rather than <span class="math inline">\theta</span>.</p>
 </div></aside></section>
 <section id="discussion" class="slide level2">
 <h2>Discussion</h2>
@@ -839,7 +855,7 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
           display:block!important;
       }</style></aside>
 <aside><div>
-<p><span class="citation" data-cites="Minsky:1969aa">Minsky and Papert (<a href="#/references" role="doc-biblioref" onclick="">1969</a>)</span> demonstrated the limitations of perceptrons, notably their inability to solve <strong>exclusive OR</strong> (XOR) classification problems: <span class="math inline">\({([0,1],\mathrm{true}), ([1,0],\mathrm{true}), ([0,0],\mathrm{false}), ([1,1],\mathrm{false})}\)</span>.</p>
+<p><span class="citation" data-cites="Minsky:1969aa">Minsky and Papert (<a href="#/references" role="doc-biblioref" onclick="">1969</a>)</span> demonstrated the limitations of perceptrons, notably their inability to solve <strong>exclusive OR</strong> (XOR) classification problems: <span class="math inline">{([0,1],\mathrm{true}), ([1,0],\mathrm{true}), ([0,0],\mathrm{false}), ([1,1],\mathrm{false})}</span>.</p>
 </div></aside></section>
 <section id="multilayer-perceptron" class="slide level2">
 <h2>Multilayer Perceptron</h2>
@@ -857,12 +873,12 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th><span class="math inline">\(x^{(1)}\)</span></th>
-<th><span class="math inline">\(x^{(2)}\)</span></th>
-<th><span class="math inline">\(y\)</span></th>
-<th><span class="math inline">\(o_1\)</span></th>
-<th><span class="math inline">\(o_2\)</span></th>
-<th><span class="math inline">\(o_3\)</span></th>
+<th><span class="math inline">x^{(1)}</span></th>
+<th><span class="math inline">x^{(2)}</span></th>
+<th><span class="math inline">y</span></th>
+<th><span class="math inline">o_1</span></th>
+<th><span class="math inline">o_2</span></th>
+<th><span class="math inline">o_3</span></th>
 </tr>
 </thead>
 <tbody>
@@ -916,7 +932,7 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
           display:block!important;
       }</style></aside>
 <aside><div>
-<p><span class="math inline">\(x^{(1)}\)</span> and <span class="math inline">\(x^{(2)}\)</span> are two attributes, <span class="math inline">\(y\)</span> is the target, <span class="math inline">\(o_1\)</span>, <span class="math inline">\(o_2\)</span>, and <span class="math inline">\(o_3 = h_\theta(x)\)</span>, are the output of the top left, bottom left, and right threshold units. Clearly <span class="math inline">\(h_\theta(x) = y, \forall x \in X\)</span>. The challenge during Rosenblatt’s time was the lack of algorithms to train multi-layer networks.</p>
+<p><span class="math inline">x^{(1)}</span> and <span class="math inline">x^{(2)}</span> are two attributes, <span class="math inline">y</span> is the target, <span class="math inline">o_1</span>, <span class="math inline">o_2</span>, and <span class="math inline">o_3 = h_\theta(x)</span>, are the output of the top left, bottom left, and right threshold units. Clearly <span class="math inline">h_\theta(x) = y, \forall x \in X</span>. The challenge during Rosenblatt’s time was the lack of algorithms to train multi-layer networks.</p>
 </div></aside></section>
 <section id="feedforward-neural-network-fnn" class="slide level2">
 <h2>Feedforward Neural Network (FNN)</h2>
@@ -929,7 +945,7 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
 <aside class="notes">
 <p>The network consists of <strong>three layers</strong>: input, hidden, and output. The <strong>input layer</strong> contains two nodes, the <strong>hidden layer</strong> comprises three nodes, and the <strong>output layer</strong> has two nodes. Additional hidden layers and nodes per layer can be added, which will be discussed later.</p>
 <p>It is often useful to include explicit input nodes that do not perform calculations, known as <strong>input units</strong> or <strong>input neurons</strong>. These nodes act as placeholders to introduce input features into the network, passing data directly to the next layer without transformation. In the network diagram, these are the light blue nodes on the left, labeled 1 and 2. Typically, <strong>the number of input units corresponds to the number of features</strong>.</p>
-<p>For clarity, nodes are labeled to facilitate discussion of the weights between them, such as <span class="math inline">\(w_{1,5}\)</span> between nodes 1 and 5. Similarly, the output of a node is denoted by <span class="math inline">\(o_k\)</span>, where <span class="math inline">\(k\)</span> represents the node’s label. For example, for <span class="math inline">\(k=3\)</span>, the output would be <span class="math inline">\(o_3\)</span>.</p>
+<p>For clarity, nodes are labeled to facilitate discussion of the weights between them, such as <span class="math inline">w_{1,5}</span> between nodes 1 and 5. Similarly, the output of a node is denoted by <span class="math inline">o_k</span>, where <span class="math inline">k</span> represents the node’s label. For example, for <span class="math inline">k=3</span>, the output would be <span class="math inline">o_3</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -950,15 +966,15 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
 <div class="column" style="width:35%;">
 <p><a href="../../assets/images/ann_mlp-07.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="../../assets/images/ann_mlp-07.png"></a></p>
 </div><div class="column" style="width:65%;">
-<p><span class="math inline">\(o3 = \sigma(w_{13} x^{(1)}+ w_{23} x^{(2)} + b_3)\)</span></p>
-<p><span class="math inline">\(o4 = \sigma(w_{14} x^{(1)}+ w_{24} x^{(2)} + b_4)\)</span></p>
-<p><span class="math inline">\(o5 = \sigma(w_{15} x^{(1)}+ w_{25} x^{(2)} + b_5)\)</span></p>
-<p><span class="math inline">\(o6 = \sigma(w_{36} o_3 + w_{46} o_4 + w_{56} o_5 + b_6)\)</span></p>
-<p><span class="math inline">\(o7 = \sigma(w_{37} o_3 + w_{47} o_4 + w_{57} o_5 + b_7)\)</span></p>
+<p><span class="math inline">o3 = \sigma(w_{13} x^{(1)}+ w_{23} x^{(2)} + b_3)</span></p>
+<p><span class="math inline">o4 = \sigma(w_{14} x^{(1)}+ w_{24} x^{(2)} + b_4)</span></p>
+<p><span class="math inline">o5 = \sigma(w_{15} x^{(1)}+ w_{25} x^{(2)} + b_5)</span></p>
+<p><span class="math inline">o6 = \sigma(w_{36} o_3 + w_{46} o_4 + w_{56} o_5 + b_6)</span></p>
+<p><span class="math inline">o7 = \sigma(w_{37} o_3 + w_{47} o_4 + w_{57} o_5 + b_7)</span></p>
 </div></div>
 
 <aside class="notes">
-<p>To simplify the figure, I have opted not to display the bias terms, though they remain crucial components. Specifically, <span class="math inline">\(b_3\)</span> represents the bias term associated with node 3.</p>
+<p>To simplify the figure, I have opted not to display the bias terms, though they remain crucial components. Specifically, <span class="math inline">b_3</span> represents the bias term associated with node 3.</p>
 <p>If bias terms were not significant, the training process would naturally reduce them to zero. Bias terms are essential as they enable the adjustment of the decision boundary, allowing the model to learn more complex patterns that weights alone cannot capture. By offering additional degrees of freedom, they also contribute to faster convergence during training.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1101,9 +1117,9 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<p><span class="math display">\[
+<p><span class="math display">
 \sigma(t) = \frac{1}{1 + e^{-t}}
-\]</span></p>
+</span></p>
 </div></div>
 </section>
 <section id="hyperbolic-tangent-function" class="slide level2">
@@ -1141,9 +1157,9 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<p><span class="math display">\[
+<p><span class="math display">
 \tanh(t) = 2 \sigma(2t) - 1
-\]</span></p>
+</span></p>
 </div></div>
 
 <aside><div>
@@ -1184,13 +1200,13 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
 </div>
 </div>
 </div><div class="column" style="width:50%;">
-<p><span class="math display">\[
+<p><span class="math display">
 \mathrm{ReLU}(t) = \max(0, t)
-\]</span></p>
+</span></p>
 </div></div>
 
 <aside><div>
-<p>Although the <strong>ReLU function</strong> is not differentiable at <span class="math inline">\(t=0\)</span> and has a derivative of 0 for <span class="math inline">\(t&lt;0\)</span>, it performs quite well in practice and is computationally efficient. Consequently, it has become the <strong>default activation function</strong>.</p>
+<p>Although the <strong>ReLU function</strong> is not differentiable at <span class="math inline">t=0</span> and has a derivative of 0 for <span class="math inline">t&lt;0</span>, it performs quite well in practice and is computationally efficient. Consequently, it has become the <strong>default activation function</strong>.</p>
 </div></aside></section>
 <section id="common-activation-functions" class="slide level2">
 <h2>Common Activation Functions</h2>
@@ -1259,10 +1275,10 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
 </section>
 <section id="definition" class="slide level2">
 <h2>Definition</h2>
-<p>The <strong>universal approximation theorem (UAT)</strong> states that a feedforward neural network with a single hidden layer containing a finite number of neurons can <strong>approximate any continuous function</strong> on a compact subset of <span class="math inline">\(\mathbb{R}^n\)</span>, given appropriate weights and activation functions.</p>
+<p>The <strong>universal approximation theorem (UAT)</strong> states that a feedforward neural network with a single hidden layer containing a finite number of neurons can <strong>approximate any continuous function</strong> on a compact subset of <span class="math inline">\mathbb{R}^n</span>, given appropriate weights and activation functions.</p>
 
 <aside class="notes">
-<p>A compact region in <span class="math inline">\(\mathbb R^n\)</span> means a set that is both <strong>closed</strong> (it contains its boundary) and <strong>bounded</strong> (it lies within some finite ball). The requirement of compactness in the universal-approximation theorem ensures the function domain is ‘finite and well-behaved’ so the theorem’s guarantee applies.</p>
+<p>A compact region in <span class="math inline">\mathbb R^n</span> means a set that is both <strong>closed</strong> (it contains its boundary) and <strong>bounded</strong> (it lies within some finite ball). The requirement of compactness in the universal-approximation theorem ensures the function domain is ‘finite and well-behaved’ so the theorem’s guarantee applies.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1283,9 +1299,9 @@ x^T \theta = x^{(1)} \theta_1 + x^{(2)} \theta_2 + \cdots + x^{(D)} \theta_D
 <div class="column" style="width:40%;">
 <p><a href="../../assets/images/ann_universal-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="../../assets/images/ann_universal-00.png"></a></p>
 </div><div class="column" style="width:60%;">
-<p><span class="math display">\[
+<p><span class="math display">
 y = \sum_{i=1}^N \alpha_i \sigma(w_{1,i} x + b_i)
-\]</span></p>
+</span></p>
 </div></div>
 
 <aside><div>
@@ -1328,7 +1344,7 @@ y = \sum_{i=1}^N \alpha_i \sigma(w_{1,i} x + b_i)
 </div>
 
 <aside><div>
-<p><strong>Sigmoid</strong> activation function: <span class="math inline">\(\sigma(wx+b)\)</span>.</p>
+<p><strong>Sigmoid</strong> activation function: <span class="math inline">\sigma(wx+b)</span>.</p>
 </div></aside></section>
 <section id="effect-of-varying-b" class="slide level2">
 <h2>Effect of Varying b</h2>
@@ -1360,7 +1376,7 @@ y = \sum_{i=1}^N \alpha_i \sigma(w_{1,i} x + b_i)
 </div>
 
 <aside><div>
-<p><strong>Sigmoid</strong> activation function: <span class="math inline">\(\sigma(wx+b)\)</span>.</p>
+<p><strong>Sigmoid</strong> activation function: <span class="math inline">\sigma(wx+b)</span>.</p>
 </div></aside></section>
 <section id="effect-of-varying-w-1" class="slide level2">
 <h2>Effect of Varying w</h2>
@@ -1439,9 +1455,9 @@ y = \sum_{i=1}^N \alpha_i \sigma(w_{1,i} x + b_i)
 <div class="column" style="width:40%;">
 <p><a href="../../assets/images/ann_universal-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="../../assets/images/ann_universal-00.png"></a></p>
 </div><div class="column" style="width:60%;">
-<p><span class="math display">\[
+<p><span class="math display">
 y = \sum_{i=1}^N \alpha_i \sigma(w_{1,i} x + b_i)
-\]</span></p>
+</span></p>
 </div></div>
 
 <aside><div>
@@ -1769,9 +1785,9 @@ y = \sum_{i=1}^N \alpha_i \sigma(w_{1,i} x + b_i)
 </div>
 </div>
 <aside class="notes">
-<p>As observed, <code>dense_3</code> has <span class="math inline">\(235,500\)</span> parameters, while <span class="math inline">\(784 \times 300 = 235,200\)</span>.</p>
+<p>As observed, <code>dense_3</code> has <span class="math inline">235,500</span> parameters, while <span class="math inline">784 \times 300 = 235,200</span>.</p>
 <p>Could you explain the origin of the additional parameters?</p>
-<p>Similarly, <code>dense_3</code> has <span class="math inline">\(30,100\)</span> parameters, while <span class="math inline">\(300 \times 100 = 30,000\)</span>.</p>
+<p>Similarly, <code>dense_3</code> has <span class="math inline">30,100</span> parameters, while <span class="math inline">300 \times 100 = 30,000</span>.</p>
 <p>Can you explain why?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -3797,7 +3813,6 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -3966,27 +3981,9 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

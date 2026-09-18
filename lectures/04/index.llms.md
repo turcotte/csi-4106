@@ -11,7 +11,7 @@ CSI4106 Introduction to Artificial Intelligence
 Corresponding pages from the main textbook. Covers lectures 3,4,5, and 6.
 
 - Russell and Norvig ([2020](#ref-Russell:2020aa)), pages 651–720
-- Géron ([2019](#ref-Geron:2019aa)), \\\S\\ 4
+- Géron ([2019](#ref-Geron:2019aa)), \S 4
 
 ## Participate
 

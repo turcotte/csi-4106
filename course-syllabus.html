@@ -81,8 +81,22 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -608,7 +622,7 @@ window.Quarto = {
 </tbody>
 </table>
 <p>Consult the <a href="course-schedule.html">schedule</a> for the dates.</p>
-<p>In order to pass the course, students must obtain a combined average of at least 50% on the quizzes and the final exam. Specifically, <span class="math inline">\((Q1 + Q2 + F)/60 \geq 0.50\)</span>, where <span class="math inline">\(Q1\)</span>, <span class="math inline">\(Q2\)</span>, and <span class="math inline">\(F\)</span> denote the first and second quizzes, and the final examination scores, respectively.</p>
+<p>In order to pass the course, students must obtain a combined average of at least 50% on the quizzes and the final exam. Specifically, <span class="math inline">(Q1 + Q2 + F)/60 \geq 0.50</span>, where <span class="math inline">Q1</span>, <span class="math inline">Q2</span>, and <span class="math inline">F</span> denote the first and second quizzes, and the final examination scores, respectively.</p>
 <p>Assignments, quizzes and the final examinaation constitute mandatory evaluation components. To be eligible to sit for the final examination, students must complete at least one of the two quizzes and at least two of the four assignments. Failure to satisfy these mandatory evaluation requirements will result in an automatic <code>EIN</code> final grade.</p>
 <p>If you are unable to complete one quiz due to valid and documented reasons, such as illness with a doctor’s note, the weight of that quiz will be transferred to the other quiz. Requests are required to be submitted within three (3) business days following the examination, in accordance with the <a href="https://www.uottawa.ca/about-us/leadership-governance/policies-regulations/a-8-evaluation-student-learning">academic regulations</a>.</p>
 <p>To accommodate circumstances beyond a student’s control, such as illness or submission errors, the assignment component of the final grade is calculated from the student’s three highest scores among the four assignments.</p>

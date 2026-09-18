@@ -126,6 +126,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -434,7 +450,7 @@ Marcel Turcotte
 <p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html">sklearn.preprocessing.PolynomialFeatures</a></strong></p>
 </div>
 <div class="callout-content">
-<p>Generate a new feature matrix consisting of all polynomial combinations of the features with degree less than or equal to the specified degree. For example, if an input sample is two dimensional and of the form <span class="math inline">\([a, b]\)</span>, the degree-2 polynomial features are <span class="math inline">\([1, a, b, a^2, ab, b^2]\)</span>.</p>
+<p>Generate a new feature matrix consisting of all polynomial combinations of the features with degree less than or equal to the specified degree. For example, if an input sample is two dimensional and of the form <span class="math inline">[a, b]</span>, the degree-2 polynomial features are <span class="math inline">[1, a, b, a^2, ab, b^2]</span>.</p>
 </div>
 </div>
 </div>
@@ -442,7 +458,7 @@ Marcel Turcotte
 </section>
 <section id="polynomialfeatures-1" class="slide level2">
 <h2><code>PolynomialFeatures</code></h2>
-<p>Given two features <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, <code>PolynomialFeatures</code> with <code>degree=3</code> would add <span class="math inline">\(a^2\)</span>, <span class="math inline">\(a^3\)</span>, <span class="math inline">\(b^2\)</span>, <span class="math inline">\(b^3\)</span>, as well as, <span class="math inline">\(ab\)</span>, <span class="math inline">\(a^2b\)</span>, <span class="math inline">\(ab^2\)</span>!</p>
+<p>Given two features <span class="math inline">a</span> and <span class="math inline">b</span>, <code>PolynomialFeatures</code> with <code>degree=3</code> would add <span class="math inline">a^2</span>, <span class="math inline">a^3</span>, <span class="math inline">b^2</span>, <span class="math inline">b^3</span>, as well as, <span class="math inline">ab</span>, <span class="math inline">a^2b</span>, <span class="math inline">ab^2</span>!</p>
 <div class="fragment">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
@@ -453,7 +469,7 @@ Marcel Turcotte
 <p><strong>Warning</strong></p>
 </div>
 <div class="callout-content">
-<p><code>PolynomialFeatures(degree=d)</code> adds <span class="math inline">\(\frac{(D+d)!}{d!D!}\)</span> features, where <span class="math inline">\(D\)</span> is the original number of features.</p>
+<p><code>PolynomialFeatures(degree=d)</code> adds <span class="math inline">\frac{(D+d)!}{d!D!}</span> features, where <span class="math inline">D</span> is the original number of features.</p>
 </div>
 </div>
 </div>
@@ -523,13 +539,13 @@ Marcel Turcotte
 </div>
 </div><div class="column" style="width:50%;">
 <p>The data was generated according to the following equation, with the inclusion of Gaussian noise.</p>
-<p><span class="math display">\[
+<p><span class="math display">
   y = 0.5 x^2 - 1.0 x + 2.0
-\]</span></p>
+</span></p>
 <p>Presented below is the learned model.</p>
-<p><span class="math display">\[
+<p><span class="math display">
   \hat{y} = 0.56 x^2 + (-1.06) x + 1.78
-\]</span></p>
+</span></p>
 </div></div>
 <div id="5a3c831d" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a>lin_reg.coef_, lin_reg.intercept_</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -543,18 +559,18 @@ Marcel Turcotte
 <li>Logistic regression is linear in its <strong>parameters</strong> (weights).</li>
 <li>The decision boundary comes from:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \hat{y_i} = \sigma(\theta_0 + \theta_1 z_i^{(1)} + \theta_2 z_i^{(2)} + \dots + \theta_{D'} z_i^{(D')})
-\]</span></p>
-<p>where each <span class="math inline">\(z_i^{(j)}\)</span> is a feature.</p>
+</span></p>
+<p>where each <span class="math inline">z_i^{(j)}</span> is a feature.</p>
 <ul>
-<li>If you define <span class="math inline">\(z_i^{(j)}\)</span> to be a polynomial function of the original variables (e.g.&nbsp;<span class="math inline">\(z_i^{(3)} = (x_i^{(1)})^2\)</span>), the model is still <em>linear in the <span class="math inline">\(z_i^{(j)}\)</span></em>.</li>
+<li>If you define <span class="math inline">z_i^{(j)}</span> to be a polynomial function of the original variables (e.g.&nbsp;<span class="math inline">z_i^{(3)} = (x_i^{(1)})^2</span>), the model is still <em>linear in the <span class="math inline">z_i^{(j)}</span></em>.</li>
 </ul>
 <h3 id="polynomialfeatures-only-changes-the-feature-space">2. <strong>PolynomialFeatures only changes the feature space</strong></h3>
 <ul>
-<li><code>PolynomialFeatures</code> maps input <span class="math inline">\((x_i^{(1)}, x_i^{(2)})\)</span> to a new vector: <span class="math inline">\((x_i^{(1)}, x_i^{(2)}, (x_i^{(1)})^2, x_i^{(1)}x_i^{(2)}, (x_i^{(2)})^2, \ldots)\)</span>.</li>
+<li><code>PolynomialFeatures</code> maps input <span class="math inline">(x_i^{(1)}, x_i^{(2)})</span> to a new vector: <span class="math inline">(x_i^{(1)}, x_i^{(2)}, (x_i^{(1)})^2, x_i^{(1)}x_i^{(2)}, (x_i^{(2)})^2, \ldots)</span>.</li>
 <li>Logistic regression then finds a linear decision boundary in this <strong>expanded feature space</strong>.</li>
-<li>When you map it back to the original <span class="math inline">\((x_i^{(1)}, x_i^{(2)})\)</span> space, that “linear” decision surface can appear curved or wiggly, but mathematically it’s still a hyperplane in the transformed space.</li>
+<li>When you map it back to the original <span class="math inline">(x_i^{(1)}, x_i^{(2)})</span> space, that “linear” decision surface can appear curved or wiggly, but mathematically it’s still a hyperplane in the transformed space.</li>
 </ul>
 <p><strong>Key message:</strong></p>
 <p>“Logistic regression always finds a linear boundary in the features you give it. If you feed it polynomials, the linear boundary in that space looks nonlinear in the original space.”</p>
@@ -951,13 +967,13 @@ Marcel Turcotte
 </section>
 <section id="bias-1" class="slide level2">
 <h2>Bias</h2>
-<p><span class="math display">\[
+<p><span class="math display">
 \text{Bias}(\hat{f}) = \mathbb{E}[\hat{f}(x)] - f(x)
-\]</span> where:</p>
+</span> where:</p>
 <ul>
-<li><span class="math inline">\(\hat{f}(x)\)</span> is the prediction made by the model,</li>
-<li><span class="math inline">\(f(x)\)</span> is the true function,</li>
-<li><span class="math inline">\(\mathbb{E}[\hat{f}(x)]\)</span> is the expected prediction over different datasets.</li>
+<li><span class="math inline">\hat{f}(x)</span> is the prediction made by the model,</li>
+<li><span class="math inline">f(x)</span> is the true function,</li>
+<li><span class="math inline">\mathbb{E}[\hat{f}(x)]</span> is the expected prediction over different datasets.</li>
 </ul>
 </section>
 <section id="variance" class="slide level2">
@@ -970,13 +986,13 @@ Marcel Turcotte
 </section>
 <section id="variance-1" class="slide level2">
 <h2>Variance</h2>
-<p><span class="math display">\[
+<p><span class="math display">
 \text{Variance}(\hat{f}) = \mathbb{E}[(\hat{f}(x) - \mathbb{E}[\hat{f}(x)])^2]
-\]</span></p>
+</span></p>
 <p>where:</p>
 <ul>
-<li><span class="math inline">\(\hat{f}(x)\)</span> is the prediction made by the model,</li>
-<li><span class="math inline">\(\mathbb{E}[\hat{f}(x)]\)</span> is the expected prediction over different datasets.</li>
+<li><span class="math inline">\hat{f}(x)</span> is the prediction made by the model,</li>
+<li><span class="math inline">\mathbb{E}[\hat{f}(x)]</span> is the expected prediction over different datasets.</li>
 </ul>
 </section>
 <section id="remarks" class="slide level2">
@@ -988,9 +1004,9 @@ Marcel Turcotte
 </section>
 <section id="bais-variance-tradeoff" class="slide level2">
 <h2>Bais-Variance Tradeoff</h2>
-<p><span class="math display">\[
+<p><span class="math display">
   \text{Error} = \text{Bias}^2 + \text{Variance} + \text{Irreducible Error}
-  \]</span></p>
+  </span></p>
 <ul>
 <li><p>Model selection aims to <strong>minimize bias</strong>, which arises from overly <em>simplistic models</em>, and <strong>variance</strong>, which results from overly <em>complex models prone to overfitting</em>.</p></li>
 <li><p>Ideally, with <strong>infinite data</strong>, both <strong>bias</strong> and <strong>variance</strong> could be <strong>reduced to zero</strong>.</p></li>
@@ -1548,8 +1564,8 @@ Marcel Turcotte
 
 <aside class="notes">
 <p>At first, this might seem counterintuitive, but it’s a direct consequence of how KNN works.</p>
-<p>With a very low <span class="math inline">\(k\)</span> (e.g., <span class="math inline">\(k = 1\)</span>), the model makes predictions based on the single closest neighbor, capturing almost every detail of the training data—this yields low bias but high variance because the predictions are highly sensitive to noise.</p>
-<p>In contrast, a higher <span class="math inline">\(k\)</span> forces the regressor to average over many neighbors, which smooths out the predictions. This results in a simpler, less flexible model that might not capture local nuances (high bias) but is less sensitive to fluctuations in the training set (low variance).</p>
+<p>With a very low <span class="math inline">k</span> (e.g., <span class="math inline">k = 1</span>), the model makes predictions based on the single closest neighbor, capturing almost every detail of the training data—this yields low bias but high variance because the predictions are highly sensitive to noise.</p>
+<p>In contrast, a higher <span class="math inline">k</span> forces the regressor to average over many neighbors, which smooths out the predictions. This results in a simpler, less flexible model that might not capture local nuances (high bias) but is less sensitive to fluctuations in the training set (low variance).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1562,7 +1578,7 @@ Marcel Turcotte
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>How do you explain that Bias<span class="math inline">\(^2\)</span> increases with the value of <span class="math inline">\(k\)</span>?</p>
+<p>How do you explain that Bias<span class="math inline">^2</span> increases with the value of <span class="math inline">k</span>?</p>
 </div></aside></section></section>
 <section>
 <section id="prologue" class="title-slide slide level1 center">
@@ -1646,45 +1662,45 @@ Statnikov, Alexander, Constantin F. Aliferis, Ioannis Tsamardinos, Douglas Hardi
 </div>
 </div>
 </div>
-<p>Clearly, this dataset is not linearly separable in <span class="math inline">\((x_1, x_2)\)</span>!</p>
+<p>Clearly, this dataset is not linearly separable in <span class="math inline">(x_1, x_2)</span>!</p>
 </section>
 <section id="feature-engineering" class="slide level2">
 <h2>Feature engineering</h2>
 <p>When using a linear classifier like <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html"><code>LogisticRegression</code></a>, it is not possible to derive parameters that enable accurate classification of the given examples.</p>
-<p>We could incorporate two additional features, <span class="math inline">\(x_1^2\)</span> and <span class="math inline">\(x_2^2\)</span>. This allows for the classification of examples using logistic regression. However, the feature space becomes four-dimensional, complicating direct visualization.</p>
+<p>We could incorporate two additional features, <span class="math inline">x_1^2</span> and <span class="math inline">x_2^2</span>. This allows for the classification of examples using logistic regression. However, the feature space becomes four-dimensional, complicating direct visualization.</p>
 </section>
 <section id="feature-engineering-continued" class="slide level2">
 <h2>Feature engineering (continued)</h2>
-<p>In this notebook, we introduce a single feature specifically designed to facilitate visualization. <span class="math display">\[
+<p>In this notebook, we introduce a single feature specifically designed to facilitate visualization. <span class="math display">
 r = x_1^2 + x_2^2,
-\]</span> <strong>(r)</strong> represents the <strong>squared distance from the origin</strong> — essentially the <strong>radius squared</strong> in polar coordinates.</p>
+</span> <strong>(r)</strong> represents the <strong>squared distance from the origin</strong> — essentially the <strong>radius squared</strong> in polar coordinates.</p>
 </section>
 <section id="intuition" class="slide level2 smaller">
 <h2>Intuition</h2>
 <ul>
-<li>Each point in the original 2-D plane has coordinates <span class="math inline">\((x_1, x_2)\)</span>.</li>
+<li>Each point in the original 2-D plane has coordinates <span class="math inline">(x_1, x_2)</span>.</li>
 <li>If you express those same coordinates in polar form, you have</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
   x_1 = r^{1/2} \cos\theta, \quad x_2 = r^{1/2} \sin\theta,
-\]</span> or more conventionally, <span class="math inline">\(r_{\text{polar}} = \sqrt{x_1^2 + x_2^2}\)</span>.</p>
+</span> or more conventionally, <span class="math inline">r_{\text{polar}} = \sqrt{x_1^2 + x_2^2}</span>.</p>
 <ul>
-<li>Here, we define <span class="math inline">\(r = x_1^2 + x_2^2\)</span>, i.e., the <strong>square</strong> of that radius.</li>
+<li>Here, we define <span class="math inline">r = x_1^2 + x_2^2</span>, i.e., the <strong>square</strong> of that radius.</li>
 </ul>
-<p>Using <span class="math inline">\(r\)</span> instead of <span class="math inline">\(\sqrt{r}\)</span> keeps the mapping differentiable and avoids square roots in the model.</p>
+<p>Using <span class="math inline">r</span> instead of <span class="math inline">\sqrt{r}</span> keeps the mapping differentiable and avoids square roots in the model.</p>
 </section>
 <section id="why-its-useful" class="slide level2 smaller">
 <h2>Why it’s useful</h2>
 <p>In the “circle vs.&nbsp;ring” dataset:</p>
 <ul>
-<li>Points from the <strong>inner circle</strong> are close to the origin, small <span class="math inline">\(r\)</span>.</li>
-<li>Points from the <strong>outer ring</strong> are farther away, large <span class="math inline">\(r\)</span>.</li>
+<li>Points from the <strong>inner circle</strong> are close to the origin, small <span class="math inline">r</span>.</li>
+<li>Points from the <strong>outer ring</strong> are farther away, large <span class="math inline">r</span>.</li>
 </ul>
-<p>Thus, the problem that is <strong>non-linear</strong> in <span class="math inline">\((x_1, x_2)\)</span> becomes <strong>linearly separable</strong> in <span class="math inline">\(r\)</span>:</p>
-<p><span class="math display">\[
+<p>Thus, the problem that is <strong>non-linear</strong> in <span class="math inline">(x_1, x_2)</span> becomes <strong>linearly separable</strong> in <span class="math inline">r</span>:</p>
+<p><span class="math display">
 \text{inner if } r &lt; r^*, \quad \text{outer if } r &gt; r^*.
-\]</span></p>
-<p>So <span class="math inline">\(r\)</span> is a <strong>feature encoding the radial distance</strong>, allowing a linear model like logistic regression to separate the classes with a single threshold in 1-D.</p>
+</span></p>
+<p>So <span class="math inline">r</span> is a <strong>feature encoding the radial distance</strong>, allowing a linear model like logistic regression to separate the classes with a single threshold in 1-D.</p>
 </section>
 <section id="d-view" class="slide level2">
 <h2>3D view</h2>
@@ -1772,11 +1788,11 @@ if (outputEl) {{
 </div>
 
 <aside><div>
-<p><span class="math inline">\((x_1,x_2,r)\)</span> with <span class="math inline">\(r=x_1^2+x_2^2\)</span></p>
+<p><span class="math inline">(x_1,x_2,r)</span> with <span class="math inline">r=x_1^2+x_2^2</span></p>
 </div></aside></section>
 <section id="linear-separability-in-1d-r-space" class="slide level2 scrollable smaller">
 <h2>Linear separability in 1D (r-space)</h2>
-<p>Comparing two models, <code>clf_r</code> uses a single attribute, <span class="math inline">\(r=x_1^2+x_2^2\)</span>, whereas <code>quad</code> includes degree 2 polynomial features.</p>
+<p>Comparing two models, <code>clf_r</code> uses a single attribute, <span class="math inline">r=x_1^2+x_2^2</span>, whereas <code>quad</code> includes degree 2 polynomial features.</p>
 <div id="ed1eaa2f" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-label="1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
 <span id="cb29-2"><a aria-label="2"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
@@ -1939,7 +1955,6 @@ if (outputEl) {{
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -2108,27 +2123,9 @@ if (outputEl) {{
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

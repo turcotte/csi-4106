@@ -124,6 +124,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -281,7 +297,7 @@ Marcel Turcotte
 <li><strong>Contrast</strong> the <strong>batch</strong>, <strong>stochastic</strong>, and <strong>mini-batch</strong> gradient descent methods.</li>
 </ul>
 <aside class="notes">
-<p>In the previous lecture, we examined two distinct learning algorithms: <span class="math inline">\(k\)</span>-nearest neighbors (KNN) and decision trees, each employing unique methods for model training and representation. KNN does not involve explicit learning; instead, the data itself constitutes the model. Conversely, decision trees utilize a greedy algorithm that begins with an empty tree and the full training dataset. The algorithm incrementally adds decision nodes, partitioning the parent dataset into subsets to achieve greater homogeneity (or purity) within each resulting classification compared to the parent node. This recursive process terminates when a node’s data satisfies predefined stopping criteria, such as achieving a single class, reaching a minimum purity level, or attaining a maximum tree depth. Once the decision tree is constructed, the original data is no longer needed. This lecture aimed to demonstrate that supervised learning models can be represented in various ways, with each “learning” algorithm tailored to its specific model.</p>
+<p>In the previous lecture, we examined two distinct learning algorithms: <span class="math inline">k</span>-nearest neighbors (KNN) and decision trees, each employing unique methods for model training and representation. KNN does not involve explicit learning; instead, the data itself constitutes the model. Conversely, decision trees utilize a greedy algorithm that begins with an empty tree and the full training dataset. The algorithm incrementally adds decision nodes, partitioning the parent dataset into subsets to achieve greater homogeneity (or purity) within each resulting classification compared to the parent node. This recursive process terminates when a node’s data satisfies predefined stopping criteria, such as achieving a single class, reaching a minimum purity level, or attaining a maximum tree depth. Once the decision tree is constructed, the original data is no longer needed. This lecture aimed to demonstrate that supervised learning models can be represented in various ways, with each “learning” algorithm tailored to its specific model.</p>
 <p>In today’s lecture, we will explore a training algorithm that is applicable to a diverse range of models, including neural networks.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -338,14 +354,14 @@ Marcel Turcotte
 <ul>
 <li class="fragment">The <strong>training data</strong> is a collection of <strong>labelled</strong> examples.
 <ul>
-<li class="fragment"><span class="math inline">\(\{(x_i,y_i)\}_{i=1}^N\)</span>
+<li class="fragment"><span class="math inline">\{(x_i,y_i)\}_{i=1}^N</span>
 <ul>
-<li class="fragment">Each <span class="math inline">\(x_i\)</span> is a <strong>feature vector</strong> with <span class="math inline">\(D\)</span> dimensions.</li>
-<li class="fragment"><span class="math inline">\(x_i^{(j)}\)</span> is the value of the <strong>feature</strong> <span class="math inline">\(j\)</span> of the example <span class="math inline">\(i\)</span>, for <span class="math inline">\(j \in 1 \ldots D\)</span> and <span class="math inline">\(i \in 1 \ldots N\)</span>.</li>
+<li class="fragment">Each <span class="math inline">x_i</span> is a <strong>feature vector</strong> with <span class="math inline">D</span> dimensions.</li>
+<li class="fragment"><span class="math inline">x_i^{(j)}</span> is the value of the <strong>feature</strong> <span class="math inline">j</span> of the example <span class="math inline">i</span>, for <span class="math inline">j \in 1 \ldots D</span> and <span class="math inline">i \in 1 \ldots N</span>.</li>
 </ul></li>
-<li class="fragment">The <strong>label</strong> <span class="math inline">\(y_i\)</span> is a <strong>real number</strong>.</li>
+<li class="fragment">The <strong>label</strong> <span class="math inline">y_i</span> is a <strong>real number</strong>.</li>
 </ul></li>
-<li class="fragment"><strong>Problem</strong>: Given the data set as input, create a <strong>model</strong> that can be used to predict the value of <span class="math inline">\(y\)</span> for an unseen <span class="math inline">\(x\)</span>.</li>
+<li class="fragment"><strong>Problem</strong>: Given the data set as input, create a <strong>model</strong> that can be used to predict the value of <span class="math inline">y</span> for an unseen <span class="math inline">x</span>.</li>
 </ul>
 <aside class="notes">
 <p>Can you think of examples of regression tasks?</p>
@@ -609,7 +625,7 @@ Marcel Turcotte
 <section id="problem" class="slide level2">
 <h2>Problem</h2>
 <ul>
-<li>Predict the <strong>waiting time until the next eruption (min)</strong>, <span class="math inline">\(y\)</span>, based on the <strong>duration of the current eruption (min)</strong>, <span class="math inline">\(x\)</span>.</li>
+<li>Predict the <strong>waiting time until the next eruption (min)</strong>, <span class="math inline">y</span>, based on the <strong>duration of the current eruption (min)</strong>, <span class="math inline">x</span>.</li>
 </ul>
 <aside class="notes">
 <p>Selecting a problem characterized by a single attribute allows us to better focus our discussion and enhance the clarity of visualization.</p>
@@ -631,16 +647,16 @@ Marcel Turcotte
 </section>
 <section id="linear-regression-1" class="slide level2">
 <h2>Linear Regression</h2>
-<p>A <strong>linear model</strong> assumes that the value of the <strong>label</strong>, <span class="math inline">\(\hat{y_i}\)</span>, can be expressed as a <strong>linear combination</strong> of the feature values, <span class="math inline">\(x_i^{(j)}\)</span>: <span class="math display">\[
+<p>A <strong>linear model</strong> assumes that the value of the <strong>label</strong>, <span class="math inline">\hat{y_i}</span>, can be expressed as a <strong>linear combination</strong> of the feature values, <span class="math inline">x_i^{(j)}</span>: <span class="math display">
   \hat{y_i} = \theta_0 + \theta_1 x_i^{(1)} + \theta_2 x_i^{(2)} + \ldots + \theta_D x_i^{(D)}
-\]</span></p>
+</span></p>
 <div class="fragment">
-<p>Here, <span class="math inline">\(\theta_{j}\)</span> is the <span class="math inline">\(j\)</span>th parameter of the (linear) <strong>model</strong>, with <span class="math inline">\(\theta_0\)</span> being the <strong>bias</strong> term/parameter, and <span class="math inline">\(\theta_1 \ldots \theta_D\)</span> being the <strong>feature weights</strong>.</p>
+<p>Here, <span class="math inline">\theta_{j}</span> is the <span class="math inline">j</span>th parameter of the (linear) <strong>model</strong>, with <span class="math inline">\theta_0</span> being the <strong>bias</strong> term/parameter, and <span class="math inline">\theta_1 \ldots \theta_D</span> being the <strong>feature weights</strong>.</p>
 
 <aside class="notes">
-<p>In statistical contexts, the notation <span class="math inline">\(\hat{y_i}\)</span> is employed to denote the estimator of the true value <span class="math inline">\(y_i\)</span>. This represents the predicted or estimated outcome based on a given model.</p>
-<p>Conversely, in machine learning, the notation <span class="math inline">\(h(x_i)\)</span> is used, where <span class="math inline">\(h\)</span> represents the hypothesis function or model applied to the input data <span class="math inline">\(x_i\)</span>. The hypothesis function <span class="math inline">\(h\)</span> is derived from a predefined hypothesis space, which encompasses the set of all possible models that can be used to map input data to predicted outcomes.</p>
-<p>The parameter <span class="math inline">\(\theta_0\)</span> is called the <strong>bias term</strong> (also “intercept”) because:</p>
+<p>In statistical contexts, the notation <span class="math inline">\hat{y_i}</span> is employed to denote the estimator of the true value <span class="math inline">y_i</span>. This represents the predicted or estimated outcome based on a given model.</p>
+<p>Conversely, in machine learning, the notation <span class="math inline">h(x_i)</span> is used, where <span class="math inline">h</span> represents the hypothesis function or model applied to the input data <span class="math inline">x_i</span>. The hypothesis function <span class="math inline">h</span> is derived from a predefined hypothesis space, which encompasses the set of all possible models that can be used to map input data to predicted outcomes.</p>
+<p>The parameter <span class="math inline">\theta_0</span> is called the <strong>bias term</strong> (also “intercept”) because:</p>
 <ul>
 <li>It <strong>shifts the prediction independently of the inputs</strong>.</li>
 <li>Geometrically, it moves the regression hyperplane up or down (or left/right in classification), so the model is not forced to pass through the origin.</li>
@@ -661,7 +677,7 @@ Marcel Turcotte
       }</style></aside>
 </div>
 <aside><div>
-<p>In my presentations, I use <span class="math inline">\(\hat{y_i}\)</span> and <span class="math inline">\(h(x_i)\)</span> synonymously.</p>
+<p>In my presentations, I use <span class="math inline">\hat{y_i}</span> and <span class="math inline">h(x_i)</span> synonymously.</p>
 </div></aside></section>
 <section id="definition" class="slide level2">
 <h2>Definition</h2>
@@ -670,9 +686,9 @@ Marcel Turcotte
 <ul>
 <li>The <strong>Root Mean Square Error</strong> is a common performance measure for regression problems.</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
     \sqrt{\frac{1}{N}\sum_1^N [h(x_i) - y_i]^2}
-\]</span></p>
+</span></p>
 <aside class="notes">
 <p>In practical implementation, algorithms typically optimize the mean squared error (MSE) due to its mathematical tractability and the fact that it converges to the same parameter estimates as other error measures. While our current focus is on using MSE, the algorithm can be adapted to work with a range of objective functions.</p>
 <style type="text/css">
@@ -778,7 +794,7 @@ Test R²  = 0.671</code></pre>
 </div>
 </div>
 <aside class="notes">
-<p>In the plot above, the line <span class="math inline">\(x=0\)</span> is included to facilitate the visualization of the intercept, which is given by <span class="math inline">\(\theta_0 = 32.910\)</span>.</p>
+<p>In the plot above, the line <span class="math inline">x=0</span> is included to facilitate the visualization of the intercept, which is given by <span class="math inline">\theta_0 = 32.910</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -798,9 +814,9 @@ Test R²  = 0.671</code></pre>
 <li class="fragment">A <strong>model</strong>, often consisting of a set of <strong>parameters</strong> whose values will be <strong>“learnt”</strong>.</li>
 <li class="fragment">An <strong>objective function</strong>.
 <ul>
-<li class="fragment">In the case of <strong>regression</strong>, this is often a <strong>loss function</strong>, a function that quantifies misclassification. The <strong>Root Mean Square Error</strong> is a common loss function for regression problems. <span class="math display">\[
+<li class="fragment">In the case of <strong>regression</strong>, this is often a <strong>loss function</strong>, a function that quantifies misclassification. The <strong>Root Mean Square Error</strong> is a common loss function for regression problems. <span class="math display">
 \sqrt{\frac{1}{N}\sum_1^N [h(x_i) - y_i]^2}
-\]</span></li>
+</span></li>
 </ul></li>
 <li class="fragment"><strong>Optimization</strong> algorithm</li>
 </ol>
@@ -809,7 +825,7 @@ Test R²  = 0.671</code></pre>
 <h2>Optimization</h2>
 <p><strong>Until</strong> some termination criteria is met<sup>1</sup>:</p>
 <ul>
-<li class="fragment"><strong>Evaluate</strong> the loss function, comparing <span class="math inline">\(h(x_i)\)</span> to <span class="math inline">\(y_i\)</span>.</li>
+<li class="fragment"><strong>Evaluate</strong> the loss function, comparing <span class="math inline">h(x_i)</span> to <span class="math inline">y_i</span>.</li>
 <li class="fragment"><strong>Make small changes to the parameters</strong>, in a way that reduces the value of the loss function.</li>
 </ul>
 <aside><ol class="aside-footnotes"><li id="fn1"><p>E.g. the value of the <strong>loss function no longer decreases</strong> or the <strong>maximum number of iterations</strong>.</p></li></ol></aside></section>
@@ -826,21 +842,21 @@ Test R²  = 0.671</code></pre>
 <h2>Optimization — single feature</h2>
 <ul>
 <li class="fragment"><p><strong>Model</strong> (hypothesis):<br>
-<span class="math display">\[
+<span class="math display">
 h(x_i; \theta) = \theta_0 + \theta_1 x_i^{(1)}
-\]</span></p></li>
+</span></p></li>
 <li class="fragment"><p><strong>Loss/cost function</strong>:<br>
-<span class="math display">\[
+<span class="math display">
 J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
-\]</span></p></li>
+</span></p></li>
 </ul>
 
 <aside class="notes">
 <p>This screen is paramount for our presentation, and it is essential to grasp its content fully, as it often causes confusion.</p>
-<p>In machine learning, an algorithm generates a model, denoted as <span class="math inline">\(h\)</span>. This model is derived from the training data, represented by <span class="math inline">\(X\)</span>. After the model is trained, it can be utilized to predict outcomes for new, unseen data points, denoted by <span class="math inline">\(x_{\mathrm{new}}\)</span>. Once trained, the model’s parameters, <span class="math inline">\(\theta\)</span>, become fixed. The model functions by mapping each input <span class="math inline">\(x_i\)</span> to a predicted output <span class="math inline">\(\hat{y}_i\)</span>, <span class="math inline">\(x_i \mapsto \hat{y}_i\)</span>.</p>
-<p>The cost function is used to determine the optimal parameter values, <span class="math inline">\(\theta\)</span>, for the model <span class="math inline">\(h\)</span>. On this screen, the loss is specified as the mean squared error. Our goal is to identify <span class="math inline">\(\theta\)</span> such that the model <span class="math inline">\(h\)</span> minimizes its error on the training dataset <span class="math inline">\(X\)</span>. The loss function maps the parameter pair <span class="math inline">\((\theta_0, \theta_1)\)</span> to a non-negative real number <span class="math inline">\(\mathbb{R}_{\ge0}\)</span>, <span class="math inline">\((\theta_0,\theta_1)\mapsto\mathbb{R}_{\ge0}\)</span>, which aggregates errors across all data points.</p>
-<p>Gradient descent is a process that operates in the parameter space, where it adjusts <span class="math inline">\(\theta\)</span> to minimize the loss, rather than in the feature space of the data.</p>
-<p>The notation <span class="math inline">\(h(x_i; \theta)\)</span> indicates that the value of the function <span class="math inline">\(h\)</span> (of the model) depends on the input example <span class="math inline">\(x_i\)</span> as well as the parameters <span class="math inline">\(\theta\)</span>. The semicolon is used to semantically differentiate these two sets of values. This convention comes from the field of statistics. In machine learning, we also use the notation <span class="math inline">\(h_{\theta}(x_i)\)</span>, which can be considered more appropriate. In this context, we refer to an indexed family of functions, where <span class="math inline">\(\theta\)</span> specifically determines which function <span class="math inline">\(h_\theta\)</span> should be used. This notation is read as follows: “the function <span class="math inline">\(h\)</span>, parameterized by <span class="math inline">\(\theta\)</span>, applied to the input <span class="math inline">\(x_i\)</span>.”</p>
+<p>In machine learning, an algorithm generates a model, denoted as <span class="math inline">h</span>. This model is derived from the training data, represented by <span class="math inline">X</span>. After the model is trained, it can be utilized to predict outcomes for new, unseen data points, denoted by <span class="math inline">x_{\mathrm{new}}</span>. Once trained, the model’s parameters, <span class="math inline">\theta</span>, become fixed. The model functions by mapping each input <span class="math inline">x_i</span> to a predicted output <span class="math inline">\hat{y}_i</span>, <span class="math inline">x_i \mapsto \hat{y}_i</span>.</p>
+<p>The cost function is used to determine the optimal parameter values, <span class="math inline">\theta</span>, for the model <span class="math inline">h</span>. On this screen, the loss is specified as the mean squared error. Our goal is to identify <span class="math inline">\theta</span> such that the model <span class="math inline">h</span> minimizes its error on the training dataset <span class="math inline">X</span>. The loss function maps the parameter pair <span class="math inline">(\theta_0, \theta_1)</span> to a non-negative real number <span class="math inline">\mathbb{R}_{\ge0}</span>, <span class="math inline">(\theta_0,\theta_1)\mapsto\mathbb{R}_{\ge0}</span>, which aggregates errors across all data points.</p>
+<p>Gradient descent is a process that operates in the parameter space, where it adjusts <span class="math inline">\theta</span> to minimize the loss, rather than in the feature space of the data.</p>
+<p>The notation <span class="math inline">h(x_i; \theta)</span> indicates that the value of the function <span class="math inline">h</span> (of the model) depends on the input example <span class="math inline">x_i</span> as well as the parameters <span class="math inline">\theta</span>. The semicolon is used to semantically differentiate these two sets of values. This convention comes from the field of statistics. In machine learning, we also use the notation <span class="math inline">h_{\theta}(x_i)</span>, which can be considered more appropriate. In this context, we refer to an indexed family of functions, where <span class="math inline">\theta</span> specifically determines which function <span class="math inline">h_\theta</span> should be used. This notation is read as follows: “the function <span class="math inline">h</span>, parameterized by <span class="math inline">\theta</span>, applied to the input <span class="math inline">x_i</span>.”</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -853,7 +869,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
           display:block!important;
       }</style></aside>
 <aside><div>
-<p><strong>Goal</strong>: find <span class="math inline">\(\theta_0, \theta_1\)</span> that minimize <span class="math inline">\(J\)</span>, by iteratively updating the parameters.</p>
+<p><strong>Goal</strong>: find <span class="math inline">\theta_0, \theta_1</span> that minimize <span class="math inline">J</span>, by iteratively updating the parameters.</p>
 </div></aside></section>
 <section id="hypothesis-vs-parameter-space" class="slide level2">
 <h2>Hypothesis vs Parameter Space</h2>
@@ -868,9 +884,9 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 </div>
 <aside class="notes">
 <p>In this example, we use the Old Faithful geyser eruption dataset.</p>
-<p>The figure on the left illustrates the data within its feature space, where each line represents a distinct hypothesis. For instance, the horizontal blue line corresponds to the hypothesis defined by parameters <span class="math inline">\((\theta_0=0, \theta_1=0)\)</span>, while the orange line corresponds to <span class="math inline">\((\theta_0=10, \theta_1=2)\)</span>. The sequence of model parameters, or hypotheses, has been deliberately designed to elucidate the underlying concepts.</p>
-<p>Conversely, the figure on the right depicts the parameter space, which is where optimization is performed. In this space, the vertical axis indicates the Mean Squared Error (MSE) for all combinations of <span class="math inline">\(\theta_0\)</span> and <span class="math inline">\(\theta_1\)</span>. Specifically, a model characterized by these parameters would incur this level of error with the specified training data. During the training process, the data remains constant, whereas the parameters <span class="math inline">\(\theta_0\)</span> and <span class="math inline">\(\theta_1\)</span> are adjusted to minimize the error.</p>
-<p>In the figure on the right, the progression of model parameters, denoted as (<span class="math inline">\(\theta_0, \theta_1\)</span>) with the sequence <span class="math inline">\(\{(0.000, 0.000), (10.000, 2.000), (20.000, 4.000), (30.000, 7.000), (32.910, 10.503)\}\)</span>, illustrates a reduction in the mean squared error (MSE), <span class="math inline">\(J(\theta)\)</span>.</p>
+<p>The figure on the left illustrates the data within its feature space, where each line represents a distinct hypothesis. For instance, the horizontal blue line corresponds to the hypothesis defined by parameters <span class="math inline">(\theta_0=0, \theta_1=0)</span>, while the orange line corresponds to <span class="math inline">(\theta_0=10, \theta_1=2)</span>. The sequence of model parameters, or hypotheses, has been deliberately designed to elucidate the underlying concepts.</p>
+<p>Conversely, the figure on the right depicts the parameter space, which is where optimization is performed. In this space, the vertical axis indicates the Mean Squared Error (MSE) for all combinations of <span class="math inline">\theta_0</span> and <span class="math inline">\theta_1</span>. Specifically, a model characterized by these parameters would incur this level of error with the specified training data. During the training process, the data remains constant, whereas the parameters <span class="math inline">\theta_0</span> and <span class="math inline">\theta_1</span> are adjusted to minimize the error.</p>
+<p>In the figure on the right, the progression of model parameters, denoted as (<span class="math inline">\theta_0, \theta_1</span>) with the sequence <span class="math inline">\{(0.000, 0.000), (10.000, 2.000), (20.000, 4.000), (30.000, 7.000), (32.910, 10.503)\}</span>, illustrates a reduction in the mean squared error (MSE), <span class="math inline">J(\theta)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -930,7 +946,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 <ul>
 <li class="fragment">We will start with a <strong>single-variable function</strong>.</li>
 <li class="fragment">Think of this as our <strong>loss function</strong>, which we aim to minimize; to reduce the average discrepancy between expected and predicted values.</li>
-<li class="fragment">Here, I am using <span class="math inline">\(t\)</span> to avoid any confusion with the attributes of our training examples.</li>
+<li class="fragment">Here, I am using <span class="math inline">t</span> to avoid any confusion with the attributes of our training examples.</li>
 </ul>
 </div></div>
 </section>
@@ -964,14 +980,14 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 </div>
 </div><div class="column" style="width:60%;">
 <ul>
-<li class="fragment"><p>The graph of the <strong>derivative</strong>, <span class="math inline">\(f^{'}(t)\)</span>, is depicted in <strong>red</strong>.</p></li>
-<li class="fragment"><p>The <strong>derivative</strong> indicates how changes in the input affect the output, <span class="math inline">\(f(t)\)</span>.</p></li>
-<li class="fragment"><p>The magnitude of the <strong>derivative</strong> at <span class="math inline">\(t = -2\)</span> is <span class="math inline">\(0\)</span>.</p></li>
+<li class="fragment"><p>The graph of the <strong>derivative</strong>, <span class="math inline">f^{'}(t)</span>, is depicted in <strong>red</strong>.</p></li>
+<li class="fragment"><p>The <strong>derivative</strong> indicates how changes in the input affect the output, <span class="math inline">f(t)</span>.</p></li>
+<li class="fragment"><p>The magnitude of the <strong>derivative</strong> at <span class="math inline">t = -2</span> is <span class="math inline">0</span>.</p></li>
 <li class="fragment"><p>This point corresponds to the <strong>minimum</strong> of our function.</p></li>
 </ul>
 </div></div>
 <aside class="notes">
-<p>Near <span class="math inline">\(t = -2\)</span>, variations in <span class="math inline">\(t\)</span> have minimal impact on the output, <span class="math inline">\(f(t)\)</span>.</p>
+<p>Near <span class="math inline">t = -2</span>, variations in <span class="math inline">t</span> have minimal impact on the output, <span class="math inline">f(t)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1000,7 +1016,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 </div><div class="column" style="width:60%;">
 <ul>
 <li class="fragment">When evaluated at a <strong>specific point</strong>, the derivative indicates the <strong>slope</strong> of the <strong>tangent line</strong> to the graph of the function at that point.</li>
-<li class="fragment">At <span class="math inline">\(t= -2\)</span>, the <strong>slope</strong> of the <strong>tangent line</strong> is 0.</li>
+<li class="fragment">At <span class="math inline">t= -2</span>, the <strong>slope</strong> of the <strong>tangent line</strong> is 0.</li>
 </ul>
 </div></div>
 </section>
@@ -1098,13 +1114,13 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 <h2>Gradient Descent — Single Feature</h2>
 <ul>
 <li class="fragment"><p><strong>Model</strong> (hypothesis):<br>
-<span class="math display">\[
+<span class="math display">
 h(x_i; \theta) = \theta_0 + \theta_1 x_i^{(1)}
-\]</span></p></li>
+</span></p></li>
 <li class="fragment"><p><strong>Loss/cost function</strong>:<br>
-<span class="math display">\[
+<span class="math display">
 J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
-\]</span></p></li>
+</span></p></li>
 </ul>
 </section>
 <section id="gradient-descent---intuition" class="slide level2">
@@ -1118,19 +1134,19 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 <section id="gradient-descent---single-value" class="slide level2">
 <h2>Gradient descent - single value</h2>
 <ul>
-<li class="fragment"><strong>Initialization:</strong> <span class="math inline">\(\theta_0\)</span> and <span class="math inline">\(\theta_1\)</span> - either with random values or zeros.</li>
+<li class="fragment"><strong>Initialization:</strong> <span class="math inline">\theta_0</span> and <span class="math inline">\theta_1</span> - either with random values or zeros.</li>
 <li class="fragment"><strong>Loop:</strong>
 <ul>
-<li class="fragment">repeat until convergence: <span class="math display">\[
+<li class="fragment">repeat until convergence: <span class="math display">
 \theta_j := \theta_j - \alpha \frac {\partial}{\partial \theta_j}J(\theta_0, \theta_1) , \text{for } j=0 \text{ and } j=1
-\]</span></li>
+</span></li>
 </ul></li>
-<li class="fragment"><span class="math inline">\(\alpha\)</span> is called the <strong>learning rate</strong> - this is the size of each step.</li>
-<li class="fragment"><span class="math inline">\(\frac {\partial}{\partial \theta_j}J(\theta_0, \theta_1)\)</span> is the <strong>partial derivative</strong> with respect to <span class="math inline">\(\theta_j\)</span>.</li>
+<li class="fragment"><span class="math inline">\alpha</span> is called the <strong>learning rate</strong> - this is the size of each step.</li>
+<li class="fragment"><span class="math inline">\frac {\partial}{\partial \theta_j}J(\theta_0, \theta_1)</span> is the <strong>partial derivative</strong> with respect to <span class="math inline">\theta_j</span>.</li>
 </ul>
 <aside class="notes">
 <p>A <strong>partial derivative</strong> represents the rate of change of a multivariable function <strong>with respect to one of its variables</strong>, while <strong>keeping the other variables constant</strong>.</p>
-<p>For the algorithm to be mathematically sound, all the <span class="math inline">\(\theta_j\)</span> must be updated <strong>simultaneously</strong>.</p>
+<p>For the algorithm to be mathematically sound, all the <span class="math inline">\theta_j</span> must be updated <strong>simultaneously</strong>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1198,14 +1214,14 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 </div>
 </div><div class="column" style="width:60%;">
 <ul>
-<li class="fragment"><p>When the value of <span class="math inline">\(\theta_j\)</span> is in the range <span class="math inline">\([- \inf, -2)\)</span>, <span class="math inline">\(\frac {\partial}{\partial \theta_j}J(\theta)\)</span> has a <strong>negative</strong> value.</p></li>
-<li class="fragment"><p>Therefore, <span class="math inline">\(- \alpha \frac {\partial}{\partial \theta_j}J(\theta)\)</span> is <strong>positive</strong>.</p></li>
-<li class="fragment"><p>Accordingly, the value of <span class="math inline">\(\theta_j\)</span> is <strong>increased</strong>.</p></li>
+<li class="fragment"><p>When the value of <span class="math inline">\theta_j</span> is in the range <span class="math inline">[- \inf, -2)</span>, <span class="math inline">\frac {\partial}{\partial \theta_j}J(\theta)</span> has a <strong>negative</strong> value.</p></li>
+<li class="fragment"><p>Therefore, <span class="math inline">- \alpha \frac {\partial}{\partial \theta_j}J(\theta)</span> is <strong>positive</strong>.</p></li>
+<li class="fragment"><p>Accordingly, the value of <span class="math inline">\theta_j</span> is <strong>increased</strong>.</p></li>
 </ul>
 </div></div>
 
 <aside><div>
-<p>Updating rule: <span class="math inline">\(\theta_j := \theta_j - \alpha \frac {\partial}{\partial \theta_j}J(\theta_0, \theta_1) , \text{for } j=0 \text{ and } j=1\)</span>.</p>
+<p>Updating rule: <span class="math inline">\theta_j := \theta_j - \alpha \frac {\partial}{\partial \theta_j}J(\theta_0, \theta_1) , \text{for } j=0 \text{ and } j=1</span>.</p>
 </div></aside></section>
 <section id="gradient-descent---single-value-2" class="slide level2">
 <h2>Gradient Descent - Single Value</h2>
@@ -1262,32 +1278,32 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_{i=1}^N [h(x_i;\theta) - y_i]^2
 </div>
 </div><div class="column" style="width:60%;">
 <ul>
-<li class="fragment"><p>When the value of <span class="math inline">\(\theta_j\)</span> is in the range <span class="math inline">\((-2, \infty]\)</span>, <span class="math inline">\(\frac {\partial}{\partial \theta_j}J(\theta)\)</span> has a <strong>positive</strong> value.</p></li>
-<li class="fragment"><p>Therefore, <span class="math inline">\(- \alpha \frac {\partial}{\partial \theta_j}J(\theta)\)</span> is <strong>negative</strong>.</p></li>
-<li class="fragment"><p>Accordingly, the value of <span class="math inline">\(\theta_j\)</span> is <strong>decreased</strong>.</p></li>
+<li class="fragment"><p>When the value of <span class="math inline">\theta_j</span> is in the range <span class="math inline">(-2, \infty]</span>, <span class="math inline">\frac {\partial}{\partial \theta_j}J(\theta)</span> has a <strong>positive</strong> value.</p></li>
+<li class="fragment"><p>Therefore, <span class="math inline">- \alpha \frac {\partial}{\partial \theta_j}J(\theta)</span> is <strong>negative</strong>.</p></li>
+<li class="fragment"><p>Accordingly, the value of <span class="math inline">\theta_j</span> is <strong>decreased</strong>.</p></li>
 </ul>
 </div></div>
 
 <aside><div>
-<p>Updating rule: <span class="math inline">\(\theta_j := \theta_j - \alpha \frac {\partial}{\partial \theta_j}J(\theta_0, \theta_1) , \text{for } j=0 \text{ and } j=1\)</span>.</p>
+<p>Updating rule: <span class="math inline">\theta_j := \theta_j - \alpha \frac {\partial}{\partial \theta_j}J(\theta_0, \theta_1) , \text{for } j=0 \text{ and } j=1</span>.</p>
 </div></aside></section>
 <section id="partial-derivatives" class="slide level2 scrollable smaller">
 <h2>Partial derivatives</h2>
 <p>Given</p>
-<p><span class="math display">\[
+<p><span class="math display">
 J(\theta_0, \theta_1) = \frac{1}{N}\sum_1^N [h(x_i) - y_i]^2 = \frac{1}{N}\sum_1^N [\theta_0 + \theta_1 x_i - y_i]^2
-\]</span></p>
+</span></p>
 <div class="fragment">
 <p>We have</p>
-<p><span class="math display">\[
+<p><span class="math display">
 \frac {\partial}{\partial \theta_0}J(\theta_0, \theta_1) = \frac{2}{N} \sum\limits_{i=1}^{N} [\theta_0 - \theta_1 x_i - y_{i}]
-\]</span></p>
+</span></p>
 </div>
 <div class="fragment">
 <p>and</p>
-<p><span class="math display">\[
+<p><span class="math display">
 \frac {\partial}{\partial \theta_1}J(\theta_0, \theta_1) = \frac{2}{N} \sum\limits_{i=1}^{N} x_{i} [\theta_0 + \theta_1 x_i - y_{i}]
-\]</span></p>
+</span></p>
 </div>
 </section>
 <section id="partial-derivate-sympy" class="slide level2">
@@ -1311,7 +1327,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_1^N [h(x_i) - y_i]^2 = \frac{1}{N}\sum_1
 <pre><code>Hypothesis function:</code></pre>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<p><span class="math inline">\(\displaystyle h(x) = \theta_{0} + \theta_{1} x_{i}\)</span></p>
+<p><span class="math inline">\displaystyle h(x) = \theta_{0} + \theta_{1} x_{i}</span></p>
 </div>
 </div>
 </section>
@@ -1331,7 +1347,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_1^N [h(x_i) - y_i]^2 = \frac{1}{N}\sum_1
 <pre><code>Loss function:</code></pre>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<p><span class="math inline">\(\displaystyle J = \frac{\sum_{x_{i}=1}^{N} \left(\theta_{0} + \theta_{1} x_{i} - y_{i}\right)^{2}}{N}\)</span></p>
+<p><span class="math inline">\displaystyle J = \frac{\sum_{x_{i}=1}^{N} \left(\theta_{0} + \theta_{1} x_{i} - y_{i}\right)^{2}}{N}</span></p>
 </div>
 </div>
 </section>
@@ -1349,7 +1365,7 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_1^N [h(x_i) - y_i]^2 = \frac{1}{N}\sum_1
 <pre><code>Partial derivative with respect to theta_0:</code></pre>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<p><span class="math inline">\(\displaystyle \frac{\sum_{x_{i}=1}^{N} \left(2 \theta_{0} + 2 \theta_{1} x_{i} - 2 y_{i}\right)}{N}\)</span></p>
+<p><span class="math inline">\displaystyle \frac{\sum_{x_{i}=1}^{N} \left(2 \theta_{0} + 2 \theta_{1} x_{i} - 2 y_{i}\right)}{N}</span></p>
 </div>
 </div>
 </section>
@@ -1368,72 +1384,72 @@ J(\theta_0, \theta_1) = \frac{1}{N}\sum_1^N [h(x_i) - y_i]^2 = \frac{1}{N}\sum_1
 Partial derivative with respect to theta_1:</code></pre>
 </div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<p><span class="math inline">\(\displaystyle \frac{\sum_{x_{i}=1}^{N} 2 x_{i} \left(\theta_{0} + \theta_{1} x_{i} - y_{i}\right)}{N}\)</span></p>
+<p><span class="math inline">\displaystyle \frac{\sum_{x_{i}=1}^{N} 2 x_{i} \left(\theta_{0} + \theta_{1} x_{i} - y_{i}\right)}{N}</span></p>
 </div>
 </div>
 </section>
 <section id="multivariate-linear-regression" class="slide level2">
 <h2>Multivariate linear regression</h2>
-<p><span class="math display">\[
+<p><span class="math display">
 h (x_i) = \theta_0 + \theta_1 x_i^{(1)} + \theta_2 x_i^{(2)} + \theta_3 x_i^{(3)} + \cdots + \theta_D x_i^{(D)}
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
 \begin{align*}
   x_i^{(j)} &amp;= \text{value of the feature } j \text{ in the } i \text{th example} \\
   D &amp;= \text{the number of features}
 \end{align*}
-\]</span></p>
+</span></p>
 </section>
 <section id="gradient-descent---multivariate" class="slide level2">
 <h2>Gradient descent - multivariate</h2>
 <p>The new <strong>loss function</strong> is</p>
-<p><span class="math display">\[
+<p><span class="math display">
 J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}^N [h(x_{i}) - y_i ]^2
-\]</span></p>
+</span></p>
 <p>Its <strong>partial derivative</strong>:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 \frac {\partial}{\partial \theta_j}J(\theta) = \frac{2}{N} \sum\limits_{i=1}^N x_i^{(j)} [\theta x_i - y_i ]
-\]</span></p>
-<p><strong>where</strong> <span class="math inline">\(\theta\)</span>, <span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span> are vectors, and <span class="math inline">\(\theta x_i\)</span> is a vector operation!</p>
+</span></p>
+<p><strong>where</strong> <span class="math inline">\theta</span>, <span class="math inline">x_i</span> and <span class="math inline">y_i</span> are vectors, and <span class="math inline">\theta x_i</span> is a vector operation!</p>
 </section>
 <section id="gradient-vector" class="slide level2 smaller">
 <h2>Gradient vector</h2>
-<p>The vector containing the partial derivative of <span class="math inline">\(J\)</span> (with respect to <span class="math inline">\(\theta_j\)</span>, for <span class="math inline">\(j \in \{0, 1\ldots D\}\)</span>) is called the <strong>gradient vector</strong>.</p>
-<p><span class="math display">\[
+<p>The vector containing the partial derivative of <span class="math inline">J</span> (with respect to <span class="math inline">\theta_j</span>, for <span class="math inline">j \in \{0, 1\ldots D\}</span>) is called the <strong>gradient vector</strong>.</p>
+<p><span class="math display">
 \nabla_\theta J(\theta) = \begin{pmatrix}
   \frac {\partial}{\partial \theta_0}J(\theta) \\
   \frac {\partial}{\partial \theta_1}J(\theta) \\
   \vdots  \\
   \frac {\partial}{\partial \theta_D}J(\theta)\\
 \end{pmatrix}
-\]</span></p>
+</span></p>
 <div class="fragment">
 <ul>
 <li>This vector gives the direction of the <strong>steepest ascent</strong>.</li>
 <li>It gives its name to the <strong>gradient descent</strong> algorithm:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \theta' = \theta - \alpha \nabla_\theta J(\theta)
-\]</span></p>
+</span></p>
 </div>
 </section>
 <section id="gradient-descent---multivariate-1" class="slide level2">
 <h2>Gradient descent - multivariate</h2>
 <p>The gradient descent algorithm becomes:</p>
 <p><strong>Repeat until convergence:</strong></p>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
 \{ &amp; \\
 \theta_j := &amp; \theta_j -  \alpha  \frac {\partial}{\partial \theta_j}J(\theta_0, \theta_1, \ldots, \theta_D) \\
 &amp;\text{for } j \in [0, \ldots, D] \textbf{ (update simultaneously)} \\
 \} &amp;
 \end{aligned}
-\]</span></p>
+</span></p>
 </section>
 <section id="gradient-descent---multivariate-2" class="slide level2 smaller">
 <h2>Gradient descent - multivariate</h2>
 <p><strong>Repeat until convergence:</strong></p>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
 \; \{ &amp; \\
 \; &amp; \theta_0 := \theta_0 - \alpha \frac{2}{N} \sum\limits_{i=1}^{N}  x^{0}_i[h(x_i) - y_i] \\
@@ -1442,10 +1458,10 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
    &amp; \cdots \\
 \} &amp;
 \end{aligned}
-\]</span></p>
+</span></p>
 
 <aside><div>
-<p>Where <span class="math inline">\(x_0 = 1\)</span>.</p>
+<p>Where <span class="math inline">x_0 = 1</span>.</p>
 </div></aside></section>
 <section id="assumptions" class="slide level2">
 <h2>Assumptions</h2>
@@ -1582,7 +1598,7 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 </div>
 </div><div class="column" style="width:60%;">
 <ul>
-<li class="fragment"><strong>Small steps</strong>, low values for <span class="math inline">\(\alpha\)</span>, will make the algorithm <strong>converge slowly</strong>.</li>
+<li class="fragment"><strong>Small steps</strong>, low values for <span class="math inline">\alpha</span>, will make the algorithm <strong>converge slowly</strong>.</li>
 <li class="fragment"><strong>Large steps</strong> might cause the algorithm to <strong>diverge</strong>.</li>
 <li class="fragment">Notice how the algorithm <strong>slows down</strong> naturally when approaching a minimum.</li>
 </ul>
@@ -1822,10 +1838,10 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 <section id="linear-regression---summary" class="slide level2">
 <h2>Linear regression - summary</h2>
 <ul>
-<li class="fragment">A <strong>linear model</strong> assumes that the value of the label, <span class="math inline">\(\hat{y_i}\)</span>, can be expressed as a <strong>linear combination</strong> of the feature values, <span class="math inline">\(x_i^{(j)}\)</span>: <span class="math inline">\(\hat{y_i} = h(x_i) = \theta_0 + \theta_1 x_i^{(1)} + \theta_2 x_i^{(2)} + \ldots + \theta_D x_i^{(D)}\)</span></li>
-<li class="fragment">The <strong>Mean Squared Error (MSE)</strong> is: <span class="math inline">\(\frac{1}{N}\sum_1^N [h(x_i) - y_i]^2\)</span></li>
-<li class="fragment"><strong>Batch</strong>, <strong>stochastic</strong>, or <strong>mini-batch gradient descent</strong> can be used to find “optimal” values for the parameters, <span class="math inline">\(\theta_j\)</span> for <span class="math inline">\(j \in 0, 1, \ldots, D\)</span>.</li>
-<li class="fragment">The result is a <strong>regressor</strong>, a function that can be used to predict the <span class="math inline">\(y\)</span> value (the label) for some unseen example <span class="math inline">\(x\)</span>.</li>
+<li class="fragment">A <strong>linear model</strong> assumes that the value of the label, <span class="math inline">\hat{y_i}</span>, can be expressed as a <strong>linear combination</strong> of the feature values, <span class="math inline">x_i^{(j)}</span>: <span class="math inline">\hat{y_i} = h(x_i) = \theta_0 + \theta_1 x_i^{(1)} + \theta_2 x_i^{(2)} + \ldots + \theta_D x_i^{(D)}</span></li>
+<li class="fragment">The <strong>Mean Squared Error (MSE)</strong> is: <span class="math inline">\frac{1}{N}\sum_1^N [h(x_i) - y_i]^2</span></li>
+<li class="fragment"><strong>Batch</strong>, <strong>stochastic</strong>, or <strong>mini-batch gradient descent</strong> can be used to find “optimal” values for the parameters, <span class="math inline">\theta_j</span> for <span class="math inline">j \in 0, 1, \ldots, D</span>.</li>
+<li class="fragment">The result is a <strong>regressor</strong>, a function that can be used to predict the <span class="math inline">y</span> value (the label) for some unseen example <span class="math inline">x</span>.</li>
 </ul>
 </section>
 <section id="andrew-ng" class="slide level2">
@@ -1947,7 +1963,7 @@ J(\theta_0, \theta_1,\ldots,\theta_D) =  \dfrac {1}{N} \displaystyle \sum _{i=1}
 </div>
 
 <aside class="notes">
-<p>The data have been generated from a quadratic model, <span class="math inline">\(x^2 - 4x + 5\)</span>, with Gaussian noise added to make the synthetic data more realistic.</p>
+<p>The data have been generated from a quadratic model, <span class="math inline">x^2 - 4x + 5</span>, with Gaussian noise added to make the synthetic data more realistic.</p>
 <p>This example illustrates that, in practice, we often have limited knowledge about the underlying model that generated the data.</p>
 <p>Despite this uncertainty, we make assumptions—in this case, assuming linearity—when building our models.</p>
 <p>Later, we will refer to this as <strong>bias</strong> (distinct from the bias parameter in our regression model). Both bias and variance influence the performance of our models.</p>
@@ -2103,7 +2119,6 @@ Stanton, Jeffrey M. 2001. <span>“Galton, Pearson, and the Peas: A Brief Histor
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -2272,27 +2287,9 @@ Stanton, Jeffrey M. 2001. <span>“Galton, Pearson, and the Peas: A Brief Histor
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

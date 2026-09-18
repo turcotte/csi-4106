@@ -20,7 +20,7 @@ In this notebook, we aim to partially replicate the study conducted by Kong & Yu
 
 - Kong, Y. & Yu, T. (2018). A graph-embedded deep feedforward network for disease outcome classification and feature selection using gene expression data. *Bioinformatics (Oxford, England)*, *34*(21), 3727–3737.
 
-We constructed a dataset comprising 5000 attributes, of which only 40 are relevant to determining the value of `y`. Our results demonstrate that a neural network with a single hidden layer containing just one node is capable of identifying 20 of these 40 critical attributes when using \\l_1\\ and \\l_2\\ regularization. This approach yields excellent classification performance.
+We constructed a dataset comprising 5000 attributes, of which only 40 are relevant to determining the value of `y`. Our results demonstrate that a neural network with a single hidden layer containing just one node is capable of identifying 20 of these 40 critical attributes when using l_1 and l_2 regularization. This approach yields excellent classification performance.
 
 # Summary of Work
 
@@ -582,7 +582,7 @@ print(classification_report(y_test, y_pred))
 
 ![](kong_and_yu-2018_files/figure-html/cell-18-output-3.png)
 
-The following extracts the weights from the hidden layer, subsequently revealing that 20 out of the 40 attributes utilized in model construction are among the top 40 highest weights. This exemplifies the efficacy of \\l_1\\ regularization in feature selection. The model achieves an accuracy of 93% when regularization is applied, compared to an accuracy of 78% in the absence of regularization.
+The following extracts the weights from the hidden layer, subsequently revealing that 20 out of the 40 attributes utilized in model construction are among the top 40 highest weights. This exemplifies the efficacy of l_1 regularization in feature selection. The model achieves an accuracy of 93% when regularization is applied, compared to an accuracy of 78% in the absence of regularization.
 
 ``` python
 W, b = baseline_model.get_layer("baseline_fc1").get_weights()

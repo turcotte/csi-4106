@@ -131,8 +131,22 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -543,7 +557,7 @@ Important
 </section>
 <section id="practice" class="level2">
 <h2 class="anchored" data-anchor-id="practice">Practice</h2>
-<p>In class, we developed a logistic regression model for handwritten digit recognition using a dataset from UCI ML. This dataset comprises 1797 images of size <span class="math inline">\(8 \times 8\)</span>. The <a href="https://www.openml.org/search?type=data&amp;sort=runs&amp;id=554&amp;status=active">MNIST</a> (<code>mnist_784</code>) dataset contains 70,000 images of size <span class="math inline">\(28 \times 28\)</span>. The following <a href="https://scikit-learn.org/dev/auto_examples/linear_model/plot_sparse_logistic_regression_mnist.html">example</a>, from the <code>sklearn</code> website, uses this dataset and graphically presents the coefficients (<span class="math inline">\(\theta\)</span>) for each of the 10 models. You can load this model as follows:</p>
+<p>In class, we developed a logistic regression model for handwritten digit recognition using a dataset from UCI ML. This dataset comprises 1797 images of size <span class="math inline">8 \times 8</span>. The <a href="https://www.openml.org/search?type=data&amp;sort=runs&amp;id=554&amp;status=active">MNIST</a> (<code>mnist_784</code>) dataset contains 70,000 images of size <span class="math inline">28 \times 28</span>. The following <a href="https://scikit-learn.org/dev/auto_examples/linear_model/plot_sparse_logistic_regression_mnist.html">example</a>, from the <code>sklearn</code> website, uses this dataset and graphically presents the coefficients (<span class="math inline">\theta</span>) for each of the 10 models. You can load this model as follows:</p>
 <div id="3017642b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_openml  </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>

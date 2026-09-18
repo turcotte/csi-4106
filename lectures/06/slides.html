@@ -124,6 +124,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -309,37 +325,37 @@ Marcel Turcotte
 <section id="problem" class="slide level2">
 <h2>Problem</h2>
 <ul>
-<li class="fragment"><strong>General Case:</strong> <span class="math inline">\(P(y = k \mid x, \theta)\)</span>, where <span class="math inline">\(k\)</span> is a class label.</li>
-<li class="fragment"><strong>Binary Case</strong>: <span class="math inline">\(y \in {0,1}\)</span>
+<li class="fragment"><strong>General Case:</strong> <span class="math inline">P(y = k \mid x, \theta)</span>, where <span class="math inline">k</span> is a class label.</li>
+<li class="fragment"><strong>Binary Case</strong>: <span class="math inline">y \in {0,1}</span>
 <ul>
-<li class="fragment"><strong>Predict</strong> <span class="math inline">\(P(y = 1 \mid x, \theta)\)</span></li>
+<li class="fragment"><strong>Predict</strong> <span class="math inline">P(y = 1 \mid x, \theta)</span></li>
 </ul></li>
 </ul>
 
 <aside><div>
-<p>For a new instance <span class="math inline">\(x_{\textrm{new}}\)</span>, determine the probability that it belongs to class <span class="math inline">\(k\)</span>, denoted as <span class="math inline">\(P(y = k \mid x_{\textrm{new}}, \theta)\)</span>.</p>
+<p>For a new instance <span class="math inline">x_{\textrm{new}}</span>, determine the probability that it belongs to class <span class="math inline">k</span>, denoted as <span class="math inline">P(y = k \mid x_{\textrm{new}}, \theta)</span>.</p>
 </div></aside></section>
 <section id="logistic-regression" class="slide level2">
 <h2>Logistic Regression</h2>
 <p>The <strong>Logistic Regression</strong> model is defined as:</p>
-<p><span class="math display">\[
+<p><span class="math display">
   h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
-  \]</span></p>
+  </span></p>
 <ul>
 <li><p><strong>Predictions</strong> are made as follows:</p></li>
-<li><p><span class="math inline">\(y_i = 0\)</span>, if <span class="math inline">\(h_\theta(x_i) &lt; 0.5\)</span></p></li>
-<li><p><span class="math inline">\(y_i = 1\)</span>, if <span class="math inline">\(h_\theta(x_i) \geq 0.5\)</span></p></li>
+<li><p><span class="math inline">y_i = 0</span>, if <span class="math inline">h_\theta(x_i) &lt; 0.5</span></p></li>
+<li><p><span class="math inline">y_i = 1</span>, if <span class="math inline">h_\theta(x_i) \geq 0.5</span></p></li>
 </ul>
 
 <aside class="notes">
 <p>In the previous lecture, we considered an example wherein <strong>logistic regression</strong> was used to classify <strong>handwritten digits</strong>.</p>
 <ul>
 <li>The classification problem was addressed using a <strong>one-vs-rest</strong> strategy, which involved training ten separate logistic regression models, each dedicated to recognizing a specific digit.</li>
-<li>Each model consisted of <strong>65 parameters</strong>: <strong>one bias</strong> term and <strong>64 weights</strong>. Each <strong>weight</strong> corresponded to a <strong>pixel</strong> (or <strong>attribute</strong>) of a <span class="math inline">\(64 \times 64\)</span> pixel image.</li>
+<li>Each model consisted of <strong>65 parameters</strong>: <strong>one bias</strong> term and <strong>64 weights</strong>. Each <strong>weight</strong> corresponded to a <strong>pixel</strong> (or <strong>attribute</strong>) of a <span class="math inline">64 \times 64</span> pixel image.</li>
 <li>This method demonstrated an excellent performance, achieving an overall accuracy of 0.97.</li>
 <li>Analyzing the weights provided insights into the areas of the image to which the model was most responsive (what does it pay attention to?).</li>
 </ul>
-<p>The model presented above is expressed in its vectorized form, allowing it to be applied to problems involving multiple attributes. In the context of recognizing handwritten digits, the model utilizes 64 attributes, corresponding to individual pixels. The function <span class="math inline">\(\sigma\)</span> employed in this model is the logistic, or sigmoid, function.</p>
+<p>The model presented above is expressed in its vectorized form, allowing it to be applied to problems involving multiple attributes. In the context of recognizing handwritten digits, the model utilizes 64 attributes, corresponding to individual pixels. The function <span class="math inline">\sigma</span> employed in this model is the logistic, or sigmoid, function.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -363,16 +379,16 @@ Marcel Turcotte
 <h2>Model Overview</h2>
 <ul>
 <li><p>Our model is expressed in a vectorized form as:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
-\]</span></p></li>
+</span></p></li>
 <li><p><strong>Prediction</strong>:</p>
 <ul>
-<li>Assign <span class="math inline">\(y_i = 0\)</span>, if <span class="math inline">\(h_\theta(x_i) &lt; 0.5\)</span>; <span class="math inline">\(y_i = 1\)</span>, if <span class="math inline">\(h_\theta(x_i) \geq 0.5\)</span></li>
+<li>Assign <span class="math inline">y_i = 0</span>, if <span class="math inline">h_\theta(x_i) &lt; 0.5</span>; <span class="math inline">y_i = 1</span>, if <span class="math inline">h_\theta(x_i) \geq 0.5</span></li>
 </ul></li>
 </ul>
 <ul>
-<li class="fragment"><p>The parameter vector <span class="math inline">\(\theta\)</span> is optimized using <strong>gradient descent</strong>.</p></li>
+<li class="fragment"><p>The parameter vector <span class="math inline">\theta</span> is optimized using <strong>gradient descent</strong>.</p></li>
 <li class="fragment"><p>Which <strong>loss function</strong> should be used and why?</p></li>
 </ul>
 <aside class="notes">
@@ -402,14 +418,14 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <h2>Parameter Estimation</h2>
 <ul>
 <li class="fragment"><p>Logistic regression is <strong>statistical model</strong>.</p></li>
-<li class="fragment"><p>Its output is <span class="math inline">\(\hat{y} = P(y = 1 | x, \theta)\)</span>.</p></li>
-<li class="fragment"><p><span class="math inline">\(P(y = 0 | x, \theta) = 1 - \hat{y}\)</span>.</p></li>
-<li class="fragment"><p>Assumes that <span class="math inline">\(y\)</span> values come from a <strong>Bernoulli distribution</strong>.</p></li>
-<li class="fragment"><p><span class="math inline">\(\theta\)</span> is commonly found by <strong>Maximum Likelihood Estimation</strong>.</p></li>
+<li class="fragment"><p>Its output is <span class="math inline">\hat{y} = P(y = 1 | x, \theta)</span>.</p></li>
+<li class="fragment"><p><span class="math inline">P(y = 0 | x, \theta) = 1 - \hat{y}</span>.</p></li>
+<li class="fragment"><p>Assumes that <span class="math inline">y</span> values come from a <strong>Bernoulli distribution</strong>.</p></li>
+<li class="fragment"><p><span class="math inline">\theta</span> is commonly found by <strong>Maximum Likelihood Estimation</strong>.</p></li>
 </ul>
 
 <aside><div>
-<p>The expressions <span class="math inline">\(\hat{y}\)</span>, <span class="math inline">\(h_\theta(x_i)\)</span>, and <span class="math inline">\(\sigma(\theta x_i)\)</span> represent the same concept, albeit at varying levels of abstraction and specificity.</p>
+<p>The expressions <span class="math inline">\hat{y}</span>, <span class="math inline">h_\theta(x_i)</span>, and <span class="math inline">\sigma(\theta x_i)</span> represent the same concept, albeit at varying levels of abstraction and specificity.</p>
 </div></aside></section>
 <section id="parameter-estimation-1" class="slide level2">
 <h2>Parameter Estimation</h2>
@@ -418,16 +434,16 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 </section>
 <section id="likelihood-function" class="slide level2">
 <h2>Likelihood Function</h2>
-<p>Assuming the <span class="math inline">\(y\)</span> values are <em>independent and identically distributed (i.i.d.)</em>, the <strong>likelihood function</strong> is expressed as the <strong>product of individual probabilities</strong>.</p>
-<p>In other words, given our data, <span class="math inline">\(\{(x_i, y_i)\}_{i=1}^N\)</span>, the likelihood function is given by this equation. <span class="math display">\[
+<p>Assuming the <span class="math inline">y</span> values are <em>independent and identically distributed (i.i.d.)</em>, the <strong>likelihood function</strong> is expressed as the <strong>product of individual probabilities</strong>.</p>
+<p>In other words, given our data, <span class="math inline">\{(x_i, y_i)\}_{i=1}^N</span>, the likelihood function is given by this equation. <span class="math display">
 \mathcal{L}(\theta) = \prod_{i=1}^{N} P(y_i \mid x_i, \theta)
-\]</span></p>
+</span></p>
 </section>
 <section id="maximum-likelihood" class="slide level2">
 <h2>Maximum Likelihood</h2>
-<p><span class="math display">\[
+<p><span class="math display">
   \hat{\theta} = \underset{\theta \in \Theta}{\arg \max} \mathcal{L}(\theta) =  \underset{\theta \in \Theta}{\arg \max}  \prod_{i=1}^{N} P(y_i \mid x_i, \theta)
-\]</span></p>
+</span></p>
 <ul>
 <li class="fragment"><p><strong>Observations</strong>:</p>
 <ol type="1">
@@ -438,29 +454,29 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 </section>
 <section id="negative-log-likelihood" class="slide level2 smaller">
 <h2>Negative Log-Likelihood</h2>
-<p><strong>Maximum likelihood</strong> <span class="math display">\[
+<p><strong>Maximum likelihood</strong> <span class="math display">
   \hat{\theta} = \underset{\theta \in \Theta}{\arg \max} \mathcal{L}(\theta) = \underset{\theta \in \Theta}{\arg \max}  \prod_{i=1}^{N} P(y_i \mid x_i, \theta)
-\]</span></p>
+</span></p>
 <p>becomes <strong>negative log-likelihood</strong></p>
-<p><span class="math display">\[
+<p><span class="math display">
 \hat{\theta} = \underset{\theta \in \Theta}{\arg \min} - \log \mathcal{L(\theta)} = \underset{\theta \in \Theta}{\arg \min} - \log \prod_{i=1}^{N} P(y_i \mid x_i, \theta) = \underset{\theta \in \Theta}{\arg \min} - \sum_{i=1}^{N} \log P(y_i \mid x_i, \theta)
-\]</span></p>
+</span></p>
 </section>
 <section id="mathematical-reformulation" class="slide level2">
 <h2>Mathematical Reformulation</h2>
-<p>For binary outcomes, the probability <span class="math inline">\(P(y \mid x, \theta)\)</span> is:</p>
-<p><span class="math display">\[
+<p>For binary outcomes, the probability <span class="math inline">P(y \mid x, \theta)</span> is:</p>
+<p><span class="math display">
 P(y \mid x, \theta) =
 \begin{cases}
 \sigma(\theta x), &amp; \text{if}\ y = 1 \\
 1 - \sigma(\theta x), &amp; \text{if}\ y = 0
 \end{cases}
-\]</span></p>
+</span></p>
 <div class="fragment">
 <p>This can be compactly expressed as:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 P(y \mid x, \theta) = \sigma(\theta x)^y (1 - \sigma(\theta x))^{1-y}
-\]</span></p>
+</span></p>
 
 </div>
 <aside><div>
@@ -469,29 +485,29 @@ P(y \mid x, \theta) = \sigma(\theta x)^y (1 - \sigma(\theta x))^{1-y}
 <section id="loss-function-1" class="slide level2">
 <h2>Loss Function</h2>
 <p>We are now ready to write our <strong>loss function</strong>.</p>
-<p><span class="math display">\[
+<p><span class="math display">
 J(\theta) = - \log \mathcal{L(\theta)} = - \sum_{i=1}^{N} \log P(y_i \mid x_i, \theta)
-\]</span> where <span class="math inline">\(P(y \mid x, \theta) = \sigma(\theta x)^y (1 - \sigma(\theta x))^{1-y}\)</span>.</p>
-<p>Consequently, <span class="math display">\[
+</span> where <span class="math inline">P(y \mid x, \theta) = \sigma(\theta x)^y (1 - \sigma(\theta x))^{1-y}</span>.</p>
+<p>Consequently, <span class="math display">
 J(\theta) = - \sum_{i=1}^{N} \log [ \sigma(\theta x_i)^{y_i} (1 - \sigma(\theta x_i))^{1-y_i} ]
-\]</span></p>
+</span></p>
 </section>
 <section id="loss-function-continued" class="slide level2">
 <h2>Loss Function (continued)</h2>
-<p>Simplifying the equation. <span class="math display">\[
+<p>Simplifying the equation. <span class="math display">
 J(\theta) = - \sum_{i=1}^{N} \log [ \sigma(\theta x_i)^{y_i} (1 - \sigma(\theta x_i))^{1-y_i} ]
-\]</span> by distributing the <span class="math inline">\(\log\)</span> into the square parenthesis. <span class="math display">\[
+</span> by distributing the <span class="math inline">\log</span> into the square parenthesis. <span class="math display">
 J(\theta) = - \sum_{i=1}^{N} [ \log \sigma(\theta x_i)^{y_i} + \log (1 - \sigma(\theta x_i))^{1-y_i} ]
-\]</span></p>
+</span></p>
 </section>
 <section id="loss-function-continued-1" class="slide level2">
 <h2>Loss Function (continued)</h2>
-<p>Simplifying the equation further. <span class="math display">\[
+<p>Simplifying the equation further. <span class="math display">
 J(\theta) = - \sum_{i=1}^{N} [ \log \sigma(\theta x_i)^{y_i} + \log (1 - \sigma(\theta x_i))^{1-y_i} ]
-\]</span> by moving the exponents in front of the <span class="math inline">\(\log\)</span>s.</p>
-<p><span class="math display">\[
+</span> by moving the exponents in front of the <span class="math inline">\log</span>s.</p>
+<p><span class="math display">
 J(\theta) = - \sum_{i=1}^{N} [ y_i \log \sigma(\theta x_i) + (1-y_i) \log (1 - \sigma(\theta x_i)) ]
-\]</span></p>
+</span></p>
 
 <aside><div>
 <p>The rationale for these additional simplifications will be elucidated shortly.</p>
@@ -505,39 +521,39 @@ J(\theta) = - \sum_{i=1}^{N} [ y_i \log \sigma(\theta x_i) + (1-y_i) \log (1 - \
 </section>
 <section id="entropy" class="slide level2">
 <h2>Entropy</h2>
-<p><strong>Entropy</strong> in information theory quantifies the <strong>uncertainty</strong> or unpredictability of a random variable’s possible outcomes. It measures the average amount of information produced by a stochastic source of data and is typically expressed in bits for binary systems. The entropy <span class="math inline">\(H\)</span> of a discrete random variable <span class="math inline">\(X\)</span> with possible outcomes <span class="math inline">\(\{x_1, x_2, \ldots, x_n\}\)</span> and probability mass function <span class="math inline">\(P(X)\)</span> is given by:</p>
-<p><span class="math display">\[
+<p><strong>Entropy</strong> in information theory quantifies the <strong>uncertainty</strong> or unpredictability of a random variable’s possible outcomes. It measures the average amount of information produced by a stochastic source of data and is typically expressed in bits for binary systems. The entropy <span class="math inline">H</span> of a discrete random variable <span class="math inline">X</span> with possible outcomes <span class="math inline">\{x_1, x_2, \ldots, x_n\}</span> and probability mass function <span class="math inline">P(X)</span> is given by:</p>
+<p><span class="math display">
 H(X) = -\sum_{i=1}^n P(x_i) \log_2 P(x_i)
-\]</span></p>
+</span></p>
 </section>
 <section id="cross-entropy" class="slide level2">
 <h2>Cross-Entropy</h2>
 <p><strong>Cross-entropy</strong> quantifies the <strong>difference between two probability distributions</strong>, typically the <strong>true distribution</strong> and a <strong>predicted distribution</strong>.</p>
-<p><span class="math display">\[
+<p><span class="math display">
 H(p, q) = -\sum_{i} p(x_i) \log q(x_i)
-\]</span> where <span class="math inline">\(p(x_i)\)</span> is the true probability distribution, and <span class="math inline">\(q(x_i)\)</span> is the predicted probability distribution.</p>
+</span> where <span class="math inline">p(x_i)</span> is the true probability distribution, and <span class="math inline">q(x_i)</span> is the predicted probability distribution.</p>
 </section>
 <section id="cross-entropy-1" class="slide level2">
 <h2>Cross-Entropy</h2>
 <ul>
-<li>Consider <span class="math inline">\(y\)</span> as the true probability distribution and <span class="math inline">\(\hat{y}\)</span>&nbsp;as the predicted probability distribution.</li>
+<li>Consider <span class="math inline">y</span> as the true probability distribution and <span class="math inline">\hat{y}</span>&nbsp;as the predicted probability distribution.</li>
 <li>Cross-entropy quantifies the <strong>discrepancy</strong> between these two distributions.</li>
 </ul>
 </section>
 <section id="cross-entropy-2" class="slide level2 smaller">
 <h2>Cross-Entropy</h2>
 <p>Consider the <strong>negative log-likelihood loss</strong> function:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \sigma(\theta x_i) + (1-y_i) \log (1 - \sigma(\theta x_i)) \right]
-\]</span></p>
-<p>By substituting <span class="math inline">\(\sigma(\theta x_i)\)</span> with <span class="math inline">\(\hat{y_i}\)</span>, the function becomes:</p>
-<p><span class="math display">\[
+</span></p>
+<p>By substituting <span class="math inline">\sigma(\theta x_i)</span> with <span class="math inline">\hat{y_i}</span>, the function becomes:</p>
+<p><span class="math display">
 J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \hat{y_i} + (1-y_i) \log (1 - \hat{y_i}) \right]
-\]</span></p>
+</span></p>
 <p>This expression illustrates that the <strong>negative log-likelihood</strong> is optimized by minimizing the <strong>cross-entropy</strong>.</p>
 
 <aside class="notes">
-<p>Interpret the final equation as applying to all examples from 1 to <span class="math inline">\(N\)</span> and all classes from 1 to <span class="math inline">\(k\)</span>. Here, <span class="math inline">\(k=0\)</span> because we are addressing a binary classification problem.</p>
+<p>Interpret the final equation as applying to all examples from 1 to <span class="math inline">N</span> and all classes from 1 to <span class="math inline">k</span>. Here, <span class="math inline">k=0</span> because we are addressing a binary classification problem.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -597,9 +613,9 @@ J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \hat{y_i} + (1-y_i) \log (1 - \hat{
 <p>For each example:</p>
 <ul>
 <li>Only one of the two terms in the summation is not zero.</li>
-<li><span class="math inline">\(1 - \hat{y_i}\)</span> is <span class="math inline">\(P(y = 0 \mid x, \theta)\)</span>.</li>
-<li>As <span class="math inline">\(\hat{y_i}\)</span> tends to 1.0, <span class="math inline">\(- \log(\hat{y})\)</span> tends to zero.</li>
-<li>As <span class="math inline">\(\hat{y_i}\)</span> tends to 0.0, indicating an incorrect prediction, <span class="math inline">\(- \log(\hat{y})\)</span> tends to <span class="math inline">\(\infty\)</span>.</li>
+<li><span class="math inline">1 - \hat{y_i}</span> is <span class="math inline">P(y = 0 \mid x, \theta)</span>.</li>
+<li>As <span class="math inline">\hat{y_i}</span> tends to 1.0, <span class="math inline">- \log(\hat{y})</span> tends to zero.</li>
+<li>As <span class="math inline">\hat{y_i}</span> tends to 0.0, indicating an incorrect prediction, <span class="math inline">- \log(\hat{y})</span> tends to <span class="math inline">\infty</span>.</li>
 <li>This substantial penalty allows cross-entropy loss to converge more quickly than mean squared error.</li>
 </ul>
 <style type="text/css">
@@ -614,9 +630,9 @@ J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \hat{y_i} + (1-y_i) \log (1 - \hat{
           display:block!important;
       }</style></aside>
 <aside><div>
-<p><span class="math display">\[
+<p><span class="math display">
 J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \hat{y_i} + (1-y_i) \log (1 - \hat{y_i}) \right]
-\]</span></p>
+</span></p>
 </div></aside></section>
 <section id="remarks-1" class="slide level2">
 <h2>Remarks</h2>
@@ -669,43 +685,43 @@ J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \hat{y_i} + (1-y_i) \log (1 - \hat{
 <section id="geometric-interpretation-1" class="slide level2">
 <h2>Geometric Interpretation</h2>
 <ul>
-<li class="fragment"><p><strong>Do you</strong> recognize this equation? <span class="math display">\[
+<li class="fragment"><p><strong>Do you</strong> recognize this equation? <span class="math display">
 w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
-\]</span></p></li>
-<li class="fragment"><p>This is the <strong>dot product</strong> of <span class="math inline">\(\mathbf{w}\)</span> and <span class="math inline">\(\mathbf{x}\)</span>, <span class="math inline">\(\mathbf{w} \cdot \mathbf{x}\)</span>.</p></li>
+</span></p></li>
+<li class="fragment"><p>This is the <strong>dot product</strong> of <span class="math inline">\mathbf{w}</span> and <span class="math inline">\mathbf{x}</span>, <span class="math inline">\mathbf{w} \cdot \mathbf{x}</span>.</p></li>
 <li class="fragment"><p>What is the <strong>geometric interpretation</strong> of the dot product?</p></li>
 </ul>
 <div class="fragment">
-<p><span class="math display">\[
+<p><span class="math display">
 \mathbf{w} \cdot \mathbf{x} = \|\mathbf{w}\| \|\mathbf{x}\| \cos \theta
-\]</span></p>
+</span></p>
 
 </div>
 <aside><div>
-<p>In certain contexts, it is advantageous to use <span class="math inline">\(w\)</span> in place of <span class="math inline">\(\theta\)</span>.</p>
+<p>In certain contexts, it is advantageous to use <span class="math inline">w</span> in place of <span class="math inline">\theta</span>.</p>
 </div></aside></section>
 <section id="geometric-interpretation-2" class="slide level2">
 <h2>Geometric Interpretation</h2>
-<p><span class="math display">\[
+<p><span class="math display">
 \mathbf{w} \cdot \mathbf{x} = \|\mathbf{w}\| \|\mathbf{x}\| \cos \theta
-\]</span></p>
+</span></p>
 <ul>
-<li><p>The <strong>dot product</strong> determines the <strong>angle <span class="math inline">\((\theta)\)</span> between vectors</strong>.</p></li>
+<li><p>The <strong>dot product</strong> determines the <strong>angle <span class="math inline">(\theta)</span> between vectors</strong>.</p></li>
 <li><p>It <strong>quantifies</strong> how much one vector extends in the direction of another.</p></li>
-<li><p>Its value is zero, if the vectors are <strong>perpendicular</strong> <span class="math inline">\((\theta = 90^\circ)\)</span>.</p></li>
+<li><p>Its value is zero, if the vectors are <strong>perpendicular</strong> <span class="math inline">(\theta = 90^\circ)</span>.</p></li>
 </ul>
 </section>
 <section id="geometric-interpretation-3" class="slide level2">
 <h2>Geometric Interpretation</h2>
 <ul>
-<li class="fragment"><p><strong>Logistic regression</strong> uses a linear combination of the input features, <span class="math inline">\(\mathbf{w} \cdot \mathbf{x} + b\)</span>, as the argument to the sigmoid (logistic) function.</p></li>
-<li class="fragment"><p>Geometrically, <span class="math inline">\(\mathbf{w}\)</span> can be viewed as a <strong>vector normal to a hyperplane in the feature space</strong>, and any point <span class="math inline">\(\mathbf{x}\)</span> is projected onto <span class="math inline">\(\mathbf{w}\)</span> via the dot product <span class="math inline">\(\mathbf{w} \cdot \mathbf{x}\)</span>.</p></li>
+<li class="fragment"><p><strong>Logistic regression</strong> uses a linear combination of the input features, <span class="math inline">\mathbf{w} \cdot \mathbf{x} + b</span>, as the argument to the sigmoid (logistic) function.</p></li>
+<li class="fragment"><p>Geometrically, <span class="math inline">\mathbf{w}</span> can be viewed as a <strong>vector normal to a hyperplane in the feature space</strong>, and any point <span class="math inline">\mathbf{x}</span> is projected onto <span class="math inline">\mathbf{w}</span> via the dot product <span class="math inline">\mathbf{w} \cdot \mathbf{x}</span>.</p></li>
 </ul>
 </section>
 <section id="geometric-interpretation-4" class="slide level2">
 <h2>Geometric Interpretation</h2>
 <ul>
-<li class="fragment"><p>The <strong>decision boundary</strong> is where this linear combination equals zero, i.e., <span class="math inline">\(\mathbf{w} \cdot \mathbf{x} + b = 0\)</span>.</p></li>
+<li class="fragment"><p>The <strong>decision boundary</strong> is where this linear combination equals zero, i.e., <span class="math inline">\mathbf{w} \cdot \mathbf{x} + b = 0</span>.</p></li>
 <li class="fragment"><p>Points on one side of the boundary have a <strong>positive dot product</strong> and are more likely to be classified as the positive class (1).</p></li>
 <li class="fragment"><p>Points on the other side have a <strong>negative dot product</strong> and are more likely to be in the opposite class (0).</p></li>
 <li class="fragment"><p>The <strong>sigmoid function</strong> simply turns this <strong>signed distance</strong> into a <strong>probability</strong> between 0 and 1.</p></li>
@@ -715,13 +731,13 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 <h2>Logistic Function</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><span class="math display">\[
+<p><span class="math display">
   \sigma(t) = \frac{1}{1+e^{-t}}
-\]</span></p>
+</span></p>
 <ul>
-<li>As <span class="math inline">\(t \to \infty\)</span>, <span class="math inline">\(e^{-t} \to 0\)</span>, so <span class="math inline">\(\sigma(t) \to 1\)</span>.</li>
-<li>As <span class="math inline">\(t \to -\infty\)</span>, <span class="math inline">\(e^{-t} \to \infty\)</span>, making the denominator approach infinity, so <span class="math inline">\(\sigma(t) \to 0\)</span>.</li>
-<li>When <span class="math inline">\(t = 0\)</span>, <span class="math inline">\(e^{-t} = 0\)</span>, resulting in a denominator of 2, so <span class="math inline">\(\sigma(t) = 0.5\)</span>.</li>
+<li>As <span class="math inline">t \to \infty</span>, <span class="math inline">e^{-t} \to 0</span>, so <span class="math inline">\sigma(t) \to 1</span>.</li>
+<li>As <span class="math inline">t \to -\infty</span>, <span class="math inline">e^{-t} \to \infty</span>, making the denominator approach infinity, so <span class="math inline">\sigma(t) \to 0</span>.</li>
+<li>When <span class="math inline">t = 0</span>, <span class="math inline">e^{-t} = 0</span>, resulting in a denominator of 2, so <span class="math inline">\sigma(t) = 0.5</span>.</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div id="89f59cbc" class="cell" data-execution_count="3">
@@ -768,12 +784,12 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 <h2>What’s special about e?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><span class="math display">\[
+<p><span class="math display">
   \sigma(t) = \frac{1}{1+e^{-t}}
-\]</span></p>
+</span></p>
 <ul>
-<li class="fragment"><p>Instead of <span class="math inline">\(e\)</span>, we might have used another constant, say 2.</p></li>
-<li class="fragment"><p><strong>Derivative Simplicity</strong>: For the logistic function <span class="math inline">\(\sigma(x) = \tfrac{1}{1 + e^{-x}}\)</span>, the derivative simplifies to <span class="math inline">\(\sigma'(x) = \sigma(x)(1 - \sigma(x))\)</span>. This elegant form arises because the exponential base <span class="math inline">\(e\)</span> has the unique property that <span class="math inline">\(\tfrac{d}{dx} e^x = e^x\)</span>, avoiding an extra multiplicative constant.</p></li>
+<li class="fragment"><p>Instead of <span class="math inline">e</span>, we might have used another constant, say 2.</p></li>
+<li class="fragment"><p><strong>Derivative Simplicity</strong>: For the logistic function <span class="math inline">\sigma(x) = \tfrac{1}{1 + e^{-x}}</span>, the derivative simplifies to <span class="math inline">\sigma'(x) = \sigma(x)(1 - \sigma(x))</span>. This elegant form arises because the exponential base <span class="math inline">e</span> has the unique property that <span class="math inline">\tfrac{d}{dx} e^x = e^x</span>, avoiding an extra multiplicative constant.</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div id="7e438f3f" class="cell" data-execution_count="4">
@@ -810,7 +826,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 </div>
 </div></div>
 <aside class="notes">
-<p>In the context of logistic regression, the choice of the mathematical constant <span class="math inline">\(e\)</span> is not arbitrary but is supported by several compelling mathematical justifications. These justifications primarily relate to the harmonious integration of the logistic function with other mathematical frameworks. Although our primary focus was to visually demonstrate the potential implications of substituting a different constant, the inherent advantages of using <span class="math inline">\(e\)</span> become evident upon closer examination of its mathematical properties and how they facilitate seamless integration with existing theories and models.</p>
+<p>In the context of logistic regression, the choice of the mathematical constant <span class="math inline">e</span> is not arbitrary but is supported by several compelling mathematical justifications. These justifications primarily relate to the harmonious integration of the logistic function with other mathematical frameworks. Although our primary focus was to visually demonstrate the potential implications of substituting a different constant, the inherent advantages of using <span class="math inline">e</span> become evident upon closer examination of its mathematical properties and how they facilitate seamless integration with existing theories and models.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -827,9 +843,9 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 <h2>Varying w</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><span class="math display">\[
+<p><span class="math display">
   \sigma(wx + b)
-\]</span></p>
+</span></p>
 </div><div class="column" style="width:50%;">
 <div id="07d95caf" class="cell" data-execution_count="5">
 <details class="code-fold">
@@ -869,9 +885,9 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 <h2>Varying b</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><span class="math display">\[
+<p><span class="math display">
   \sigma(wx + b)
-\]</span></p>
+</span></p>
 </div><div class="column" style="width:50%;">
 <div id="8e7622f9" class="cell" data-execution_count="6">
 <details class="code-fold">
@@ -1079,7 +1095,7 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 </div>
 <aside class="notes">
 <p>In the given example, each data point is characterized by two primary features. However, the representation includes three components. Why?</p>
-<p>This discrepancy arises from an earlier discussed mathematical technique, where each instance is augmented with an additional term, <span class="math inline">\(x_i^{(0)} = 1\)</span>. This augmentation facilitates the expression of the model in a vectorized format, enhancing computational efficiency and simplicity.</p>
+<p>This discrepancy arises from an earlier discussed mathematical technique, where each instance is augmented with an additional term, <span class="math inline">x_i^{(0)} = 1</span>. This augmentation facilitates the expression of the model in a vectorized format, enhancing computational efficiency and simplicity.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1299,7 +1315,6 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1468,27 +1483,9 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

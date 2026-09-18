@@ -124,6 +124,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -327,7 +343,7 @@ Marcel Turcotte
 </ul></li>
 <li><p><strong>4 outputs:</strong></p>
 <ul>
-<li>Predicting <strong>bounding box coordinates</strong> — <span class="math inline">\((x_{min}, y_{min}, x_{max}, y_{max})\)</span> — in object detection.</li>
+<li>Predicting <strong>bounding box coordinates</strong> — <span class="math inline">(x_{min}, y_{min}, x_{max}, y_{max})</span> — in object detection.</li>
 </ul></li>
 </ul>
 <style type="text/css">
@@ -395,8 +411,8 @@ Marcel Turcotte
 
 <aside class="notes">
 <p>Observe that I have revised the representation of the output nodes to indicate that the softmax function is applied to the entire layer, rather than to individual nodes. This function transforms the raw output values of the layer into probabilities that sum to 1, facilitating multi-class classification. This characteristic distinguishes it from activation functions like ReLU or sigmoid, which are typically applied independently to each node’s output.</p>
-<p>The <span class="math inline">\(\argmax\)</span> function is not suitable for optimization via gradient-based methods because its derivative is zero in all cases, similar to step functions. In contrast, the softmax function offers both a probabilistic interpretation and a computable derivative, making it more effective for such applications.</p>
-<p>The <span class="math inline">\(\argmax\)</span> function can be applied <em>a posteriori</em> to trained networks for class prediction.</p>
+<p>The <span class="math inline">\argmax</span> function is not suitable for optimization via gradient-based methods because its derivative is zero in all cases, similar to step functions. In contrast, the softmax function offers both a probabilistic interpretation and a computable derivative, making it more effective for such applications.</p>
+<p>The <span class="math inline">\argmax</span> function can be applied <em>a posteriori</em> to trained networks for class prediction.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -414,26 +430,26 @@ Marcel Turcotte
 <section id="softmax-1" class="slide level2">
 <h2>Softmax</h2>
 <p>The <strong>softmax</strong> function is an <strong>activation function</strong> used in <strong>multi-class classification problems</strong> to convert a vector of raw scores into <strong>probabilities that sum to 1</strong>.</p>
-<p>Given a vector <span class="math inline">\(\mathbf{z} = [z_1, z_2, \ldots, z_n]\)</span>:</p>
-<p><span class="math display">\[
+<p>Given a vector <span class="math inline">\mathbf{z} = [z_1, z_2, \ldots, z_n]</span>:</p>
+<p><span class="math display">
 \sigma(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{n} e^{z_j}}
-\]</span></p>
-<p>where <span class="math inline">\(\sigma(\mathbf{z})_i\)</span> is the probability of the <span class="math inline">\(i\)</span>-th class, and <span class="math inline">\(n\)</span> is the number of classes.</p>
+</span></p>
+<p>where <span class="math inline">\sigma(\mathbf{z})_i</span> is the probability of the <span class="math inline">i</span>-th class, and <span class="math inline">n</span> is the number of classes.</p>
 <aside class="notes">
 <p>Softmax emphasizes higher scores while suppressing lower ones, enabling a probabilistic interpretation of the outputs.</p>
-<p>We clearly see that such an activation applies for an entire layer since the denomination depends on the values of all the <span class="math inline">\(z_j\)</span>, for <span class="math inline">\(j in 1 \ldots n\)</span>.</p>
+<p>We clearly see that such an activation applies for an entire layer since the denomination depends on the values of all the <span class="math inline">z_j</span>, for <span class="math inline">j in 1 \ldots n</span>.</p>
 <p>In the <strong>softmax</strong> function, exponentiation serves a crucial mathematical and conceptual role: it transforms arbitrary real-valued scores into <strong>positive, normalized probabilities</strong> while <strong>amplifying differences</strong> between inputs.</p>
 <ol type="1">
 <li><p><strong>Ensures positivity:</strong></p>
 <p>The exponential function guarantees all outputs are positive, a necessary property for valid probabilities.</p></li>
 <li><p><strong>Magnifies relative differences:</strong></p>
-<p>Exponentiation is a <em>monotonic nonlinear</em> transformation that increases large values much more than small ones. If one logit is slightly larger, <span class="math inline">\(e^{z_i}\)</span> becomes <em>disproportionately larger</em>, sharpening the distribution (useful for emphasizing the most likely class).</p></li>
+<p>Exponentiation is a <em>monotonic nonlinear</em> transformation that increases large values much more than small ones. If one logit is slightly larger, <span class="math inline">e^{z_i}</span> becomes <em>disproportionately larger</em>, sharpening the distribution (useful for emphasizing the most likely class).</p></li>
 <li><p><strong>Preserves ordering:</strong></p>
-<p>Since <span class="math inline">\(e^x\)</span> is strictly increasing, the class with the highest logit before softmax remains the one with the highest probability after.</p></li>
+<p>Since <span class="math inline">e^x</span> is strictly increasing, the class with the highest logit before softmax remains the one with the highest probability after.</p></li>
 <li><p><strong>Facilitates gradient-based learning:</strong></p>
 <p>The exponential smooths the transition between classes, providing differentiable outputs and stable gradients for optimization with cross-entropy.</p></li>
 </ol>
-<p>A <em>logit</em> is a pre-activation value (<span class="math inline">\(z_i\)</span>). Each neuron in the output layer (before activation) produces a logit <span class="math inline">\(z_i\)</span>.</p>
+<p>A <em>logit</em> is a pre-activation value (<span class="math inline">z_i</span>). Each neuron in the output layer (before activation) produces a logit <span class="math inline">z_i</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -460,13 +476,13 @@ Marcel Turcotte
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;"><span class="math inline">\(z_1\)</span></th>
-<th style="text-align: right;"><span class="math inline">\(z_2\)</span></th>
-<th style="text-align: right;"><span class="math inline">\(z_3\)</span></th>
-<th style="text-align: right;"><span class="math inline">\(\sigma(z_1)\)</span></th>
-<th style="text-align: right;"><span class="math inline">\(\sigma(z_2)\)</span></th>
-<th style="text-align: right;"><span class="math inline">\(\sigma(z_3)\)</span></th>
-<th style="text-align: right;"><span class="math inline">\(\sum\)</span></th>
+<th style="text-align: right;"><span class="math inline">z_1</span></th>
+<th style="text-align: right;"><span class="math inline">z_2</span></th>
+<th style="text-align: right;"><span class="math inline">z_3</span></th>
+<th style="text-align: right;"><span class="math inline">\sigma(z_1)</span></th>
+<th style="text-align: right;"><span class="math inline">\sigma(z_2)</span></th>
+<th style="text-align: right;"><span class="math inline">\sigma(z_3)</span></th>
+<th style="text-align: right;"><span class="math inline">\sum</span></th>
 </tr>
 </thead>
 <tbody>
@@ -513,7 +529,7 @@ Marcel Turcotte
 <ol type="1">
 <li><p><strong>Maintains Relative Order</strong>: The softmax function preserves the relative order of the input values. If one input is greater than another, its corresponding output will also be greater.</p></li>
 <li><p><strong>Interpreted as probabilities</strong>: Each value is in the range 0 to 1. The output values from the softmax function are normalized to sum to one, which allows them to be interpreted as probabilities.</p></li>
-<li><p><strong>Relative Differences</strong>: When the relative differences among the input values are small, the differences in the output probabilities remain small, reflecting the input distribution. When the input values are identical, the output values will be <span class="math inline">\(\frac{1}{n}\)</span>, where <span class="math inline">\(n\)</span> is the number of classes.</p></li>
+<li><p><strong>Relative Differences</strong>: When the relative differences among the input values are small, the differences in the output probabilities remain small, reflecting the input distribution. When the input values are identical, the output values will be <span class="math inline">\frac{1}{n}</span>, where <span class="math inline">n</span> is the number of classes.</p></li>
 <li><p><strong>Wide Range of Values</strong>: The softmax function can effectively handle a wide range of input values, thanks to the exponential function and normalization, which scale the inputs to a probabilistic range.</p></li>
 </ol>
 <p>These properties make the softmax function particularly useful for multi-class classification tasks in machine learning.</p>
@@ -538,21 +554,21 @@ Marcel Turcotte
 <section id="cross-entropy-loss-function" class="slide level2">
 <h2>Cross-entropy loss function</h2>
 <p>The <strong>cross-entropy</strong> in a <strong>multi-class classification task</strong> for one example:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 J(W) = -\sum_{k=1}^{K} y_k \log(\hat{y}_k)
-\]</span></p>
+</span></p>
 <p>Where:</p>
 <ul>
-<li><span class="math inline">\(K\)</span> is the <strong>number of classes</strong>.</li>
-<li><span class="math inline">\(y_k\)</span> is the <strong>true distribution</strong> for the class <span class="math inline">\(k\)</span>.</li>
-<li><span class="math inline">\(\hat{y}_k\)</span> is the <strong>predicted probability</strong> of class <span class="math inline">\(k\)</span> from the model.</li>
+<li><span class="math inline">K</span> is the <strong>number of classes</strong>.</li>
+<li><span class="math inline">y_k</span> is the <strong>true distribution</strong> for the class <span class="math inline">k</span>.</li>
+<li><span class="math inline">\hat{y}_k</span> is the <strong>predicted probability</strong> of class <span class="math inline">k</span> from the model.</li>
 </ul>
 <aside class="notes">
 <ul>
-<li><p>The target vector <span class="math inline">\(y\)</span> is expressed as a one-hot encoded vector of length <span class="math inline">\(K\)</span>, where the element corresponding to the true class is set to 1, and all other elements are 0.</p></li>
+<li><p>The target vector <span class="math inline">y</span> is expressed as a one-hot encoded vector of length <span class="math inline">K</span>, where the element corresponding to the true class is set to 1, and all other elements are 0.</p></li>
 <li><p>Consequently, in the summation over classes, only the term associated with the true class contributes a non-zero value.</p></li>
-<li><p>Therefore, the cross-entropy loss for a single example is given by <span class="math inline">\(-\log(\hat{y}_k)\)</span>, where <span class="math inline">\(\hat{y}_k\)</span> is the predicted probability for the true class.</p></li>
-<li><p>The predicted probability <span class="math inline">\(\hat{y}_k\)</span> is derived from the softmax function applied in the output layer of the neural network.</p></li>
+<li><p>Therefore, the cross-entropy loss for a single example is given by <span class="math inline">-\log(\hat{y}_k)</span>, where <span class="math inline">\hat{y}_k</span> is the predicted probability for the true class.</p></li>
+<li><p>The predicted probability <span class="math inline">\hat{y}_k</span> is derived from the softmax function applied in the output layer of the neural network.</p></li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -575,17 +591,17 @@ J(W) = -\sum_{k=1}^{K} y_k \log(\hat{y}_k)
 </ul></li>
 <li class="fragment"><strong>One-Hot Encoding</strong>:
 <ul>
-<li class="fragment">Setosa = <span class="math inline">\([0, 1, 0]\)</span>.</li>
+<li class="fragment">Setosa = <span class="math inline">[0, 1, 0]</span>.</li>
 </ul></li>
 <li class="fragment"><strong>Softmax Outputs &amp; Loss</strong>:
 <ul>
-<li class="fragment"><span class="math inline">\([0.22,\mathbf{0.7}, 0.08]\)</span>: Loss = <span class="math inline">\(-\log(0.7) = 0.3567\)</span>.</li>
-<li class="fragment"><span class="math inline">\([0.7, \mathbf{0.22}, 0.08]\)</span>: Loss = <span class="math inline">\(-\log(0.22) = 1.5141\)</span>.</li>
-<li class="fragment"><span class="math inline">\([0.7, \mathbf{0.08}, 0.22]\)</span>: Loss = <span class="math inline">\(-\log(0.08) = 2.5257\)</span>.</li>
+<li class="fragment"><span class="math inline">[0.22,\mathbf{0.7}, 0.08]</span>: Loss = <span class="math inline">-\log(0.7) = 0.3567</span>.</li>
+<li class="fragment"><span class="math inline">[0.7, \mathbf{0.22}, 0.08]</span>: Loss = <span class="math inline">-\log(0.22) = 1.5141</span>.</li>
+<li class="fragment"><span class="math inline">[0.7, \mathbf{0.08}, 0.22]</span>: Loss = <span class="math inline">-\log(0.08) = 2.5257</span>.</li>
 </ul></li>
 </ul>
 <aside class="notes">
-<p>Among the softmax outputs, cross-entropy evaluates only the component corresponding to <span class="math inline">\(k=1\)</span> (Setosa), as the other entries in the one-hot encoded vector are zero. This relevant element is highlighted in bold. When the softmax prediction aligns closely with the expected value, the resulting loss is minimal (0.3567). Conversely, as the prediction deviates further from the expected value, the loss increases (1.5141 and 2.5257).</p>
+<p>Among the softmax outputs, cross-entropy evaluates only the component corresponding to <span class="math inline">k=1</span> (Setosa), as the other entries in the one-hot encoded vector are zero. This relevant element is highlighted in bold. When the softmax prediction aligns closely with the expected value, the resulting loss is minimal (0.3567). Conversely, as the prediction deviates further from the expected value, the loss increases (1.5141 and 2.5257).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -611,10 +627,10 @@ J(W) = -\sum_{k=1}^{K} y_k \log(\hat{y}_k)
 </div>
 <aside class="notes">
 <ul>
-<li><p>In the summation, only the term where <span class="math inline">\(y_k = 1\)</span> contributes a non-zero value.</p></li>
-<li><p>Due to the negative sign preceding the summation, the value of the function is <span class="math inline">\(-\log(\hat{y}_k\)</span>.</p></li>
-<li><p>If the predicted probability <span class="math inline">\(\hat{y}_k\)</span> is near 1, the loss approaches zero, indicating minimal penalty.</p></li>
-<li><p>Conversely, as <span class="math inline">\(\hat{y}_k\)</span> nears 0, indicating an incorrect prediction, the loss approaches infinity. This substantial penalty allows cross-entropy loss to converge more quickly than mean squared error.</p></li>
+<li><p>In the summation, only the term where <span class="math inline">y_k = 1</span> contributes a non-zero value.</p></li>
+<li><p>Due to the negative sign preceding the summation, the value of the function is <span class="math inline">-\log(\hat{y}_k</span>.</p></li>
+<li><p>If the predicted probability <span class="math inline">\hat{y}_k</span> is near 1, the loss approaches zero, indicating minimal penalty.</p></li>
+<li><p>Conversely, as <span class="math inline">\hat{y}_k</span> nears 0, indicating an incorrect prediction, the loss approaches infinity. This substantial penalty allows cross-entropy loss to converge more quickly than mean squared error.</p></li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -630,14 +646,14 @@ J(W) = -\sum_{k=1}^{K} y_k \log(\hat{y}_k)
 </section>
 <section id="case-dataset" class="slide level2">
 <h2>Case: dataset</h2>
-<p>For a dataset with <span class="math inline">\(N\)</span> examples, the <strong>average cross-entropy loss</strong> over all examples is computed as:</p>
-<p><span class="math display">\[
+<p>For a dataset with <span class="math inline">N</span> examples, the <strong>average cross-entropy loss</strong> over all examples is computed as:</p>
+<p><span class="math display">
 L = -\frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} y_{i,k} \log(\hat{y}_{i,k})
-\]</span></p>
+</span></p>
 <p>Where:</p>
 <ul>
-<li><span class="math inline">\(i\)</span> indexes over the different <strong>examples</strong> in the dataset.</li>
-<li><span class="math inline">\(y_{i,k}\)</span> and <span class="math inline">\(\hat{y}_{i,k}\)</span> are the <strong>true</strong> and <strong>predicted probabilities</strong> for class <span class="math inline">\(k\)</span> of example <span class="math inline">\(i\)</span>, respectively.</li>
+<li><span class="math inline">i</span> indexes over the different <strong>examples</strong> in the dataset.</li>
+<li><span class="math inline">y_{i,k}</span> and <span class="math inline">\hat{y}_{i,k}</span> are the <strong>true</strong> and <strong>predicted probabilities</strong> for class <span class="math inline">k</span> of example <span class="math inline">i</span>, respectively.</li>
 </ul>
 </section></section>
 <section>
@@ -659,30 +675,30 @@ L = -\frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} y_{i,k} \log(\hat{y}_{i,k})
 <section id="loss-function" class="slide level2">
 <h2>Loss function</h2>
 <p>Consider the <strong>mean absolute error</strong> loss function:</p>
-<p><span class="math display">\[
+<p><span class="math display">
   \mathrm{MAE}(X,W) = \frac{1}{N} \sum_{i=1}^N | h_W(x_i) - y_i |
-\]</span></p>
+</span></p>
 <p>Where:</p>
 <ul>
-<li><span class="math inline">\(W\)</span> are the weights of our network.</li>
-<li><span class="math inline">\(h_W(x_i)\)</span> is the output of the network for example <span class="math inline">\(i\)</span>.</li>
-<li><span class="math inline">\(y_i\)</span> is the true label for example <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">W</span> are the weights of our network.</li>
+<li><span class="math inline">h_W(x_i)</span> is the output of the network for example <span class="math inline">i</span>.</li>
+<li><span class="math inline">y_i</span> is the true label for example <span class="math inline">i</span>.</li>
 </ul>
 </section>
 <section id="penalty-terms" class="slide level2">
 <h2>Penalty term(s)</h2>
 <p>One or more terms can be added to the loss:</p>
-<p><span class="math display">\[
+<p><span class="math display">
   \mathrm{MAE}(X,W) = \frac{1}{N} \sum_{i=1}^N | h_W(x_i) - y_i | + \mathrm{penalty}
-\]</span></p>
+</span></p>
 </section>
 <section id="norm" class="slide level2">
 <h2>Norm</h2>
 <p>A <strong>norm</strong> is assigns a non-negative length to a vector.</p>
-<p>The <strong><span class="math inline">\(\ell_p\)</span> norm</strong> of a vector <span class="math inline">\(\mathbf{z} = [z_1, z_2, \ldots, z_n]\)</span> is defined as:</p>
-<p><span class="math display">\[
+<p>The <strong><span class="math inline">\ell_p</span> norm</strong> of a vector <span class="math inline">\mathbf{z} = [z_1, z_2, \ldots, z_n]</span> is defined as:</p>
+<p><span class="math display">
   \|\mathbf{z}\|_p = \left( \sum_{i=1}^{n} |z_i|^p \right)^{1/p}
-\]</span></p>
+</span></p>
 
 <aside class="notes">
 <p>A <strong>norm</strong> is a function that assigns a non-negative length or size to each vector in a vector space, satisfying certain properties: positivity, scalar multiplication, the triangle inequality, and the property that the norm is zero if and only if the vector is zero.</p>
@@ -698,34 +714,34 @@ L = -\frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} y_{i,k} \log(\hat{y}_{i,k})
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>With larger <span class="math inline">\(p\)</span>, the <span class="math inline">\(\ell_p\)</span> norm increasingly highlights larger <span class="math inline">\(z_i\)</span> values due to exponentiation.</p>
+<p>With larger <span class="math inline">p</span>, the <span class="math inline">\ell_p</span> norm increasingly highlights larger <span class="math inline">z_i</span> values due to exponentiation.</p>
 </div></aside></section>
 <section id="ell_1-and-ell_2-norms" class="slide level2">
-<h2><span class="math inline">\(\ell_1\)</span> and <span class="math inline">\(\ell_2\)</span> norms</h2>
-<p>The <strong><span class="math inline">\(\ell_1\)</span> norm</strong> (<strong>Manhattan norm</strong>) is:</p>
-<p><span class="math display">\[
+<h2><span class="math inline">\ell_1</span> and <span class="math inline">\ell_2</span> norms</h2>
+<p>The <strong><span class="math inline">\ell_1</span> norm</strong> (<strong>Manhattan norm</strong>) is:</p>
+<p><span class="math display">
   \|\mathbf{z}\|_1 = \sum_{i=1}^{n} |z_i|
-\]</span></p>
-<p>The <strong><span class="math inline">\(\ell_2\)</span> norm</strong> (<strong>Euclidean norm</strong>) is:</p>
-<p><span class="math display">\[
+</span></p>
+<p>The <strong><span class="math inline">\ell_2</span> norm</strong> (<strong>Euclidean norm</strong>) is:</p>
+<p><span class="math display">
   \|\mathbf{z}\|_2 = \sqrt{\sum_{i=1}^{n} z_i^2}
-\]</span></p>
+</span></p>
 </section>
 <section id="ell_1-and-ell_2-regularization" class="slide level2">
-<h2><span class="math inline">\(\ell_1\)</span> and <span class="math inline">\(\ell_2\)</span> regularization</h2>
-<p>Below, <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> determine the degree of regularization applied; setting these values to zero effectively disables the regularization term. <span class="math display">\[
+<h2><span class="math inline">\ell_1</span> and <span class="math inline">\ell_2</span> regularization</h2>
+<p>Below, <span class="math inline">\alpha</span> and <span class="math inline">\beta</span> determine the degree of regularization applied; setting these values to zero effectively disables the regularization term. <span class="math display">
   \mathrm{MAE}(X,W) = \frac{1}{N} \sum_{i=1}^N | h_W(x_i) - y_i | + \alpha \ell_1 + \beta \ell_2
-\]</span></p>
+</span></p>
 </section>
 <section id="guidelines" class="slide level2">
 <h2>Guidelines</h2>
 <ul>
-<li class="fragment"><strong><span class="math inline">\(\ell_1\)</span> Regularization</strong>:
+<li class="fragment"><strong><span class="math inline">\ell_1</span> Regularization</strong>:
 <ul>
 <li class="fragment">Promotes <strong>sparsity</strong>, setting many weights to zero.</li>
 <li class="fragment">Useful for <strong>feature selection</strong> by reducing feature reliance.</li>
 </ul></li>
-<li class="fragment"><strong><span class="math inline">\(\ell_2\)</span> Regularization</strong>:
+<li class="fragment"><strong><span class="math inline">\ell_2</span> Regularization</strong>:
 <ul>
 <li class="fragment">Promotes <strong>small, distributed weights</strong> for stability.</li>
 <li class="fragment">Ideal when <strong>all features contribute</strong> and reducing complexity is key.</li>
@@ -747,7 +763,7 @@ L = -\frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} y_{i,k} \log(\hat{y}_{i,k})
 </div>
 
 <aside><div>
-<p>This layer specifically utilizes <span class="math inline">\(\ell_2\)</span> regularization, in contrast to the prior discussion where regularization was applied globally across the entire model.</p>
+<p>This layer specifically utilizes <span class="math inline">\ell_2</span> regularization, in contrast to the prior discussion where regularization was applied globally across the entire model.</p>
 </div></aside></section>
 <section id="dropout" class="slide level2">
 <h2>Dropout</h2>
@@ -759,7 +775,7 @@ L = -\frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} y_{i,k} \log(\hat{y}_{i,k})
 <section id="dropout-1" class="slide level2">
 <h2>Dropout</h2>
 <ul>
-<li class="fragment"><p>During each training step, each neuron in a dropout layer has a probability <span class="math inline">\(p\)</span> of being <strong>excluded from the computation</strong>, typical values for <span class="math inline">\(p\)</span> are between 10% and 50%.</p></li>
+<li class="fragment"><p>During each training step, each neuron in a dropout layer has a probability <span class="math inline">p</span> of being <strong>excluded from the computation</strong>, typical values for <span class="math inline">p</span> are between 10% and 50%.</p></li>
 <li class="fragment"><p>While seemingly counterintuitive, this approach <strong>prevents the network from depending on specific neurons</strong>, promoting the <strong>distribution of learned representations across multiple neurons</strong>.</p></li>
 </ul>
 </section>
@@ -770,7 +786,7 @@ L = -\frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} y_{i,k} \log(\hat{y}_{i,k})
 <li class="fragment"><p>The typical improvement in performance is <strong>modest</strong>, usually around 1 to 2%.</p></li>
 </ul>
 <aside class="notes">
-<p>During training, each neuron in a dropout layer is randomly excluded (set to zero) with a probability <span class="math inline">\(p\)</span>—the dropout rate.</p>
+<p>During training, each neuron in a dropout layer is randomly excluded (set to zero) with a probability <span class="math inline">p</span>—the dropout rate.</p>
 <p>When dropout “sets a neuron to zero,” it means that for the current training step (mini-batch), that neuron’s output activation is replaced by zero. The neuron still exists in the network — its weights are not removed or altered — but its output contributes nothing to the forward or backward pass for that batch.</p>
 <p>In the next batch, a new random mask is sampled, so a different subset of neurons is dropped. Over many iterations, all neurons participate, but never all at once.</p>
 <p>At inference time, dropout is disabled—all neurons are active, and their outputs are not scaled.</p>
@@ -915,7 +931,6 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1084,27 +1099,9 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

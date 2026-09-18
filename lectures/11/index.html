@@ -68,6 +68,8 @@ div.csl-indent {
 <link href="../../site_libs/bootstrap/bootstrap-98c7db931a85d9ab1fb3feaac0faa502.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark-0455937d2cbe398515a871030189d4b5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../../site_libs/bootstrap/bootstrap-98c7db931a85d9ab1fb3feaac0faa502.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -96,8 +98,22 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -505,16 +521,16 @@ Important
 <section id="watch-3blue1brown-videos-on-neural-networks" class="level3">
 <h3 class="anchored" data-anchor-id="watch-3blue1brown-videos-on-neural-networks">Watch 3Blue1Brown videos on neural networks</h3>
 <ul>
-<li><a href="https://youtu.be/aircAruvnKk"><strong>But what is a Neural Network?</strong></a> (19 minutes)</li>
-<li><a href="https://youtu.be/IHZwWFHWa-w"><strong>Gradient descent, how neural networks learn</strong></a> (21 minutes)</li>
-<li><a href="https://youtu.be/Ilg3gGewQ5U"><strong>What is backpropagation really doing?</strong></a> (14 minutes)</li>
-<li><a href="https://youtu.be/tIeHLnjs5U8"><strong>Backpropagation calculus</strong></a> (10 minutes)</li>
+<li><a href="https://youtu.be/aircAruvnKk" class="external" data-icon="true"><strong>But what is a Neural Network?</strong></a> (19 minutes)</li>
+<li><a href="https://youtu.be/IHZwWFHWa-w" class="external" data-icon="true"><strong>Gradient descent, how neural networks learn</strong></a> (21 minutes)</li>
+<li><a href="https://youtu.be/Ilg3gGewQ5U" class="external" data-icon="true"><strong>What is backpropagation really doing?</strong></a> (14 minutes)</li>
+<li><a href="https://youtu.be/tIeHLnjs5U8" class="external" data-icon="true"><strong>Backpropagation calculus</strong></a> (10 minutes)</li>
 </ul>
 </section>
 <section id="narrative-of-pytorchs-inception" class="level3">
 <h3 class="anchored" data-anchor-id="narrative-of-pytorchs-inception">Narrative of PyTorch’s inception</h3>
 <ul>
-<li><a href="https://www.youtube.com/watch?v=rgP_LBtaUEc">PyTorch (2024) Official PyTorch Documentary - Powering the AI Revolution</a> (36 minutes)</li>
+<li><a href="https://www.youtube.com/watch?v=rgP_LBtaUEc" class="external" data-icon="true">PyTorch (2024) Official PyTorch Documentary - Powering the AI Revolution</a> (36 minutes)</li>
 </ul>
 </section>
 </section>
@@ -527,15 +543,15 @@ Important
 <section id="practice" class="level2">
 <h2 class="anchored" data-anchor-id="practice">Practice</h2>
 <ul>
-<li><p><a href="CircularSeparability">Circular Separability</a>: To complement your exploration of TensorFlow Playground (below), I have developed a notebook focusing on feature engineering.</p></li>
-<li><p><a href="https://playground.tensorflow.org/">TensorFlow Playground</a></p>
+<li><p><a href="CircularSeparability">Circular Separability <i class="fa-brands fa-python" aria-label="python"></i></a>: To complement your exploration of TensorFlow Playground (below), I have developed a notebook focusing on feature engineering.</p></li>
+<li><p><a href="https://playground.tensorflow.org/" class="external" data-icon="true">TensorFlow Playground</a></p>
 <ul>
 <li><strong>Dataset Options</strong>: Users can choose from four types of datasets: circular, XOR, Gaussian, and spiral.</li>
 <li><strong>Feature Engineering</strong>: Enables the creation of new features to improve model performance.</li>
 <li><strong>Model Architecture</strong>: Allows customization of neural network architecture, including varying the number of layers and neurons per layer.</li>
 <li><strong>Hyperparameter Tuning</strong>: Provides options to adjust learning rate, activation functions, regularization techniques, and task specifications to observe their effects on model training.</li>
 <li><strong>Suggestion 1</strong>: For the Gaussian dataset, which is linearly separable, configure a network without hidden layers and a single output neuron using the sigmoid activation function. This setup effectively constructs a logistic regression model.</li>
-<li><strong>Suggestion 2</strong>: The circular dataset is not linearly separable using only the original features <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>. However, by creating new features, <span class="math inline">\(x_1^2\)</span> and <span class="math inline">\(x_2^2\)</span>, the problem becomes linearly separable in the transformed feature space. A network with no hidden layers and a single output node is sufficient for this task.</li>
+<li><strong>Suggestion 2</strong>: The circular dataset is not linearly separable using only the original features <span class="math inline">x_1</span> and <span class="math inline">x_2</span>. However, by creating new features, <span class="math inline">x_1^2</span> and <span class="math inline">x_2^2</span>, the problem becomes linearly separable in the transformed feature space. A network with no hidden layers and a single output node is sufficient for this task.</li>
 </ul></li>
 </ul>
 

@@ -124,6 +124,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -416,11 +432,11 @@ Marcel Turcotte
 <h2>Logistic (Logit) Regression</h2>
 <ul>
 <li class="fragment"><p>Despite its name, <strong>logistic regression</strong> serves as a <strong>classification</strong> algorithm rather than a regression technique.</p></li>
-<li class="fragment"><p>The <strong>labels</strong> in logistic regression are binary values, denoted as <span class="math inline">\(y_i \in \{0,1\}\)</span>, making it a <strong>binary classification task</strong>.</p></li>
-<li class="fragment"><p>The primary objective of logistic regression is to determine the <strong>probability</strong> that a given instance <span class="math inline">\(x_i\)</span> belongs to the <strong>positive class</strong>, i.e., <span class="math inline">\(y_i = 1\)</span>.</p></li>
+<li class="fragment"><p>The <strong>labels</strong> in logistic regression are binary values, denoted as <span class="math inline">y_i \in \{0,1\}</span>, making it a <strong>binary classification task</strong>.</p></li>
+<li class="fragment"><p>The primary objective of logistic regression is to determine the <strong>probability</strong> that a given instance <span class="math inline">x_i</span> belongs to the <strong>positive class</strong>, i.e., <span class="math inline">y_i = 1</span>.</p></li>
 </ul>
 <aside class="notes">
-<p>The representation of the two classes, <strong>negative</strong> and <strong>positive</strong>, by the values 0 and 1, respectively, is not arbitrary. This choice is intrinsically connected to our objective of determining the <strong>probability</strong> that an instance <span class="math inline">\(x_i\)</span> belongs to the positive class.</p>
+<p>The representation of the two classes, <strong>negative</strong> and <strong>positive</strong>, by the values 0 and 1, respectively, is not arbitrary. This choice is intrinsically connected to our objective of determining the <strong>probability</strong> that an instance <span class="math inline">x_i</span> belongs to the positive class.</p>
 <p>While this learning algorithm may initially seem unremarkable, it is essential to continue engaging with it, as logistic regression will later prove to be crucial in the discussion on artificial neural networks.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -437,10 +453,10 @@ Marcel Turcotte
 <section id="model" class="slide level2">
 <h2>Model</h2>
 <ul>
-<li class="fragment"><strong>General Case:</strong> <span class="math inline">\(P(y = k | x, \theta)\)</span>, where <span class="math inline">\(k\)</span> is a class label.</li>
-<li class="fragment"><strong>Binary Case</strong>: <span class="math inline">\(y \in {0,1}\)</span>
+<li class="fragment"><strong>General Case:</strong> <span class="math inline">P(y = k | x, \theta)</span>, where <span class="math inline">k</span> is a class label.</li>
+<li class="fragment"><strong>Binary Case</strong>: <span class="math inline">y \in {0,1}</span>
 <ul>
-<li class="fragment"><strong>Predict</strong> <span class="math inline">\(P(y = 1 | x, \theta)\)</span></li>
+<li class="fragment"><strong>Predict</strong> <span class="math inline">P(y = 1 | x, \theta)</span></li>
 </ul></li>
 </ul>
 </section>
@@ -486,7 +502,7 @@ Marcel Turcotte
 </section>
 <section id="intuition" class="slide level2">
 <h2>Intuition</h2>
-<p>Fitting a linear regression is not the answer, but <span class="math inline">\(\ldots\)</span></p>
+<p>Fitting a linear regression is not the answer, but <span class="math inline">\ldots</span></p>
 <div id="ba13c899" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
@@ -609,10 +625,10 @@ Marcel Turcotte
 <h2>Logistic Function</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
-<p>In mathematics, the <strong>standard logistic function</strong> maps a real-valued input from <span class="math inline">\(\mathbb{R}\)</span> to the open interval <span class="math inline">\((0,1)\)</span>. The function is defined as:</p>
-<p><span class="math display">\[
+<p>In mathematics, the <strong>standard logistic function</strong> maps a real-valued input from <span class="math inline">\mathbb{R}</span> to the open interval <span class="math inline">(0,1)</span>. The function is defined as:</p>
+<p><span class="math display">
   \sigma(t) = \frac{1}{1+e^{-t}}
-\]</span></p>
+</span></p>
 </div><div class="column" style="width:60%;">
 <div id="733fbdc6" class="cell" data-execution_count="10">
 <details class="code-fold">
@@ -655,17 +671,17 @@ Marcel Turcotte
 </div></div>
 <aside class="notes">
 <ul>
-<li>When the input variable <span class="math inline">\(t\)</span> is 0, the output of the logistic function is 0.5.
+<li>When the input variable <span class="math inline">t</span> is 0, the output of the logistic function is 0.5.
 <ul>
-<li>Indeed, <span class="math inline">\(e^{-t} = {e^0} = 1\)</span> and thus <span class="math inline">\(\frac{1}{1+e^{-t}} = \frac{1}{1+1}= \frac{1}{2}.\)</span></li>
+<li>Indeed, <span class="math inline">e^{-t} = {e^0} = 1</span> and thus <span class="math inline">\frac{1}{1+e^{-t}} = \frac{1}{1+1}= \frac{1}{2}.</span></li>
 </ul></li>
-<li>As <span class="math inline">\(t\)</span> increases, the output value approaches 1.
+<li>As <span class="math inline">t</span> increases, the output value approaches 1.
 <ul>
-<li>As <span class="math inline">\(t \to \infty\)</span>, <span class="math inline">\(e^{-t} \to 0\)</span>.</li>
+<li>As <span class="math inline">t \to \infty</span>, <span class="math inline">e^{-t} \to 0</span>.</li>
 </ul></li>
-<li>Conversely, as <span class="math inline">\(t\)</span> becomes more negative, the output value approaches 0.
+<li>Conversely, as <span class="math inline">t</span> becomes more negative, the output value approaches 0.
 <ul>
-<li>As <span class="math inline">\(t \to -\infty\)</span>, <span class="math inline">\(e^{-t} \to \infty\)</span> (the two negative signs cancel out).</li>
+<li>As <span class="math inline">t \to -\infty</span>, <span class="math inline">e^{-t} \to \infty</span> (the two negative signs cancel out).</li>
 </ul></li>
 <li>The standard logistic function is also commonly referred to as the <strong>sigmoid</strong> function.</li>
 </ul>
@@ -715,9 +731,9 @@ Marcel Turcotte
 <div class="columns">
 <div class="column" style="width:60%;">
 <p>An S-shaped curve, such as the standard logistic function (aka <strong>sigmoid</strong>), is termed a <strong>squashing function</strong> because it maps a wide input domain to a constrained output range.</p>
-<p><span class="math display">\[
+<p><span class="math display">
   \sigma(t) = \frac{1}{1+e^{-t}}
-\]</span></p>
+</span></p>
 </div><div class="column" style="width:40%;">
 <div id="3638baf8" class="cell" data-execution_count="13">
 <details class="code-fold">
@@ -752,37 +768,37 @@ Marcel Turcotte
 <section id="logistic-logit-regression-1" class="slide level2">
 <h2>Logistic (Logit) Regression</h2>
 <ul>
-<li class="fragment"><p>Analogous to <strong>linear regression</strong>, <strong>logistic regression</strong> computes a weighted sum of the input features, expressed as: <span class="math display">\[
+<li class="fragment"><p>Analogous to <strong>linear regression</strong>, <strong>logistic regression</strong> computes a weighted sum of the input features, expressed as: <span class="math display">
 \theta_0 + \theta_1 x_i^{(1)} + \theta_2 x_i^{(2)} + \ldots + \theta_D x_i^{(D)}
-\]</span></p></li>
-<li class="fragment"><p>However, using the sigmoid function limits its output to the range <span class="math inline">\((0,1)\)</span>: <span class="math display">\[
+</span></p></li>
+<li class="fragment"><p>However, using the sigmoid function limits its output to the range <span class="math inline">(0,1)</span>: <span class="math display">
 \sigma(\theta_0 + \theta_1 x_i^{(1)} + \theta_2 x_i^{(2)} + \ldots + \theta_D x_i^{(D)})
-\]</span></p></li>
+</span></p></li>
 </ul>
 </section>
 <section id="notation" class="slide level2">
 <h2>Notation</h2>
 <ul>
-<li class="fragment"><p>Equation for the <strong>logistic regression</strong>: <span class="math display">\[
+<li class="fragment"><p>Equation for the <strong>logistic regression</strong>: <span class="math display">
 \sigma(\theta_0 + \theta_1 x_i^{(1)} + \theta_2 x_i^{(2)} + \ldots + \theta_D x_i^{(D)})
-\]</span></p></li>
-<li class="fragment"><p>Multipling <span class="math inline">\(\theta_0\)</span> (intercept/bias) by 1: <span class="math display">\[
+</span></p></li>
+<li class="fragment"><p>Multipling <span class="math inline">\theta_0</span> (intercept/bias) by 1: <span class="math display">
 \sigma(\theta_0 \times 1 + \theta_1 x_i^{(1)} + \theta_2 x_i^{(2)} + \ldots + \theta_D x_i^{(D)})
-\]</span></p></li>
-<li class="fragment"><p>Multipling <span class="math inline">\(\theta_0\)</span> by <span class="math inline">\(x_i^{(0)} = 1\)</span>: <span class="math display">\[
+</span></p></li>
+<li class="fragment"><p>Multipling <span class="math inline">\theta_0</span> by <span class="math inline">x_i^{(0)} = 1</span>: <span class="math display">
 \sigma(\theta_0 x_i^{(0)} + \theta_1 x_i^{(1)} + \theta_2 x_i^{(2)} + \ldots + \theta_D x_i^{(D)})
-\]</span></p></li>
+</span></p></li>
 </ul>
 </section>
 <section id="logistic-regression-1" class="slide level2">
 <h2>Logistic regression</h2>
 <p>The <strong>Logistic Regression</strong> model, in its vectorized form, is defined as:</p>
-<p><span class="math display">\[
+<p><span class="math display">
   h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
-  \]</span></p>
+  </span></p>
 
 <aside><div>
-<p>An extra feature, <span class="math inline">\(x_i^{(0)} = 1\)</span>, has been added to <span class="math inline">\(x_i\)</span>, and <span class="math inline">\(\theta_0\)</span> is the intercept/bias term.</p>
+<p>An extra feature, <span class="math inline">x_i^{(0)} = 1</span>, has been added to <span class="math inline">x_i</span>, and <span class="math inline">\theta_0</span> is the intercept/bias term.</p>
 </div></aside></section>
 <section id="logistic-regression-two-attributes" class="slide level2">
 <h2>Logistic regression (two attributes)</h2>
@@ -797,9 +813,9 @@ Marcel Turcotte
 </div>
 </div>
 </div>
-<p><span class="math display">\[
+<p><span class="math display">
   h_\theta(x_i) = \sigma(\theta x_i)
-\]</span></p>
+</span></p>
 </div><div class="column" style="width:65%;">
 <ul>
 <li class="fragment">In logistic regression, <strong>the probability of correctly classifying an example increases as its distance from the decision boundary increases</strong>.</li>
@@ -812,18 +828,18 @@ Marcel Turcotte
 <h2>Logistic regression</h2>
 <ul>
 <li><p>The <strong>Logistic Regression</strong> model, in its vectorized form, is defined as:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
-\]</span></p></li>
+</span></p></li>
 <li><p><strong>Predictions</strong> are made as follows:</p>
 <ul>
-<li><span class="math inline">\(y_i = 0\)</span>, if <span class="math inline">\(h_\theta(x_i) &lt; 0.5\)</span></li>
-<li><span class="math inline">\(y_i = 1\)</span>, if <span class="math inline">\(h_\theta(x_i) \geq 0.5\)</span></li>
+<li><span class="math inline">y_i = 0</span>, if <span class="math inline">h_\theta(x_i) &lt; 0.5</span></li>
+<li><span class="math inline">y_i = 1</span>, if <span class="math inline">h_\theta(x_i) \geq 0.5</span></li>
 </ul></li>
 </ul>
 <div class="fragment">
 <ul>
-<li>The values of <span class="math inline">\(\theta\)</span> are learned using <strong>gradient descent</strong>.</li>
+<li>The values of <span class="math inline">\theta</span> are learned using <strong>gradient descent</strong>.</li>
 </ul>
 </div>
 </section>
@@ -931,7 +947,7 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 </section>
 <section id="uci-ml-hand-written-digits-datasets-4" class="slide level2 smaller">
 <h2>UCI ML hand-written digits datasets</h2>
-<p><code>X[0]</code> is a vector of size <code>width * height = D</code> (<span class="math inline">\(8 \times 8 = 64\)</span>).</p>
+<p><code>X[0]</code> is a vector of size <code>width * height = D</code> (<span class="math inline">8 \times 8 = 64</span>).</p>
 <div id="16ad5d59" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a>X[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
@@ -943,7 +959,7 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 </div>
 </div>
 <div class="fragment">
-<p>It corresponds to an <span class="math inline">\(8 \times 8 = 64\)</span> image.</p>
+<p>It corresponds to an <span class="math inline">8 \times 8 = 64</span> image.</p>
 <div id="65db1ccb" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a>X[<span class="dv">0</span>].reshape(width, height)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
@@ -1020,9 +1036,9 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 </div>
 </div>
 <ul>
-<li class="fragment"><p>In our dataset, each <span class="math inline">\(x_i\)</span> is an <strong>attribute vector</strong> of size <span class="math inline">\(D = 64\)</span>.</p></li>
-<li class="fragment"><p>This vector is formed by concatenating the rows of an <span class="math inline">\(8 \times 8\)</span> image.</p></li>
-<li class="fragment"><p>The <code>reshape</code> function is employed to convert this 64-dimensional vector back into its original <span class="math inline">\(8 \times 8\)</span> image format.</p></li>
+<li class="fragment"><p>In our dataset, each <span class="math inline">x_i</span> is an <strong>attribute vector</strong> of size <span class="math inline">D = 64</span>.</p></li>
+<li class="fragment"><p>This vector is formed by concatenating the rows of an <span class="math inline">8 \times 8</span> image.</p></li>
+<li class="fragment"><p>The <code>reshape</code> function is employed to convert this 64-dimensional vector back into its original <span class="math inline">8 \times 8</span> image format.</p></li>
 </ul>
 </section>
 <section id="uci-ml-hand-written-digits-datasets-7" class="slide level2">
@@ -1038,7 +1054,7 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 </div>
 <ul>
 <li class="fragment"><p>We will train <strong>10 classifiers</strong>, each corresponding to a specific digit in a <strong>One-vs-All (OvA)</strong> approach.</p></li>
-<li class="fragment"><p>Each classifier will determine the optimal values of <span class="math inline">\(\theta_j\)</span> (associated with the pixel features), allowing it to distinguish one digit from all other digits.</p></li>
+<li class="fragment"><p>Each classifier will determine the optimal values of <span class="math inline">\theta_j</span> (associated with the pixel features), allowing it to distinguish one digit from all other digits.</p></li>
 </ul>
 </section>
 <section id="uci-ml-hand-written-digits-datasets-8" class="slide level2">
@@ -1064,10 +1080,10 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <aside class="notes">
 <p>Certain classifiers exhibit suboptimal performance when there are significant variations in feature scales. This issue is particularly pronounced in classifiers that utilize gradient descent for parameter optimization, as they can be adversely affected by discrepancies in feature scale. Consequently, standardization of features is a widely adopted practice to mitigate this problem.</p>
 <p><a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html">StandardScaler</a> is a commonly used approach. For a given feature, the values are transformed as follows:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 z = (x - \mu) / \sigma
-\]</span></p>
-<p>where <span class="math inline">\(\mu\)</span> is the average of all the values for that feature for the training data, and <span class="math inline">\(\sigma\)</span> the corresponding standard deviation.</p>
+</span></p>
+<p>where <span class="math inline">\mu</span> is the average of all the values for that feature for the training data, and <span class="math inline">\sigma</span> the corresponding standard deviation.</p>
 <p>Calling <code>fit</code> forces the scaler to learn the mean and standard deviation of each feature. Calling <code>tranform</code>, applies the transformation onto the designated dataset. Finally, calling <code>fit_transform</code> combines the two steps.</p>
 <p>It would be an error to apply <code>fit</code> or <code>fit_transform</code> on the entire dataset, an error called <strong>data leakeage</strong>. Information from the test data would influence the mean and standard deviation learnt by the scaler. The training data would be transformed using information from the test set. The model will learn from training data scaled using information baised by the test set. The test set is no longer independent.</p>
 <p>It is paramount to scale the test data. The model has been trained on scaled data, here with mean values centered at zero and standard deviation of 1. The original data was likely on a widely different scale. Imagine a attribute representing the temperature in celcius might have values -40 to 40. Another attribute, this one representing a grade, with values from 0 to 100. The model would produce non sense results on such data. The test data needs to be scaled using the mean and standard deviation from the training data, which represents the frame of reference for its training.</p>
@@ -1168,7 +1184,7 @@ weighted avg       0.98      0.98      0.98       180
 </div>
 </div>
 <div class="fragment">
-<p>Intercepts are <span class="math inline">\(\theta_0\)</span>, where as coefficents are <span class="math inline">\(\theta_j, j \in [1,64]\)</span>.</p>
+<p>Intercepts are <span class="math inline">\theta_0</span>, where as coefficents are <span class="math inline">\theta_j, j \in [1,64]</span>.</p>
 
 </div>
 <aside><div>
@@ -1226,7 +1242,7 @@ weighted avg       0.98      0.98      0.98       180
 </div>
 </div>
 <aside class="notes">
-<p>Each <code>LogisticRegression</code> learns 64 <span class="math inline">\(\theta_i\)</span> parameters.</p>
+<p>Each <code>LogisticRegression</code> learns 64 <span class="math inline">\theta_i</span> parameters.</p>
 <p>In the images above, red pixels correspond to negative coefficients, while blue pixels correspond to positive coefficients.</p>
 <p>For the first classifier, which predicts the digit ‘0’, the model assigns negative weights to high-intensity pixels in the center of the image and positive weights to high-intensity pixels in the oval region surrounding the center.</p>
 <style type="text/css">
@@ -1432,7 +1448,6 @@ Original labels:
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1601,27 +1616,9 @@ Original labels:
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

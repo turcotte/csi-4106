@@ -114,8 +114,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -584,9 +598,9 @@ Classes: ['Adelie' 'Chinstrap' 'Gentoo']</code></pre>
 <section id="feature-scaling" class="level1">
 <h1>Feature Scaling</h1>
 <p>Euclidean distance depends on numerical scale. We therefore standardize each feature using the training-set mean and standard deviation:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 z=\frac{x-\mu_{\mathrm{train}}}{\sigma_{\mathrm{train}}}.
-\]</span></p>
+</span></p>
 <p>The scaler is fitted only on the training data. The test data must not influence preprocessing choices made during learning.</p>
 <div id="scaling" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
@@ -596,11 +610,11 @@ z=\frac{x-\mu_{\mathrm{train}}}{\sigma_{\mathrm{train}}}.
 </section>
 <section id="searching-for-neighbours" class="level1">
 <h1>Searching for Neighbours</h1>
-<p>For a query <span class="math inline">\(x\)</span> and a training example <span class="math inline">\(x_i\)</span>, Euclidean distance is</p>
-<p><span class="math display">\[
+<p>For a query <span class="math inline">x</span> and a training example <span class="math inline">x_i</span>, Euclidean distance is</p>
+<p><span class="math display">
 d(x,x_i)=\sqrt{\sum_{j=1}^{D}\left(x^{(j)}-x_i^{(j)}\right)^2}.
-\]</span></p>
-<p>The most direct implementation computes every distance, sorts them, and keeps the first <span class="math inline">\(k\)</span> indices.</p>
+</span></p>
+<p>The most direct implementation computes every distance, sorts them, and keeps the first <span class="math inline">k</span> indices.</p>
 <div id="nearest-neighbors" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> nearest_neighbors(X_train, x, n_neighbors):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return the nearest training indices and their distances from x."""</span></span>
@@ -612,11 +626,11 @@ d(x,x_i)=\sqrt{\sum_{j=1}^{D}\left(x^{(j)}-x_i^{(j)}\right)^2}.
 </section>
 <section id="voting" class="level1">
 <h1>Voting</h1>
-<p>With uniform voting, all selected neighbours receive weight 1. With distance weighting, neighbour <span class="math inline">\(i\)</span> receives weight</p>
-<p><span class="math display">\[
+<p>With uniform voting, all selected neighbours receive weight 1. With distance weighting, neighbour <span class="math inline">i</span> receives weight</p>
+<p><span class="math display">
 w_i=\frac{1}{d_i}.
-\]</span></p>
-<p>An exact match requires special handling because <span class="math inline">\(1/0\)</span> is undefined. If exact matches exist, our implementation lets only those observations vote.</p>
+</span></p>
+<p>An exact match requires special handling because <span class="math inline">1/0</span> is undefined. If exact matches exist, our implementation lets only those observations vote.</p>
 <div id="voting" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> voting_weights(distances, mode):</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return uniform weights or inverse-distance weights."""</span></span>
@@ -820,7 +834,7 @@ Neighbours:
 </div>
 </div>
 </div>
-<p>With <span class="math inline">\(k=1\)</span>, individual training observations control small regions, producing a highly irregular boundary. Increasing <span class="math inline">\(k\)</span> smooths the boundary because a larger neighbourhood must agree. Distance weighting allows nearby observations to retain greater local influence.</p>
+<p>With <span class="math inline">k=1</span>, individual training observations control small regions, producing a highly irregular boundary. Increasing <span class="math inline">k</span> smooths the boundary because a larger neighbourhood must agree. Distance weighting allows nearby observations to retain greater local influence.</p>
 </section>
 <section id="regression" class="level1">
 <h1>Regression</h1>
@@ -834,12 +848,12 @@ Neighbours:
 </section>
 <section id="complexity-and-limitations" class="level1">
 <h1>Complexity and Limitations</h1>
-<p>For each query, this straightforward implementation computes distances in <span class="math inline">\(\mathcal{O}(ND)\)</span> and performs a complete <span class="math inline">\(\mathcal{O}(N\log N)\)</span> sort. It also retains the <span class="math inline">\(\mathcal{O}(ND)\)</span> training set in memory.</p>
+<p>For each query, this straightforward implementation computes distances in <span class="math inline">\mathcal{O}(ND)</span> and performs a complete <span class="math inline">\mathcal{O}(N\log N)</span> sort. It also retains the <span class="math inline">\mathcal{O}(ND)</span> training set in memory.</p>
 <p>Other important limitations include:</p>
 <ul>
 <li>distances are sensitive to feature scaling and the selected metric;</li>
 <li>neighbourhoods become less informative in high-dimensional spaces;</li>
-<li>small <span class="math inline">\(k\)</span> can be sensitive to noise, whereas large <span class="math inline">\(k\)</span> can hide local structure; and</li>
+<li>small <span class="math inline">k</span> can be sensitive to noise, whereas large <span class="math inline">k</span> can hide local structure; and</li>
 <li>class imbalance can dominate a neighbourhood’s vote.</li>
 </ul>
 </section>

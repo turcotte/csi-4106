@@ -128,6 +128,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -295,7 +311,7 @@ Marcel Turcotte
 <h2>Learning Outcomes</h2>
 <ul>
 <li><strong>Describe</strong> the structure and role of the confusion matrix in model evaluation.</li>
-<li><strong>Compute</strong> and <strong>interpret</strong> accuracy, precision, recall, and <span class="math inline">\(F_1\)</span> score.</li>
+<li><strong>Compute</strong> and <strong>interpret</strong> accuracy, precision, recall, and <span class="math inline">F_1</span> score.</li>
 <li><strong>Identify</strong> the pitfalls of using accuracy with imbalanced datasets.</li>
 <li><strong>Differentiate</strong> between micro and macro averaging for performance metrics.</li>
 <li><strong>Analyze</strong> precision-recall trade-offs and <strong>construct</strong> ROC curves, including the calculation of AUC.</li>
@@ -342,7 +358,7 @@ Marcel Turcotte
 <li>The diagonal elements represent the correctly predicted outcomes, namely true positives (TP) and true negatives (TN).</li>
 <li>In contrast, the off-diagonal elements correspond to incorrect predictions, specifically false positives (FP) and false negatives (FN).</li>
 <li>The <strong>confusion matrix</strong> encapsulates all essential information required to assess the performance of a classification model.</li>
-<li>While the confusion matrix provides a comprehensive view, more <strong>concise metrics</strong> such as <strong>accuracy</strong>, <strong>precision</strong>, <strong>recall</strong>, and the <strong>F<span class="math inline">\(_1\)</span> score</strong> are often more intuitive and practical for summarizing model performance.</li>
+<li>While the confusion matrix provides a comprehensive view, more <strong>concise metrics</strong> such as <strong>accuracy</strong>, <strong>precision</strong>, <strong>recall</strong>, and the <strong>F<span class="math inline">_1</span> score</strong> are often more intuitive and practical for summarizing model performance.</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -412,14 +428,14 @@ Marcel Turcotte
 </section>
 <section id="confusion-matrix-1" class="slide level2">
 <h2>Confusion Matrix</h2>
-<p>Given a test set with <span class="math inline">\(N\)</span> examples and a classifier <span class="math inline">\(h(x):\)</span></p>
-<p><span class="math display">\[
+<p>Given a test set with <span class="math inline">N</span> examples and a classifier <span class="math inline">h(x):</span></p>
+<p><span class="math display">
 C_{i,j} = \sum_{k = 1}^N [y_k = i \wedge h(x_k) = j]
-\]</span></p>
-<p>Where <span class="math inline">\(C\)</span> is <span class="math inline">\(l \times l\)</span> matrix, for a dataset with <span class="math inline">\(l\)</span> classes.</p>
+</span></p>
+<p>Where <span class="math inline">C</span> is <span class="math inline">l \times l</span> matrix, for a dataset with <span class="math inline">l</span> classes.</p>
 
 <aside class="notes">
-<p>Let us now examine the general case of a confusion matrix with <span class="math inline">\(l\)</span> classes, which may initially appear “confusing” to comprehend.</p>
+<p>Let us now examine the general case of a confusion matrix with <span class="math inline">l</span> classes, which may initially appear “confusing” to comprehend.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -432,25 +448,25 @@ C_{i,j} = \sum_{k = 1}^N [y_k = i \wedge h(x_k) = j]
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>A confusion matrix <span class="math inline">\(C\)</span> is defined such that each element <span class="math inline">\(C_{i,j}\)</span> represents the count of observations actually belonging to class <span class="math inline">\(i\)</span> but predicted to belong to class <span class="math inline">\(j\)</span>.</p>
+<p>A confusion matrix <span class="math inline">C</span> is defined such that each element <span class="math inline">C_{i,j}</span> represents the count of observations actually belonging to class <span class="math inline">i</span> but predicted to belong to class <span class="math inline">j</span>.</p>
 </div></aside></section>
 <section id="confusion-matrix-2" class="slide level2">
 <h2>Confusion Matrix</h2>
 <ul>
-<li><p>The total number of examples of the (actual) class <span class="math inline">\(i\)</span> is <span class="math display">\[
+<li><p>The total number of examples of the (actual) class <span class="math inline">i</span> is <span class="math display">
 C_{i \cdot} = \sum_{j=1}^l C_{i,j}
-\]</span></p></li>
-<li><p>The total number of examples assigned to the (predicted) class <span class="math inline">\(j\)</span> by classiﬁer <span class="math inline">\(h\)</span> is <span class="math display">\[
+</span></p></li>
+<li><p>The total number of examples assigned to the (predicted) class <span class="math inline">j</span> by classiﬁer <span class="math inline">h</span> is <span class="math display">
 C_{\cdot j} = \sum_{i=1}^l C_{i,j}
-\]</span></p></li>
+</span></p></li>
 </ul>
 </section>
 <section id="confusion-matrix-3" class="slide level2">
 <h2>Confusion Matrix</h2>
 <ul>
-<li><p>Terms on the diagonal denote the total number of examples classified correctly by classifier <span class="math inline">\(h\)</span>. Hence, the number of correctly classified examples is <span class="math display">\[
+<li><p>Terms on the diagonal denote the total number of examples classified correctly by classifier <span class="math inline">h</span>. Hence, the number of correctly classified examples is <span class="math display">
 \sum_{i=1}^l C_{i,i}
-\]</span></p></li>
+</span></p></li>
 <li><p>Non-diagonal terms represent misclassifications.</p></li>
 </ul>
 </section>
@@ -478,7 +494,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 </div>
 
 <aside><div>
-<p><code>comp.graphics</code> is the <strong>true</strong> class (<span class="math inline">\(i\)</span>).</p>
+<p><code>comp.graphics</code> is the <strong>true</strong> class (<span class="math inline">i</span>).</p>
 </div></aside></section>
 <section id="confusion-matrix---false-positive" class="slide level2">
 <h2>Confusion Matrix - False Positive</h2>
@@ -489,7 +505,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 </div>
 
 <aside><div>
-<p><code>comp.graphics</code> is the <strong>true</strong> class (<span class="math inline">\(i\)</span>).</p>
+<p><code>comp.graphics</code> is the <strong>true</strong> class (<span class="math inline">i</span>).</p>
 </div></aside></section>
 <section id="confusion-matrix---false-negative" class="slide level2">
 <h2>Confusion Matrix - False Negative</h2>
@@ -500,7 +516,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 </div>
 
 <aside><div>
-<p><code>comp.graphics</code> is the <strong>true</strong> class (<span class="math inline">\(i\)</span>).</p>
+<p><code>comp.graphics</code> is the <strong>true</strong> class (<span class="math inline">i</span>).</p>
 </div></aside></section>
 <section id="confusion-matrix---true-negative" class="slide level2">
 <h2>Confusion Matrix - True Negative</h2>
@@ -511,7 +527,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 </div>
 
 <aside><div>
-<p><code>comp.graphics</code> is the <strong>true</strong> class (<span class="math inline">\(i\)</span>).</p>
+<p><code>comp.graphics</code> is the <strong>true</strong> class (<span class="math inline">i</span>).</p>
 </div></aside></section>
 <section id="confusion-matrix---multi-class-2" class="slide level2">
 <h2>Confusion Matrix - Multi-Class</h2>
@@ -522,26 +538,26 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 </div>
 
 <aside><div>
-<p><code>comp.graphics</code> is the <strong>true</strong> class (<span class="math inline">\(i\)</span>).</p>
+<p><code>comp.graphics</code> is the <strong>true</strong> class (<span class="math inline">i</span>).</p>
 </div></aside></section>
 <section id="multi-class" class="slide level2">
 <h2>Multi-Class</h2>
 <p>To evaluate performance in a multi-class setting, one typically derives “one-vs-all” metrics for each class from the confusion matrix. These metrics are then averaged using specific weighting schemes.</p>
 <ul>
-<li><strong>True Positives</strong> (<span class="math inline">\(\mathrm{TP}_i\)</span>): Diagonal entry <span class="math inline">\(C_{i,i}\)</span></li>
-<li><strong>False Positives</strong> (<span class="math inline">\(\mathrm{FP}_i\)</span>): Sum of column <span class="math inline">\(i\)</span> excluding <span class="math inline">\(C_{i,i}\)</span></li>
-<li><strong>False Negatives</strong> (<span class="math inline">\(\mathrm{FN}_i\)</span>): Sum of row <span class="math inline">\(i\)</span> excluding <span class="math inline">\(C_{i,i}\)</span></li>
-<li><strong>True Negatives</strong> (<span class="math inline">\(\mathrm{TN}_i\)</span>): <span class="math inline">\(N - (\mathrm{TP}_i + \mathrm{FP}_i + \mathrm{FN}_i)\)</span></li>
+<li><strong>True Positives</strong> (<span class="math inline">\mathrm{TP}_i</span>): Diagonal entry <span class="math inline">C_{i,i}</span></li>
+<li><strong>False Positives</strong> (<span class="math inline">\mathrm{FP}_i</span>): Sum of column <span class="math inline">i</span> excluding <span class="math inline">C_{i,i}</span></li>
+<li><strong>False Negatives</strong> (<span class="math inline">\mathrm{FN}_i</span>): Sum of row <span class="math inline">i</span> excluding <span class="math inline">C_{i,i}</span></li>
+<li><strong>True Negatives</strong> (<span class="math inline">\mathrm{TN}_i</span>): <span class="math inline">N - (\mathrm{TP}_i + \mathrm{FP}_i + \mathrm{FN}_i)</span></li>
 </ul>
 </section>
 <section id="multi-class-1" class="slide level2">
 <h2>Multi-Class</h2>
 <p>To evaluate performance in a multi-class setting, one typically derives “one-vs-all” metrics for each class from the confusion matrix. These metrics are then averaged using specific weighting schemes.</p>
 <ul>
-<li><span class="math inline">\(\mathrm{TP}_i = C_{i,i}\)</span></li>
-<li><span class="math inline">\(\mathrm{FP}_i = \sum_{k \ne i} C_{k,i}\)</span></li>
-<li><span class="math inline">\(\mathrm{FN}_i = \sum_{k \ne i} C_{i,k}\)</span></li>
-<li><span class="math inline">\(\mathrm{TN}_i = \sum_{j \ne i} \sum_{k \ne i} C_{j,k}\)</span></li>
+<li><span class="math inline">\mathrm{TP}_i = C_{i,i}</span></li>
+<li><span class="math inline">\mathrm{FP}_i = \sum_{k \ne i} C_{k,i}</span></li>
+<li><span class="math inline">\mathrm{FN}_i = \sum_{k \ne i} C_{i,k}</span></li>
+<li><span class="math inline">\mathrm{TN}_i = \sum_{j \ne i} \sum_{k \ne i} C_{j,k}</span></li>
 </ul>
 </section>
 <section id="sklearn.metrics.confusion_matrix" class="slide level2">
@@ -567,7 +583,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 </div>
 </div>
 <aside class="notes">
-<p>By default, <code>sklearn.metrics.confusion_matrix</code> determines the set of labels from the data (<span class="math inline">\(\textrm{y_true} \cup \textrm{y_pred}\)</span>), and then:</p>
+<p>By default, <code>sklearn.metrics.confusion_matrix</code> determines the set of labels from the data (<span class="math inline">\textrm{y_true} \cup \textrm{y_pred}</span>), and then:</p>
 <ul>
 <li>It sorts them in ascending order (which for strings or mixed types corresponds to Python’s lexicographic ordering).</li>
 <li>It then builds the matrix so that row <code>i</code> corresponds to the true class with label <code>labels[i]</code>, and column <code>j</code> corresponds to the predicted class with label <code>labels[j]</code>.</li>
@@ -793,9 +809,9 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <section id="accuracy" class="slide level2">
 <h2>Accuracy</h2>
 <p>How <strong>accurate</strong> is this result?</p>
-<p><span class="math display">\[
+<p><span class="math display">
   \mathrm{accuracy} = \frac{\mathrm{TP}+\mathrm{TN}}{\mathrm{TP}+\mathrm{TN}+\mathrm{FP}+\mathrm{FN}} = \frac{\mathrm{TP}+\mathrm{TN}}{\mathrm{N}}
-\]</span></p>
+</span></p>
 <div id="c4315cd2" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
 <span id="cb16-2"><a aria-label="2"></a></span>
@@ -867,9 +883,9 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <section id="precision" class="slide level2">
 <h2>Precision</h2>
 <p>AKA, <strong>positive predictive value</strong> (PPV).</p>
-<p><span class="math display">\[
+<p><span class="math display">
   \mathrm{precision} = \frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FP}}
-\]</span></p>
+</span></p>
 <div id="ecedf087" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> precision_score</span>
 <span id="cb24-2"><a aria-label="2"></a></span>
@@ -890,9 +906,9 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <li>If your model predicts “positive” too loosely, you will generate many false positives.</li>
 <li>Here, precision (the proportion of predicted positives that are actually true positives) is crucial:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}
-\]</span></p>
+</span></p>
 <ul>
 <li>A high precision means that when the test says “positive,” it is very likely correct.</li>
 <li>This reduces unnecessary anxiety, costs, and follow-up procedures for patients incorrectly flagged.</li>
@@ -934,9 +950,9 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 </div></aside></section>
 <section id="recall" class="slide level2">
 <h2>Recall</h2>
-<p>AKA <strong>sensitivity</strong> or <strong>true positive rate</strong> (TPR) <span class="math display">\[
+<p>AKA <strong>sensitivity</strong> or <strong>true positive rate</strong> (TPR) <span class="math display">
   \mathrm{recall} = \frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}}
-\]</span></p>
+</span></p>
 <div id="b0a55a36" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a aria-label="1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> recall_score</span>
 <span id="cb28-2"><a aria-label="2"></a></span>
@@ -956,9 +972,9 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <li>Here, false negatives (missing an actual cancer case) are far more dangerous than false positives.</li>
 <li>Recall measures the proportion of actual positives correctly identified:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 \text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}
-\]</span></p>
+</span></p>
 <ul>
 <li>A high recall means the test finds nearly all patients with cancer, even if it also produces some false alarms.</li>
 <li>Missing a true case (low recall) could mean a patient doesn’t receive treatment in time — a much more serious error than investigating a few extra false positives.</li>
@@ -984,13 +1000,13 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <p><strong>Recall</strong> is the proportion of true positive instances correctly identified among all actual positive instances.</p>
 </div></aside></section>
 <section id="f_1-score" class="slide level2">
-<h2>F<span class="math inline">\(_1\)</span> score</h2>
-<p><span class="math display">\[
+<h2>F<span class="math inline">_1</span> score</h2>
+<p><span class="math display">
 \begin{align*}
   F_1~\mathrm{score} &amp;= \frac{2}{\frac{1}{\mathrm{precision}}+\frac{1}{\mathrm{recall}}} = 2 \times \frac{\mathrm{precision}\times\mathrm{recall}}{\mathrm{precision}+\mathrm{recall}} \\
                      &amp;= \frac{\mathrm{TP}}{\mathrm{TP}+\frac{\mathrm{FN}+\mathrm{FP}}{2}}
 \end{align*}
-\]</span></p>
+</span></p>
 <div id="e6e7b0e4" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a aria-label="1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> f1_score</span>
 <span id="cb30-2"><a aria-label="2"></a></span>
@@ -1007,7 +1023,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <ul>
 <li>The harmonic mean places greater emphasis on lower values, while the arithmetic mean treats all values equally.</li>
 <li>Using the harmonic mean ensures that a high score is only achieved when both precision and recall are high, thus providing a more holistic measure of a classifier’s performance in scenarios with imbalanced datasets.</li>
-<li>The F<span class="math inline">\(_1\)</span> score favors classifiers that achieve a balance between precision and recall.</li>
+<li>The F<span class="math inline">_1</span> score favors classifiers that achieve a balance between precision and recall.</li>
 <li>Increasing <strong>recall</strong> often results in a decrease in <strong>precision</strong>, and vice versa. This phenomenon is known as the <strong>precision/recall trade-off</strong>.</li>
 </ul>
 <style type="text/css">
@@ -1022,7 +1038,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
           display:block!important;
       }</style></aside>
 <aside><div>
-<p><strong>F<span class="math inline">\(_1\)</span></strong> is the <strong>harmonic mean</strong> of precision and recall.</p>
+<p><strong>F<span class="math inline">_1</span></strong> is the <strong>harmonic mean</strong> of precision and recall.</p>
 </div></aside></section></section>
 <section>
 <section id="micro-and-macro-averaging" class="title-slide slide level1 center">
@@ -1057,22 +1073,22 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 </section>
 <section id="multi-class-2" class="slide level2">
 <h2>Multi-Class</h2>
-<p>When calculating <strong>precision</strong>, <strong>recall</strong>, and <span class="math inline">\(F_1\)</span>, one usually compute “one-vs-all” metrics for each class. Then, average them using weighting schemes (macro, micro).</p>
+<p>When calculating <strong>precision</strong>, <strong>recall</strong>, and <span class="math inline">F_1</span>, one usually compute “one-vs-all” metrics for each class. Then, average them using weighting schemes (macro, micro).</p>
 <ul>
-<li><strong>True Positives</strong> (<span class="math inline">\(\mathrm{TP}_i\)</span>): Diagonal entry <span class="math inline">\(C_{i,i}\)</span></li>
-<li><strong>False Positives</strong> (<span class="math inline">\(\mathrm{FP}_i\)</span>): Sum of column <span class="math inline">\(i\)</span> excluding <span class="math inline">\(C_{i,i}\)</span></li>
-<li><strong>False Negatives</strong> (<span class="math inline">\(\mathrm{FN}_i\)</span>): Sum of row <span class="math inline">\(i\)</span> excluding <span class="math inline">\(C_{i,i}\)</span></li>
-<li><strong>True Negatives</strong> (<span class="math inline">\(\mathrm{TN}_i\)</span>): <span class="math inline">\(N - (\mathrm{TP}_i + \mathrm{FP}_i + \mathrm{FN}_i)\)</span></li>
+<li><strong>True Positives</strong> (<span class="math inline">\mathrm{TP}_i</span>): Diagonal entry <span class="math inline">C_{i,i}</span></li>
+<li><strong>False Positives</strong> (<span class="math inline">\mathrm{FP}_i</span>): Sum of column <span class="math inline">i</span> excluding <span class="math inline">C_{i,i}</span></li>
+<li><strong>False Negatives</strong> (<span class="math inline">\mathrm{FN}_i</span>): Sum of row <span class="math inline">i</span> excluding <span class="math inline">C_{i,i}</span></li>
+<li><strong>True Negatives</strong> (<span class="math inline">\mathrm{TN}_i</span>): <span class="math inline">N - (\mathrm{TP}_i + \mathrm{FP}_i + \mathrm{FN}_i)</span></li>
 </ul>
 </section>
 <section id="multi-class-3" class="slide level2">
 <h2>Multi-Class</h2>
-<p>When calculating <strong>precision</strong>, <strong>recall</strong>, and <span class="math inline">\(F_1\)</span>, one usually compute “one-vs-all” metrics for each class. Then, average them using weighting schemes (macro, micro).</p>
+<p>When calculating <strong>precision</strong>, <strong>recall</strong>, and <span class="math inline">F_1</span>, one usually compute “one-vs-all” metrics for each class. Then, average them using weighting schemes (macro, micro).</p>
 <ul>
-<li><span class="math inline">\(\mathrm{TP}_i = C_{i,i}\)</span></li>
-<li><span class="math inline">\(\mathrm{FP}_i = \sum_{k \ne i} C_{k,i}\)</span></li>
-<li><span class="math inline">\(\mathrm{FN}_i = \sum_{k \ne i} C_{i,k}\)</span></li>
-<li><span class="math inline">\(\mathrm{TN}_i = \sum_{j \ne i} \sum_{k \ne i} C_{j,k}\)</span></li>
+<li><span class="math inline">\mathrm{TP}_i = C_{i,i}</span></li>
+<li><span class="math inline">\mathrm{FP}_i = \sum_{k \ne i} C_{k,i}</span></li>
+<li><span class="math inline">\mathrm{FN}_i = \sum_{k \ne i} C_{i,k}</span></li>
+<li><span class="math inline">\mathrm{TN}_i = \sum_{j \ne i} \sum_{k \ne i} C_{j,k}</span></li>
 </ul>
 </section>
 <section id="micromacro-metrics" class="slide level2 smaller">
@@ -1138,8 +1154,8 @@ Macro precision: 0.71</code></pre>
 <section id="micromacro-precision-1" class="slide level2 scrollable">
 <h2>Micro/Macro Precision</h2>
 <ul>
-<li><p><strong>Macro-average precision</strong> is calculated as the mean of the <strong>precision</strong> scores<sup>1</sup> for each class: <span class="math inline">\(\frac{0.81 + 0.60 + 0.71}{3} = 0.71\)</span>.</p></li>
-<li><p>Whereas, the <strong>micro-average precision</strong> is calculated using the formala, <span class="math inline">\(\frac{TP}{TP+FP}\)</span> and the <strong>data from the entire confusion matrix</strong> <span class="math inline">\(\frac{39+3+5}{39+3+5+9+2+2} = \frac{47}{60} = 0.78\)</span></p></li>
+<li><p><strong>Macro-average precision</strong> is calculated as the mean of the <strong>precision</strong> scores<sup>1</sup> for each class: <span class="math inline">\frac{0.81 + 0.60 + 0.71}{3} = 0.71</span>.</p></li>
+<li><p>Whereas, the <strong>micro-average precision</strong> is calculated using the formala, <span class="math inline">\frac{TP}{TP+FP}</span> and the <strong>data from the entire confusion matrix</strong> <span class="math inline">\frac{39+3+5}{39+3+5+9+2+2} = \frac{47}{60} = 0.78</span></p></li>
 </ul>
 <aside class="notes">
 <p>The high micro-average precision observed here is primarily due to the high precision and large number of examples in the majority class, Cat. This masks the classifier’s relatively poor performance on the minority classes, Dog and Fox.</p>
@@ -1190,8 +1206,8 @@ Macro recall: 0.60</code></pre>
 <section id="micromacro-recall-1" class="slide level2">
 <h2>Micro/Macro Recall</h2>
 <ul>
-<li><p><strong>Macro-average</strong> recall is calculated as the <strong>mean of the recall scores for each class</strong>: <span class="math inline">\(\frac{0.93 + 0.43 + 0.45}{3} = 0.60\)</span>.</p></li>
-<li><p>Whereas, the <strong>micro-average</strong> recall is calculated using the formala, <span class="math inline">\(\frac{TP}{TP+FN}\)</span> and the <strong>data from the entire confusion matrix</strong> <span class="math inline">\(\frac{39+3+5}{39+3+5+3+4+6} = \frac{39}{60} = 0.78\)</span></p></li>
+<li><p><strong>Macro-average</strong> recall is calculated as the <strong>mean of the recall scores for each class</strong>: <span class="math inline">\frac{0.93 + 0.43 + 0.45}{3} = 0.60</span>.</p></li>
+<li><p>Whereas, the <strong>micro-average</strong> recall is calculated using the formala, <span class="math inline">\frac{TP}{TP+FN}</span> and the <strong>data from the entire confusion matrix</strong> <span class="math inline">\frac{39+3+5}{39+3+5+3+4+6} = \frac{39}{60} = 0.78</span></p></li>
 </ul>
 </section>
 <section id="example" class="slide level2">
@@ -1368,9 +1384,9 @@ Macro recall: 0.60</code></pre>
 </section>
 <section id="precision-micro-average" class="slide level2">
 <h2>Precision Micro Average</h2>
-<p><span class="math display">\[
+<p><span class="math display">
   \frac{(258+380+371+199)}{(258+380+371+199)+(40+38+22+45)}
-\]</span> where</p>
+</span> where</p>
 <ul>
 <li>40 = 2 + 1 + 37</li>
 <li>38 = 7 + 22 + 9</li>
@@ -1384,12 +1400,12 @@ Macro recall: 0.60</code></pre>
 <section id="precision-macro-average" class="slide level2">
 <h2>Precision Macro Average</h2>
 <ul>
-<li><span class="math inline">\(\mathrm{Precision}_0 = \frac{258}{258+(2+1+37)} = 0.8657718121\)</span></li>
-<li><span class="math inline">\(\mathrm{Precision}_1 = \frac{380}{380+(7+22+9)} = 0.9090909091\)</span></li>
-<li><span class="math inline">\(\mathrm{Precision}_2 = \frac{371}{371+(12+4+6)} = 0.9440203562\)</span></li>
-<li><span class="math inline">\(\mathrm{Precision}_3 = \frac{199}{199+(42+3+0)} = 0.8155737705\)</span></li>
+<li><span class="math inline">\mathrm{Precision}_0 = \frac{258}{258+(2+1+37)} = 0.8657718121</span></li>
+<li><span class="math inline">\mathrm{Precision}_1 = \frac{380}{380+(7+22+9)} = 0.9090909091</span></li>
+<li><span class="math inline">\mathrm{Precision}_2 = \frac{371}{371+(12+4+6)} = 0.9440203562</span></li>
+<li><span class="math inline">\mathrm{Precision}_3 = \frac{199}{199+(42+3+0)} = 0.8155737705</span></li>
 </ul>
-<p><span class="math inline">\(\mathrm{Precision}_3 = \frac{0.8657718121 + 0.9090909091 + 0.9440203562 + 0.8155737705}{4}\)</span></p>
+<p><span class="math inline">\mathrm{Precision}_3 = \frac{0.8657718121 + 0.9090909091 + 0.9440203562 + 0.8155737705}{4}</span></p>
 
 <aside><div>
 <p>88.3614212 %</p>
@@ -1483,7 +1499,7 @@ Macro recall: 0.80</code></pre>
 </div>
 </div>
 </div>
-<p>These images have dimensions of <span class="math inline">\(28 \times 28\)</span> pixels.</p>
+<p>These images have dimensions of <span class="math inline">28 \times 28</span> pixels.</p>
 </section>
 <section id="creating-a-binary-classification-task" class="slide level2">
 <h2>Creating a Binary Classification Task</h2>
@@ -1695,9 +1711,9 @@ Macro recall: 0.80</code></pre>
 <ul>
 <li class="fragment"><strong>True positive rate</strong> (TPR) against <strong>false positive rate</strong> (FPR)</li>
 <li class="fragment">An ideal classifier has <strong>TPR</strong> close to <strong>1.0</strong> and <strong>FPR</strong> close to <strong>0.0</strong></li>
-<li class="fragment"><span class="math inline">\(\mathrm{TPR} = \frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}}\)</span> (recall, sensitivity)</li>
+<li class="fragment"><span class="math inline">\mathrm{TPR} = \frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}}</span> (recall, sensitivity)</li>
 <li class="fragment"><strong>TPR</strong> approaches <strong>one</strong> when the number of <strong>false negative</strong> predictions is low</li>
-<li class="fragment"><span class="math inline">\(\mathrm{FPR} = \frac{\mathrm{FP}}{\mathrm{FP}+\mathrm{TN}}\)</span> (aka~[1-specificity])</li>
+<li class="fragment"><span class="math inline">\mathrm{FPR} = \frac{\mathrm{FP}}{\mathrm{FP}+\mathrm{TN}}</span> (aka~[1-specificity])</li>
 <li class="fragment"><strong>FPR</strong> approaches <strong>zero</strong> when the number of <strong>false positive</strong> is low</li>
 </ul>
 <aside class="notes">
@@ -1995,18 +2011,18 @@ From: 1 To: tested_positive</p>
 <h2>Logistic Regression</h2>
 <ul>
 <li><p><strong>Model</strong>:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
-\]</span></p></li>
+</span></p></li>
 <li><p><strong>Prediction</strong>:</p>
 <ul>
-<li>Assign <span class="math inline">\(y_i = 0\)</span>, if <span class="math inline">\(h_\theta(x_i) &lt; 0.5\)</span>; <span class="math inline">\(y_i = 1\)</span>, if <span class="math inline">\(h_\theta(x_i) \geq 0.5\)</span></li>
+<li>Assign <span class="math inline">y_i = 0</span>, if <span class="math inline">h_\theta(x_i) &lt; 0.5</span>; <span class="math inline">y_i = 1</span>, if <span class="math inline">h_\theta(x_i) \geq 0.5</span></li>
 </ul></li>
 <li><p><strong>Loss Function</strong>: cross-entropy</p></li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \sigma(\theta x_i) + (1-y_i) \log (1 - \sigma(\theta x_i)) \right]
-\]</span></p>
+</span></p>
 <aside class="notes">
 <p>Let’s walk through what happens to the confusion matrix terms as the decision threshold moves from 0 to 1.</p>
 <p>At threshold = 0</p>
@@ -2014,9 +2030,9 @@ J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \sigma(\theta x_i) + (1-y_i) \log (
 <li>All predicted positive.</li>
 <li>TP: all actual positives are predicted positive, maximal TP.</li>
 <li>FP: all actual negatives are predicted positive, maximal FP.</li>
-<li><span class="math inline">\(\text{TPR} = 1\)</span> (since <span class="math inline">\(\text{TP} = P\)</span>, where <span class="math inline">\(P\)</span> is total positives).</li>
-<li><span class="math inline">\(\text{FPR} = 1\)</span> (since <span class="math inline">\(\text{FP} = N\)</span>, where <span class="math inline">\(N\)</span> is total negatives).</li>
-<li>ROC point = <span class="math inline">\((1,1)\)</span>.</li>
+<li><span class="math inline">\text{TPR} = 1</span> (since <span class="math inline">\text{TP} = P</span>, where <span class="math inline">P</span> is total positives).</li>
+<li><span class="math inline">\text{FPR} = 1</span> (since <span class="math inline">\text{FP} = N</span>, where <span class="math inline">N</span> is total negatives).</li>
+<li>ROC point = <span class="math inline">(1,1)</span>.</li>
 </ul>
 <p>As threshold increases from 0 to 1</p>
 <ul>
@@ -2031,15 +2047,15 @@ J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \sigma(\theta x_i) + (1-y_i) \log (
 <ul>
 <li>All predicted negative.</li>
 <li>TP = 0, FP = 0.</li>
-<li><span class="math inline">\(\text{TPR} = 0\)</span>, <span class="math inline">\(\text{FPR} = 0\)</span>.</li>
-<li>ROC point = <span class="math inline">\((0,0)\)</span>.</li>
+<li><span class="math inline">\text{TPR} = 0</span>, <span class="math inline">\text{FPR} = 0</span>.</li>
+<li>ROC point = <span class="math inline">(0,0)</span>.</li>
 </ul>
 <p>Summary intuition</p>
 <ul>
 <li>Lower threshold, more predicted positives, both TP and FP increase, both TPR and FPR increase.</li>
 <li>Higher threshold, more predicted negatives, both TP and FP decrease, both TPR and FPR decrease.</li>
 <li>The shape of the ROC curve depends on how well logistic regression separates - positives from negatives:</li>
-<li>A perfect model climbs quickly toward <span class="math inline">\((0,1)\)</span>.</li>
+<li>A perfect model climbs quickly toward <span class="math inline">(0,1)</span>.</li>
 <li>A random model follows the diagonal.</li>
 <li>A realistic model lies between.</li>
 </ul>
@@ -2270,7 +2286,7 @@ J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \sigma(\theta x_i) + (1-y_i) \log (
 <section id="summary-1" class="slide level2">
 <h2>Summary</h2>
 <ul>
-<li>Examined classification model evaluation techniques, focusing on confusion matrices and key metrics: accuracy, precision, recall, and <span class="math inline">\(F_1\)</span> score.</li>
+<li>Examined classification model evaluation techniques, focusing on confusion matrices and key metrics: accuracy, precision, recall, and <span class="math inline">F_1</span> score.</li>
 <li>Addressed the limitations of accuracy in imbalanced datasets, introducing micro and macro averaging techniques.</li>
 <li>Explored the precision-recall trade-off and ROC analysis, including the area under the curve (AUC).</li>
 <li>Provided practical insights through Python implementations.</li>
@@ -2380,7 +2396,6 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -2549,27 +2564,9 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

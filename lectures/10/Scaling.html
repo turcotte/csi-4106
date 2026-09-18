@@ -117,8 +117,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -534,8 +548,8 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="scenario">Scenario</h2>
 <p>We pretend to predict a house price using <strong>k-Nearest Neighbors (KNN) regression</strong> with two features:</p>
 <ul>
-<li><span class="math inline">\(x_1\)</span>: number of rooms (small scale)</li>
-<li><span class="math inline">\(x_2\)</span>: square footage (large scale)</li>
+<li><span class="math inline">x_1</span>: number of rooms (small scale)</li>
+<li><span class="math inline">x_2</span>: square footage (large scale)</li>
 </ul>
 <p>We create three examples <strong>a</strong>, <strong>b</strong>, <strong>c</strong> chosen so that:</p>
 <ul>
@@ -629,9 +643,9 @@ window.Quarto = {
 </section>
 <section id="euclidean-distances-unscaled" class="level2">
 <h2 class="anchored" data-anchor-id="euclidean-distances-unscaled">Euclidean distances (unscaled)</h2>
-<p>The (squared) Euclidean distance between <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> is <span class="math display">\[
+<p>The (squared) Euclidean distance between <span class="math inline">u</span> and <span class="math inline">v</span> is <span class="math display">
 \|u-v\|_2^2 = \sum_j (u_j - v_j)^2.
-\]</span></p>
+</span></p>
 <p>When one feature has a much larger scale (e.g., square footage), it can dominate the sum.</p>
 <div id="4c18c6e1" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> pairwise_distances</span>
@@ -690,9 +704,9 @@ window.Quarto = {
 <section id="proper-scaling-for-modeling-fit-scaler-on-the-training-set" class="level2">
 <h2 class="anchored" data-anchor-id="proper-scaling-for-modeling-fit-scaler-on-the-training-set">Proper scaling for modeling (fit scaler on the <strong>training</strong> set)</h2>
 <p>For a fair ML workflow, compute scaling parameters on the training data (<strong>b</strong>, <strong>c</strong>) only, then transform both train and query:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 z(x) = \frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
-\]</span></p>
+</span></p>
 <div id="61acd123" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -871,12 +885,12 @@ z(x) = \frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
 <ul>
 <li>(Squared) Euclidean distance aggregates per-feature squared differences:</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
   |u-v|_2^2 = \sum_j (u_j - v_j)^2.
-\]</span></p>
+</span></p>
 <ul>
 <li>A large-scale feature (e.g., <strong>sqft</strong>) can dwarf small-scale features (e.g., <strong>rooms</strong>), so KNN effectively “ignores” the smaller-scale dimensions.</li>
-<li><strong>Standardization</strong> (<span class="math inline">\(z\)</span>-scores) or <strong>min-max scaling</strong> puts dimensions on comparable footing.</li>
+<li><strong>Standardization</strong> (<span class="math inline">z</span>-scores) or <strong>min-max scaling</strong> puts dimensions on comparable footing.</li>
 <li><strong>Rule of thumb:</strong> For distance-based methods (KNN, k-means, RBF kernels, etc.), always <strong>scale</strong> features.</li>
 </ul>
 </section>
@@ -952,10 +966,10 @@ z(x) = \frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
 </section>
 <section id="switch-to-manhattan-distance" class="level2">
 <h2 class="anchored" data-anchor-id="switch-to-manhattan-distance">Switch to Manhattan distance?</h2>
-<p>Even with <span class="math inline">\(L_1\)</span> distance, scale still matters:</p>
-<p><span class="math display">\[
+<p>Even with <span class="math inline">L_1</span> distance, scale still matters:</p>
+<p><span class="math display">
 |u-v|_1 = \sum_j |u_j - v_j|.
-\]</span></p>
+</span></p>
 <p>Try replacing <code>metric="euclidean"</code> with <code>metric="manhattan"</code>—you’ll see the same sensitivity to feature scale.</p>
 <div id="02c4e2d7" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>

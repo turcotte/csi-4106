@@ -124,6 +124,22 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -1142,7 +1158,7 @@ Marcel Turcotte
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>X_wins: <span class="math inline">\(\frac{1}{3}\)</span>, O_wins: <span class="math inline">\(\frac{1}{3}\)</span>, draws: <span class="math inline">\(\frac{1}{3}\)</span> or X_wins: <span class="math inline">\(\frac{2}{5}\)</span>, O_wins: <span class="math inline">\(\frac{2}{5}\)</span>, draws: <span class="math inline">\(\frac{1}{5}\)</span> or something else?</p>
+<p>X_wins: <span class="math inline">\frac{1}{3}</span>, O_wins: <span class="math inline">\frac{1}{3}</span>, draws: <span class="math inline">\frac{1}{3}</span> or X_wins: <span class="math inline">\frac{2}{5}</span>, O_wins: <span class="math inline">\frac{2}{5}</span>, draws: <span class="math inline">\frac{1}{5}</span> or something else?</p>
 </div></aside></section><section id="can-you-guess-the-outcome-output" class="slide level2 output-location-slide"><h2>Can You Guess the Outcome?</h2><div class="cell output-location-slide" data-execution_count="22">
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>{'X_wins': 581, 'O_wins': 290, 'draws': 129}</code></pre>
@@ -1185,32 +1201,32 @@ Marcel Turcotte
 <section id="deterministic-games" class="slide level2">
 <h2>Deterministic Games</h2>
 <ul>
-<li><strong>States</strong>: <span class="math inline">\(S\)</span> (<span class="math inline">\(S_0\)</span> to <span class="math inline">\(S_k\)</span>)</li>
-<li><strong>Players</strong>: <span class="math inline">\(P = {1, N}\)</span></li>
-<li><strong>Actions</strong>: <span class="math inline">\(A\)</span> (depends on <span class="math inline">\(P\)</span> and <span class="math inline">\(S\)</span>)</li>
-<li><strong>Transition function</strong>: <span class="math inline">\(S \times A \rightarrow S\)</span></li>
-<li><strong>A final state</strong>: <span class="math inline">\(S_\mathrm{final}\)</span></li>
-<li><strong>Reward or utility</strong>: <span class="math inline">\(S_\mathrm{final}, p\)</span></li>
+<li><strong>States</strong>: <span class="math inline">S</span> (<span class="math inline">S_0</span> to <span class="math inline">S_k</span>)</li>
+<li><strong>Players</strong>: <span class="math inline">P = {1, N}</span></li>
+<li><strong>Actions</strong>: <span class="math inline">A</span> (depends on <span class="math inline">P</span> and <span class="math inline">S</span>)</li>
+<li><strong>Transition function</strong>: <span class="math inline">S \times A \rightarrow S</span></li>
+<li><strong>A final state</strong>: <span class="math inline">S_\mathrm{final}</span></li>
+<li><strong>Reward or utility</strong>: <span class="math inline">S_\mathrm{final}, p</span></li>
 </ul>
-<p>Develop a policy <span class="math inline">\(S_0 \rightarrow S_\mathrm{final}\)</span>.</p>
+<p>Develop a policy <span class="math inline">S_0 \rightarrow S_\mathrm{final}</span>.</p>
 <aside class="notes">
 <p>Unlike the earlier state-space search formulations, we introduce an explicit player parameter. Consequently, the transition function is conditioned on both the current state and the player identity (rather than on state alone).</p>
 <p>What is a <strong>policy</strong>? How does it differ from the <strong>transition</strong> function?</p>
 <p>The <strong>transition function</strong> describes the game’s mechanics.</p>
-<p><span class="math display">\[
+<p><span class="math display">
 T : S \times A \to S
-\]</span></p>
+</span></p>
 <p>It is part of the <em>game definition</em>.</p>
-<p>It tells you <strong>what happens</strong> when you take action <span class="math inline">\(a\)</span> in state <span class="math inline">\(s\)</span>:</p>
+<p>It tells you <strong>what happens</strong> when you take action <span class="math inline">a</span> in state <span class="math inline">s</span>:</p>
 <ul>
 <li>It is fixed by the rules of the game.</li>
 <li>It does <strong>not</strong> depend on how a particular player wants to play.</li>
 <li>Example (Tic-Tac-Toe): placing an X in an empty cell updates the board accordingly.</li>
 </ul>
 <p>The <strong>policy</strong> describes the player’s behaviour.</p>
-<p><span class="math display">\[
+<p><span class="math display">
 \pi : S \to A
-\]</span></p>
+</span></p>
 <p>It is part of the <em>solution</em>.</p>
 <p>It tells the player <strong>which action to choose</strong> in each state they may encounter.</p>
 <ul>
@@ -1235,13 +1251,13 @@ T : S \times A \to S
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Transition function</strong> <span class="math inline">\(T\)</span></td>
+<td><strong>Transition function</strong> <span class="math inline">T</span></td>
 <td>How states evolve when an action is taken</td>
 <td><strong>Fixed by game rules</strong></td>
 <td>Applying a move updates the board</td>
 </tr>
 <tr class="even">
-<td><strong>Policy</strong> <span class="math inline">\(\pi\)</span></td>
+<td><strong>Policy</strong> <span class="math inline">\pi</span></td>
 <td>Which action the player selects in each state</td>
 <td><strong>Chosen (e.g., optimal strategy)</strong></td>
 <td>Always take center if possible</td>
@@ -1272,7 +1288,7 @@ T : S \times A \to S
 <p>In itself this statement is rather surprising. Why?</p>
 <p><strong>How many board configurations are there?</strong></p>
 <ul>
-<li>Each square can be occupied by X or O or be empty. This leads to <span class="math inline">\(3^9= 19,683\)</span> board configurations.</li>
+<li>Each square can be occupied by X or O or be empty. This leads to <span class="math inline">3^9= 19,683</span> board configurations.</li>
 <li>Are all these configurations possible in a valid game?</li>
 </ul>
 <p><strong>Game progression.</strong></p>
@@ -1358,17 +1374,17 @@ T : S \times A \to S
 <section id="search-tree-1" class="slide level2">
 <h2>Search Tree</h2>
 <ul>
-<li><p><strong>Chess</strong>: <span class="math inline">\(35^{80} \sim 10^{123}\)</span></p></li>
-<li><p><strong>Go</strong>: <span class="math inline">\(361! \sim 10^{768}\)</span></p></li>
+<li><p><strong>Chess</strong>: <span class="math inline">35^{80} \sim 10^{123}</span></p></li>
+<li><p><strong>Go</strong>: <span class="math inline">361! \sim 10^{768}</span></p></li>
 </ul>
 
 <aside class="notes">
 <p><strong>Chess</strong>:</p>
-<p>Chess has a relatively small board (<span class="math inline">\(8 \times 8\)</span>) but a variety of pieces with different movement capabilities.</p>
+<p>Chess has a relatively small board (<span class="math inline">8 \times 8</span>) but a variety of pieces with different movement capabilities.</p>
 <p>On average, each position has about 35 legal moves.</p>
-<p>Considering an average game length of 80 ply (a ply is a half-move, so 40 moves per player), the total games are estimated using the formula: <span class="math inline">\(35^{80} \sim 10^{123}\)</span>, adjusted down to account for illegal and redundant positions.</p>
+<p>Considering an average game length of 80 ply (a ply is a half-move, so 40 moves per player), the total games are estimated using the formula: <span class="math inline">35^{80} \sim 10^{123}</span>, adjusted down to account for illegal and redundant positions.</p>
 <p><strong>Go</strong>:</p>
-<p>Go is played on a <span class="math inline">\(19 \times 19\)</span> board, providing 361 points where stones can be placed. Accordingly, the total number of games is <span class="math inline">\(361! \sim 10^{768}\)</span>.</p>
+<p>Go is played on a <span class="math inline">19 \times 19</span> board, providing 361 points where stones can be placed. Accordingly, the total number of games is <span class="math inline">361! \sim 10^{768}</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1381,7 +1397,7 @@ T : S \times A \to S
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>The estimated <strong>number of atoms in the observable universe</strong> is around <span class="math inline">\(10^{78}\)</span> to <span class="math inline">\(10^{82}\)</span>.</p>
+<p>The estimated <strong>number of atoms in the observable universe</strong> is around <span class="math inline">10^{78}</span> to <span class="math inline">10^{82}</span>.</p>
 </div></aside></section>
 <section id="definition-1" class="slide level2">
 <h2>Definition</h2>
@@ -1427,8 +1443,8 @@ T : S \times A \to S
 <section id="game-setup" class="slide level2">
 <h2>Game Setup</h2>
 <ul>
-<li>The <strong>game starts</strong> with a single decision point for Player 1, who has two possible moves: <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</li>
-<li>Each of these moves leads to a <strong>decision point for Player 2</strong>, who also has two possible responses: <span class="math inline">\(C\)</span> and <span class="math inline">\(D\)</span>.</li>
+<li>The <strong>game starts</strong> with a single decision point for Player 1, who has two possible moves: <span class="math inline">A</span> and <span class="math inline">B</span>.</li>
+<li>Each of these moves leads to a <strong>decision point for Player 2</strong>, who also has two possible responses: <span class="math inline">C</span> and <span class="math inline">D</span>.</li>
 <li>The <strong>game ends</strong> after Player 2’s move, resulting in a terminal state with predefined scores.</li>
 </ul>
 </section>
@@ -1436,18 +1452,18 @@ T : S \times A \to S
 <h2>Search Tree</h2>
 <ul>
 <li><strong>Root Node</strong>: Represents the initial state before Player 1’s move.</li>
-<li><strong>Ply 1</strong>: Player 1 chooses between moves <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</li>
-<li><strong>Ply 2</strong>: For each of Player 1’s moves, Player 2 chooses between moves <span class="math inline">\(C\)</span> and <span class="math inline">\(D\)</span>.</li>
+<li><strong>Ply 1</strong>: Player 1 chooses between moves <span class="math inline">A</span> and <span class="math inline">B</span>.</li>
+<li><strong>Ply 2</strong>: For each of Player 1’s moves, Player 2 chooses between moves <span class="math inline">C</span> and <span class="math inline">D</span>.</li>
 <li><strong>Leaf Nodes</strong>: Each branch’s endpoint is a terminal state with an associated score.</li>
 </ul>
 </section>
 <section id="scores" class="slide level2">
 <h2>Scores</h2>
 <ul>
-<li><span class="math inline">\((A, C)\)</span> results in a score of 3.</li>
-<li><span class="math inline">\((A, D)\)</span> results in a score of 5.</li>
-<li><span class="math inline">\((B, C)\)</span> results in a score of 2.</li>
-<li><span class="math inline">\((B, D)\)</span> results in a score of 1.</li>
+<li><span class="math inline">(A, C)</span> results in a score of 3.</li>
+<li><span class="math inline">(A, D)</span> results in a score of 5.</li>
+<li><span class="math inline">(B, C)</span> results in a score of 2.</li>
+<li><span class="math inline">(B, D)</span> results in a score of 1.</li>
 </ul>
 
 <aside><div>
@@ -1477,13 +1493,13 @@ T : S \times A \to S
 </div>
 </div><div class="column" style="width:60%;">
 <ul>
-<li><p><strong>For move <span class="math inline">\(A\)</span></strong>:</p>
+<li><p><strong>For move <span class="math inline">A</span></strong>:</p>
 <ul>
-<li>Player 2 can choose <span class="math inline">\(C\)</span> (score = 3) or <span class="math inline">\(D\)</span> (score = 5); they choose <span class="math inline">\(C\)</span> (minimizing to 3).</li>
+<li>Player 2 can choose <span class="math inline">C</span> (score = 3) or <span class="math inline">D</span> (score = 5); they choose <span class="math inline">C</span> (minimizing to 3).</li>
 </ul></li>
-<li><p><strong>For move <span class="math inline">\(B\)</span></strong>:</p>
+<li><p><strong>For move <span class="math inline">B</span></strong>:</p>
 <ul>
-<li>Player 2 can choose <span class="math inline">\(C\)</span> (score = 2) or <span class="math inline">\(D\)</span> (score = 1); they choose <span class="math inline">\(D\)</span> (minimizing to 1).</li>
+<li>Player 2 can choose <span class="math inline">C</span> (score = 2) or <span class="math inline">D</span> (score = 1); they choose <span class="math inline">D</span> (minimizing to 1).</li>
 </ul></li>
 </ul>
 </div></div>
@@ -1511,7 +1527,7 @@ T : S \times A \to S
 </figure>
 </div>
 </div><div class="column" style="width:60%;">
-<p>Player 1, being the <strong>maximizer</strong>, will choose move <span class="math inline">\(A\)</span>, as it leads to the higher score of 3 after Player 2 minimizes.</p>
+<p>Player 1, being the <strong>maximizer</strong>, will choose move <span class="math inline">A</span>, as it leads to the higher score of 3 after Player 2 minimizes.</p>
 </div></div>
 </section></section>
 <section>
@@ -2357,14 +2373,14 @@ T : S \times A \to S
 <p>At a <strong>maximizing node</strong>:</p>
 <ul>
 <li><p>The <strong>maximizer</strong> aims to <strong>maximize</strong> the score.</p></li>
-<li><p><strong>Alpha (<span class="math inline">\(\alpha\)</span>)</strong> is updated to the <strong>highest</strong> value found so far among child nodes.</p></li>
+<li><p><strong>Alpha (<span class="math inline">\alpha</span>)</strong> is updated to the <strong>highest</strong> value found so far among child nodes.</p></li>
 <li><p><strong>Process</strong>:</p>
 <ul>
-<li><p>Initialize <span class="math inline">\(\alpha = -\infty\)</span>.</p></li>
+<li><p>Initialize <span class="math inline">\alpha = -\infty</span>.</p></li>
 <li><p>For each child node:</p>
 <ul>
 <li><p>Compute the evaluation score.</p></li>
-<li><p>Update <span class="math inline">\(\alpha = \max(\alpha, \mathrm{child\_score})\)</span>.</p></li>
+<li><p>Update <span class="math inline">\alpha = \max(\alpha, \mathrm{child\_score})</span>.</p></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -2374,14 +2390,14 @@ T : S \times A \to S
 <p>At a <strong>minimizing node</strong>:</p>
 <ul>
 <li><p>The <strong>minimizer</strong> aims to <strong>minimize</strong> the score.</p></li>
-<li><p><strong>Beta (<span class="math inline">\(\beta\)</span>)</strong> is updated to the <strong>lowest</strong> value found so far among child nodes.</p></li>
+<li><p><strong>Beta (<span class="math inline">\beta</span>)</strong> is updated to the <strong>lowest</strong> value found so far among child nodes.</p></li>
 <li><p><strong>Process</strong>:</p>
 <ul>
-<li><p>Initialize <span class="math inline">\(\beta = \infty\)</span>.</p></li>
+<li><p>Initialize <span class="math inline">\beta = \infty</span>.</p></li>
 <li><p>For each child node:</p>
 <ul>
 <li><p>Compute the evaluation score.</p></li>
-<li><p>Update <span class="math inline">\(\beta = \min(\beta, \mathrm{child\_score})\)</span>.</p></li>
+<li><p>Update <span class="math inline">\beta = \min(\beta, \mathrm{child\_score})</span>.</p></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -2394,12 +2410,12 @@ T : S \times A \to S
 <h2>Role of Alpha and Beta in Pruning</h2>
 <p><strong>Pruning Condition</strong>:</p>
 <ul>
-<li><p><strong>If <span class="math inline">\(\beta \leq \alpha\)</span></strong>, further exploration of the current node’s siblings is unnecessary.</p></li>
+<li><p><strong>If <span class="math inline">\beta \leq \alpha</span></strong>, further exploration of the current node’s siblings is unnecessary.</p></li>
 <li><p><strong>Rationale</strong>:</p>
 <ul>
-<li><p>The maximizer has a guaranteed score of at least <span class="math inline">\(\alpha\)</span>.</p></li>
-<li><p>The minimizer can ensure that the maximizer cannot get a better score than <span class="math inline">\(\beta\)</span>.</p></li>
-<li><p>If <span class="math inline">\(\beta \leq \alpha\)</span>, the maximizer won’t find a better option in this branch.</p></li>
+<li><p>The maximizer has a guaranteed score of at least <span class="math inline">\alpha</span>.</p></li>
+<li><p>The minimizer can ensure that the maximizer cannot get a better score than <span class="math inline">\beta</span>.</p></li>
+<li><p>If <span class="math inline">\beta \leq \alpha</span>, the maximizer won’t find a better option in this branch.</p></li>
 </ul></li>
 </ul>
 </section>
@@ -2707,7 +2723,7 @@ T : S \times A \to S
 </div>
 
 <aside><div>
-<p>The values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are initially set to <span class="math inline">\(-\infty\)</span> and <span class="math inline">\(\infty\)</span>, respectively. The recursive calls continue traversing the tree until the leftmost node is reached.</p>
+<p>The values of <span class="math inline">\alpha</span> and <span class="math inline">\beta</span> are initially set to <span class="math inline">-\infty</span> and <span class="math inline">\infty</span>, respectively. The recursive calls continue traversing the tree until the leftmost node is reached.</p>
 </div></aside></section>
 <section id="walkthrough-2" class="slide level2">
 <h2>Walkthrough</h2>
@@ -2718,7 +2734,7 @@ T : S \times A \to S
 </div>
 
 <aside><div>
-<p>The value of <span class="math inline">\(\alpha\)</span> is updated to -1.</p>
+<p>The value of <span class="math inline">\alpha</span> is updated to -1.</p>
 </div></aside></section>
 <section id="walkthrough-3" class="slide level2">
 <h2>Walkthrough</h2>
@@ -2729,7 +2745,7 @@ T : S \times A \to S
 </div>
 
 <aside><div>
-<p>Updating <span class="math inline">\(\alpha\)</span> to 3.</p>
+<p>Updating <span class="math inline">\alpha</span> to 3.</p>
 </div></aside></section>
 <section id="walkthrough-4" class="slide level2">
 <h2>Walkthrough</h2>
@@ -2740,7 +2756,7 @@ T : S \times A \to S
 </div>
 
 <aside><div>
-<p>Updating <span class="math inline">\(\beta\)</span> from <span class="math inline">\(\infty\)</span> to 3. Passing those values to the right child.</p>
+<p>Updating <span class="math inline">\beta</span> from <span class="math inline">\infty</span> to 3. Passing those values to the right child.</p>
 </div></aside></section>
 <section id="walkthrough-5" class="slide level2">
 <h2>Walkthrough</h2>
@@ -2751,7 +2767,7 @@ T : S \times A \to S
 </div>
 
 <aside><div>
-<p>Updating <span class="math inline">\(\alpha\)</span> from <span class="math inline">\(-\infty\)</span> to 5. We now have <span class="math inline">\(\beta \le \alpha\)</span>.</p>
+<p>Updating <span class="math inline">\alpha</span> from <span class="math inline">-\infty</span> to 5. We now have <span class="math inline">\beta \le \alpha</span>.</p>
 </div></aside></section>
 <section id="walkthrough-6" class="slide level2">
 <h2>Walkthrough</h2>
@@ -2762,7 +2778,7 @@ T : S \times A \to S
 </div>
 
 <aside><div>
-<p>The right child is not visited. The parent (a minimizer) has a better option (<span class="math inline">\(\beta\)</span>) than <span class="math inline">\(\alpha\)</span>.</p>
+<p>The right child is not visited. The parent (a minimizer) has a better option (<span class="math inline">\beta</span>) than <span class="math inline">\alpha</span>.</p>
 </div></aside></section>
 <section id="walkthrough-7" class="slide level2">
 <h2>Walkthrough</h2>
@@ -2773,7 +2789,7 @@ T : S \times A \to S
 </div>
 
 <aside><div>
-<p>Returning from the recursive calls, the root node receives a value of 3 from its left child and updates its <span class="math inline">\(\alpha\)</span> to 3, which exceeds its initial value of <span class="math inline">\(-\infty\)</span>.</p>
+<p>Returning from the recursive calls, the root node receives a value of 3 from its left child and updates its <span class="math inline">\alpha</span> to 3, which exceeds its initial value of <span class="math inline">-\infty</span>.</p>
 </div></aside></section>
 <section id="walkthrough-8" class="slide level2">
 <h2>Walkthrough</h2>
@@ -2784,7 +2800,7 @@ T : S \times A \to S
 </div>
 
 <aside><div>
-<p>Now traversing the right subtree from the root. Upon reaching left-most maximizing node of the right subtree, <span class="math inline">\(\alpha\)</span> is not updated since -6 and -4 are less than 3.</p>
+<p>Now traversing the right subtree from the root. Upon reaching left-most maximizing node of the right subtree, <span class="math inline">\alpha</span> is not updated since -6 and -4 are less than 3.</p>
 </div></aside></section>
 <section id="walkthrough-9" class="slide level2">
 <h2>Walkthrough</h2>
@@ -2795,7 +2811,7 @@ T : S \times A \to S
 </div>
 
 <aside><div>
-<p><span class="math inline">\(\beta\)</span> is now updated to -4. We now have that <span class="math inline">\(\beta \le \alpha\)</span>.</p>
+<p><span class="math inline">\beta</span> is now updated to -4. We now have that <span class="math inline">\beta \le \alpha</span>.</p>
 </div></aside></section>
 <section id="walkthrough-10" class="slide level2">
 <h2>Walkthrough</h2>
@@ -2875,8 +2891,8 @@ T : S \times A \to S
 </figure>
 </div>
 <ul>
-<li><strong>Alpha Cutoff:</strong> Occurs at <strong>minimizer nodes</strong> when <span class="math inline">\(\beta \le \alpha\)</span>.</li>
-<li><strong>Beta Cutoff:</strong> Occurs at <strong>maximizer nodes</strong> when <span class="math inline">\(\alpha \ge \beta\)</span>.</li>
+<li><strong>Alpha Cutoff:</strong> Occurs at <strong>minimizer nodes</strong> when <span class="math inline">\beta \le \alpha</span>.</li>
+<li><strong>Beta Cutoff:</strong> Occurs at <strong>maximizer nodes</strong> when <span class="math inline">\alpha \ge \beta</span>.</li>
 </ul>
 <aside class="notes">
 <ol type="1">
@@ -2893,25 +2909,25 @@ T : S \times A \to S
 <ul>
 <li><strong>At Maximizer Nodes:</strong>
 <ul>
-<li>If <strong>alpha</strong> becomes <strong>greater than or equal to beta</strong> (<span class="math inline">\(\alpha \ge \beta\)</span>), further exploration of the current node’s descendants can be stopped. This is because the minimizer (opponent) can force the outcome to be no better than beta, so the maximizer cannot improve the result beyond this point.</li>
+<li>If <strong>alpha</strong> becomes <strong>greater than or equal to beta</strong> (<span class="math inline">\alpha \ge \beta</span>), further exploration of the current node’s descendants can be stopped. This is because the minimizer (opponent) can force the outcome to be no better than beta, so the maximizer cannot improve the result beyond this point.</li>
 <li>This is often referred to as a <strong>beta cutoff</strong> because the value of beta is causing the pruning at a maximizer node.</li>
 </ul></li>
 <li><strong>At Minimizer Nodes:</strong>
 <ul>
-<li>If <strong>beta</strong> becomes <strong>less than or equal to alpha</strong> (<span class="math inline">\(\beta \le \alpha\)</span>), the algorithm can prune the remaining child nodes of the minimizer node. This is because the maximizer can force a result of at least alpha, so the minimizer cannot find a better (lower) outcome.</li>
+<li>If <strong>beta</strong> becomes <strong>less than or equal to alpha</strong> (<span class="math inline">\beta \le \alpha</span>), the algorithm can prune the remaining child nodes of the minimizer node. This is because the maximizer can force a result of at least alpha, so the minimizer cannot find a better (lower) outcome.</li>
 <li>This is known as an <strong>alpha cutoff</strong> because the value of alpha is causing the pruning at a minimizer node.</li>
 </ul></li>
 </ul></li>
 <li><strong>Process of Pruning:</strong>
 <ul>
-<li>The pruning occurs <strong>not when alpha or beta are updated</strong>, but when the pruning condition (<span class="math inline">\(\alpha \ge \beta\)</span> at maximizer nodes or <span class="math inline">\(\beta \le \alpha\)</span> at minimizer nodes) is met.</li>
+<li>The pruning occurs <strong>not when alpha or beta are updated</strong>, but when the pruning condition (<span class="math inline">\alpha \ge \beta</span> at maximizer nodes or <span class="math inline">\beta \le \alpha</span> at minimizer nodes) is met.</li>
 <li>Once these conditions are satisfied, the algorithm knows that further exploration will not yield a better outcome, and thus it can safely prune those branches.</li>
 </ul></li>
 </ol>
 <p><strong>Summary:</strong></p>
 <ul>
-<li><p><strong>Alpha Cutoff:</strong> Occurs at <strong>minimizer nodes</strong> when <span class="math inline">\(\beta \le \alpha\)</span>.</p></li>
-<li><p><strong>Beta Cutoff:</strong> Occurs at <strong>maximizer nodes</strong> when <span class="math inline">\(\alpha \ge \beta\)</span>.</p></li>
+<li><p><strong>Alpha Cutoff:</strong> Occurs at <strong>minimizer nodes</strong> when <span class="math inline">\beta \le \alpha</span>.</p></li>
+<li><p><strong>Beta Cutoff:</strong> Occurs at <strong>maximizer nodes</strong> when <span class="math inline">\alpha \ge \beta</span>.</p></li>
 <li><p><strong>Why Pruning Occurs:</strong></p>
 <ul>
 <li>In both cases, the pruning occurs because further exploration cannot influence the final decision. The opponent can force the game into a situation that’s no better than the current evaluation.</li>
@@ -3570,7 +3586,6 @@ Shannon, Claude E. 1959. <span>“Programming a Computer Playing Chess.”</span
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -3739,27 +3754,9 @@ Shannon, Claude E. 1959. <span>“Programming a Computer Playing Chess.”</span
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

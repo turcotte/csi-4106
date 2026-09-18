@@ -12,4 +12,4 @@ CSI4106 Introduction to Artificial Intelligence
 
 ## Practice
 
-- [kong_and_yu-2018](kong_and_yu-2018) - a notebook illustrating the effectiveness of \\l_1\\ and \\l_2\\ regularization.
+- [kong_and_yu-2018](kong_and_yu-2018) - a notebook illustrating the effectiveness of l_1 and l_2 regularization.

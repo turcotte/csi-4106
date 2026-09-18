@@ -20,7 +20,7 @@ In this notebook, we develop a custom implementation of logistic regression, emp
 
 # Logistic Regression
 
-The logistic regression implementation presented in the lecture notes has some practical limitations, notably the need for users to manually add a column of ones to the matrix \\X\\ to account for the intercept term, \\\theta_0\\. Such a requirement can be considered suboptimal as it exposes users to unnecessary implementation details. To address this issue, I propose an object-oriented implementation that improves both clarity and usability. This implementation efficiently utilizes the [NumPy](https://numpy.org) library.
+The logistic regression implementation presented in the lecture notes has some practical limitations, notably the need for users to manually add a column of ones to the matrix X to account for the intercept term, \theta_0. Such a requirement can be considered suboptimal as it exposes users to unnecessary implementation details. To address this issue, I propose an object-oriented implementation that improves both clarity and usability. This implementation efficiently utilizes the [NumPy](https://numpy.org) library.
 
 ``` python
 import numpy as np

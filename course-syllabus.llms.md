@@ -68,7 +68,7 @@ The final course grade will be calculated as follows:
 
 Consult the [schedule](course-schedule.llms.md) for the dates.
 
-In order to pass the course, students must obtain a combined average of at least 50% on the quizzes and the final exam. Specifically, \\(Q1 + Q2 + F)/60 \geq 0.50\\, where \\Q1\\, \\Q2\\, and \\F\\ denote the first and second quizzes, and the final examination scores, respectively.
+In order to pass the course, students must obtain a combined average of at least 50% on the quizzes and the final exam. Specifically, (Q1 + Q2 + F)/60 \geq 0.50, where Q1, Q2, and F denote the first and second quizzes, and the final examination scores, respectively.
 
 Assignments, quizzes and the final examinaation constitute mandatory evaluation components. To be eligible to sit for the final examination, students must complete at least one of the two quizzes and at least two of the four assignments. Failure to satisfy these mandatory evaluation requirements will result in an automatic `EIN` final grade.
 

@@ -125,6 +125,22 @@
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
   <link rel="stylesheet" href="../../assets/css/reveal-common.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -334,13 +350,13 @@ Marcel Turcotte
 <section id="motivation-continued" class="slide level2">
 <h2>Motivation (continued)</h2>
 <ul>
-<li class="fragment">Consider an <strong>RGB image</strong> with dimensions <span class="math inline">\(224 \times 224\)</span>, which is relatively small by contemporary benchmarks.</li>
-<li class="fragment">The image consists of <span class="math inline">\(224 \times 224 \times 3 = 150,528\)</span> <strong>input features</strong>.</li>
+<li class="fragment">Consider an <strong>RGB image</strong> with dimensions <span class="math inline">224 \times 224</span>, which is relatively small by contemporary benchmarks.</li>
+<li class="fragment">The image consists of <span class="math inline">224 \times 224 \times 3 = 150,528</span> <strong>input features</strong>.</li>
 <li class="fragment">A neural network with merely a <strong>single hidden dense layer</strong> would require over 22,658,678,784 (<strong>22 billion</strong>) parameters, highlighting the computational complexity involved.</li>
 </ul>
 <aside class="notes">
 <p>Here, we assume that the hidden layer contains the same number of units as the input layer, a common design choice. This preserves the dimensionality of the feature space and avoids imposing an arbitrary information bottleneck in the first layer. It also ensures that the network has sufficient capacity to model complex, nonlinear combinations of all pixels prior to downsampling.</p>
-<p>In a fully connected feedforward neural network with <span class="math inline">\(k\)</span> layers, if each layer contains <span class="math inline">\(n\)</span> units, the number of parameters scales as <span class="math inline">\(\mathcal{O}(k n^2)\)</span>.</p>
+<p>In a fully connected feedforward neural network with <span class="math inline">k</span> layers, if each layer contains <span class="math inline">n</span> units, the number of parameters scales as <span class="math inline">\mathcal{O}(k n^2)</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -378,7 +394,7 @@ Marcel Turcotte
 <ul>
 <li><strong>The Pivot:</strong> While classic computer vision relied on humans guessing the correct matrix weights, convolutional layers <em>learn</em> them. To implement this learning mathematically—specifically how we handle deep representations—you strip away the spatial complexity.</li>
 <li><strong>The Content:</strong> Execute the 1D signal progression (Single Channel -&gt; Multi-Channel -&gt; Multiple Kernels -&gt; Stacked Layers).</li>
-<li><strong>The Takeaway:</strong> Master the underlying dot-product arithmetic and the strict dimensional rules governing <span class="math inline">\(C_{in}\)</span> and <span class="math inline">\(C_{out}\)</span>.</li>
+<li><strong>The Takeaway:</strong> Master the underlying dot-product arithmetic and the strict dimensional rules governing <span class="math inline">C_{in}</span> and <span class="math inline">C_{out}</span>.</li>
 </ul>
 <p><strong>Phase 3: The Synthesis (2D Neural Networks)</strong></p>
 <p><strong>Goal:</strong> Re-introduce spatial dimensions to the rigorous tensor math.</p>
@@ -581,8 +597,8 @@ Marcel Turcotte
 
 <aside class="notes">
 <p>An image is a two-dimensional array of numbers. Here, 0 represents a black pixel and 255 represents a white pixel, following the conventional range for an 8-bit grayscale image. These sixteen intensities form a small letter O.</p>
-<p>The small <span class="math inline">\(2 \times 2\)</span> matrix is a kernel. We begin with its upper-left entry aligned with the upper-left input pixel, then move it one column at a time. After reaching the end of a row, we continue on the next row. With a <span class="math inline">\(4 \times
-4\)</span> input and a <span class="math inline">\(2 \times 2\)</span> kernel, there are <span class="math inline">\(3 \times 3=9\)</span> valid placements.</p>
+<p>The small <span class="math inline">2 \times 2</span> matrix is a kernel. We begin with its upper-left entry aligned with the upper-left input pixel, then move it one column at a time. After reaching the end of a row, we continue on the next row. With a <span class="math inline">4 \times
+4</span> input and a <span class="math inline">2 \times 2</span> kernel, there are <span class="math inline">3 \times 3=9</span> valid placements.</p>
 <p>Only positions where the complete kernel overlaps the input are used. This is called <strong>valid</strong> cross-correlation. Boundary handling is deliberately postponed until later.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -596,16 +612,16 @@ Marcel Turcotte
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>A <strong>kernel</strong> (aka filter) is a small matrix, usually <span class="math inline">\(3 \times 3\)</span>, <span class="math inline">\(5 \times 5\)</span>, or similar in size, that <strong>slides over</strong> the input data (such as an image) to perform <strong>cross-correlation</strong>.</p>
+<p>A <strong>kernel</strong> (aka filter) is a small matrix, usually <span class="math inline">3 \times 3</span>, <span class="math inline">5 \times 5</span>, or similar in size, that <strong>slides over</strong> the input data (such as an image) to perform <strong>cross-correlation</strong>.</p>
 </div></aside></section>
 <section id="what-does-each-placement-compute" class="slide level2 hide-code-toggle">
 <h2>What does each placement compute?</h2>
-<p><span class="math display">\[
+<p><span class="math display">
 Y[i,j]
 =
 \sum_{u=0}^{K_h-1}\sum_{v=0}^{K_w-1}
 X[i+u,j+v] K[u,v]
-\]</span></p>
+</span></p>
 <div id="cell-cross-correlation-one-calculation" class="cell" data-fig-height="3.25" data-fig-width="11.2" data-execution_count="4">
 <details class="code-fold">
 <summary>Show calculation code</summary>
@@ -646,7 +662,7 @@ X[i+u,j+v] K[u,v]
 </div>
 
 <aside class="notes">
-<p>At placement <span class="math inline">\((i,j)=(1,2)\)</span>, the kernel overlaps two black pixels and two white pixels. Corresponding entries are multiplied, and the four products are summed. The result, 510, is stored at <span class="math inline">\(Y[1,2]\)</span>.</p>
+<p>At placement <span class="math inline">(i,j)=(1,2)</span>, the kernel overlaps two black pixels and two white pixels. Corresponding entries are multiplied, and the four products are summed. The result, 510, is stored at <span class="math inline">Y[1,2]</span>.</p>
 <p>The same calculation is repeated at each placement. The right edge of the O produces positive responses, the left edge produces negative responses, and the central column produces zero. The sign therefore records the direction of the change, not merely the presence of an edge.</p>
 <p>This operation is <strong>cross-correlation</strong>, because the kernel is used as written. In mathematical convolution, the kernel is first reversed along both axes. Machine-learning libraries ordinarily compute cross-correlation but call the result <strong>convolution</strong> by convention. With an asymmetric edge kernel, reversal changes the sign of the response, although its absolute magnitude is unchanged.</p>
 <p>The output is often called a <strong>response map</strong> in classical image processing. In a convolutional network, the corresponding output of a kernel is a <strong>feature map</strong>.</p>
@@ -719,8 +735,8 @@ X[i+u,j+v] K[u,v]
 </div>
 
 <aside class="notes">
-<p>This is the Sobel <span class="math inline">\(x\)</span> kernel. It estimates how rapidly image intensity changes across columns—the horizontal coordinate. A strong left-to-right change occurs at a vertical boundary, so <span class="math inline">\(K_x\)</span> is commonly described as a vertical-edge detector. Keeping the derivative direction and edge orientation distinct avoids an otherwise common terminology error.</p>
-<p>The signed response distinguishes a dark-to-light boundary from a light-to-dark boundary. The slide displays <span class="math inline">\(|Y|\)</span>, the absolute response, because the immediate question is where strong vertical boundaries occur rather than their polarity. The clipping value is the 99th percentile so that a few very strong pixels do not make the remaining edges invisible.</p>
+<p>This is the Sobel <span class="math inline">x</span> kernel. It estimates how rapidly image intensity changes across columns—the horizontal coordinate. A strong left-to-right change occurs at a vertical boundary, so <span class="math inline">K_x</span> is commonly described as a vertical-edge detector. Keeping the derivative direction and edge orientation distinct avoids an otherwise common terminology error.</p>
+<p>The signed response distinguishes a dark-to-light boundary from a light-to-dark boundary. The slide displays <span class="math inline">|Y|</span>, the absolute response, because the immediate question is where strong vertical boundaries occur rather than their polarity. The clipping value is the 99th percentile so that a few very strong pixels do not make the remaining edges invisible.</p>
 <p>The kernel was chosen by a person; no machine learning is involved. The photograph provides a real image with natural variation, while the computer console, checkerboard, clothing, and background contain boundaries at several orientations.</p>
 <p><strong>Sources:</strong></p>
 <ul>
@@ -790,7 +806,7 @@ X[i+u,j+v] K[u,v]
 </div>
 
 <aside class="notes">
-<p>Transposing the Sobel <span class="math inline">\(x\)</span> kernel gives the Sobel <span class="math inline">\(y\)</span> kernel. It estimates changes from one row to the next, so it responds strongly to horizontal boundaries. Using the same input image makes the comparison controlled: only the kernel weights have changed.</p>
+<p>Transposing the Sobel <span class="math inline">x</span> kernel gives the Sobel <span class="math inline">y</span> kernel. It estimates changes from one row to the next, so it responds strongly to horizontal boundaries. Using the same input image makes the comparison controlled: only the kernel weights have changed.</p>
 <p>These kernels illustrate the central computational idea. A small set of weights is applied to every local neighbourhood, producing a response map that records where the selected pattern occurs. Classical image processing relies on domain experts to specify useful kernels. A convolutional neural network retains the local scanning operation but learns its kernel weights and biases from data.</p>
 <p>Learned first-layer kernels may resemble edge or colour-contrast detectors, but a convolutional network is not restricted to reproducing classical kernels. Its kernels are optimized for the network’s prediction objective.</p>
 <p><strong>Sources:</strong></p>
@@ -844,9 +860,9 @@ X[i+u,j+v] K[u,v]
 <blockquote>
 <p>What problems have observations arranged along <strong>one ordered axis</strong>?</p>
 </blockquote>
-<p><span class="math display">\[
+<p><span class="math display">
 x[0],\; x[1],\; x[2],\; \ldots,\; x[L-1]
-\]</span></p>
+</span></p>
 
 <aside class="notes">
 <p>One-dimensional data are organized along one ordered axis. Time is the most familiar axis, but the ordering can also represent position in text, position in a biological sequence, or distance along a route. <strong>Neighbouring observations are usually related</strong>, so exchanging two positions changes the meaning of the data.</p>
@@ -1010,12 +1026,12 @@ x[0],\; x[1],\; x[2],\; \ldots,\; x[L-1]
        7      0.14   0.22359</code></pre>
 </div>
 </div>
-<p><span class="math display">\[
+<p><span class="math display">
 x[0]=0.04796,\quad x[1]=0.23134,\quad x[2]=0.30507,\quad\ldots
-\]</span></p>
+</span></p>
 
 <aside class="notes">
-<p>The X-axis input used in the following slides is a vector of 128 real numbers. At 50 readings per second, the index increases by 0.02 seconds at every step. The notation <span class="math inline">\(x[i]\)</span> simply means the number stored at position <span class="math inline">\(i\)</span>.</p>
+<p>The X-axis input used in the following slides is a vector of 128 real numbers. At 50 readings per second, the index increases by 0.02 seconds at every step. The notation <span class="math inline">x[i]</span> simply means the number stored at position <span class="math inline">i</span>.</p>
 <p>The file <a href="data/uci_har_prototype.csv"><code>data/uci_har_prototype.csv</code></a> is a compact, long-form extract made for this lecture. Each row contains the activity, the zero-based index of the source window, the subject identifier, the sample index, and the three body-acceleration values. It was derived from the three UCI files <code>body_acc_{x,y,z}_train.txt</code>, with labels and subjects joined from <code>y_train.txt</code> and <code>subject_train.txt</code>.</p>
 <p>“Actual values” does not mean “unprocessed raw recordings.” The values have undergone the preprocessing described in the preceding notes. The distinction matters when interpreting what the model receives and what conclusions can be drawn from it.</p>
 <p><strong>Sources:</strong></p>
@@ -1112,17 +1128,17 @@ x[0]=0.04796,\quad x[1]=0.23134,\quad x[2]=0.30507,\quad\ldots
 </div>
 </div>
 </div>
-<p><span class="math display">\[
+<p><span class="math display">
 w = [-1,-1,0,1,1], \qquad
 y[i] = \sum_{j=0}^{K-1} x[i+j]w[j]
-\]</span></p>
+</span></p>
 
 <aside class="notes">
-<p>The kernel <span class="math inline">\(w\)</span> contains five weights, so <span class="math inline">\(K=5\)</span>. At output position <span class="math inline">\(i\)</span>, the score is</p>
-<p><span class="math display">\[
+<p>The kernel <span class="math inline">w</span> contains five weights, so <span class="math inline">K=5</span>. At output position <span class="math inline">i</span>, the score is</p>
+<p><span class="math display">
 y[i] = -x[i]-x[i+1]+x[i+3]+x[i+4].
-\]</span></p>
-<p>It compares the combined level of the last two values with the combined level of the first two values. The middle value <span class="math inline">\(x[i+2]\)</span> is ignored. The selected window happens to contain two negative values, one value near zero, and two positive values, which makes the upward transition visually clear.</p>
+</span></p>
+<p>It compares the combined level of the last two values with the combined level of the first two values. The middle value <span class="math inline">x[i+2]</span> is ignored. The selected window happens to contain two negative values, one value near zero, and two positive values, which makes the upward transition visually clear.</p>
 <p>The kernel does not test the signs of the input values. It also responds when all five values are positive or all five are negative, provided that the last two are sufficiently larger than the first two. It is therefore more precise to describe it as an upward-contrast detector than as an exact template for a particular sequence of signs.</p>
 <p>The kernel is intentionally hand-crafted so that its behaviour can be predicted before performing the arithmetic. In a convolutional neural network, the kernel weights are learned from data.</p>
 <p>Classical signal and image processing use the same local multiply-and-sum arithmetic with weights chosen from domain knowledge. A convolutional neural network treats those weights as parameters and learns useful detectors for the prediction task. The hand-crafted kernel here is therefore an explanatory starting point, not a claim about what a trained network must learn.</p>
@@ -1165,8 +1181,8 @@ y[i] = -x[i]-x[i+1]+x[i+3]+x[i+4].
 </div>
 <aside class="notes">
 <p>The answer is no for this implementation. This function performs valid one-dimensional cross-correlation with one input channel, one kernel, unit stride, no padding, and no bias. It is already a complete forward pass for this restricted case.</p>
-<p>The loop variable <span class="math inline">\(i\)</span> identifies an output position, and <span class="math inline">\(j\)</span> identifies a position within the kernel. The update on the inner line forms one product and adds it to <code>y[i]</code>. Consequently, the source code displays the same summation as the equation rather than hiding it in a vectorized operation.</p>
-<p>The same vector <code>w</code> is used at every position. This parameter sharing is what allows a local pattern to be detected wherever it occurs in the sequence. For <span class="math inline">\(L=128\)</span> and <span class="math inline">\(K=5\)</span>, valid cross-correlation produces <span class="math inline">\(L_{\mathrm{out}}=124\)</span> scores.</p>
+<p>The loop variable <span class="math inline">i</span> identifies an output position, and <span class="math inline">j</span> identifies a position within the kernel. The update on the inner line forms one product and adds it to <code>y[i]</code>. Consequently, the source code displays the same summation as the equation rather than hiding it in a vectorized operation.</p>
+<p>The same vector <code>w</code> is used at every position. This parameter sharing is what allows a local pattern to be detected wherever it occurs in the sequence. For <span class="math inline">L=128</span> and <span class="math inline">K=5</span>, valid cross-correlation produces <span class="math inline">L_{\mathrm{out}}=124</span> scores.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1241,7 +1257,7 @@ y[i] = -x[i]-x[i+1]+x[i+3]+x[i+4].
 </div>
 <aside class="notes">
 <p>The highlighted input window produces the marked output value. Moving the window across every valid position fills the output vector. In a convolutional network this output is called a <strong>feature map</strong>: each position records how strongly the learned local pattern is present there.</p>
-<p>This is both <strong>local connectivity</strong> and <strong>parameter sharing</strong>. Each output value uses only five neighbouring input values, yet the same five weights are reused at all 124 valid positions. For comparison, a Dense mapping from 128 input values to 124 output values would contain <span class="math inline">\(128\times124=15{,}872\)</span> distinct weights. This convolution contains only five weights, or six learned parameters if one shared bias is included.</p>
+<p>This is both <strong>local connectivity</strong> and <strong>parameter sharing</strong>. Each output value uses only five neighbouring input values, yet the same five weights are reused at all 124 valid positions. For comparison, a Dense mapping from 128 input values to 124 output values would contain <span class="math inline">128\times124=15{,}872</span> distinct weights. This convolution contains only five weights, or six learned parameters if one shared bias is included.</p>
 <p>The reduction is not achieved by discarding input positions. It comes from requiring the same local rule to apply everywhere. That architectural constraint is the source of both parameter efficiency and translation equivariance.</p>
 <p>The horizontal placement of each score is shown at the centre of its five-sample input window. This choice is useful for visualization, although the array itself is indexed simply as <code>up_map[0]</code> through <code>up_map[123]</code>.</p>
 <p><strong>Sources:</strong></p>
@@ -1292,14 +1308,14 @@ y[i] = -x[i]-x[i+1]+x[i+3]+x[i+4].
 </div></aside></section>
 <section id="equivariance" class="slide level2">
 <h2>Equivariance</h2>
-<p>Let <span class="math inline">\(T_\Delta\)</span> translate an input by <span class="math inline">\(\Delta\)</span> positions.</p>
-<p><span class="math display">\[
+<p>Let <span class="math inline">T_\Delta</span> translate an input by <span class="math inline">\Delta</span> positions.</p>
+<p><span class="math display">
 F(T_\Delta X)=T_\Delta F(X)
-\]</span></p>
+</span></p>
 <p>A convolutional feature map moves with the input pattern.</p>
 <aside class="notes">
-<p><span class="math inline">\(T_\Delta\)</span> is a translation operator: it shifts every position by <span class="math inline">\(\Delta\)</span>. For stride-one convolution or cross-correlation on an infinite sequence, a translated input produces an identically translated feature map. This is translation equivariance, expressed by <span class="math inline">\(F(T_\Delta X)=T_\Delta F(X)\)</span>.</p>
-<p>The equation describes idealized properties. Finite boundaries and padding can disturb exact equivariance near the edges. A stride-<span class="math inline">\(S\)</span> convolution is exactly equivariant only to translations compatible with its sampling grid, such as shifts by multiples of <span class="math inline">\(S\)</span>.</p>
+<p><span class="math inline">T_\Delta</span> is a translation operator: it shifts every position by <span class="math inline">\Delta</span>. For stride-one convolution or cross-correlation on an infinite sequence, a translated input produces an identically translated feature map. This is translation equivariance, expressed by <span class="math inline">F(T_\Delta X)=T_\Delta F(X)</span>.</p>
+<p>The equation describes idealized properties. Finite boundaries and padding can disturb exact equivariance near the edges. A stride-<span class="math inline">S</span> convolution is exactly equivariant only to translations compatible with its sampling grid, such as shifts by multiples of <span class="math inline">S</span>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1331,12 +1347,12 @@ F(T_\Delta X)=T_\Delta F(X)
 <span id="cb13-14"><a aria-label="14"></a></span>
 <span id="cb13-15"><a aria-label="15"></a>up_map_same <span class="op">=</span> conv1d(x_walking, kernel_up, padding<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><span class="math display">\[
+<p><span class="math display">
 L_{\mathrm{out}}=L+P_{\mathrm{left}}+P_{\mathrm{right}}-K+1
-\]</span></p>
+</span></p>
 <aside class="notes">
-<p>Padding extends the input before the kernel is moved across it. Here, <code>padding=(2, 2)</code> adds two zeros to the start and two zeros to the end. Because the kernel has odd length <span class="math inline">\(K=5\)</span>, this balanced padding places one output at every original input position and preserves the length.</p>
-<p>Numerically, <span class="math inline">\(L=128\)</span>, <span class="math inline">\(K=5\)</span>, and two padded zeros on each side give <span class="math inline">\(L_{\mathrm{out}}=128+2+2-5+1=128\)</span>.</p>
+<p>Padding extends the input before the kernel is moved across it. Here, <code>padding=(2, 2)</code> adds two zeros to the start and two zeros to the end. Because the kernel has odd length <span class="math inline">K=5</span>, this balanced padding places one output at every original input position and preserves the length.</p>
+<p>Numerically, <span class="math inline">L=128</span>, <span class="math inline">K=5</span>, and two padded zeros on each side give <span class="math inline">L_{\mathrm{out}}=128+2+2-5+1=128</span>.</p>
 <p>Padding need not be balanced. Adding values only at the start or only at the end shifts which input positions align with the output. “Same” padding usually means choosing the total padding required to preserve the length; for an odd-length kernel and unit stride, splitting it equally is the most natural choice.</p>
 <p>The implementation now redefines <code>conv1d</code> by adding one optional argument. Its default value <code>(0, 0)</code> recovers the preceding valid cross-correlation function.</p>
 <style type="text/css">
@@ -1442,14 +1458,14 @@ L_{\mathrm{out}}=L+P_{\mathrm{left}}+P_{\mathrm{right}}-K+1
 </div>
 </div>
 <div class="fragment">
-<p><span class="math display">\[
+<p><span class="math display">
 L_{\mathrm{out}}=
 \left\lfloor\frac{L+P_{\mathrm{left}}+P_{\mathrm{right}}-K}{S}\right\rfloor+1
-\]</span></p>
+</span></p>
 <aside class="notes">
-<p>The stride <span class="math inline">\(S\)</span> is the distance between successive kernel placements. With <code>stride=1</code>, the input-window start <span class="math inline">\(i\)</span> advances through <span class="math inline">\(0,1,2,\ldots\)</span>. With <code>stride=2</code>, it advances through $0,2,4,` and half of the possible placements are skipped in this example.</p>
-<p>The output index <span class="math inline">\(t\)</span> remains consecutive: <span class="math inline">\(0,1,2,\ldots\)</span>. The input-window start used to compute it is <span class="math inline">\(i=tS\)</span>. Distinguishing <span class="math inline">\(t\)</span> from <span class="math inline">\(i\)</span> makes the relationship between the shorter output and the original input explicit.</p>
-<p>The floor in the length formula discards any final partial window. For <span class="math inline">\(L=128\)</span>, <span class="math inline">\(K=5\)</span>, balanced padding <span class="math inline">\((2,2)\)</span>, and <span class="math inline">\(S=2\)</span>, the output contains 64 positions.</p>
+<p>The stride <span class="math inline">S</span> is the distance between successive kernel placements. With <code>stride=1</code>, the input-window start <span class="math inline">i</span> advances through <span class="math inline">0,1,2,\ldots</span>. With <code>stride=2</code>, it advances through $0,2,4,` and half of the possible placements are skipped in this example.</p>
+<p>The output index <span class="math inline">t</span> remains consecutive: <span class="math inline">0,1,2,\ldots</span>. The input-window start used to compute it is <span class="math inline">i=tS</span>. Distinguishing <span class="math inline">t</span> from <span class="math inline">i</span> makes the relationship between the shorter output and the original input explicit.</p>
+<p>The floor in the length formula discards any final partial window. For <span class="math inline">L=128</span>, <span class="math inline">K=5</span>, balanced padding <span class="math inline">(2,2)</span>, and <span class="math inline">S=2</span>, the output contains 64 positions.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1524,7 +1540,7 @@ L_{\mathrm{out}}=
 <aside class="notes">
 <p>Padding was selected so that stride 1 produces one score aligned with every input position. Increasing the stride to 2 uses the same kernel weights and the same padded input, but evaluates only every second placement. The result contains 64 scores rather than 128. In this shape-focused view, the 64-value array is deliberately drawn at half the physical width of the 128-value arrays.</p>
 <p>If both outputs were plotted against elapsed time, they would cover the same 2.56-second interval: stride 2 would simply contain half as many samples across that interval. Plotting output index instead makes the change in array length immediately visible.</p>
-<p>This is temporal downsampling. It reduces storage and computation in later layers, but it also removes positional resolution and can miss changes that occur between sampled placements. The phrase “half of <span class="math inline">\(x\)</span>” would be misleading: the output is a learned local summary with half as many positions, not a vector containing every second original input value.</p>
+<p>This is temporal downsampling. It reduces storage and computation in later layers, but it also removes positional resolution and can miss changes that occur between sampled placements. The phrase “half of <span class="math inline">x</span>” would be misleading: the output is a learned local summary with half as many positions, not a vector containing every second original input value.</p>
 <p><strong>Sources:</strong></p>
 <ul>
 <li>The input signal comes from record 3363 of the UCI HAR training inertial-signal files. The feature maps were computed by the displayed code.</li>
@@ -1553,26 +1569,26 @@ L_{\mathrm{out}}=
 <div class="columns">
 <div class="column" style="width:50%;">
 <h3 id="upward-contrast">Upward contrast</h3>
-<p><span class="math display">\[
+<p><span class="math display">
 w^{(0)} = [-1,-1,0,1,1]
-\]</span></p>
+</span></p>
 <p>The first pair is subtracted from the last pair.</p>
 </div><div class="column" style="width:50%;">
 <h3 id="downward-contrast">Downward contrast</h3>
-<p><span class="math display">\[
+<p><span class="math display">
 w^{(1)} = [1,1,0,-1,-1]
-\]</span></p>
+</span></p>
 <p>The last pair is subtracted from the first pair.</p>
 </div></div>
-<p><span class="math display">\[
+<p><span class="math display">
 W = \begin{bmatrix}\vert &amp; \vert\\ w^{(0)} &amp; w^{(1)}\\ \vert &amp; \vert\end{bmatrix}
 \in \mathbb{R}^{K\times C_{\mathrm{out}}}
-\]</span></p>
+</span></p>
 <aside class="notes">
 <p>How can multiple local patterns be modelled?</p>
 <p>The first kernel gives a positive score when the last pair exceeds the first pair. The second is its negative and therefore gives a positive score for the opposite contrast.</p>
 <p>This symmetric pair is pedagogically useful because the relationship between the outputs is predictable.</p>
-<p>Stacking the two length-<span class="math inline">\(K\)</span> vectors as columns produces a matrix <span class="math inline">\(W\)</span> with shape <span class="math inline">\(K\times C_{\mathrm{out}}\)</span>. Here <span class="math inline">\(C_{\mathrm{out}}=2\)</span> because two kernels produce two <strong>output channels</strong>. One kernel produces one feature map, so adding kernels allows a layer to represent several kinds of local evidence.</p>
+<p>Stacking the two length-<span class="math inline">K</span> vectors as columns produces a matrix <span class="math inline">W</span> with shape <span class="math inline">K\times C_{\mathrm{out}}</span>. Here <span class="math inline">C_{\mathrm{out}}=2</span> because two kernels produce two <strong>output channels</strong>. One kernel produces one feature map, so adding kernels allows a layer to represent several kinds of local evidence.</p>
 <p>The idea that one learned kernel corresponds to one easily named pattern is a useful first model, not a guarantee. Learned kernels need not be negatives of one another, and their joint representation can be more meaningful than any single kernel viewed in isolation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1590,7 +1606,7 @@ W = \begin{bmatrix}\vert &amp; \vert\\ w^{(0)} &amp; w^{(1)}\\ \vert &amp; \vert
 <h2>How many kernels should a layer use?</h2>
 <ul>
 <li class="fragment"><strong>Domain expertise</strong> can suggest a small, interpretable set.</li>
-<li class="fragment">More commonly, <span class="math inline">\(C_{\mathrm{out}}\)</span> is a <strong>hyperparameter</strong> selected using validation data.</li>
+<li class="fragment">More commonly, <span class="math inline">C_{\mathrm{out}}</span> is a <strong>hyperparameter</strong> selected using validation data.</li>
 <li class="fragment"><strong>More kernels</strong> increase representational capacity, parameter count, memory, and computation.</li>
 </ul>
 <aside class="notes">
@@ -1628,8 +1644,8 @@ W = \begin{bmatrix}\vert &amp; \vert\\ w^{(0)} &amp; w^{(1)}\\ \vert &amp; \vert
 <span id="cb17-15"><a aria-label="15"></a>    <span class="cf">return</span> Y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <aside class="notes">
-<p>The revised function adds the kernel index <span class="math inline">\(m\)</span>. <code>W[j, m]</code> selects position <span class="math inline">\(j\)</span> within kernel <span class="math inline">\(m\)</span>, <code>b[m]</code> selects its bias, and <code>Y[:, m]</code> is the corresponding feature map. Initializing <code>Y[t, m]</code> with the bias and then accumulating the <span class="math inline">\(K\)</span> products mirrors the displayed equation directly. The padding and stride arguments remain available, so the implementation grows by successively adding concepts rather than replacing them with unrelated code.</p>
-<p>The input is still one-dimensional, with shape <span class="math inline">\((L)\)</span>. The kernel matrix has shape <span class="math inline">\((K,C_{\mathrm{out}})\)</span> and the output has shape <span class="math inline">\((L_{\mathrm{out}},C_{\mathrm{out}})\)</span>. This example uses zero biases, no padding, and unit stride so that the two maps can be compared directly with the earlier valid feature map.</p>
+<p>The revised function adds the kernel index <span class="math inline">m</span>. <code>W[j, m]</code> selects position <span class="math inline">j</span> within kernel <span class="math inline">m</span>, <code>b[m]</code> selects its bias, and <code>Y[:, m]</code> is the corresponding feature map. Initializing <code>Y[t, m]</code> with the bias and then accumulating the <span class="math inline">K</span> products mirrors the displayed equation directly. The padding and stride arguments remain available, so the implementation grows by successively adding concepts rather than replacing them with unrelated code.</p>
+<p>The input is still one-dimensional, with shape <span class="math inline">(L)</span>. The kernel matrix has shape <span class="math inline">(K,C_{\mathrm{out}})</span> and the output has shape <span class="math inline">(L_{\mathrm{out}},C_{\mathrm{out}})</span>. This example uses zero biases, no padding, and unit stride so that the two maps can be compared directly with the earlier valid feature map.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1730,50 +1746,50 @@ W = \begin{bmatrix}\vert &amp; \vert\\ w^{(0)} &amp; w^{(1)}\\ \vert &amp; \vert
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="math inline">\(X\)</span></td>
+<td><span class="math inline">X</span></td>
 <td>input sequence</td>
-<td><span class="math inline">\((L,C_{\mathrm{in}})\)</span></td>
+<td><span class="math inline">(L,C_{\mathrm{in}})</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(W\)</span></td>
+<td><span class="math inline">W</span></td>
 <td>kernel weights</td>
-<td><span class="math inline">\((K,C_{\mathrm{in}},C_{\mathrm{out}})\)</span></td>
+<td><span class="math inline">(K,C_{\mathrm{in}},C_{\mathrm{out}})</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">\(b\)</span></td>
+<td><span class="math inline">b</span></td>
 <td>one bias per output channel</td>
-<td><span class="math inline">\((C_{\mathrm{out}})\)</span></td>
+<td><span class="math inline">(C_{\mathrm{out}})</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(Y\)</span></td>
+<td><span class="math inline">Y</span></td>
 <td>output feature maps</td>
-<td><span class="math inline">\((L_{\mathrm{out}},C_{\mathrm{out}})\)</span></td>
+<td><span class="math inline">(L_{\mathrm{out}},C_{\mathrm{out}})</span></td>
 </tr>
 </tbody>
 </table>
-<p><span class="math display">\[
+<p><span class="math display">
 Y[t,m] = b[m] +
 \sum_{j=0}^{K-1}\sum_{c=0}^{C_{\mathrm{in}}-1}
 \widetilde X[tS+j,c]W[j,c,m]
-\]</span></p>
+</span></p>
 <aside class="notes">
 <p>The symbols describe both the sizes of the arrays and the meaning of each index:</p>
 <ul>
-<li><span class="math inline">\(L\)</span> is the number of input positions and <span class="math inline">\(t\)</span> is an output position;</li>
-<li><span class="math inline">\(K\)</span> is the kernel length and <span class="math inline">\(j\)</span> is a position inside the kernel;</li>
-<li><span class="math inline">\(C_{\mathrm{in}}\)</span> is the number of input channels and <span class="math inline">\(c\)</span> selects one;</li>
-<li><span class="math inline">\(C_{\mathrm{out}}\)</span> is the number of kernels and <span class="math inline">\(m\)</span> selects one output feature map; and</li>
-<li><span class="math inline">\(S\)</span> is the stride, so <span class="math inline">\(i=tS\)</span> is the corresponding kernel start in the padded input <span class="math inline">\(\widetilde X\)</span>.</li>
+<li><span class="math inline">L</span> is the number of input positions and <span class="math inline">t</span> is an output position;</li>
+<li><span class="math inline">K</span> is the kernel length and <span class="math inline">j</span> is a position inside the kernel;</li>
+<li><span class="math inline">C_{\mathrm{in}}</span> is the number of input channels and <span class="math inline">c</span> selects one;</li>
+<li><span class="math inline">C_{\mathrm{out}}</span> is the number of kernels and <span class="math inline">m</span> selects one output feature map; and</li>
+<li><span class="math inline">S</span> is the stride, so <span class="math inline">i=tS</span> is the corresponding kernel start in the padded input <span class="math inline">\widetilde X</span>.</li>
 </ul>
-<p>With <span class="math inline">\(P_{\mathrm{left}}\)</span> and <span class="math inline">\(P_{\mathrm{right}}\)</span> padded positions,</p>
-<p><span class="math display">\[
+<p>With <span class="math inline">P_{\mathrm{left}}</span> and <span class="math inline">P_{\mathrm{right}}</span> padded positions,</p>
+<p><span class="math display">
 L_{\mathrm{out}}=
 \left\lfloor
 \frac{L+P_{\mathrm{left}}+P_{\mathrm{right}}-K}{S}
 \right\rfloor+1.
-\]</span></p>
-<p>The equation forms every product between the <span class="math inline">\(K\times C_{\mathrm{in}}\)</span> input patch and the corresponding weights for kernel <span class="math inline">\(m\)</span>, sums those products, and adds the bias <span class="math inline">\(b[m]\)</span>. The tilde distinguishes the padded input from the original input. When there is no padding and <span class="math inline">\(S=1\)</span>, the equation reduces to the earlier valid-correlation expression.</p>
-<p>Lowercase <span class="math inline">\(x\)</span>, <span class="math inline">\(w\)</span>, and <span class="math inline">\(y\)</span> denoted the single-channel, single-kernel special case. Uppercase <span class="math inline">\(X\)</span>, <span class="math inline">\(W\)</span>, and <span class="math inline">\(Y\)</span> denote the general arrays. These are notation conventions rather than different mathematical operations.</p>
+</span></p>
+<p>The equation forms every product between the <span class="math inline">K\times C_{\mathrm{in}}</span> input patch and the corresponding weights for kernel <span class="math inline">m</span>, sums those products, and adds the bias <span class="math inline">b[m]</span>. The tilde distinguishes the padded input from the original input. When there is no padding and <span class="math inline">S=1</span>, the equation reduces to the earlier valid-correlation expression.</p>
+<p>Lowercase <span class="math inline">x</span>, <span class="math inline">w</span>, and <span class="math inline">y</span> denoted the single-channel, single-kernel special case. Uppercase <span class="math inline">X</span>, <span class="math inline">W</span>, and <span class="math inline">Y</span> denote the general arrays. These are notation conventions rather than different mathematical operations.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1807,7 +1823,7 @@ L_{\mathrm{out}}=
 <span id="cb19-16"><a aria-label="16"></a>    <span class="cf">return</span> Y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <aside class="notes">
-<p>The new loop index <span class="math inline">\(c\)</span> selects an input channel. For a fixed output position <span class="math inline">\(t\)</span> and kernel <span class="math inline">\(m\)</span>, the two inner loops visit every position <span class="math inline">\(j\)</span> and every channel <span class="math inline">\(c\)</span> in the <span class="math inline">\(K\times C_{\mathrm{in}}\)</span> patch. Each product is added to the same scalar <code>Y[t, m]</code>, which starts at the bias <span class="math inline">\(b[m]\)</span>.</p>
+<p>The new loop index <span class="math inline">c</span> selects an input channel. For a fixed output position <span class="math inline">t</span> and kernel <span class="math inline">m</span>, the two inner loops visit every position <span class="math inline">j</span> and every channel <span class="math inline">c</span> in the <span class="math inline">K\times C_{\mathrm{in}}</span> patch. Each product is added to the same scalar <code>Y[t, m]</code>, which starts at the bias <span class="math inline">b[m]</span>.</p>
 <p>An expression such as <code>np.sum(patch * W[:, :, m])</code> is shorter, but it conceals the two distinct summations that are the main new idea on this slide. The implementation is therefore intentionally literal. A library implementation would vectorize these loops and support batches; those engineering improvements do not change the mathematical forward pass represented here.</p>
 <p>The notebook successively redefines <code>conv1d</code>. Executing it from top to bottom therefore mirrors the conceptual progression: each definition replaces the previous restricted case with a more general one.</p>
 <style type="text/css">
@@ -1902,8 +1918,8 @@ L_{\mathrm{out}}=
 </div>
 </div>
 <aside class="notes">
-<p>The yellow band is aligned across all three channels because the channels are simultaneous measurements. For one output position, the highlighted input patch has shape <span class="math inline">\(K\times C_{\mathrm{in}}=5\times3\)</span>. Kernel 0 contains one five-weight vector for each channel, and all 15 products contribute to a single output score.</p>
-<p>The illustrative kernel uses <span class="math inline">\(w^{(0)}\)</span> on X, <span class="math inline">\(-0.6w^{(0)}\)</span> on Y, and <span class="math inline">\(0.4w^{(0)}\)</span> on Z. Its purpose is to make the channel dimension concrete, not to claim that these hand-selected weights classify walking accurately. A trained network would learn all of these values from labelled examples.</p>
+<p>The yellow band is aligned across all three channels because the channels are simultaneous measurements. For one output position, the highlighted input patch has shape <span class="math inline">K\times C_{\mathrm{in}}=5\times3</span>. Kernel 0 contains one five-weight vector for each channel, and all 15 products contribute to a single output score.</p>
+<p>The illustrative kernel uses <span class="math inline">w^{(0)}</span> on X, <span class="math inline">-0.6w^{(0)}</span> on Y, and <span class="math inline">0.4w^{(0)}</span> on Z. Its purpose is to make the channel dimension concrete, not to claim that these hand-selected weights classify walking accurately. A trained network would learn all of these values from labelled examples.</p>
 <p><strong>Sources:</strong></p>
 <ul>
 <li>The plotted signals come from record 3363 of the UCI HAR training inertial-signal files.</li>
@@ -1927,27 +1943,27 @@ L_{\mathrm{out}}=
 </section>
 <section id="what-do-x-and-y-represent" class="slide level2">
 <h2>What do X and Y represent?</h2>
-<p><span class="math display">\[
+<p><span class="math display">
 X
 \;\xrightarrow{\;\text{convolution}+b\;}\;
 Z
 \;\xrightarrow{\;g\;}\;
 Y
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
 X^{(\ell+1)}=Y^{(\ell)}
-\]</span></p>
+</span></p>
 <ul>
-<li><span class="math inline">\(X\)</span>: input to one layer;</li>
-<li><span class="math inline">\(Z\)</span>: pre-activation scores;</li>
-<li><span class="math inline">\(Y=g(Z)\)</span>: output activations; and</li>
-<li>the channels of <span class="math inline">\(Y^{(\ell)}\)</span> become the channels of the next layer’s input.</li>
+<li><span class="math inline">X</span>: input to one layer;</li>
+<li><span class="math inline">Z</span>: pre-activation scores;</li>
+<li><span class="math inline">Y=g(Z)</span>: output activations; and</li>
+<li>the channels of <span class="math inline">Y^{(\ell)}</span> become the channels of the next layer’s input.</li>
 </ul>
 <aside class="notes">
-<p>The symbols <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> describe the input and output of a single layer, not the input and final prediction of the entire network. <span class="math inline">\(Z\)</span> names the result of the convolution and bias addition before the activation function <span class="math inline">\(g\)</span> is applied. A network composes layers sequentially: the complete output activation array of layer <span class="math inline">\(\ell\)</span> becomes the complete input array of layer <span class="math inline">\(\ell+1\)</span>.</p>
-<p>For the first convolutional layer, <span class="math inline">\(X^{(0)}\)</span> contains the measured signal channels. In the walking example these could be the X, Y, and Z accelerometer axes. For a later layer, the input channels are not raw sensor axes; they are the feature maps produced by the preceding layer. Consequently, <span class="math inline">\(C_{\mathrm{in}}^{(\ell+1)}=C_{\mathrm{out}}^{(\ell)}\)</span>.</p>
-<p>The displayed <code>conv1d</code> returns <span class="math inline">\(Z\)</span>, the pre-activation scores. The next example uses <span class="math inline">\(g(z)=\operatorname{ReLU}(z)=\max(0,z)\)</span>. ReLU is applied element by element, so it changes values without changing the sequence length or the number of channels.</p>
-<p>Earlier slides used <span class="math inline">\(Y\)</span> directly for the convolution scores because no nonlinearity had yet been introduced; that is the special case <span class="math inline">\(g(z)=z\)</span>. From this point onward, <span class="math inline">\(Z\)</span> and <span class="math inline">\(Y\)</span> make the distinction explicit.</p>
+<p>The symbols <span class="math inline">X</span> and <span class="math inline">Y</span> describe the input and output of a single layer, not the input and final prediction of the entire network. <span class="math inline">Z</span> names the result of the convolution and bias addition before the activation function <span class="math inline">g</span> is applied. A network composes layers sequentially: the complete output activation array of layer <span class="math inline">\ell</span> becomes the complete input array of layer <span class="math inline">\ell+1</span>.</p>
+<p>For the first convolutional layer, <span class="math inline">X^{(0)}</span> contains the measured signal channels. In the walking example these could be the X, Y, and Z accelerometer axes. For a later layer, the input channels are not raw sensor axes; they are the feature maps produced by the preceding layer. Consequently, <span class="math inline">C_{\mathrm{in}}^{(\ell+1)}=C_{\mathrm{out}}^{(\ell)}</span>.</p>
+<p>The displayed <code>conv1d</code> returns <span class="math inline">Z</span>, the pre-activation scores. The next example uses <span class="math inline">g(z)=\operatorname{ReLU}(z)=\max(0,z)</span>. ReLU is applied element by element, so it changes values without changing the sequence length or the number of channels.</p>
+<p>Earlier slides used <span class="math inline">Y</span> directly for the convolution scores because no nonlinearity had yet been introduced; that is the special case <span class="math inline">g(z)=z</span>. From this point onward, <span class="math inline">Z</span> and <span class="math inline">Y</span> make the distinction explicit.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1982,11 +1998,11 @@ X^{(\ell+1)}=Y^{(\ell)}
 <span id="cb21-17"><a aria-label="17"></a>Y2 <span class="op">=</span> relu(Z2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <aside class="notes">
-<p>The first layer applies the upward- and downward-contrast kernels already introduced. Its output <span class="math inline">\(Z^{(1)}\)</span> contains signed scores. ReLU sets negative scores to zero, producing nonnegative activations <span class="math inline">\(Y^{(1)}\)</span> with two channels: one for upward evidence and one for downward evidence.</p>
+<p>The first layer applies the upward- and downward-contrast kernels already introduced. Its output <span class="math inline">Z^{(1)}</span> contains signed scores. ReLU sets negative scores to zero, producing nonnegative activations <span class="math inline">Y^{(1)}</span> with two channels: one for upward evidence and one for downward evidence.</p>
 <p>The second-layer kernel spans both channels. Its positive weights on the first two positions of channel 0 reward earlier upward evidence. Its positive weights on the final two positions of channel 1 reward later downward evidence. It therefore responds to a sequence of learned features rather than directly to raw acceleration values.</p>
 <p>This is hierarchical feature composition: layer 1 describes local contrasts, whereas layer 2 describes a pattern made from those contrasts. In this sense, deeper layers learn “patterns of patterns.” When the model is trained, these intermediate representations are selected for their usefulness to the final prediction rather than specified manually as an independent feature-engineering step.</p>
 <p>Hierarchy comes from composing learned layers and nonlinearities. Pooling or stride can change the resolution and help later layers cover a wider portion of the original input, but downsampling alone does not create a hierarchy of learned features.</p>
-<p>The bias <span class="math inline">\(-0.8\)</span> requires enough combined evidence before the second-layer ReLU becomes positive. This gives the bias term a concrete role: it changes the activation threshold while remaining shared over every output position.</p>
+<p>The bias <span class="math inline">-0.8</span> requires enough combined evidence before the second-layer ReLU becomes positive. This gives the bias term a concrete role: it changes the activation threshold while remaining shared over every output position.</p>
 <p>These weights are hand-selected to keep the computation interpretable. They illustrate a complete forward pass, not a trained walking classifier.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2072,7 +2088,7 @@ X^{(\ell+1)}=Y^{(\ell)}
 </div>
 </div>
 <aside class="notes">
-<p>The first layer receives one signal channel and returns two activation maps. Those two columns are exactly the two input channels of the second layer. At each second-layer position, the patch has shape <span class="math inline">\(5\times2\)</span>: five nearby positions from each first-layer activation map.</p>
+<p>The first layer receives one signal channel and returns two activation maps. Those two columns are exactly the two input channels of the second layer. At each second-layer position, the patch has shape <span class="math inline">5\times2</span>: five nearby positions from each first-layer activation map.</p>
 <p>The yellow region in the middle panel is the two-channel patch that produces the marked second-layer activation. The yellow region in the top panel is its nine-position receptive field in the original input. The layer-2 kernel can combine features that occur at different relative positions and in different channels.</p>
 <p>Both layers use valid cross-correlation here. The sequence length therefore changes from 128 to 124 to 120. Padding could preserve the length, and stride could reduce it more rapidly, without changing what constitutes the next layer’s input.</p>
 <p><strong>Sources:</strong></p>
@@ -2093,13 +2109,13 @@ X^{(\ell+1)}=Y^{(\ell)}
 </section>
 <section id="what-does-the-bias-change" class="slide level2">
 <h2>What does the bias change?</h2>
-<p><span class="math display">\[
+<p><span class="math display">
 Y[i,m] =  \sum_{j=0}^{K-1}x[i+j] W[j,m] + b[m]
-\]</span></p>
+</span></p>
 
 <aside class="notes">
 <p>The bias is not another temporal pattern. There is <strong>one bias per output channel</strong>, and the same scalar is added at every output position. Consequently, the bias cannot encode where a pattern occurs; translation of the input still translates the corresponding feature-map response.</p>
-<p>Without a following nonlinearity, the bias simply shifts every score in one feature map. With a rectified linear unit, <span class="math inline">\(\operatorname{ReLU}(s+b)=\max(0,s+b)\)</span>, the bias changes the score required for an activation to become positive. It can therefore be interpreted as part of the activation threshold.</p>
+<p>Without a following nonlinearity, the bias simply shifts every score in one feature map. With a rectified linear unit, <span class="math inline">\operatorname{ReLU}(s+b)=\max(0,s+b)</span>, the bias changes the score required for an activation to become positive. It can therefore be interpreted as part of the activation threshold.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2112,7 +2128,7 @@ Y[i,m] =  \sum_{j=0}^{K-1}x[i+j] W[j,m] + b[m]
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>One scalar <span class="math inline">\(b[m]\)</span> shifts the entire feature map produced by kernel <span class="math inline">\(m\)</span>.</p>
+<p>One scalar <span class="math inline">b[m]</span> shifts the entire feature map produced by kernel <span class="math inline">m</span>.</p>
 </div></aside></section>
 <section id="patch-or-receptive-field" class="slide level2">
 <h2>Patch or receptive field?</h2>
@@ -2121,19 +2137,19 @@ Y[i,m] =  \sum_{j=0}^{K-1}x[i+j] W[j,m] + b[m]
 <li>A unit’s <strong>receptive field</strong> is the set of original-input positions that can influence it.</li>
 </ul>
 <p>For unit stride and no dilation,</p>
-<p><span class="math display">\[
+<p><span class="math display">
 R_1=K_1,\qquad
 R_2=R_1+(K_2-1).
-\]</span></p>
-<p>With two kernels of length 5, one second-layer activation can depend on <span class="math inline">\(5+(5-1)=9\)</span> original positions.</p>
+</span></p>
+<p>With two kernels of length 5, one second-layer activation can depend on <span class="math inline">5+(5-1)=9</span> original positions.</p>
 <aside class="notes">
 <p>In the first layer, a patch of five input positions is also a receptive field of five original positions. The terms can appear interchangeable in that special case. In a deeper layer, however, a five-position patch contains five preceding feature-map values, and each of those values already summarizes several original positions. The deeper receptive field is therefore larger than the current-layer patch.</p>
-<p>For arbitrary strides, it is helpful to track the spacing <span class="math inline">\(J_\ell\)</span> between adjacent units measured in original-input positions. Starting with <span class="math inline">\(R_0=1\)</span> and <span class="math inline">\(J_0=1\)</span>,</p>
-<p><span class="math display">\[
+<p>For arbitrary strides, it is helpful to track the spacing <span class="math inline">J_\ell</span> between adjacent units measured in original-input positions. Starting with <span class="math inline">R_0=1</span> and <span class="math inline">J_0=1</span>,</p>
+<p><span class="math display">
 R_\ell=R_{\ell-1}+(K_\ell-1)J_{\ell-1},
 \qquad
 J_\ell=J_{\ell-1}S_\ell.
-\]</span></p>
+</span></p>
 <p>This is the theoretical receptive field: the set of positions that could influence an activation according to the architecture. The magnitude of the actual influence also depends on the learned weights and nonlinearities.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2163,19 +2179,19 @@ J_\ell=J_{\ell-1}S_\ell.
 <span id="cb23-10"><a aria-label="10"></a></span>
 <span id="cb23-11"><a aria-label="11"></a>    <span class="cf">return</span> p</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><span class="math display">\[
+<p><span class="math display">
 p[t]=\max_{0\leq j&lt;P} y[tS+j]
-\]</span></p>
+</span></p>
 
 <aside class="notes">
 <p>The motivating question is: “Can nearby activations be summarized without learning another set of weights?” Max pooling answers yes by applying a fixed summary independently to each feature map. No weights or biases are learned.</p>
-<p>Here <span class="math inline">\(P\)</span> is the pool size, <span class="math inline">\(S\)</span> is the stride, <span class="math inline">\(t\)</span> is the output position, and <code>i = t * stride</code> is the start of the corresponding input window. The code deliberately separates those two indices, just as the stride example did for convolution.</p>
+<p>Here <span class="math inline">P</span> is the pool size, <span class="math inline">S</span> is the stride, <span class="math inline">t</span> is the output position, and <code>i = t * stride</code> is the start of the corresponding input window. The code deliberately separates those two indices, just as the stride example did for convolution.</p>
 <p>The output length uses integer division to implement</p>
-<p><span class="math display">\[
+<p><span class="math display">
 L_{\mathrm{out}}=
 \left\lfloor\frac{L-P}{S}\right\rfloor+1.
-\]</span></p>
-<p>Any final partial window is discarded. Inside the loop, <code>window</code> makes the local neighbourhood visible and Python’s <code>max</code> selects its largest value. An equivalent NumPy list comprehension would be shorter, but it would hide the output allocation, the relationship <span class="math inline">\(i=tS\)</span>, and the repeated local operation.</p>
+</span></p>
+<p>Any final partial window is discarded. Inside the loop, <code>window</code> makes the local neighbourhood visible and Python’s <code>max</code> selects its largest value. An equivalent NumPy list comprehension would be shorter, but it would hide the output allocation, the relationship <span class="math inline">i=tS</span>, and the repeated local operation.</p>
 <p>The function accepts one feature map. For a multichannel array, the same operation is applied independently to every channel, so pooling normally changes the sequence length without changing the number of channels.</p>
 <p>Pooling summarizes features that a preceding convolutional layer has already computed; it does not learn new feature detectors. Max pooling retains the strongest response in each window. Mean pooling instead retains the average response. The choice determines what information is preserved during downsampling.</p>
 <style type="text/css">
@@ -2321,7 +2337,7 @@ L_{\mathrm{out}}=
 </section>
 <section id="how-do-feature-maps-predict" class="slide level2">
 <h2>How do feature maps predict?</h2>
-<p><span class="math display">\[
+<p><span class="math display">
 Y\in\mathbb{R}^{L_{\mathrm{out}}\times C_{\mathrm{out}}}
 \;\xrightarrow{\;\text{global pooling}\;}\;
 h\in\mathbb{R}^{C_{\mathrm{out}}}
@@ -2329,22 +2345,22 @@ h\in\mathbb{R}^{C_{\mathrm{out}}}
 z\in\mathbb{R}
 \;\xrightarrow{\;\sigma\;}\;
 \widehat p_{\mathrm{walking}}
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
 h[m]=\max_i Y[i,m],
 \qquad
 z=\sum_m v[m]h[m]+a,
 \qquad
 \widehat p_{\mathrm{walking}}=\sigma(z).
-\]</span></p>
+</span></p>
 <blockquote>
 <p>Do we need to know <strong>where</strong> a feature occurred, or only <strong>whether</strong> it occurred?</p>
 </blockquote>
 <aside class="notes">
 <p>The final convolutional layer still returns a sequence: one activation at each output position in each output feature map. A sequence-level classification such as “walking” requires a fixed-size summary and a prediction rule.</p>
-<p>Global max pooling produces one number per output feature map. The value <span class="math inline">\(h[m]\)</span> records the strongest activation of feature <span class="math inline">\(m\)</span> anywhere in the sequence. Global mean pooling is another possibility; it records the average activation instead. Both discard the exact position and therefore make the head position-agnostic. The qualification from the translation slides still applies: padding, boundaries, and stride can affect exact invariance.</p>
-<p>The Dense layer combines the pooled feature evidence. Its weights <span class="math inline">\(v[m]\)</span> say how feature <span class="math inline">\(m\)</span> contributes to the walking decision, and the bias <span class="math inline">\(a\)</span> changes the decision threshold. For binary classification, the sigmoid converts the scalar logit <span class="math inline">\(z\)</span> into a number between zero and one. For multiple activities, the Dense layer would return one logit per class, followed by a softmax.</p>
-<p>The notation <span class="math inline">\(\widehat p_{\mathrm{walking}}\)</span> emphasizes that this is the output of the entire network. It is distinct from <span class="math inline">\(Y\)</span>, which denotes the output of one layer.</p>
+<p>Global max pooling produces one number per output feature map. The value <span class="math inline">h[m]</span> records the strongest activation of feature <span class="math inline">m</span> anywhere in the sequence. Global mean pooling is another possibility; it records the average activation instead. Both discard the exact position and therefore make the head position-agnostic. The qualification from the translation slides still applies: padding, boundaries, and stride can affect exact invariance.</p>
+<p>The Dense layer combines the pooled feature evidence. Its weights <span class="math inline">v[m]</span> say how feature <span class="math inline">m</span> contributes to the walking decision, and the bias <span class="math inline">a</span> changes the decision threshold. For binary classification, the sigmoid converts the scalar logit <span class="math inline">z</span> into a number between zero and one. For multiple activities, the Dense layer would return one logit per class, followed by a softmax.</p>
+<p>The notation <span class="math inline">\widehat p_{\mathrm{walking}}</span> emphasizes that this is the output of the entire network. It is distinct from <span class="math inline">Y</span>, which denotes the output of one layer.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2359,25 +2375,25 @@ z=\sum_m v[m]h[m]+a,
 </section>
 <section id="what-changes-under-translation" class="slide level2">
 <h2>What changes under translation?</h2>
-<p>Let <span class="math inline">\(T_\Delta\)</span> translate an input by <span class="math inline">\(\Delta\)</span> positions.</p>
+<p>Let <span class="math inline">T_\Delta</span> translate an input by <span class="math inline">\Delta</span> positions.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <h3 id="equivariance-1">Equivariance</h3>
-<p><span class="math display">\[
+<p><span class="math display">
 F(T_\Delta X)=T_\Delta F(X)
-\]</span></p>
+</span></p>
 <p>A convolutional feature map moves with the input pattern.</p>
 </div><div class="column" style="width:50%;">
 <h3 id="invariance">Invariance</h3>
-<p><span class="math display">\[
+<p><span class="math display">
 G(T_\Delta Y)=G(Y)
-\]</span></p>
+</span></p>
 <p>A position-aggregating readout can preserve the final decision.</p>
 </div></div>
 <aside class="notes">
-<p><span class="math inline">\(T_\Delta\)</span> is a translation operator: it shifts every position by <span class="math inline">\(\Delta\)</span>. For stride-one convolution or cross-correlation on an infinite sequence, a translated input produces an identically translated feature map. This is translation equivariance, expressed by <span class="math inline">\(F(T_\Delta X)=T_\Delta F(X)\)</span>.</p>
-<p>An invariant function discards the position information relevant to that translation. For example, global maximum pooling <span class="math inline">\(G(Y)=\max_i Y[i]\)</span> gives the same scalar when the feature map is translated: <span class="math inline">\(G(T_\Delta Y)=G(Y)\)</span>. A classifier built on such an aggregation can therefore make the same category decision at different positions.</p>
-<p>The equations describe idealized properties. Finite boundaries and padding can disturb exact equivariance near the edges. A stride-<span class="math inline">\(S\)</span> convolution is exactly equivariant only to translations compatible with its sampling grid, such as shifts by multiples of <span class="math inline">\(S\)</span>. Local pooling can increase tolerance to small shifts but is not, by itself, exact global translation invariance.</p>
+<p><span class="math inline">T_\Delta</span> is a translation operator: it shifts every position by <span class="math inline">\Delta</span>. For stride-one convolution or cross-correlation on an infinite sequence, a translated input produces an identically translated feature map. This is translation equivariance, expressed by <span class="math inline">F(T_\Delta X)=T_\Delta F(X)</span>.</p>
+<p>An invariant function discards the position information relevant to that translation. For example, global maximum pooling <span class="math inline">G(Y)=\max_i Y[i]</span> gives the same scalar when the feature map is translated: <span class="math inline">G(T_\Delta Y)=G(Y)</span>. A classifier built on such an aggregation can therefore make the same category decision at different positions.</p>
+<p>The equations describe idealized properties. Finite boundaries and padding can disturb exact equivariance near the edges. A stride-<span class="math inline">S</span> convolution is exactly equivariant only to translations compatible with its sampling grid, such as shifts by multiples of <span class="math inline">S</span>. Local pooling can increase tolerance to small shifts but is not, by itself, exact global translation invariance.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2405,21 +2421,21 @@ G(T_\Delta Y)=G(Y)
 <span id="cb25-10"><a aria-label="10"></a>    z <span class="op">=</span> h <span class="op">@</span> v <span class="op">+</span> a            <span class="co"># Dense layer</span></span>
 <span id="cb25-11"><a aria-label="11"></a>    <span class="cf">return</span> sigmoid(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><span class="math display">\[
+<p><span class="math display">
 \text{signal}
 \rightarrow \text{convolutional layers}
 \rightarrow \text{global pooling}
 \rightarrow \text{Dense}
 \rightarrow \text{prediction}
-\]</span></p>
+</span></p>
 
 <aside class="notes">
-<p>This function is the complete forward computation of a binary prediction head. If <span class="math inline">\(Y\)</span> has shape <span class="math inline">\((L_{\mathrm{out}},C_{\mathrm{out}})\)</span>, the loop visits each feature map <span class="math inline">\(m\)</span> and stores its global maximum in <span class="math inline">\(h[m]\)</span>. The resulting vector has shape <span class="math inline">\((C_{\mathrm{out}},)\)</span>. The Dense weights <span class="math inline">\(v\)</span> have the same length, and the bias <span class="math inline">\(a\)</span> is a scalar.</p>
-<p>In the current two-layer illustration, <span class="math inline">\(Y^{(2)}\)</span> has one channel, so the head would receive one pooled value. A practical final convolutional layer normally has several output channels, allowing the Dense layer to combine evidence from several learned features.</p>
-<p>No numerical values are assigned to <span class="math inline">\(v\)</span> and <span class="math inline">\(a\)</span> here because those parameters must be learned. Choosing convenient values by hand could demonstrate arithmetic, but it would not produce a trained walking classifier. During training, the convolutional kernels, convolutional biases, Dense weights, and The Dense bias is optimized jointly from labelled examples using a classification loss such as binary cross-entropy.</p>
-<p>Flattening is a legitimate alternative. It turns all <span class="math inline">\(L_{\mathrm{out}}C_{\mathrm{out}}\)</span> activations into one vector before the Dense layer, retaining which feature occurred at which position. The resulting head has more parameters, expects a fixed input length, and learns position-specific weights. Global pooling uses only <span class="math inline">\(C_{\mathrm{out}}\)</span> values, can accommodate different sequence lengths, and fits the question “did this feature occur anywhere?”</p>
+<p>This function is the complete forward computation of a binary prediction head. If <span class="math inline">Y</span> has shape <span class="math inline">(L_{\mathrm{out}},C_{\mathrm{out}})</span>, the loop visits each feature map <span class="math inline">m</span> and stores its global maximum in <span class="math inline">h[m]</span>. The resulting vector has shape <span class="math inline">(C_{\mathrm{out}},)</span>. The Dense weights <span class="math inline">v</span> have the same length, and the bias <span class="math inline">a</span> is a scalar.</p>
+<p>In the current two-layer illustration, <span class="math inline">Y^{(2)}</span> has one channel, so the head would receive one pooled value. A practical final convolutional layer normally has several output channels, allowing the Dense layer to combine evidence from several learned features.</p>
+<p>No numerical values are assigned to <span class="math inline">v</span> and <span class="math inline">a</span> here because those parameters must be learned. Choosing convenient values by hand could demonstrate arithmetic, but it would not produce a trained walking classifier. During training, the convolutional kernels, convolutional biases, Dense weights, and The Dense bias is optimized jointly from labelled examples using a classification loss such as binary cross-entropy.</p>
+<p>Flattening is a legitimate alternative. It turns all <span class="math inline">L_{\mathrm{out}}C_{\mathrm{out}}</span> activations into one vector before the Dense layer, retaining which feature occurred at which position. The resulting head has more parameters, expects a fixed input length, and learns position-specific weights. Global pooling uses only <span class="math inline">C_{\mathrm{out}}</span> values, can accommodate different sequence lengths, and fits the question “did this feature occur anywhere?”</p>
 <p>Consult the self-study notebook <a href="../../lectures/15/tang_cnn_tutorial.html"><em>Predicting Mean Ribosome Load with a 1D Convolutional Neural Network</em></a> for an example where flattening is used.</p>
-<p>For <span class="math inline">\(Q\)</span> activity classes, replace <span class="math inline">\(v\)</span> with a matrix having one column per class, replace <span class="math inline">\(a\)</span> with a length-<span class="math inline">\(Q\)</span> bias vector, and apply softmax to the resulting logits. The mechanics of Dense layers, sigmoid, softmax, and cross-entropy have already been developed in the dense-network lecture, so they need not be reintroduced here.</p>
+<p>For <span class="math inline">Q</span> activity classes, replace <span class="math inline">v</span> with a matrix having one column per class, replace <span class="math inline">a</span> with a length-<span class="math inline">Q</span> bias vector, and apply softmax to the resulting logits. The mechanics of Dense layers, sigmoid, softmax, and cross-entropy have already been developed in the dense-network lecture, so they need not be reintroduced here.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2436,17 +2452,17 @@ G(T_\Delta Y)=G(Y)
 </div></aside></section>
 <section id="how-are-all-parameters-learned" class="slide level2">
 <h2>How are all parameters learned?</h2>
-<p><span class="math display">\[
+<p><span class="math display">
 \text{labelled examples}
 \rightarrow \text{forward pass}
 \rightarrow \text{loss}
-\]</span></p>
-<p><span class="math display">\[
+</span></p>
+<p><span class="math display">
 \text{loss}
 \rightarrow \text{backpropagation}
 \rightarrow \text{parameter update}
 \rightarrow \text{repeat}
-\]</span></p>
+</span></p>
 <ul>
 <li><strong>Learned:</strong> every kernel weight, every output-channel bias, and the prediction-head weights and bias.</li>
 <li><strong>Specified:</strong> padding, stride, pooling rule, activation function, and layer sizes.</li>
@@ -2474,13 +2490,13 @@ G(T_\Delta Y)=G(Y)
 </div></aside></section>
 <section id="more-dimensions-add-indices" class="slide level2">
 <h2>More dimensions add indices</h2>
-<p><span class="math display">\[
+<p><span class="math display">
 \begin{aligned}
 \text{1D: } &amp; W[j,c,m] \\
 \text{2D: } &amp; W[j_1,j_2,c,m] \\
 \text{3D: } &amp; W[j_1,j_2,j_3,c,m]
 \end{aligned}
-\]</span></p>
+</span></p>
 <p>Each kernel still:</p>
 <ol type="1">
 <li>selects a local patch;</li>
@@ -2492,14 +2508,14 @@ G(T_\Delta Y)=G(Y)
 <p>More dimensions add indices, not a new idea.</p>
 <p>Moving from sequences to images or volumes does not introduce a different principle. It adds one local-position index for every spatial or temporal dimension. A 2D image kernel moves over two axes; a 3D volume kernel moves over three. The input-channel and output-channel indices retain exactly the same roles.</p>
 <p>For example, omitting padding notation for readability, a two-dimensional layer computes</p>
-<p><span class="math display">\[
+<p><span class="math display">
 Y[i_1,i_2,m]=b[m]
 +\sum_{j_1=0}^{K_1-1}
 \sum_{j_2=0}^{K_2-1}
 \sum_{c=0}^{C_{\mathrm{in}}-1}
 X[i_1S_1+j_1,i_2S_2+j_2,c]W[j_1,j_2,c,m].
-\]</span></p>
-<p>Compared with the 1D equation, the only new mathematical operation is the sum over the second local-position index <span class="math inline">\(j_2\)</span>. A literal implementation similarly adds one spatial loop. Every kernel still spans all input channels and produces one output feature map.</p>
+</span></p>
+<p>Compared with the 1D equation, the only new mathematical operation is the sum over the second local-position index <span class="math inline">j_2</span>. A literal implementation similarly adds one spatial loop. Every kernel still spans all input channels and produces one output feature map.</p>
 <p>This correspondence is the reason for developing the one-dimensional case carefully. Once the data, local patch, kernel weights, sums, and output feature maps are understood in 1D, the higher-dimensional equations are extensions of the same pattern rather than new constructions.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2515,13 +2531,13 @@ X[i_1S_1+j_1,i_2S_2+j_2,c]W[j_1,j_2,c,m].
 </section>
 <section id="can-a-phone-recognize-walking" class="slide level2">
 <h2>Can a phone recognize walking?</h2>
-<p><span class="math display">\[
+<p><span class="math display">
 X
 \rightarrow \text{local features}
 \rightarrow \text{feature hierarchy}
 \rightarrow \text{global summary}
 \rightarrow \widehat p_{\mathrm{walking}}
-\]</span></p>
+</span></p>
 <blockquote>
 <p>Yes—after the kernels, biases, and prediction head have been learned from labelled examples.</p>
 </blockquote>
@@ -2730,7 +2746,6 @@ Simonyan, Karen, and Andrew Zisserman. 2015. <span>“Very Deep Convolutional Ne
   <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
   <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="../../site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -2899,27 +2914,9 @@ Simonyan, Karen, and Andrew Zisserman. 2015. <span>“Very Deep Convolutional Ne
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom

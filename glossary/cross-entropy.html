@@ -119,8 +119,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -519,28 +533,28 @@ window.Quarto = {
 
 
 <p>Cross-entropy measures the difference between a predicted probability distribution and the true distribution, typically represented by one-hot encoded labels. It quantifies the penalty or error in prediction, commonly used as a loss function in classification tasks, with lower values indicating better model performance.</p>
-<p>The equation for cross-entropy <span class="math inline">\(H(p, q)\)</span> is:</p>
-<p><span class="math display">\[
+<p>The equation for cross-entropy <span class="math inline">H(p, q)</span> is:</p>
+<p><span class="math display">
 H(p, q) = -\sum_{k} p_k \log(q_k)
-\]</span></p>
+</span></p>
 <p>where:</p>
 <ul>
-<li><span class="math inline">\(p_k\)</span> is the true probability distribution (typically one-hot encoded labels),</li>
-<li><span class="math inline">\(q_k\)</span> is the predicted probability distribution,</li>
-<li>the sum runs over all classes <span class="math inline">\(k\)</span>.</li>
+<li><span class="math inline">p_k</span> is the true probability distribution (typically one-hot encoded labels),</li>
+<li><span class="math inline">q_k</span> is the predicted probability distribution,</li>
+<li>the sum runs over all classes <span class="math inline">k</span>.</li>
 </ul>
 <p>In binary classification, this simplifies to:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 H(y, \hat{y}) = -[y \log(\hat{y}) + (1-y) \log(1-\hat{y})]
-\]</span></p>
+</span></p>
 <p>where:</p>
 <ul>
-<li><span class="math inline">\(y\)</span> is the true label (either 0 or 1),</li>
-<li><span class="math inline">\(\hat{y}\)</span> is the predicted probability of the positive class.</li>
+<li><span class="math inline">y</span> is the true label (either 0 or 1),</li>
+<li><span class="math inline">\hat{y}</span> is the predicted probability of the positive class.</li>
 </ul>
-<p>When <span class="math inline">\(y\)</span>, the true label, is one-hot encoded for multiclass classification, it represents the class as a vector where the element corresponding to the correct class is 1, and all other elements are 0. This encoding allows the cross-entropy loss to focus only on the predicted probability for the true class, penalizing the model based on how far the predicted probability deviates from 1 for the correct class.</p>
-<p>In neural networks, the values of <span class="math inline">\(\hat{y}_k\)</span> are generally obtained by applying the softmax function to the outputs of the final layer.</p>
-<p>The Python program below demonstrates how cross-entropy loss for one example varies with changes in the predicted probability, represented as <span class="math inline">\(-\log(\hat{y}_k)\)</span>, as it deviates from 1 for the true class label (<span class="math inline">\(y_k\)</span>). When <span class="math inline">\(\hat{y}_k\)</span> approaches 1, the loss for a single example approaches 0, indicating no penalty. Conversely, as <span class="math inline">\(\hat{y}_k\)</span> approaches 0, the loss tends toward positive infinity, imposing a substantial penalty for assigning a low probability to the correct class. This logarithmic relationship ensures that the loss function heavily penalizes incorrect predictions, particularly when the predicted probability for the correct class is near zero.</p>
+<p>When <span class="math inline">y</span>, the true label, is one-hot encoded for multiclass classification, it represents the class as a vector where the element corresponding to the correct class is 1, and all other elements are 0. This encoding allows the cross-entropy loss to focus only on the predicted probability for the true class, penalizing the model based on how far the predicted probability deviates from 1 for the correct class.</p>
+<p>In neural networks, the values of <span class="math inline">\hat{y}_k</span> are generally obtained by applying the softmax function to the outputs of the final layer.</p>
+<p>The Python program below demonstrates how cross-entropy loss for one example varies with changes in the predicted probability, represented as <span class="math inline">-\log(\hat{y}_k)</span>, as it deviates from 1 for the true class label (<span class="math inline">y_k</span>). When <span class="math inline">\hat{y}_k</span> approaches 1, the loss for a single example approaches 0, indicating no penalty. Conversely, as <span class="math inline">\hat{y}_k</span> approaches 0, the loss tends toward positive infinity, imposing a substantial penalty for assigning a low probability to the correct class. This logarithmic relationship ensures that the loss function heavily penalizes incorrect predictions, particularly when the predicted probability for the correct class is near zero.</p>
 <div id="370e7f04" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -573,41 +587,41 @@ H(y, \hat{y}) = -[y \log(\hat{y}) + (1-y) \log(1-\hat{y})]
 </div>
 </div>
 </div>
-<p>Consider a multiclass classification problem with three classes <span class="math inline">\((C_1, C_2, C_3)\)</span>. Suppose the true class of the given example is <span class="math inline">\(C_2\)</span>, and the model outputs the following predicted probabilities:</p>
-<p><span class="math display">\[
+<p>Consider a multiclass classification problem with three classes <span class="math inline">(C_1, C_2, C_3)</span>. Suppose the true class of the given example is <span class="math inline">C_2</span>, and the model outputs the following predicted probabilities:</p>
+<p><span class="math display">
 \hat{y} = [0.2, 0.7, 0.1]
-\]</span></p>
-<p>The one-hot encoded true label <span class="math inline">\({y}\)</span> for <span class="math inline">\(C_2\)</span> is:</p>
-<p><span class="math display">\[
+</span></p>
+<p>The one-hot encoded true label <span class="math inline">{y}</span> for <span class="math inline">C_2</span> is:</p>
+<p><span class="math display">
 {y} = [0, 1, 0]
-\]</span></p>
+</span></p>
 <p>Using the cross-entropy formula:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 H({y}, \hat{y}) = -\sum_{k} y_k \log(\hat{y}_k)
-\]</span></p>
+</span></p>
 <p>Substituting the values:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 H({y}, \hat{y}) = -[0 \cdot \log(0.2) + 1 \cdot \log(0.7) + 0 \cdot \log(0.1)]
-\]</span></p>
+</span></p>
 <p>Since only the term corresponding to the true class (second class) is non-zero, the calculation simplifies to:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 H({y}, \hat{y}) = -\log(0.7)
-\]</span></p>
+</span></p>
 <p>Calculating this:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 H({y}, \hat{y}) \approx -(-0.357) = 0.357
-\]</span></p>
+</span></p>
 <p>Thus, the cross-entropy loss for this example is approximately 0.357, indicating the penalty for the model’s deviation from the correct class probability.</p>
 <p>When calculating the average cross-entropy loss over a dataset with multiple examples, the loss function is summed over all examples and then divided by the number of examples to obtain the average loss. The equation for the average cross-entropy loss is:</p>
-<p><span class="math display">\[
+<p><span class="math display">
 L = -\frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} y_{i,k} \log(\hat{y}_{i,k})
-\]</span></p>
+</span></p>
 <p>where:</p>
 <ul>
-<li><span class="math inline">\(N\)</span> is the total number of examples in the dataset,</li>
-<li><span class="math inline">\(K\)</span> is the number of classes,</li>
-<li><span class="math inline">\(y_{i,k}\)</span> is the true binary indicator (0 or 1) for whether the <span class="math inline">\(i\)</span>-th example belongs to class <span class="math inline">\(k\)</span>,</li>
-<li><span class="math inline">\(\hat{y}_{i,k}\)</span> is the predicted probability that the <span class="math inline">\(i\)</span>-th example belongs to class <span class="math inline">\(k\)</span>.</li>
+<li><span class="math inline">N</span> is the total number of examples in the dataset,</li>
+<li><span class="math inline">K</span> is the number of classes,</li>
+<li><span class="math inline">y_{i,k}</span> is the true binary indicator (0 or 1) for whether the <span class="math inline">i</span>-th example belongs to class <span class="math inline">k</span>,</li>
+<li><span class="math inline">\hat{y}_{i,k}</span> is the predicted probability that the <span class="math inline">i</span>-th example belongs to class <span class="math inline">k</span>.</li>
 </ul>
 <p>This formulation calculates the average loss across all examples, providing a single scalar value that represents the model’s performance over the entire dataset.</p>
 

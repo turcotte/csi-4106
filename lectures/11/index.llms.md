@@ -27,7 +27,7 @@ CSI4106 Introduction to Artificial Intelligence
 
 ## Practice
 
-- [Circular Separability](CircularSeparability): To complement your exploration of TensorFlow Playground (below), I have developed a notebook focusing on feature engineering.
+- [Circular Separability ](CircularSeparability): To complement your exploration of TensorFlow Playground (below), I have developed a notebook focusing on feature engineering.
 
 - [TensorFlow Playground](https://playground.tensorflow.org/)
 
@@ -36,7 +36,7 @@ CSI4106 Introduction to Artificial Intelligence
   - **Model Architecture**: Allows customization of neural network architecture, including varying the number of layers and neurons per layer.
   - **Hyperparameter Tuning**: Provides options to adjust learning rate, activation functions, regularization techniques, and task specifications to observe their effects on model training.
   - **Suggestion 1**: For the Gaussian dataset, which is linearly separable, configure a network without hidden layers and a single output neuron using the sigmoid activation function. This setup effectively constructs a logistic regression model.
-  - **Suggestion 2**: The circular dataset is not linearly separable using only the original features \\x_1\\ and \\x_2\\. However, by creating new features, \\x_1^2\\ and \\x_2^2\\, the problem becomes linearly separable in the transformed feature space. A network with no hidden layers and a single output node is sufficient for this task.
+  - **Suggestion 2**: The circular dataset is not linearly separable using only the original features x_1 and x_2. However, by creating new features, x_1^2 and x_2^2, the problem becomes linearly separable in the transformed feature space. A network with no hidden layers and a single output node is sufficient for this task.
 
 ## References
 

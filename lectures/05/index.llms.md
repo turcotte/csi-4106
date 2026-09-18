@@ -17,7 +17,7 @@ CSI4106 Introduction to Artificial Intelligence
 
 ## Practice
 
-In class, we developed a logistic regression model for handwritten digit recognition using a dataset from UCI ML. This dataset comprises 1797 images of size \\8 \times 8\\. The [MNIST](https://www.openml.org/search?type=data&sort=runs&id=554&status=active) (`mnist_784`) dataset contains 70,000 images of size \\28 \times 28\\. The following [example](https://scikit-learn.org/dev/auto_examples/linear_model/plot_sparse_logistic_regression_mnist.html), from the `sklearn` website, uses this dataset and graphically presents the coefficients (\\\theta\\) for each of the 10 models. You can load this model as follows:
+In class, we developed a logistic regression model for handwritten digit recognition using a dataset from UCI ML. This dataset comprises 1797 images of size 8 \times 8. The [MNIST](https://www.openml.org/search?type=data&sort=runs&id=554&status=active) (`mnist_784`) dataset contains 70,000 images of size 28 \times 28. The following [example](https://scikit-learn.org/dev/auto_examples/linear_model/plot_sparse_logistic_regression_mnist.html), from the `sklearn` website, uses this dataset and graphically presents the coefficients (\theta) for each of the 10 models. You can load this model as follows:
 
 ``` python
 from sklearn.datasets import fetch_openml  
