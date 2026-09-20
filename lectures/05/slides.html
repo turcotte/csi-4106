@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/tabby.min.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -13,7 +13,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Marcel Turcotte">
-  <title>CSI 4106 - Fall 2026 – Logististic regression</title>
+  <title>CSI 4106 - Fall 2026 – Logistic regression</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -124,6 +124,7 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link rel="stylesheet" href="../../assets/css/reveal-common.css">
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
@@ -233,7 +234,10 @@
       margin-right: 0; 
     }
   </style>
-<meta property="og:title" content="Logististic regression – CSI 4106 - Fall 2026">
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<meta property="og:title" content="Logistic regression – CSI 4106 - Fall 2026">
 <meta property="og:description" content="CSI 4106 - Fall 2026">
 <meta property="og:site_name" content="CSI 4106 - Fall 2026">
 </head>
@@ -242,7 +246,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Logististic regression</h1>
+  <h1 class="title">Logistic regression</h1>
   <p class="subtitle">CSI 4106 - Fall 2026</p>
 
 <div class="quarto-title-authors">
@@ -253,28 +257,30 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Aug 10, 2026 11:53</p>
+  <p class="date">Version: Sep 19, 2026 14:33</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
 <h1>Preamble</h1>
 
 </section>
-<section id="message-of-the-day" class="slide level2 scrollable">
+<section id="message-of-the-day" class="slide level2">
 <h2>Message of the Day</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="https://cdn.theatlantic.com/thumbor/e3cWq_N5d7ra9OaF0EH0Qi4yH4E=/0x0:2000x1125/1952x1098/media/img/mt/2025/09/AIA_S2_Ep_9/original.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="https://cdn.theatlantic.com/thumbor/e3cWq_N5d7ra9OaF0EH0Qi4yH4E=/0x0:2000x1125/1952x1098/media/img/mt/2025/09/AIA_S2_Ep_9/original.jpg" class="quarto-figure quarto-figure-center" height="475"></a></p>
+<p><a href="https://www.science.org/content/article/openai-breakthrough-triggers-existential-crisis-math"><img data-src="../../assets/images/20260915_on_navier_stokes.jpg" class="quarto-figure quarto-figure-center" alt="A conceptual illustration of a vortex in OpenAI's claimed Navier–Stokes solution." height="475"></a></p>
 </figure>
 </div>
 
 <aside class="notes">
-<p>A 30 minutes podcast where Garry Kasparov is joined by cognitive scientist Gary Marcus.</p>
-<p><a href="https://www.kasparov.com">Garry Kasparov</a> (b. 1963) is a Russian chess grandmaster and former World Chess Champion, widely regarded as one of the greatest players in history. He held the world’s top ranking for nearly two decades and is also known for his matches against IBM’s Deep Blue and his later political activism and writing.</p>
-<p><a href="http://garymarcus.com/">Gary Marcus</a> (b. 1965) is an American cognitive scientist, author, and entrepreneur. He is known for his critiques of deep learning, his work on language acquisition and cognitive development, and for founding several AI startups.</p>
-<blockquote>
-<p>Kasparov and Marcus agree that AI is a tool—neither inherently utopian nor dystopian—and that the real risks stem from how it is used and by whom. Marcus emphasizes current AI systems still lack genuine understanding; they work by pattern recognition over vast datasets, not by grasping rules or concepts, which leads to alignment problems: machines frequently err or act in unforeseen ways. A major concern is how AI amplifies political deception, surveillance, and information manipulation—tools favored by autocratic or oligarchic interests. On the brighter side, they argue that we are not powerless: democratic societies still have levers—legal regulation, mass action, resistance, insistence on accountability—and might yet steer AI toward benefiting rather than undermining democracy. The default path is dangerous, but with political will, things need not slide irreversibly toward techno-fascism. (Summary generated by ChatGPT 5 on 2025-09-16)</p>
-</blockquote>
+<p>On September 8, OpenAI announced that an internal AI system had produced a solution to the Navier–Stokes existence and smoothness problem, one of the Millennium Prize Problems. OpenAI released both a written proof and a formalization in Lean. The mathematical community is still examining the result, so describe it as a <strong>claimed solution</strong>, not as a settled achievement <span class="citation" data-cites="Zhao:2026aa">(<a href="#/references" role="doc-biblioref" onclick="">Zhao 2026</a>)</span>.</p>
+<p>Here, “existential crisis” refers to a debate about the purpose and future of mathematics, not an existential threat to humanity. The article asks what mathematical understanding means when an AI system produces a formally verified proof that humans struggle to understand. It also raises concerns about attribution and unequal access to the computing resources required for this kind of research.</p>
+<ul>
+<li>Does a formally verified proof provide mathematical understanding, or only mathematical certainty?</li>
+<li>How might access to powerful AI systems change who receives opportunities and recognition in research?</li>
+</ul>
+<p>Today, we return from this frontier system to one of the simplest and most interpretable classification models.</p>
+<p>Image credit: OpenAI, via <em>Science</em>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -287,14 +293,17 @@ Marcel Turcotte
           display:block!important;
       }</style></aside>
 <aside><div>
-<p><a href="https://www.theatlantic.com/podcasts/archive/2025/09/ai-and-the-fight-between-democracy-and-autocracy/684095/">AI and the Rise of Techno-Fascism in the United States</a> by Gary Kasparov, The Atlantic, 2025-09-05. (31m 13s)</p>
+<p><a href="https://www.science.org/content/article/openai-breakthrough-triggers-existential-crisis-math">“OpenAI breakthrough triggers ‘existential crisis’ in math”</a>, C. Zhao, <em>Science</em>, 2026-09-15.</p>
 </div></aside></section>
-<section id="learning-objectives" class="slide level2">
+<section id="learning-objectives" class="slide level2 smaller">
 <h2>Learning Objectives</h2>
 <ul>
-<li><strong>Differentiate</strong> between binary classification and multi-class classification paradigms.</li>
-<li><strong>Describe</strong> a methodology for converting multi-class classification problems into binary classification tasks.</li>
-<li><strong>Implement</strong> a logistic regression algorithm, focusing on its application in classification problems.</li>
+<li><strong>Distinguish</strong> binary, multiclass, and multilabel classification tasks.</li>
+<li><strong>Explain</strong> how logistic regression converts a linear score into a probability using the sigmoid function.</li>
+<li><strong>Relate</strong> the <span class="math inline">0.5</span> classification threshold to the linear decision boundary.</li>
+<li><strong>Explain</strong> how one-vs-rest extends a binary classifier to multiclass problems.</li>
+<li><strong>Train</strong> a logistic regression model without leaking information from the test set.</li>
+<li><strong>Interpret</strong> the coefficients learned by one-vs-rest digit classifiers.</li>
 </ul>
 </section></section>
 <section>
@@ -306,7 +315,7 @@ Marcel Turcotte
 <h2>Definitions</h2>
 <ul>
 <li class="fragment"><p><strong>Binary classification</strong> is a supervised learning task where the objective is to categorize instances (examples) into one of <strong>two discrete classes</strong>.</p></li>
-<li class="fragment"><p>A <strong>multi-class classification</strong> task is a type of supervised learning problem where the objective is to categorize instances into one of <strong>three or more discrete classes</strong>.</p></li>
+<li class="fragment"><p>A <strong>multiclass classification</strong> task is a supervised learning problem where the objective is to categorize instances into one of <strong>three or more discrete classes</strong>.</p></li>
 </ul>
 
 <aside class="notes">
@@ -326,7 +335,7 @@ Marcel Turcotte
           display:block!important;
       }</style></aside>
 <aside><div>
-<p><strong>Caveat</strong>: <strong>Multi-class classification</strong> should not be confused with <strong>multi-label classification</strong>, which allows an instance to be associated with multiple classes. The algorithms designed to address these tasks differ significantly.</p>
+<p><strong>Caveat</strong>: <strong>Multiclass classification</strong> should not be confused with <strong>multilabel classification</strong>, which allows an instance to be associated with multiple classes.</p>
 </div></aside></section>
 <section id="binary-classification" class="slide level2">
 <h2>Binary classification</h2>
@@ -350,20 +359,20 @@ Marcel Turcotte
           display:block!important;
       }</style></aside>
 </section>
-<section id="multi-class-classification" class="slide level2 smaller">
-<h2>Multi-class classification</h2>
+<section id="multiclass-classification" class="slide level2 smaller">
+<h2>Multiclass classification</h2>
 <ul>
-<li class="fragment">Any <strong>multi-class classification problem</strong> can be transformed into a <strong>binary classification problem</strong>.</li>
-<li class="fragment"><strong>One-vs-All (OvA)</strong>
+<li class="fragment">A <strong>multiclass classification problem</strong> can be approached as a collection of <strong>binary classification tasks</strong>.</li>
+<li class="fragment"><strong>One-vs-Rest (OvR)</strong>
 <ul>
 <li class="fragment">A <strong>separate binary classifier</strong> is trained <strong>for each class</strong>.</li>
 <li class="fragment">For each classifier, <strong>one class</strong> is treated as the <strong>positive class</strong>, and <strong>all other classes</strong> are treated as the <strong>negative class</strong>.</li>
-<li class="fragment">The <strong>final assignment</strong> of a class label is made based on the classifier that outputs the <strong>highest confidence score</strong> for a given input.</li>
+<li class="fragment">The <strong>final assignment</strong> selects the class whose classifier produces the <strong>largest score</strong> for a given input.</li>
 </ul></li>
 </ul>
 
 <aside><div>
-<p>Scikit-learn offers <a href="https://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier"><code>OneVsRestClassifier</code></a>, a utility designed to extend binary classifiers for multi-class classification tasks via the One-vs-Rest strategy.</p>
+<p>Scikit-learn offers <a href="https://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier"><code>OneVsRestClassifier</code></a>, a utility designed to extend binary classifiers to multiclass tasks. One-vs-rest is also called one-vs-all.</p>
 <p>A complete example will be presented at the end of the lecture.</p>
 </div></aside></section></section>
 <section>
@@ -379,50 +388,59 @@ Marcel Turcotte
 <li><strong>Feature of Interest</strong>: Flipper length</li>
 </ul>
 </section>
-<section id="histogram" class="slide level2">
+<section id="histogram" class="slide level2 hide-code-toggle">
 <h2>Histogram</h2>
-<div id="a342693e" class="cell" data-execution_count="2">
+<div id="57e9665d" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a aria-label="2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a aria-label="3"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-4"><a aria-label="4"></a></span>
-<span id="cb1-5"><a aria-label="5"></a><span class="cf">try</span>:</span>
-<span id="cb1-6"><a aria-label="6"></a>    <span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
-<span id="cb1-7"><a aria-label="7"></a><span class="cf">except</span> <span class="pp">ImportError</span>:</span>
-<span id="cb1-8"><a aria-label="8"></a>    <span class="op">!</span> pip install palmerpenguins</span>
-<span id="cb1-9"><a aria-label="9"></a>    <span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
-<span id="cb1-10"><a aria-label="10"></a></span>
-<span id="cb1-11"><a aria-label="11"></a><span class="co"># Load the Palmer Penguins dataset</span></span>
-<span id="cb1-12"><a aria-label="12"></a>df <span class="op">=</span> load_penguins()</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a aria-label="3"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a aria-label="4"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a aria-label="5"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
+<span id="cb1-6"><a aria-label="6"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_digits, load_iris</span>
+<span id="cb1-7"><a aria-label="7"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression, LogisticRegression</span>
+<span id="cb1-8"><a aria-label="8"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb1-9"><a aria-label="9"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb1-10"><a aria-label="10"></a><span class="im">from</span> sklearn.multiclass <span class="im">import</span> OneVsRestClassifier</span>
+<span id="cb1-11"><a aria-label="11"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb1-12"><a aria-label="12"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler, label_binarize</span>
 <span id="cb1-13"><a aria-label="13"></a></span>
-<span id="cb1-14"><a aria-label="14"></a><span class="co"># Keep only 'flipper_length_mm' and 'species'</span></span>
-<span id="cb1-15"><a aria-label="15"></a>df <span class="op">=</span> df[[<span class="st">'flipper_length_mm'</span>, <span class="st">'species'</span>]]</span>
+<span id="cb1-14"><a aria-label="14"></a><span class="co"># Load the Palmer Penguins dataset</span></span>
+<span id="cb1-15"><a aria-label="15"></a>penguin_df <span class="op">=</span> load_penguins()[[<span class="st">'flipper_length_mm'</span>, <span class="st">'species'</span>]].dropna().copy()</span>
 <span id="cb1-16"><a aria-label="16"></a></span>
-<span id="cb1-17"><a aria-label="17"></a><span class="co"># Drop rows with missing values (NaNs)</span></span>
-<span id="cb1-18"><a aria-label="18"></a>df.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-19"><a aria-label="19"></a></span>
-<span id="cb1-20"><a aria-label="20"></a><span class="co"># Create a binary label: 1 if Gentoo, 0 otherwise</span></span>
-<span id="cb1-21"><a aria-label="21"></a>df[<span class="st">'is_gentoo'</span>] <span class="op">=</span> (df[<span class="st">'species'</span>] <span class="op">==</span> <span class="st">'Gentoo'</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb1-22"><a aria-label="22"></a></span>
-<span id="cb1-23"><a aria-label="23"></a><span class="co"># Separate features (X) and labels (y)</span></span>
-<span id="cb1-24"><a aria-label="24"></a>X <span class="op">=</span> df[[<span class="st">'flipper_length_mm'</span>]]</span>
-<span id="cb1-25"><a aria-label="25"></a>y <span class="op">=</span> df[<span class="st">'is_gentoo'</span>]</span>
-<span id="cb1-26"><a aria-label="26"></a></span>
-<span id="cb1-27"><a aria-label="27"></a><span class="co"># Plot the distribution of flipper lengths by binary species label</span></span>
-<span id="cb1-28"><a aria-label="28"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb1-29"><a aria-label="29"></a>sns.histplot(data<span class="op">=</span>df, x<span class="op">=</span><span class="st">'flipper_length_mm'</span>, hue<span class="op">=</span><span class="st">'is_gentoo'</span>, kde<span class="op">=</span><span class="va">True</span>, bins<span class="op">=</span><span class="dv">30</span>, palette<span class="op">=</span><span class="st">'Set1'</span>)</span>
-<span id="cb1-30"><a aria-label="30"></a>plt.title(<span class="st">'Distribution of Flipper Length (Gentoo vs. Others)'</span>)</span>
-<span id="cb1-31"><a aria-label="31"></a>plt.xlabel(<span class="st">'Flipper Length (mm)'</span>)</span>
-<span id="cb1-32"><a aria-label="32"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb1-33"><a aria-label="33"></a>plt.legend(title<span class="op">=</span><span class="st">'Species'</span>, labels<span class="op">=</span>[<span class="st">'Gentoo'</span>, <span class="st">'Non Gentoo'</span>])</span>
-<span id="cb1-34"><a aria-label="34"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-17"><a aria-label="17"></a><span class="co"># Create a binary label: 1 if Gentoo, 0 otherwise</span></span>
+<span id="cb1-18"><a aria-label="18"></a>penguin_df[<span class="st">'is_gentoo'</span>] <span class="op">=</span> (penguin_df[<span class="st">'species'</span>] <span class="op">==</span> <span class="st">'Gentoo'</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb1-19"><a aria-label="19"></a>penguin_df[<span class="st">'class_name'</span>] <span class="op">=</span> np.where(</span>
+<span id="cb1-20"><a aria-label="20"></a>    penguin_df[<span class="st">'is_gentoo'</span>] <span class="op">==</span> <span class="dv">1</span>,</span>
+<span id="cb1-21"><a aria-label="21"></a>    <span class="st">'Gentoo'</span>,</span>
+<span id="cb1-22"><a aria-label="22"></a>    <span class="st">'Not Gentoo'</span></span>
+<span id="cb1-23"><a aria-label="23"></a>)</span>
+<span id="cb1-24"><a aria-label="24"></a></span>
+<span id="cb1-25"><a aria-label="25"></a><span class="co"># Separate features (X) and labels (y)</span></span>
+<span id="cb1-26"><a aria-label="26"></a>penguin_X <span class="op">=</span> penguin_df[[<span class="st">'flipper_length_mm'</span>]]</span>
+<span id="cb1-27"><a aria-label="27"></a>penguin_y <span class="op">=</span> penguin_df[<span class="st">'is_gentoo'</span>]</span>
+<span id="cb1-28"><a aria-label="28"></a></span>
+<span id="cb1-29"><a aria-label="29"></a><span class="co"># Plot the distribution of flipper lengths by binary species label</span></span>
+<span id="cb1-30"><a aria-label="30"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb1-31"><a aria-label="31"></a>sns.histplot(</span>
+<span id="cb1-32"><a aria-label="32"></a>    data<span class="op">=</span>penguin_df,</span>
+<span id="cb1-33"><a aria-label="33"></a>    x<span class="op">=</span><span class="st">'flipper_length_mm'</span>,</span>
+<span id="cb1-34"><a aria-label="34"></a>    hue<span class="op">=</span><span class="st">'class_name'</span>,</span>
+<span id="cb1-35"><a aria-label="35"></a>    hue_order<span class="op">=</span>[<span class="st">'Not Gentoo'</span>, <span class="st">'Gentoo'</span>],</span>
+<span id="cb1-36"><a aria-label="36"></a>    kde<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb1-37"><a aria-label="37"></a>    bins<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb1-38"><a aria-label="38"></a>    palette<span class="op">=</span><span class="st">'Set1'</span></span>
+<span id="cb1-39"><a aria-label="39"></a>)</span>
+<span id="cb1-40"><a aria-label="40"></a>plt.title(<span class="st">'Distribution of Flipper Length (Gentoo vs. Others)'</span>)</span>
+<span id="cb1-41"><a aria-label="41"></a>plt.xlabel(<span class="st">'Flipper Length (mm)'</span>)</span>
+<span id="cb1-42"><a aria-label="42"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb1-43"><a aria-label="43"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="slides_files/figure-revealjs/cell-2-output-1.png" class="quarto-figure quarto-figure-center" width="808" height="525"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="slides_files/figure-revealjs/cell-2-output-1.png" class="quarto-figure quarto-figure-center" width="808" height="525"></a></p>
 </figure>
 </div>
 </div>
@@ -454,15 +472,15 @@ Marcel Turcotte
 <h2>Model</h2>
 <ul>
 <li class="fragment"><strong>General Case:</strong> <span class="math inline">P(y = k | x, \theta)</span>, where <span class="math inline">k</span> is a class label.</li>
-<li class="fragment"><strong>Binary Case</strong>: <span class="math inline">y \in {0,1}</span>
+<li class="fragment"><strong>Binary Case</strong>: <span class="math inline">y \in \{0,1\}</span>
 <ul>
 <li class="fragment"><strong>Predict</strong> <span class="math inline">P(y = 1 | x, \theta)</span></li>
 </ul></li>
 </ul>
 </section>
-<section id="visualizing-our-data" class="slide level2">
+<section id="visualizing-our-data" class="slide level2 hide-code-toggle">
 <h2>Visualizing our data</h2>
-<div id="6c773c04" class="cell" data-execution_count="3">
+<div id="8a145841" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Scatter plot of flipper length vs. binary label (Gentoo or Not Gentoo)</span></span>
@@ -470,16 +488,16 @@ Marcel Turcotte
 <span id="cb2-3"><a aria-label="3"></a></span>
 <span id="cb2-4"><a aria-label="4"></a><span class="co"># Plot points labeled as Gentoo (is_gentoo = 1)</span></span>
 <span id="cb2-5"><a aria-label="5"></a>plt.scatter(</span>
-<span id="cb2-6"><a aria-label="6"></a>    df.loc[df[<span class="st">'is_gentoo'</span>] <span class="op">==</span> <span class="dv">1</span>, <span class="st">'flipper_length_mm'</span>],</span>
-<span id="cb2-7"><a aria-label="7"></a>    df.loc[df[<span class="st">'is_gentoo'</span>] <span class="op">==</span> <span class="dv">1</span>, <span class="st">'is_gentoo'</span>],</span>
+<span id="cb2-6"><a aria-label="6"></a>    penguin_df.loc[penguin_df[<span class="st">'is_gentoo'</span>] <span class="op">==</span> <span class="dv">1</span>, <span class="st">'flipper_length_mm'</span>],</span>
+<span id="cb2-7"><a aria-label="7"></a>    penguin_df.loc[penguin_df[<span class="st">'is_gentoo'</span>] <span class="op">==</span> <span class="dv">1</span>, <span class="st">'is_gentoo'</span>],</span>
 <span id="cb2-8"><a aria-label="8"></a>    color<span class="op">=</span><span class="st">'blue'</span>,</span>
 <span id="cb2-9"><a aria-label="9"></a>    label<span class="op">=</span><span class="st">'Gentoo'</span></span>
 <span id="cb2-10"><a aria-label="10"></a>)</span>
 <span id="cb2-11"><a aria-label="11"></a></span>
 <span id="cb2-12"><a aria-label="12"></a><span class="co"># Plot points labeled as Not Gentoo (is_gentoo = 0)</span></span>
 <span id="cb2-13"><a aria-label="13"></a>plt.scatter(</span>
-<span id="cb2-14"><a aria-label="14"></a>    df.loc[df[<span class="st">'is_gentoo'</span>] <span class="op">==</span> <span class="dv">0</span>, <span class="st">'flipper_length_mm'</span>],</span>
-<span id="cb2-15"><a aria-label="15"></a>    df.loc[df[<span class="st">'is_gentoo'</span>] <span class="op">==</span> <span class="dv">0</span>, <span class="st">'is_gentoo'</span>],</span>
+<span id="cb2-14"><a aria-label="14"></a>    penguin_df.loc[penguin_df[<span class="st">'is_gentoo'</span>] <span class="op">==</span> <span class="dv">0</span>, <span class="st">'flipper_length_mm'</span>],</span>
+<span id="cb2-15"><a aria-label="15"></a>    penguin_df.loc[penguin_df[<span class="st">'is_gentoo'</span>] <span class="op">==</span> <span class="dv">0</span>, <span class="st">'is_gentoo'</span>],</span>
 <span id="cb2-16"><a aria-label="16"></a>    color<span class="op">=</span><span class="st">'red'</span>,</span>
 <span id="cb2-17"><a aria-label="17"></a>    label<span class="op">=</span><span class="st">'Not Gentoo'</span></span>
 <span id="cb2-18"><a aria-label="18"></a>)</span>
@@ -494,57 +512,84 @@ Marcel Turcotte
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="813" height="525"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="slides_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="813" height="525"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="intuition" class="slide level2">
+<section id="intuition" class="slide level2 hide-code-toggle">
 <h2>Intuition</h2>
 <p>Fitting a linear regression is not the answer, but <span class="math inline">\ldots</span></p>
-<div id="ba13c899" class="cell" data-execution_count="4">
+<div id="f64dfc37" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb3-2"><a aria-label="2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a>penguin_linear_model <span class="op">=</span> LinearRegression()</span>
+<span id="cb3-2"><a aria-label="2"></a>penguin_linear_model.fit(penguin_X, penguin_y)</span>
 <span id="cb3-3"><a aria-label="3"></a></span>
-<span id="cb3-4"><a aria-label="4"></a>lin_reg <span class="op">=</span> LinearRegression()</span>
-<span id="cb3-5"><a aria-label="5"></a>lin_reg.fit(X, y)</span>
-<span id="cb3-6"><a aria-label="6"></a></span>
-<span id="cb3-7"><a aria-label="7"></a>X_new <span class="op">=</span> pd.DataFrame([X.<span class="bu">min</span>(), X.<span class="bu">max</span>()], columns<span class="op">=</span>X.columns)</span>
-<span id="cb3-8"><a aria-label="8"></a></span>
-<span id="cb3-9"><a aria-label="9"></a>y_pred <span class="op">=</span> lin_reg.predict(X_new)</span>
-<span id="cb3-10"><a aria-label="10"></a></span>
-<span id="cb3-11"><a aria-label="11"></a><span class="co"># Plot the scatter plot</span></span>
-<span id="cb3-12"><a aria-label="12"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
-<span id="cb3-13"><a aria-label="13"></a>plt.scatter(X, y, c<span class="op">=</span>y, cmap<span class="op">=</span><span class="st">'bwr'</span>, edgecolor<span class="op">=</span><span class="st">'k'</span>)</span>
-<span id="cb3-14"><a aria-label="14"></a>plt.plot(X_new, y_pred, <span class="st">"r-"</span>)</span>
-<span id="cb3-15"><a aria-label="15"></a>plt.xlabel(<span class="st">'Flipper Length (mm)'</span>)</span>
-<span id="cb3-16"><a aria-label="16"></a>plt.ylabel(<span class="st">'Binary Label (Gentoo or Not Gentoo)'</span>)</span>
-<span id="cb3-17"><a aria-label="17"></a>plt.title(<span class="st">'Flipper Length vs. Binary Label (Gentoo or Not Gentoo)'</span>)</span>
-<span id="cb3-18"><a aria-label="18"></a>plt.yticks([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="st">'Not Gentoo'</span>, <span class="st">'Gentoo'</span>])</span>
-<span id="cb3-19"><a aria-label="19"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb3-20"><a aria-label="20"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-4"><a aria-label="4"></a>penguin_line_X <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb3-5"><a aria-label="5"></a>    <span class="st">'flipper_length_mm'</span>: np.linspace(</span>
+<span id="cb3-6"><a aria-label="6"></a>        penguin_X[<span class="st">'flipper_length_mm'</span>].<span class="bu">min</span>(),</span>
+<span id="cb3-7"><a aria-label="7"></a>        penguin_X[<span class="st">'flipper_length_mm'</span>].<span class="bu">max</span>(),</span>
+<span id="cb3-8"><a aria-label="8"></a>        <span class="dv">200</span></span>
+<span id="cb3-9"><a aria-label="9"></a>    )</span>
+<span id="cb3-10"><a aria-label="10"></a>})</span>
+<span id="cb3-11"><a aria-label="11"></a>penguin_line_y <span class="op">=</span> penguin_linear_model.predict(penguin_line_X)</span>
+<span id="cb3-12"><a aria-label="12"></a></span>
+<span id="cb3-13"><a aria-label="13"></a><span class="co"># The threshold is where the fitted line reaches 0.5.</span></span>
+<span id="cb3-14"><a aria-label="14"></a>linear_boundary_mm <span class="op">=</span> <span class="bu">float</span>(</span>
+<span id="cb3-15"><a aria-label="15"></a>    (<span class="fl">0.5</span> <span class="op">-</span> penguin_linear_model.intercept_) <span class="op">/</span></span>
+<span id="cb3-16"><a aria-label="16"></a>    penguin_linear_model.coef_[<span class="dv">0</span>]</span>
+<span id="cb3-17"><a aria-label="17"></a>)</span>
+<span id="cb3-18"><a aria-label="18"></a></span>
+<span id="cb3-19"><a aria-label="19"></a><span class="kw">def</span> plot_penguin_linear_fit():</span>
+<span id="cb3-20"><a aria-label="20"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb3-21"><a aria-label="21"></a>    plt.scatter(</span>
+<span id="cb3-22"><a aria-label="22"></a>        penguin_X[<span class="st">'flipper_length_mm'</span>],</span>
+<span id="cb3-23"><a aria-label="23"></a>        penguin_y,</span>
+<span id="cb3-24"><a aria-label="24"></a>        c<span class="op">=</span>penguin_y,</span>
+<span id="cb3-25"><a aria-label="25"></a>        cmap<span class="op">=</span><span class="st">'bwr'</span>,</span>
+<span id="cb3-26"><a aria-label="26"></a>        edgecolor<span class="op">=</span><span class="st">'k'</span></span>
+<span id="cb3-27"><a aria-label="27"></a>    )</span>
+<span id="cb3-28"><a aria-label="28"></a>    plt.plot(penguin_line_X[<span class="st">'flipper_length_mm'</span>], penguin_line_y, <span class="st">'r-'</span>)</span>
+<span id="cb3-29"><a aria-label="29"></a>    plt.axhline(<span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'gray'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-30"><a aria-label="30"></a>    plt.axvline(linear_boundary_mm, color<span class="op">=</span><span class="st">'gray'</span>, linestyle<span class="op">=</span><span class="st">':'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-31"><a aria-label="31"></a>    plt.xlabel(<span class="st">'Flipper Length (mm)'</span>)</span>
+<span id="cb3-32"><a aria-label="32"></a>    plt.ylabel(<span class="st">'Model output'</span>)</span>
+<span id="cb3-33"><a aria-label="33"></a>    plt.yticks([<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>], [<span class="st">'Not Gentoo'</span>, <span class="st">'Threshold'</span>, <span class="st">'Gentoo'</span>])</span>
+<span id="cb3-34"><a aria-label="34"></a>    plt.grid(<span class="va">True</span>)</span>
+<span id="cb3-35"><a aria-label="35"></a>    plt.show()</span>
+<span id="cb3-36"><a aria-label="36"></a></span>
+<span id="cb3-37"><a aria-label="37"></a>plot_penguin_linear_fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides_files/figure-revealjs/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="498" height="283"></a></p>
 </figure>
 </div>
 </div>
 </div>
+<div id="ef9bd447" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a>plot_penguin_linear_fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
 </section>
-<section id="intuition-continued" class="slide level2">
+<section id="intuition-continued" class="slide level2 hide-code-toggle">
 <h2>Intuition (continued)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="05dbfb2d" class="cell" data-execution_count="5">
+<div id="7d8cdfd3" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a>plot_penguin_linear_fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-revealjs/cell-5-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="498" height="283"></a></p>
 </figure>
 </div>
 </div>
@@ -557,15 +602,19 @@ Marcel Turcotte
 </ul>
 </div></div>
 </section>
-<section id="intuition-continued-1" class="slide level2">
+<section id="intuition-continued-1" class="slide level2 hide-code-toggle">
 <h2>Intuition (continued)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="d45e8dc0" class="cell" data-execution_count="6">
+<div id="864cc86a" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>plot_penguin_linear_fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-revealjs/cell-7-output-1.png" class="quarto-figure quarto-figure-center" width="498" height="283"></a></p>
 </figure>
 </div>
 </div>
@@ -573,55 +622,119 @@ Marcel Turcotte
 </div><div class="column" style="width:65%;">
 <ul>
 <li class="fragment">For a <strong>single feature</strong>, the decision boundary is a <strong>specific point</strong>.</li>
-<li class="fragment">In this case, the <strong>decision boundary</strong> is approximately 205.</li>
+<li class="fragment">In this case, the fitted line reaches the <span class="math inline">0.5</span> threshold at approximately <span class="math inline">205.6</span> mm.</li>
 </ul>
 </div></div>
 </section>
-<section id="intuition-continued-2" class="slide level2">
+<section id="intuition-continued-2" class="slide level2 hide-code-toggle">
 <h2>Intuition (continued)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="e5413dfc" class="cell" data-execution_count="8">
+<div id="cad0bb8d" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a>plot_penguin_linear_fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="498" height="283"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:65%;">
 <ul>
-<li class="fragment">As <strong><code>flipper_length_mm</code></strong> increases from 205 to 230, confidence in classifying the example as Gentoo rises.</li>
-<li class="fragment">Conversely, as <strong><code>flipper_length_mm</code></strong> decreases from 205 to 170, confidence in classifying the example as non-Gentoo rises.</li>
+<li class="fragment">As <strong><code>flipper_length_mm</code></strong> increases above the threshold, the fitted output moves toward the Gentoo label.</li>
+<li class="fragment">As <strong><code>flipper_length_mm</code></strong> decreases below the threshold, the fitted output moves toward the non-Gentoo label.</li>
 </ul>
 </div></div>
 </section>
-<section id="intuition-continued-3" class="slide level2">
+<section id="intuition-continued-3" class="slide level2 hide-code-toggle">
 <h2>Intuition (continued)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="d5856a2a" class="cell" data-execution_count="9">
+<div id="9e820810" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a>plot_penguin_linear_fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-revealjs/cell-9-output-1.png" class="quarto-figure quarto-figure-center" width="533" height="303"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides_files/figure-revealjs/cell-9-output-1.png" class="quarto-figure quarto-figure-center" width="498" height="283"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:65%;">
 <ul>
-<li class="fragment">For <strong>values near the decision boundary</strong>, 205, some examples classify as Gentoo while others do not, leading to a classification uncertainty comparable to a coin flip (<strong>0.5 probability</strong>).</li>
+<li class="fragment">Near the threshold, the fitted output is close to <span class="math inline">0.5</span>, but linear regression still does not produce a valid probability model.</li>
 </ul>
 </div></div>
 </section></section>
 <section>
-<section id="logistic-function" class="title-slide slide level1 center">
+<section id="logistic-function" class="title-slide slide level1 hide-code-toggle center">
 <h1>Logistic Function</h1>
-
+<div id="c8ab7568" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="kw">def</span> sigmoid(t):</span>
+<span id="cb9-2"><a aria-label="2"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>t))</span>
+<span id="cb9-3"><a aria-label="3"></a></span>
+<span id="cb9-4"><a aria-label="4"></a>sigmoid_input <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">1000</span>)</span>
+<span id="cb9-5"><a aria-label="5"></a>sigmoid_output <span class="op">=</span> sigmoid(sigmoid_input)</span>
+<span id="cb9-6"><a aria-label="6"></a></span>
+<span id="cb9-7"><a aria-label="7"></a><span class="co"># Fit a one-feature logistic regression model so that we can distinguish</span></span>
+<span id="cb9-8"><a aria-label="8"></a><span class="co"># its linear score from the probability obtained after applying the sigmoid.</span></span>
+<span id="cb9-9"><a aria-label="9"></a>penguin_logistic_model <span class="op">=</span> LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb9-10"><a aria-label="10"></a>penguin_logistic_model.fit(penguin_X, penguin_y)</span>
+<span id="cb9-11"><a aria-label="11"></a></span>
+<span id="cb9-12"><a aria-label="12"></a>penguin_line_score <span class="op">=</span> penguin_logistic_model.decision_function(penguin_line_X)</span>
+<span id="cb9-13"><a aria-label="13"></a>logistic_boundary_mm <span class="op">=</span> <span class="bu">float</span>(</span>
+<span id="cb9-14"><a aria-label="14"></a>    <span class="op">-</span>penguin_logistic_model.intercept_[<span class="dv">0</span>] <span class="op">/</span></span>
+<span id="cb9-15"><a aria-label="15"></a>    penguin_logistic_model.coef_[<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb9-16"><a aria-label="16"></a>)</span>
+<span id="cb9-17"><a aria-label="17"></a></span>
+<span id="cb9-18"><a aria-label="18"></a><span class="kw">def</span> plot_penguin_logistic_score():</span>
+<span id="cb9-19"><a aria-label="19"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb9-20"><a aria-label="20"></a>    plt.plot(</span>
+<span id="cb9-21"><a aria-label="21"></a>        penguin_line_X[<span class="st">'flipper_length_mm'</span>],</span>
+<span id="cb9-22"><a aria-label="22"></a>        penguin_line_score,</span>
+<span id="cb9-23"><a aria-label="23"></a>        color<span class="op">=</span><span class="st">'blue'</span>,</span>
+<span id="cb9-24"><a aria-label="24"></a>        linewidth<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb9-25"><a aria-label="25"></a>    )</span>
+<span id="cb9-26"><a aria-label="26"></a>    plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'gray'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-27"><a aria-label="27"></a>    plt.axvline(logistic_boundary_mm, color<span class="op">=</span><span class="st">'gray'</span>, linestyle<span class="op">=</span><span class="st">':'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-28"><a aria-label="28"></a>    plt.scatter([logistic_boundary_mm], [<span class="dv">0</span>], color<span class="op">=</span><span class="st">'black'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb9-29"><a aria-label="29"></a>    plt.xlabel(<span class="st">'Flipper Length (mm)'</span>)</span>
+<span id="cb9-30"><a aria-label="30"></a>    plt.ylabel(<span class="vs">r'Linear score </span><span class="dv">$</span><span class="vs">t</span><span class="kw">(</span><span class="vs">x</span><span class="kw">)</span><span class="dv">$</span><span class="vs">'</span>)</span>
+<span id="cb9-31"><a aria-label="31"></a>    plt.grid(<span class="va">True</span>)</span>
+<span id="cb9-32"><a aria-label="32"></a>    plt.show()</span>
+<span id="cb9-33"><a aria-label="33"></a></span>
+<span id="cb9-34"><a aria-label="34"></a><span class="kw">def</span> plot_sigmoid():</span>
+<span id="cb9-35"><a aria-label="35"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb9-36"><a aria-label="36"></a>    ax.plot(sigmoid_input, sigmoid_output, color<span class="op">=</span><span class="st">'blue'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb9-37"><a aria-label="37"></a>    ax.axvline(x<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-38"><a aria-label="38"></a>    ax.axhline(y<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'gray'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-39"><a aria-label="39"></a>    ax.scatter([<span class="dv">0</span>], [<span class="fl">0.5</span>], color<span class="op">=</span><span class="st">'black'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb9-40"><a aria-label="40"></a>    ax.set_yticks([<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>])</span>
+<span id="cb9-41"><a aria-label="41"></a>    ax.set_xlabel(<span class="st">'t'</span>)</span>
+<span id="cb9-42"><a aria-label="42"></a>    ax.set_ylabel(<span class="vs">r'</span><span class="dv">$\s</span><span class="vs">igma</span><span class="kw">(</span><span class="vs">t</span><span class="kw">)</span><span class="dv">$</span><span class="vs">'</span>)</span>
+<span id="cb9-43"><a aria-label="43"></a>    ax.grid(<span class="va">True</span>)</span>
+<span id="cb9-44"><a aria-label="44"></a>    plt.show()</span>
+<span id="cb9-45"><a aria-label="45"></a></span>
+<span id="cb9-46"><a aria-label="46"></a>plot_sigmoid()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="604fdc78" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a>plot_sigmoid()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
 </section>
-<section id="logistic-function-1" class="slide level2">
+<section id="logistic-function-1" class="slide level2 hide-code-toggle">
 <h2>Logistic Function</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
@@ -630,40 +743,15 @@ Marcel Turcotte
   \sigma(t) = \frac{1}{1+e^{-t}}
 </span></p>
 </div><div class="column" style="width:60%;">
-<div id="733fbdc6" class="cell" data-execution_count="10">
+<div id="161b8f77" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Sigmoid function</span></span>
-<span id="cb4-2"><a aria-label="2"></a><span class="kw">def</span> sigmoid(t):</span>
-<span id="cb4-3"><a aria-label="3"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>t))</span>
-<span id="cb4-4"><a aria-label="4"></a></span>
-<span id="cb4-5"><a aria-label="5"></a><span class="co"># Generate t values</span></span>
-<span id="cb4-6"><a aria-label="6"></a>t <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">1000</span>)</span>
-<span id="cb4-7"><a aria-label="7"></a></span>
-<span id="cb4-8"><a aria-label="8"></a><span class="co"># Compute y values for the sigmoid function</span></span>
-<span id="cb4-9"><a aria-label="9"></a>sigma <span class="op">=</span> sigmoid(t)</span>
-<span id="cb4-10"><a aria-label="10"></a></span>
-<span id="cb4-11"><a aria-label="11"></a><span class="co"># Create a figure</span></span>
-<span id="cb4-12"><a aria-label="12"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb4-13"><a aria-label="13"></a>ax.plot(t, sigma, color<span class="op">=</span><span class="st">'blue'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)  <span class="co"># Keep the curve opaque</span></span>
-<span id="cb4-14"><a aria-label="14"></a></span>
-<span id="cb4-15"><a aria-label="15"></a><span class="co"># Draw vertical axis at x = 0</span></span>
-<span id="cb4-16"><a aria-label="16"></a>ax.axvline(x<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb4-17"><a aria-label="17"></a></span>
-<span id="cb4-18"><a aria-label="18"></a><span class="co"># Add labels on the vertical axis</span></span>
-<span id="cb4-19"><a aria-label="19"></a>ax.set_yticks([<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>])</span>
-<span id="cb4-20"><a aria-label="20"></a></span>
-<span id="cb4-21"><a aria-label="21"></a><span class="co"># Add labels to the axes</span></span>
-<span id="cb4-22"><a aria-label="22"></a>ax.set_xlabel(<span class="st">'t'</span>)</span>
-<span id="cb4-23"><a aria-label="23"></a>ax.set_ylabel(<span class="vs">r'</span><span class="dv">$\s</span><span class="vs">igma</span><span class="kw">(</span><span class="vs">t</span><span class="kw">)</span><span class="dv">$</span><span class="vs">'</span>)</span>
-<span id="cb4-24"><a aria-label="24"></a></span>
-<span id="cb4-25"><a aria-label="25"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb4-26"><a aria-label="26"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a>plot_sigmoid()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides_files/figure-revealjs/cell-10-output-1.png" class="quarto-figure quarto-figure-center" width="813" height="430"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-revealjs/cell-12-output-1.png" class="quarto-figure quarto-figure-center" width="515" height="356"></a></p>
 </figure>
 </div>
 </div>
@@ -697,36 +785,44 @@ Marcel Turcotte
           display:block!important;
       }</style></aside>
 </section>
-<section id="logistic-regression-intuition" class="slide level2 smaller">
-<h2>Logistic Regression (intuition)</h2>
+<section id="linear-score-and-probability" class="slide level2 smaller hide-code-toggle">
+<h2>Linear score and probability</h2>
 <div class="columns">
 <div class="column" style="width:65%;">
-<div id="d73d7afb" class="cell" data-execution_count="11">
+<div id="801a191d" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>plot_penguin_logistic_score()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="slides_files/figure-revealjs/cell-11-output-1.png" class="quarto-figure quarto-figure-center" width="498" height="357"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides_files/figure-revealjs/cell-13-output-1.png" class="quarto-figure quarto-figure-center" width="448" height="283"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:35%;">
-<div id="77dd585c" class="cell" data-execution_count="12">
+<div id="afa276c0" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a>plot_sigmoid()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides_files/figure-revealjs/cell-12-output-1.png" class="quarto-figure quarto-figure-center" width="515" height="356"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="slides_files/figure-revealjs/cell-14-output-1.png" class="quarto-figure quarto-figure-center" width="515" height="356"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
 <ul>
-<li class="fragment">When the <strong>distance to the decision boundary</strong> is <strong>zero</strong>, uncertainty is high, making a probability of <strong>0.5</strong> appropriate.</li>
-<li class="fragment">As we move <strong>away from the decision boundary</strong>, confidence increases, warranting <strong>higher</strong> or <strong>lower</strong> probabilities accordingly.</li>
+<li class="fragment">The fitted linear score <span class="math inline">t(x)=\theta_0+\theta_1x</span> is zero at the decision boundary, approximately <span class="math inline">207</span> mm in this example.</li>
+<li class="fragment">The sigmoid maps this zero score to <span class="math inline">P(y=1\mid x)=0.5</span>. Negative scores map below <span class="math inline">0.5</span>, and positive scores map above <span class="math inline">0.5</span>.</li>
 </ul>
 </section>
-<section id="logistic-function-2" class="slide level2">
+<section id="logistic-function-2" class="slide level2 hide-code-toggle">
 <h2>Logistic function</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
@@ -735,30 +831,15 @@ Marcel Turcotte
   \sigma(t) = \frac{1}{1+e^{-t}}
 </span></p>
 </div><div class="column" style="width:40%;">
-<div id="3638baf8" class="cell" data-execution_count="13">
+<div id="33c9c200" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="co"># Create a figure</span></span>
-<span id="cb5-2"><a aria-label="2"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb5-3"><a aria-label="3"></a>ax.plot(t, sigma, color<span class="op">=</span><span class="st">'blue'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)  <span class="co"># Keep the curve opaque</span></span>
-<span id="cb5-4"><a aria-label="4"></a></span>
-<span id="cb5-5"><a aria-label="5"></a><span class="co"># Draw vertical axis at x = 0</span></span>
-<span id="cb5-6"><a aria-label="6"></a>ax.axvline(x<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-7"><a aria-label="7"></a></span>
-<span id="cb5-8"><a aria-label="8"></a><span class="co"># Add labels on the vertical axis</span></span>
-<span id="cb5-9"><a aria-label="9"></a>ax.set_yticks([<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>])</span>
-<span id="cb5-10"><a aria-label="10"></a></span>
-<span id="cb5-11"><a aria-label="11"></a><span class="co"># Add labels to the axes</span></span>
-<span id="cb5-12"><a aria-label="12"></a>ax.set_xlabel(<span class="st">'t'</span>)</span>
-<span id="cb5-13"><a aria-label="13"></a>ax.set_ylabel(<span class="vs">r'</span><span class="dv">$\s</span><span class="vs">igma</span><span class="kw">(</span><span class="vs">t</span><span class="kw">)</span><span class="dv">$</span><span class="vs">'</span>)</span>
-<span id="cb5-14"><a aria-label="14"></a></span>
-<span id="cb5-15"><a aria-label="15"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb5-16"><a aria-label="16"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>plot_sigmoid()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="slides_files/figure-revealjs/cell-13-output-1.png" class="quarto-figure quarto-figure-center" width="813" height="430"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-15-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides_files/figure-revealjs/cell-15-output-1.png" class="quarto-figure quarto-figure-center" width="515" height="356"></a></p>
 </figure>
 </div>
 </div>
@@ -782,64 +863,144 @@ Marcel Turcotte
 <li class="fragment"><p>Equation for the <strong>logistic regression</strong>: <span class="math display">
 \sigma(\theta_0 + \theta_1 x_i^{(1)} + \theta_2 x_i^{(2)} + \ldots + \theta_D x_i^{(D)})
 </span></p></li>
-<li class="fragment"><p>Multipling <span class="math inline">\theta_0</span> (intercept/bias) by 1: <span class="math display">
+<li class="fragment"><p>Multiplying <span class="math inline">\theta_0</span> (intercept/bias) by 1: <span class="math display">
 \sigma(\theta_0 \times 1 + \theta_1 x_i^{(1)} + \theta_2 x_i^{(2)} + \ldots + \theta_D x_i^{(D)})
 </span></p></li>
-<li class="fragment"><p>Multipling <span class="math inline">\theta_0</span> by <span class="math inline">x_i^{(0)} = 1</span>: <span class="math display">
+<li class="fragment"><p>Multiplying <span class="math inline">\theta_0</span> by <span class="math inline">x_i^{(0)} = 1</span>: <span class="math display">
 \sigma(\theta_0 x_i^{(0)} + \theta_1 x_i^{(1)} + \theta_2 x_i^{(2)} + \ldots + \theta_D x_i^{(D)})
 </span></p></li>
 </ul>
 </section>
-<section id="logistic-regression-1" class="slide level2">
+<section id="logistic-regression-1" class="slide level2 hide-code-toggle">
 <h2>Logistic regression</h2>
 <p>The <strong>Logistic Regression</strong> model, in its vectorized form, is defined as:</p>
 <p><span class="math display">
-  h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
+  h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
   </span></p>
 
+<div id="0726fcc9" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a>penguin_features <span class="op">=</span> [<span class="st">'bill_depth_mm'</span>, <span class="st">'body_mass_g'</span>]</span>
+<span id="cb15-2"><a aria-label="2"></a>penguin_two_feature_df <span class="op">=</span> load_penguins()[penguin_features <span class="op">+</span> [<span class="st">'species'</span>]].dropna().copy()</span>
+<span id="cb15-3"><a aria-label="3"></a>penguin_two_feature_df[<span class="st">'is_gentoo'</span>] <span class="op">=</span> (</span>
+<span id="cb15-4"><a aria-label="4"></a>    penguin_two_feature_df[<span class="st">'species'</span>] <span class="op">==</span> <span class="st">'Gentoo'</span></span>
+<span id="cb15-5"><a aria-label="5"></a>).astype(<span class="bu">int</span>)</span>
+<span id="cb15-6"><a aria-label="6"></a></span>
+<span id="cb15-7"><a aria-label="7"></a>penguin_two_X <span class="op">=</span> penguin_two_feature_df[penguin_features].to_numpy()</span>
+<span id="cb15-8"><a aria-label="8"></a>penguin_two_y <span class="op">=</span> penguin_two_feature_df[<span class="st">'is_gentoo'</span>].to_numpy()</span>
+<span id="cb15-9"><a aria-label="9"></a></span>
+<span id="cb15-10"><a aria-label="10"></a>penguin_two_X_train, penguin_two_X_test, penguin_two_y_train, penguin_two_y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb15-11"><a aria-label="11"></a>    penguin_two_X,</span>
+<span id="cb15-12"><a aria-label="12"></a>    penguin_two_y,</span>
+<span id="cb15-13"><a aria-label="13"></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb15-14"><a aria-label="14"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb15-15"><a aria-label="15"></a>    stratify<span class="op">=</span>penguin_two_y</span>
+<span id="cb15-16"><a aria-label="16"></a>)</span>
+<span id="cb15-17"><a aria-label="17"></a></span>
+<span id="cb15-18"><a aria-label="18"></a>penguin_two_model <span class="op">=</span> make_pipeline(</span>
+<span id="cb15-19"><a aria-label="19"></a>    StandardScaler(),</span>
+<span id="cb15-20"><a aria-label="20"></a>    LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb15-21"><a aria-label="21"></a>)</span>
+<span id="cb15-22"><a aria-label="22"></a>penguin_two_model.fit(penguin_two_X_train, penguin_two_y_train)</span>
+<span id="cb15-23"><a aria-label="23"></a></span>
+<span id="cb15-24"><a aria-label="24"></a><span class="kw">def</span> plot_penguin_decision_boundary(X_values, y_values, fitted_model):</span>
+<span id="cb15-25"><a aria-label="25"></a>    bill_depth <span class="op">=</span> np.linspace(X_values[:, <span class="dv">0</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="dv">1</span>, X_values[:, <span class="dv">0</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">1</span>, <span class="dv">200</span>)</span>
+<span id="cb15-26"><a aria-label="26"></a>    body_mass <span class="op">=</span> np.linspace(X_values[:, <span class="dv">1</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="dv">200</span>, X_values[:, <span class="dv">1</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">200</span>, <span class="dv">200</span>)</span>
+<span id="cb15-27"><a aria-label="27"></a>    depth_grid, mass_grid <span class="op">=</span> np.meshgrid(bill_depth, body_mass)</span>
+<span id="cb15-28"><a aria-label="28"></a>    grid <span class="op">=</span> np.column_stack([depth_grid.ravel(), mass_grid.ravel()])</span>
+<span id="cb15-29"><a aria-label="29"></a>    predicted_class <span class="op">=</span> fitted_model.predict(grid).reshape(depth_grid.shape)</span>
+<span id="cb15-30"><a aria-label="30"></a></span>
+<span id="cb15-31"><a aria-label="31"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
+<span id="cb15-32"><a aria-label="32"></a>    plt.contourf(depth_grid, mass_grid, predicted_class, alpha<span class="op">=</span><span class="fl">0.3</span>, cmap<span class="op">=</span><span class="st">'RdYlBu'</span>)</span>
+<span id="cb15-33"><a aria-label="33"></a>    plt.scatter(</span>
+<span id="cb15-34"><a aria-label="34"></a>        X_values[y_values <span class="op">==</span> <span class="dv">1</span>, <span class="dv">0</span>],</span>
+<span id="cb15-35"><a aria-label="35"></a>        X_values[y_values <span class="op">==</span> <span class="dv">1</span>, <span class="dv">1</span>],</span>
+<span id="cb15-36"><a aria-label="36"></a>        color<span class="op">=</span><span class="st">'orange'</span>,</span>
+<span id="cb15-37"><a aria-label="37"></a>        edgecolors<span class="op">=</span><span class="st">'k'</span>,</span>
+<span id="cb15-38"><a aria-label="38"></a>        label<span class="op">=</span><span class="st">'Gentoo'</span></span>
+<span id="cb15-39"><a aria-label="39"></a>    )</span>
+<span id="cb15-40"><a aria-label="40"></a>    plt.scatter(</span>
+<span id="cb15-41"><a aria-label="41"></a>        X_values[y_values <span class="op">==</span> <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb15-42"><a aria-label="42"></a>        X_values[y_values <span class="op">==</span> <span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb15-43"><a aria-label="43"></a>        color<span class="op">=</span><span class="st">'blue'</span>,</span>
+<span id="cb15-44"><a aria-label="44"></a>        edgecolors<span class="op">=</span><span class="st">'k'</span>,</span>
+<span id="cb15-45"><a aria-label="45"></a>        label<span class="op">=</span><span class="st">'Not Gentoo'</span></span>
+<span id="cb15-46"><a aria-label="46"></a>    )</span>
+<span id="cb15-47"><a aria-label="47"></a>    plt.xlabel(<span class="st">'Bill Depth (mm)'</span>)</span>
+<span id="cb15-48"><a aria-label="48"></a>    plt.ylabel(<span class="st">'Body Mass (g)'</span>)</span>
+<span id="cb15-49"><a aria-label="49"></a>    plt.title(<span class="st">'Logistic Regression Decision Regions'</span>)</span>
+<span id="cb15-50"><a aria-label="50"></a>    plt.legend()</span>
+<span id="cb15-51"><a aria-label="51"></a>    plt.show()</span>
+<span id="cb15-52"><a aria-label="52"></a></span>
+<span id="cb15-53"><a aria-label="53"></a>plot_penguin_decision_boundary(</span>
+<span id="cb15-54"><a aria-label="54"></a>    penguin_two_X_train,</span>
+<span id="cb15-55"><a aria-label="55"></a>    penguin_two_y_train,</span>
+<span id="cb15-56"><a aria-label="56"></a>    penguin_two_model</span>
+<span id="cb15-57"><a aria-label="57"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="c5bdc882" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a>plot_penguin_decision_boundary(</span>
+<span id="cb16-2"><a aria-label="2"></a>    penguin_two_X_train,</span>
+<span id="cb16-3"><a aria-label="3"></a>    penguin_two_y_train,</span>
+<span id="cb16-4"><a aria-label="4"></a>    penguin_two_model</span>
+<span id="cb16-5"><a aria-label="5"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
 <aside><div>
 <p>An extra feature, <span class="math inline">x_i^{(0)} = 1</span>, has been added to <span class="math inline">x_i</span>, and <span class="math inline">\theta_0</span> is the intercept/bias term.</p>
 </div></aside></section>
-<section id="logistic-regression-two-attributes" class="slide level2">
+<section id="logistic-regression-two-attributes" class="slide level2 hide-code-toggle">
 <h2>Logistic regression (two attributes)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="b89b6866" class="cell" data-execution_count="14">
+<div id="2dfe80ed" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a>plot_penguin_decision_boundary(</span>
+<span id="cb17-2"><a aria-label="2"></a>    penguin_two_X_train,</span>
+<span id="cb17-3"><a aria-label="3"></a>    penguin_two_y_train,</span>
+<span id="cb17-4"><a aria-label="4"></a>    penguin_two_model</span>
+<span id="cb17-5"><a aria-label="5"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-14-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides_files/figure-revealjs/cell-14-output-1.png" class="quarto-figure quarto-figure-center" width="751" height="377"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-18-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="slides_files/figure-revealjs/cell-18-output-1.png" class="quarto-figure quarto-figure-center" width="751" height="377"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p><span class="math display">
-  h_\theta(x_i) = \sigma(\theta x_i)
+  h_\theta(x_i) = \sigma(\theta^\top x_i)
 </span></p>
 </div><div class="column" style="width:65%;">
 <ul>
-<li class="fragment">In logistic regression, <strong>the probability of correctly classifying an example increases as its distance from the decision boundary increases</strong>.</li>
-<li class="fragment">This principle holds for both <strong>positive</strong> and <strong>negative</strong> classes.</li>
-<li class="fragment">An example lying on the decision boundary has a <strong>50% probability</strong> of belonging to either class.</li>
+<li class="fragment">The sign of <span class="math inline">\theta^\top x_i</span> determines which side of the decision boundary contains the example.</li>
+<li class="fragment">As the score becomes more positive or more negative, the model probability moves farther from <span class="math inline">0.5</span>.</li>
+<li class="fragment">On the decision boundary, <span class="math inline">\theta^\top x_i=0</span> and the model assigns probability <span class="math inline">0.5</span> to each class.</li>
 </ul>
 </div></div>
 </section>
-<section id="logistic-regression-2" class="slide level2">
+<section id="logistic-regression-2" class="slide level2 smaller">
 <h2>Logistic regression</h2>
 <ul>
 <li><p>The <strong>Logistic Regression</strong> model, in its vectorized form, is defined as:</p>
 <p><span class="math display">
-h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
+h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
 </span></p></li>
 <li><p><strong>Predictions</strong> are made as follows:</p>
 <ul>
-<li><span class="math inline">y_i = 0</span>, if <span class="math inline">h_\theta(x_i) &lt; 0.5</span></li>
-<li><span class="math inline">y_i = 1</span>, if <span class="math inline">h_\theta(x_i) \geq 0.5</span></li>
+<li><span class="math inline">\hat{y}_i = 0</span>, if <span class="math inline">h_\theta(x_i) &lt; 0.5</span>, equivalently <span class="math inline">\theta^\top x_i &lt; 0</span></li>
+<li><span class="math inline">\hat{y}_i = 1</span>, if <span class="math inline">h_\theta(x_i) \geq 0.5</span>, equivalently <span class="math inline">\theta^\top x_i \geq 0</span></li>
 </ul></li>
 </ul>
 <div class="fragment">
 <ul>
-<li>The values of <span class="math inline">\theta</span> are learned using <strong>gradient descent</strong>.</li>
+<li>The parameters <span class="math inline">\theta</span> are learned by minimizing a loss function. The next lecture derives this loss and applies gradient descent.</li>
 </ul>
 </div>
 </section>
@@ -886,15 +1047,13 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <section id="uci-ml-hand-written-digits-datasets" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Loading the dataset</p>
-<div id="c49d177e" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_digits</span>
-<span id="cb6-2"><a aria-label="2"></a></span>
-<span id="cb6-3"><a aria-label="3"></a>digits <span class="op">=</span> load_digits()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="599f624a" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a>digits <span class="op">=</span> load_digits()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>What is the type of <code>digits.data</code></p>
-<div id="c1e25780" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="bu">type</span>(digits.data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div id="9566749b" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a><span class="bu">type</span>(digits.data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>numpy.ndarray</code></pre>
 </div>
 </div>
@@ -905,20 +1064,20 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <section id="uci-ml-hand-written-digits-datasets-1" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>How many examples (<code>N</code>) and how many attributes (<code>D</code>)?</p>
-<div id="6f1b702e" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>digits.data.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div id="159f9f14" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>digits.data.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>(1797, 64)</code></pre>
 </div>
 </div>
 <p>Assigning <code>N</code> and <code>D</code></p>
-<div id="d4e83bb7" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a>N, D <span class="op">=</span> digits.data.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="02da0792" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a>digit_count, digit_feature_count <span class="op">=</span> digits.data.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>target</code> has the same number of entries (examples) as <code>data</code>?</p>
-<div id="c5d39d29" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>digits.target.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div id="aaa999f5" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a>digits.target.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>(1797,)</code></pre>
 </div>
 </div>
@@ -926,31 +1085,31 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <section id="uci-ml-hand-written-digits-datasets-2" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>What are the width and height of those images?</p>
-<div id="e299e82f" class="cell" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>digits.images.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div id="a8f90585" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a>digits.images.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>(1797, 8, 8)</code></pre>
 </div>
 </div>
-<p>Assigning <code>width</code> and <code>height</code></p>
-<div id="f974af5d" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a>_, width, height <span class="op">=</span> digits.images.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Assigning <code>height</code> and <code>width</code></p>
+<div id="bd4e44c9" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a aria-label="1"></a>_, digit_height, digit_width <span class="op">=</span> digits.images.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="uci-ml-hand-written-digits-datasets-3" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
-<p>Assigning <code>X</code> and <code>y</code></p>
-<div id="3d5cb414" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a>X <span class="op">=</span> digits.data</span>
-<span id="cb17-2"><a aria-label="2"></a>y <span class="op">=</span> digits.target</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Assigning <code>digits_X</code> and <code>digits_y</code></p>
+<div id="90b1d537" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-label="1"></a>digits_X <span class="op">=</span> digits.data</span>
+<span id="cb29-2"><a aria-label="2"></a>digits_y <span class="op">=</span> digits.target</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="uci-ml-hand-written-digits-datasets-4" class="slide level2 smaller">
 <h2>UCI ML hand-written digits datasets</h2>
-<p><code>X[0]</code> is a vector of size <code>width * height = D</code> (<span class="math inline">8 \times 8 = 64</span>).</p>
-<div id="16ad5d59" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a>X[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<p><code>digits_X[0]</code> is a vector of size <code>digit_height * digit_width = D</code> (<span class="math inline">8 \times 8 = 64</span>).</p>
+<div id="15e6c0fa" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a aria-label="1"></a>digits_X[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>array([ 0.,  0.,  5., 13.,  9.,  1.,  0.,  0.,  0.,  0., 13., 15., 10.,
        15.,  5.,  0.,  0.,  3., 15.,  2.,  0., 11.,  8.,  0.,  0.,  4.,
        12.,  0.,  0.,  8.,  8.,  0.,  0.,  5.,  8.,  0.,  0.,  9.,  8.,
@@ -960,9 +1119,9 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 </div>
 <div class="fragment">
 <p>It corresponds to an <span class="math inline">8 \times 8 = 64</span> image.</p>
-<div id="65db1ccb" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a>X[<span class="dv">0</span>].reshape(width, height)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div id="52509602" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a aria-label="1"></a>digits_X[<span class="dv">0</span>].reshape(digit_height, digit_width)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>array([[ 0.,  0.,  5., 13.,  9.,  1.,  0.,  0.],
        [ 0.,  0., 13., 15., 10., 15.,  5.,  0.],
        [ 0.,  3., 15.,  2.,  0., 11.,  8.,  0.],
@@ -978,21 +1137,21 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <section id="uci-ml-hand-written-digits-datasets-5" class="slide level2 smaller">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Plot the first <code>n=5</code> examples</p>
-<div id="7505e1db" class="cell" data-execution_count="25">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb22-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb22-3"><a aria-label="3"></a></span>
-<span id="cb22-4"><a aria-label="4"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">2</span>))</span>
-<span id="cb22-5"><a aria-label="5"></a>n <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb22-6"><a aria-label="6"></a></span>
-<span id="cb22-7"><a aria-label="7"></a><span class="cf">for</span> index, (image, label) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(X[<span class="dv">0</span>:n], y[<span class="dv">0</span>:n])):</span>
-<span id="cb22-8"><a aria-label="8"></a>    plt.subplot(<span class="dv">1</span>, n, index <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb22-9"><a aria-label="9"></a>    plt.imshow(np.reshape(image, (width,width)), cmap<span class="op">=</span>plt.cm.gray)</span>
-<span id="cb22-10"><a aria-label="10"></a>    plt.title(<span class="ss">f'y = </span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="c3ec2386" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a aria-label="1"></a><span class="kw">def</span> plot_digit_examples(X_values, y_values, count<span class="op">=</span><span class="dv">5</span>):</span>
+<span id="cb34-2"><a aria-label="2"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">2</span>))</span>
+<span id="cb34-3"><a aria-label="3"></a>    <span class="cf">for</span> index, (image, label) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(X_values[:count], y_values[:count])):</span>
+<span id="cb34-4"><a aria-label="4"></a>        plt.subplot(<span class="dv">1</span>, count, index <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb34-5"><a aria-label="5"></a>        plt.imshow(image.reshape(digit_height, digit_width), cmap<span class="op">=</span>plt.cm.gray)</span>
+<span id="cb34-6"><a aria-label="6"></a>        plt.title(<span class="ss">f'y = </span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb34-7"><a aria-label="7"></a>        plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb34-8"><a aria-label="8"></a>    plt.show()</span>
+<span id="cb34-9"><a aria-label="9"></a></span>
+<span id="cb34-10"><a aria-label="10"></a>plot_digit_examples(digits_X, digits_y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-25-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="slides_files/figure-revealjs/cell-25-output-1.png" width="781" height="190"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-29-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides_files/figure-revealjs/cell-29-output-1.png" width="763" height="168"></a></p>
 </figure>
 </div>
 </div>
@@ -1014,23 +1173,15 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 </section>
 <section id="uci-ml-hand-written-digits-datasets-6" class="slide level2 smaller">
 <h2>UCI ML hand-written digits datasets</h2>
-<div id="80fc6cd5" class="cell" data-execution_count="26">
+<div id="60316d7e" class="cell" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb23-2"><a aria-label="2"></a></span>
-<span id="cb23-3"><a aria-label="3"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">2</span>))</span>
-<span id="cb23-4"><a aria-label="4"></a>n <span class="op">=</span> <span class="dv">5</span></span>
-<span id="cb23-5"><a aria-label="5"></a></span>
-<span id="cb23-6"><a aria-label="6"></a><span class="cf">for</span> index, (image, label) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(X[<span class="dv">0</span>:n], y[<span class="dv">0</span>:n])):</span>
-<span id="cb23-7"><a aria-label="7"></a>    plt.subplot(<span class="dv">1</span>, n, index <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb23-8"><a aria-label="8"></a>    plt.imshow(np.reshape(image, (width,width)), cmap<span class="op">=</span>plt.cm.gray)</span>
-<span id="cb23-9"><a aria-label="9"></a>    plt.title(<span class="ss">f'y = </span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a aria-label="1"></a>plot_digit_examples(digits_X, digits_y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-26-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-revealjs/cell-26-output-1.png" width="781" height="190"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-30-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="slides_files/figure-revealjs/cell-30-output-1.png" width="763" height="168"></a></p>
 </figure>
 </div>
 </div>
@@ -1041,60 +1192,58 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <li class="fragment"><p>The <code>reshape</code> function is employed to convert this 64-dimensional vector back into its original <span class="math inline">8 \times 8</span> image format.</p></li>
 </ul>
 </section>
-<section id="uci-ml-hand-written-digits-datasets-7" class="slide level2">
+<section id="uci-ml-hand-written-digits-datasets-7" class="slide level2 hide-code-toggle">
 <h2>UCI ML hand-written digits datasets</h2>
-<div id="cf1be408" class="cell" data-execution_count="27">
+<div id="998b0269" class="cell" data-execution_count="31">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a aria-label="1"></a>plot_digit_examples(digits_X, digits_y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-27-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-revealjs/cell-27-output-1.png" width="781" height="190"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-31-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-revealjs/cell-31-output-1.png" width="763" height="168"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <ul>
-<li class="fragment"><p>We will train <strong>10 classifiers</strong>, each corresponding to a specific digit in a <strong>One-vs-All (OvA)</strong> approach.</p></li>
+<li class="fragment"><p>We will train <strong>10 classifiers</strong>, each corresponding to a specific digit in a <strong>one-vs-rest (OvR)</strong> approach.</p></li>
 <li class="fragment"><p>Each classifier will determine the optimal values of <span class="math inline">\theta_j</span> (associated with the pixel features), allowing it to distinguish one digit from all other digits.</p></li>
 </ul>
 </section>
 <section id="uci-ml-hand-written-digits-datasets-8" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Preparing for our machine learning experiment</p>
-<div id="0f8411da" class="cell" data-execution_count="28">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb24-2"><a aria-label="2"></a></span>
-<span id="cb24-3"><a aria-label="3"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.1</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="d8e2f40d" class="cell" data-execution_count="32">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a aria-label="1"></a>digits_X_train, digits_X_test, digits_y_train, digits_y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb37-2"><a aria-label="2"></a>    digits_X,</span>
+<span id="cb37-3"><a aria-label="3"></a>    digits_y,</span>
+<span id="cb37-4"><a aria-label="4"></a>    test_size<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="cb37-5"><a aria-label="5"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb37-6"><a aria-label="6"></a>    stratify<span class="op">=</span>digits_y</span>
+<span id="cb37-7"><a aria-label="7"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="uci-ml-hand-written-digits-datasets-9" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Optimization algorithms generally work best when the attributes have similar ranges.</p>
-<div id="58f18bde" class="cell" data-execution_count="29">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb25-2"><a aria-label="2"></a></span>
-<span id="cb25-3"><a aria-label="3"></a>scaler <span class="op">=</span> StandardScaler()</span>
-<span id="cb25-4"><a aria-label="4"></a>X_train <span class="op">=</span> scaler.fit_transform(X_train)</span>
-<span id="cb25-5"><a aria-label="5"></a>X_test <span class="op">=</span> scaler.transform(X_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="6c32afe9" class="cell" data-execution_count="33">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a aria-label="1"></a>digit_scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb38-2"><a aria-label="2"></a>digits_X_train_scaled <span class="op">=</span> digit_scaler.fit_transform(digits_X_train)</span>
+<span id="cb38-3"><a aria-label="3"></a>digits_X_test_scaled <span class="op">=</span> digit_scaler.transform(digits_X_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 <aside class="notes">
-<p>Certain classifiers exhibit suboptimal performance when there are significant variations in feature scales. This issue is particularly pronounced in classifiers that utilize gradient descent for parameter optimization, as they can be adversely affected by discrepancies in feature scale. Consequently, standardization of features is a widely adopted practice to mitigate this problem.</p>
+<p>Optimization generally behaves better when the features have comparable scales.</p>
 <p><a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html">StandardScaler</a> is a commonly used approach. For a given feature, the values are transformed as follows:</p>
 <p><span class="math display">
 z = (x - \mu) / \sigma
 </span></p>
 <p>where <span class="math inline">\mu</span> is the average of all the values for that feature for the training data, and <span class="math inline">\sigma</span> the corresponding standard deviation.</p>
-<p>Calling <code>fit</code> forces the scaler to learn the mean and standard deviation of each feature. Calling <code>tranform</code>, applies the transformation onto the designated dataset. Finally, calling <code>fit_transform</code> combines the two steps.</p>
-<p>It would be an error to apply <code>fit</code> or <code>fit_transform</code> on the entire dataset, an error called <strong>data leakeage</strong>. Information from the test data would influence the mean and standard deviation learnt by the scaler. The training data would be transformed using information from the test set. The model will learn from training data scaled using information baised by the test set. The test set is no longer independent.</p>
-<p>It is paramount to scale the test data. The model has been trained on scaled data, here with mean values centered at zero and standard deviation of 1. The original data was likely on a widely different scale. Imagine a attribute representing the temperature in celcius might have values -40 to 40. Another attribute, this one representing a grade, with values from 0 to 100. The model would produce non sense results on such data. The test data needs to be scaled using the mean and standard deviation from the training data, which represents the frame of reference for its training.</p>
-<ol type="1">
-<li><p><strong>Fairness in evaluation (no cheating):</strong> If you use the test data to compute the mean and variance, you’re peeking at the answers. Even though it’s “just” a mean and standard deviation, that’s still information from the test set. This breaks the principle that test data should remain completely unseen until evaluation.</p></li>
-<li><p><strong>Consistency of distribution:</strong> The model was trained assuming features are centered and scaled using the training distribution. If you scale test data differently (e.g., with its own mean/std), then the numbers the model sees no longer match the distribution it was trained on. It’s like giving the model inputs in a “new language.”</p></li>
-<li><p><strong>Deployment perspective:</strong> In real applications, you’ll only ever have the training distribution to compute the scaling parameters. When the model is deployed, you can’t stop time to recompute scaling each time new data arrives — you must apply the fixed transformation learned from the training data.</p></li>
-</ol>
-<p><strong>“The scaler is part of the model.”</strong> Just like weights in logistic regression, the <code>StandardScaler</code>’s mean and variance are <strong>learned from the training set</strong>. Once learned, they become fixed parameters of your preprocessing pipeline.</p>
-<p><strong>“Training vs.&nbsp;exam.”</strong> Training data is your study material; test data is the exam. You can’t look at the exam questions to prepare your notes (using test data for scaling), and you can’t change the exam’s grading scheme midway (scaling test data separately). You must prepare with your study notes (training distribution) and then take the exam under the same scheme.</p>
-<p><strong>“Same ruler for everyone.”</strong> Scaling is like using a ruler to measure heights. You calibrate the ruler once with the training data. If you used a different ruler for the test data, the numbers wouldn’t be comparable anymore.</p>
+<p>Calling <code>fit</code> learns the mean and standard deviation of each feature. Calling <code>transform</code> applies the learned transformation. Calling <code>fit_transform</code> combines those operations.</p>
+<p>Fitting the scaler on the complete dataset would cause <strong>data leakage</strong> because information from the test set would influence the transformation used during training.</p>
+<p>The test data must still be transformed, but with the mean and standard deviation learned from the training data. The fitted scaler is therefore part of the trained system.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1107,16 +1256,13 @@ z = (x - \mu) / \sigma
           display:block!important;
       }</style></aside>
 <aside><div>
-<p><strong>Discussion</strong>: importance of applying <code>fit_transform</code> only to <code>X_train</code>.</p>
+<p><strong>Discussion</strong>: importance of applying <code>fit_transform</code> only to <code>digits_X_train</code>.</p>
 </div></aside></section>
 <section id="uci-ml-hand-written-digits-datasets-10" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
-<div id="baea153a" class="cell" data-execution_count="30">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
-<span id="cb26-2"><a aria-label="2"></a><span class="im">from</span> sklearn.multiclass <span class="im">import</span> OneVsRestClassifier</span>
-<span id="cb26-3"><a aria-label="3"></a></span>
-<span id="cb26-4"><a aria-label="4"></a>clf <span class="op">=</span> OneVsRestClassifier(LogisticRegression())</span>
-<span id="cb26-5"><a aria-label="5"></a>clf <span class="op">=</span> clf.fit(X_train, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="d2eeff0e" class="cell" data-execution_count="34">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a aria-label="1"></a>digit_classifier <span class="op">=</span> OneVsRestClassifier(LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>))</span>
+<span id="cb39-2"><a aria-label="2"></a>digit_classifier.fit(digits_X_train_scaled, digits_y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 <aside class="notes">
@@ -1133,58 +1279,44 @@ z = (x - \mu) / \sigma
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>Asking the classifier to solve a multiclass task, using <strong>one-vs-rest (OvR)</strong>, aka OvA. Classfiers in <code>sklearn</code> have <a href="https://scikit-learn.org/stable/modules/multiclass.html">multi-learning support</a> built-in.</p>
+<p>The classifier solves the multiclass task using <strong>one-vs-rest (OvR)</strong>. Classifiers in scikit-learn provide <a href="https://scikit-learn.org/stable/modules/multiclass.html">multiclass support</a>.</p>
 </div></aside></section>
 <section id="uci-ml-hand-written-digits-datasets-11" class="slide level2 smaller">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Applying the classifier to our test set</p>
-<div id="47d6a731" class="cell" data-execution_count="31">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-label="1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
-<span id="cb27-2"><a aria-label="2"></a></span>
-<span id="cb27-3"><a aria-label="3"></a>y_pred <span class="op">=</span> clf.predict(X_test)</span>
-<span id="cb27-4"><a aria-label="4"></a></span>
-<span id="cb27-5"><a aria-label="5"></a><span class="bu">print</span>(classification_report(y_test, y_pred))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="4cfff244" class="cell" data-execution_count="35">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a aria-label="1"></a>digits_y_pred <span class="op">=</span> digit_classifier.predict(digits_X_test_scaled)</span>
+<span id="cb40-2"><a aria-label="2"></a>digit_test_accuracy <span class="op">=</span> accuracy_score(digits_y_test, digits_y_pred)</span>
+<span id="cb40-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="ss">f'Test accuracy: </span><span class="sc">{</span>digit_test_accuracy<span class="sc">:.3f}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              precision    recall  f1-score   support
-
-           0       1.00      1.00      1.00        17
-           1       1.00      1.00      1.00        11
-           2       1.00      1.00      1.00        17
-           3       1.00      0.94      0.97        17
-           4       1.00      1.00      1.00        25
-           5       0.96      1.00      0.98        22
-           6       1.00      1.00      1.00        19
-           7       1.00      0.95      0.97        19
-           8       0.80      1.00      0.89         8
-           9       0.96      0.92      0.94        25
-
-    accuracy                           0.98       180
-   macro avg       0.97      0.98      0.97       180
-weighted avg       0.98      0.98      0.98       180
-</code></pre>
+<pre><code>Test accuracy: 0.967</code></pre>
 </div>
 </div>
-</section>
+
+<aside><div>
+<p>Lecture 7 introduces performance measures in detail.</p>
+</div></aside></section>
 <section id="visualization" class="slide level2">
 <h2>Visualization</h2>
 <p>How many classes?</p>
-<div id="0f693f43" class="cell" data-execution_count="32">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-label="1"></a>clf.classes_</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="30">
+<div id="2bbe1829" class="cell" data-execution_count="36">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a aria-label="1"></a>digit_classifier.classes_</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
 <pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</code></pre>
 </div>
 </div>
 <div class="fragment">
 <p>The coefficients and intercepts are in distinct arrays.</p>
-<div id="90495439" class="cell" data-execution_count="33">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a aria-label="1"></a>(clf.estimators_[<span class="dv">0</span>].coef_.shape, clf.estimators_[<span class="dv">0</span>].intercept_.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="31">
+<div id="8ae04151" class="cell" data-execution_count="37">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a aria-label="1"></a>(digit_classifier.estimators_[<span class="dv">0</span>].coef_.shape,</span>
+<span id="cb44-2"><a aria-label="2"></a> digit_classifier.estimators_[<span class="dv">0</span>].intercept_.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="36">
 <pre><code>((1, 64), (1,))</code></pre>
 </div>
 </div>
 </div>
 <div class="fragment">
-<p>Intercepts are <span class="math inline">\theta_0</span>, where as coefficents are <span class="math inline">\theta_j, j \in [1,64]</span>.</p>
+<p>The intercept is <span class="math inline">\theta_0</span>. The 64 feature coefficients are <span class="math inline">\theta_j</span>, for <span class="math inline">j \in \{1,\ldots,64\}</span>.</p>
 
 </div>
 <aside><div>
@@ -1192,29 +1324,37 @@ weighted avg       0.98      0.98      0.98       180
 </div></aside></section>
 <section id="visualization-1" class="slide level2">
 <h2>Visualization</h2>
-<div id="156616d0" class="cell" data-execution_count="34">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a aria-label="1"></a>clf.estimators_[<span class="dv">0</span>].coef_[<span class="dv">0</span>].<span class="bu">round</span>(<span class="dv">2</span>).reshape(width, height)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="32">
-<pre><code>array([[ 0.  , -0.25,  0.04,  0.21,  0.02, -0.58, -0.36, -0.05],
-       [ 0.  , -0.39,  0.04,  0.43,  0.53,  0.72, -0.03, -0.12],
-       [-0.03,  0.19,  0.28, -0.04, -0.94,  0.84, -0.01, -0.06],
-       [-0.04,  0.27,  0.26, -0.57, -1.75,  0.24,  0.07, -0.03],
-       [ 0.  ,  0.32,  0.57, -0.58, -1.62, -0.15,  0.17,  0.  ],
-       [-0.08, -0.13,  0.92, -0.85, -0.83, -0.01,  0.22, -0.  ],
-       [-0.04, -0.36,  0.61, -0.14,  0.28,  0.01, -0.37, -0.41],
-       [ 0.01, -0.31, -0.31,  0.54, -0.32, -0.18, -0.32, -0.21]])</code></pre>
+<div id="47d7c768" class="cell" data-execution_count="38">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a aria-label="1"></a>digit_classifier.estimators_[<span class="dv">0</span>].coef_[<span class="dv">0</span>].<span class="bu">round</span>(<span class="dv">2</span>).reshape(</span>
+<span id="cb46-2"><a aria-label="2"></a>    digit_height,</span>
+<span id="cb46-3"><a aria-label="3"></a>    digit_width</span>
+<span id="cb46-4"><a aria-label="4"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<pre><code>array([[ 0.  , -0.14, -0.  ,  0.21, -0.01, -0.66, -0.46, -0.05],
+       [ 0.  , -0.22, -0.05,  0.43,  0.57,  0.9 ,  0.02, -0.19],
+       [-0.03,  0.28,  0.43, -0.18, -0.94,  0.82,  0.04, -0.13],
+       [-0.04,  0.21,  0.11, -0.63, -1.78,  0.09,  0.23, -0.04],
+       [ 0.  ,  0.35,  0.5 , -0.6 , -1.73, -0.02,  0.03,  0.  ],
+       [-0.15, -0.13,  0.86, -0.97, -0.73,  0.1 ,  0.26,  0.02],
+       [-0.07, -0.3 ,  0.44,  0.09,  0.25,  0.05, -0.4 , -0.47],
+       [ 0.02, -0.26, -0.43,  0.43, -0.59, -0.08, -0.28, -0.28]])</code></pre>
 </div>
 </div>
 </section>
 <section id="visualization-2" class="slide level2">
 <h2>Visualization</h2>
-<div id="27293d6c" class="cell" data-execution_count="35">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a aria-label="1"></a>coef <span class="op">=</span> clf.estimators_[<span class="dv">0</span>].coef_</span>
-<span id="cb35-2"><a aria-label="2"></a>plt.imshow(coef[<span class="dv">0</span>].reshape(width,height))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="9da484bb" class="cell" data-execution_count="39">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a aria-label="1"></a>digit_zero_coefficients <span class="op">=</span> digit_classifier.estimators_[<span class="dv">0</span>].coef_[<span class="dv">0</span>]</span>
+<span id="cb48-2"><a aria-label="2"></a>plt.imshow(</span>
+<span id="cb48-3"><a aria-label="3"></a>    digit_zero_coefficients.reshape(digit_height, digit_width),</span>
+<span id="cb48-4"><a aria-label="4"></a>    cmap<span class="op">=</span>plt.cm.RdBu</span>
+<span id="cb48-5"><a aria-label="5"></a>)</span>
+<span id="cb48-6"><a aria-label="6"></a>plt.colorbar()</span>
+<span id="cb48-7"><a aria-label="7"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-35-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-revealjs/cell-35-output-1.png" width="407" height="411"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-39-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-revealjs/cell-39-output-1.png" width="505" height="411"></a></p>
 </figure>
 </div>
 </div>
@@ -1222,29 +1362,43 @@ weighted avg       0.98      0.98      0.98       180
 </section>
 <section id="visualization-3" class="slide level2">
 <h2>Visualization</h2>
-<div id="1f6100c3" class="cell" data-execution_count="36">
+<div id="5369f663" class="cell" data-execution_count="40">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
-<span id="cb36-2"><a aria-label="2"></a></span>
-<span id="cb36-3"><a aria-label="3"></a><span class="cf">for</span> index <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(clf.classes_)):</span>
-<span id="cb36-4"><a aria-label="4"></a>    plt.subplot(<span class="dv">2</span>, <span class="dv">5</span>, index <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb36-5"><a aria-label="5"></a>    plt.title(<span class="ss">f'y = </span><span class="sc">{</span>clf<span class="sc">.</span>classes_[index]<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb36-6"><a aria-label="6"></a>    plt.imshow(clf.estimators_[index].coef_.reshape(width,width), </span>
-<span id="cb36-7"><a aria-label="7"></a>               cmap<span class="op">=</span>plt.cm.RdBu)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
+<span id="cb49-2"><a aria-label="2"></a>max_abs_coefficient <span class="op">=</span> <span class="bu">max</span>(</span>
+<span id="cb49-3"><a aria-label="3"></a>    np.<span class="bu">abs</span>(estimator.coef_).<span class="bu">max</span>()</span>
+<span id="cb49-4"><a aria-label="4"></a>    <span class="cf">for</span> estimator <span class="kw">in</span> digit_classifier.estimators_</span>
+<span id="cb49-5"><a aria-label="5"></a>)</span>
+<span id="cb49-6"><a aria-label="6"></a></span>
+<span id="cb49-7"><a aria-label="7"></a><span class="cf">for</span> index, class_label <span class="kw">in</span> <span class="bu">enumerate</span>(digit_classifier.classes_):</span>
+<span id="cb49-8"><a aria-label="8"></a>    plt.subplot(<span class="dv">2</span>, <span class="dv">5</span>, index <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb49-9"><a aria-label="9"></a>    plt.title(<span class="ss">f'y = </span><span class="sc">{</span>class_label<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb49-10"><a aria-label="10"></a>    plt.imshow(</span>
+<span id="cb49-11"><a aria-label="11"></a>        digit_classifier.estimators_[index].coef_.reshape(</span>
+<span id="cb49-12"><a aria-label="12"></a>            digit_height,</span>
+<span id="cb49-13"><a aria-label="13"></a>            digit_width</span>
+<span id="cb49-14"><a aria-label="14"></a>        ),</span>
+<span id="cb49-15"><a aria-label="15"></a>        cmap<span class="op">=</span>plt.cm.RdBu,</span>
+<span id="cb49-16"><a aria-label="16"></a>        vmin<span class="op">=-</span>max_abs_coefficient,</span>
+<span id="cb49-17"><a aria-label="17"></a>        vmax<span class="op">=</span>max_abs_coefficient</span>
+<span id="cb49-18"><a aria-label="18"></a>    )</span>
+<span id="cb49-19"><a aria-label="19"></a>    plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb49-20"><a aria-label="20"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-36-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="slides_files/figure-revealjs/cell-36-output-1.png" width="781" height="392"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-40-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-revealjs/cell-40-output-1.png" width="763" height="369"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <aside class="notes">
-<p>Each <code>LogisticRegression</code> learns 64 <span class="math inline">\theta_i</span> parameters.</p>
-<p>In the images above, red pixels correspond to negative coefficients, while blue pixels correspond to positive coefficients.</p>
-<p>For the first classifier, which predicts the digit ‘0’, the model assigns negative weights to high-intensity pixels in the center of the image and positive weights to high-intensity pixels in the oval region surrounding the center.</p>
+<p>Each binary <code>LogisticRegression</code> learns 64 feature coefficients and one intercept, for 65 parameters.</p>
+<p>These coefficients act on the standardized pixel intensities used for training.</p>
+<p>Red pixels correspond to negative coefficients, while blue pixels correspond to positive coefficients. All ten maps use the same colour scale.</p>
+<p>For the classifier that recognizes zero, high-intensity pixels in the centre reduce the class score, while pixels along the surrounding oval increase it.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1256,29 +1410,6 @@ weighted avg       0.98      0.98      0.98       180
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="visualization-4" class="slide level2">
-<h2>Visualization</h2>
-<div id="dbf6e5a3" class="cell" data-execution_count="37">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
-<span id="cb37-2"><a aria-label="2"></a></span>
-<span id="cb37-3"><a aria-label="3"></a><span class="cf">for</span> index <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(clf.classes_)):</span>
-<span id="cb37-4"><a aria-label="4"></a>    plt.subplot(<span class="dv">2</span>, <span class="dv">5</span>, index <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb37-5"><a aria-label="5"></a>    plt.title(<span class="ss">f'y = </span><span class="sc">{</span>clf<span class="sc">.</span>classes_[index]<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb37-6"><a aria-label="6"></a>    plt.imshow(clf.estimators_[index].coef_.reshape(width,width), </span>
-<span id="cb37-7"><a aria-label="7"></a>               cmap<span class="op">=</span>plt.cm.RdBu,</span>
-<span id="cb37-8"><a aria-label="8"></a>               interpolation<span class="op">=</span><span class="st">'bilinear'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure>
-<p><a href="slides_files/figure-revealjs/cell-37-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="slides_files/figure-revealjs/cell-37-output-1.png" width="781" height="392"></a></p>
-</figure>
-</div>
-</div>
-</div>
 </section>
 <section class="slide level2">
 
@@ -1292,6 +1423,17 @@ weighted avg       0.98      0.98      0.98       180
 <h1>Prologue</h1>
 
 </section>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<ul>
+<li class="fragment">Logistic regression maps the linear score <span class="math inline">\theta^\top x_i</span> to the probability <span class="math inline">P(y_i=1\mid x_i,\theta)</span> using the sigmoid function.</li>
+<li class="fragment">The threshold <span class="math inline">h_\theta(x_i)=0.5</span> corresponds to the linear decision boundary <span class="math inline">\theta^\top x_i=0</span>.</li>
+<li class="fragment">A model probability estimates class membership; it is not the probability that the predicted label is correct.</li>
+<li class="fragment"><strong>One-vs-rest</strong> trains one binary classifier for each class and selects the class with the largest score.</li>
+<li class="fragment">Preprocessing must be fitted on the training set and then applied unchanged to the test set.</li>
+<li class="fragment">Learned coefficients show how each feature changes a classifier’s linear score.</li>
+</ul>
+</section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
@@ -1303,6 +1445,9 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
 </div>
 <div id="ref-Wu:2018aa" class="csl-entry" role="listitem">
 Wu, Qianfan, Adel Boueiz, Alican Bozkurt, et al. 2018. <span>“<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6530791"><span class="nocase">Deep Learning Methods for Predicting Disease Status Using Genomic Data</span></a>.”</span> <em>Journal of Biometrics &amp; Biostatistics</em> 9 (5).
+</div>
+<div id="ref-Zhao:2026aa" class="csl-entry" role="listitem">
+Zhao, Celina. 2026. <span>“<span>OpenAI</span> Breakthrough Triggers <span><span>‘Existential Crisis’</span></span> in Math.”</span> <em>Science</em>, ahead of print, September. <a href="https://doi.org/10.1126/science.zbgmw3q">https://doi.org/10.1126/science.zbgmw3q</a>.
 </div>
 </div>
 </section>
@@ -1319,80 +1464,81 @@ Wu, Qianfan, Adel Boueiz, Alican Bozkurt, et al. 2018. <span>“<a href="https:/
 </ul>
 </section></section>
 <section>
-<section id="one-vs-all" class="title-slide slide level1 center">
-<h1>One-vs-All</h1>
+<section id="appendix" class="title-slide slide level1 center">
+<h1>Appendix</h1>
 
 </section>
-<section id="one-vs-all-classifier-complete" class="slide level2">
-<h2>One-vs-All classifier (complete)</h2>
-<div id="0916fda3" class="cell" data-execution_count="38">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a aria-label="1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_iris</span>
-<span id="cb38-2"><a aria-label="2"></a></span>
-<span id="cb38-3"><a aria-label="3"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
-<span id="cb38-4"><a aria-label="4"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> label_binarize</span>
-<span id="cb38-5"><a aria-label="5"></a></span>
-<span id="cb38-6"><a aria-label="6"></a><span class="co"># Load the Iris dataset</span></span>
-<span id="cb38-7"><a aria-label="7"></a>iris <span class="op">=</span> load_iris()</span>
-<span id="cb38-8"><a aria-label="8"></a>X, y <span class="op">=</span> iris.data, iris.target</span>
-<span id="cb38-9"><a aria-label="9"></a></span>
-<span id="cb38-10"><a aria-label="10"></a><span class="co"># Binarize the output</span></span>
-<span id="cb38-11"><a aria-label="11"></a>y_bin <span class="op">=</span> label_binarize(y, classes<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>])</span>
-<span id="cb38-12"><a aria-label="12"></a></span>
-<span id="cb38-13"><a aria-label="13"></a><span class="co"># Split the dataset into training and testing sets</span></span>
-<span id="cb38-14"><a aria-label="14"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y_bin, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="one-vs-rest-classifier" class="slide level2">
+<h2>One-vs-rest classifier</h2>
+<div id="b18c341d" class="cell" data-execution_count="41">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a aria-label="1"></a><span class="co"># Load the Iris dataset</span></span>
+<span id="cb50-2"><a aria-label="2"></a>iris <span class="op">=</span> load_iris()</span>
+<span id="cb50-3"><a aria-label="3"></a>iris_X, iris_y <span class="op">=</span> iris.data, iris.target</span>
+<span id="cb50-4"><a aria-label="4"></a></span>
+<span id="cb50-5"><a aria-label="5"></a><span class="co"># Binarize the output</span></span>
+<span id="cb50-6"><a aria-label="6"></a>iris_y_binarized <span class="op">=</span> label_binarize(iris_y, classes<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>])</span>
+<span id="cb50-7"><a aria-label="7"></a></span>
+<span id="cb50-8"><a aria-label="8"></a><span class="co"># Split the dataset into training and testing sets</span></span>
+<span id="cb50-9"><a aria-label="9"></a>iris_X_train, iris_X_test, iris_y_train, iris_y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb50-10"><a aria-label="10"></a>    iris_X,</span>
+<span id="cb50-11"><a aria-label="11"></a>    iris_y_binarized,</span>
+<span id="cb50-12"><a aria-label="12"></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb50-13"><a aria-label="13"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb50-14"><a aria-label="14"></a>    stratify<span class="op">=</span>iris_y</span>
+<span id="cb50-15"><a aria-label="15"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="one-vs-all-classifier-complete-1" class="slide level2">
-<h2>One-vs-All classifier (complete)</h2>
-<div id="ed29ff06" class="cell" data-execution_count="39">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a aria-label="1"></a><span class="co"># Train a One-vs-All classifier for each class</span></span>
-<span id="cb39-2"><a aria-label="2"></a></span>
-<span id="cb39-3"><a aria-label="3"></a>classifiers <span class="op">=</span> []</span>
-<span id="cb39-4"><a aria-label="4"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb39-5"><a aria-label="5"></a>    clf <span class="op">=</span> LogisticRegression()</span>
-<span id="cb39-6"><a aria-label="6"></a>    clf.fit(X_train, y_train[:, i])</span>
-<span id="cb39-7"><a aria-label="7"></a>    classifiers.append(clf)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="one-vs-rest-classifier-1" class="slide level2">
+<h2>One-vs-rest classifier</h2>
+<div id="90b1c233" class="cell" data-execution_count="42">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a aria-label="1"></a><span class="co"># Train one binary classifier for each class</span></span>
+<span id="cb51-2"><a aria-label="2"></a></span>
+<span id="cb51-3"><a aria-label="3"></a>iris_classifiers <span class="op">=</span> []</span>
+<span id="cb51-4"><a aria-label="4"></a><span class="cf">for</span> class_index <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(iris.target_names)):</span>
+<span id="cb51-5"><a aria-label="5"></a>    iris_classifier <span class="op">=</span> LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb51-6"><a aria-label="6"></a>    iris_classifier.fit(iris_X_train, iris_y_train[:, class_index])</span>
+<span id="cb51-7"><a aria-label="7"></a>    iris_classifiers.append(iris_classifier)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 <aside><div>
 <p>Each logistic regression finds a <strong>hyperplane</strong> in a <strong>4-dimensional space</strong> that separates the data into two classes.</p>
 </div></aside></section>
-<section id="one-vs-all-classifier-complete-2" class="slide level2">
-<h2>One-vs-All classifier (complete)</h2>
-<div id="3b15488f" class="cell" data-execution_count="40">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a aria-label="1"></a><span class="co"># Predict on a new sample</span></span>
-<span id="cb40-2"><a aria-label="2"></a>new_sample <span class="op">=</span> X_test[<span class="dv">0</span>].reshape(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb40-3"><a aria-label="3"></a>confidences <span class="op">=</span> [clf.decision_function(new_sample) <span class="cf">for</span> clf <span class="kw">in</span> classifiers]</span>
-<span id="cb40-4"><a aria-label="4"></a></span>
-<span id="cb40-5"><a aria-label="5"></a><span class="co"># Final assignment</span></span>
-<span id="cb40-6"><a aria-label="6"></a>final_class <span class="op">=</span> np.argmax(confidences)</span>
-<span id="cb40-7"><a aria-label="7"></a></span>
-<span id="cb40-8"><a aria-label="8"></a><span class="co"># Printing the result</span></span>
-<span id="cb40-9"><a aria-label="9"></a><span class="bu">print</span>(<span class="ss">f"Final class assigned: </span><span class="sc">{</span>iris<span class="sc">.</span>target_names[final_class]<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb40-10"><a aria-label="10"></a><span class="bu">print</span>(<span class="ss">f"True class: </span><span class="sc">{</span>iris<span class="sc">.</span>target_names[np.argmax(y_test[<span class="dv">0</span>])]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="one-vs-rest-classifier-2" class="slide level2">
+<h2>One-vs-rest classifier</h2>
+<div id="6100b889" class="cell" data-execution_count="43">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a aria-label="1"></a><span class="co"># Predict on a new sample</span></span>
+<span id="cb52-2"><a aria-label="2"></a>new_sample <span class="op">=</span> iris_X_test[<span class="dv">0</span>].reshape(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb52-3"><a aria-label="3"></a>confidence_scores <span class="op">=</span> np.array([</span>
+<span id="cb52-4"><a aria-label="4"></a>    classifier.decision_function(new_sample).item()</span>
+<span id="cb52-5"><a aria-label="5"></a>    <span class="cf">for</span> classifier <span class="kw">in</span> iris_classifiers</span>
+<span id="cb52-6"><a aria-label="6"></a>])</span>
+<span id="cb52-7"><a aria-label="7"></a></span>
+<span id="cb52-8"><a aria-label="8"></a><span class="co"># Final assignment</span></span>
+<span id="cb52-9"><a aria-label="9"></a>final_class <span class="op">=</span> np.argmax(confidence_scores)</span>
+<span id="cb52-10"><a aria-label="10"></a></span>
+<span id="cb52-11"><a aria-label="11"></a><span class="co"># Printing the result</span></span>
+<span id="cb52-12"><a aria-label="12"></a><span class="bu">print</span>(<span class="ss">f"Final class assigned: </span><span class="sc">{</span>iris<span class="sc">.</span>target_names[final_class]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb52-13"><a aria-label="13"></a><span class="bu">print</span>(<span class="ss">f"True class: </span><span class="sc">{</span>iris<span class="sc">.</span>target_names[np.argmax(iris_y_test[<span class="dv">0</span>])]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Final class assigned: versicolor
-True class: versicolor</code></pre>
+<pre><code>Final class assigned: setosa
+True class: setosa</code></pre>
 </div>
 </div>
 </section>
-<section id="label_binarized" class="slide level2 smaller">
-<h2><code>label_binarized</code></h2>
-<div id="7a5c48ef" class="cell" data-execution_count="41">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> label_binarize</span>
-<span id="cb42-2"><a aria-label="2"></a></span>
-<span id="cb42-3"><a aria-label="3"></a><span class="co"># Original class labels</span></span>
-<span id="cb42-4"><a aria-label="4"></a>y_train <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>])</span>
-<span id="cb42-5"><a aria-label="5"></a></span>
-<span id="cb42-6"><a aria-label="6"></a><span class="co"># Binarize the labels</span></span>
-<span id="cb42-7"><a aria-label="7"></a>y_train_binarized <span class="op">=</span> label_binarize(y_train, classes<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>])</span>
-<span id="cb42-8"><a aria-label="8"></a></span>
-<span id="cb42-9"><a aria-label="9"></a><span class="co"># Assume y_train_binarized contains the binarized labels</span></span>
-<span id="cb42-10"><a aria-label="10"></a><span class="bu">print</span>(<span class="st">"Binarized labels:</span><span class="ch">\n</span><span class="st">"</span>, y_train_binarized)</span>
-<span id="cb42-11"><a aria-label="11"></a></span>
-<span id="cb42-12"><a aria-label="12"></a><span class="co"># Convert binarized labels back to the original numerical values</span></span>
-<span id="cb42-13"><a aria-label="13"></a>original_labels <span class="op">=</span> [np.argmax(b) <span class="cf">for</span> b <span class="kw">in</span> y_train_binarized]</span>
-<span id="cb42-14"><a aria-label="14"></a><span class="bu">print</span>(<span class="st">"Original labels:</span><span class="ch">\n</span><span class="st">"</span>, original_labels)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="label_binarize" class="slide level2 smaller">
+<h2><code>label_binarize</code></h2>
+<div id="a686565d" class="cell" data-execution_count="44">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a aria-label="1"></a><span class="co"># Original class labels</span></span>
+<span id="cb54-2"><a aria-label="2"></a>example_labels <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>])</span>
+<span id="cb54-3"><a aria-label="3"></a></span>
+<span id="cb54-4"><a aria-label="4"></a><span class="co"># Binarize the labels</span></span>
+<span id="cb54-5"><a aria-label="5"></a>example_labels_binarized <span class="op">=</span> label_binarize(example_labels, classes<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>])</span>
+<span id="cb54-6"><a aria-label="6"></a></span>
+<span id="cb54-7"><a aria-label="7"></a><span class="bu">print</span>(<span class="st">"Binarized labels:</span><span class="ch">\n</span><span class="st">"</span>, example_labels_binarized)</span>
+<span id="cb54-8"><a aria-label="8"></a></span>
+<span id="cb54-9"><a aria-label="9"></a><span class="co"># Convert binarized labels back to the original numerical values</span></span>
+<span id="cb54-10"><a aria-label="10"></a>original_labels <span class="op">=</span> [np.argmax(label_vector) <span class="cf">for</span> label_vector <span class="kw">in</span> example_labels_binarized]</span>
+<span id="cb54-11"><a aria-label="11"></a><span class="bu">print</span>(<span class="st">"Original labels:</span><span class="ch">\n</span><span class="st">"</span>, original_labels)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Binarized labels:
  [[1 0 0]
@@ -1418,7 +1564,7 @@ Original labels:
 <div class="column" style="width:70%;">
 
 </div><div class="column" style="width:30%;">
-<p><a href="../../assets/images/amigurumi_chihuahua-2024-09-16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="../../assets/images/amigurumi_chihuahua-2024-09-16.png"></a></p>
+<p><a href="../../assets/images/amigurumi_chihuahua-2024-09-16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="../../assets/images/amigurumi_chihuahua-2024-09-16.png"></a></p>
 </div></div>
 
 

@@ -6,7 +6,7 @@ Marcel Turcotte
 
 Published
 
-September 14, 2026
+September 20, 2026
 
 This page contains an outline of the topics, content, and assignments for the semester.
 
@@ -19,7 +19,7 @@ Note that this schedule will be updated as the semester progresses, with all cha
 | Sept. 16 | [Learning Algorithms](lectures/03/index.llms.md) | [](lectures/03/slides.llms.md) [](lectures/03/slides.pdf) | \- | \- |
 | Sept. 21 | [Linear regression and gradient descent](lectures/04/index.llms.md) | [](lectures/04/slides.llms.md) [](lectures/04/slides.pdf) | \- | \- |
 | Sept. 23 | [Logistic regression](lectures/05/index.llms.md) | [](lectures/05/slides.llms.md) [](lectures/05/slides.pdf) | \- | \- |
-| Sept. 28 | [Cross-entropy, geometric interpretation](lectures/06/index.llms.md) | [](lectures/06/slides.llms.md) [](lectures/06/slides.pdf) | \- | \- |
+| Sept. 28 | [Logistic Regression: Cross-Entropy and Geometry](lectures/06/index.llms.md) | [](lectures/06/slides.llms.md) [](lectures/06/slides.pdf) | \- | \- |
 | Sept. 30 | [Performance evaluation](lectures/07/index.llms.md) | [](lectures/07/slides.llms.md) [](lectures/07/slides.pdf) | \- | \- |
 | Oct. 5 | [Model Evaluation and Hyperparameter Tuning](lectures/08/index.llms.md) | [](lectures/08/slides.llms.md) [](lectures/08/slides.pdf) | \- | \- |
 | Oct. 5 | \- | \- | A1: Jupyter | \- |

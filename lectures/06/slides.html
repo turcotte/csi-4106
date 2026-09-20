@@ -13,7 +13,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Marcel Turcotte">
-  <title>CSI 4106 - Fall 2026 – Cross-entropy, geometric interpretation, and implementation</title>
+  <title>CSI 4106 - Fall 2026 – Logistic Regression: Cross-Entropy and Geometry</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -124,6 +124,7 @@
       margin-left: 2em;
     }  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link rel="stylesheet" href="../../assets/css/reveal-common.css">
   <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
@@ -233,7 +234,7 @@
       margin-right: 0; 
     }
   </style>
-<meta property="og:title" content="Cross-entropy, geometric interpretation, and implementation – CSI 4106 - Fall 2026">
+<meta property="og:title" content="Logistic Regression: Cross-Entropy and Geometry – CSI 4106 - Fall 2026">
 <meta property="og:description" content="CSI 4106 - Fall 2026">
 <meta property="og:site_name" content="CSI 4106 - Fall 2026">
 </head>
@@ -242,7 +243,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Cross-entropy, geometric interpretation, and implementation</h1>
+  <h1 class="title">Logistic Regression: Cross-Entropy and Geometry</h1>
   <p class="subtitle">CSI 4106 - Fall 2026</p>
 
 <div class="quarto-title-authors">
@@ -253,22 +254,27 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Aug 10, 2026 11:53</p>
+  <p class="date">Version: Sep 20, 2026 12:40</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
 <h1>Preamble</h1>
 
 </section>
-<section id="message-of-the-day" class="slide level2 scrollable">
+<section id="message-of-the-day" class="slide level2">
 <h2>Message of the Day</h2>
-<iframe data-external="1" src="https://www.youtube.com/embed/I_cvKK7LanI" width="889" height="500" title="AI’s 'Significant Effect' on Entry-Level Work" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<iframe data-external="1" src="https://www.youtube.com/embed/cLFkoeWe1dQ" width="800" height="450" title="The Learning Crisis in Academia" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
 
 <aside class="notes">
-<p>TIME conducted interviews with the authors of a recent report from the <strong>Stanford Digital Economy Lab</strong>, titled “Canaries in the Coal Mine? Six Facts about the Recent Employment Effects of Artificial Intelligence.” The report is available <a href="https://www.rivista.ai/wp-content/uploads/2025/09/1756729755699.pdf">here</a> and here is the abstract:</p>
-<blockquote>
-<p>This paper examines changes in the labor market for occupations exposed to generative artificial intelligence using high-frequency administrative data from the largest payroll software provider in the United States. We present six facts that characterize these shifts. We find that since the widespread adoption of generative AI, early-career workers (ages 22-25) in the most AI-exposed occupations have experienced a 13 percent relative decline in employment even after controlling for firm-level shocks. In contrast, employment for workers in less exposed fields and more experienced workers in the same occupations has remained stable or continued to grow. We also find that adjustments occur primarily through employment rather than compensation. Furthermore, employment declines are concentrated in occupations where AI is more likely to automate, ratherthanaugment, humanlabor. Ourresultsarerobusttoalternativeexplanations, such as excluding technology-related firms and excluding occupations amenable to remote work. These six facts provide early, large-scale evidence consistent with the hypothesis that the AI revolution is beginning to have a significant and disproportionate impact on entry-level workers in the American labor market.</p>
-</blockquote>
+<p>Trefor Bazett is an Associate Teaching Professor in Mathematics and Statistics at the <a href="https://www.uvic.ca/science/math-statistics/people/home/faculty/bazett_trefor.php">University of Victoria</a>. He earned his PhD in mathematics from the University of Toronto. His academic interests include mathematics education and algebraic topology. In 2024, he received the PIMS Education Prize for his contributions to education in the mathematical sciences. PIMS highlighted his extensive collection of mathematics videos as part of this work.</p>
+<p>The following points summarize the video and adapt its recommendations to examples from this course.</p>
+<ol type="1">
+<li><strong>Active learning.</strong> Attempt a small example before consulting AI. Ask for targeted help after making an initial effort.</li>
+<li><strong>AI as a tutor.</strong> Share your reasoning or code and request a conceptual hint or diagnostic question.</li>
+<li><strong>Productive struggle.</strong> Complete important reasoning steps yourself, such as applying the chain rule during a backpropagation derivation. Use AI afterward to check the work.</li>
+<li><strong>Retrieval practice.</strong> Ask AI to generate questions, answer them from memory, and then review the feedback.</li>
+<li><strong>Critical evaluation.</strong> Check the response for accuracy and determine whether it uses methods appropriate to the course.</li>
+</ol>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -281,52 +287,29 @@ Marcel Turcotte
           display:block!important;
       }</style></aside>
 <aside><div>
-<p><a href="https://www.youtube.com/watch?v=I_cvKK7LanI">AI’s “Significant Effect” on Entry-Level Work</a>, TIME, 2025-09-05. (13m 55s)</p>
+<p>Bazett, T. (2026, August 30). <a href="https://youtu.be/cLFkoeWe1dQ"><em>The Learning Crisis in Academia</em></a> [Video]. YouTube.</p>
 </div></aside></section>
-<section id="message-of-the-day-continued" class="slide level2">
-<h2>Message of the Day (continued)</h2>
-<iframe data-external="1" src="https://www.youtube.com/embed/p_kF_SDB0-c" width="889" height="500" title="How AI is changing the job market" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-
-<aside class="notes">
-<p>A wealth of videos, news articles, and academic publications are available online, exploring the impact of artificial intelligence (AI) on the job market. Notably, the following source provides a more optimistic perspective, highlighting instances where companies are increasingly hiring recent graduates for senior roles with the intention of providing on-the-job training.</p>
-<ul>
-<li><a href="https://youtu.be/106DaA8WdHg">How AI Is Crushing Junior Developers</a>, Economy Media, posted on 2025-09-04.</li>
-<li><a href="https://www.youtube.com/watch?v=P4I_LuUqBqg">Why It is So Difficult to Gen Zeers to Get a Job</a>, Economy Media, posted on 2025-10-01.</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-<aside><div>
-<p><a href="https://www.youtube.com/watch?v=p_kF_SDB0-c">How AI is changing the job market</a>, What in the World podcast, BBC World Service, 2025-09-16.</p>
-</div></aside></section>
-<section id="learning-outcomes" class="slide level2">
-<h2>Learning Outcomes</h2>
+<section id="learning-objectives" class="slide level2 smaller">
+<h2>Learning Objectives</h2>
 <p>By the end of this presentation, you should be able to:</p>
 <ul>
-<li><strong>Differentiate</strong> between MSE and cross-entropy as loss functions.</li>
-<li><strong>Relate</strong> maximum likelihood estimation to parameter learning in logistic regression.</li>
-<li><strong>Interpret</strong> the geometric view of logistic regression as a linear decision boundary.</li>
-<li><strong>Implement</strong> logistic regression with gradient descent on simple data.</li>
+<li><strong>Derive</strong> binary cross-entropy from the Bernoulli likelihood.</li>
+<li><strong>Explain</strong> why binary cross-entropy is preferred to MSE for logistic regression.</li>
+<li><strong>Interpret</strong> the logistic-regression decision boundary and its normal vector geometrically.</li>
+<li><strong>Distinguish</strong> the linear score from its corresponding probability and signed distance.</li>
+<li><strong>Relate</strong> the mathematical model to a batch-gradient-descent implementation.</li>
 </ul>
 </section></section>
 <section>
-<section id="linear-regression" class="title-slide slide level1 center">
-<h1>Linear Regression</h1>
+<section id="logistic-regression-review" class="title-slide slide level1 center">
+<h1>Logistic Regression Review</h1>
 
 </section>
 <section id="problem" class="slide level2">
 <h2>Problem</h2>
 <ul>
 <li class="fragment"><strong>General Case:</strong> <span class="math inline">P(y = k \mid x, \theta)</span>, where <span class="math inline">k</span> is a class label.</li>
-<li class="fragment"><strong>Binary Case</strong>: <span class="math inline">y \in {0,1}</span>
+<li class="fragment"><strong>Binary Case</strong>: <span class="math inline">y \in \{0,1\}</span>
 <ul>
 <li class="fragment"><strong>Predict</strong> <span class="math inline">P(y = 1 \mid x, \theta)</span></li>
 </ul></li>
@@ -339,19 +322,19 @@ Marcel Turcotte
 <h2>Logistic Regression</h2>
 <p>The <strong>Logistic Regression</strong> model is defined as:</p>
 <p><span class="math display">
-  h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
+  \hat{p}_i = h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
   </span></p>
 <ul>
 <li><p><strong>Predictions</strong> are made as follows:</p></li>
-<li><p><span class="math inline">y_i = 0</span>, if <span class="math inline">h_\theta(x_i) &lt; 0.5</span></p></li>
-<li><p><span class="math inline">y_i = 1</span>, if <span class="math inline">h_\theta(x_i) \geq 0.5</span></p></li>
+<li><p><span class="math inline">\hat{y}_i = 0</span>, if <span class="math inline">h_\theta(x_i) &lt; 0.5</span></p></li>
+<li><p><span class="math inline">\hat{y}_i = 1</span>, if <span class="math inline">h_\theta(x_i) \geq 0.5</span></p></li>
 </ul>
 
 <aside class="notes">
 <p>In the previous lecture, we considered an example wherein <strong>logistic regression</strong> was used to classify <strong>handwritten digits</strong>.</p>
 <ul>
 <li>The classification problem was addressed using a <strong>one-vs-rest</strong> strategy, which involved training ten separate logistic regression models, each dedicated to recognizing a specific digit.</li>
-<li>Each model consisted of <strong>65 parameters</strong>: <strong>one bias</strong> term and <strong>64 weights</strong>. Each <strong>weight</strong> corresponded to a <strong>pixel</strong> (or <strong>attribute</strong>) of a <span class="math inline">64 \times 64</span> pixel image.</li>
+<li>Each model consisted of <strong>65 parameters</strong>: <strong>one bias</strong> term and <strong>64 weights</strong>. Each <strong>weight</strong> corresponded to a <strong>pixel</strong> (or <strong>attribute</strong>) of an <span class="math inline">8 \times 8</span> image.</li>
 <li>This method demonstrated an excellent performance, achieving an overall accuracy of 0.97.</li>
 <li>Analyzing the weights provided insights into the areas of the image to which the model was most responsive (what does it pay attention to?).</li>
 </ul>
@@ -375,16 +358,16 @@ Marcel Turcotte
 <h1>Loss Function</h1>
 
 </section>
-<section id="model-overview" class="slide level2">
+<section id="model-overview" class="slide level2 smaller">
 <h2>Model Overview</h2>
 <ul>
 <li><p>Our model is expressed in a vectorized form as:</p>
 <p><span class="math display">
-h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
+\hat{p}_i = h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
 </span></p></li>
 <li><p><strong>Prediction</strong>:</p>
 <ul>
-<li>Assign <span class="math inline">y_i = 0</span>, if <span class="math inline">h_\theta(x_i) &lt; 0.5</span>; <span class="math inline">y_i = 1</span>, if <span class="math inline">h_\theta(x_i) \geq 0.5</span></li>
+<li>Assign <span class="math inline">\hat{y}_i = 0</span>, if <span class="math inline">h_\theta(x_i) &lt; 0.5</span>; <span class="math inline">\hat{y}_i = 1</span>, if <span class="math inline">h_\theta(x_i) \geq 0.5</span></li>
 </ul></li>
 </ul>
 <ul>
@@ -417,15 +400,15 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <section id="parameter-estimation" class="slide level2">
 <h2>Parameter Estimation</h2>
 <ul>
-<li class="fragment"><p>Logistic regression is <strong>statistical model</strong>.</p></li>
-<li class="fragment"><p>Its output is <span class="math inline">\hat{y} = P(y = 1 | x, \theta)</span>.</p></li>
-<li class="fragment"><p><span class="math inline">P(y = 0 | x, \theta) = 1 - \hat{y}</span>.</p></li>
+<li class="fragment"><p>Logistic regression is <strong>a statistical model</strong>.</p></li>
+<li class="fragment"><p>Its output is <span class="math inline">\hat{p} = P(y = 1 \mid x, \theta)</span>.</p></li>
+<li class="fragment"><p><span class="math inline">P(y = 0 \mid x, \theta) = 1 - \hat{p}</span>.</p></li>
 <li class="fragment"><p>Assumes that <span class="math inline">y</span> values come from a <strong>Bernoulli distribution</strong>.</p></li>
 <li class="fragment"><p><span class="math inline">\theta</span> is commonly found by <strong>Maximum Likelihood Estimation</strong>.</p></li>
 </ul>
 
 <aside><div>
-<p>The expressions <span class="math inline">\hat{y}</span>, <span class="math inline">h_\theta(x_i)</span>, and <span class="math inline">\sigma(\theta x_i)</span> represent the same concept, albeit at varying levels of abstraction and specificity.</p>
+<p>The expressions <span class="math inline">\hat{p}_i</span>, <span class="math inline">h_\theta(x_i)</span>, and <span class="math inline">\sigma(\theta^\top x_i)</span> all denote the predicted probability that example <span class="math inline">i</span> belongs to the positive class. The symbol <span class="math inline">\hat{y}_i</span> denotes the class label obtained after applying the threshold.</p>
 </div></aside></section>
 <section id="parameter-estimation-1" class="slide level2">
 <h2>Parameter Estimation</h2>
@@ -435,14 +418,15 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 <section id="likelihood-function" class="slide level2">
 <h2>Likelihood Function</h2>
 <p>Assuming the <span class="math inline">y</span> values are <em>independent and identically distributed (i.i.d.)</em>, the <strong>likelihood function</strong> is expressed as the <strong>product of individual probabilities</strong>.</p>
-<p>In other words, given our data, <span class="math inline">\{(x_i, y_i)\}_{i=1}^N</span>, the likelihood function is given by this equation. <span class="math display">
+<p>In other words, given our data, <span class="math inline">\{(x_i, y_i)\}_{i=1}^N</span>, the likelihood function is given by this equation.</p>
+<p><span class="math display">
 \mathcal{L}(\theta) = \prod_{i=1}^{N} P(y_i \mid x_i, \theta)
 </span></p>
 </section>
 <section id="maximum-likelihood" class="slide level2">
 <h2>Maximum Likelihood</h2>
 <p><span class="math display">
-  \hat{\theta} = \underset{\theta \in \Theta}{\arg \max} \mathcal{L}(\theta) =  \underset{\theta \in \Theta}{\arg \max}  \prod_{i=1}^{N} P(y_i \mid x_i, \theta)
+  \hat{\theta} = \underset{\theta \in \Theta}{\arg \max}\ \mathcal{L}(\theta) =  \underset{\theta \in \Theta}{\arg \max}  \prod_{i=1}^{N} P(y_i \mid x_i, \theta)
 </span></p>
 <ul>
 <li class="fragment"><p><strong>Observations</strong>:</p>
@@ -454,66 +438,80 @@ h_\theta(x_i) = \sigma(\theta x_i) = \frac{1}{1+e^{- \theta x_i}}
 </section>
 <section id="negative-log-likelihood" class="slide level2 smaller">
 <h2>Negative Log-Likelihood</h2>
-<p><strong>Maximum likelihood</strong> <span class="math display">
-  \hat{\theta} = \underset{\theta \in \Theta}{\arg \max} \mathcal{L}(\theta) = \underset{\theta \in \Theta}{\arg \max}  \prod_{i=1}^{N} P(y_i \mid x_i, \theta)
+<p><strong>Maximum likelihood</strong></p>
+<p><span class="math display">
+  \hat{\theta} = \underset{\theta \in \Theta}{\arg \max}\ \mathcal{L}(\theta) = \underset{\theta \in \Theta}{\arg \max}  \prod_{i=1}^{N} P(y_i \mid x_i, \theta)
 </span></p>
 <p>becomes <strong>negative log-likelihood</strong></p>
 <p><span class="math display">
-\hat{\theta} = \underset{\theta \in \Theta}{\arg \min} - \log \mathcal{L(\theta)} = \underset{\theta \in \Theta}{\arg \min} - \log \prod_{i=1}^{N} P(y_i \mid x_i, \theta) = \underset{\theta \in \Theta}{\arg \min} - \sum_{i=1}^{N} \log P(y_i \mid x_i, \theta)
+\hat{\theta} = \underset{\theta \in \Theta}{\arg \min} - \log \mathcal{L}(\theta) = \underset{\theta \in \Theta}{\arg \min} - \log \prod_{i=1}^{N} P(y_i \mid x_i, \theta) = \underset{\theta \in \Theta}{\arg \min} - \sum_{i=1}^{N} \log P(y_i \mid x_i, \theta)
 </span></p>
 </section>
 <section id="mathematical-reformulation" class="slide level2">
 <h2>Mathematical Reformulation</h2>
-<p>For binary outcomes, the probability <span class="math inline">P(y \mid x, \theta)</span> is:</p>
+<p>For <strong>binary outcomes</strong>, the probability <span class="math inline">P(y \mid x, \theta)</span> is:</p>
 <p><span class="math display">
 P(y \mid x, \theta) =
 \begin{cases}
-\sigma(\theta x), &amp; \text{if}\ y = 1 \\
-1 - \sigma(\theta x), &amp; \text{if}\ y = 0
+\sigma(\theta^\top x), &amp; \text{if}\ y = 1 \\
+1 - \sigma(\theta^\top x), &amp; \text{if}\ y = 0
 \end{cases}
 </span></p>
 <div class="fragment">
 <p>This can be compactly expressed as:</p>
 <p><span class="math display">
-P(y \mid x, \theta) = \sigma(\theta x)^y (1 - \sigma(\theta x))^{1-y}
+P(y \mid x, \theta) = \sigma(\theta^\top x)^y (1 - \sigma(\theta^\top x))^{1-y}
 </span></p>
 
 </div>
 <aside><div>
-<p>This <strong>“mathematical hack”</strong> validates the rationale for the <strong>label encoding</strong>.</p>
+<p>Because <span class="math inline">y \in \{0,1\}</span>, one factor always has exponent zero and equals one. The other factor selects the probability assigned to the observed label.</p>
 </div></aside></section>
-<section id="loss-function-1" class="slide level2">
+<section id="loss-function-1" class="slide level2 smaller">
 <h2>Loss Function</h2>
-<p>We are now ready to write our <strong>loss function</strong>.</p>
+<p>We define the objective as the <strong>mean negative log-likelihood</strong>.</p>
 <p><span class="math display">
-J(\theta) = - \log \mathcal{L(\theta)} = - \sum_{i=1}^{N} \log P(y_i \mid x_i, \theta)
-</span> where <span class="math inline">P(y \mid x, \theta) = \sigma(\theta x)^y (1 - \sigma(\theta x))^{1-y}</span>.</p>
-<p>Consequently, <span class="math display">
-J(\theta) = - \sum_{i=1}^{N} \log [ \sigma(\theta x_i)^{y_i} (1 - \sigma(\theta x_i))^{1-y_i} ]
+J(\theta) = -\frac{1}{N}\log \mathcal{L}(\theta) = -\frac{1}{N}\sum_{i=1}^{N} \log P(y_i \mid x_i, \theta)
 </span></p>
-</section>
-<section id="loss-function-continued" class="slide level2">
-<h2>Loss Function (continued)</h2>
-<p>Simplifying the equation. <span class="math display">
-J(\theta) = - \sum_{i=1}^{N} \log [ \sigma(\theta x_i)^{y_i} (1 - \sigma(\theta x_i))^{1-y_i} ]
-</span> by distributing the <span class="math inline">\log</span> into the square parenthesis. <span class="math display">
-J(\theta) = - \sum_{i=1}^{N} [ \log \sigma(\theta x_i)^{y_i} + \log (1 - \sigma(\theta x_i))^{1-y_i} ]
-</span></p>
-</section>
-<section id="loss-function-continued-1" class="slide level2">
-<h2>Loss Function (continued)</h2>
-<p>Simplifying the equation further. <span class="math display">
-J(\theta) = - \sum_{i=1}^{N} [ \log \sigma(\theta x_i)^{y_i} + \log (1 - \sigma(\theta x_i))^{1-y_i} ]
-</span> by moving the exponents in front of the <span class="math inline">\log</span>s.</p>
+<p>where <span class="math inline">P(y \mid x, \theta) = \sigma(\theta^\top x)^y (1 - \sigma(\theta^\top x))^{1-y}</span>.</p>
+<div class="fragment">
+<p>Consequently,</p>
 <p><span class="math display">
-J(\theta) = - \sum_{i=1}^{N} [ y_i \log \sigma(\theta x_i) + (1-y_i) \log (1 - \sigma(\theta x_i)) ]
+J(\theta) = -\frac{1}{N}\sum_{i=1}^{N} \log [ \sigma(\theta^\top x_i)^{y_i} (1 - \sigma(\theta^\top x_i))^{1-y_i} ]
+</span></p>
+</div>
+</section>
+<section id="loss-function-continued" class="slide level2 smaller">
+<h2>Loss Function (continued)</h2>
+<p>Simplifying the equation.</p>
+<p><span class="math display">
+J(\theta) = -\frac{1}{N}\sum_{i=1}^{N} \log [ \sigma(\theta^\top x_i)^{y_i} (1 - \sigma(\theta^\top x_i))^{1-y_i} ]
+</span></p>
+<div class="fragment">
+<p>by distributing the <span class="math inline">\log</span> over the product.</p>
+<p><span class="math display">
+J(\theta) = -\frac{1}{N}\sum_{i=1}^{N} [ \log \sigma(\theta^\top x_i)^{y_i} + \log (1 - \sigma(\theta^\top x_i))^{1-y_i} ]
+</span></p>
+</div>
+</section>
+<section id="loss-function-continued-1" class="slide level2 smaller">
+<h2>Loss Function (continued)</h2>
+<p>Simplifying the equation further.</p>
+<p><span class="math display">
+J(\theta) = -\frac{1}{N}\sum_{i=1}^{N} [ \log \sigma(\theta^\top x_i)^{y_i} + \log (1 - \sigma(\theta^\top x_i))^{1-y_i} ]
+</span></p>
+<div class="fragment">
+<p>by moving the exponents in front of the <span class="math inline">\log</span>s.</p>
+<p><span class="math display">
+J(\theta) = -\frac{1}{N}\sum_{i=1}^{N} [ y_i \log \sigma(\theta^\top x_i) + (1-y_i) \log (1 - \sigma(\theta^\top x_i)) ]
 </span></p>
 
+</div>
 <aside><div>
 <p>The rationale for these additional simplifications will be elucidated shortly.</p>
 </div></aside></section>
-<section id="one-more-thing" class="slide level2">
-<h2>One More Thing</h2>
+<section id="from-entropy-to-cross-entropy" class="slide level2">
+<h2>From Entropy to Cross-Entropy</h2>
 <ul>
 <li>Decision tree algorithms often employ <strong>entropy</strong>, a measure from <strong>information theory</strong>, to evaluate the quality of splits or partitions in decision rules.</li>
 <li>Entropy quantifies the uncertainty or impurity associated with the potential outcomes of a random variable.</li>
@@ -521,39 +519,46 @@ J(\theta) = - \sum_{i=1}^{N} [ y_i \log \sigma(\theta x_i) + (1-y_i) \log (1 - \
 </section>
 <section id="entropy" class="slide level2">
 <h2>Entropy</h2>
-<p><strong>Entropy</strong> in information theory quantifies the <strong>uncertainty</strong> or unpredictability of a random variable’s possible outcomes. It measures the average amount of information produced by a stochastic source of data and is typically expressed in bits for binary systems. The entropy <span class="math inline">H</span> of a discrete random variable <span class="math inline">X</span> with possible outcomes <span class="math inline">\{x_1, x_2, \ldots, x_n\}</span> and probability mass function <span class="math inline">P(X)</span> is given by:</p>
+<p><strong>Entropy</strong> in information theory quantifies the <strong>uncertainty</strong> or unpredictability of a random variable’s possible outcomes. It measures the average information associated with an outcome. When the base-2 logarithm is used, entropy is measured in bits. The entropy <span class="math inline">H</span> of a discrete random variable <span class="math inline">X</span> with possible outcomes <span class="math inline">\{x_1, x_2, \ldots, x_n\}</span> and probability mass function <span class="math inline">P(X)</span> is given by:</p>
 <p><span class="math display">
 H(X) = -\sum_{i=1}^n P(x_i) \log_2 P(x_i)
 </span></p>
 </section>
 <section id="cross-entropy" class="slide level2">
 <h2>Cross-Entropy</h2>
-<p><strong>Cross-entropy</strong> quantifies the <strong>difference between two probability distributions</strong>, typically the <strong>true distribution</strong> and a <strong>predicted distribution</strong>.</p>
+<p><strong>Cross-entropy</strong> measures the average penalty for the probabilities predicted by <span class="math inline">q</span>, using <span class="math inline">p</span> to weight the possible outcomes.</p>
 <p><span class="math display">
-H(p, q) = -\sum_{i} p(x_i) \log q(x_i)
-</span> where <span class="math inline">p(x_i)</span> is the true probability distribution, and <span class="math inline">q(x_i)</span> is the predicted probability distribution.</p>
-</section>
+H(p, q) = -\sum_{k} p_k \log q_k
+</span></p>
+
+<aside><div>
+<p>It is not a distance: <span class="math inline">H(p,q)</span> need not equal <span class="math inline">H(q,p)</span>.</p>
+</div></aside></section>
 <section id="cross-entropy-1" class="slide level2">
 <h2>Cross-Entropy</h2>
 <ul>
-<li>Consider <span class="math inline">y</span> as the true probability distribution and <span class="math inline">\hat{y}</span>&nbsp;as the predicted probability distribution.</li>
-<li>Cross-entropy quantifies the <strong>discrepancy</strong> between these two distributions.</li>
+<li>For a <strong>binary label</strong>, the observed distribution is <span class="math inline">(y_i, 1-y_i)</span>.</li>
+<li>The predicted <strong>Bernoulli distribution</strong> is <span class="math inline">(\hat{p}_i, 1-\hat{p}_i)</span>.</li>
+<li>Their <strong>cross-entropy</strong>, denoted <span class="math inline">\ell_i</span>, is the loss for example <span class="math inline">i</span>.</li>
 </ul>
 </section>
 <section id="cross-entropy-2" class="slide level2 smaller">
 <h2>Cross-Entropy</h2>
 <p>Consider the <strong>negative log-likelihood loss</strong> function:</p>
 <p><span class="math display">
-J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \sigma(\theta x_i) + (1-y_i) \log (1 - \sigma(\theta x_i)) \right]
+J(\theta) = -\frac{1}{N}\sum_{i=1}^{N} \left[ y_i \log \sigma(\theta^\top x_i) + (1-y_i) \log (1 - \sigma(\theta^\top x_i)) \right]
 </span></p>
-<p>By substituting <span class="math inline">\sigma(\theta x_i)</span> with <span class="math inline">\hat{y_i}</span>, the function becomes:</p>
+<p>By substituting <span class="math inline">\sigma(\theta^\top x_i)</span> with <span class="math inline">\hat{p}_i</span>, the function becomes:</p>
 <p><span class="math display">
-J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \hat{y_i} + (1-y_i) \log (1 - \hat{y_i}) \right]
+\ell_i(\theta) = -\left[ y_i \log \hat{p}_i + (1-y_i) \log (1 - \hat{p}_i) \right],
+\qquad
+J(\theta)=\frac{1}{N}\sum_{i=1}^{N}\ell_i(\theta).
 </span></p>
-<p>This expression illustrates that the <strong>negative log-likelihood</strong> is optimized by minimizing the <strong>cross-entropy</strong>.</p>
+<p>For the Bernoulli model, the <strong>mean negative log-likelihood</strong> is the <strong>binary cross-entropy</strong>.</p>
 
 <aside class="notes">
-<p>Interpret the final equation as applying to all examples from 1 to <span class="math inline">N</span> and all classes from 1 to <span class="math inline">k</span>. Here, <span class="math inline">k=0</span> because we are addressing a binary classification problem.</p>
+<p>Binary classification has two outcomes, labelled 0 and 1. The two terms inside the brackets are the cross-entropy over these two outcomes; the outer sum averages the loss over the <span class="math inline">N</span> examples.</p>
+<p>Changing the logarithm base rescales the loss. We use the natural logarithm because it follows directly from likelihood and gives convenient derivatives.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -566,58 +571,83 @@ J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \hat{y_i} + (1-y_i) \log (1 - \hat{
           display:block!important;
       }</style></aside>
 <aside><div>
-<p><strong>Cross-entropy</strong>, <strong>log loss</strong>, and n<strong>egative log-likelihood</strong> refer to the same concept.</p>
+<p>In binary logistic regression, <strong>binary cross-entropy</strong>, <strong>log loss</strong>, and <strong>mean negative log-likelihood</strong> refer to the same objective.</p>
 </div></aside></section>
-<section id="for-each-example" class="slide level2">
-<h2>For Each Example</h2>
-<div id="fc0bdb58" class="cell" data-execution_count="2">
+<section id="bce-and-mse-for-a-positive-example" class="slide level2 hide-code-toggle">
+<h2>BCE and MSE for a Positive Example</h2>
+<div id="203956c1" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a aria-label="3"></a></span>
-<span id="cb1-4"><a aria-label="4"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb1-4"><a aria-label="4"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">42</span>)</span>
 <span id="cb1-5"><a aria-label="5"></a></span>
-<span id="cb1-6"><a aria-label="6"></a><span class="co"># Generate an array of p values from just above 0 to 1</span></span>
-<span id="cb1-7"><a aria-label="7"></a>p_values <span class="op">=</span> np.linspace(<span class="fl">0.001</span>, <span class="dv">1</span>, <span class="dv">1000</span>)</span>
-<span id="cb1-8"><a aria-label="8"></a></span>
-<span id="cb1-9"><a aria-label="9"></a><span class="co"># Compute the natural logarithm of each p value</span></span>
-<span id="cb1-10"><a aria-label="10"></a>ln_p_values <span class="op">=</span> <span class="op">-</span> np.log(p_values)</span>
-<span id="cb1-11"><a aria-label="11"></a></span>
-<span id="cb1-12"><a aria-label="12"></a><span class="co"># Plot the graph</span></span>
-<span id="cb1-13"><a aria-label="13"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
-<span id="cb1-14"><a aria-label="14"></a>plt.plot(p_values, ln_p_values, label<span class="op">=</span><span class="vs">r'</span><span class="dv">$</span><span class="vs">-</span><span class="er">\</span><span class="vs">log</span><span class="kw">(</span><span class="er">\</span><span class="vs">hat{y}</span><span class="kw">)</span><span class="dv">$</span><span class="vs">'</span>, color<span class="op">=</span><span class="st">'b'</span>)</span>
+<span id="cb1-6"><a aria-label="6"></a><span class="co"># Sigmoid function</span></span>
+<span id="cb1-7"><a aria-label="7"></a><span class="kw">def</span> sigmoid(t):</span>
+<span id="cb1-8"><a aria-label="8"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>t))</span>
+<span id="cb1-9"><a aria-label="9"></a></span>
+<span id="cb1-10"><a aria-label="10"></a><span class="co"># Compare the losses as functions of the linear score z for y = 1.</span></span>
+<span id="cb1-11"><a aria-label="11"></a>z_values <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">1000</span>)</span>
+<span id="cb1-12"><a aria-label="12"></a>p_values <span class="op">=</span> sigmoid(z_values)</span>
+<span id="cb1-13"><a aria-label="13"></a>bce_values <span class="op">=</span> <span class="op">-</span>np.log(p_values)</span>
+<span id="cb1-14"><a aria-label="14"></a>mse_values <span class="op">=</span> (p_values <span class="op">-</span> <span class="dv">1</span>) <span class="op">**</span> <span class="dv">2</span></span>
 <span id="cb1-15"><a aria-label="15"></a></span>
-<span id="cb1-16"><a aria-label="16"></a><span class="co"># Add labels and title</span></span>
-<span id="cb1-17"><a aria-label="17"></a>plt.xlabel(<span class="vs">r'</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{y}</span><span class="dv">$</span><span class="vs">'</span>)</span>
-<span id="cb1-18"><a aria-label="18"></a>plt.ylabel(<span class="vs">r'J'</span>)</span>
-<span id="cb1-19"><a aria-label="19"></a>plt.title(<span class="vs">r'Graph of </span><span class="dv">$</span><span class="vs">-</span><span class="er">\</span><span class="vs">log</span><span class="kw">(</span><span class="er">\</span><span class="vs">hat{y}</span><span class="kw">)</span><span class="dv">$</span><span class="vs"> for </span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{y}</span><span class="dv">$</span><span class="vs"> from 0 to 1'</span>)</span>
-<span id="cb1-20"><a aria-label="20"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb1-21"><a aria-label="21"></a>plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'gray'</span>, lw<span class="op">=</span><span class="fl">0.5</span>)  <span class="co"># Add horizontal line at y=0</span></span>
-<span id="cb1-22"><a aria-label="22"></a>plt.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'gray'</span>, lw<span class="op">=</span><span class="fl">0.5</span>)  <span class="co"># Add vertical line at x=0</span></span>
-<span id="cb1-23"><a aria-label="23"></a></span>
-<span id="cb1-24"><a aria-label="24"></a><span class="co"># Display the plot</span></span>
-<span id="cb1-25"><a aria-label="25"></a>plt.legend()</span>
-<span id="cb1-26"><a aria-label="26"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-16"><a aria-label="16"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.5</span>))</span>
+<span id="cb1-17"><a aria-label="17"></a>ax.axvspan(<span class="op">-</span><span class="dv">6</span>, <span class="dv">0</span>, color<span class="op">=</span><span class="st">'tab:red'</span>, alpha<span class="op">=</span><span class="fl">0.06</span>)</span>
+<span id="cb1-18"><a aria-label="18"></a>ax.axvspan(<span class="dv">0</span>, <span class="dv">6</span>, color<span class="op">=</span><span class="st">'tab:green'</span>, alpha<span class="op">=</span><span class="fl">0.06</span>)</span>
+<span id="cb1-19"><a aria-label="19"></a>ax.plot(</span>
+<span id="cb1-20"><a aria-label="20"></a>    z_values,</span>
+<span id="cb1-21"><a aria-label="21"></a>    bce_values,</span>
+<span id="cb1-22"><a aria-label="22"></a>    color<span class="op">=</span><span class="st">'tab:blue'</span>,</span>
+<span id="cb1-23"><a aria-label="23"></a>    linewidth<span class="op">=</span><span class="fl">2.5</span>,</span>
+<span id="cb1-24"><a aria-label="24"></a>    label<span class="op">=</span><span class="vs">r'</span><span class="dv">$</span><span class="er">\</span><span class="vs">ell_{</span><span class="dv">\m</span><span class="vs">athrm{BCE}}</span><span class="kw">(</span><span class="vs">z;y=1</span><span class="kw">)</span><span class="vs">=-</span><span class="er">\</span><span class="vs">log </span><span class="dv">\s</span><span class="vs">igma</span><span class="kw">(</span><span class="vs">z</span><span class="kw">)</span><span class="dv">$</span><span class="vs">'</span>,</span>
+<span id="cb1-25"><a aria-label="25"></a>)</span>
+<span id="cb1-26"><a aria-label="26"></a>ax.plot(</span>
+<span id="cb1-27"><a aria-label="27"></a>    z_values,</span>
+<span id="cb1-28"><a aria-label="28"></a>    mse_values,</span>
+<span id="cb1-29"><a aria-label="29"></a>    color<span class="op">=</span><span class="st">'tab:orange'</span>,</span>
+<span id="cb1-30"><a aria-label="30"></a>    linewidth<span class="op">=</span><span class="fl">2.5</span>,</span>
+<span id="cb1-31"><a aria-label="31"></a>    linestyle<span class="op">=</span><span class="st">'--'</span>,</span>
+<span id="cb1-32"><a aria-label="32"></a>    label<span class="op">=</span><span class="vs">r'</span><span class="dv">$</span><span class="er">\</span><span class="vs">ell_{</span><span class="dv">\m</span><span class="vs">athrm{MSE}}</span><span class="kw">(</span><span class="vs">z;y=1</span><span class="kw">)</span><span class="vs">=</span><span class="kw">(</span><span class="dv">\s</span><span class="vs">igma</span><span class="kw">(</span><span class="vs">z</span><span class="kw">)</span><span class="vs">-1</span><span class="kw">)</span><span class="dv">^</span><span class="vs">2</span><span class="dv">$</span><span class="vs">'</span>,</span>
+<span id="cb1-33"><a aria-label="33"></a>)</span>
+<span id="cb1-34"><a aria-label="34"></a>ax.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-35"><a aria-label="35"></a></span>
+<span id="cb1-36"><a aria-label="36"></a>ax.text(<span class="op">-</span><span class="fl">5.8</span>, <span class="fl">5.6</span>, <span class="st">'Incorrect side'</span>, color<span class="op">=</span><span class="st">'darkred'</span>)</span>
+<span id="cb1-37"><a aria-label="37"></a>ax.text(<span class="fl">2.8</span>, <span class="fl">5.6</span>, <span class="st">'Correct side'</span>, color<span class="op">=</span><span class="st">'darkgreen'</span>)</span>
+<span id="cb1-38"><a aria-label="38"></a>ax.annotate(</span>
+<span id="cb1-39"><a aria-label="39"></a>    <span class="st">'MSE becomes nearly flat'</span>,</span>
+<span id="cb1-40"><a aria-label="40"></a>    xy<span class="op">=</span>(<span class="op">-</span><span class="fl">4.5</span>, mse_values[np.argmin(np.<span class="bu">abs</span>(z_values <span class="op">+</span> <span class="fl">4.5</span>))]),</span>
+<span id="cb1-41"><a aria-label="41"></a>    xytext<span class="op">=</span>(<span class="op">-</span><span class="fl">3.5</span>, <span class="fl">2.1</span>),</span>
+<span id="cb1-42"><a aria-label="42"></a>    arrowprops<span class="op">=</span>{<span class="st">'arrowstyle'</span>: <span class="st">'-&gt;'</span>, <span class="st">'color'</span>: <span class="st">'tab:orange'</span>},</span>
+<span id="cb1-43"><a aria-label="43"></a>    color<span class="op">=</span><span class="st">'tab:orange'</span>,</span>
+<span id="cb1-44"><a aria-label="44"></a>)</span>
+<span id="cb1-45"><a aria-label="45"></a></span>
+<span id="cb1-46"><a aria-label="46"></a>ax.set_xlim(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>)</span>
+<span id="cb1-47"><a aria-label="47"></a>ax.set_ylim(<span class="dv">0</span>, <span class="fl">6.1</span>)</span>
+<span id="cb1-48"><a aria-label="48"></a>ax.set_xlabel(<span class="vs">r'Linear score </span><span class="dv">$</span><span class="vs">z</span><span class="dv">$</span><span class="vs">'</span>)</span>
+<span id="cb1-49"><a aria-label="49"></a>ax.set_ylabel(<span class="vs">r'Per-example loss </span><span class="dv">$</span><span class="er">\</span><span class="vs">ell</span><span class="dv">$</span><span class="vs">'</span>)</span>
+<span id="cb1-50"><a aria-label="50"></a>ax.set_title(<span class="vs">r'Per-example losses for a positive example </span><span class="kw">(</span><span class="dv">$</span><span class="vs">y=1</span><span class="dv">$</span><span class="kw">)</span><span class="vs">'</span>)</span>
+<span id="cb1-51"><a aria-label="51"></a>ax.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb1-52"><a aria-label="52"></a>ax.legend()</span>
+<span id="cb1-53"><a aria-label="53"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="slides_files/figure-revealjs/cell-2-output-1.png" class="quarto-figure quarto-figure-center" width="428" height="382"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="slides_files/figure-revealjs/cell-2-output-1.png" class="quarto-figure quarto-figure-center" width="581" height="414"></a></p>
 </figure>
 </div>
 </div>
 </div>
 
 <aside class="notes">
-<p>For each example:</p>
-<ul>
-<li>Only one of the two terms in the summation is not zero.</li>
-<li><span class="math inline">1 - \hat{y_i}</span> is <span class="math inline">P(y = 0 \mid x, \theta)</span>.</li>
-<li>As <span class="math inline">\hat{y_i}</span> tends to 1.0, <span class="math inline">- \log(\hat{y})</span> tends to zero.</li>
-<li>As <span class="math inline">\hat{y_i}</span> tends to 0.0, indicating an incorrect prediction, <span class="math inline">- \log(\hat{y})</span> tends to <span class="math inline">\infty</span>.</li>
-<li>This substantial penalty allows cross-entropy loss to converge more quickly than mean squared error.</li>
-</ul>
+<p>For a positive example, negative scores correspond to incorrect predictions. As <span class="math inline">z</span> becomes strongly negative, binary cross-entropy continues to increase. The squared-error loss instead approaches 1 and becomes nearly flat.</p>
+<p>The small slope of the MSE curve corresponds to a small gradient, even though the prediction is confidently incorrect. For <span class="math inline">y=0</span>, the curves are reflected horizontally.</p>
+<p>Each curve shows the loss <span class="math inline">\ell</span> for one example. The training objective <span class="math inline">J(\theta)</span> is the mean of these losses over the training set:</p>
+<p><span class="math display">
+J(\theta)=\frac{1}{N}\sum_{i=1}^{N}\ell(\theta^\top x_i;y_i).
+</span></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -630,24 +660,28 @@ J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \hat{y_i} + (1-y_i) \log (1 - \hat{
           display:block!important;
       }</style></aside>
 <aside><div>
+<p>For one example with <span class="math inline">y=1</span> and <span class="math inline">\hat{p}=\sigma(z)</span>:</p>
 <p><span class="math display">
-J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \hat{y_i} + (1-y_i) \log (1 - \hat{y_i}) \right]
+\ell_{\mathrm{BCE}}(z;y=1)=-\log\sigma(z),
+\qquad
+\ell_{\mathrm{MSE}}(z;y=1)=(\sigma(z)-1)^2.
 </span></p>
 </div></aside></section>
-<section id="remarks-1" class="slide level2">
-<h2>Remarks</h2>
+<section id="why-not-mse-as-a-loss-function" class="slide level2">
+<h2>Why not MSE as a Loss Function?</h2>
 <ul>
-<li><p>Cross-entropy loss is particularly well-suited for <strong>probabilistic classification tasks</strong> due to its alignment with maximum likelihood estimation.</p></li>
-<li><p>In logistic regression, <strong>cross-entropy loss preserves convexity</strong>, contrasting with the non-convex nature of mean squared error (MSE)<sup>1</sup>.</p></li>
+<li class="fragment"><strong>Binary cross-entropy</strong> is the <strong>negative log-likelihood</strong> of the <strong>Bernoulli model</strong>.</li>
+<li class="fragment">With <strong>binary cross-entropy</strong>, the logistic-regression objective is <strong>convex</strong> in the parameters.</li>
+<li class="fragment">With <strong>sigmoid</strong> outputs, <strong>MSE</strong> is <strong>not globally convex</strong> in the linear score. Its <strong>gradient</strong> can also become <strong>very small</strong> when the model makes a <strong>confidently incorrect prediction</strong>.</li>
 </ul>
 
 <aside class="notes">
-<p>If you train <strong>logistic regression</strong> with the <strong>mean squared error (MSE)</strong> loss:</p>
+<p>Optional explanations:</p>
 <ul>
-<li>The composition of the <strong>sigmoid</strong> (nonlinear, S-shaped) with the <strong>quadratic loss</strong> produces a <strong>non-convex objective</strong>.</li>
-<li>This leads to multiple local minima and poor optimization behavior.</li>
-<li>By contrast, using the <strong>log-loss (cross-entropy)</strong> yields a <strong>convex objective</strong> in the parameters, making optimization well-behaved with gradient methods.</li>
+<li><a href="https://www.youtube.com/watch?v=m0ZeT1EWjjI">Cross Entropy vs.&nbsp;MSE as Cost Function for Logistic Regression for Classification</a></li>
+<li><a href="https://www.youtube.com/watch?v=ziq967YrSsc">What is the difference between negative log likelihood and cross entropy?</a></li>
 </ul>
+<p>In linear regression, MSE is convex because the prediction is linear in the parameters. The issue here is the composition of MSE with the nonlinear sigmoid.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -660,262 +694,60 @@ J(\theta) = - \sum_{i=1}^{N} \left[ y_i \log \hat{y_i} + (1-y_i) \log (1 - \hat{
           display:block!important;
       }</style></aside>
 <aside><div>
-<p>We will revisite cross-entropy loss when studying deep learning, especially in conjunction with the softmax function.</p>
-</div><ol class="aside-footnotes"><li id="fn1"><p>In linear regression, mean squared error loss is convex.</p></li></ol></aside></section>
-<section id="remarks-2" class="slide level2">
-<h2>Remarks</h2>
-<ul>
-<li><p>For classification problems, cross-entropy loss often achieves <strong>faster convergence</strong> compared to MSE, enhancing model efficiency.</p></li>
-<li><p>Within deep learning architectures, MSE can exacerbate the <strong>vanishing gradient problem</strong>, an issue we will address in a subsequent discussion.</p></li>
-</ul>
-</section>
-<section id="why-not-mse-as-a-loss-function" class="slide level2">
-<h2>Why not MSE as a Loss Function?</h2>
-<iframe data-external="1" src="https://www.youtube.com/embed/m0ZeT1EWjjI" width="889" height="500" title="Cross Entropy vs. MSE as Cost Function for Logistic Regression for Classification [Lecture 2.5]" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-</section>
-<section id="what-is-the-difference" class="slide level2">
-<h2>What is the Difference?</h2>
-<iframe data-external="1" src="https://www.youtube.com/embed/ziq967YrSsc" width="889" height="500" title="What is the difference between negative log likelihood and cross entropy? (in neural networks)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-</section></section>
+<p>We will revisit cross-entropy when studying neural networks, especially in conjunction with the softmax function.</p>
+</div></aside></section></section>
 <section>
 <section id="geometric-interpretation" class="title-slide slide level1 center">
 <h1>Geometric Interpretation</h1>
 
 </section>
-<section id="geometric-interpretation-1" class="slide level2">
+<section id="geometric-interpretation-1" class="slide level2 smaller">
 <h2>Geometric Interpretation</h2>
 <ul>
-<li class="fragment"><p><strong>Do you</strong> recognize this equation? <span class="math display">
-w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
+<li class="fragment"><p>Let <span class="math inline">w=(\theta_1,\ldots,\theta_D)^\top</span> denote the <strong>feature-weight vector</strong>.</p></li>
+<li class="fragment"><p>The feature-dependent part of the linear score is a <strong>dot product</strong>: <span class="math display">
+w^\top x = \theta_1 x_1 + \theta_2 x_2 + \ldots + \theta_D x_D.
 </span></p></li>
-<li class="fragment"><p>This is the <strong>dot product</strong> of <span class="math inline">\mathbf{w}</span> and <span class="math inline">\mathbf{x}</span>, <span class="math inline">\mathbf{w} \cdot \mathbf{x}</span>.</p></li>
-<li class="fragment"><p>What is the <strong>geometric interpretation</strong> of the dot product?</p></li>
+<li class="fragment"><p>The complete <strong>linear score</strong> includes the <strong>intercept</strong>: <span class="math display">
+t(x)=\theta_0 + w^\top x.
+</span></p></li>
+<li class="fragment"><p>The <strong>dot product</strong> has a <strong>geometric interpretation</strong>. <span class="math display">
+w^\top x = \|w\|\|x\|\cos\phi
+</span></p></li>
 </ul>
-<div class="fragment">
-<p><span class="math display">
-\mathbf{w} \cdot \mathbf{x} = \|\mathbf{w}\| \|\mathbf{x}\| \cos \theta
-</span></p>
 
-</div>
 <aside><div>
-<p>In certain contexts, it is advantageous to use <span class="math inline">w</span> in place of <span class="math inline">\theta</span>.</p>
+<p>The complete parameter vector is <span class="math inline">\theta=(\theta_0,\theta_1,\ldots,\theta_D)^\top</span>. The vector <span class="math inline">w</span> contains only the feature weights.</p>
 </div></aside></section>
 <section id="geometric-interpretation-2" class="slide level2">
 <h2>Geometric Interpretation</h2>
 <p><span class="math display">
-\mathbf{w} \cdot \mathbf{x} = \|\mathbf{w}\| \|\mathbf{x}\| \cos \theta
+w^\top x = \|w\|\|x\|\cos\phi
 </span></p>
 <ul>
-<li><p>The <strong>dot product</strong> determines the <strong>angle <span class="math inline">(\theta)</span> between vectors</strong>.</p></li>
-<li><p>It <strong>quantifies</strong> how much one vector extends in the direction of another.</p></li>
-<li><p>Its value is zero, if the vectors are <strong>perpendicular</strong> <span class="math inline">(\theta = 90^\circ)</span>.</p></li>
+<li>The <strong>dot product</strong> depends on both <strong>vector lengths</strong> and the <strong>angle</strong> between them.</li>
+<li>It is <strong>positive</strong> when the angle is <strong>acute</strong> and <strong>negative</strong> when the angle is <strong>obtuse</strong>.</li>
+<li>It is <strong>zero</strong> when the vectors are <strong>perpendicular</strong> <span class="math inline">(\phi=90^\circ)</span>.</li>
 </ul>
 </section>
 <section id="geometric-interpretation-3" class="slide level2">
 <h2>Geometric Interpretation</h2>
 <ul>
-<li class="fragment"><p><strong>Logistic regression</strong> uses a linear combination of the input features, <span class="math inline">\mathbf{w} \cdot \mathbf{x} + b</span>, as the argument to the sigmoid (logistic) function.</p></li>
-<li class="fragment"><p>Geometrically, <span class="math inline">\mathbf{w}</span> can be viewed as a <strong>vector normal to a hyperplane in the feature space</strong>, and any point <span class="math inline">\mathbf{x}</span> is projected onto <span class="math inline">\mathbf{w}</span> via the dot product <span class="math inline">\mathbf{w} \cdot \mathbf{x}</span>.</p></li>
+<li class="fragment"><p><strong>Logistic regression</strong> applies the sigmoid to the linear score <span class="math inline">t(x)=\theta_0+w^\top x</span>.</p></li>
+<li class="fragment"><p>The equation <span class="math inline">t(x)=0</span> defines a hyperplane in feature space.</p></li>
+<li class="fragment"><p>The feature-weight vector <span class="math inline">w</span> is normal to this hyperplane. The intercept <span class="math inline">\theta_0</span> shifts the boundary without changing its orientation.</p></li>
 </ul>
 </section>
 <section id="geometric-interpretation-4" class="slide level2">
 <h2>Geometric Interpretation</h2>
 <ul>
-<li class="fragment"><p>The <strong>decision boundary</strong> is where this linear combination equals zero, i.e., <span class="math inline">\mathbf{w} \cdot \mathbf{x} + b = 0</span>.</p></li>
-<li class="fragment"><p>Points on one side of the boundary have a <strong>positive dot product</strong> and are more likely to be classified as the positive class (1).</p></li>
-<li class="fragment"><p>Points on the other side have a <strong>negative dot product</strong> and are more likely to be in the opposite class (0).</p></li>
-<li class="fragment"><p>The <strong>sigmoid function</strong> simply turns this <strong>signed distance</strong> into a <strong>probability</strong> between 0 and 1.</p></li>
+<li class="fragment"><p>The <strong>decision boundary</strong> is where <span class="math inline">t(x)=0</span>.</p></li>
+<li class="fragment"><p>Points with <span class="math inline">t(x)&gt;0</span> receive probability greater than <span class="math inline">0.5</span>.</p></li>
+<li class="fragment"><p>Points with <span class="math inline">t(x)&lt;0</span> receive probability less than <span class="math inline">0.5</span>.</p></li>
+<li class="fragment"><p>The sigmoid converts the <strong>linear score</strong> into a probability. The signed distance to the boundary is <span class="math display">
+\frac{t(x)}{\|w\|}.
+</span></p></li>
 </ul>
-</section>
-<section id="logistic-function" class="slide level2 smaller">
-<h2>Logistic Function</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><span class="math display">
-  \sigma(t) = \frac{1}{1+e^{-t}}
-</span></p>
-<ul>
-<li>As <span class="math inline">t \to \infty</span>, <span class="math inline">e^{-t} \to 0</span>, so <span class="math inline">\sigma(t) \to 1</span>.</li>
-<li>As <span class="math inline">t \to -\infty</span>, <span class="math inline">e^{-t} \to \infty</span>, making the denominator approach infinity, so <span class="math inline">\sigma(t) \to 0</span>.</li>
-<li>When <span class="math inline">t = 0</span>, <span class="math inline">e^{-t} = 0</span>, resulting in a denominator of 2, so <span class="math inline">\sigma(t) = 0.5</span>.</li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div id="89f59cbc" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Sigmoid function</span></span>
-<span id="cb2-2"><a aria-label="2"></a><span class="kw">def</span> sigmoid(t):</span>
-<span id="cb2-3"><a aria-label="3"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>t))</span>
-<span id="cb2-4"><a aria-label="4"></a></span>
-<span id="cb2-5"><a aria-label="5"></a><span class="co"># Generate t values</span></span>
-<span id="cb2-6"><a aria-label="6"></a>t <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">1000</span>)</span>
-<span id="cb2-7"><a aria-label="7"></a></span>
-<span id="cb2-8"><a aria-label="8"></a><span class="co"># Compute y values for the sigmoid function</span></span>
-<span id="cb2-9"><a aria-label="9"></a>sigma <span class="op">=</span> sigmoid(t)</span>
-<span id="cb2-10"><a aria-label="10"></a></span>
-<span id="cb2-11"><a aria-label="11"></a><span class="co"># Create a figure</span></span>
-<span id="cb2-12"><a aria-label="12"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb2-13"><a aria-label="13"></a>ax.plot(t, sigma, color<span class="op">=</span><span class="st">'blue'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)  <span class="co"># Keep the curve opaque</span></span>
-<span id="cb2-14"><a aria-label="14"></a></span>
-<span id="cb2-15"><a aria-label="15"></a><span class="co"># Draw vertical axis at x = 0</span></span>
-<span id="cb2-16"><a aria-label="16"></a>ax.axvline(x<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb2-17"><a aria-label="17"></a></span>
-<span id="cb2-18"><a aria-label="18"></a><span class="co"># Add labels on the vertical axis</span></span>
-<span id="cb2-19"><a aria-label="19"></a>ax.set_yticks([<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>])</span>
-<span id="cb2-20"><a aria-label="20"></a></span>
-<span id="cb2-21"><a aria-label="21"></a><span class="co"># Add labels to the axes</span></span>
-<span id="cb2-22"><a aria-label="22"></a>ax.set_xlabel(<span class="st">'t'</span>)</span>
-<span id="cb2-23"><a aria-label="23"></a>ax.set_ylabel(<span class="vs">r'</span><span class="dv">$\s</span><span class="vs">igma</span><span class="kw">(</span><span class="vs">t</span><span class="kw">)</span><span class="dv">$</span><span class="vs">'</span>)</span>
-<span id="cb2-24"><a aria-label="24"></a></span>
-<span id="cb2-25"><a aria-label="25"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb2-26"><a aria-label="26"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="slides_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="slides_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="813" height="430"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="whats-special-about-e" class="slide level2 smaller">
-<h2>What’s special about e?</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><span class="math display">
-  \sigma(t) = \frac{1}{1+e^{-t}}
-</span></p>
-<ul>
-<li class="fragment"><p>Instead of <span class="math inline">e</span>, we might have used another constant, say 2.</p></li>
-<li class="fragment"><p><strong>Derivative Simplicity</strong>: For the logistic function <span class="math inline">\sigma(x) = \tfrac{1}{1 + e^{-x}}</span>, the derivative simplifies to <span class="math inline">\sigma'(x) = \sigma(x)(1 - \sigma(x))</span>. This elegant form arises because the exponential base <span class="math inline">e</span> has the unique property that <span class="math inline">\tfrac{d}{dx} e^x = e^x</span>, avoiding an extra multiplicative constant.</p></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div id="7e438f3f" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="im">import</span> math</span>
-<span id="cb3-2"><a aria-label="2"></a></span>
-<span id="cb3-3"><a aria-label="3"></a><span class="kw">def</span> logistic(x, e):</span>
-<span id="cb3-4"><a aria-label="4"></a>    <span class="co">"""Compute a modified logistic function using b rather than e."""</span></span>
-<span id="cb3-5"><a aria-label="5"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.power(e, <span class="op">-</span>x))</span>
-<span id="cb3-6"><a aria-label="6"></a></span>
-<span id="cb3-7"><a aria-label="7"></a><span class="co"># Define a range for x values.</span></span>
-<span id="cb3-8"><a aria-label="8"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">400</span>)</span>
-<span id="cb3-9"><a aria-label="9"></a></span>
-<span id="cb3-10"><a aria-label="10"></a><span class="co"># Plot 1: Varying e.</span></span>
-<span id="cb3-11"><a aria-label="11"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb3-12"><a aria-label="12"></a>e_values <span class="op">=</span> [<span class="dv">2</span>, math.e, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">16</span>]  <span class="co"># different steepness values</span></span>
-<span id="cb3-13"><a aria-label="13"></a></span>
-<span id="cb3-14"><a aria-label="14"></a><span class="cf">for</span> e <span class="kw">in</span> e_values:</span>
-<span id="cb3-15"><a aria-label="15"></a>    plt.plot(x, logistic(x, e), label<span class="op">=</span><span class="ss">f'e = </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb3-16"><a aria-label="16"></a>plt.title(<span class="st">'Effect of Varying e'</span>)</span>
-<span id="cb3-17"><a aria-label="17"></a>plt.xlabel(<span class="st">'x'</span>)</span>
-<span id="cb3-18"><a aria-label="18"></a>plt.ylabel(<span class="vs">r'</span><span class="dv">$</span><span class="ch">\f</span><span class="vs">rac</span><span class="op">{1}</span><span class="vs">{1</span><span class="op">+</span><span class="vs">e</span><span class="dv">^</span><span class="vs">{-x}}</span><span class="dv">$</span><span class="vs">'</span>)</span>
-<span id="cb3-19"><a aria-label="19"></a>plt.legend()</span>
-<span id="cb3-20"><a aria-label="20"></a>plt.grid(<span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="slides_files/figure-revealjs/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides_files/figure-revealjs/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="668" height="524"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-<aside class="notes">
-<p>In the context of logistic regression, the choice of the mathematical constant <span class="math inline">e</span> is not arbitrary but is supported by several compelling mathematical justifications. These justifications primarily relate to the harmonious integration of the logistic function with other mathematical frameworks. Although our primary focus was to visually demonstrate the potential implications of substituting a different constant, the inherent advantages of using <span class="math inline">e</span> become evident upon closer examination of its mathematical properties and how they facilitate seamless integration with existing theories and models.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="varying-w" class="slide level2 smaller">
-<h2>Varying w</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><span class="math display">
-  \sigma(wx + b)
-</span></p>
-</div><div class="column" style="width:50%;">
-<div id="07d95caf" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="kw">def</span> logistic(x, w, b):</span>
-<span id="cb4-2"><a aria-label="2"></a>    <span class="co">"""Compute the logistic function with parameters w and b."""</span></span>
-<span id="cb4-3"><a aria-label="3"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>(w <span class="op">*</span> x <span class="op">+</span> b)))</span>
-<span id="cb4-4"><a aria-label="4"></a></span>
-<span id="cb4-5"><a aria-label="5"></a><span class="co"># Define a range for x values.</span></span>
-<span id="cb4-6"><a aria-label="6"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">400</span>)</span>
-<span id="cb4-7"><a aria-label="7"></a></span>
-<span id="cb4-8"><a aria-label="8"></a><span class="co"># Plot 1: Varying w (steepness) with b fixed at 0.</span></span>
-<span id="cb4-9"><a aria-label="9"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb4-10"><a aria-label="10"></a>w_values <span class="op">=</span> [<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>]  <span class="co"># different steepness values</span></span>
-<span id="cb4-11"><a aria-label="11"></a>b <span class="op">=</span> <span class="dv">0</span>  <span class="co"># fixed bias</span></span>
-<span id="cb4-12"><a aria-label="12"></a></span>
-<span id="cb4-13"><a aria-label="13"></a><span class="cf">for</span> w <span class="kw">in</span> w_values:</span>
-<span id="cb4-14"><a aria-label="14"></a>    plt.plot(x, logistic(x, w, b), label<span class="op">=</span><span class="ss">f'w = </span><span class="sc">{</span>w<span class="sc">}</span><span class="ss">, b = </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb4-15"><a aria-label="15"></a>plt.title(<span class="st">'Effect of Varying w (with b = 0)'</span>)</span>
-<span id="cb4-16"><a aria-label="16"></a>plt.xlabel(<span class="st">'x'</span>)</span>
-<span id="cb4-17"><a aria-label="17"></a>plt.ylabel(<span class="vs">r'</span><span class="dv">$\s</span><span class="vs">igma</span><span class="kw">(</span><span class="vs">wx</span><span class="op">+</span><span class="vs">b</span><span class="kw">)</span><span class="dv">$</span><span class="vs">'</span>)</span>
-<span id="cb4-18"><a aria-label="18"></a>plt.legend()</span>
-<span id="cb4-19"><a aria-label="19"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb4-20"><a aria-label="20"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="slides_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-5-output-1.png" class="quarto-figure quarto-figure-center" width="664" height="524"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="varying-b" class="slide level2 smaller">
-<h2>Varying b</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><span class="math display">
-  \sigma(wx + b)
-</span></p>
-</div><div class="column" style="width:50%;">
-<div id="8e7622f9" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="co"># Plot 2: Varying b (horizontal shift) with w fixed at 1.</span></span>
-<span id="cb5-2"><a aria-label="2"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb5-3"><a aria-label="3"></a>w <span class="op">=</span> <span class="dv">1</span>  <span class="co"># fixed steepness</span></span>
-<span id="cb5-4"><a aria-label="4"></a>b_values <span class="op">=</span> [<span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">5</span>]  <span class="co"># different bias values</span></span>
-<span id="cb5-5"><a aria-label="5"></a></span>
-<span id="cb5-6"><a aria-label="6"></a><span class="cf">for</span> b <span class="kw">in</span> b_values:</span>
-<span id="cb5-7"><a aria-label="7"></a>    plt.plot(x, logistic(x, w, b), label<span class="op">=</span><span class="ss">f'w = </span><span class="sc">{</span>w<span class="sc">}</span><span class="ss">, b = </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb5-8"><a aria-label="8"></a>plt.title(<span class="st">'Effect of Varying b (with w = 1)'</span>)</span>
-<span id="cb5-9"><a aria-label="9"></a>plt.xlabel(<span class="st">'x'</span>)</span>
-<span id="cb5-10"><a aria-label="10"></a>plt.ylabel(<span class="vs">r'</span><span class="dv">$\s</span><span class="vs">igma</span><span class="kw">(</span><span class="vs">wx</span><span class="op">+</span><span class="vs">b</span><span class="kw">)</span><span class="dv">$</span><span class="vs">'</span>)</span>
-<span id="cb5-11"><a aria-label="11"></a>plt.legend()</span>
-<span id="cb5-12"><a aria-label="12"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb5-13"><a aria-label="13"></a></span>
-<span id="cb5-14"><a aria-label="14"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="slides_files/figure-revealjs/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="664" height="524"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
 </section></section>
 <section>
 <section id="implementation" class="title-slide slide level1 center">
@@ -924,41 +756,41 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 </section>
 <section id="implementation-generating-data" class="slide level2">
 <h2>Implementation: Generating Data</h2>
-<div id="19c96445" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="co"># Generate synthetic data for a binary classification problem</span></span>
-<span id="cb6-2"><a aria-label="2"></a></span>
-<span id="cb6-3"><a aria-label="3"></a>m <span class="op">=</span> <span class="dv">100</span>  <span class="co"># number of examples</span></span>
-<span id="cb6-4"><a aria-label="4"></a>d <span class="op">=</span> <span class="dv">2</span>    <span class="co"># number of featues</span></span>
-<span id="cb6-5"><a aria-label="5"></a></span>
-<span id="cb6-6"><a aria-label="6"></a>X <span class="op">=</span> np.random.randn(m, d)</span>
-<span id="cb6-7"><a aria-label="7"></a></span>
-<span id="cb6-8"><a aria-label="8"></a><span class="co"># Define labels using a linear decision boundary with some noise:</span></span>
-<span id="cb6-9"><a aria-label="9"></a></span>
-<span id="cb6-10"><a aria-label="10"></a>noise <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> np.random.randn(m)</span>
-<span id="cb6-11"><a aria-label="11"></a></span>
-<span id="cb6-12"><a aria-label="12"></a>y <span class="op">=</span> (X[:, <span class="dv">0</span>] <span class="op">+</span> X[:, <span class="dv">1</span>] <span class="op">+</span> noise <span class="op">&gt;</span> <span class="dv">0</span>).astype(<span class="bu">int</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="ac93593e" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Generate synthetic data for a binary classification problem</span></span>
+<span id="cb2-2"><a aria-label="2"></a></span>
+<span id="cb2-3"><a aria-label="3"></a>m <span class="op">=</span> <span class="dv">100</span>  <span class="co"># number of examples</span></span>
+<span id="cb2-4"><a aria-label="4"></a>d <span class="op">=</span> <span class="dv">2</span>    <span class="co"># number of features</span></span>
+<span id="cb2-5"><a aria-label="5"></a></span>
+<span id="cb2-6"><a aria-label="6"></a>X <span class="op">=</span> rng.standard_normal((m, d))</span>
+<span id="cb2-7"><a aria-label="7"></a></span>
+<span id="cb2-8"><a aria-label="8"></a><span class="co"># Define labels using a linear decision boundary with some noise:</span></span>
+<span id="cb2-9"><a aria-label="9"></a></span>
+<span id="cb2-10"><a aria-label="10"></a>noise <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> rng.standard_normal(m)</span>
+<span id="cb2-11"><a aria-label="11"></a></span>
+<span id="cb2-12"><a aria-label="12"></a>y <span class="op">=</span> (X[:, <span class="dv">0</span>] <span class="op">+</span> X[:, <span class="dv">1</span>] <span class="op">+</span> noise <span class="op">&gt;</span> <span class="dv">0</span>).astype(<span class="bu">int</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="implementation-vizualization" class="slide level2">
-<h2>Implementation: Vizualization</h2>
-<div id="12c2a23d" class="cell" data-execution_count="8">
+<section id="implementation-visualization" class="slide level2 hide-code-toggle">
+<h2>Implementation: Visualization</h2>
+<div id="42b9765c" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="co"># Visualize the decision boundary along with the data points</span></span>
-<span id="cb7-2"><a aria-label="2"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb7-3"><a aria-label="3"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Class 0'</span>)</span>
-<span id="cb7-4"><a aria-label="4"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Class 1'</span>)</span>
-<span id="cb7-5"><a aria-label="5"></a></span>
-<span id="cb7-6"><a aria-label="6"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
-<span id="cb7-7"><a aria-label="7"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
-<span id="cb7-8"><a aria-label="8"></a>plt.title(<span class="st">"Data"</span>)</span>
-<span id="cb7-9"><a aria-label="9"></a>plt.legend()</span>
-<span id="cb7-10"><a aria-label="10"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="co"># Visualize the decision boundary along with the data points</span></span>
+<span id="cb3-2"><a aria-label="2"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb3-3"><a aria-label="3"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Class 0'</span>)</span>
+<span id="cb3-4"><a aria-label="4"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Class 1'</span>)</span>
+<span id="cb3-5"><a aria-label="5"></a></span>
+<span id="cb3-6"><a aria-label="6"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb3-7"><a aria-label="7"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb3-8"><a aria-label="8"></a>plt.title(<span class="st">"Data"</span>)</span>
+<span id="cb3-9"><a aria-label="9"></a>plt.legend()</span>
+<span id="cb3-10"><a aria-label="10"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="662" height="524"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="slides_files/figure-revealjs/cell-4-output-1.png" class="quarto-figure quarto-figure-center" width="662" height="524"></a></p>
 </figure>
 </div>
 </div>
@@ -966,313 +798,224 @@ w_1 x_1 + w_2 x_2 + \ldots + w_D x_2
 </section>
 <section id="implementation-cost-function" class="slide level2">
 <h2>Implementation: Cost Function</h2>
-<div id="4d697d6b" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="co"># Sigmoid function</span></span>
-<span id="cb8-2"><a aria-label="2"></a><span class="kw">def</span> sigmoid(z):</span>
-<span id="cb8-3"><a aria-label="3"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>z))</span>
-<span id="cb8-4"><a aria-label="4"></a></span>
-<span id="cb8-5"><a aria-label="5"></a><span class="co"># Cost function: binary cross-entropy</span></span>
-<span id="cb8-6"><a aria-label="6"></a><span class="kw">def</span> cost_function(theta, X, y):</span>
-<span id="cb8-7"><a aria-label="7"></a>    m <span class="op">=</span> <span class="bu">len</span>(y)</span>
-<span id="cb8-8"><a aria-label="8"></a>    h <span class="op">=</span> sigmoid(X.dot(theta))</span>
-<span id="cb8-9"><a aria-label="9"></a>    epsilon <span class="op">=</span> <span class="fl">1e-5</span>  <span class="co"># avoid log(0)</span></span>
-<span id="cb8-10"><a aria-label="10"></a>    cost <span class="op">=</span> <span class="op">-</span>(<span class="dv">1</span><span class="op">/</span>m) <span class="op">*</span> np.<span class="bu">sum</span>(y <span class="op">*</span> np.log(h <span class="op">+</span> epsilon) <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> y) <span class="op">*</span> np.log(<span class="dv">1</span> <span class="op">-</span> h <span class="op">+</span> epsilon))</span>
-<span id="cb8-11"><a aria-label="11"></a>    <span class="cf">return</span> cost</span>
-<span id="cb8-12"><a aria-label="12"></a></span>
-<span id="cb8-13"><a aria-label="13"></a><span class="co"># Gradient of the cost function</span></span>
-<span id="cb8-14"><a aria-label="14"></a><span class="kw">def</span> gradient(theta, X, y):</span>
-<span id="cb8-15"><a aria-label="15"></a>    m <span class="op">=</span> <span class="bu">len</span>(y)</span>
-<span id="cb8-16"><a aria-label="16"></a>    h <span class="op">=</span> sigmoid(X.dot(theta))</span>
-<span id="cb8-17"><a aria-label="17"></a>    grad <span class="op">=</span> (<span class="dv">1</span><span class="op">/</span>m) <span class="op">*</span> X.T.dot(h <span class="op">-</span> y)</span>
-<span id="cb8-18"><a aria-label="18"></a>    <span class="cf">return</span> grad</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cdb78b05" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Cost function: binary cross-entropy</span></span>
+<span id="cb4-2"><a aria-label="2"></a><span class="kw">def</span> cost_function(theta, X, y):</span>
+<span id="cb4-3"><a aria-label="3"></a>    m <span class="op">=</span> <span class="bu">len</span>(y)</span>
+<span id="cb4-4"><a aria-label="4"></a>    h <span class="op">=</span> sigmoid(X.dot(theta))</span>
+<span id="cb4-5"><a aria-label="5"></a>    h <span class="op">=</span> np.clip(h, <span class="fl">1e-12</span>, <span class="dv">1</span> <span class="op">-</span> <span class="fl">1e-12</span>)</span>
+<span id="cb4-6"><a aria-label="6"></a>    cost <span class="op">=</span> <span class="op">-</span>(<span class="dv">1</span><span class="op">/</span>m) <span class="op">*</span> np.<span class="bu">sum</span>(y <span class="op">*</span> np.log(h) <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> y) <span class="op">*</span> np.log(<span class="dv">1</span> <span class="op">-</span> h))</span>
+<span id="cb4-7"><a aria-label="7"></a>    <span class="cf">return</span> cost</span>
+<span id="cb4-8"><a aria-label="8"></a></span>
+<span id="cb4-9"><a aria-label="9"></a><span class="co"># Gradient of the cost function</span></span>
+<span id="cb4-10"><a aria-label="10"></a><span class="kw">def</span> gradient(theta, X, y):</span>
+<span id="cb4-11"><a aria-label="11"></a>    m <span class="op">=</span> <span class="bu">len</span>(y)</span>
+<span id="cb4-12"><a aria-label="12"></a>    h <span class="op">=</span> sigmoid(X.dot(theta))</span>
+<span id="cb4-13"><a aria-label="13"></a>    grad <span class="op">=</span> (<span class="dv">1</span><span class="op">/</span>m) <span class="op">*</span> X.T.dot(h <span class="op">-</span> y)</span>
+<span id="cb4-14"><a aria-label="14"></a>    <span class="cf">return</span> grad</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="implementation-logistic-regression" class="slide level2">
 <h2>Implementation: Logistic Regression</h2>
-<div id="3c5c9b50" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="co"># Logistic regression training using gradient descent</span></span>
-<span id="cb9-2"><a aria-label="2"></a><span class="kw">def</span> logistic_regression(X, y, learning_rate<span class="op">=</span><span class="fl">0.1</span>, iterations<span class="op">=</span><span class="dv">1000</span>):</span>
-<span id="cb9-3"><a aria-label="3"></a>    m, n <span class="op">=</span> X.shape</span>
-<span id="cb9-4"><a aria-label="4"></a>    theta <span class="op">=</span> np.zeros(n)</span>
-<span id="cb9-5"><a aria-label="5"></a>    cost_history <span class="op">=</span> []</span>
-<span id="cb9-6"><a aria-label="6"></a>    </span>
-<span id="cb9-7"><a aria-label="7"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(iterations):</span>
-<span id="cb9-8"><a aria-label="8"></a>        theta <span class="op">-=</span> learning_rate <span class="op">*</span> gradient(theta, X, y)</span>
-<span id="cb9-9"><a aria-label="9"></a>        cost_history.append(cost_function(theta, X, y))</span>
-<span id="cb9-10"><a aria-label="10"></a>        </span>
-<span id="cb9-11"><a aria-label="11"></a>    <span class="cf">return</span> theta, cost_history</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="9184ca7d" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="co"># Logistic regression training using gradient descent</span></span>
+<span id="cb5-2"><a aria-label="2"></a><span class="kw">def</span> logistic_regression(X, y, learning_rate<span class="op">=</span><span class="fl">0.1</span>, iterations<span class="op">=</span><span class="dv">1000</span>):</span>
+<span id="cb5-3"><a aria-label="3"></a>    m, n <span class="op">=</span> X.shape</span>
+<span id="cb5-4"><a aria-label="4"></a>    theta <span class="op">=</span> np.zeros(n)</span>
+<span id="cb5-5"><a aria-label="5"></a>    cost_history <span class="op">=</span> []</span>
+<span id="cb5-6"><a aria-label="6"></a>    </span>
+<span id="cb5-7"><a aria-label="7"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(iterations):</span>
+<span id="cb5-8"><a aria-label="8"></a>        theta <span class="op">-=</span> learning_rate <span class="op">*</span> gradient(theta, X, y)</span>
+<span id="cb5-9"><a aria-label="9"></a>        cost_history.append(cost_function(theta, X, y))</span>
+<span id="cb5-10"><a aria-label="10"></a>        </span>
+<span id="cb5-11"><a aria-label="11"></a>    <span class="cf">return</span> theta, cost_history</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="training" class="slide level2">
 <h2>Training</h2>
-<div id="dd7699f2" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="co"># Add intercept term (bias)</span></span>
-<span id="cb10-2"><a aria-label="2"></a>X_with_intercept <span class="op">=</span> np.hstack([np.ones((m, <span class="dv">1</span>)), X])</span>
-<span id="cb10-3"><a aria-label="3"></a></span>
-<span id="cb10-4"><a aria-label="4"></a><span class="co"># Train the logistic regression model</span></span>
-<span id="cb10-5"><a aria-label="5"></a>theta, cost_history <span class="op">=</span> logistic_regression(X_with_intercept, y, learning_rate<span class="op">=</span><span class="fl">0.1</span>, iterations<span class="op">=</span><span class="dv">1000</span>)</span>
-<span id="cb10-6"><a aria-label="6"></a></span>
-<span id="cb10-7"><a aria-label="7"></a><span class="bu">print</span>(<span class="st">"Optimized theta:"</span>, theta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="1ba78339" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="co"># Add intercept term (bias)</span></span>
+<span id="cb6-2"><a aria-label="2"></a>X_with_intercept <span class="op">=</span> np.hstack([np.ones((m, <span class="dv">1</span>)), X])</span>
+<span id="cb6-3"><a aria-label="3"></a></span>
+<span id="cb6-4"><a aria-label="4"></a><span class="co"># Train the logistic regression model</span></span>
+<span id="cb6-5"><a aria-label="5"></a>theta, cost_history <span class="op">=</span> logistic_regression(X_with_intercept, y, learning_rate<span class="op">=</span><span class="fl">0.1</span>, iterations<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb6-6"><a aria-label="6"></a>theta_0 <span class="op">=</span> theta[<span class="dv">0</span>]</span>
+<span id="cb6-7"><a aria-label="7"></a>w <span class="op">=</span> theta[<span class="dv">1</span>:]</span>
+<span id="cb6-8"><a aria-label="8"></a></span>
+<span id="cb6-9"><a aria-label="9"></a><span class="bu">print</span>(<span class="st">"Optimized theta:"</span>, theta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Optimized theta: [-0.28840995  2.80390104  2.45238752]</code></pre>
+<pre><code>Optimized theta: [-0.28250171  3.11670841  3.46892095]</code></pre>
 </div>
 </div>
 </section>
-<section id="cost-function-convergence" class="slide level2">
+<section id="cost-function-convergence" class="slide level2 hide-code-toggle">
 <h2>Cost Function Convergence</h2>
-<div id="2dbe0ce2" class="cell" data-execution_count="12">
+<div id="3a95a435" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb12-2"><a aria-label="2"></a>plt.plot(cost_history, label<span class="op">=</span><span class="st">"Cost"</span>)</span>
-<span id="cb12-3"><a aria-label="3"></a>plt.xlabel(<span class="st">"Iteration"</span>)</span>
-<span id="cb12-4"><a aria-label="4"></a>plt.ylabel(<span class="st">"Cost"</span>)</span>
-<span id="cb12-5"><a aria-label="5"></a>plt.title(<span class="st">"Cost Function Convergence"</span>)</span>
-<span id="cb12-6"><a aria-label="6"></a>plt.legend()</span>
-<span id="cb12-7"><a aria-label="7"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb8-2"><a aria-label="2"></a>plt.plot(cost_history, label<span class="op">=</span><span class="st">"Cost"</span>)</span>
+<span id="cb8-3"><a aria-label="3"></a>plt.xlabel(<span class="st">"Iteration"</span>)</span>
+<span id="cb8-4"><a aria-label="4"></a>plt.ylabel(<span class="st">"Cost"</span>)</span>
+<span id="cb8-5"><a aria-label="5"></a>plt.title(<span class="st">"Cost Function Convergence"</span>)</span>
+<span id="cb8-6"><a aria-label="6"></a>plt.legend()</span>
+<span id="cb8-7"><a aria-label="7"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides_files/figure-revealjs/cell-12-output-1.png" class="quarto-figure quarto-figure-center" width="672" height="525"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="664" height="525"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="decision-boundary-and-data-points" class="slide level2">
+<section id="decision-boundary-and-data-points" class="slide level2 hide-code-toggle">
 <h2>Decision Boundary and Data Points</h2>
-<div id="b42b0fd8" class="cell" data-execution_count="13">
+<div id="11e2de58" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb13-2"><a aria-label="2"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Class 0'</span>)</span>
-<span id="cb13-3"><a aria-label="3"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Class 1'</span>)</span>
-<span id="cb13-4"><a aria-label="4"></a></span>
-<span id="cb13-5"><a aria-label="5"></a><span class="co"># Decision boundary: theta0 + theta1*x1 + theta2*x2 = 0</span></span>
-<span id="cb13-6"><a aria-label="6"></a>x_vals <span class="op">=</span> np.array([<span class="bu">min</span>(X[:, <span class="dv">0</span>]) <span class="op">-</span> <span class="dv">1</span>, <span class="bu">max</span>(X[:, <span class="dv">0</span>]) <span class="op">+</span> <span class="dv">1</span>])</span>
-<span id="cb13-7"><a aria-label="7"></a>y_vals <span class="op">=</span> <span class="op">-</span>(theta[<span class="dv">0</span>] <span class="op">+</span> theta[<span class="dv">1</span>] <span class="op">*</span> x_vals) <span class="op">/</span> theta[<span class="dv">2</span>]</span>
-<span id="cb13-8"><a aria-label="8"></a>plt.plot(x_vals, y_vals, label<span class="op">=</span><span class="st">'Decision Boundary'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
-<span id="cb13-9"><a aria-label="9"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
-<span id="cb13-10"><a aria-label="10"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
-<span id="cb13-11"><a aria-label="11"></a>plt.title(<span class="st">"Logistic Regression Decision Boundary"</span>)</span>
-<span id="cb13-12"><a aria-label="12"></a>plt.legend()</span>
-<span id="cb13-13"><a aria-label="13"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb9-2"><a aria-label="2"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Class 0'</span>)</span>
+<span id="cb9-3"><a aria-label="3"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Class 1'</span>)</span>
+<span id="cb9-4"><a aria-label="4"></a></span>
+<span id="cb9-5"><a aria-label="5"></a><span class="co"># Decision boundary: theta_0 + w[0]*x1 + w[1]*x2 = 0</span></span>
+<span id="cb9-6"><a aria-label="6"></a>x_vals <span class="op">=</span> np.array([<span class="bu">min</span>(X[:, <span class="dv">0</span>]) <span class="op">-</span> <span class="dv">1</span>, <span class="bu">max</span>(X[:, <span class="dv">0</span>]) <span class="op">+</span> <span class="dv">1</span>])</span>
+<span id="cb9-7"><a aria-label="7"></a>y_vals <span class="op">=</span> <span class="op">-</span>(theta_0 <span class="op">+</span> w[<span class="dv">0</span>] <span class="op">*</span> x_vals) <span class="op">/</span> w[<span class="dv">1</span>]</span>
+<span id="cb9-8"><a aria-label="8"></a>plt.plot(x_vals, y_vals, label<span class="op">=</span><span class="st">'Decision Boundary'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb9-9"><a aria-label="9"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb9-10"><a aria-label="10"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb9-11"><a aria-label="11"></a>plt.title(<span class="st">"Logistic Regression Decision Boundary"</span>)</span>
+<span id="cb9-12"><a aria-label="12"></a>plt.legend()</span>
+<span id="cb9-13"><a aria-label="13"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-13-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-revealjs/cell-13-output-1.png" class="quarto-figure quarto-figure-center" width="662" height="524"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-9-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-9-output-1.png" class="quarto-figure quarto-figure-center" width="662" height="524"></a></p>
 </figure>
 </div>
-</div>
-</div>
-</section>
-<section id="implementation-continued" class="slide level2">
-<h2>Implementation (continued)</h2>
-<div id="23cd686b" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="co"># Predict function: returns class labels and probabilities for new data</span></span>
-<span id="cb14-2"><a aria-label="2"></a><span class="kw">def</span> predict(theta, X, threshold<span class="op">=</span><span class="fl">0.5</span>):</span>
-<span id="cb14-3"><a aria-label="3"></a>    probs <span class="op">=</span> sigmoid(X.dot(theta))</span>
-<span id="cb14-4"><a aria-label="4"></a>    <span class="cf">return</span> (probs <span class="op">&gt;=</span> threshold).astype(<span class="bu">int</span>), probs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="predictions" class="slide level2">
-<h2>Predictions</h2>
-<div id="f698aa10" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a><span class="co"># New examples must include the intercept term.</span></span>
-<span id="cb15-2"><a aria-label="2"></a></span>
-<span id="cb15-3"><a aria-label="3"></a><span class="co"># Negative example (likely class 0): Choose a point far in the negative quadrant.</span></span>
-<span id="cb15-4"><a aria-label="4"></a>example_neg <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">3</span>])</span>
-<span id="cb15-5"><a aria-label="5"></a></span>
-<span id="cb15-6"><a aria-label="6"></a><span class="co"># Positive example (likely class 1): Choose a point far in the positive quadrant.</span></span>
-<span id="cb15-7"><a aria-label="7"></a>example_pos <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>])</span>
-<span id="cb15-8"><a aria-label="8"></a></span>
-<span id="cb15-9"><a aria-label="9"></a><span class="co"># Near decision boundary: Choose x1 = 0 and compute x2 from the decision boundary equation.</span></span>
-<span id="cb15-10"><a aria-label="10"></a>x1_near <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb15-11"><a aria-label="11"></a>x2_near <span class="op">=</span> <span class="op">-</span>(theta[<span class="dv">0</span>] <span class="op">+</span> theta[<span class="dv">1</span>] <span class="op">*</span> x1_near) <span class="op">/</span> theta[<span class="dv">2</span>]</span>
-<span id="cb15-12"><a aria-label="12"></a>example_near <span class="op">=</span> np.array([<span class="dv">1</span>, x1_near, x2_near])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<aside class="notes">
-<p>In the given example, each data point is characterized by two primary features. However, the representation includes three components. Why?</p>
-<p>This discrepancy arises from an earlier discussed mathematical technique, where each instance is augmented with an additional term, <span class="math inline">x_i^{(0)} = 1</span>. This augmentation facilitates the expression of the model in a vectorized format, enhancing computational efficiency and simplicity.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="predictions-continued" class="slide level2">
-<h2>Predictions (continued)</h2>
-<div id="bc4e8b9a" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="co"># Combine the examples into one array for prediction.</span></span>
-<span id="cb16-2"><a aria-label="2"></a>new_examples <span class="op">=</span> np.vstack([example_neg, example_pos, example_near])</span>
-<span id="cb16-3"><a aria-label="3"></a></span>
-<span id="cb16-4"><a aria-label="4"></a>labels, probabilities <span class="op">=</span> predict(theta, new_examples)</span>
-<span id="cb16-5"><a aria-label="5"></a></span>
-<span id="cb16-6"><a aria-label="6"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Predictions on new examples:"</span>)</span>
-<span id="cb16-7"><a aria-label="7"></a></span>
-<span id="cb16-8"><a aria-label="8"></a><span class="bu">print</span>(<span class="st">"Negative example </span><span class="sc">{}</span><span class="st"> -&gt; Prediction: </span><span class="sc">{}</span><span class="st"> (Probability: </span><span class="sc">{:.4f}</span><span class="st">)"</span>.<span class="bu">format</span>(example_neg[<span class="dv">1</span>:], labels[<span class="dv">0</span>], probabilities[<span class="dv">0</span>]))</span>
-<span id="cb16-9"><a aria-label="9"></a></span>
-<span id="cb16-10"><a aria-label="10"></a><span class="bu">print</span>(<span class="st">"Positive example </span><span class="sc">{}</span><span class="st"> -&gt; Prediction: </span><span class="sc">{}</span><span class="st"> (Probability: </span><span class="sc">{:.4f}</span><span class="st">)"</span>.<span class="bu">format</span>(example_pos[<span class="dv">1</span>:], labels[<span class="dv">1</span>], probabilities[<span class="dv">1</span>]))</span>
-<span id="cb16-11"><a aria-label="11"></a></span>
-<span id="cb16-12"><a aria-label="12"></a><span class="bu">print</span>(<span class="st">"Near-boundary example </span><span class="sc">{}</span><span class="st"> -&gt; Prediction: </span><span class="sc">{}</span><span class="st"> (Probability: </span><span class="sc">{:.4f}</span><span class="st">)"</span>.<span class="bu">format</span>(example_near[<span class="dv">1</span>:], labels[<span class="dv">2</span>], probabilities[<span class="dv">2</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Predictions on new examples:
-Negative example [-3 -3] -&gt; Prediction: 0 (Probability: 0.0000)
-Positive example [3 3] -&gt; Prediction: 1 (Probability: 1.0000)
-Near-boundary example [0.         0.11760374] -&gt; Prediction: 1 (Probability: 0.5000)</code></pre>
 </div>
 </div>
 </section>
 <section id="visualizing-the-weight-vector" class="slide level2">
 <h2>Visualizing the Weight Vector</h2>
-<p>In the previous lecture, we established that <strong>logistic regression</strong> determines a <strong>weight vector</strong> that is <strong>orthogonal</strong> to the <strong>decision boundary</strong>.</p>
-<p>Conversely, the <strong>decision boundary</strong> itself is <strong>orthogonal</strong> to the <strong>weight vector</strong>, which is derived through gradient descent optimization.</p>
+<p>The fitted feature-weight vector <span class="math inline">w=(\theta_1,\theta_2)^\top</span> is <strong>normal</strong> to the decision boundary.</p>
+<p>The intercept <span class="math inline">\theta_0</span> determines the position of the boundary.</p>
 </section>
-<section id="visualizing-the-weight-vector-1" class="slide level2">
+<section id="visualizing-the-weight-vector-1" class="slide level2 hide-code-toggle">
 <h2>Visualizing the Weight Vector</h2>
-<div id="33ae4774" class="cell" data-execution_count="17">
+<div id="946d7e14" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a><span class="co"># Plot decision boundary and data points</span></span>
-<span id="cb18-2"><a aria-label="2"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb18-3"><a aria-label="3"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Class 0'</span>)</span>
-<span id="cb18-4"><a aria-label="4"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Class 1'</span>)</span>
-<span id="cb18-5"><a aria-label="5"></a></span>
-<span id="cb18-6"><a aria-label="6"></a><span class="co"># Decision boundary: theta0 + theta1*x1 + theta2*x2 = 0</span></span>
-<span id="cb18-7"><a aria-label="7"></a>x_vals <span class="op">=</span> np.array([<span class="bu">min</span>(X[:, <span class="dv">0</span>]) <span class="op">-</span> <span class="dv">1</span>, <span class="bu">max</span>(X[:, <span class="dv">0</span>]) <span class="op">+</span> <span class="dv">1</span>])</span>
-<span id="cb18-8"><a aria-label="8"></a>y_vals <span class="op">=</span> <span class="op">-</span>(theta[<span class="dv">0</span>] <span class="op">+</span> theta[<span class="dv">1</span>] <span class="op">*</span> x_vals) <span class="op">/</span> theta[<span class="dv">2</span>]</span>
-<span id="cb18-9"><a aria-label="9"></a>plt.plot(x_vals, y_vals, label<span class="op">=</span><span class="st">'Decision Boundary'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
-<span id="cb18-10"><a aria-label="10"></a></span>
-<span id="cb18-11"><a aria-label="11"></a><span class="co"># --- Draw the normal vector ---</span></span>
-<span id="cb18-12"><a aria-label="12"></a><span class="co"># The normal vector is (theta[1], theta[2]).</span></span>
-<span id="cb18-13"><a aria-label="13"></a><span class="co"># Choose a reference point on the decision boundary. Here, we use x1 = 0:</span></span>
-<span id="cb18-14"><a aria-label="14"></a>x_ref <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb18-15"><a aria-label="15"></a>y_ref <span class="op">=</span> <span class="op">-</span>theta[<span class="dv">0</span>] <span class="op">/</span> theta[<span class="dv">2</span>]  <span class="co"># when x1=0, theta0 + theta2*x2=0  =&gt;  x2=-theta0/theta2</span></span>
-<span id="cb18-16"><a aria-label="16"></a></span>
-<span id="cb18-17"><a aria-label="17"></a><span class="co"># Create the normal vector from (theta[1], theta[2]).</span></span>
-<span id="cb18-18"><a aria-label="18"></a>normal <span class="op">=</span> np.array([theta[<span class="dv">1</span>], theta[<span class="dv">2</span>]])</span>
-<span id="cb18-19"><a aria-label="19"></a></span>
-<span id="cb18-20"><a aria-label="20"></a><span class="co"># Normalize and scale for display</span></span>
-<span id="cb18-21"><a aria-label="21"></a>normal_norm <span class="op">=</span> np.linalg.norm(normal)</span>
-<span id="cb18-22"><a aria-label="22"></a><span class="cf">if</span> normal_norm <span class="op">!=</span> <span class="dv">0</span>:</span>
-<span id="cb18-23"><a aria-label="23"></a>    normal_unit <span class="op">=</span> normal <span class="op">/</span> normal_norm</span>
-<span id="cb18-24"><a aria-label="24"></a><span class="cf">else</span>:</span>
-<span id="cb18-25"><a aria-label="25"></a>    normal_unit <span class="op">=</span> normal</span>
-<span id="cb18-26"><a aria-label="26"></a>scale <span class="op">=</span> <span class="dv">2</span>  <span class="co"># adjust scale as needed</span></span>
-<span id="cb18-27"><a aria-label="27"></a>normal_display <span class="op">=</span> normal_unit <span class="op">*</span> scale</span>
-<span id="cb18-28"><a aria-label="28"></a></span>
-<span id="cb18-29"><a aria-label="29"></a><span class="co"># Draw an arrow starting at the reference point</span></span>
-<span id="cb18-30"><a aria-label="30"></a>plt.arrow(x_ref, y_ref, normal_display[<span class="dv">0</span>], normal_display[<span class="dv">1</span>],</span>
-<span id="cb18-31"><a aria-label="31"></a>          head_width<span class="op">=</span><span class="fl">0.1</span>, head_length<span class="op">=</span><span class="fl">0.2</span>, fc<span class="op">=</span><span class="st">'black'</span>, ec<span class="op">=</span><span class="st">'black'</span>)</span>
-<span id="cb18-32"><a aria-label="32"></a>plt.text(x_ref <span class="op">+</span> normal_display[<span class="dv">0</span>]<span class="op">*</span><span class="fl">1.1</span>, y_ref <span class="op">+</span> normal_display[<span class="dv">1</span>]<span class="op">*</span><span class="fl">1.1</span>, </span>
-<span id="cb18-33"><a aria-label="33"></a>         <span class="vs">r'</span><span class="dv">$</span><span class="kw">(</span><span class="ch">\t</span><span class="vs">heta_1, </span><span class="ch">\t</span><span class="vs">heta_2</span><span class="kw">)</span><span class="dv">$</span><span class="vs">'</span>, color<span class="op">=</span><span class="st">'black'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb18-34"><a aria-label="34"></a></span>
-<span id="cb18-35"><a aria-label="35"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
-<span id="cb18-36"><a aria-label="36"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
-<span id="cb18-37"><a aria-label="37"></a>plt.title(<span class="st">"Logistic Regression Decision Boundary and Normal Vector"</span>)</span>
-<span id="cb18-38"><a aria-label="38"></a>plt.legend()</span>
-<span id="cb18-39"><a aria-label="39"></a>plt.gca().set_aspect(<span class="st">'equal'</span>, adjustable<span class="op">=</span><span class="st">'box'</span>)</span>
-<span id="cb18-40"><a aria-label="40"></a>plt.ylim(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>)</span>
-<span id="cb18-41"><a aria-label="41"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="co"># Plot decision boundary and data points</span></span>
+<span id="cb10-2"><a aria-label="2"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb10-3"><a aria-label="3"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'red'</span>, label<span class="op">=</span><span class="st">'Class 0'</span>)</span>
+<span id="cb10-4"><a aria-label="4"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Class 1'</span>)</span>
+<span id="cb10-5"><a aria-label="5"></a></span>
+<span id="cb10-6"><a aria-label="6"></a><span class="co"># Decision boundary: theta_0 + w[0]*x1 + w[1]*x2 = 0</span></span>
+<span id="cb10-7"><a aria-label="7"></a>x_vals <span class="op">=</span> np.array([<span class="bu">min</span>(X[:, <span class="dv">0</span>]) <span class="op">-</span> <span class="dv">1</span>, <span class="bu">max</span>(X[:, <span class="dv">0</span>]) <span class="op">+</span> <span class="dv">1</span>])</span>
+<span id="cb10-8"><a aria-label="8"></a>y_vals <span class="op">=</span> <span class="op">-</span>(theta_0 <span class="op">+</span> w[<span class="dv">0</span>] <span class="op">*</span> x_vals) <span class="op">/</span> w[<span class="dv">1</span>]</span>
+<span id="cb10-9"><a aria-label="9"></a>plt.plot(x_vals, y_vals, label<span class="op">=</span><span class="st">'Decision Boundary'</span>, color<span class="op">=</span><span class="st">'green'</span>)</span>
+<span id="cb10-10"><a aria-label="10"></a></span>
+<span id="cb10-11"><a aria-label="11"></a><span class="co"># --- Draw the normal vector ---</span></span>
+<span id="cb10-12"><a aria-label="12"></a><span class="co"># The normal vector is w.</span></span>
+<span id="cb10-13"><a aria-label="13"></a><span class="co"># Choose a reference point on the decision boundary. Here, we use x1 = 0:</span></span>
+<span id="cb10-14"><a aria-label="14"></a>x_ref <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb10-15"><a aria-label="15"></a>y_ref <span class="op">=</span> <span class="op">-</span>theta_0 <span class="op">/</span> w[<span class="dv">1</span>]</span>
+<span id="cb10-16"><a aria-label="16"></a></span>
+<span id="cb10-17"><a aria-label="17"></a><span class="co"># Copy the feature-weight vector for display.</span></span>
+<span id="cb10-18"><a aria-label="18"></a>normal <span class="op">=</span> w.copy()</span>
+<span id="cb10-19"><a aria-label="19"></a></span>
+<span id="cb10-20"><a aria-label="20"></a><span class="co"># Normalize and scale for display</span></span>
+<span id="cb10-21"><a aria-label="21"></a>normal_norm <span class="op">=</span> np.linalg.norm(normal)</span>
+<span id="cb10-22"><a aria-label="22"></a><span class="cf">if</span> normal_norm <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb10-23"><a aria-label="23"></a>    normal_unit <span class="op">=</span> normal <span class="op">/</span> normal_norm</span>
+<span id="cb10-24"><a aria-label="24"></a><span class="cf">else</span>:</span>
+<span id="cb10-25"><a aria-label="25"></a>    normal_unit <span class="op">=</span> normal</span>
+<span id="cb10-26"><a aria-label="26"></a>scale <span class="op">=</span> <span class="dv">2</span>  <span class="co"># adjust scale as needed</span></span>
+<span id="cb10-27"><a aria-label="27"></a>normal_display <span class="op">=</span> normal_unit <span class="op">*</span> scale</span>
+<span id="cb10-28"><a aria-label="28"></a></span>
+<span id="cb10-29"><a aria-label="29"></a><span class="co"># Draw an arrow starting at the reference point</span></span>
+<span id="cb10-30"><a aria-label="30"></a>plt.arrow(x_ref, y_ref, normal_display[<span class="dv">0</span>], normal_display[<span class="dv">1</span>],</span>
+<span id="cb10-31"><a aria-label="31"></a>          head_width<span class="op">=</span><span class="fl">0.1</span>, head_length<span class="op">=</span><span class="fl">0.2</span>, fc<span class="op">=</span><span class="st">'black'</span>, ec<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb10-32"><a aria-label="32"></a>plt.text(x_ref <span class="op">+</span> normal_display[<span class="dv">0</span>]<span class="op">*</span><span class="fl">1.1</span>, y_ref <span class="op">+</span> normal_display[<span class="dv">1</span>]<span class="op">*</span><span class="fl">1.1</span>, </span>
+<span id="cb10-33"><a aria-label="33"></a>         <span class="vs">r'</span><span class="dv">$</span><span class="vs">w</span><span class="dv">$</span><span class="vs">'</span>, color<span class="op">=</span><span class="st">'black'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb10-34"><a aria-label="34"></a></span>
+<span id="cb10-35"><a aria-label="35"></a>plt.xlabel(<span class="st">"Feature 1"</span>)</span>
+<span id="cb10-36"><a aria-label="36"></a>plt.ylabel(<span class="st">"Feature 2"</span>)</span>
+<span id="cb10-37"><a aria-label="37"></a>plt.title(<span class="st">"Logistic Regression Decision Boundary and Normal Vector"</span>)</span>
+<span id="cb10-38"><a aria-label="38"></a>plt.legend()</span>
+<span id="cb10-39"><a aria-label="39"></a>plt.gca().set_aspect(<span class="st">'equal'</span>, adjustable<span class="op">=</span><span class="st">'box'</span>)</span>
+<span id="cb10-40"><a aria-label="40"></a>plt.ylim(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb10-41"><a aria-label="41"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-17-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides_files/figure-revealjs/cell-17-output-1.png" class="quarto-figure quarto-figure-center" width="596" height="524"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-revealjs/cell-10-output-1.png" class="quarto-figure quarto-figure-center" width="577" height="524"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="near-the-decision-boundary" class="slide level2">
+<section id="near-the-decision-boundary" class="slide level2 hide-code-toggle">
 <h2>Near the Decision Boundary</h2>
-<div id="4ece8cb8" class="cell" data-execution_count="18">
+<div id="bd7f6485" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a><span class="co"># --- Visualization Setup ---</span></span>
-<span id="cb19-2"><a aria-label="2"></a><span class="co"># Create a grid over the feature space</span></span>
-<span id="cb19-3"><a aria-label="3"></a>x1_range <span class="op">=</span> np.linspace(X[:, <span class="dv">0</span>].<span class="bu">min</span>()<span class="op">-</span><span class="dv">1</span>, X[:, <span class="dv">0</span>].<span class="bu">max</span>()<span class="op">+</span><span class="dv">1</span>, <span class="dv">100</span>)</span>
-<span id="cb19-4"><a aria-label="4"></a>x2_range <span class="op">=</span> np.linspace(X[:, <span class="dv">1</span>].<span class="bu">min</span>()<span class="op">-</span><span class="dv">1</span>, X[:, <span class="dv">1</span>].<span class="bu">max</span>()<span class="op">+</span><span class="dv">1</span>, <span class="dv">100</span>)</span>
-<span id="cb19-5"><a aria-label="5"></a>xx1, xx2 <span class="op">=</span> np.meshgrid(x1_range, x2_range)</span>
-<span id="cb19-6"><a aria-label="6"></a></span>
-<span id="cb19-7"><a aria-label="7"></a><span class="co"># Construct the grid input (with intercept) for predictions</span></span>
-<span id="cb19-8"><a aria-label="8"></a>grid <span class="op">=</span> np.c_[np.ones(xx1.ravel().shape), xx1.ravel(), xx2.ravel()]</span>
-<span id="cb19-9"><a aria-label="9"></a><span class="co"># Compute predicted probabilities over the grid</span></span>
-<span id="cb19-10"><a aria-label="10"></a>probs <span class="op">=</span> sigmoid(grid.dot(theta)).reshape(xx1.shape)</span>
-<span id="cb19-11"><a aria-label="11"></a><span class="co"># --- Approach 2: 2D Contour (Heatmap) Plot ---</span></span>
-<span id="cb19-12"><a aria-label="12"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb19-13"><a aria-label="13"></a>contour <span class="op">=</span> plt.contourf(xx1, xx2, probs, cmap<span class="op">=</span><span class="st">'spring'</span>, levels<span class="op">=</span><span class="dv">50</span>)</span>
-<span id="cb19-14"><a aria-label="14"></a>plt.colorbar(contour)</span>
-<span id="cb19-15"><a aria-label="15"></a>plt.xlabel(<span class="st">'Feature x1'</span>)</span>
-<span id="cb19-16"><a aria-label="16"></a>plt.ylabel(<span class="st">'Feature x2'</span>)</span>
-<span id="cb19-17"><a aria-label="17"></a>plt.title(<span class="st">'Contour Plot (Heatmap) of Predicted Probabilities'</span>)</span>
-<span id="cb19-18"><a aria-label="18"></a><span class="co"># Overlay training data</span></span>
-<span id="cb19-19"><a aria-label="19"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'red'</span>, edgecolor<span class="op">=</span><span class="st">'k'</span>, label<span class="op">=</span><span class="st">'Class 0'</span>)</span>
-<span id="cb19-20"><a aria-label="20"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, edgecolor<span class="op">=</span><span class="st">'k'</span>, label<span class="op">=</span><span class="st">'Class 1'</span>)</span>
-<span id="cb19-21"><a aria-label="21"></a>plt.legend()</span>
-<span id="cb19-22"><a aria-label="22"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="co"># --- Visualization Setup ---</span></span>
+<span id="cb11-2"><a aria-label="2"></a><span class="co"># Create a grid over the feature space</span></span>
+<span id="cb11-3"><a aria-label="3"></a>x1_range <span class="op">=</span> np.linspace(X[:, <span class="dv">0</span>].<span class="bu">min</span>()<span class="op">-</span><span class="dv">1</span>, X[:, <span class="dv">0</span>].<span class="bu">max</span>()<span class="op">+</span><span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb11-4"><a aria-label="4"></a>x2_range <span class="op">=</span> np.linspace(X[:, <span class="dv">1</span>].<span class="bu">min</span>()<span class="op">-</span><span class="dv">1</span>, X[:, <span class="dv">1</span>].<span class="bu">max</span>()<span class="op">+</span><span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb11-5"><a aria-label="5"></a>xx1, xx2 <span class="op">=</span> np.meshgrid(x1_range, x2_range)</span>
+<span id="cb11-6"><a aria-label="6"></a></span>
+<span id="cb11-7"><a aria-label="7"></a><span class="co"># Construct the grid input (with intercept) for predictions</span></span>
+<span id="cb11-8"><a aria-label="8"></a>grid <span class="op">=</span> np.c_[np.ones(xx1.ravel().shape), xx1.ravel(), xx2.ravel()]</span>
+<span id="cb11-9"><a aria-label="9"></a><span class="co"># Compute predicted probabilities over the grid</span></span>
+<span id="cb11-10"><a aria-label="10"></a>probs <span class="op">=</span> sigmoid(grid.dot(theta)).reshape(xx1.shape)</span>
+<span id="cb11-11"><a aria-label="11"></a><span class="co"># --- Approach 2: 2D Contour (Heatmap) Plot ---</span></span>
+<span id="cb11-12"><a aria-label="12"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb11-13"><a aria-label="13"></a>contour <span class="op">=</span> plt.contourf(xx1, xx2, probs, cmap<span class="op">=</span><span class="st">'spring'</span>, levels<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb11-14"><a aria-label="14"></a>plt.colorbar(contour)</span>
+<span id="cb11-15"><a aria-label="15"></a>plt.contour(xx1, xx2, probs, levels<span class="op">=</span>[<span class="fl">0.5</span>], colors<span class="op">=</span><span class="st">'green'</span>, linewidths<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb11-16"><a aria-label="16"></a>plt.xlabel(<span class="st">'Feature x1'</span>)</span>
+<span id="cb11-17"><a aria-label="17"></a>plt.ylabel(<span class="st">'Feature x2'</span>)</span>
+<span id="cb11-18"><a aria-label="18"></a>plt.title(<span class="st">'Contour Plot (Heatmap) of Predicted Probabilities'</span>)</span>
+<span id="cb11-19"><a aria-label="19"></a><span class="co"># Overlay training data</span></span>
+<span id="cb11-20"><a aria-label="20"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">0</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'red'</span>, edgecolor<span class="op">=</span><span class="st">'k'</span>, label<span class="op">=</span><span class="st">'Class 0'</span>)</span>
+<span id="cb11-21"><a aria-label="21"></a>plt.scatter(X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">0</span>], X[y <span class="op">==</span> <span class="dv">1</span>][:, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>, edgecolor<span class="op">=</span><span class="st">'k'</span>, label<span class="op">=</span><span class="st">'Class 1'</span>)</span>
+<span id="cb11-22"><a aria-label="22"></a>plt.legend()</span>
+<span id="cb11-23"><a aria-label="23"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-18-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="slides_files/figure-revealjs/cell-18-output-1.png" class="quarto-figure quarto-figure-center" width="635" height="524"></a></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="near-the-decision-boundary-1" class="slide level2">
-<h2>Near the Decision Boundary</h2>
-<div id="467d0f18" class="cell" data-execution_count="19">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a><span class="co"># --- Approach 1: 3D Surface Plot ---</span></span>
-<span id="cb20-2"><a aria-label="2"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
-<span id="cb20-3"><a aria-label="3"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb20-4"><a aria-label="4"></a>surface <span class="op">=</span> ax.plot_surface(xx1, xx2, probs, cmap<span class="op">=</span><span class="st">'spring'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb20-5"><a aria-label="5"></a>ax.set_xlabel(<span class="st">'Feature x1'</span>)</span>
-<span id="cb20-6"><a aria-label="6"></a>ax.set_ylabel(<span class="st">'Feature x2'</span>)</span>
-<span id="cb20-7"><a aria-label="7"></a>ax.set_zlabel(<span class="st">'Probability'</span>)</span>
-<span id="cb20-8"><a aria-label="8"></a>ax.set_title(<span class="st">'3D Surface Plot of Logistic Regression Model'</span>)</span>
-<span id="cb20-9"><a aria-label="9"></a>fig.colorbar(surface, shrink<span class="op">=</span><span class="fl">0.5</span>, aspect<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb20-10"><a aria-label="10"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><a href="slides_files/figure-revealjs/cell-19-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides_files/figure-revealjs/cell-19-output-1.png" class="quarto-figure quarto-figure-center" width="738" height="631"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-11-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides_files/figure-revealjs/cell-11-output-1.png" class="quarto-figure quarto-figure-center" width="635" height="524"></a></p>
 </figure>
 </div>
 </div>
 </div>
 </section></section>
 <section>
-<section id="prologue" class="title-slide slide level1 center">
-<h1>Prologue</h1>
+<section id="epilogue" class="title-slide slide level1 center">
+<h1>Epilogue</h1>
 
 </section>
-<section id="summary" class="slide level2">
+<section id="summary" class="slide level2 smaller">
 <h2>Summary</h2>
-<p>In this presentation, we:</p>
 <ul>
-<li>Derived the <strong>likelihood</strong> and <strong>negative log-likelihood</strong> formulations.</li>
-<li>Illustrated the <strong>geometric interpretation</strong> of decision boundaries and weight vectors.</li>
-<li><strong>Implemented</strong> logistic regression with <strong>gradient descent</strong> and visualized results.</li>
+<li>Logistic regression models the probability of a <strong>binary outcome</strong>.</li>
+<li><strong>Maximizing the Bernoulli likelihood</strong> is equivalent to <strong>minimizing binary cross-entropy</strong>.</li>
+<li>Cross-entropy <strong>strongly penalizes</strong> confident, <strong>incorrect predictions</strong>.</li>
+<li>The equation <span class="math inline">\theta_0+w^\top x=0</span> defines the <strong>decision boundary</strong>, and the feature-weight vector <span class="math inline">w</span> is normal to it.</li>
+<li><strong>Batch gradient descent</strong> updates the parameters using the average gradient over the training set.</li>
 </ul>
 </section>
 <section id="next-lecture" class="slide level2">
 <h2>Next lecture</h2>
 <ul>
-<li>Performance measures and cross-evaluation</li>
+<li>Performance measures and model evaluation</li>
 </ul>
 </section>
 <section id="references" class="slide level2 smaller scrollable">
@@ -1292,7 +1035,6 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
 
 
 </section></section>
-
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="../../assets/images/uottawa_hor_black.png" class="slide-logo"></p>

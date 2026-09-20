@@ -12,6 +12,10 @@ CSI4106 Introduction to Artificial Intelligence
 
 ## Practice
 
+### Randomness and reproducibility
+
+- [The Role of Randomness in Machine Learning ](../../lectures/03/randomness_in_ml.llms.md) ([Jupyter Notebook](randomness_in_ml.ipynb))
+
 ### Classifiers from first principles
 
 - [Building a Decision Tree Classifier ](../../lectures/03/decision_tree_classifier.llms.md) ([Jupyter Notebook](decision_tree_classifier.ipynb), [Open in Colab](https://colab.research.google.com/github/turcotte/csi-4106/blob/gh-pages/lectures/03/decision_tree_classifier.ipynb))

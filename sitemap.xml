@@ -46,7 +46,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/course-schedule.html</loc>
-    <lastmod>2026-09-14T19:48:51.922Z</lastmod>
+    <lastmod>2026-09-20T15:05:14.680Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/course-syllabus.html</loc>
@@ -90,7 +90,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/03/index.html</loc>
-    <lastmod>2026-09-13T21:31:55.217Z</lastmod>
+    <lastmod>2026-09-20T20:55:40.309Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/03/knn_classifier.html</loc>
@@ -106,7 +106,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/04/slides.html</loc>
-    <lastmod>2026-08-31T17:41:37.740Z</lastmod>
+    <lastmod>2026-09-20T16:53:12.399Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/05/index.html</loc>
@@ -114,23 +114,23 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/05/slides.html</loc>
-    <lastmod>2026-08-10T15:53:35.303Z</lastmod>
+    <lastmod>2026-09-19T18:33:57.218Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/06/index.html</loc>
-    <lastmod>2026-09-17T14:19:27.126Z</lastmod>
+    <lastmod>2026-09-20T20:20:49.717Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/06/slides.html</loc>
-    <lastmod>2026-08-10T15:53:35.273Z</lastmod>
+    <lastmod>2026-09-20T16:40:28.910Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/07/LogisticRegression.html</loc>
-    <lastmod>2026-01-30T17:30:34.790Z</lastmod>
+    <lastmod>2026-09-19T20:30:31.213Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/07/index.html</loc>
-    <lastmod>2026-09-17T14:21:25.946Z</lastmod>
+    <lastmod>2026-09-19T19:00:10.031Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/07/slides.html</loc>
@@ -331,5 +331,13 @@
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/tests/notebook.html</loc>
     <lastmod>2026-01-30T17:30:34.726Z</lastmod>
+  </url>
+  <url>
+    <loc>https://turcotte.xyz/teaching/csi-4106/lectures/06/LogisticRegression.html</loc>
+    <lastmod>2026-09-19T21:21:41.440Z</lastmod>
+  </url>
+  <url>
+    <loc>https://turcotte.xyz/teaching/csi-4106/lectures/03/randomness_in_ml.html</loc>
+    <lastmod>2026-09-20T20:39:56.964Z</lastmod>
   </url>
 </urlset>
