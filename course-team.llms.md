@@ -6,7 +6,7 @@ Marcel Turcotte
 
 Published
 
-September 18, 2026
+September 22, 2026
 
 # Instructor
 
@@ -23,6 +23,6 @@ September 18, 2026
 | Maryam Tamimi             | Thursday     | 17:00-19:00 | STE 3031 or Online |
 | Niloofar Jazaeri          | Monday       | 17:00-19:00 | Online             |
 | Xing Shen                 | Tuesday      | 17:00-19:00 | STE 4035 or Online |
-| Vishal Meenakshi Sundaram | Tuesday      | 12:00-14:00 | Email              |
+| Vishal Meenakshi Sundaram | Tuesday      | 12:00-14:00 | STE 5112 (5000J)   |
 
-Pending confirmation of the room where Vishal’s office hours will be held, please contact them by email. Please refer to Brightspace to find the email addresses of our teaching assistants, which are available under either the ‘Overview’ or ‘Course Information’ sections.
+Please refer to Brightspace to find the email addresses of our teaching assistants, which are available under either the ‘Overview’ or ‘Course Information’ sections.
