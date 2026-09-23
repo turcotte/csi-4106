@@ -257,7 +257,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Sep 22, 2026 19:09</p>
+  <p class="date">Version: Sep 23, 2026 10:06</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -1888,22 +1888,14 @@ J(\theta) =  \dfrac {1}{N} \displaystyle \sum _{i=1}^N [h_\theta(x_i) - y_i]^2
 <p>The panels show which data are used to compute each gradient estimate; they do not display the gradient itself. The gradient is a vector in parameter space. For fixed parameter values, the mini-batch gradient is the average of the individual-example gradients over the highlighted examples.</p>
 <p>A small random mini-batch can reflect the structure of the training set, but this is not guaranteed for every draw. Increasing <span class="math inline">B</span> reduces the variability of the gradient estimate on average; an individual larger mini-batch need not be closer to the full-data gradient than every smaller one. When <span class="math inline">B=N</span>, the mini-batch and batch gradients are identical.</p>
 <p>Mini-batches can also take advantage of hardware acceleration for matrix operations, particularly on GPUs.</p>
-<p>Larger batches are not always better. Smaller batches produce gradient estimates with greater sampling variability. On non-convex objectives, this stochasticity can sometimes help the optimizer move away from saddle points; it can also influence which solution is reached and thereby affect generalization. These possible benefits do not apply in the same way to the convex MSE objective of ordinary linear regression.</p>
+<p>Larger batches are not always better. A smaller batch uses less of the training set, so its gradient may point in a somewhat different direction from the gradient computed using all the examples. The direction can therefore change more noticeably from one mini-batch to the next.</p>
 <p>There are two distinct ideas worth separating:</p>
 <ol type="1">
-<li><p><strong>Optimization:</strong> For the empirical training objective <span class="math display">
-J(\theta)=\frac1N\sum_{i=1}^N \ell_i(\theta),
-</span> the full-batch gradient is <span class="math display">
-\nabla J(\theta)=\frac1N\sum_{i=1}^N\nabla \ell_i(\theta).
-</span> A mini-batch <span class="math inline">\mathcal{B}</span> of size <span class="math inline">B</span> gives the estimate <span class="math display">
-g_{\mathcal{B}}(\theta)=\frac1B\sum_{i\in\mathcal{B}}\nabla \ell_i(\theta).
-</span> Under uniform sampling without replacement, <span class="math display">
-\mathbb{E}_{\mathcal{B}}[g_{\mathcal{B}}(\theta)]=\nabla J(\theta).
-</span> Smaller batches have higher variance across random selections. Under suitable conditions, that noise can help an optimizer move away from saddle points in a non-convex objective, but this is not guaranteed.</p></li>
-<li><p><strong>Generalization:</strong> Empirical studies of deep networks have found that very large batches can generalize less well in some settings. This effect is not universal: adjusting the learning rate and its schedule, training for longer, or changing other aspects of optimization can reduce or eliminate the gap. The noise associated with SGD is often interpreted as a form of implicit regularization, but a smaller batch does not guarantee better generalization.</p></li>
+<li><p><strong>Optimization:</strong> The batch gradient averages the contributions of every training example. A mini-batch gradient averages only the selected examples, so it is an approximation. As the batch size increases, the direction generally becomes more stable and more similar to the batch-gradient direction. When <span class="math inline">B=N</span>, the two are identical. For non-convex objectives, such as those used to train deep networks, the variation between updates can sometimes help the optimizer move away from saddle points. This benefit is not guaranteed. It does not apply in the same way to the convex MSE objective used here for linear regression, in which every local minimum is global.</p></li>
+<li><p><strong>Generalization:</strong> In some deep-learning experiments, models trained with smaller batches have performed better on new data. This is not a general rule: with a well-adjusted learning rate, training schedule, and training duration, large batches can perform just as well. The randomness of mini-batch training can influence which solution is found, even when no explicit penalty is added; this effect is often called <strong>implicit regularization</strong>.</p></li>
 </ol>
 <p><strong>Why not use the entire training set to compute every gradient?</strong></p>
-<p>A mini-batch is cheaper per update than computing the full gradient, provides a useful estimate of the gradient of the empirical training objective, and supports efficient vectorized computation. Its randomness is not necessarily harmful: depending on the problem and training procedure, it can sometimes help optimization or generalization.</p>
+<p>A mini-batch is cheaper per update than using the complete training set and can be processed efficiently using matrix operations. Its gradient is usually accurate enough to make useful progress, and its randomness is not necessarily harmful. Depending on the problem and training procedure, it can sometimes help optimization or generalization.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

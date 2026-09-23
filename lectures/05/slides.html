@@ -257,7 +257,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Sep 21, 2026 09:39</p>
+  <p class="date">Version: Sep 23, 2026 10:14</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -390,7 +390,7 @@ Marcel Turcotte
 </section>
 <section id="histogram" class="slide level2 hide-code-toggle">
 <h2>Histogram</h2>
-<div id="57e9665d" class="cell" data-execution_count="2">
+<div id="1cd52bf8" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -417,25 +417,33 @@ Marcel Turcotte
 <span id="cb1-22"><a aria-label="22"></a>    <span class="st">'Not Gentoo'</span></span>
 <span id="cb1-23"><a aria-label="23"></a>)</span>
 <span id="cb1-24"><a aria-label="24"></a></span>
-<span id="cb1-25"><a aria-label="25"></a><span class="co"># Separate features (X) and labels (y)</span></span>
-<span id="cb1-26"><a aria-label="26"></a>penguin_X <span class="op">=</span> penguin_df[[<span class="st">'flipper_length_mm'</span>]]</span>
-<span id="cb1-27"><a aria-label="27"></a>penguin_y <span class="op">=</span> penguin_df[<span class="st">'is_gentoo'</span>]</span>
-<span id="cb1-28"><a aria-label="28"></a></span>
-<span id="cb1-29"><a aria-label="29"></a><span class="co"># Plot the distribution of flipper lengths by binary species label</span></span>
-<span id="cb1-30"><a aria-label="30"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb1-31"><a aria-label="31"></a>sns.histplot(</span>
-<span id="cb1-32"><a aria-label="32"></a>    data<span class="op">=</span>penguin_df,</span>
-<span id="cb1-33"><a aria-label="33"></a>    x<span class="op">=</span><span class="st">'flipper_length_mm'</span>,</span>
-<span id="cb1-34"><a aria-label="34"></a>    hue<span class="op">=</span><span class="st">'class_name'</span>,</span>
-<span id="cb1-35"><a aria-label="35"></a>    hue_order<span class="op">=</span>[<span class="st">'Not Gentoo'</span>, <span class="st">'Gentoo'</span>],</span>
-<span id="cb1-36"><a aria-label="36"></a>    kde<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb1-37"><a aria-label="37"></a>    bins<span class="op">=</span><span class="dv">30</span>,</span>
-<span id="cb1-38"><a aria-label="38"></a>    palette<span class="op">=</span><span class="st">'Set1'</span></span>
-<span id="cb1-39"><a aria-label="39"></a>)</span>
-<span id="cb1-40"><a aria-label="40"></a>plt.title(<span class="st">'Distribution of Flipper Length (Gentoo vs. Others)'</span>)</span>
-<span id="cb1-41"><a aria-label="41"></a>plt.xlabel(<span class="st">'Flipper Length (mm)'</span>)</span>
-<span id="cb1-42"><a aria-label="42"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb1-43"><a aria-label="43"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-25"><a aria-label="25"></a><span class="co"># Use the same colours for the two classes in every figure.</span></span>
+<span id="cb1-26"><a aria-label="26"></a>not_gentoo_color <span class="op">=</span> <span class="st">'tab:red'</span>   <span class="co"># y = 0</span></span>
+<span id="cb1-27"><a aria-label="27"></a>gentoo_color <span class="op">=</span> <span class="st">'tab:blue'</span>      <span class="co"># y = 1</span></span>
+<span id="cb1-28"><a aria-label="28"></a>model_color <span class="op">=</span> <span class="st">'black'</span></span>
+<span id="cb1-29"><a aria-label="29"></a></span>
+<span id="cb1-30"><a aria-label="30"></a><span class="co"># Separate features (X) and labels (y)</span></span>
+<span id="cb1-31"><a aria-label="31"></a>penguin_X <span class="op">=</span> penguin_df[[<span class="st">'flipper_length_mm'</span>]]</span>
+<span id="cb1-32"><a aria-label="32"></a>penguin_y <span class="op">=</span> penguin_df[<span class="st">'is_gentoo'</span>]</span>
+<span id="cb1-33"><a aria-label="33"></a></span>
+<span id="cb1-34"><a aria-label="34"></a><span class="co"># Plot the distribution of flipper lengths by binary species label</span></span>
+<span id="cb1-35"><a aria-label="35"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb1-36"><a aria-label="36"></a>sns.histplot(</span>
+<span id="cb1-37"><a aria-label="37"></a>    data<span class="op">=</span>penguin_df,</span>
+<span id="cb1-38"><a aria-label="38"></a>    x<span class="op">=</span><span class="st">'flipper_length_mm'</span>,</span>
+<span id="cb1-39"><a aria-label="39"></a>    hue<span class="op">=</span><span class="st">'class_name'</span>,</span>
+<span id="cb1-40"><a aria-label="40"></a>    hue_order<span class="op">=</span>[<span class="st">'Not Gentoo'</span>, <span class="st">'Gentoo'</span>],</span>
+<span id="cb1-41"><a aria-label="41"></a>    kde<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb1-42"><a aria-label="42"></a>    bins<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb1-43"><a aria-label="43"></a>    palette<span class="op">=</span>{</span>
+<span id="cb1-44"><a aria-label="44"></a>        <span class="st">'Not Gentoo'</span>: not_gentoo_color,</span>
+<span id="cb1-45"><a aria-label="45"></a>        <span class="st">'Gentoo'</span>: gentoo_color,</span>
+<span id="cb1-46"><a aria-label="46"></a>    }</span>
+<span id="cb1-47"><a aria-label="47"></a>)</span>
+<span id="cb1-48"><a aria-label="48"></a>plt.title(<span class="st">'Distribution of Flipper Length (Gentoo vs. Others)'</span>)</span>
+<span id="cb1-49"><a aria-label="49"></a>plt.xlabel(<span class="st">'Flipper Length (mm)'</span>)</span>
+<span id="cb1-50"><a aria-label="50"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb1-51"><a aria-label="51"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -480,7 +488,7 @@ Marcel Turcotte
 </section>
 <section id="visualizing-our-data" class="slide level2 hide-code-toggle">
 <h2>Visualizing our data</h2>
-<div id="8a145841" class="cell" data-execution_count="3">
+<div id="e27606cc" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Scatter plot of flipper length vs. binary label (Gentoo or Not Gentoo)</span></span>
@@ -490,7 +498,7 @@ Marcel Turcotte
 <span id="cb2-5"><a aria-label="5"></a>plt.scatter(</span>
 <span id="cb2-6"><a aria-label="6"></a>    penguin_df.loc[penguin_df[<span class="st">'is_gentoo'</span>] <span class="op">==</span> <span class="dv">1</span>, <span class="st">'flipper_length_mm'</span>],</span>
 <span id="cb2-7"><a aria-label="7"></a>    penguin_df.loc[penguin_df[<span class="st">'is_gentoo'</span>] <span class="op">==</span> <span class="dv">1</span>, <span class="st">'is_gentoo'</span>],</span>
-<span id="cb2-8"><a aria-label="8"></a>    color<span class="op">=</span><span class="st">'blue'</span>,</span>
+<span id="cb2-8"><a aria-label="8"></a>    color<span class="op">=</span>gentoo_color,</span>
 <span id="cb2-9"><a aria-label="9"></a>    label<span class="op">=</span><span class="st">'Gentoo'</span></span>
 <span id="cb2-10"><a aria-label="10"></a>)</span>
 <span id="cb2-11"><a aria-label="11"></a></span>
@@ -498,7 +506,7 @@ Marcel Turcotte
 <span id="cb2-13"><a aria-label="13"></a>plt.scatter(</span>
 <span id="cb2-14"><a aria-label="14"></a>    penguin_df.loc[penguin_df[<span class="st">'is_gentoo'</span>] <span class="op">==</span> <span class="dv">0</span>, <span class="st">'flipper_length_mm'</span>],</span>
 <span id="cb2-15"><a aria-label="15"></a>    penguin_df.loc[penguin_df[<span class="st">'is_gentoo'</span>] <span class="op">==</span> <span class="dv">0</span>, <span class="st">'is_gentoo'</span>],</span>
-<span id="cb2-16"><a aria-label="16"></a>    color<span class="op">=</span><span class="st">'red'</span>,</span>
+<span id="cb2-16"><a aria-label="16"></a>    color<span class="op">=</span>not_gentoo_color,</span>
 <span id="cb2-17"><a aria-label="17"></a>    label<span class="op">=</span><span class="st">'Not Gentoo'</span></span>
 <span id="cb2-18"><a aria-label="18"></a>)</span>
 <span id="cb2-19"><a aria-label="19"></a></span>
@@ -521,7 +529,7 @@ Marcel Turcotte
 <section id="intuition" class="slide level2 hide-code-toggle">
 <h2>Intuition</h2>
 <p>Fitting a linear regression is not the answer, but <span class="math inline">\ldots</span></p>
-<div id="f64dfc37" class="cell" data-execution_count="4">
+<div id="6918ea6c" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a>penguin_linear_model <span class="op">=</span> LinearRegression()</span>
@@ -547,20 +555,27 @@ Marcel Turcotte
 <span id="cb3-21"><a aria-label="21"></a>    plt.scatter(</span>
 <span id="cb3-22"><a aria-label="22"></a>        penguin_X[<span class="st">'flipper_length_mm'</span>],</span>
 <span id="cb3-23"><a aria-label="23"></a>        penguin_y,</span>
-<span id="cb3-24"><a aria-label="24"></a>        c<span class="op">=</span>penguin_y,</span>
-<span id="cb3-25"><a aria-label="25"></a>        cmap<span class="op">=</span><span class="st">'bwr'</span>,</span>
-<span id="cb3-26"><a aria-label="26"></a>        edgecolor<span class="op">=</span><span class="st">'k'</span></span>
-<span id="cb3-27"><a aria-label="27"></a>    )</span>
-<span id="cb3-28"><a aria-label="28"></a>    plt.plot(penguin_line_X[<span class="st">'flipper_length_mm'</span>], penguin_line_y, <span class="st">'r-'</span>)</span>
-<span id="cb3-29"><a aria-label="29"></a>    plt.axhline(<span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'gray'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb3-30"><a aria-label="30"></a>    plt.axvline(linear_boundary_mm, color<span class="op">=</span><span class="st">'gray'</span>, linestyle<span class="op">=</span><span class="st">':'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb3-31"><a aria-label="31"></a>    plt.xlabel(<span class="st">'Flipper Length (mm)'</span>)</span>
-<span id="cb3-32"><a aria-label="32"></a>    plt.ylabel(<span class="st">'Model output'</span>)</span>
-<span id="cb3-33"><a aria-label="33"></a>    plt.yticks([<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>], [<span class="st">'Not Gentoo'</span>, <span class="st">'Threshold'</span>, <span class="st">'Gentoo'</span>])</span>
-<span id="cb3-34"><a aria-label="34"></a>    plt.grid(<span class="va">True</span>)</span>
-<span id="cb3-35"><a aria-label="35"></a>    plt.show()</span>
-<span id="cb3-36"><a aria-label="36"></a></span>
-<span id="cb3-37"><a aria-label="37"></a>plot_penguin_linear_fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-24"><a aria-label="24"></a>        color<span class="op">=</span>np.where(</span>
+<span id="cb3-25"><a aria-label="25"></a>            penguin_y <span class="op">==</span> <span class="dv">1</span>,</span>
+<span id="cb3-26"><a aria-label="26"></a>            gentoo_color,</span>
+<span id="cb3-27"><a aria-label="27"></a>            not_gentoo_color,</span>
+<span id="cb3-28"><a aria-label="28"></a>        ),</span>
+<span id="cb3-29"><a aria-label="29"></a>        edgecolor<span class="op">=</span><span class="st">'k'</span></span>
+<span id="cb3-30"><a aria-label="30"></a>    )</span>
+<span id="cb3-31"><a aria-label="31"></a>    plt.plot(</span>
+<span id="cb3-32"><a aria-label="32"></a>        penguin_line_X[<span class="st">'flipper_length_mm'</span>],</span>
+<span id="cb3-33"><a aria-label="33"></a>        penguin_line_y,</span>
+<span id="cb3-34"><a aria-label="34"></a>        color<span class="op">=</span>model_color,</span>
+<span id="cb3-35"><a aria-label="35"></a>    )</span>
+<span id="cb3-36"><a aria-label="36"></a>    plt.axhline(<span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'gray'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-37"><a aria-label="37"></a>    plt.axvline(linear_boundary_mm, color<span class="op">=</span><span class="st">'gray'</span>, linestyle<span class="op">=</span><span class="st">':'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-38"><a aria-label="38"></a>    plt.xlabel(<span class="st">'Flipper Length (mm)'</span>)</span>
+<span id="cb3-39"><a aria-label="39"></a>    plt.ylabel(<span class="st">'Model output'</span>)</span>
+<span id="cb3-40"><a aria-label="40"></a>    plt.yticks([<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>], [<span class="st">'Not Gentoo'</span>, <span class="st">'Threshold'</span>, <span class="st">'Gentoo'</span>])</span>
+<span id="cb3-41"><a aria-label="41"></a>    plt.grid(<span class="va">True</span>)</span>
+<span id="cb3-42"><a aria-label="42"></a>    plt.show()</span>
+<span id="cb3-43"><a aria-label="43"></a></span>
+<span id="cb3-44"><a aria-label="44"></a>plot_penguin_linear_fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -570,7 +585,7 @@ Marcel Turcotte
 </div>
 </div>
 </div>
-<div id="ef9bd447" class="cell" data-execution_count="5">
+<div id="32f130fe" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a>plot_penguin_linear_fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -581,7 +596,7 @@ Marcel Turcotte
 <h2>Intuition (continued)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="7d8cdfd3" class="cell" data-execution_count="6">
+<div id="9f5e5ca7" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a>plot_penguin_linear_fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -606,7 +621,7 @@ Marcel Turcotte
 <h2>Intuition (continued)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="864cc86a" class="cell" data-execution_count="7">
+<div id="d0f08fae" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>plot_penguin_linear_fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -630,7 +645,7 @@ Marcel Turcotte
 <h2>Intuition (continued)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="cad0bb8d" class="cell" data-execution_count="8">
+<div id="85ec7275" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a>plot_penguin_linear_fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -654,7 +669,7 @@ Marcel Turcotte
 <h2>Intuition (continued)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="9e820810" class="cell" data-execution_count="9">
+<div id="a8d0c5b1" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a>plot_penguin_linear_fit()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -676,7 +691,7 @@ Marcel Turcotte
 <section>
 <section id="logistic-function" class="title-slide slide level1 hide-code-toggle center">
 <h1>Logistic Function</h1>
-<div id="c8ab7568" class="cell" data-execution_count="10">
+<div id="0e5ac4b0" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="kw">def</span> sigmoid(t):</span>
@@ -701,7 +716,7 @@ Marcel Turcotte
 <span id="cb9-20"><a aria-label="20"></a>    plt.plot(</span>
 <span id="cb9-21"><a aria-label="21"></a>        penguin_line_X[<span class="st">'flipper_length_mm'</span>],</span>
 <span id="cb9-22"><a aria-label="22"></a>        penguin_line_score,</span>
-<span id="cb9-23"><a aria-label="23"></a>        color<span class="op">=</span><span class="st">'blue'</span>,</span>
+<span id="cb9-23"><a aria-label="23"></a>        color<span class="op">=</span>model_color,</span>
 <span id="cb9-24"><a aria-label="24"></a>        linewidth<span class="op">=</span><span class="dv">2</span></span>
 <span id="cb9-25"><a aria-label="25"></a>    )</span>
 <span id="cb9-26"><a aria-label="26"></a>    plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'gray'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
@@ -714,7 +729,7 @@ Marcel Turcotte
 <span id="cb9-33"><a aria-label="33"></a></span>
 <span id="cb9-34"><a aria-label="34"></a><span class="kw">def</span> plot_sigmoid():</span>
 <span id="cb9-35"><a aria-label="35"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
-<span id="cb9-36"><a aria-label="36"></a>    ax.plot(sigmoid_input, sigmoid_output, color<span class="op">=</span><span class="st">'blue'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb9-36"><a aria-label="36"></a>    ax.plot(sigmoid_input, sigmoid_output, color<span class="op">=</span>model_color, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb9-37"><a aria-label="37"></a>    ax.axvline(x<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb9-38"><a aria-label="38"></a>    ax.axhline(y<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'gray'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb9-39"><a aria-label="39"></a>    ax.scatter([<span class="dv">0</span>], [<span class="fl">0.5</span>], color<span class="op">=</span><span class="st">'black'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
@@ -727,7 +742,7 @@ Marcel Turcotte
 <span id="cb9-46"><a aria-label="46"></a>plot_sigmoid()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="604fdc78" class="cell" data-execution_count="11">
+<div id="879358b6" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a>plot_sigmoid()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -743,7 +758,7 @@ Marcel Turcotte
   \sigma(t) = \frac{1}{1+e^{-t}}
 </span></p>
 </div><div class="column" style="width:60%;">
-<div id="161b8f77" class="cell" data-execution_count="12">
+<div id="de9b6d34" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a>plot_sigmoid()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -789,7 +804,7 @@ Marcel Turcotte
 <h2>Linear score and probability</h2>
 <div class="columns">
 <div class="column" style="width:65%;">
-<div id="801a191d" class="cell" data-execution_count="13">
+<div id="56bd051b" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>plot_penguin_logistic_score()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -803,7 +818,7 @@ Marcel Turcotte
 </div>
 </div>
 </div><div class="column" style="width:35%;">
-<div id="afa276c0" class="cell" data-execution_count="14">
+<div id="edd63812" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a>plot_sigmoid()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -831,7 +846,7 @@ Marcel Turcotte
   \sigma(t) = \frac{1}{1+e^{-t}}
 </span></p>
 </div><div class="column" style="width:40%;">
-<div id="33c9c200" class="cell" data-execution_count="15">
+<div id="021408b6" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>plot_sigmoid()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -878,7 +893,7 @@ Marcel Turcotte
   h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
   </span></p>
 
-<div id="0726fcc9" class="cell" data-execution_count="16">
+<div id="5e344a06" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a>penguin_features <span class="op">=</span> [<span class="st">'bill_depth_mm'</span>, <span class="st">'body_mass_g'</span>]</span>
@@ -912,35 +927,42 @@ Marcel Turcotte
 <span id="cb15-29"><a aria-label="29"></a>    predicted_class <span class="op">=</span> fitted_model.predict(grid).reshape(depth_grid.shape)</span>
 <span id="cb15-30"><a aria-label="30"></a></span>
 <span id="cb15-31"><a aria-label="31"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
-<span id="cb15-32"><a aria-label="32"></a>    plt.contourf(depth_grid, mass_grid, predicted_class, alpha<span class="op">=</span><span class="fl">0.3</span>, cmap<span class="op">=</span><span class="st">'RdYlBu'</span>)</span>
-<span id="cb15-33"><a aria-label="33"></a>    plt.scatter(</span>
-<span id="cb15-34"><a aria-label="34"></a>        X_values[y_values <span class="op">==</span> <span class="dv">1</span>, <span class="dv">0</span>],</span>
-<span id="cb15-35"><a aria-label="35"></a>        X_values[y_values <span class="op">==</span> <span class="dv">1</span>, <span class="dv">1</span>],</span>
-<span id="cb15-36"><a aria-label="36"></a>        color<span class="op">=</span><span class="st">'orange'</span>,</span>
-<span id="cb15-37"><a aria-label="37"></a>        edgecolors<span class="op">=</span><span class="st">'k'</span>,</span>
-<span id="cb15-38"><a aria-label="38"></a>        label<span class="op">=</span><span class="st">'Gentoo'</span></span>
+<span id="cb15-32"><a aria-label="32"></a>    plt.contourf(</span>
+<span id="cb15-33"><a aria-label="33"></a>        depth_grid,</span>
+<span id="cb15-34"><a aria-label="34"></a>        mass_grid,</span>
+<span id="cb15-35"><a aria-label="35"></a>        predicted_class,</span>
+<span id="cb15-36"><a aria-label="36"></a>        levels<span class="op">=</span>[<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">1.5</span>],</span>
+<span id="cb15-37"><a aria-label="37"></a>        colors<span class="op">=</span>[not_gentoo_color, gentoo_color],</span>
+<span id="cb15-38"><a aria-label="38"></a>        alpha<span class="op">=</span><span class="fl">0.3</span></span>
 <span id="cb15-39"><a aria-label="39"></a>    )</span>
 <span id="cb15-40"><a aria-label="40"></a>    plt.scatter(</span>
-<span id="cb15-41"><a aria-label="41"></a>        X_values[y_values <span class="op">==</span> <span class="dv">0</span>, <span class="dv">0</span>],</span>
-<span id="cb15-42"><a aria-label="42"></a>        X_values[y_values <span class="op">==</span> <span class="dv">0</span>, <span class="dv">1</span>],</span>
-<span id="cb15-43"><a aria-label="43"></a>        color<span class="op">=</span><span class="st">'blue'</span>,</span>
+<span id="cb15-41"><a aria-label="41"></a>        X_values[y_values <span class="op">==</span> <span class="dv">1</span>, <span class="dv">0</span>],</span>
+<span id="cb15-42"><a aria-label="42"></a>        X_values[y_values <span class="op">==</span> <span class="dv">1</span>, <span class="dv">1</span>],</span>
+<span id="cb15-43"><a aria-label="43"></a>        color<span class="op">=</span>gentoo_color,</span>
 <span id="cb15-44"><a aria-label="44"></a>        edgecolors<span class="op">=</span><span class="st">'k'</span>,</span>
-<span id="cb15-45"><a aria-label="45"></a>        label<span class="op">=</span><span class="st">'Not Gentoo'</span></span>
+<span id="cb15-45"><a aria-label="45"></a>        label<span class="op">=</span><span class="st">'Gentoo'</span></span>
 <span id="cb15-46"><a aria-label="46"></a>    )</span>
-<span id="cb15-47"><a aria-label="47"></a>    plt.xlabel(<span class="st">'Bill Depth (mm)'</span>)</span>
-<span id="cb15-48"><a aria-label="48"></a>    plt.ylabel(<span class="st">'Body Mass (g)'</span>)</span>
-<span id="cb15-49"><a aria-label="49"></a>    plt.title(<span class="st">'Logistic Regression Decision Regions'</span>)</span>
-<span id="cb15-50"><a aria-label="50"></a>    plt.legend()</span>
-<span id="cb15-51"><a aria-label="51"></a>    plt.show()</span>
-<span id="cb15-52"><a aria-label="52"></a></span>
-<span id="cb15-53"><a aria-label="53"></a>plot_penguin_decision_boundary(</span>
-<span id="cb15-54"><a aria-label="54"></a>    penguin_two_X_train,</span>
-<span id="cb15-55"><a aria-label="55"></a>    penguin_two_y_train,</span>
-<span id="cb15-56"><a aria-label="56"></a>    penguin_two_model</span>
-<span id="cb15-57"><a aria-label="57"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-47"><a aria-label="47"></a>    plt.scatter(</span>
+<span id="cb15-48"><a aria-label="48"></a>        X_values[y_values <span class="op">==</span> <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb15-49"><a aria-label="49"></a>        X_values[y_values <span class="op">==</span> <span class="dv">0</span>, <span class="dv">1</span>],</span>
+<span id="cb15-50"><a aria-label="50"></a>        color<span class="op">=</span>not_gentoo_color,</span>
+<span id="cb15-51"><a aria-label="51"></a>        edgecolors<span class="op">=</span><span class="st">'k'</span>,</span>
+<span id="cb15-52"><a aria-label="52"></a>        label<span class="op">=</span><span class="st">'Not Gentoo'</span></span>
+<span id="cb15-53"><a aria-label="53"></a>    )</span>
+<span id="cb15-54"><a aria-label="54"></a>    plt.xlabel(<span class="st">'Bill Depth (mm)'</span>)</span>
+<span id="cb15-55"><a aria-label="55"></a>    plt.ylabel(<span class="st">'Body Mass (g)'</span>)</span>
+<span id="cb15-56"><a aria-label="56"></a>    plt.title(<span class="st">'Logistic Regression Decision Regions'</span>)</span>
+<span id="cb15-57"><a aria-label="57"></a>    plt.legend()</span>
+<span id="cb15-58"><a aria-label="58"></a>    plt.show()</span>
+<span id="cb15-59"><a aria-label="59"></a></span>
+<span id="cb15-60"><a aria-label="60"></a>plot_penguin_decision_boundary(</span>
+<span id="cb15-61"><a aria-label="61"></a>    penguin_two_X_train,</span>
+<span id="cb15-62"><a aria-label="62"></a>    penguin_two_y_train,</span>
+<span id="cb15-63"><a aria-label="63"></a>    penguin_two_model</span>
+<span id="cb15-64"><a aria-label="64"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="c5bdc882" class="cell" data-execution_count="17">
+<div id="b3c50b03" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a>plot_penguin_decision_boundary(</span>
@@ -957,7 +979,7 @@ Marcel Turcotte
 <h2>Logistic regression (two attributes)</h2>
 <div class="columns">
 <div class="column" style="width:35%;">
-<div id="2dfe80ed" class="cell" data-execution_count="18">
+<div id="76c2fbdd" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a>plot_penguin_decision_boundary(</span>
@@ -1047,11 +1069,11 @@ h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
 <section id="uci-ml-hand-written-digits-datasets" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Loading the dataset</p>
-<div id="599f624a" class="cell" data-execution_count="19">
+<div id="441762c9" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a>digits <span class="op">=</span> load_digits()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>What is the type of <code>digits.data</code></p>
-<div id="9566749b" class="cell" data-execution_count="20">
+<div id="8620bc4a" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a><span class="bu">type</span>(digits.data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>numpy.ndarray</code></pre>
@@ -1064,18 +1086,18 @@ h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
 <section id="uci-ml-hand-written-digits-datasets-1" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>How many examples (<code>N</code>) and how many attributes (<code>D</code>)?</p>
-<div id="159f9f14" class="cell" data-execution_count="21">
+<div id="4aa91354" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>digits.data.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>(1797, 64)</code></pre>
 </div>
 </div>
 <p>Assigning <code>N</code> and <code>D</code></p>
-<div id="02da0792" class="cell" data-execution_count="22">
+<div id="3d5e394a" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a>digit_count, digit_feature_count <span class="op">=</span> digits.data.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>target</code> has the same number of entries (examples) as <code>data</code>?</p>
-<div id="aaa999f5" class="cell" data-execution_count="23">
+<div id="62e944c1" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a>digits.target.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>(1797,)</code></pre>
@@ -1085,21 +1107,21 @@ h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
 <section id="uci-ml-hand-written-digits-datasets-2" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>What are the width and height of those images?</p>
-<div id="a8f90585" class="cell" data-execution_count="24">
+<div id="c8804353" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a>digits.images.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>(1797, 8, 8)</code></pre>
 </div>
 </div>
 <p>Assigning <code>height</code> and <code>width</code></p>
-<div id="bd4e44c9" class="cell" data-execution_count="25">
+<div id="cb0d4279" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a aria-label="1"></a>_, digit_height, digit_width <span class="op">=</span> digits.images.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="uci-ml-hand-written-digits-datasets-3" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Assigning <code>digits_X</code> and <code>digits_y</code></p>
-<div id="90b1d537" class="cell" data-execution_count="26">
+<div id="17f01e96" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-label="1"></a>digits_X <span class="op">=</span> digits.data</span>
 <span id="cb29-2"><a aria-label="2"></a>digits_y <span class="op">=</span> digits.target</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1107,7 +1129,7 @@ h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
 <section id="uci-ml-hand-written-digits-datasets-4" class="slide level2 smaller">
 <h2>UCI ML hand-written digits datasets</h2>
 <p><code>digits_X[0]</code> is a vector of size <code>digit_height * digit_width = D</code> (<span class="math inline">8 \times 8 = 64</span>).</p>
-<div id="15e6c0fa" class="cell" data-execution_count="27">
+<div id="936250fa" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a aria-label="1"></a>digits_X[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>array([ 0.,  0.,  5., 13.,  9.,  1.,  0.,  0.,  0.,  0., 13., 15., 10.,
@@ -1119,7 +1141,7 @@ h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
 </div>
 <div class="fragment">
 <p>It corresponds to an <span class="math inline">8 \times 8 = 64</span> image.</p>
-<div id="52509602" class="cell" data-execution_count="28">
+<div id="bf02c307" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a aria-label="1"></a>digits_X[<span class="dv">0</span>].reshape(digit_height, digit_width)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>array([[ 0.,  0.,  5., 13.,  9.,  1.,  0.,  0.],
@@ -1137,7 +1159,7 @@ h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
 <section id="uci-ml-hand-written-digits-datasets-5" class="slide level2 smaller">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Plot the first <code>n=5</code> examples</p>
-<div id="c3ec2386" class="cell" data-execution_count="29">
+<div id="6f1484fd" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a aria-label="1"></a><span class="kw">def</span> plot_digit_examples(X_values, y_values, count<span class="op">=</span><span class="dv">5</span>):</span>
 <span id="cb34-2"><a aria-label="2"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">2</span>))</span>
 <span id="cb34-3"><a aria-label="3"></a>    <span class="cf">for</span> index, (image, label) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(X_values[:count], y_values[:count])):</span>
@@ -1173,7 +1195,7 @@ h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
 </section>
 <section id="uci-ml-hand-written-digits-datasets-6" class="slide level2 smaller">
 <h2>UCI ML hand-written digits datasets</h2>
-<div id="60316d7e" class="cell" data-execution_count="30">
+<div id="871a3af8" class="cell" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a aria-label="1"></a>plot_digit_examples(digits_X, digits_y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1194,7 +1216,7 @@ h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
 </section>
 <section id="uci-ml-hand-written-digits-datasets-7" class="slide level2 hide-code-toggle">
 <h2>UCI ML hand-written digits datasets</h2>
-<div id="998b0269" class="cell" data-execution_count="31">
+<div id="48f7d502" class="cell" data-execution_count="31">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a aria-label="1"></a>plot_digit_examples(digits_X, digits_y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1215,7 +1237,7 @@ h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
 <section id="uci-ml-hand-written-digits-datasets-8" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Preparing for our machine learning experiment</p>
-<div id="d8e2f40d" class="cell" data-execution_count="32">
+<div id="7902cbc5" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a aria-label="1"></a>digits_X_train, digits_X_test, digits_y_train, digits_y_test <span class="op">=</span> train_test_split(</span>
 <span id="cb37-2"><a aria-label="2"></a>    digits_X,</span>
 <span id="cb37-3"><a aria-label="3"></a>    digits_y,</span>
@@ -1228,7 +1250,7 @@ h_\theta(x_i) = \sigma(\theta^\top x_i) = \frac{1}{1+e^{-\theta^\top x_i}}
 <section id="uci-ml-hand-written-digits-datasets-9" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Optimization algorithms generally work best when the attributes have similar ranges.</p>
-<div id="6c32afe9" class="cell" data-execution_count="33">
+<div id="390fe87e" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a aria-label="1"></a>digit_scaler <span class="op">=</span> StandardScaler()</span>
 <span id="cb38-2"><a aria-label="2"></a>digits_X_train_scaled <span class="op">=</span> digit_scaler.fit_transform(digits_X_train)</span>
 <span id="cb38-3"><a aria-label="3"></a>digits_X_test_scaled <span class="op">=</span> digit_scaler.transform(digits_X_test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1260,7 +1282,7 @@ z = (x - \mu) / \sigma
 </div></aside></section>
 <section id="uci-ml-hand-written-digits-datasets-10" class="slide level2">
 <h2>UCI ML hand-written digits datasets</h2>
-<div id="d2eeff0e" class="cell" data-execution_count="34">
+<div id="287c0917" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a aria-label="1"></a>digit_classifier <span class="op">=</span> OneVsRestClassifier(LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>))</span>
 <span id="cb39-2"><a aria-label="2"></a>digit_classifier.fit(digits_X_train_scaled, digits_y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1284,7 +1306,7 @@ z = (x - \mu) / \sigma
 <section id="uci-ml-hand-written-digits-datasets-11" class="slide level2 smaller">
 <h2>UCI ML hand-written digits datasets</h2>
 <p>Applying the classifier to our test set</p>
-<div id="4cfff244" class="cell" data-execution_count="35">
+<div id="bd427fcc" class="cell" data-execution_count="35">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a aria-label="1"></a>digits_y_pred <span class="op">=</span> digit_classifier.predict(digits_X_test_scaled)</span>
 <span id="cb40-2"><a aria-label="2"></a>digit_test_accuracy <span class="op">=</span> accuracy_score(digits_y_test, digits_y_pred)</span>
 <span id="cb40-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="ss">f'Test accuracy: </span><span class="sc">{</span>digit_test_accuracy<span class="sc">:.3f}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1299,7 +1321,7 @@ z = (x - \mu) / \sigma
 <section id="visualization" class="slide level2">
 <h2>Visualization</h2>
 <p>How many classes?</p>
-<div id="2bbe1829" class="cell" data-execution_count="36">
+<div id="9a895e24" class="cell" data-execution_count="36">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a aria-label="1"></a>digit_classifier.classes_</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="35">
 <pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</code></pre>
@@ -1307,7 +1329,7 @@ z = (x - \mu) / \sigma
 </div>
 <div class="fragment">
 <p>The coefficients and intercepts are in distinct arrays.</p>
-<div id="8ae04151" class="cell" data-execution_count="37">
+<div id="7aa8b13e" class="cell" data-execution_count="37">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a aria-label="1"></a>(digit_classifier.estimators_[<span class="dv">0</span>].coef_.shape,</span>
 <span id="cb44-2"><a aria-label="2"></a> digit_classifier.estimators_[<span class="dv">0</span>].intercept_.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
@@ -1324,7 +1346,7 @@ z = (x - \mu) / \sigma
 </div></aside></section>
 <section id="visualization-1" class="slide level2">
 <h2>Visualization</h2>
-<div id="47d7c768" class="cell" data-execution_count="38">
+<div id="0db51677" class="cell" data-execution_count="38">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a aria-label="1"></a>digit_classifier.estimators_[<span class="dv">0</span>].coef_[<span class="dv">0</span>].<span class="bu">round</span>(<span class="dv">2</span>).reshape(</span>
 <span id="cb46-2"><a aria-label="2"></a>    digit_height,</span>
 <span id="cb46-3"><a aria-label="3"></a>    digit_width</span>
@@ -1343,7 +1365,7 @@ z = (x - \mu) / \sigma
 </section>
 <section id="visualization-2" class="slide level2">
 <h2>Visualization</h2>
-<div id="9da484bb" class="cell" data-execution_count="39">
+<div id="7bd33aff" class="cell" data-execution_count="39">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a aria-label="1"></a>digit_zero_coefficients <span class="op">=</span> digit_classifier.estimators_[<span class="dv">0</span>].coef_[<span class="dv">0</span>]</span>
 <span id="cb48-2"><a aria-label="2"></a>plt.imshow(</span>
 <span id="cb48-3"><a aria-label="3"></a>    digit_zero_coefficients.reshape(digit_height, digit_width),</span>
@@ -1362,7 +1384,7 @@ z = (x - \mu) / \sigma
 </section>
 <section id="visualization-3" class="slide level2">
 <h2>Visualization</h2>
-<div id="5369f663" class="cell" data-execution_count="40">
+<div id="8932a87b" class="cell" data-execution_count="40">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">5</span>))</span>
@@ -1470,7 +1492,7 @@ Zhao, Celina. 2026. <span>“<span>OpenAI</span> Breakthrough Triggers <span><sp
 </section>
 <section id="one-vs-rest-classifier" class="slide level2">
 <h2>One-vs-rest classifier</h2>
-<div id="b18c341d" class="cell" data-execution_count="41">
+<div id="a14566e0" class="cell" data-execution_count="41">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a aria-label="1"></a><span class="co"># Load the Iris dataset</span></span>
 <span id="cb50-2"><a aria-label="2"></a>iris <span class="op">=</span> load_iris()</span>
 <span id="cb50-3"><a aria-label="3"></a>iris_X, iris_y <span class="op">=</span> iris.data, iris.target</span>
@@ -1490,7 +1512,7 @@ Zhao, Celina. 2026. <span>“<span>OpenAI</span> Breakthrough Triggers <span><sp
 </section>
 <section id="one-vs-rest-classifier-1" class="slide level2">
 <h2>One-vs-rest classifier</h2>
-<div id="90b1c233" class="cell" data-execution_count="42">
+<div id="65d5dcf0" class="cell" data-execution_count="42">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a aria-label="1"></a><span class="co"># Train one binary classifier for each class</span></span>
 <span id="cb51-2"><a aria-label="2"></a></span>
 <span id="cb51-3"><a aria-label="3"></a>iris_classifiers <span class="op">=</span> []</span>
@@ -1505,7 +1527,7 @@ Zhao, Celina. 2026. <span>“<span>OpenAI</span> Breakthrough Triggers <span><sp
 </div></aside></section>
 <section id="one-vs-rest-classifier-2" class="slide level2">
 <h2>One-vs-rest classifier</h2>
-<div id="6100b889" class="cell" data-execution_count="43">
+<div id="8bb84ae9" class="cell" data-execution_count="43">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a aria-label="1"></a><span class="co"># Predict on a new sample</span></span>
 <span id="cb52-2"><a aria-label="2"></a>new_sample <span class="op">=</span> iris_X_test[<span class="dv">0</span>].reshape(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
 <span id="cb52-3"><a aria-label="3"></a>confidence_scores <span class="op">=</span> np.array([</span>
@@ -1527,7 +1549,7 @@ True class: setosa</code></pre>
 </section>
 <section id="label_binarize" class="slide level2 smaller">
 <h2><code>label_binarize</code></h2>
-<div id="a686565d" class="cell" data-execution_count="44">
+<div id="8690816a" class="cell" data-execution_count="44">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a aria-label="1"></a><span class="co"># Original class labels</span></span>
 <span id="cb54-2"><a aria-label="2"></a>example_labels <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>])</span>
 <span id="cb54-3"><a aria-label="3"></a></span>

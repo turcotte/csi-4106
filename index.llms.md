@@ -1,4 +1,4 @@
-# CSI 4106: Introduction to Artificial Intelligence
+# CSI 4106: Introduction to ~~Artificial~~ Super Intelligence
 
 Author
 
@@ -6,7 +6,7 @@ Marcel Turcotte
 
 Published
 
-August 7, 2026
+September 22, 2026
 
 # Description
 
