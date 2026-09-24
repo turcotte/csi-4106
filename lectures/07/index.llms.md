@@ -17,4 +17,4 @@ CSI4106 Introduction to Artificial Intelligence
 
 ## Practice
 
-- [LogisticRegression ](../../lectures/07/LogisticRegression.llms.md) - This notebook retains the logistic-regression implementation and uses it to study classification reports, confusion matrices, ROC curves, AUC, and threshold trade-offs.
+- [LogisticRegression ](../../lectures/07/LogisticRegression.llms.md) - This notebook retains the logistic-regression implementation and uses it to study classification reports, confusion matrices, ROC curves, AUROC, and threshold trade-offs.

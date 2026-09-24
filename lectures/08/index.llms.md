@@ -12,6 +12,6 @@ CSI4106 Introduction to Artificial Intelligence
 
 - [slides](slides.llms.md) ([PDF](slides.pdf), [Jupyter Notebook](slides.ipynb))
 
-If time permits, we will further explore the concepts of underfitting and overfitting.
+If time permits, we will further explore the concepts of underfitting and overfitting. However, bias and variance will not be assessed.
 
 - [bias_variance](bias_variance.llms.md) ([PDF](bias_variance.pdf), [Jupyter Notebook](bias_variance.ipynb))
