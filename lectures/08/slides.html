@@ -256,7 +256,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Sep 24, 2026 17:01</p>
+  <p class="date">Version: Sep 25, 2026 08:51</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -279,7 +279,7 @@ Marcel Turcotte
 </div>
 </div>
 <p>Daniel Kokotajlo shared on X a personal statement about AI risk written by Daniel Selsam, the OpenAI employee featured in the video.</p>
-<p></p><div id="tweet-82037"></div><script>tweet={"url":"https:\/\/x.com\/DKokotajlo\/status\/2099600298855829616","author_name":"Daniel Kokotajlo","author_url":"https:\/\/x.com\/DKokotajlo","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EDan Selsam is a current OpenAI capabilities researcher. (since 2022) He was my boss for a while. He doesn&#39;t have a twitter account but has made this public statement of his views on AI risk and sent it to me to share:\u003Cbr\u003E\u003Cbr\u003EDan Selsam&#39;s Personal Statement on AI Risk:\u003Cbr\u003E\u003Cbr\u003EI have been…\u003C\/p\u003E&mdash; Daniel Kokotajlo (@DKokotajlo) \u003Ca href=\"https:\/\/x.com\/DKokotajlo\/status\/2099600298855829616?ref_src=twsrc%5Etfw\"\u003ESeptember 14, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-82037").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-80974"></div><script>tweet={"url":"https:\/\/x.com\/DKokotajlo\/status\/2099600298855829616","author_name":"Daniel Kokotajlo","author_url":"https:\/\/x.com\/DKokotajlo","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EDan Selsam is a current OpenAI capabilities researcher. (since 2022) He was my boss for a while. He doesn&#39;t have a twitter account but has made this public statement of his views on AI risk and sent it to me to share:\u003Cbr\u003E\u003Cbr\u003EDan Selsam&#39;s Personal Statement on AI Risk:\u003Cbr\u003E\u003Cbr\u003EI have been…\u003C\/p\u003E&mdash; Daniel Kokotajlo (@DKokotajlo) \u003Ca href=\"https:\/\/x.com\/DKokotajlo\/status\/2099600298855829616?ref_src=twsrc%5Etfw\"\u003ESeptember 14, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-80974").innerHTML = tweet["html"];</script><p></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -439,9 +439,9 @@ Name: count, dtype: int64</code></pre>
       }</style></aside>
 </div>
 </section>
-<section id="missing-measurements" class="slide level2">
+<section id="missing-measurements" class="slide level2 smaller">
 <h2>Missing measurements</h2>
-<p>For this example, zero values in five clinical measurements are treated as missing. Zero remains valid for the number of pregnancies.</p>
+<p>Following the convention used by the corrected <code>PimaIndiansDiabetes2</code> version of this dataset, zero values in five clinical measurements are treated as missing. Zero remains valid for the number of pregnancies.</p>
 <div id="c0e403e5" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>missing_value_columns <span class="op">=</span> [<span class="st">"plas"</span>, <span class="st">"pres"</span>, <span class="st">"skin"</span>, <span class="st">"insu"</span>, <span class="st">"mass"</span>]</span>
 <span id="cb14-2"><a aria-label="2"></a></span>
@@ -459,7 +459,8 @@ dtype: int64</code></pre>
 </div>
 </div>
 <aside class="notes">
-<p>This replacement rule follows the meaning of the attributes and does not estimate any value from the dataset. Median imputation will be learned later from each training fold, which prevents information from a validation fold or the test set from influencing the transformation.</p>
+<p>The OpenML metadata reports no missing attribute values. However, the <a href="https://search.r-project.org/CRAN/refmans/mlbench/html/PimaIndiansDiabetes.html" class="external" data-icon="true"><code>PimaIndiansDiabetes2</code> documentation</a> describes these zeros as physical impossibilities and treats them as missing. This is therefore a documented preprocessing convention rather than a rule supplied by OpenML.</p>
+<p>The replacement does not estimate any value from the dataset. Median imputation will be learned later from each training fold, which prevents information from a validation fold or the test set from influencing the transformation.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -874,7 +875,7 @@ dtype: int64</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="preprocessing-within-each-fold" class="slide level2">
+<section id="preprocessing-within-each-fold" class="slide level2 smaller">
 <h2>Preprocessing within each fold</h2>
 <p>For every fold, cross-validation creates and fits a <strong>new pipeline</strong>.</p>
 <table class="caption-top">
@@ -1004,8 +1005,8 @@ Standard deviation: 0.037</code></pre>
 <aside><div>
 <p><a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html" class="external" data-icon="true">sklearn.model_selection.cross_val_score</a>. See also <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html#sklearn.model_selection.cross_validate" class="external" data-icon="true">cross_validate</a>.</p>
 </div></aside></section>
-<section id="model-parameters-and-hyperparameters" class="slide level2">
-<h2>Model parameters and hyperparameters</h2>
+<section id="parameters-and-hyperparameters" class="slide level2">
+<h2>Parameters and hyperparameters</h2>
 <p><strong>Model parameters</strong> are learned from the training data.</p>
 <p><strong>Hyperparameters</strong> are chosen before each fit and control the model structure or learning process.</p>
 
