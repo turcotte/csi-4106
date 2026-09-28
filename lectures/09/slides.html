@@ -34,26 +34,7 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for citations */
-    div.csl-bib-body { }
-    div.csl-entry {
-      clear: both;
-    }
-    .hanging-indent div.csl-entry {
-      margin-left:2em;
-      text-indent:-2em;
-    }
-    div.csl-left-margin {
-      min-width:2em;
-      float:left;
-    }
-    div.csl-right-inline {
-      margin-left:2em;
-      padding-left:1em;
-    }
-    div.csl-indent {
-      margin-left: 2em;
-    }  </style>
+  </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -149,7 +130,7 @@
     }
   </style>
 <meta property="og:title" content="Quiz 1 – CSI 4106 - Fall 2026">
-<meta property="og:description" content="CSI 4106 - Fall 2026">
+<meta property="og:description" content="CSI 4106 Introduction to Artificial Intelligence">
 <meta property="og:site_name" content="CSI 4106 - Fall 2026">
 </head>
 <body class="quarto-light">
@@ -158,7 +139,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Quiz 1</h1>
-  <p class="subtitle">CSI 4106 - Fall 2026</p>
+  <p class="subtitle">CSI 4106 Introduction to Artificial Intelligence</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -168,17 +149,51 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Aug 10, 2026 11:53</p>
+  <p class="date">Version: Sep 27, 2026 12:30</p>
 </section>
-<section id="important-information" class="title-slide slide level1 smaller scrollable">
-<h1>Important Information</h1>
+<section id="csi-4106" class="slide level2">
+<h2>CSI 4106</h2>
+<div id="clock" style="font-size: 2em; font-weight: bold; margin: 20px 0px;">
+
+</div>
+<style>
+  #clock {
+    color: #007bff; /* Example color */
+    /* Add any other styling here */
+  }
+</style>
+<script>
+  function updateClock() {
+    const now = new Date();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+
+    // Add leading zeros if needed
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    const timeString = hours + ':' + minutes + ':' + seconds;
+
+    document.getElementById('clock').textContent = timeString;
+  }
+
+  // Update the clock immediately and then every second
+  document.addEventListener('DOMContentLoaded', (event) => {
+    updateClock();
+    setInterval(updateClock, 1000);
+  });
+</script>
+<ol type="1">
+<li><strong>Wait</strong> for the signal to begin.</li>
+<li>Write your <strong>name</strong> and <strong>student number</strong> on the <strong>questionnaire</strong> and the <strong>Scantron</strong>.</li>
+<li>If you have finished, <strong>raise your hand</strong> to submit and leave.</li>
+<li><strong>Remain seated</strong> if several finish at the same time.</li>
+<li>Submit all copies <strong>10 minutes before the next class</strong>.</li>
+</ol>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-Russell:2020aa" class="csl-entry" role="listitem">
-Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</span> Modern Approach</em>. 4th ed. Pearson. <a href="http://aima.cs.berkeley.edu/">http://aima.cs.berkeley.edu/</a>.
-</div>
-</div>
 </section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
