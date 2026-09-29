@@ -6,7 +6,7 @@ Marcel Turcotte
 
 Published
 
-August 10, 2026
+September 29, 2026
 
 # How to Get Help?
 
@@ -29,15 +29,30 @@ By clicking on **Assignments**, you should see the following notice at the top o
 
 # What will be the format of Quiz 1?
 
-- **When**: Refer to the course [Schedule](course-schedule) page.
-- **Format**: Closed book. Multiple-choice and true/false questions.
-- **Scope**: Lectures 1 to 8.
-  - The numbering corresponds to that used in the URLs, for example, [turcotte.xyz/teaching/csi-4106/lectures/07/slides.html](https://turcotte.xyz/teaching/csi-4106/lectures/07/slides.html) is Lecture 7. Consequently, the quiz covers the lectures from September 9 to October 7 inclusively.
-- **Content**: Emphasis on conceptual questions rather than intricate technical details (e.g., reshaping a numpy array).
-- **Question Types**: Includes code excerpts or diagrams requiring identification of the correct statements.
-- **Number of Questions**: Expect 25 to 35 questions.
-- **In class**: You will take the quiz in class on a paper questionnaire, but we will also use Scantron sheets (both). Please arrive on time so that we can start as early as possible (the total time available depends on your arrival time). We must collect all copies 10 minutes before the end of the class to allow the next class to begin on time.
-- **Student ID Card**: Please bring your student ID card.
+- **When**: Refer to the course [Schedule](course-schedule) page for the authoritative date and location.
+- **Duration**: 60 minutes. Please arrive before the beginning of class; arriving late will not extend your time.
+- **Format**: Closed book, with no notes, cheat sheet, calculator, electronic device, or other aid permitted.
+- **Scope**: Lectures 1 through 8. Lecture numbering corresponds to the numbers used in the course website URLs.
+- **Questions and weighting**:
+  - 15 true-or-false questions worth 1 point each;
+  - 10 multiple-choice questions worth 2 points each;
+  - 35 points in total.
+- **Materials**: You will receive a paper questionnaire and a Scantron sheet. You must record your answers on both. For true-or-false questions, use **A for True** and **B for False** on the Scantron sheet.
+- **What the quiz assesses**: The emphasis is on conceptual understanding and the ability to apply course ideas, rather than on memorizing incidental implementation details. Questions may ask you to:
+  - distinguish closely related concepts;
+  - reason about the behaviour of a model or learning procedure;
+  - interpret short code excerpts, experimental results, or performance measures;
+  - identify methodological problems in a machine-learning experiment; or
+  - perform a short calculation that does not require a calculator.
+- **How to prepare effectively**:
+  - Review both the lecture slides and the accompanying notebooks; they provide complementary explanations and examples.
+  - Make sure that you can explain important concepts in your own words and recognize when their assumptions apply.
+  - Revisit examples involving model training, prediction, validation, preprocessing, evaluation metrics, and the interpretation of experimental results.
+  - Practise explaining why an answer is correct and why plausible alternatives are incorrect. Simply recognizing terminology is not sufficient.
+  - Review the meaning of mathematical expressions and simple update rules discussed in class. The focus is on interpreting and applying them, not on lengthy arithmetic.
+  - Pay close attention to qualifiers such as *always*, *necessarily*, *may*, and *cannot*. Read each statement completely before answering.
+- **What not to prioritize**: You are not expected to memorize minor library syntax or incidental programming details such as how to reshape a NumPy array. However, you should understand the purpose of the principal operations and workflows demonstrated in class.
+- **What to bring**: Bring your student ID card and at least two pencils suitable for completing a Scantron sheet.
 
 # What will be the format of Quiz 2?
 
