@@ -259,7 +259,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Sep 24, 2026 14:39</p>
+  <p class="date">Version: Sep 29, 2026 17:04</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -303,6 +303,9 @@ Marcel Turcotte
 <section id="lecture-overview" class="slide level2">
 <h2>Lecture overview</h2>
 <p>This lecture develops <strong>classification evaluation</strong> from the <strong>confusion matrix</strong>. It introduces <strong>accuracy</strong>, <strong>precision</strong>, <strong>recall</strong>, and the <strong><span class="math inline">F_1</span> score</strong>, then examines <strong>class imbalance</strong> and <strong>micro</strong> versus <strong>macro</strong> averaging. The final sections connect <strong>decision thresholds</strong> to <strong>precision-recall</strong> and <strong>ROC curves</strong> and interpret <strong>AUROC</strong> as a measure of score ranking.</p>
+<div class="corner-image">
+<p><a href="../../assets/images/performance_evaluation_overview.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="../../assets/images/performance_evaluation_overview.png"></a></p>
+</div>
 </section>
 <section id="learning-objectives" class="slide level2 smaller">
 <h2>Learning Objectives</h2>
@@ -348,7 +351,11 @@ Marcel Turcotte
 </tr>
 </tbody>
 </table>
-
+<p><br></p>
+<p>A <strong>confusion matrix</strong> is a table summarizing the performance of a classification algorithm (here for a binary classification task).</p>
+<div class="corner-image">
+<p><a href="../../assets/images/performance_evaluation_confusion_matrix.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="../../assets/images/performance_evaluation_confusion_matrix.png"></a></p>
+</div>
 <aside class="notes">
 <ul>
 <li>In statistical analysis, <strong>False Positives (FP)</strong> are commonly referred to as <strong>Type I errors</strong>, and <strong>False Negatives (FN)</strong> are known as <strong>Type II errors</strong>.</li>
@@ -368,9 +375,7 @@ Marcel Turcotte
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<aside><div>
-<p>A <strong>confusion matrix</strong> is a table summarizing the performance of a classification algorithm (here for a binary classification task).</p>
-</div></aside></section>
+</section>
 <section id="confusionmatrixdisplay" class="slide level2">
 <h2>ConfusionMatrixDisplay</h2>
 <div id="9f0fd972" class="cell" data-execution_count="2">
@@ -413,7 +418,7 @@ Marcel Turcotte
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="slides_files/figure-revealjs/cell-2-output-1.png" class="quarto-figure quarto-figure-center" alt="Binary confusion matrix for a synthetic classification task." width="561" height="431"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-2-output-1.png" class="quarto-figure quarto-figure-center" alt="Binary confusion matrix for a synthetic classification task." width="561" height="431"></a></p>
 </figure>
 </div>
 </div>
@@ -484,7 +489,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <h2>Confusion Matrix: Multiclass</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="../../assets/images/cm_multiclass-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="../../assets/images/cm_multiclass-00.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
+<p><a href="../../assets/images/cm_multiclass-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="../../assets/images/cm_multiclass-00.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
 </figure>
 </div>
 
@@ -495,7 +500,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <h2>Confusion Matrix: True Positive</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="../../assets/images/cm_multiclass-01-tp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="../../assets/images/cm_multiclass-01-tp.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
+<p><a href="../../assets/images/cm_multiclass-01-tp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="../../assets/images/cm_multiclass-01-tp.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
 </figure>
 </div>
 
@@ -506,7 +511,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <h2>Confusion Matrix: False Positive</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="../../assets/images/cm_multiclass-02-fp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="../../assets/images/cm_multiclass-02-fp.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
+<p><a href="../../assets/images/cm_multiclass-02-fp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="../../assets/images/cm_multiclass-02-fp.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
 </figure>
 </div>
 
@@ -517,7 +522,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <h2>Confusion Matrix: False Negative</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="../../assets/images/cm_multiclass-03-fn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="../../assets/images/cm_multiclass-03-fn.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
+<p><a href="../../assets/images/cm_multiclass-03-fn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="../../assets/images/cm_multiclass-03-fn.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
 </figure>
 </div>
 
@@ -528,7 +533,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <h2>Confusion Matrix: True Negative</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="../../assets/images/cm_multiclass-04-tn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="../../assets/images/cm_multiclass-04-tn.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
+<p><a href="../../assets/images/cm_multiclass-04-tn.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="../../assets/images/cm_multiclass-04-tn.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
 </figure>
 </div>
 
@@ -539,7 +544,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <h2>Confusion Matrix: Multiclass</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="../../assets/images/cm_multiclass-05.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="../../assets/images/cm_multiclass-05.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
+<p><a href="../../assets/images/cm_multiclass-05.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="../../assets/images/cm_multiclass-05.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
 </figure>
 </div>
 
@@ -693,7 +698,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides_files/figure-revealjs/cell-7-output-1.png" class="quarto-figure quarto-figure-center" alt="Ten-class confusion matrix for handwritten digit predictions." width="508" height="436"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides_files/figure-revealjs/cell-7-output-1.png" class="quarto-figure quarto-figure-center" alt="Ten-class confusion matrix for handwritten digit predictions." width="508" height="436"></a></p>
 </figure>
 </div>
 </div>
@@ -738,7 +743,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="slides_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center" alt="Two handwritten eight that the model predicted as ones." width="478" height="182"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="slides_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center" alt="Two handwritten eight that the model predicted as ones." width="478" height="182"></a></p>
 </figure>
 </div>
 </div>
@@ -747,7 +752,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <aside><div>
 <p>The preceding confusion matrix shows examples whose true label is 8 but whose predicted label is 1. Inspecting the original pixel values, rather than the standardized features supplied to the classifier, preserves the appearance of each digit.</p>
 </div></aside></section>
-<section id="accuracy" class="slide level2">
+<section id="accuracy" class="slide level2 smaller">
 <h2>Accuracy</h2>
 <p>How <strong>accurate</strong> is this result?</p>
 <p><span class="math display">
@@ -763,6 +768,9 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>0.5</code></pre>
 </div>
+</div>
+<div class="corner-image">
+<p><a href="../../assets/images/performance_evaluation_accuracy.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="../../assets/images/performance_evaluation_accuracy.png"></a></p>
 </div>
 
 <aside><div>
@@ -821,7 +829,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <aside><div>
 <p><strong>Why</strong> is it problematic?</p>
 </div></aside></section>
-<section id="precision" class="slide level2">
+<section id="precision" class="slide level2 smaller">
 <h2>Precision</h2>
 <p>Also known as <strong>positive predictive value</strong> (PPV).</p>
 <p><span class="math display">
@@ -837,6 +845,9 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>0.6666666666666666</code></pre>
 </div>
+</div>
+<div class="corner-image">
+<p><a href="../../assets/images/performance_evaluation_precision.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="../../assets/images/performance_evaluation_precision.png"></a></p>
 </div>
 
 <aside class="notes">
@@ -888,7 +899,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <aside><div>
 <p>An algorithm that makes a small number of high-confidence predictions might achieve a high precision score, but this may not necessarily be useful.</p>
 </div></aside></section>
-<section id="recall" class="slide level2">
+<section id="recall" class="slide level2 smaller">
 <h2>Recall</h2>
 <p>Also known as <strong>sensitivity</strong> or <strong>true positive rate</strong> (TPR). <span class="math display">
   \mathrm{recall} = \frac{\mathrm{TP}}{\mathrm{TP}+\mathrm{FN}}
@@ -903,6 +914,9 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>0.5714285714285714</code></pre>
 </div>
+</div>
+<div class="corner-image">
+<p><a href="../../assets/images/performance_evaluation_recall.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="../../assets/images/performance_evaluation_recall.png"></a></p>
 </div>
 
 <aside class="notes">
@@ -1071,7 +1085,7 @@ C_{\cdot j} = \sum_{i=1}^l C_{i,j}
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-17-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides_files/figure-revealjs/cell-17-output-1.png" alt="Three-class confusion matrix for cats, dogs, and foxes." width="527" height="431"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-17-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-revealjs/cell-17-output-1.png" alt="Three-class confusion matrix for cats, dogs, and foxes." width="527" height="431"></a></p>
 </figure>
 </div>
 </div>
@@ -1217,7 +1231,7 @@ Macro recall: 0.60</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-20-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="slides_files/figure-revealjs/cell-20-output-1.png" alt="Confusion matrix for an imbalanced medical example." width="558" height="431"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-20-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-revealjs/cell-20-output-1.png" alt="Confusion matrix for an imbalanced medical example." width="558" height="431"></a></p>
 </figure>
 </div>
 </div>
@@ -1301,7 +1315,7 @@ Macro recall: 0.80</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-23-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides_files/figure-revealjs/cell-23-output-1.png" alt="Five sample handwritten digits from the MNIST dataset." width="790" height="190"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-23-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="slides_files/figure-revealjs/cell-23-output-1.png" alt="Five sample handwritten digits from the MNIST dataset." width="790" height="190"></a></p>
 </figure>
 </div>
 </div>
@@ -1405,7 +1419,7 @@ Macro recall: 0.80</code></pre>
 </div></aside></section>
 <section id="precision-recall-trade-off-1" class="slide level2">
 <h2>Precision-Recall Trade-Off</h2>
-<p><a href="../../assets/images/geron_2022-f3_4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="../../assets/images/geron_2022-f3_4.png"></a></p>
+<p><a href="../../assets/images/geron_2022-f3_4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="../../assets/images/geron_2022-f3_4.png"></a></p>
 
 <aside><div>
 <p><strong>Attribution</strong>: <span class="citation" data-cites="Geron:2022aa">Géron (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> Figure 3.4</p>
@@ -1457,7 +1471,7 @@ Macro recall: 0.80</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-30-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-revealjs/cell-30-output-1.png" class="quarto-figure quarto-figure-center" alt="Precision and recall as functions of the decision threshold." width="645" height="362"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-30-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="slides_files/figure-revealjs/cell-30-output-1.png" class="quarto-figure quarto-figure-center" alt="Precision and recall as functions of the decision threshold." width="645" height="362"></a></p>
 </figure>
 </div>
 </div>
@@ -1519,7 +1533,7 @@ Macro recall: 0.80</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-31-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-revealjs/cell-31-output-1.png" class="quarto-figure quarto-figure-center" alt="Precision-recall curve with one selected threshold marked." width="452" height="436"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-31-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="slides_files/figure-revealjs/cell-31-output-1.png" class="quarto-figure quarto-figure-center" alt="Precision-recall curve with one selected threshold marked." width="452" height="436"></a></p>
 </figure>
 </div>
 </div>
@@ -1533,7 +1547,7 @@ Macro recall: 0.80</code></pre>
 <h1>ROC Curve</h1>
 
 </section>
-<section id="roc-curve-1" class="slide level2">
+<section id="roc-curve-1" class="slide level2 smaller">
 <h2>ROC Curve</h2>
 <p><strong>Receiver operating characteristic (ROC) curve</strong></p>
 <ul>
@@ -1544,6 +1558,9 @@ Macro recall: 0.80</code></pre>
 <li class="fragment"><span class="math inline">\mathrm{FPR} = \frac{\mathrm{FP}}{\mathrm{FP}+\mathrm{TN}} = 1-\mathrm{specificity}</span></li>
 <li class="fragment"><strong>FPR</strong> approaches <strong>zero</strong> when the number of <strong>false positives</strong> is low</li>
 </ul>
+<div class="corner-image">
+<p><a href="../../assets/images/performance_evaluation_roc.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="../../assets/images/performance_evaluation_roc.png"></a></p>
+</div>
 <aside class="notes">
 <p>An ROC curve plots the true-positive rate against the false-positive rate as the decision threshold varies. Each threshold produces one operating point. An ideal operating point lies near the upper-left corner, while random ranking produces the diagonal on average.</p>
 <p>The curve summarizes score ranking across thresholds, but a deployment decision still requires a particular threshold. The relative costs of false positives and false negatives help determine which operating point is appropriate. One-vs-rest evaluation extends ROC analysis to multiclass tasks.</p>
@@ -1563,7 +1580,7 @@ Macro recall: 0.80</code></pre>
 <h2>ROC Curve</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="../../assets/images/tpr_fpr.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="../../assets/images/tpr_fpr.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
+<p><a href="../../assets/images/tpr_fpr.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="../../assets/images/tpr_fpr.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
 </figure>
 </div>
 </section>
@@ -1608,7 +1625,7 @@ Macro recall: 0.80</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-32-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="slides_files/figure-revealjs/cell-32-output-1.png" class="quarto-figure quarto-figure-center" alt="ROC curve with the operating point for 90 percent precision." width="452" height="436"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-32-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="slides_files/figure-revealjs/cell-32-output-1.png" class="quarto-figure quarto-figure-center" alt="ROC curve with the operating point for 90 percent precision." width="452" height="436"></a></p>
 </figure>
 </div>
 </div>
@@ -1770,7 +1787,7 @@ Macro recall: 0.80</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-33-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="slides_files/figure-revealjs/cell-33-output-1.png" class="quarto-figure quarto-figure-center" alt="Prediction-score histograms for the negative and positive classes beside the corresponding ROC curve, with one threshold marked in both plots." width="947" height="443"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-33-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="slides_files/figure-revealjs/cell-33-output-1.png" class="quarto-figure quarto-figure-center" alt="Prediction-score histograms for the negative and positive classes beside the corresponding ROC curve, with one threshold marked in both plots." width="947" height="443"></a></p>
 </figure>
 </div>
 </div>
@@ -1851,7 +1868,7 @@ Macro recall: 0.80</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-34-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="slides_files/figure-revealjs/cell-34-output-1.png" class="quarto-figure quarto-figure-center" alt="Separated Gaussian score distributions for negative and positive examples beside a perfect ROC curve." width="947" height="443"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-34-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="slides_files/figure-revealjs/cell-34-output-1.png" class="quarto-figure quarto-figure-center" alt="Separated Gaussian score distributions for negative and positive examples beside a perfect ROC curve." width="947" height="443"></a></p>
 </figure>
 </div>
 </div>
@@ -1895,7 +1912,7 @@ Macro recall: 0.80</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-35-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="slides_files/figure-revealjs/cell-35-output-1.png" class="quarto-figure quarto-figure-center" alt="Two independently sampled uniform score distributions beside an ROC curve close to the random diagonal." width="947" height="443"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-35-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img data-src="slides_files/figure-revealjs/cell-35-output-1.png" class="quarto-figure quarto-figure-center" alt="Two independently sampled uniform score distributions beside an ROC curve close to the random diagonal." width="947" height="443"></a></p>
 </figure>
 </div>
 </div>
@@ -1938,7 +1955,7 @@ Macro recall: 0.80</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-36-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img data-src="slides_files/figure-revealjs/cell-36-output-1.png" class="quarto-figure quarto-figure-center" alt="Positive examples receiving systematically lower scores than negative examples beside an ROC curve below the random diagonal." width="947" height="443"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-36-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img data-src="slides_files/figure-revealjs/cell-36-output-1.png" class="quarto-figure quarto-figure-center" alt="Positive examples receiving systematically lower scores than negative examples beside an ROC curve below the random diagonal." width="947" height="443"></a></p>
 </figure>
 </div>
 </div>
@@ -2332,7 +2349,7 @@ scikit-learn AUROC: 0.938</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-41-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img data-src="slides_files/figure-revealjs/cell-41-output-2.png" class="quarto-figure quarto-figure-center" alt="ROC curve from the lecture logistic regression implementation." width="664" height="525"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-41-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img data-src="slides_files/figure-revealjs/cell-41-output-2.png" class="quarto-figure quarto-figure-center" alt="ROC curve from the lecture logistic regression implementation." width="664" height="525"></a></p>
 </figure>
 </div>
 </div>
@@ -2373,7 +2390,10 @@ scikit-learn AUROC: 0.938</code></pre>
 <li>Related the decision threshold to the <strong>precision-recall trade-off</strong> and to operating points on the <strong>ROC curve</strong>.</li>
 <li>Interpreted <strong>AUROC</strong> as a measure of score ranking. AUROC does not assess probability calibration or select a decision threshold.</li>
 </ul>
-</section>
+
+<aside><div>
+<p>Penguin illustrations used throughout this lecture were generated with OpenAI image generation tools from prompts and concepts prepared for this course.</p>
+</div></aside></section>
 <section id="key-references" class="slide level2">
 <h2>Key references</h2>
 <ul>
@@ -2386,7 +2406,7 @@ scikit-learn AUROC: 0.938</code></pre>
 <h2>Evaluating Learning Algorithms</h2>
 <div class="columns">
 <div class="column" style="width:20%;">
-<p><a href="../../assets/images/evaluating_learning_algorithms.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img data-src="../../assets/images/evaluating_learning_algorithms.jpg"></a></p>
+<p><a href="../../assets/images/evaluating_learning_algorithms.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img data-src="../../assets/images/evaluating_learning_algorithms.jpg"></a></p>
 </div><div class="column" style="width:80%;">
 <ul>
 <li><p>This <a href="https://www.cambridge.org/core/books/evaluating-learning-algorithms/3CB22D16AB609D1770C24CA2CB5A11BF" class="external" data-icon="true">book</a> examines the evaluation process, with particular attention to classification algorithms <span class="citation" data-cites="Japkowicz:2011aa">(<a href="#/references" role="doc-biblioref" onclick="">Japkowicz and Shah 2011</a>)</span>.</p></li>
@@ -2503,7 +2523,7 @@ Unceta, Irene, Paula Subı́as-Beltrán, and Oriol Pujol. 2026. <span>“The Epi
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-42-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img data-src="slides_files/figure-revealjs/cell-42-output-1.png" alt="Four-class confusion matrix for selected 20 Newsgroups topics." width="625" height="451"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-42-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img data-src="slides_files/figure-revealjs/cell-42-output-1.png" alt="Four-class confusion matrix for selected 20 Newsgroups topics." width="625" height="451"></a></p>
 </figure>
 </div>
 </div>
@@ -2837,7 +2857,7 @@ From: 1 To: tested_positive</p>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-51-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img data-src="slides_files/figure-revealjs/cell-51-output-1.png" class="quarto-figure quarto-figure-center" alt="ROC curves for four classifiers on the Pima diabetes test set." width="452" height="451"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-51-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-32"><img data-src="slides_files/figure-revealjs/cell-51-output-1.png" class="quarto-figure quarto-figure-center" alt="ROC curves for four classifiers on the Pima diabetes test set." width="452" height="451"></a></p>
 </figure>
 </div>
 </div>

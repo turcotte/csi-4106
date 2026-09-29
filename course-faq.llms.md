@@ -45,7 +45,7 @@ By clicking on **Assignments**, you should see the following notice at the top o
   - identify methodological problems in a machine-learning experiment; or
   - perform a short calculation that does not require a calculator.
 - **How to prepare effectively**:
-  - Review both the lecture slides and the accompanying notebooks; they provide complementary explanations and examples.
+  - Review both the lecture slides and the accompanying notebooks (); they provide complementary explanations and examples.
   - Make sure that you can explain important concepts in your own words and recognize when their assumptions apply.
   - Revisit examples involving model training, prediction, validation, preprocessing, evaluation metrics, and the interpretation of experimental results.
   - Practise explaining why an answer is correct and why plausible alternatives are incorrect. Simply recognizing terminology is not sufficient.

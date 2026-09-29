@@ -14,7 +14,7 @@ University of Ottawa
 
 Published
 
-September 19, 2026
+September 29, 2026
 
 This notebook implements binary logistic regression with NumPy. The model uses binary cross-entropy and batch gradient descent, matching the equations developed in Lecture 6.
 
@@ -348,3 +348,82 @@ plt.show()
 ![](LogisticRegression_files/figure-html/cell-8-output-1.png)
 
 The sigmoid acts on the linear score \theta_0+w^\top x. The signed distance to the boundary divides that score by \lVert w\rVert; the two quantities therefore differ whenever the weight vector is not a unit vector.
+
+``` python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Decision boundary: theta_0 + w^T x = 0
+w = np.array([1.0, 2.0])
+theta_0 = -4.0
+
+# Two points on the boundary
+a = np.array([0.5, 1.75])
+b = np.array([3.0, 0.5])
+
+# Unit vectors tangent and normal to the boundary
+tangent = (b - a) / np.linalg.norm(b - a)
+normal = w / np.linalg.norm(w)
+
+fig, ax = plt.subplots(figsize=(7, 5))
+
+# Decision boundary
+x1 = np.linspace(-0.25, 4.0, 100)
+x2 = -(theta_0 + w[0] * x1) / w[1]
+ax.plot(x1, x2, color="black", label=r"$t(x)=0$")
+
+# Position vectors from the origin
+for point, label, color in [
+    (a, r"$a$", "tab:blue"),
+    (b, r"$b$", "tab:orange"),
+]:
+    ax.annotate(
+        "",
+        xy=point,
+        xytext=(0, 0),
+        arrowprops=dict(arrowstyle="->", color=color, lw=2),
+    )
+    ax.scatter(*point, color=color, zorder=3)
+    ax.text(*(point + 0.08), label, color=color)
+
+# Displacement from a to b: b - a
+ax.annotate(
+    "",
+    xy=b,
+    xytext=a,
+    arrowprops=dict(arrowstyle="->", color="tab:green", lw=3),
+)
+midpoint = (a + b) / 2
+ax.text(
+    *(midpoint - 0.25 * normal),
+    r"$b-a$",
+    color="tab:green",
+    ha="center",
+)
+
+# Weight vector, drawn from the boundary
+normal_endpoint = midpoint + normal
+ax.annotate(
+    "",
+    xy=normal_endpoint,
+    xytext=midpoint,
+    arrowprops=dict(arrowstyle="->", color="tab:red", lw=3),
+)
+ax.text(
+    *(normal_endpoint + 0.08 * normal),
+    r"$w$",
+    color="tab:red",
+)
+
+ax.axhline(0, color="gray", lw=0.5)
+ax.axvline(0, color="gray", lw=0.5)
+ax.set_aspect("equal")
+ax.set_xlim(-0.3, 4.1)
+ax.set_ylim(-0.3, 2.8)
+ax.set_xlabel(r"$x_1$")
+ax.set_ylabel(r"$x_2$")
+ax.legend()
+plt.show()
+```
+
+![](LogisticRegression_files/figure-html/cell-9-output-1.png)

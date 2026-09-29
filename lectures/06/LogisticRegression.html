@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Marcel Turcotte">
-<meta name="dcterms.date" content="2026-09-19">
+<meta name="dcterms.date" content="2026-09-29">
 
 <title>Logistic regression trained with batch gradient descent – CSI 4106 - Fall 2026</title>
 <style>
@@ -527,7 +527,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 19, 2026</p>
+      <p class="date">September 29, 2026</p>
     </div>
   </div>
   
@@ -542,7 +542,7 @@ window.Quarto = {
 <p>This notebook implements binary logistic regression with NumPy. The model uses binary cross-entropy and batch gradient descent, matching the equations developed in Lecture 6.</p>
 <section id="imports" class="level1">
 <h1>Imports</h1>
-<div id="7b1f7665" class="cell" data-execution_count="2">
+<div id="10a79df6" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -564,7 +564,7 @@ z = X_b\theta,
 \theta \leftarrow \theta-\alpha\nabla J(\theta).
 </span></p>
 <p>Here, <span class="math inline">\alpha</span> is the learning rate.</p>
-<div id="ac4bdf31" class="cell" data-execution_count="3">
+<div id="40e125a7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> LogisticRegression:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Binary logistic regression trained with batch gradient descent.</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -713,7 +713,7 @@ z = X_b\theta,
 <section id="a-two-dimensional-example" class="level1">
 <h1>A two-dimensional example</h1>
 <p>The two features let us see the probability surface, decision boundary, and normal vector directly.</p>
-<div id="a3f04cfa" class="cell" data-execution_count="4">
+<div id="42adc5fb" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> make_blobs(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    n_samples<span class="op">=</span><span class="dv">1000</span>,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    n_features<span class="op">=</span><span class="dv">2</span>,</span>
@@ -730,7 +730,7 @@ z = X_b\theta,
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y,</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="7ca43985" class="cell" data-execution_count="5">
+<div id="1b790b4e" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">6</span>))</span>
@@ -768,7 +768,7 @@ z = X_b\theta,
 </section>
 <section id="training" class="level1">
 <h1>Training</h1>
-<div id="5a7eb4de" class="cell" data-execution_count="6">
+<div id="bbc3b756" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LogisticRegression(learning_rate<span class="op">=</span><span class="fl">0.1</span>, max_iter<span class="op">=</span><span class="dv">500</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -780,7 +780,7 @@ Feature coefficients: [ 1.06044862 -0.48332183]</code></pre>
 </div>
 </div>
 <p>The loss decreases as batch gradient descent updates the parameter vector.</p>
-<div id="ea2ce2aa" class="cell" data-execution_count="7">
+<div id="8a4fcd34" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
@@ -803,7 +803,7 @@ Feature coefficients: [ 1.06044862 -0.48332183]</code></pre>
 <section id="probability-surface-and-decision-boundary" class="level1">
 <h1>Probability surface and decision boundary</h1>
 <p>The green contour shows where <span class="math inline">P(y=1\mid x)=0.5</span>. Let <span class="math inline">w=(\theta_1,\theta_2)^\top</span> denote the fitted feature-weight vector. This vector is normal to the boundary.</p>
-<div id="235de281" class="cell" data-execution_count="8">
+<div id="debdba70" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x1_min, x1_max <span class="op">=</span> X[:, <span class="dv">0</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="fl">0.5</span>, X[:, <span class="dv">0</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="fl">0.5</span></span>
@@ -887,6 +887,89 @@ Feature coefficients: [ 1.06044862 -0.48332183]</code></pre>
 </div>
 </div>
 <p>The sigmoid acts on the linear score <span class="math inline">\theta_0+w^\top x</span>. The signed distance to the boundary divides that score by <span class="math inline">\lVert w\rVert</span>; the two quantities therefore differ whenever the weight vector is not a unit vector.</p>
+<div id="baaa9a37" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Decision boundary: theta_0 + w^T x = 0</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">2.0</span>])</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>theta_0 <span class="op">=</span> <span class="op">-</span><span class="fl">4.0</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Two points on the boundary</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="fl">0.5</span>, <span class="fl">1.75</span>])</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="fl">3.0</span>, <span class="fl">0.5</span>])</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Unit vectors tangent and normal to the boundary</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>tangent <span class="op">=</span> (b <span class="op">-</span> a) <span class="op">/</span> np.linalg.norm(b <span class="op">-</span> a)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>normal <span class="op">=</span> w <span class="op">/</span> np.linalg.norm(w)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Decision boundary</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">0.25</span>, <span class="fl">4.0</span>, <span class="dv">100</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> <span class="op">-</span>(theta_0 <span class="op">+</span> w[<span class="dv">0</span>] <span class="op">*</span> x1) <span class="op">/</span> w[<span class="dv">1</span>]</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>ax.plot(x1, x2, color<span class="op">=</span><span class="st">"black"</span>, label<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="vs">t</span><span class="kw">(</span><span class="vs">x</span><span class="kw">)</span><span class="vs">=0</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Position vectors from the origin</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> point, label, color <span class="kw">in</span> [</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    (a, <span class="vs">r"</span><span class="dv">$</span><span class="vs">a</span><span class="dv">$</span><span class="vs">"</span>, <span class="st">"tab:blue"</span>),</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    (b, <span class="vs">r"</span><span class="dv">$</span><span class="vs">b</span><span class="dv">$</span><span class="vs">"</span>, <span class="st">"tab:orange"</span>),</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>]:</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    ax.annotate(</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">""</span>,</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>        xy<span class="op">=</span>point,</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>        xytext<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">"-&gt;"</span>, color<span class="op">=</span>color, lw<span class="op">=</span><span class="dv">2</span>),</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    ax.scatter(<span class="op">*</span>point, color<span class="op">=</span>color, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    ax.text(<span class="op">*</span>(point <span class="op">+</span> <span class="fl">0.08</span>), label, color<span class="op">=</span>color)</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Displacement from a to b: b - a</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>ax.annotate(</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">""</span>,</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    xy<span class="op">=</span>b,</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    xytext<span class="op">=</span>a,</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">"-&gt;"</span>, color<span class="op">=</span><span class="st">"tab:green"</span>, lw<span class="op">=</span><span class="dv">3</span>),</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>midpoint <span class="op">=</span> (a <span class="op">+</span> b) <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>ax.text(</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>(midpoint <span class="op">-</span> <span class="fl">0.25</span> <span class="op">*</span> normal),</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    <span class="vs">r"</span><span class="dv">$</span><span class="vs">b-a</span><span class="dv">$</span><span class="vs">"</span>,</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"tab:green"</span>,</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    ha<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Weight vector, drawn from the boundary</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>normal_endpoint <span class="op">=</span> midpoint <span class="op">+</span> normal</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>ax.annotate(</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>    <span class="st">""</span>,</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>    xy<span class="op">=</span>normal_endpoint,</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>    xytext<span class="op">=</span>midpoint,</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>    arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">"-&gt;"</span>, color<span class="op">=</span><span class="st">"tab:red"</span>, lw<span class="op">=</span><span class="dv">3</span>),</span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>ax.text(</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>(normal_endpoint <span class="op">+</span> <span class="fl">0.08</span> <span class="op">*</span> normal),</span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a>    <span class="vs">r"</span><span class="dv">$</span><span class="vs">w</span><span class="dv">$</span><span class="vs">"</span>,</span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"tab:red"</span>,</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"gray"</span>, lw<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"gray"</span>, lw<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">"equal"</span>)</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="op">-</span><span class="fl">0.3</span>, <span class="fl">4.1</span>)</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="op">-</span><span class="fl">0.3</span>, <span class="fl">2.8</span>)</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x_1</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="vs">r"</span><span class="dv">$</span><span class="vs">x_2</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="LogisticRegression_files/figure-html/cell-9-output-1.png" width="590" height="427" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
