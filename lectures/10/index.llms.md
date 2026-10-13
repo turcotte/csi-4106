@@ -12,4 +12,4 @@ CSI4106 Introduction to Artificial Intelligence
 
 ## Practice
 
-- [Scaling ](../../lectures/10/Scaling.llms.md) - We apply **k-Nearest Neighbours (KNN) regression** to predict house prices, utilizing two features: the number of rooms and square footage, which inherently possess differing scales. We compare the model’s performance with and without feature scaling.
+- [Scaling ](../../lectures/10/Scaling.llms.md) - An independently executable KNN regression example showing how room count and square footage create different distance geometries, nearest neighbours, and predictions before and after leakage-safe feature scaling.

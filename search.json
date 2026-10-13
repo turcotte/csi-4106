@@ -4567,56 +4567,56 @@
     "href": "lectures/10/Scaling.html",
     "title": "Scaling",
     "section": "",
-    "text": "We pretend to predict a house price using k-Nearest Neighbors (KNN) regression with two features:\n\nx_1: number of rooms (small scale)\nx_2: square footage (large scale)\n\nWe create three examples a, b, c chosen so that:\n\nWithout scaling, a is closer to b (because square footage dominates).\nWith scaling (z-score), a becomes closer to c (rooms difference matters after rescaling)."
+    "text": "This independently executable notebook expands the scaling example from Lecture 10. It focuses on how feature scales alter the geometry used by nearest-neighbour methods."
   },
   {
     "objectID": "lectures/10/Scaling.html#scenario",
     "href": "lectures/10/Scaling.html#scenario",
     "title": "Scaling",
-    "section": "",
-    "text": "We pretend to predict a house price using k-Nearest Neighbors (KNN) regression with two features:\n\nx_1: number of rooms (small scale)\nx_2: square footage (large scale)\n\nWe create three examples a, b, c chosen so that:\n\nWithout scaling, a is closer to b (because square footage dominates).\nWith scaling (z-score), a becomes closer to c (rooms difference matters after rescaling)."
+    "section": "Scenario",
+    "text": "Scenario\nConsider a house-price prediction task using k-nearest neighbours (KNN) regression with two features:\n\nx_1: number of rooms (small scale)\nx_2: square footage (large scale)\n\nThe three examples a, b, and c are chosen so that:\n\nWithout scaling, a is closer to b (because square footage dominates).\nWith scaling (z-score), a becomes closer to c (rooms difference matters after rescaling)."
   },
   {
     "objectID": "lectures/10/Scaling.html#data-three-houses",
     "href": "lectures/10/Scaling.html#data-three-houses",
     "title": "Scaling",
     "section": "Data (three houses)",
-    "text": "Data (three houses)\n\nimport numpy as np\nimport pandas as pd\n\n# Three examples (rooms, sqft); prices only for b and c (training)\npoint_names = [\"a\", \"b\", \"c\"]\nX = np.array([\n    [4, 1500.0],  # a (query)\n    [8, 1520.0],  # b (train)\n    [4, 1300.0],  # c (train)\n], dtype=float)\n\nprices = pd.Series([np.nan, 520_000, 390_000], index=point_names, name=\"price\")\n\ndf = pd.DataFrame(X, columns=[\"rooms\", \"sqft\"], index=point_names)\ndisplay(df)\ndisplay(prices.to_frame())\n\n\n\n\n\n\n\n\nrooms\nsqft\n\n\n\n\na\n4.0\n1500.0\n\n\nb\n8.0\n1520.0\n\n\nc\n4.0\n1300.0\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nprice\n\n\n\n\na\nNaN\n\n\nb\n520000.0\n\n\nc\n390000.0\n\n\n\n\n\n\n\nNote. We’ll treat b and c as the training set, and a as the query whose price we want to predict."
+    "text": "Data (three houses)\n\nimport numpy as np\nimport pandas as pd\n\n# Three examples (rooms, sqft); prices only for b and c (training)\npoint_names = [\"a\", \"b\", \"c\"]\nX = np.array([\n    [4, 1500.0],  # a (query)\n    [8, 1520.0],  # b (train)\n    [4, 1300.0],  # c (train)\n], dtype=float)\n\nprices = pd.Series([np.nan, 520_000, 390_000], index=point_names, name=\"price\")\n\ndf = pd.DataFrame(X, columns=[\"rooms\", \"sqft\"], index=point_names)\ndisplay(df)\ndisplay(prices.to_frame())\n\n\n\n\n\n\n\n\nrooms\nsqft\n\n\n\n\na\n4.0\n1500.0\n\n\nb\n8.0\n1520.0\n\n\nc\n4.0\n1300.0\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nprice\n\n\n\n\na\nNaN\n\n\nb\n520000.0\n\n\nc\n390000.0\n\n\n\n\n\n\n\nExamples b and c form the training set. Example a is the query whose price will be predicted. This deliberately tiny dataset illustrates geometry rather than realistic model estimation."
   },
   {
     "objectID": "lectures/10/Scaling.html#euclidean-distances-unscaled",
     "href": "lectures/10/Scaling.html#euclidean-distances-unscaled",
     "title": "Scaling",
     "section": "Euclidean distances (unscaled)",
-    "text": "Euclidean distances (unscaled)\nThe (squared) Euclidean distance between u and v is \n\\|u-v\\|_2^2 = \\sum_j (u_j - v_j)^2.\n\nWhen one feature has a much larger scale (e.g., square footage), it can dominate the sum.\n\nfrom sklearn.metrics import pairwise_distances\n\ndist_unscaled = pd.DataFrame(\n    pairwise_distances(df.values, metric=\"euclidean\"),\n    index=df.index, columns=df.index\n)\ndist_unscaled\n\n\n\n\n\n\n\n\na\nb\nc\n\n\n\n\na\n0.000000\n20.396078\n200.000000\n\n\nb\n20.396078\n0.000000\n220.036361\n\n\nc\n200.000000\n220.036361\n0.000000\n\n\n\n\n\n\n\n\nprint(\"Nearest to 'a' (unscaled):\", dist_unscaled.loc[\"a\"].drop(\"a\").idxmin())\n\nNearest to 'a' (unscaled): b\n\n\nExpectation: a is nearest to b (similar sqft overwhelms rooms)."
+    "text": "Euclidean distances (unscaled)\nThe squared Euclidean distance between u and v is \n\\|u-v\\|_2^2 = \\sum_j (u_j - v_j)^2.\n\nEuclidean distance is its square root, \\|u-v\\|_2; both expressions rank neighbours in the same order.\nWhen one feature has a much larger scale (e.g., square footage), it can dominate the sum.\n\nfrom sklearn.metrics import pairwise_distances\n\ndist_unscaled = pd.DataFrame(\n    pairwise_distances(df.values, metric=\"euclidean\"),\n    index=df.index, columns=df.index\n)\ndist_unscaled\n\n\n\n\n\n\n\n\na\nb\nc\n\n\n\n\na\n0.000000\n20.396078\n200.000000\n\n\nb\n20.396078\n0.000000\n220.036361\n\n\nc\n200.000000\n220.036361\n0.000000\n\n\n\n\n\n\n\n\nprint(\"Nearest to 'a' (unscaled):\", dist_unscaled.loc[\"a\"].drop(\"a\").idxmin())\n\nNearest to 'a' (unscaled): b\n\n\nResult: a is nearest to b because the square-footage difference dominates the distance."
   },
   {
     "objectID": "lectures/10/Scaling.html#proper-scaling-for-modeling-fit-scaler-on-the-training-set",
     "href": "lectures/10/Scaling.html#proper-scaling-for-modeling-fit-scaler-on-the-training-set",
     "title": "Scaling",
     "section": "Proper scaling for modeling (fit scaler on the training set)",
-    "text": "Proper scaling for modeling (fit scaler on the training set)\nFor a fair ML workflow, compute scaling parameters on the training data (b, c) only, then transform both train and query:\n\nz(x) = \\frac{x-\\mu_{\\text{train}}}{\\sigma_{\\text{train}}}.\n\n\nfrom sklearn.preprocessing import StandardScaler\n\ntrain_idx = [\"b\", \"c\"]\nquery_idx = [\"a\"]\n\nscaler = StandardScaler()\n\nscaler.fit(df.loc[train_idx])     # fit only on training points\n\nZ = pd.DataFrame(\n    scaler.transform(df),\n    columns=df.columns, index=df.index\n)\n\nZ\n\n\n\n\n\n\n\n\nrooms\nsqft\n\n\n\n\na\n-1.0\n0.818182\n\n\nb\n1.0\n1.000000\n\n\nc\n-1.0\n-1.000000"
+    "text": "Proper scaling for modeling (fit scaler on the training set)\nFor a leakage-safe workflow, compute scaling parameters on the training data (b, c) only, then transform both the training data and query:\n\nz(x) = \\frac{x-\\mu_{\\text{train}}}{\\sigma_{\\text{train}}}.\n\n\nfrom sklearn.preprocessing import StandardScaler\n\ntrain_idx = [\"b\", \"c\"]\nquery_idx = [\"a\"]\n\nscaler = StandardScaler()\n\nscaler.fit(df.loc[train_idx])     # fit only on training points\n\nZ = pd.DataFrame(\n    scaler.transform(df),\n    columns=df.columns, index=df.index\n)\n\nZ\n\n\n\n\n\n\n\n\nrooms\nsqft\n\n\n\n\na\n-1.0\n0.818182\n\n\nb\n1.0\n1.000000\n\n\nc\n-1.0\n-1.000000"
   },
   {
     "objectID": "lectures/10/Scaling.html#euclidean-distances-after-scaling",
     "href": "lectures/10/Scaling.html#euclidean-distances-after-scaling",
     "title": "Scaling",
     "section": "Euclidean distances (after scaling)",
-    "text": "Euclidean distances (after scaling)\n\ndist_scaled = pd.DataFrame(\n    pairwise_distances(Z.values, metric=\"euclidean\"),\n    index=Z.index, columns=Z.index\n)\ndist_scaled\n\n\n\n\n\n\n\n\na\nb\nc\n\n\n\n\na\n0.000000\n2.008247\n1.818182\n\n\nb\n2.008247\n0.000000\n2.828427\n\n\nc\n1.818182\n2.828427\n0.000000\n\n\n\n\n\n\n\n\nprint(\"Nearest to 'a' (scaled):\", dist_scaled.loc[\"a\"].drop(\"a\").idxmin())\n\nNearest to 'a' (scaled): c\n\n\nNow: a is nearest to c (rooms difference matters once features are on comparable scales)."
+    "text": "Euclidean distances (after scaling)\n\ndist_scaled = pd.DataFrame(\n    pairwise_distances(Z.values, metric=\"euclidean\"),\n    index=Z.index, columns=Z.index\n)\ndist_scaled\n\n\n\n\n\n\n\n\na\nb\nc\n\n\n\n\na\n0.000000\n2.008247\n1.818182\n\n\nb\n2.008247\n0.000000\n2.828427\n\n\nc\n1.818182\n2.828427\n0.000000\n\n\n\n\n\n\n\n\nprint(\"Nearest to 'a' (scaled):\", dist_scaled.loc[\"a\"].drop(\"a\").idxmin())\n\nNearest to 'a' (scaled): c\n\n\nNow: a is nearest to c because the room-count difference matters once the features have comparable scales."
   },
   {
     "objectID": "lectures/10/Scaling.html#knn-regressor-flip-in-the-prediction",
     "href": "lectures/10/Scaling.html#knn-regressor-flip-in-the-prediction",
     "title": "Scaling",
     "section": "KNN regressor: flip in the prediction",
-    "text": "KNN regressor: flip in the prediction\nWe’ll run a 1-NN regressor (so the prediction is exactly the nearest neighbor’s price) with and without scaling.\n\nfrom sklearn.neighbors import KNeighborsRegressor\nfrom sklearn.pipeline import Pipeline\n\nX_train = df.loc[train_idx].values          # b, c\ny_train = prices.loc[train_idx].values      # prices for b, c\nX_query = df.loc[query_idx].values          # a\n\n# 1) No scaling\nknn_plain = KNeighborsRegressor(n_neighbors=1, metric=\"euclidean\")\nknn_plain.fit(X_train, y_train)\npred_plain = knn_plain.predict(X_query)[0]\n\n# 2) With scaling (pipeline fits scaler only on training, then KNN on scaled)\nknn_scaled = Pipeline([\n    (\"scaler\", StandardScaler()),\n    (\"knn\", KNeighborsRegressor(n_neighbors=1, metric=\"euclidean\"))\n])\nknn_scaled.fit(X_train, y_train)\npred_scaled = knn_scaled.predict(X_query)[0]\n\npd.DataFrame(\n    {\n        \"prediction (no scaling)\": [pred_plain],\n        \"prediction (with scaling)\": [pred_scaled],\n        \"nearest neighbor (no scaling)\": [point_names[1] if pred_plain==prices['b'] else point_names[2]],\n        \"nearest neighbor (with scaling)\": [point_names[1] if pred_scaled==prices['b'] else point_names[2]],\n    },\n    index=[\"a\"]\n)\n\n\n\n\n\n\n\n\nprediction (no scaling)\nprediction (with scaling)\nnearest neighbor (no scaling)\nnearest neighbor (with scaling)\n\n\n\n\na\n520000.0\n390000.0\nb\nc\n\n\n\n\n\n\n\nTakeaway:\n\nUnscaled: a ↔︎ b ⇒ prediction ≈ $520,000\nScaled: a ↔︎ c ⇒ prediction ≈ $390,000\n\nSame model and data; just feature scale changed the neighbor—and the prediction."
+    "text": "KNN regressor: flip in the prediction\nA 1-NN regressor predicts the price of the nearest training example. Compare the same estimator with and without scaling.\n\nfrom sklearn.neighbors import KNeighborsRegressor\nfrom sklearn.pipeline import Pipeline\n\nX_train = df.loc[train_idx].values          # b, c\ny_train = prices.loc[train_idx].values      # prices for b, c\nX_query = df.loc[query_idx].values          # a\n\n# 1) No scaling\nknn_plain = KNeighborsRegressor(n_neighbors=1, metric=\"euclidean\")\nknn_plain.fit(X_train, y_train)\npred_plain = knn_plain.predict(X_query)[0]\n\n# 2) With scaling (pipeline fits scaler only on training, then KNN on scaled)\nknn_scaled = Pipeline([\n    (\"scaler\", StandardScaler()),\n    (\"knn\", KNeighborsRegressor(n_neighbors=1, metric=\"euclidean\"))\n])\nknn_scaled.fit(X_train, y_train)\npred_scaled = knn_scaled.predict(X_query)[0]\n\npd.DataFrame(\n    {\n        \"prediction (no scaling)\": [pred_plain],\n        \"prediction (with scaling)\": [pred_scaled],\n        \"nearest neighbour (no scaling)\": [\n            train_idx[\n                knn_plain.kneighbors(\n                    X_query, return_distance=False\n                )[0, 0]\n            ]\n        ],\n        \"nearest neighbour (with scaling)\": [\n            train_idx[\n                knn_scaled[\"knn\"].kneighbors(\n                    knn_scaled[\"scaler\"].transform(X_query),\n                    return_distance=False,\n                )[0, 0]\n            ]\n        ],\n    },\n    index=[\"a\"]\n)\n\n\n\n\n\n\n\n\nprediction (no scaling)\nprediction (with scaling)\nnearest neighbour (no scaling)\nnearest neighbour (with scaling)\n\n\n\n\na\n520000.0\n390000.0\nb\nc\n\n\n\n\n\n\n\nTakeaway:\n\nUnscaled: a ↔︎ b ⇒ prediction ≈ $520,000\nScaled: a ↔︎ c ⇒ prediction ≈ $390,000\n\nThe query has no known target, so this is not a performance comparison. It demonstrates that the chosen representation changed the nearest neighbour—and therefore the prediction."
   },
   {
     "objectID": "lectures/10/Scaling.html#why-this-happens",
     "href": "lectures/10/Scaling.html#why-this-happens",
     "title": "Scaling",
     "section": "Why this happens",
-    "text": "Why this happens\n\n(Squared) Euclidean distance aggregates per-feature squared differences:\n\n\n  |u-v|_2^2 = \\sum_j (u_j - v_j)^2.\n\n\nA large-scale feature (e.g., sqft) can dwarf small-scale features (e.g., rooms), so KNN effectively “ignores” the smaller-scale dimensions.\nStandardization (z-scores) or min-max scaling puts dimensions on comparable footing.\nRule of thumb: For distance-based methods (KNN, k-means, RBF kernels, etc.), always scale features."
+    "text": "Why this happens\n\nSquared Euclidean distance aggregates per-feature squared differences:\n\n\n  \\|u-v\\|_2^2 = \\sum_j (u_j - v_j)^2.\n\n\nA large-scale feature (e.g., sqft) can dwarf small-scale features (e.g., rooms), so KNN effectively “ignores” the smaller-scale dimensions.\nStandardization (z-scores) or min-max scaling puts dimensions on comparable footing.\nRule of thumb: For distance-based methods, scale features unless their existing units deliberately encode the relative importance that the distance should use."
   },
   {
     "objectID": "lectures/10/Scaling.html#show-the-distance-to-neighbors-only",
@@ -4630,14 +4630,14 @@
     "href": "lectures/10/Scaling.html#switch-to-manhattan-distance",
     "title": "Scaling",
     "section": "Switch to Manhattan distance?",
-    "text": "Switch to Manhattan distance?\nEven with L_1 distance, scale still matters:\n\n|u-v|_1 = \\sum_j |u_j - v_j|.\n\nTry replacing metric=\"euclidean\" with metric=\"manhattan\"—you’ll see the same sensitivity to feature scale.\n\nfrom sklearn.neighbors import KNeighborsRegressor\nfrom sklearn.pipeline import Pipeline\n\nX_train = df.loc[train_idx].values          # b, c\ny_train = prices.loc[train_idx].values      # prices for b, c\nX_query = df.loc[query_idx].values          # a\n\n# 1) No scaling\nknn_plain = KNeighborsRegressor(n_neighbors=1, metric=\"manhattan\")\nknn_plain.fit(X_train, y_train)\npred_plain = knn_plain.predict(X_query)[0]\n\n# 2) With scaling (pipeline fits scaler only on training, then KNN on scaled)\nknn_scaled = Pipeline([\n    (\"scaler\", StandardScaler()),\n    (\"knn\", KNeighborsRegressor(n_neighbors=1, metric=\"manhattan\"))\n])\nknn_scaled.fit(X_train, y_train)\npred_scaled = knn_scaled.predict(X_query)[0]\n\npd.DataFrame(\n    {\n        \"prediction (no scaling)\": [pred_plain],\n        \"prediction (with scaling)\": [pred_scaled],\n        \"nearest neighbor (no scaling)\": [point_names[1] if pred_plain==prices['b'] else point_names[2]],\n        \"nearest neighbor (with scaling)\": [point_names[1] if pred_scaled==prices['b'] else point_names[2]],\n    },\n    index=[\"a\"]\n)\n\n\n\n\n\n\n\n\nprediction (no scaling)\nprediction (with scaling)\nnearest neighbor (no scaling)\nnearest neighbor (with scaling)\n\n\n\n\na\n520000.0\n390000.0\nb\nc"
+    "text": "Switch to Manhattan distance?\nScale also matters with L_1 distance:\n\n|u-v|_1 = \\sum_j |u_j - v_j|.\n\nThe same training data can be reused with metric=\"manhattan\".\n\n# 1) No scaling\nknn_manhattan_plain = KNeighborsRegressor(\n    n_neighbors=1, metric=\"manhattan\"\n)\nknn_manhattan_plain.fit(X_train, y_train)\npred_manhattan_plain = knn_manhattan_plain.predict(X_query)[0]\n\n# 2) With scaling (pipeline fits scaler only on training, then KNN on scaled)\nknn_manhattan_scaled = Pipeline([\n    (\"scaler\", StandardScaler()),\n    (\"knn\", KNeighborsRegressor(n_neighbors=1, metric=\"manhattan\"))\n])\nknn_manhattan_scaled.fit(X_train, y_train)\npred_manhattan_scaled = knn_manhattan_scaled.predict(X_query)[0]\n\npd.DataFrame(\n    {\n        \"prediction (no scaling)\": [pred_manhattan_plain],\n        \"prediction (with scaling)\": [pred_manhattan_scaled],\n    },\n    index=[\"a\"]\n)\n\n\n\n\n\n\n\n\nprediction (no scaling)\nprediction (with scaling)\n\n\n\n\na\n520000.0\n390000.0"
   },
   {
     "objectID": "lectures/10/Scaling.html#tldr",
     "href": "lectures/10/Scaling.html#tldr",
     "title": "Scaling",
     "section": "TL;DR",
-    "text": "TL;DR\n\nDistance-based models are highly sensitive to feature scales.\nAlways scale your inputs (fit the scaler on the training set only).\nScaling can change nearest neighbors and therefore change predictions—as seen here with 1-NN regression."
+    "text": "TL;DR\n\nDistance-based models are sensitive to the units and relative scales of their features.\nFit a scaler on the training data only, then reuse it for validation, test, and production examples.\nA pipeline keeps scaling and prediction together and prevents leakage during cross-validation.\nScaling changes the model’s geometry and can therefore change nearest neighbours and predictions."
   },
   {
     "objectID": "lectures/10/index.html",
@@ -4658,28 +4658,28 @@
     "href": "lectures/10/index.html#practice",
     "title": "Machine Learning Engineering",
     "section": "Practice",
-    "text": "Practice\n\nScaling  - We apply k-Nearest Neighbours (KNN) regression to predict house prices, utilizing two features: the number of rooms and square footage, which inherently possess differing scales. We compare the model’s performance with and without feature scaling."
+    "text": "Practice\n\nScaling  - An independently executable KNN regression example showing how room count and square footage create different distance geometries, nearest neighbours, and predictions before and after leakage-safe feature scaling."
   },
   {
     "objectID": "lectures/10/slides.html#message-of-the-day",
     "href": "lectures/10/slides.html#message-of-the-day",
     "title": "Machine Learning Engineering",
     "section": "Message of the Day",
-    "text": "Message of the Day\n\n\n\n\n\n\n\nThe Weston Family Foundation has awarded a $10 million grant to a collaborative research project between the University of Ottawa and the University of Alberta. This initiative aims to conduct research into inflammatory bowel disease (IBD).\nIn Canada, over 300,000 individuals suffer from chronic IBD, which includes conditions such as Crohn’s disease and ulcerative colitis. The project will leverage data from RapidAIM, a platform developed at the University of Ottawa designed to quickly evaluate the effects of various compounds on individual microbiomes.\nA key objective of this research is to lay the groundwork for training an artificial intelligence (AI) model. This model will be capable of generating personalized dietary recommendations, tailored to the unique microbiome profiles of individuals with IBD.\n\n\nuOttawa developing AI-powered tool to personalize diets for people living with inflammatory bowel diseases (IBD), 2025-09-23."
+    "text": "Message of the Day\n\n\n\n\n\n\n\n\n\n\n Aidan Gomez, Co-Founder and CEO\n\n\nCanada is home for Cohere. It’s where we founded the company, where so much of our talent comes from, and where we want to keep building for the long term. Ottawa has an incredible technology community and a deep pool of technical talent. Establishing our first office in the city is an important step in investing in our team and building for the future.\n\n\n\nWe began the semester by introducing Joëlle Pineau and her role at Cohere. Today, we return to Cohere as the company expands its presence in Canada with a new permanent office in Ottawa. This is an exciting development for our local AI community—and perhaps a future career opportunity for some of you.\nTwo of Cohere’s co-founders have interesting connections to both Ottawa and music.\nAidan Gomez, Cohere’s co-founder and CEO, was one of the eight authors of the landmark 2017 paper Attention Is All You Need, which introduced the Transformer architecture underlying modern large language models. His path into machine learning also has a musical connection. A pianist since childhood, he worked as an undergraduate on an application that used neural networks to follow a live piano performance and automatically turn the pages of the musical score.\nNick Frosst, another Cohere co-founder, grew up in Ottawa and says that he first learned to program at Bell High School in Bells Corners. He later studied computer science and cognitive science at the University of Toronto and became the first employee in Geoffrey Hinton’s Google Brain lab in Toronto. Frosst also has a rather unusual second career: he is the lead singer of the Canadian indie-rock band Good Kid.\n\n\nCohere Expands Canadian Footprint with New Ottawa Office, 2026-10-08."
   },
   {
     "objectID": "lectures/10/slides.html#learning-objectives",
     "href": "lectures/10/slides.html#learning-objectives",
     "title": "Machine Learning Engineering",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nExplain feature extraction, compare encoding methods, and justify choices based on data nature.\nApply normalization/standardization for feature scaling and handle missing values using imputation.\nDefine class imbalance, explore solutions like resampling and SMOTE, and ensure proper application.\nApply concepts to real-world datasets, analyze results, and understand the machine learning pipeline.\nRecognize dataset size impact, discuss data augmentation, and explore data effectiveness in ML."
+    "text": "Learning Objectives\n\nChoose an encoding that matches a feature’s meaning and the needs of the estimator.\nExplain when feature scaling matters and apply it without leaking validation or test information.\nCompare strategies for missing values and implement imputation within a pipeline.\nApply class-imbalance remedies to training data without altering the evaluation distribution.\nConstruct nonlinear and interaction features while controlling model complexity.\nExplain how data quality, coverage, and augmentation affect generalization."
   },
   {
     "objectID": "lectures/10/slides.html#machine-learning-engineering-1",
     "href": "lectures/10/slides.html#machine-learning-engineering-1",
     "title": "Machine Learning Engineering",
     "section": "Machine Learning Engineering",
-    "text": "Machine Learning Engineering\n\n\n\n\n\n\n\nThe courses SDS 3386: Data Science Lab and CSI 4142: Fundamentals of Data Science provide comprehensive coverage of machine learning engineering. For those not enrolled in these courses, we provide an overview of essential concepts.\nAs illustrated, the life cycle of a machine learning project typically involves multiple iterations. Each cycle enhances understanding of the problem and reveals limitations. Insufficient data quality often precipitates project failure.\nCharacteristics of High-Quality Data\n\nVolume: Is the dataset sufficiently large to support generalization?\nRelevance: Do the features accurately model the problem?\nRepresentation: Does the data reflect the conditions expected in production?\n\nAre these features obtainable from real-world inputs?\nDoes the dataset adequately cover and represent feature examples?\n\nBias: Is the data free from bias?\nLabel Consistency: Are the labels consistent throughout the dataset?\n\nMachine learning Project Cycle\nGathering data and extracting features are the first two steps of a machine learning project.\n\nGather adequate data.\nExtract features from the raw data:\n\nThis process is labor-intensive.\nIt necessitates creativity.\nDomain knowledge is highly beneficial.\n\n\n\n\nAttribution: Burkov (2020), Figure 3.1"
+    "text": "Machine Learning Engineering\n\n\n\n\n\n\n\nThe courses SDS 3386: Data Science Lab and CSI 4142: Fundamentals of Data Science provide comprehensive coverage of machine learning engineering. This lecture introduces a focused subset of the preprocessing and feature-engineering concepts used in those courses.\nAs illustrated, the life cycle of a machine learning project typically involves multiple iterations. Each cycle enhances understanding of the problem and reveals limitations. Insufficient data quality often precipitates project failure.\nCharacteristics of High-Quality Data\n\nVolume: Is the dataset sufficiently large to support generalization?\nRelevance: Do the features accurately model the problem?\nRepresentation: Does the data reflect the conditions expected in production?\n\nAre these features obtainable from real-world inputs?\nDoes the dataset adequately cover and represent feature examples?\n\nBias: Is the data free from bias?\nLabel Consistency: Are the labels consistent throughout the dataset?\n\nMachine Learning Project Cycle\nGathering data and extracting features are the first two steps of a machine learning project.\n\nGather adequate data.\nExtract features from the raw data:\n\nThis process is labor-intensive.\nIt necessitates creativity.\nDomain knowledge is highly beneficial.\n\n\n\n\nAttribution: Burkov (2020), Figure 3.1"
   },
   {
     "objectID": "lectures/10/slides.html#why",
@@ -4728,7 +4728,7 @@
     "href": "lectures/10/slides.html#categorical-data",
     "title": "Machine Learning Engineering",
     "section": "Categorical Data",
-    "text": "Categorical Data\nKey Points on Data Representation\n\nNumerical Representation: Some learning algorithms require data to be in numerical form."
+    "text": "Categorical Data\nKey Points on Data Representation\n\nNumerical Representation: Many learning algorithms require numerical feature vectors.\nMeaning Matters: The representation should preserve whether categories are unordered or have an inherent order."
   },
   {
     "objectID": "lectures/10/slides.html#encoding-methods",
@@ -4749,49 +4749,49 @@
     "href": "lectures/10/slides.html#definition",
     "title": "Machine Learning Engineering",
     "section": "Definition",
-    "text": "Definition\nOne-Hot Encoding: A technique that converts categorical variables into a binary vector representation, where each category is represented by a vector with a single ‘1’ and all other elements as ‘0’.\n\n\nThere are numerous other vector representations, among which “embeddings” stand out for their remarkable efficiency."
+    "text": "Definition\nOne-Hot Encoding: A technique that converts categorical variables into a binary vector representation, where each category is represented by a vector with a single ‘1’ and all other elements as ‘0’.\n\n\nHigh-cardinality attributes may require other representations, such as grouping infrequent categories, hashing, target encoding, or learned embeddings."
   },
   {
     "objectID": "lectures/10/slides.html#onehotencoder",
     "href": "lectures/10/slides.html#onehotencoder",
     "title": "Machine Learning Engineering",
     "section": "OneHotEncoder",
-    "text": "OneHotEncoder\n\nfrom numpy import array\nfrom sklearn.preprocessing import OneHotEncoder\n\nwork = adult.data[['workclass']]\n\nonehot_encoder = OneHotEncoder()\n\nonehot_encoder.fit(work)\nvalues_encoded = onehot_encoder.transform(work)\n\nfor i in range(5): print(values_encoded.toarray()[i])\n\n[0. 0. 0. 1. 0. 0. 0. 0. 0.]\n[0. 0. 0. 1. 0. 0. 0. 0. 0.]\n[0. 1. 0. 0. 0. 0. 0. 0. 0.]\n[0. 0. 0. 1. 0. 0. 0. 0. 0.]\n[0. 0. 0. 0. 0. 0. 0. 0. 1.]\n\n\n\n\nA student from my research group faced a challenging debugging issue. They mistakenly created a new encoder for the test set using onehot_encoder.fit(X_test['some_attribute']), which produced a vector representation different from the one used during training. Consequently, the results on the training set were poor, while the results on the training set appeared satisfactory.\nWhile Pandas offers a method called get_dummies() for one-hot encoding, it is important to note the following distinctions:\n\nCategory Memory: OneHotEncoder retains the categories it was trained on, whereas get_dummies() does not.\nConsistency in Production: It is crucial to use the same encoding scheme in production as was used during training to ensure accurate results.\nVector Length Discrepancies: If get_dummies() encounters a different number of categories in new data, it will produce vectors of varying lengths, leading to potential errors.\nHandling Missing Values: When get_dummies() processes missing values, it generates an additional column to accommodate them.\n\nEnsuring consistency in encoding across training, validation, and production datasets is essential to maintain the integrity and accuracy of your machine learning models.\n\n\nConsistency is Key: Ensure you use the same encoding on: Validation Set, Test Set, and Production Data."
+    "text": "OneHotEncoder\n\nfrom sklearn.preprocessing import OneHotEncoder\n\nwork = adult.data[['workclass']]\n\nonehot_encoder = OneHotEncoder(handle_unknown=\"ignore\")\n\nonehot_encoder.fit(work)\nvalues_encoded = onehot_encoder.transform(work)\n\nvalues_encoded[:5].toarray()\n\narray([[0., 0., 0., 1., 0., 0., 0., 0., 0.],\n       [0., 0., 0., 1., 0., 0., 0., 0., 0.],\n       [0., 1., 0., 0., 0., 0., 0., 0., 0.],\n       [0., 0., 0., 1., 0., 0., 0., 0., 0.],\n       [0., 0., 0., 0., 0., 0., 0., 0., 1.]])\n\n\n\n\nAn encoder learns the categories and their column order during fit. Fitting a second encoder on validation, test, or production data can therefore change the meaning or number of columns. The correct pattern is to fit the encoder on the training data and reuse its transform method everywhere else. A pipeline applies this pattern automatically during cross-validation.\nWhile Pandas offers a method called get_dummies() for one-hot encoding, it is important to note the following distinctions:\n\nCategory Memory: OneHotEncoder retains the categories it was trained on, whereas get_dummies() does not.\nConsistency in Production: It is crucial to use the same encoding scheme in production as was used during training to ensure accurate results.\nVector Length Discrepancies: If get_dummies() encounters a different number of categories in new data, it will produce vectors of varying lengths, leading to potential errors.\nHandling Missing Values: By default, get_dummies() encodes a missing value as all zeros. An explicit missing-value column is created only with dummy_na=True.\n\nEnsuring consistency in encoding across training, validation, and production datasets is essential to maintain the integrity and accuracy of your machine learning models.\n\n\nConsistency is Key: Ensure you use the same encoding on: Validation Set, Test Set, and Production Data."
   },
   {
     "objectID": "lectures/10/slides.html#case-study",
     "href": "lectures/10/slides.html#case-study",
     "title": "Machine Learning Engineering",
     "section": "Case Study",
-    "text": "Case Study\n\nDataset: Heart Disease\n\nExamples: 303, features: 13, target: Presence/absence of disease\n\nCategorical Data:\n\nsex: 1 = male, 0 = female\ncp (chest pain type):\n\n1: Typical angina\n2: Atypical angina\n3: Non-anginal pain\n4: Asymptomatic\n\nOther: ‘fbs’, ‘restecg’, ‘exang’, ‘slope’, ‘thal’\n\n\n\n\nHere are some suggestions for further investigation:\n\nAssess the impact of omitting missing values on the dataset.\nImplement hyperparameter tuning to determine whether L_1 or L_2 regularization enhances model performance.\n\n\n\nTo simplify the analysis: Examples with missing values were dropped, no hyperparameter tuning was performed, numerical values were scaled for solver convergence."
+    "text": "Case Study\n\nDataset: Heart Disease\n\nExamples: 303, features: 13\nTarget: 0 denotes absence; values 1–4 denote presence of disease\n\nCategorical Data:\n\nsex: 1 = male, 0 = female\ncp (chest pain type):\n\n1: Typical angina\n2: Atypical angina\n3: Non-anginal pain\n4: Asymptomatic\n\nOther: ‘fbs’, ‘restecg’, ‘exang’, ‘slope’, ‘thal’\n\n\n\n\nThe UCI target records absence as 0 and degrees of presence as values 1 through 4. The code converts these values into the binary task described on the slide.\nDropped rows can differ systematically from complete rows, so this shortcut may introduce selection bias. A realistic analysis would investigate the missingness process and compare an imputation strategy fitted on the training data.\nThe example is intentionally limited to preprocessing. Model and regularization choices would be selected with validation data or cross-validation, while the test set would remain reserved for final evaluation.\n\n\nTo simplify the analysis: Examples with missing values are dropped, the target is converted to absence/presence, and no hyperparameter tuning is performed."
   },
   {
     "objectID": "lectures/10/slides.html#case-study-1",
     "href": "lectures/10/slides.html#case-study-1",
     "title": "Machine Learning Engineering",
     "section": "Case Study",
-    "text": "Case Study\n\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.datasets import fetch_openml\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import classification_report\n\n# Load the 'Heart-Disease' dataset from OpenML\ndata = fetch_openml(name='Heart-Disease', version=1, as_frame=True)\ndf = data.frame\n\n# Replace '?' with NaN and convert columns to numeric\nfor col in df.columns:\n    df[col] = pd.to_numeric(df[col], errors='coerce')\n\n# Drop rows with missing values\ndf.dropna(inplace=True)\n\n# Define features and target\nX = df.drop(columns=['target'])\ny = df['target']\n\n# Columns to encode with OneHotEncoder\ncolumns_to_encode = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'thal']\n\n# Identify numerical columns\nnumerical_columns = X.columns.difference(columns_to_encode)\n\n# Split the dataset into training and testing sets before transformations\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n\n# Apply OneHotEncoder and StandardScaler using ColumnTransformer\ncolumn_transformer = ColumnTransformer(\n    transformers=[\n        ('onehot', OneHotEncoder(), columns_to_encode),\n        ('scaler', StandardScaler(), numerical_columns)\n    ]\n)\n\n# Fit the transformer on the training data and transform both training and test data\nX_train_processed = column_transformer.fit_transform(X_train)\nX_test_processed = column_transformer.transform(X_test)\n\n# Initialize and train logistic regression model\nmodel = LogisticRegression(max_iter=1000)\nmodel = model.fit(X_train_processed, y_train)\n\n\nIn the context of using ColumnTransformer, the second element of the triplets, typically an estimator, can also be replaced with the options drop or passthrough. The drop option excludes the specified column from the transformation process, while passthrough retains the column in its original state without any modifications."
+    "text": "Case Study\n\nimport pandas as pd\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.datasets import fetch_openml\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import classification_report\nfrom sklearn.pipeline import Pipeline\n\n# Load the 'Heart-Disease' dataset from OpenML\ndata = fetch_openml(name='Heart-Disease', version=1, as_frame=True)\ndf = data.frame\n\n# Replace '?' with NaN and convert columns to numeric\nfor col in df.columns:\n    df[col] = pd.to_numeric(df[col], errors='coerce')\n\n# Drop rows with missing values\ndf.dropna(inplace=True)\n\n# Define features and convert the target to absence/presence\nX = df.drop(columns=['target'])\ny = (df['target'] &gt; 0).astype(int)\n\n# Columns to encode with OneHotEncoder\ncolumns_to_encode = ['sex', 'cp', 'fbs', 'restecg', 'exang', 'slope', 'thal']\n\n# Identify numerical columns\nnumerical_columns = X.columns.difference(columns_to_encode)\n\n# Split the dataset into training and testing sets before transformations\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42, stratify=y\n)\n\n# Apply OneHotEncoder and StandardScaler using ColumnTransformer\npreprocessor = ColumnTransformer(\n    transformers=[\n        (\n            'onehot',\n            OneHotEncoder(drop='first', handle_unknown='ignore'),\n            columns_to_encode,\n        ),\n        ('scaler', StandardScaler(), numerical_columns)\n    ]\n)\n\n# The pipeline fits preprocessing and the classifier on training data only\nheart_pipeline = Pipeline([\n    ('preprocessor', preprocessor),\n    ('classifier', LogisticRegression()),\n])\nheart_pipeline.fit(X_train, y_train)\n\n\nColumnTransformer applies different transformations to selected columns. Its transformer can also be drop, which excludes the selected columns, or passthrough, which retains them unchanged.\nThe surrounding Pipeline is the important engineering pattern: calling fit learns both the preprocessing parameters and the classifier from the training data. Calling predict applies the already-fitted transformations before classification. During cross-validation, each fold therefore learns its own preprocessing parameters from that fold’s training partition."
   },
   {
     "objectID": "lectures/10/slides.html#case-study---results",
     "href": "lectures/10/slides.html#case-study---results",
     "title": "Machine Learning Engineering",
     "section": "Case study - results",
-    "text": "Case study - results\n\n# Predict and evaluate the model\ny_pred = model.predict(X_test_processed)\n\nprint(classification_report(y_test, y_pred))\n\n              precision    recall  f1-score   support\n\n         0.0       0.87      0.93      0.90        29\n         1.0       0.93      0.88      0.90        32\n\n    accuracy                           0.90        61\n   macro avg       0.90      0.90      0.90        61\nweighted avg       0.90      0.90      0.90        61"
+    "text": "Case study - results\n\n# Predict and evaluate on the untouched test set\ny_pred = heart_pipeline.predict(X_test)\n\nprint(classification_report(y_test, y_pred))\n\n              precision    recall  f1-score   support\n\n           0       0.83      0.71      0.77        28\n           1       0.78      0.88      0.83        33\n\n    accuracy                           0.80        61\n   macro avg       0.81      0.80      0.80        61\nweighted avg       0.81      0.80      0.80        61"
   },
   {
     "objectID": "lectures/10/slides.html#case-study---chest-pain-cp",
     "href": "lectures/10/slides.html#case-study---chest-pain-cp",
     "title": "Machine Learning Engineering",
     "section": "Case study - chest pain (cp)",
-    "text": "Case study - chest pain (cp)\n\n# Retrieve feature names after transformation using get_feature_names_out()\nfeature_names = column_transformer.get_feature_names_out()\n\n# Get coefficients and map them to feature names\ncoefficients = model.coef_[0]\n\n# Create a DataFrame with feature names and coefficients\ncoef_df = pd.DataFrame({\n    'Feature': feature_names,\n    'Coefficient': coefficients\n})\n\n# Display coefficients associated with 'cp'\ncp_features = coef_df[coef_df['Feature'].str.contains('_cp')]\nprint(\"\\nCoefficients associated with 'cp':\")\nprint(cp_features)\n\n\nCoefficients associated with 'cp':\n          Feature  Coefficient\n2  onehot__cp_0.0    -1.013382\n3  onehot__cp_1.0    -0.212284\n4  onehot__cp_2.0     0.599934\n5  onehot__cp_3.0     0.628824"
+    "text": "Case study - chest pain (cp)\n\n# Retrieve feature names and coefficients from the fitted pipeline\nfeature_names = heart_pipeline[\n    'preprocessor'\n].get_feature_names_out()\n\ncoefficients = heart_pipeline['classifier'].coef_[0]\n\n# Create a DataFrame with feature names and coefficients\ncoef_df = pd.DataFrame({\n    'Feature': feature_names,\n    'Coefficient': coefficients\n})\n\n# Display coefficients associated with 'cp'\ncp_features = coef_df[coef_df['Feature'].str.contains('_cp')]\nprint(\"\\nCoefficients associated with 'cp':\")\nprint(cp_features)\n\n\nCoefficients associated with 'cp':\n          Feature  Coefficient\n1  onehot__cp_1.0     0.754906\n2  onehot__cp_2.0     1.440017\n3  onehot__cp_3.0     1.255102"
   },
   {
     "objectID": "lectures/10/slides.html#case-study---coefficients",
     "href": "lectures/10/slides.html#case-study---coefficients",
     "title": "Machine Learning Engineering",
     "section": "Case study - coefficients",
-    "text": "Case study - coefficients\n\n# Visualize the coefficients\n\nplt.figure(figsize=(8, 6))\nplt.barh(coef_df['Feature'], coef_df['Coefficient'])\nplt.title('Feature Coefficients')\nplt.xlabel('Coefficient Value')\nplt.ylabel('Feature')\nplt.tight_layout()\nplt.show()\n\n\n\n\nPositive coefficients in a logistic regression model signify that higher values of the corresponding feature contribute positively to the probability of an example belonging to ‘target = 1.0’. Negative coefficients indicate the opposite effect."
+    "text": "Case study - coefficients\n\n\nCode\n# Visualize the fitted coefficients\n\ncoef_plot_df = coef_df.sort_values(by='Coefficient')\nplt.figure(figsize=(8, 6))\nplt.barh(coef_plot_df['Feature'], coef_plot_df['Coefficient'])\nplt.title('Feature Coefficients')\nplt.xlabel('Coefficient Value')\nplt.ylabel('Feature')\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\nWith the first category of each encoded attribute used as a reference, a positive coefficient raises the fitted log-odds of heart-disease presence relative to that reference, holding the other transformed features fixed. A negative coefficient lowers those log-odds.\nCoefficient magnitude also depends on feature scaling and regularization. These coefficients describe associations in this fitted model; they do not establish that a feature causes heart disease."
   },
   {
     "objectID": "lectures/10/slides.html#case-study---coefficients-output",
@@ -4826,35 +4826,35 @@
     "href": "lectures/10/slides.html#feature-engineering---ordinal",
     "title": "Machine Learning Engineering",
     "section": "Feature Engineering - Ordinal",
-    "text": "Feature Engineering - Ordinal\nFor attributs with values such as ‘Poor’, ‘Average’, and ‘Good’, an ordinal encoding would make sense.\n\nHowever!\n\nfrom numpy import array\nfrom sklearn.preprocessing import OrdinalEncoder\n\nX =[['Poor'], ['Average'], ['Good'], ['Average'], ['Average']]\n\nencoder = OrdinalEncoder()\n\nencoder.fit(X)\nencoder.transform(X)\n\narray([[2.],\n       [0.],\n       [1.],\n       [0.],\n       [0.]])"
+    "text": "Feature Engineering - Ordinal\nFor attributes with values such as ‘Poor’, ‘Average’, and ‘Good’, an ordinal encoding can preserve their ordering.\n\nHowever!\n\nfrom sklearn.preprocessing import OrdinalEncoder\n\nX =[['Poor'], ['Average'], ['Good'], ['Average'], ['Average']]\n\nencoder = OrdinalEncoder()\n\nencoder.fit(X)\nencoder.transform(X)\n\narray([[2.],\n       [0.],\n       [1.],\n       [0.],\n       [0.]])"
   },
   {
     "objectID": "lectures/10/slides.html#ordinalencoder-revised",
     "href": "lectures/10/slides.html#ordinalencoder-revised",
     "title": "Machine Learning Engineering",
     "section": "OrdinalEncoder (revised)",
-    "text": "OrdinalEncoder (revised)\n\nfrom numpy import array\nfrom sklearn.preprocessing import OrdinalEncoder\n\nX =[['Poor'], ['Average'], ['Good'], ['Average'], ['Average']]\n\nencoder = OrdinalEncoder(categories=[['Poor', 'Average', 'Good']])\n\nencoder.fit(X)\n\nX_encoded = encoder.transform(X)\n\nX_encoded\n\narray([[0.],\n       [1.],\n       [2.],\n       [1.],\n       [1.]])\n\n\n\nThe desired order of the categories must be explicitly provided to the encoder; otherwise, it defaults to alphabetical order.\nAn ordinal encoder is appropriate when categorical attributes have a clear, inherent order or ranking, such as ‘Low’, ‘Medium’, and ‘High’, or ‘Poor’, ‘Average’, and ‘Good’. This encoding method preserves the ordinal relationships among categories.\nWhen data is inherently ordinal, this encoding is more compact and can be advantageous for machine learning models. However, if there is any uncertainty about the ordinal nature of the data, it is safer to use a OneHotEncoder."
+    "text": "OrdinalEncoder (revised)\n\nfrom sklearn.preprocessing import OrdinalEncoder\n\nX =[['Poor'], ['Average'], ['Good'], ['Average'], ['Average']]\n\nencoder = OrdinalEncoder(categories=[['Poor', 'Average', 'Good']])\n\nencoder.fit(X)\n\nX_encoded = encoder.transform(X)\n\nX_encoded\n\narray([[0.],\n       [1.],\n       [2.],\n       [1.],\n       [1.]])\n\n\n\nThe desired order of the categories must be explicitly provided to the encoder; otherwise, it defaults to alphabetical order.\nAn ordinal encoder is appropriate when categorical attributes have a clear, inherent order or ranking, such as ‘Low’, ‘Medium’, and ‘High’, or ‘Poor’, ‘Average’, and ‘Good’. This encoding method preserves the ordinal relationships among categories.\nWhen data is inherently ordinal, this encoding is more compact and can be advantageous for machine learning models. However, if there is any uncertainty about the ordinal nature of the data, it is safer to use a OneHotEncoder."
   },
   {
     "objectID": "lectures/10/slides.html#definition-2",
     "href": "lectures/10/slides.html#definition-2",
     "title": "Machine Learning Engineering",
     "section": "Definition",
-    "text": "Definition\nDiscretization involves grouping ordinal values into discrete categories.\n\n\nAKA binning, bucketing, or quantization."
+    "text": "Definition\nDiscretization maps a continuous or fine-grained numerical feature into a finite set of intervals.\n\n\nAKA binning, bucketing, or quantization."
   },
   {
     "objectID": "lectures/10/slides.html#feature-engineering-binning",
     "href": "lectures/10/slides.html#feature-engineering-binning",
     "title": "Machine Learning Engineering",
     "section": "Feature Engineering: Binning",
-    "text": "Feature Engineering: Binning\nExample: Categorizing ages into bins such as ‘infant’, ‘child’, ‘teen’, ‘adult’, and ‘senior citizen’.\n\nAdvantages:\n\nEnables the algorithm to learn effectively with fewer training examples.\n\nDisadvantages:\n\nRequires domain expertise to define meaningful categories.\nMay lack generalizability; for example, the starting age for ‘senior citizen’ could be 60, 65, or 701.\n\n\nProviding hints or predefined bins can help a decision tree algorithm generate more compact trees, as it reduces the need for the classifier to independently learn decision boundaries.\nHowever, introducing such a strong bias may hinder the algorithm’s ability to discover meaningful decision boundaries on its own.\nCross-validation is an effective method to determine the best encoding scheme, but it is essential to withhold the test set until the final evaluation phase of the project to prevent data leakage and ensure unbiased assessment.\n\n\nYour instructor is concerned with your choice of cutoff"
+    "text": "Feature Engineering: Binning\nExample: Categorizing ages into bins such as ‘infant’, ‘child’, ‘teen’, ‘adult’, and ‘senior citizen’.\n\nPossible advantage:\n\nEncodes useful domain thresholds and can reduce model complexity.\n\nDisadvantages:\n\nDiscards differences within each interval and introduces abrupt boundaries.\nRequires defensible cut points; for example, the starting age for ‘senior citizen’ could be 60, 65, or 701.\n\n\nPredefined bins can help a decision tree produce a more compact model because the tree no longer has to discover every threshold from the available sample.\nHowever, this strong inductive bias can hide useful variation or prevent the estimator from discovering better boundaries. Binning is therefore a modelling choice, not an automatic preprocessing step.\nCross-validation is an effective method to determine the best encoding scheme, but it is essential to withhold the test set until the final evaluation phase of the project to prevent data leakage and ensure unbiased assessment.\n\n\nYour instructor is concerned with your choice of cutoff"
   },
   {
     "objectID": "lectures/10/slides.html#functiontransformer",
     "href": "lectures/10/slides.html#functiontransformer",
     "title": "Machine Learning Engineering",
     "section": "FunctionTransformer",
-    "text": "FunctionTransformer\n\nimport pandas as pd\nimport numpy as np\nfrom sklearn.preprocessing import FunctionTransformer\n\nbins = [0, 1, 13, 20, 60, np.inf]\nlabels = ['infant', 'kid', 'teen', 'adult', 'senior citizen']\n\ntransformer = FunctionTransformer(\n    pd.cut, kw_args={'bins': bins, 'labels': labels, 'retbins': False}\n)\n\nX = np.array([0.5, 2, 15, 25, 97])\ntransformer.fit_transform(X)\n\n['infant', 'kid', 'teen', 'adult', 'senior citizen']\nCategories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior citizen']\n\n\n\n\nSe also: KBinsDiscretizer"
+    "text": "FunctionTransformer\n\nimport pandas as pd\nimport numpy as np\nfrom sklearn.preprocessing import FunctionTransformer\n\nbins = [0, 1, 13, 20, 60, np.inf]\nlabels = ['infant', 'kid', 'teen', 'adult', 'senior citizen']\n\ntransformer = FunctionTransformer(\n    pd.cut, kw_args={'bins': bins, 'labels': labels, 'retbins': False}\n)\n\nX = np.array([0.5, 2, 15, 25, 97])\ntransformer.fit_transform(X)\n\n['infant', 'kid', 'teen', 'adult', 'senior citizen']\nCategories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior citizen']\n\n\n\n\nSee also: KBinsDiscretizer"
   },
   {
     "objectID": "lectures/10/slides.html#what-is-it",
@@ -4868,7 +4868,7 @@
     "href": "lectures/10/slides.html#why-1",
     "title": "Machine Learning Engineering",
     "section": "Why?",
-    "text": "Why?\nWhy is scaling data a best practice?\n\nScaling attributes ensures that their values fall within comparable ranges. Numerous studies indicate that this transformation improves model performance.\nSome algorithms, such as k-nearest neighbors, experience reduced efficiency when faced with significant disparities in attribute scales. Consider two attributes: one representing a proportion as a real number between 0 and 1, and the other measuring a volume in milliliters. In this case, the distance calculated between two examples will be primarily influenced by variations in volume rather than those in proportion. Tree-based algorithms are typically insensitive to the scale of the data, and therefore, scaling is not necessary.\nFurthermore, optimization methods, such as gradient descent, reach convergence more quickly when the attributes have been scaled.\nNormalization can be significantly influenced by the presence of outliers, which often compresses the data into a narrower range. To mitigate this effect, a common approach is to clip the data within a fixed interval, [a, b]. In this method, values below a are set to a, and values exceeding b are set to b. Typically, the clipping thresholds are chosen based on percentile values, such as the 5th and 95th percentiles, to ensure a balanced trimming of extreme values."
+    "text": "Why?\nWhy do some estimators require comparable feature scales?\n\nScaling changes the geometry and numerical conditioning of a learning problem. Whether it helps depends on the estimator.\nDistance-based methods such as k-nearest neighbours and k-means are sensitive because a large-scale feature can dominate the distance. RBF kernels and regularized linear models are also scale-sensitive. Gradient-based optimization often converges more readily when feature scales are comparable.\nTree-based models make threshold comparisons within one feature at a time, so monotonic rescaling usually leaves their possible partitions unchanged.\nScaling does not decide how important a feature should be. Domain knowledge and the model’s intended geometry still matter."
   },
   {
     "objectID": "lectures/10/slides.html#scenario",
@@ -4931,7 +4931,7 @@
     "href": "lectures/10/slides.html#knn-regressor",
     "title": "Machine Learning Engineering",
     "section": "KNN regressor",
-    "text": "KNN regressor\nWe’ll run a 1-NN regressor (so the prediction is exactly the nearest neighbor’s price) with and without scaling.\n\nfrom sklearn.neighbors import KNeighborsRegressor\nfrom sklearn.pipeline import Pipeline\n\nX_train = df.loc[train_idx].values          # b, c\ny_train = prices.loc[train_idx].values      # prices for b, c\nX_query = df.loc[query_idx].values          # a"
+    "text": "KNN regressor\nA 1-NN regressor predicts the price of the nearest training example. Compare the same estimator with and without scaling.\n\nfrom sklearn.neighbors import KNeighborsRegressor\n\nX_train = df.loc[train_idx].values\ny_train = prices.loc[train_idx].values\nX_query = df.loc[query_idx].values\n\nknn_plain = KNeighborsRegressor(n_neighbors=1, metric=\"euclidean\")\nknn_plain.fit(X_train, y_train)\n\nknn_scaled = Pipeline([\n    (\"scaler\", StandardScaler()),\n    (\"knn\", KNeighborsRegressor(n_neighbors=1, metric=\"euclidean\"))\n])\n\nknn_scaled.fit(X_train, y_train)\n\n\nThe pipeline behaves like a single regressor. Its fit method learns the scaler from X_train and then fits KNN in the transformed space. Its predict method applies that fitted scaler before searching for neighbours."
   },
   {
     "objectID": "lectures/10/slides.html#knn-regressor-no-scaling",
@@ -4951,8 +4951,8 @@
     "objectID": "lectures/10/slides.html#knn-regressor-results",
     "href": "lectures/10/slides.html#knn-regressor-results",
     "title": "Machine Learning Engineering",
-    "section": "KNN regressor (results)",
-    "text": "KNN regressor (results)\n\npd.DataFrame(\n    {\n        \"prediction (no scaling)\": [pred_plain],\n        \"prediction (with scaling)\": [pred_scaled],\n        \"nearest neighbor (no scaling)\": [point_names[1] if pred_plain==prices['b'] else point_names[2]],\n        \"nearest neighbor (with scaling)\": [point_names[1] if pred_scaled==prices['b'] else point_names[2]],\n    },\n    index=[\"a\"]\n)\n\n\n\n\n\n\n\n\nprediction (no scaling)\nprediction (with scaling)\nnearest neighbor (no scaling)\nnearest neighbor (with scaling)\n\n\n\n\na\n520000.0\n390000.0\nb\nc"
+    "section": "KNN regressor: results",
+    "text": "KNN regressor: results\n\n\nCode\npred_plain = knn_plain.predict(X_query)[0]\npred_scaled = knn_scaled.predict(X_query)[0]\n\nplain_index = knn_plain.kneighbors(\n    X_query, return_distance=False\n)[0, 0]\nscaled_query = knn_scaled[\"scaler\"].transform(X_query)\nscaled_index = knn_scaled[\"knn\"].kneighbors(\n    scaled_query, return_distance=False\n)[0, 0]\n\nknn_comparison = pd.DataFrame(\n    {\n        \"prediction\": [pred_plain, pred_scaled],\n        \"nearest neighbour\": [\n            train_idx[plain_index], train_idx[scaled_index]\n        ],\n    },\n    index=[\"without scaling\", \"with scaling\"],\n)\n\n\n\n\n\n\nPrediction\nNearest neighbour\n\n\n\n\nWithout scaling\n$520,000\nb\n\n\nWith scaling\n$390,000\nc\n\n\n\n\nThis deliberately tiny dataset illustrates geometry, not model quality. Two observations are not enough to estimate stable population means and standard deviations, and the query has no known price with which to measure predictive performance. The example demonstrates a change in neighbour and prediction, not an improvement in accuracy."
   },
   {
     "objectID": "lectures/10/slides.html#normalization",
@@ -4966,7 +4966,7 @@
     "href": "lectures/10/slides.html#standardization",
     "title": "Machine Learning Engineering",
     "section": "Standardization",
-    "text": "Standardization\nStandardization (AKA z-score normalization) transforms each feature to have a normal distribution with a mean (\\mu) of 0 and a standard deviation (\\sigma) of 1.\n\n\\frac{x_i^{(j)} - \\mu^{(j)}}{\\sigma^{(j)}}\n\nNote: The range of values is not bounded!\n\n\nSee: sklearn.preprocessing.StandardScaler"
+    "text": "Standardization\nStandardization subtracts the training mean and divides by the training standard deviation.\n\n\\frac{x_i^{(j)} - \\mu^{(j)}}{\\sigma^{(j)}}\n\nThe transformed training feature has mean 0 and variance 1, but its distribution does not become normal and its range is not bounded.\n\n\nSee: sklearn.preprocessing.StandardScaler"
   },
   {
     "objectID": "lectures/10/slides.html#standardization-or-normalization",
@@ -5001,14 +5001,14 @@
     "href": "lectures/10/slides.html#standardization-1",
     "title": "Machine Learning Engineering",
     "section": "Standardization",
-    "text": "Standardization\n\n\n\n\n\n\n\n\n\n\n\nWhen examining the graph resulting from standardization, it bears a resemblance to that of normalization. Nonetheless, a closer inspection of the values reveals that the data distribution is centered around zero, with approximately 95% of the observations falling within the range of -2 to 2. It is important to note that, unlike normalization, the StandardScaler does not impose bounds on the range of output values.\n\n\nStandardization (StandardScaler) of values from a normal distribution containing outliers."
+    "text": "Standardization\n\n\nCode\nstandard_scaler = StandardScaler()\n\nstandard_norm_values = standard_scaler.fit_transform(\n    norm_values.reshape(-1, 1)\n)\n\n# Plot the histogram\nplt.hist(standard_norm_values, bins=20, edgecolor='black')\n\nplt.title(f'StandardScaler')\n\nplt.xlabel('Value')\nplt.ylabel('Frequency')\n\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nStandardization changes the centre and scale but preserves the distribution’s shape. The bulk of this approximately normal sample lies near zero, while the outliers remain outliers. The interval [-2,2] is a useful empirical description for this sample, not a guarantee of StandardScaler.\n\n\nStandardization (StandardScaler) of values from a normal distribution containing outliers."
   },
   {
     "objectID": "lectures/10/slides.html#avoid-data-leakage",
     "href": "lectures/10/slides.html#avoid-data-leakage",
     "title": "Machine Learning Engineering",
     "section": "Avoid Data Leakage!",
-    "text": "Avoid Data Leakage!\nThe correct workflow:\n\nSplit your data into a training set and a testing set.\nFit your scaler (e.g., StandardScaler) on the training data (scaler.fit(X_train)).\n\nThis step learns the mean and standard deviation of the training data.\n\nTransform both the training data (scaler.transform(X_train)) and the testing data (scaler.transform(X_test)) using the scaler that was fitted on the training data.\n\n\nYou must learn the scaling parameters (like the mean, standard deviation, min, or max) from the training data only. Never use the full dataset before splitting.\nWhy? The test set is supposed to simulate new, unseen data. If you use information from the test set to scale your training data, your model is “cheating” by getting a sneak peek at the test data. This is called data leakage and will lead to an overly optimistic evaluation of your model’s performance."
+    "text": "Avoid Data Leakage!\nThe correct workflow:\n\nSplit the examples before learning any preprocessing parameters.\nFit the scaler on the training data.\nReuse that fitted scaler to transform validation, test, and production data.\nDuring cross-validation, fit preprocessing separately inside each training fold—normally by placing it in a Pipeline.\n\n\nMeans, standard deviations, minima, maxima, category sets, and imputation values are all learned information. They must come from the training data only.\nThe test set simulates unseen data. Allowing it to influence preprocessing gives the training procedure information that would not be available when making a genuinely new prediction. This data leakage can produce an optimistic estimate of generalization performance."
   },
   {
     "objectID": "lectures/10/slides.html#definition-3",
@@ -5022,7 +5022,7 @@
     "href": "lectures/10/slides.html#handling-missing-values",
     "title": "Machine Learning Engineering",
     "section": "Handling Missing Values",
-    "text": "Handling Missing Values\n\nDrop Examples\n\nFeasible if the dataset is large and outcome is unaffected.\n\nDrop Features\n\nSuitable if it does not impact the project’s outcome.\n\nUse Algorithms Handling Missing Data\n\nExample: XGBoost\nNote: Some algorithms like sklearn.linear_model.LinearRegression cannot handle missing values.\n\nData Imputation\n\nReplace missing values with computed values."
+    "text": "Handling Missing Values\n\nDrop Examples\n\nReasonable only when enough data remain and the missing rows are not systematically different.\n\nDrop Features\n\nSuitable when a feature is not essential and too little reliable information remains.\n\nUse Algorithms Handling Missing Data\n\nSome estimators model missing values directly; many others do not accept them.\n\nData Imputation\n\nReplace missing values using statistics or a model learned from the training data."
   },
   {
     "objectID": "lectures/10/slides.html#definition-4",
@@ -5036,7 +5036,7 @@
     "href": "lectures/10/slides.html#data-imputation-strategy",
     "title": "Machine Learning Engineering",
     "section": "Data Imputation Strategy",
-    "text": "Data Imputation Strategy\nReplace missing values with mean or median of the attribute.\n\nfrom sklearn.impute import SimpleImputer\nimputer = SimpleImputer(strategy=\"median\")\n\nX = imputer.fit_transform(X)\n\n\n\nCons: Ignores feature correlations and complex relationships.\nMode Imputation: Replace missing values with the most frequent value; also ignores feature correlations.\n\n\nData imputation inherently relies on several assumptions, which may not always hold true.\nRandomness Assumption: Many methods (e.g., mean/median imputation) assume that missingness is unrelated to any data.\nModel Bias: Incorrect randomness assumptions can lead to biased estimates and flawed conclusions.\nInformation Loss: Imputation can obscure patterns, leading to loss of valuable information for advanced models.\nProceed with caution!"
+    "text": "Data Imputation Strategy\nReplace missing numerical values with the training mean or median of the feature.\n\nfrom sklearn.impute import SimpleImputer\n\nX_train_missing = np.array([\n    [1.0, 10.0],\n    [2.0, np.nan],\n    [3.0, 12.0],\n])\nX_new_missing = np.array([[4.0, np.nan]])\n\nimputer = SimpleImputer(strategy=\"median\")\nimputer.fit(X_train_missing)\nimputer.transform(X_new_missing)\n\narray([[ 4., 11.]])\n\n\n\n\nLimitation: Univariate imputation ignores relationships between features and reduces the observed variability.\nCategorical Features: Use the most frequent category or an explicit \"missing\" category when that representation is appropriate.\n\n\nMissingness can be completely at random, related to other observed features, or related to the missing value itself. These mechanisms are often described as MCAR, MAR, and MNAR. A simple imputer does not determine which mechanism produced the missing values.\nMean, median, and most-frequent imputation are useful baselines, but they can distort distributions and relationships. The imputation strategy is part of the model and must be assessed on held-out data.\nAs with scaling, fit the imputer only on the training partition. A pipeline repeats that fit correctly within every cross-validation fold."
   },
   {
     "objectID": "lectures/10/slides.html#data-imputation-strategy-1",
@@ -5057,21 +5057,21 @@
     "href": "lectures/10/slides.html#using-ml-for-imputation",
     "title": "Machine Learning Engineering",
     "section": "Using ML for Imputation",
-    "text": "Using ML for Imputation\n\nInstance-Based Method:\n\nUse k nearest neighbors (k-NN) to find the k closest examples and impute using the non-missing values from the neighborhood.\n\nModel-Based Methods:\n\nEmploy advanced techniques such as random forests, tensor decomposition, or deep neural networks.\n\n\n\n\nConsult this guide or KNNImputer."
+    "text": "Using ML for Imputation\n\nNeighbour-Based Method:\n\nUse k nearest neighbors (k-NN) to find the k closest examples and impute using the non-missing values from the neighborhood.\n\nIterative Model-Based Methods:\n\nPredict each incomplete feature from the others and repeat the process across features.\n\n\n\n\nConsult the scikit-learn imputation guide or KNNImputer documentation."
   },
   {
     "objectID": "lectures/10/slides.html#why-use-these-methods",
     "href": "lectures/10/slides.html#why-use-these-methods",
     "title": "Machine Learning Engineering",
     "section": "Why Use these Methods?",
-    "text": "Why Use these Methods?\n\nAdvantages:\n\nEffectively handle complex relationships and correlations between features.\n\nDisadvantages:\n\nCost-intensive in terms of labor, CPU time, and memory resources."
+    "text": "Why Use these Methods?\n\nPossible advantage:\n\nCan use relationships between features that univariate imputation ignores.\n\nLimitations:\n\nMore computation and modelling choices do not guarantee better predictions.\nThe imputer must still be fitted inside each training split or cross-validation fold."
   },
   {
     "objectID": "lectures/10/slides.html#definition-5",
     "href": "lectures/10/slides.html#definition-5",
     "title": "Machine Learning Engineering",
     "section": "Definition",
-    "text": "Definition\nThe class imbablance problem is a scenario where the number of instances in one class significantly outnumbers the instances in other classes.\n\nModels tend to be biased towards the majority class, leading to poor performance on the minority class.\n\n\n\nStandard evaluation metrics like accuracy may be misleading in the presence of class imbalance."
+    "text": "Definition\nFeature engineering is the process of creating, transforming, and selecting variables (attributes) from raw data to improve the performance of machine learning models.\n\n\nHere, our focus is on creating new attributes from raw data."
   },
   {
     "objectID": "lectures/10/slides.html#solutions",
@@ -5085,21 +5085,21 @@
     "href": "lectures/10/slides.html#definition-6",
     "title": "Machine Learning Engineering",
     "section": "Definition",
-    "text": "Definition\nFeature engineering is the process of creating, transforming, and selecting variables (attributes) from raw data to improve the performance of machine learning models.\n\n\nHere, our focus is on creating new attributes from raw data."
+    "text": "Definition\nData augmentation creates additional training examples with transformations that should preserve the target label.\n\n\nPurpose: Encode plausible invariances and improve robustness to variation expected in deployment."
   },
   {
     "objectID": "lectures/10/slides.html#exploration",
     "href": "lectures/10/slides.html#exploration",
     "title": "Machine Learning Engineering",
     "section": "Exploration",
-    "text": "Exploration\n\n\nCode\nimport numpy as np\n\nnp.random.seed(42)\n\nX = 6 * np.random.rand(100, 1) - 3\ny = 0.5 * X ** 2 - X + 2 + np.random.randn(100, 1)\n\nimport matplotlib as mpl\nimport matplotlib.pyplot as plt\n\nplt.figure(figsize=(6,4))\n\nplt.plot(X, y, \"b.\")\nplt.xlabel(\"$x$\", fontsize=18)\nplt.ylabel(\"$y$\", rotation=0, fontsize=18)\nplt.axis([-3, 3, 0, 10])\nplt.grid(True)\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nIn machine learning experiments, specifying the seed of the random number generator is crucial for ensuring reproducibility. By setting a fixed seed, programmers can guarantee that the same sequence of random numbers will be generated each time the experiment is run. This consistency is vital for several reasons:\n\nReproducibility: It allows other programmers to replicate the experiment with the exact same conditions, facilitating verification and validation of results.\nComparative Analysis: It enables consistent comparison between different models or algorithms under the same initial conditions, ensuring that observed differences are due to the models themselves rather than variations in the random initialization.\nDebugging: It aids in debugging by providing a stable environment where issues can be consistently reproduced and investigated.\n\n\n\nAttribution: Géron (2022), Chapter 4"
+    "text": "Exploration\n\n\nCode\nimport numpy as np\n\nnp.random.seed(42)\n\nX = 6 * np.random.rand(100, 1) - 3\ny = 0.5 * X ** 2 - X + 2 + np.random.randn(100, 1)\n\nimport matplotlib as mpl\nimport matplotlib.pyplot as plt\n\nplt.figure(figsize=(6,4))\n\nplt.plot(X, y, \"b.\")\nplt.xlabel(\"$x$\", fontsize=18)\nplt.ylabel(\"$y$\", rotation=0, fontsize=18)\nplt.axis([-3, 3, 0, 10])\nplt.grid(True)\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nThe scatter plot has a curved trend: the response decreases and then increases as x changes. A model that uses only an intercept and the original feature x cannot represent that curvature.\nThe fixed random seed makes the generated sample reproducible. Reproducibility is useful for comparing models and debugging, but a single seed does not establish that a result is stable across possible samples.\n\n\nAttribution: Géron (2022), Chapter 4"
   },
   {
     "objectID": "lectures/10/slides.html#linear-regression",
     "href": "lectures/10/slides.html#linear-regression",
     "title": "Machine Learning Engineering",
     "section": "Linear Regression",
-    "text": "Linear Regression\n\n\nCode\nfrom sklearn.linear_model import LinearRegression\n\nlin_reg = LinearRegression()\nlin_reg.fit(X, y)\n\nX_new = np.array([[-3], [3]])\ny_pred = lin_reg.predict(X_new)\n\nplt.figure(figsize=(6,4))\n\nplt.plot(X, y, \"b.\")\nplt.plot(X_new, y_pred, \"r-\")\nplt.xlabel(\"$x$\", fontsize=18)\nplt.ylabel(\"$y$\", rotation=0, fontsize=18)\nplt.axis([-3, 3, 0, 10])\nplt.show()\n\n\n\n\n\n\n\n\n\n\nA linear model inadequately represents this dataset. \n\n\nAdjusting the slope invariably leads to a scenario where residuals (errors) are minimized for certain data points while remaining significant for others."
+    "text": "Linear Regression\n\n\nCode\nfrom sklearn.linear_model import LinearRegression\n\nlin_reg = LinearRegression()\nlin_reg.fit(X, y)\n\nX_new = np.array([[-3], [3]])\ny_pred = lin_reg.predict(X_new)\n\nplt.figure(figsize=(6,4))\n\nplt.plot(X, y, \"b.\")\nplt.plot(X_new, y_pred, \"r-\")\nplt.xlabel(\"$x$\", fontsize=18)\nplt.ylabel(\"$y$\", rotation=0, fontsize=18)\nplt.axis([-3, 3, 0, 10])\nplt.show()\n\n\n\n\n\n\n\n\n\n\nA linear model inadequately represents this dataset. \n\n\nThe best-fitting straight line balances residuals across the dataset, but changing its slope and intercept cannot create a turning point. The model is underfitting because its representation is too restrictive for the observed relationship."
   },
   {
     "objectID": "lectures/10/slides.html#machine-learning-engineering-2",
@@ -5120,14 +5120,14 @@
     "href": "lectures/10/slides.html#polynomialfeatures-1",
     "title": "Machine Learning Engineering",
     "section": "PolynomialFeatures",
-    "text": "PolynomialFeatures\nGiven two features a and b, PolynomialFeatures with degree=3 would add a^2, a^3, b^2, b^3, as well as, ab, a^2b, ab^2!\n\n\n\n\n\n\n\nWarning\n\n\nPolynomialFeatures(degree=d) adds \\frac{(D+d)!}{d!D!} features, where D is the original number of features.\n\n\n\n\nAdditionally, you have the option to engineer new features of your own."
+    "text": "PolynomialFeatures\nGiven two features a and b, PolynomialFeatures with degree=3 would add a^2, a^3, b^2, b^3, as well as, ab, a^2b, ab^2!\n\n\n\n\n\n\n\nWarning\n\n\nWith include_bias=True, the total number of output features is\n\n\\binom{D+d}{d} = \\frac{(D+d)!}{d!D!},\n\nwhere D is the number of input features. With include_bias=False, subtract one.\n\n\n\n\nThe output count includes the original features as well as powers and interactions. It grows quickly with both D and d, which increases computation and the risk of overfitting. Select the degree with validation and use regularization when appropriate."
   },
   {
     "objectID": "lectures/10/slides.html#polynomial-regression",
     "href": "lectures/10/slides.html#polynomial-regression",
     "title": "Machine Learning Engineering",
     "section": "Polynomial Regression",
-    "text": "Polynomial Regression\n\n\nCode\nlin_reg = LinearRegression()\nlin_reg = lin_reg.fit(X_poly, y)\n\nX_new = np.linspace(-3, 3, 100).reshape(100, 1)\nX_new_poly = poly_features.transform(X_new)\ny_new = lin_reg.predict(X_new_poly)\n\nplt.figure(figsize=(5, 3))\nplt.plot(X, y, \"b.\")\nplt.plot(X_new, y_new, \"r-\", linewidth=2, label=\"Predictions\")\nplt.xlabel(\"$x_1$\")\nplt.ylabel(\"$y$\", rotation=0)\nplt.legend(loc=\"upper left\")\nplt.axis([-3, 3, 0, 10])\nplt.grid()\nplt.show()\n\n\n\n\n\n\n\n\n\nLinearRegression on PolynomialFeatures\n\nlin_reg = LinearRegression()\nlin_reg.fit(X_poly, y)"
+    "text": "Polynomial Regression\n\n\nCode\nlin_reg = LinearRegression()\nlin_reg = lin_reg.fit(X_poly, y)\n\nX_new = np.linspace(-3, 3, 100).reshape(100, 1)\nX_new_poly = poly_features.transform(X_new)\ny_new = lin_reg.predict(X_new_poly)\n\nplt.figure(figsize=(5, 3))\nplt.plot(X, y, \"b.\")\nplt.plot(X_new, y_new, \"r-\", linewidth=2, label=\"Predictions\")\nplt.xlabel(\"$x_1$\")\nplt.ylabel(\"$y$\", rotation=0)\nplt.legend(loc=\"upper left\")\nplt.axis([-3, 3, 0, 10])\nplt.grid()\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nLinearRegression fitted to features [x, x^2]."
   },
   {
     "objectID": "lectures/10/slides.html#polynomial-regression-1",
@@ -5141,14 +5141,14 @@
     "href": "lectures/10/slides.html#size-does-matter",
     "title": "Machine Learning Engineering",
     "section": "Size does matter",
-    "text": "Size does matter\n\n\n“However, these results suggest that we may want to reconsider the trade-off between spending time and money on algorithm development versus spending it on corpus development algorithms themselves.”\n\n\n\n\n\nAttribution: Banko and Brill (2001)"
+    "text": "Size does matter\n\n\nFor the language task studied by Banko and Brill, increasing the training corpus produced large gains across several learning algorithms.\n\n\n\n\n\nThe result in Banko and Brill (2001) concerns one natural-language disambiguation task and should not be read as a universal law that more examples always solve a learning problem.\nAdditional data help when they provide relevant, correctly labelled, and representative information. More examples do not repair a mismatched target, systematic label errors, omitted subpopulations, or a distribution shift between training and deployment.\nFor some large neural models, empirical scaling laws relate loss to training data, parameter count, and computation over a studied range (Kaplan et al. 2020). Those regularities do not remove the need to examine data quality and coverage.\n\n\nAttribution: Banko and Brill (2001)"
   },
   {
     "objectID": "lectures/10/slides.html#unreasonable-effectiveness-of-data",
     "href": "lectures/10/slides.html#unreasonable-effectiveness-of-data",
     "title": "Machine Learning Engineering",
     "section": "Unreasonable Effectiveness of Data",
-    "text": "Unreasonable Effectiveness of Data\n\n\n\nPeter Norvig’s presentation, titled “The Unreasonable Effectiveness of Data,” runs for just over one hour. It is noteworthy that the paper on which the presentation is based was published in 2009, predating the success of AlexNet.\nThe substantial improvements observed with AlexNet in 2012 highlighted the benefits of training deep neural networks on large image datasets.\nSimilarly, modern models like GPT, Gemini, Claude, and LLaMA have achieved significant advancements in language capabilities by training on vast amounts of text data, encompassing nearly all written material since the inception of human civilization.\nNeural scaling laws describe how the performance of neural networks varies with changes in key factors such as dataset size, number of parameters, and computational cost Kaplan et al. (2020).\n\n\nHalevy et al. (2009) and Kaplan et al. (2020)."
+    "text": "Unreasonable Effectiveness of Data\n\n\n\nPeter Norvig’s presentation runs for just over one hour and is provided for independent study rather than classroom viewing. The associated 2009 paper predates the modern wave of large deep-learning systems but remains useful for examining the relationship between data scale and modelling choices.\n\n\nSupplementary presentation related to Halevy et al. (2009) and later empirical scaling work such as Kaplan et al. (2020)."
   },
   {
     "objectID": "lectures/10/slides.html#definition-7",
@@ -5162,7 +5162,7 @@
     "href": "lectures/10/slides.html#data-augmentation",
     "title": "Machine Learning Engineering",
     "section": "Data Augmentation",
-    "text": "Data Augmentation\n\nFor Images: Rotations, translations, scaling, flipping, adding noise, etc.\n\nHow to find ancient geoglyphs using machine learning?, Sakai et al. (2024)\n\nFor Text: Synonym replacement, random insertion, deletion, and swapping of words.\n\n\n\nGenerative Adversarial Networks (GANs) (a form of deep learning) can be used to generate new, synthetic data that mimics the distribution of the original dataset.\nSee also: Shumailov et al. (2024)."
+    "text": "Data Augmentation\n\nImages: Rotations, translations, crops, flips, or noise—when these transformations preserve the label.\n\nHow to find ancient geoglyphs using machine learning?, Sakai et al. (2024)\n\nText: Carefully controlled paraphrasing or edits that preserve meaning and the assigned label.\n\n\n\nAn augmentation is valid only when its transformation preserves the target for the application. A horizontal flip may be harmless for many object categories but invalid for text, medical laterality, or traffic signs. Synonym replacement can also change nuance or grammar.\nApply augmentation only to training examples and, during cross-validation, only within the training fold. Validation and test sets should represent naturally occurring inputs.\nSynthetic data require the same scrutiny as collected data. Indiscriminate reuse of model-generated content can narrow the represented distribution or amplify artifacts; Shumailov et al. (2024) discusses one form of this risk.\n\n\nGenerative models can also produce synthetic examples, but realistic-looking output does not guarantee correct labels, representative coverage, or independence from the source data."
   },
   {
     "objectID": "lectures/10/slides.html#further-readings",
@@ -5176,28 +5176,28 @@
     "href": "lectures/10/slides.html#summary",
     "title": "Machine Learning Engineering",
     "section": "Summary",
-    "text": "Summary\n\nAttribute Encoding: Evaluation of techniques to avoid bias and possibly speed up the training.\nPreprocessing:\n\nData Scaling\nHandling Missing Values\nManaging Class Imbalance\n\nTraining Set Size: Impact on model efficacy and generalization."
+    "text": "Summary\n\nMatch categorical encodings to nominal or ordinal meaning.\nFit scaling, encoding, and imputation on training data through a pipeline.\nChoose scaling according to the estimator; scaling does not make a feature normally distributed.\nApply class-imbalance remedies only within training partitions and evaluate on the natural distribution.\nUse polynomial and interaction features to expand a model’s representation while controlling complexity.\nValue representative, correctly labelled data and use only label-preserving augmentation."
   },
   {
     "objectID": "lectures/10/slides.html#next-lecture",
     "href": "lectures/10/slides.html#next-lecture",
     "title": "Machine Learning Engineering",
     "section": "Next lecture",
-    "text": "Next lecture\n\nWe will introduce artificial neural networks."
+    "text": "Next lecture\n\nNext: artificial neural networks."
   },
   {
     "objectID": "lectures/10/slides.html#references",
     "href": "lectures/10/slides.html#references",
     "title": "Machine Learning Engineering",
     "section": "References",
-    "text": "References\n\n\nBanko, Michele, and Eric Brill. 2001. “Scaling to Very Very Large Corpora for Natural Language Disambiguation.” Proceedings of the 39th Annual Meeting on Association for Computational Linguistics (USA), ACL ’01, 26–33. https://doi.org/10.3115/1073012.1073017.\n\n\nBurkov, A. 2020. Machine Learning Engineering. True Positive Incorporated. https://books.google.ca/books?id=HeXizQEACAAJ.\n\n\nBurkov, Andriy. 2019. The Hundred-Page Machine Learning Book. Andriy Burkov.\n\n\nChawla, N V, K W Bowyer, L O Hall, and W P Kegelmeyer. 2002. “SMOTE: Synthetic minority over-sampling technique.” Journal of Artificial Intelligence Research 16: 321–57.\n\n\nGéron, Aurélien. 2022. Hands-on Machine Learning with Scikit-Learn, Keras, and TensorFlow. 3rd ed. O’Reilly Media, Inc.\n\n\nHalevy, Alon, Peter Norvig, and Fernando Pereira. 2009. “The Unreasonable Effectiveness of Data.” IEEE Intelligent Systems 24 (2): 8–12.\n\n\nKaplan, Jared, Sam McCandlish, Tom Henighan, et al. 2020. Scaling Laws for Neural Language Models. https://arxiv.org/abs/2001.08361.\n\n\nPradipta, Gede Angga, Retantyo Wardoyo, Aina Musdholifah, I Nyoman Hariyasa Sanjaya, and Muhammad Ismail. 2021. “SMOTE for Handling Imbalanced Data Problem : A Review.” 2021 Sixth International Conference on Informatics and Computing (ICIC) 00: 1–8. https://doi.org/10.1109/icic54025.2021.9632912.\n\n\nRussell, Stuart, and Peter Norvig. 2020. Artificial Intelligence: A Modern Approach. 4th ed. Pearson. http://aima.cs.berkeley.edu/.\n\n\nSakai, Masato, Akihisa Sakurai, Siyuan Lu, et al. 2024. “AI-accelerated Nazca survey nearly doubles the number of known figurative geoglyphs and sheds light on their purpose.” Proceedings of the National Academy of Sciences 121 (40): e2407652121. https://doi.org/10.1073/pnas.2407652121.\n\n\nShumailov, Ilia, Zakhar Shumaylov, Yiren Zhao, Nicolas Papernot, Ross Anderson, and Yarin Gal. 2024. “AI models collapse when trained on recursively generated data.” Nature 631 (8022): 755–59. https://doi.org/10.1038/s41586-024-07566-y."
+    "text": "References\n\n\nBanko, Michele, and Eric Brill. 2001. “Scaling to Very Very Large Corpora for Natural Language Disambiguation.” Proceedings of the 39th Annual Meeting on Association for Computational Linguistics (USA), ACL ’01, 26–33. https://doi.org/10.3115/1073012.1073017.\n\n\nBurkov, A. 2020. Machine Learning Engineering. True Positive Incorporated. https://books.google.ca/books?id=HeXizQEACAAJ.\n\n\nBurkov, Andriy. 2019. The Hundred-Page Machine Learning Book. Andriy Burkov.\n\n\nChawla, N V, K W Bowyer, L O Hall, and W P Kegelmeyer. 2002. “SMOTE: Synthetic minority over-sampling technique.” Journal of Artificial Intelligence Research 16: 321–57.\n\n\nGéron, Aurélien. 2022. Hands-on Machine Learning with Scikit-Learn, Keras, and TensorFlow. 3rd ed. O’Reilly Media, Inc.\n\n\nHalevy, Alon, Peter Norvig, and Fernando Pereira. 2009. “The Unreasonable Effectiveness of Data.” IEEE Intelligent Systems 24 (2): 8–12.\n\n\nKaplan, Jared, Sam McCandlish, Tom Henighan, et al. 2020. Scaling Laws for Neural Language Models. https://arxiv.org/abs/2001.08361.\n\n\nSakai, Masato, Akihisa Sakurai, Siyuan Lu, et al. 2024. “AI-accelerated Nazca survey nearly doubles the number of known figurative geoglyphs and sheds light on their purpose.” Proceedings of the National Academy of Sciences 121 (40): e2407652121. https://doi.org/10.1073/pnas.2407652121.\n\n\nShumailov, Ilia, Zakhar Shumaylov, Yiren Zhao, Nicolas Papernot, Ross Anderson, and Yarin Gal. 2024. “AI models collapse when trained on recursively generated data.” Nature 631 (8022): 755–59. https://doi.org/10.1038/s41586-024-07566-y."
   },
   {
     "objectID": "lectures/10/slides.html#pipeline",
     "href": "lectures/10/slides.html#pipeline",
     "title": "Machine Learning Engineering",
     "section": "Pipeline",
-    "text": "Pipeline\n\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import StandardScaler\n\nnum_pipeline = Pipeline([\n        ('imputer', SimpleImputer(strategy=\"median\")),\n        ('attribs_adder', CombinedAttributesAdder()),\n        ('std_scaler', StandardScaler()),\n        ])\n\ntraining_num_tr = num_pipeline.fit_transform(training_num)\n\nfull_pipeline = ColumnTransformer([\n        (\"num\", num_pipeline, num_attribs),\n        (\"cat\", OneHotEncoder(), [\"sequence\"]),\n    ])\n\ntraining_prepared = full_pipeline.fit_transform(training)"
+    "text": "Pipeline\n\nfrom sklearn.compose import ColumnTransformer, make_column_selector\nfrom sklearn.impute import SimpleImputer\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\n\nnumeric_pipeline = Pipeline([\n    ('imputer', SimpleImputer(strategy=\"median\", add_indicator=True)),\n    ('scaler', StandardScaler()),\n])\n\npreprocessor = ColumnTransformer([\n    (\n        \"numeric\",\n        numeric_pipeline,\n        make_column_selector(dtype_include=np.number),\n    ),\n    (\n        \"categorical\",\n        OneHotEncoder(handle_unknown=\"ignore\"),\n        make_column_selector(dtype_exclude=np.number),\n    ),\n])\n\nfull_pipeline = Pipeline([\n    (\"preprocessor\", preprocessor),\n    (\"classifier\", LogisticRegression()),\n])\n\n\nThis template keeps every learned preprocessing step with the estimator. Numerical columns are imputed and standardized; categorical columns are one-hot encoded. The selectors choose columns by data type, so the template does not depend on lecture-specific column names.\nCalling full_pipeline.fit(X_train, y_train) fits every component on the same training examples. The fitted pipeline can then transform and classify validation, test, or production examples consistently."
   },
   {
     "objectID": "lectures/10/slides.html#gpt-4o-interactions-2024-09-30",
@@ -6709,7 +6709,7 @@
     "href": "lectures/14/slides.html#message-of-the-day",
     "title": "Softmax, cross-entropy, regularization",
     "section": "Message of the Day",
-    "text": "Message of the Day\n\n\n\n\n\n\n\nWhy 2025 is the single most pivotal year in our lifetime, Peter Leyden, Big Think, YouTube, 2025-10-20."
+    "text": "Message of the Day\n\n\n\n\n\n\nNote\n\n\nGrant Sanderson explores the evolving relationship between technical understanding and the act of building in modern software development. By comparing the motivations of different approaches, this keynote encourages attendees to reflect on their own goals for learning and creation during the event.\n\n\n\nGrant Sanderson is the creator of 3Blue1Brown, a YouTube channel known for exceptionally clear, visual explanations of mathematics. His work helped popularize intuitive, animation-driven math education online.\n\n\nThe collie and the pug | HackMIT keynote 2026, Posting on YouTube on 2026-09-24."
   },
   {
     "objectID": "lectures/14/slides.html#learning-objectives",
@@ -12958,5 +12958,110 @@
     "title": "Quiz 1",
     "section": "CSI 4106",
     "text": "CSI 4106\n\n\n\n\n\n\nWait for the signal to begin.\nWrite your name and student number on the questionnaire and the Scantron.\nIf you have finished, raise your hand to submit and leave.\nRemain seated if several finish at the same time.\nSubmit all copies 10 minutes before the next class."
+  },
+  {
+    "objectID": "lectures/10/slides.html#encoding-nominal-data",
+    "href": "lectures/10/slides.html#encoding-nominal-data",
+    "title": "Machine Learning Engineering",
+    "section": "Encoding Nominal Data",
+    "text": "Encoding Nominal Data\nOne-hot encoding is a common default for unordered, or nominal, categories.\n\nIncreases Dimensionality: One-hot encoding creates one output feature per retained category.\nAvoids Artificial Order: Integer codes can introduce distances and order that the categories do not possess.\nExample of Bias: Using the first method, w = 1, 2, 3, etc., implies that ‘Federal-gov’ and ‘Local-gov’ are similar, while ‘Federal-gov’ and ‘Without-pay’ are not.\nMisleading Similarity: The second method, w = [0,0,0], [0,0,1], etc., might mislead the algorithm by suggesting similarity based on numeric patterns."
+  },
+  {
+    "objectID": "lectures/10/slides.html#min-max-scaling",
+    "href": "lectures/10/slides.html#min-max-scaling",
+    "title": "Machine Learning Engineering",
+    "section": "Min-max scaling",
+    "text": "Min-max scaling\nMin-max scaling maps each feature to a chosen interval, usually [0,1].\n\n  \\frac{x_i^{(j)} - \\min^{(j)}}{\\max^{(j)} - \\min^{(j)}}\n\nThe minimum and maximum must be learned from the training data.\n\n\nSee: sklearn.preprocessing.MinMaxScaler"
+  },
+  {
+    "objectID": "lectures/10/slides.html#choosing-a-scaling-method",
+    "href": "lectures/10/slides.html#choosing-a-scaling-method",
+    "title": "Machine Learning Engineering",
+    "section": "Choosing a scaling method",
+    "text": "Choosing a scaling method\n\nStandardization is a common choice for distance-based methods, regularized linear models, and gradient-based optimization.\nMin-max scaling is useful when a bounded input range is required.\nBoth methods are sensitive to outliers: min-max scaling uses extremes, while standardization uses the mean and standard deviation.\nFor strongly skewed features or outliers, investigate the data-generating process and consider a justified transformation, clipping rule, or RobustScaler.\nIf several choices are plausible and consequential, compare them within cross-validation.\n\n\nScaling and distributional transformation solve different problems. A logarithm can reduce right skew for strictly positive data, but it must be meaningful for the feature and fitted into the same leakage-safe workflow. RobustScaler uses the median and interquartile range, which makes its fitted statistics less sensitive to extreme values."
+  },
+  {
+    "objectID": "lectures/10/slides.html#scaling-methods-compared",
+    "href": "lectures/10/slides.html#scaling-methods-compared",
+    "title": "Machine Learning Engineering",
+    "section": "Scaling methods compared",
+    "text": "Scaling methods compared\n\n\n\n\n\n\n\n\nFeature\nStandardization\nMin-max scaling\n\n\n\n\nOutput Range\nNot bounded\nTypically [0, 1]\n\n\nCenter\nMean at 0\nNot centered\n\n\nOutlier sensitivity\nSensitive through the mean and standard deviation\nSensitive through the minimum and maximum\n\n\nTypical use\nComparable variance and zero-centred features\nA prescribed bounded range"
+  },
+  {
+    "objectID": "lectures/10/slides.html#normally-distributed-sample-with-outliers",
+    "href": "lectures/10/slides.html#normally-distributed-sample-with-outliers",
+    "title": "Machine Learning Engineering",
+    "section": "Normally distributed sample with outliers",
+    "text": "Normally distributed sample with outliers\n\nimport numpy as np\nnp.random.seed(7)\n\n# Sample characteristics\nsample_size = 1000\nmu = 57\nsigma = 7\n\n# Generate values\nnorm_values = sigma * np.random.randn(sample_size) + mu\n\n# Add three outliers\nnorm_values = np.append(norm_values, [92, 95, 98])"
+  },
+  {
+    "objectID": "lectures/10/slides.html#original-distribution",
+    "href": "lectures/10/slides.html#original-distribution",
+    "title": "Machine Learning Engineering",
+    "section": "Original distribution",
+    "text": "Original distribution\n\n\nCode\nimport matplotlib.pyplot as plt\n\n# Plot the histogram\nplt.hist(norm_values, bins=20, edgecolor='black')\n\nplt.title(f'Sampling of {sample_size} values from a normal distribution')\n\nplt.xlabel('Value')\nplt.ylabel('Frequency')\n\nplt.show()"
+  },
+  {
+    "objectID": "lectures/10/slides.html#min-max-scaling-1",
+    "href": "lectures/10/slides.html#min-max-scaling-1",
+    "title": "Machine Learning Engineering",
+    "section": "Min-max scaling",
+    "text": "Min-max scaling\n\n\nCode\nfrom sklearn.preprocessing import MinMaxScaler\n\nscaler = MinMaxScaler()\n\nminmax_norm_values = scaler.fit_transform(norm_values.reshape(-1, 1))\n\n# Plot the histogram\nplt.hist(minmax_norm_values, bins=20, edgecolor='black')\n\nplt.title(f'MinMaxScaler')\n\nplt.xlabel('Value')\nplt.ylabel('Frequency')\n\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nThe largest observed value is mapped to 1 and the smallest to 0. The high outliers stretch that interval, compressing most observations into its lower portion. Min-max scaling does not imply that the transformed mean should be 0.5.\n\n\nMin-max scaling of values from a normal distribution containing high outliers."
+  },
+  {
+    "objectID": "lectures/10/slides.html#preserve-missingness-information",
+    "href": "lectures/10/slides.html#preserve-missingness-information",
+    "title": "Machine Learning Engineering",
+    "section": "Preserve Missingness Information",
+    "text": "Preserve Missingness Information\nAn imputed value can be accompanied by a binary feature indicating that the original value was missing.\n\nimputer_with_indicator = SimpleImputer(\n    strategy=\"median\", add_indicator=True\n)\nimputer_with_indicator.fit_transform(X_train_missing)\n\narray([[ 1., 10.,  0.],\n       [ 2., 11.,  1.],\n       [ 3., 12.,  0.]])\n\n\n\nadd_indicator=True lets an estimator use the fact that a value was missing as a separate signal. This can help when the observation process is informative—for example, when one measurement is ordered only for higher-risk patients.\nA sentinel value outside the normal range can serve a similar purpose for some tree-based models, but it can badly distort distances or linear relationships. An explicit indicator communicates the intent more clearly."
+  },
+  {
+    "objectID": "lectures/10/slides.html#predict-a-missing-feature",
+    "href": "lectures/10/slides.html#predict-a-missing-feature",
+    "title": "Machine Learning Engineering",
+    "section": "Predict a Missing Feature",
+    "text": "Predict a Missing Feature\n\nSelect a feature containing missing values as the prediction target.\nUse rows where that feature is observed as training examples.\nUse the remaining observed features as inputs.\nPredict the missing entries with a regression or classification model."
+  },
+  {
+    "objectID": "lectures/10/slides.html#from-evaluation-to-intervention",
+    "href": "lectures/10/slides.html#from-evaluation-to-intervention",
+    "title": "Machine Learning Engineering",
+    "section": "From Evaluation to Intervention",
+    "text": "From Evaluation to Intervention\nLecture 7 established that class imbalance can hide poor performance on an infrequent class and that evaluation must reflect the decision problem.\nThis lecture asks a different question:\n\nHow can the training procedure respond to class imbalance without contaminating evaluation?\n\n\nLecture 7 already developed the confusion matrix, accuracy, precision, recall, F_1, micro and macro averaging, threshold trade-offs, ROC curves, and precision–recall curves. Those definitions and formulas are not repeated here.\nThe important transition is from detecting a problem during evaluation to changing the training procedure. A remedy is useful only if it improves the application-relevant validation measure established in Lecture 7."
+  },
+  {
+    "objectID": "lectures/10/slides.html#training-time-remedies",
+    "href": "lectures/10/slides.html#training-time-remedies",
+    "title": "Machine Learning Engineering",
+    "section": "Training-Time Remedies",
+    "text": "Training-Time Remedies\n\nClass or sample weights: Make errors on selected examples contribute more strongly to the training objective.\nRandom oversampling: Repeat minority-class training examples.\nRandom undersampling: Retain fewer majority-class training examples.\nSMOTE: Interpolate synthetic minority-class examples from neighbouring training examples.\nDecision threshold: Select an operating point using validation data, as introduced in Lecture 7.\n\n\n\nClass weights change the contribution of training examples without creating or deleting observations. Oversampling can overfit repeated examples, whereas undersampling can discard useful majority-class variation.\nSMOTE constructs synthetic points between minority-class neighbours (Chawla et al. 2002). This interpolation can be inappropriate when a straight line between two observations leaves the set of plausible examples. Ordinary SMOTE also assumes numerical features; mixed numerical and categorical data require an appropriate variant such as SMOTENC.\nNo remedy is universally best. Compare plausible choices using the validation procedure and application-relevant measures established in Lecture 7.\n\n\nImplementations: class_weight and imbalanced-learn."
+  },
+  {
+    "objectID": "lectures/10/slides.html#keep-evaluation-untouched",
+    "href": "lectures/10/slides.html#keep-evaluation-untouched",
+    "title": "Machine Learning Engineering",
+    "section": "Keep Evaluation Untouched",
+    "text": "Keep Evaluation Untouched\n\nPreserve the natural class distribution in validation and test data.\nApply resampling only to a training partition.\nDuring cross-validation, resample separately inside each training fold.\nPlace resampling and the estimator in an imbalanced-learn pipeline.\nReserve the test set for the final evaluation after selecting the remedy and any decision threshold.\n\n\nResampling before the train/test split leaks information and also creates an unrealistic evaluation distribution. Resampling once before cross-validation has the same problem because a synthetic or repeated example can influence both training and validation folds.\nAn imbalanced-learn pipeline calls the sampler only while fitting each training fold. Its prediction path does not resample validation, test, or production examples."
+  },
+  {
+    "objectID": "lectures/10/slides.html#learned-polynomial",
+    "href": "lectures/10/slides.html#learned-polynomial",
+    "title": "Machine Learning Engineering",
+    "section": "Learned Polynomial",
+    "text": "Learned Polynomial\nThe data was generated according to the following equation, with the inclusion of Gaussian noise.\n\n  y = 0.5 x^2 - 1.0 x + 2.0\n\nPresented below is the learned model.\n\n  \\hat{y} = 0.56 x^2 + (-1.06) x + 1.78\n\n\nlin_reg.coef_, lin_reg.intercept_\n\n(array([[-1.06633107,  0.56456263]]), array([1.78134581]))\n\n\n\nLinearity refers to the fitted coefficients, not necessarily to the original input. After defining z_1=x and z_2=x^2, linear regression fits\n\n\\hat{y}=\\theta_0+\\theta_1z_1+\\theta_2z_2.\n\nThis expression is linear in \\theta_0,\\theta_1,\\theta_2, even though it traces a curve as x changes. PolynomialFeatures changes the feature representation; it does not change the fitting algorithm into a different kind of regression estimator.\nThe fitted coefficients are close to the generating coefficients because the model contains the relevant quadratic term and the sample contains moderate Gaussian noise. Exact recovery is neither expected nor required."
+  },
+  {
+    "objectID": "lectures/10/Scaling.html#distances-to-the-training-examples",
+    "href": "lectures/10/Scaling.html#distances-to-the-training-examples",
+    "title": "Scaling",
+    "section": "Distances to the training examples",
+    "text": "Distances to the training examples\nDistances from a to {b, c} before and after scaling.\n\ndef show_pair(name_from, names_to, D):\n    return D.loc[name_from, names_to].to_frame(\"distance\")\n\nprint(\"Unscaled distances from a → {b,c}\")\ndisplay(show_pair(\"a\", [\"b\", \"c\"], dist_unscaled))\n\nprint(\"Scaled distances from a → {b,c}\")\ndisplay(show_pair(\"a\", [\"b\", \"c\"], dist_scaled))\n\nUnscaled distances from a → {b,c}\n\n\n\n\n\n\n\n\n\ndistance\n\n\n\n\nb\n20.396078\n\n\nc\n200.000000\n\n\n\n\n\n\n\nScaled distances from a → {b,c}\n\n\n\n\n\n\n\n\n\ndistance\n\n\n\n\nb\n2.008247\n\n\nc\n1.818182"
+  },
+  {
+    "objectID": "lectures/14/slides.html#message-of-the-day-1",
+    "href": "lectures/14/slides.html#message-of-the-day-1",
+    "title": "Softmax, cross-entropy, regularization",
+    "section": "Message of the Day",
+    "text": "Message of the Day\n\n\n\n\n\n\n\nWhy 2025 is the single most pivotal year in our lifetime, Peter Leyden, Big Think, YouTube, 2025-10-20."
   }
 ]

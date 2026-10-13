@@ -1,0 +1,2660 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <meta name="author" content="Marcel Turcotte">
+  <title>CSI 4106 - Fall 2026 – Machine Learning Engineering</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link rel="stylesheet" href="../../assets/css/reveal-common.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<meta property="og:title" content="Machine Learning Engineering – CSI 4106 - Fall 2026">
+<meta property="og:description" content="CSI 4106 - Fall 2026">
+<meta property="og:site_name" content="CSI 4106 - Fall 2026">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Machine Learning Engineering</h1>
+  <p class="subtitle">CSI 4106 - Fall 2026</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Marcel Turcotte
+</div>
+</div>
+</div>
+
+  <p class="date">Version: Oct 13, 2026 11:54</p>
+</section>
+<section>
+<section id="preamble" class="title-slide slide level1 center">
+<h1>Preamble</h1>
+
+</section>
+<section id="message-of-the-day" class="slide level2">
+<h2>Message of the Day</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://cohere-ai.ghost.io/content/images/size/w1600/2026/10/260902_OfficeAnnouncement_Ottawa_Blog.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="https://cohere-ai.ghost.io/content/images/size/w1600/2026/10/260902_OfficeAnnouncement_Ottawa_Blog.png" class="quarto-figure quarto-figure-center" height="450"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> Aidan Gomez, Co-Founder and CEO</strong></p>
+</div>
+<div class="callout-content">
+<p>Canada is home for Cohere. It’s where we founded the company, where so much of our talent comes from, and where we want to keep building for the long term. Ottawa has an incredible technology community and a deep pool of technical talent. Establishing our first office in the city is an important step in investing in our team and building for the future.</p>
+</div>
+</div>
+</div>
+<p>We began the semester by introducing Joëlle Pineau and her role at Cohere. Today, we return to Cohere as the company expands its presence in Canada with a new permanent office in Ottawa. This is an exciting development for our local AI community—and perhaps a future career opportunity for some of you.</p>
+<p>Two of Cohere’s co-founders have interesting connections to both Ottawa and music.</p>
+<p><a href="https://aidangomez.ca/"><strong>Aidan Gomez</strong></a>, Cohere’s co-founder and CEO, was one of the eight authors of the landmark 2017 paper <a href="https://research.google/pubs/attention-is-all-you-need"><em>Attention Is All You Need</em></a>, which introduced the Transformer architecture underlying modern large language models. His path into machine learning also has a musical connection. A pianist since childhood, he worked as an undergraduate on an application that used neural networks to follow a live piano performance and automatically turn the pages of the musical score.</p>
+<p><a href="https://nickfrosst.com/"><strong>Nick Frosst</strong></a>, another Cohere co-founder, grew up in Ottawa and says that he first learned to program at Bell High School in Bells Corners. He later studied computer science and cognitive science at the University of Toronto and became the first employee in Geoffrey Hinton’s Google Brain lab in Toronto. Frosst also has a rather unusual second career: he is the lead singer of the Canadian indie-rock band <a href="https://goodkidofficial.com/"><strong>Good Kid</strong></a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><a href="https://cohere.com/blog/cohere-expands-canadian-footprint-with-new-ottawa-office" class="external" data-icon="true">Cohere Expands Canadian Footprint with New Ottawa Office</a>, 2026-10-08.</p>
+</div></aside></section>
+<section id="learning-objectives" class="slide level2 smaller">
+<h2>Learning Objectives</h2>
+<ul>
+<li><strong>Choose</strong> an encoding that matches a feature’s meaning and the needs of the estimator.</li>
+<li><strong>Explain</strong> when feature scaling matters and <strong>apply</strong> it without leaking validation or test information.</li>
+<li><strong>Compare</strong> strategies for missing values and <strong>implement</strong> imputation within a pipeline.</li>
+<li><strong>Apply</strong> class-imbalance remedies to training data without altering the evaluation distribution.</li>
+<li><strong>Construct</strong> nonlinear and interaction features while controlling model complexity.</li>
+<li><strong>Explain</strong> how data quality, coverage, and augmentation affect generalization.</li>
+</ul>
+</section></section>
+<section>
+<section id="machine-learning-engineering" class="title-slide slide level1 center">
+<h1>Machine Learning Engineering</h1>
+
+</section>
+<section id="machine-learning-engineering-1" class="slide level2">
+<h2>Machine Learning Engineering</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/mle_3_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="../../assets/images/mle_3_1.png" class="quarto-figure quarto-figure-center" height="450"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>The courses <a href="https://catalogue.uottawa.ca/search/?P=SDS%203386" class="external" data-icon="true">SDS 3386: Data Science Lab</a> and <a href="https://catalogue.uottawa.ca/search/?P=CSI%204142" class="external" data-icon="true">CSI 4142: Fundamentals of Data Science</a> provide comprehensive coverage of machine learning engineering. This lecture introduces a focused subset of the preprocessing and feature-engineering concepts used in those courses.</p>
+<p>As illustrated, the life cycle of a machine learning project typically involves multiple iterations. Each cycle enhances understanding of the problem and reveals limitations. Insufficient data quality often precipitates project failure.</p>
+<h3 id="characteristics-of-high-quality-data">Characteristics of High-Quality Data</h3>
+<ul>
+<li><strong>Volume</strong>: Is the dataset sufficiently large to support generalization?</li>
+<li><strong>Relevance</strong>: Do the features accurately model the problem?</li>
+<li><strong>Representation</strong>: Does the data reflect the conditions expected in production?
+<ul>
+<li>Are these features obtainable from real-world inputs?</li>
+<li>Does the dataset adequately cover and represent feature examples?</li>
+</ul></li>
+<li><strong>Bias</strong>: Is the data free from bias?</li>
+<li><strong>Label Consistency</strong>: Are the labels consistent throughout the dataset?</li>
+</ul>
+<h3 id="machine-learning-project-cycle">Machine Learning Project Cycle</h3>
+<p>Gathering data and extracting features are the first two steps of a machine learning project.</p>
+<ol type="1">
+<li>Gather <strong>adequate</strong> data.</li>
+<li>Extract <strong>features</strong> from the raw data:
+<ul>
+<li>This process is <strong>labor-intensive</strong>.</li>
+<li>It necessitates <strong>creativity</strong>.</li>
+<li><strong>Domain knowledge</strong> is highly beneficial.</li>
+</ul></li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Attribution:</strong> <span class="citation" data-cites="Burkov:2020aa">Burkov (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>, Figure 3.1</p>
+</div></aside></section></section>
+<section>
+<section id="encoding" class="title-slide slide level1 center">
+<h1>Encoding</h1>
+
+</section>
+<section id="why" class="slide level2">
+<h2>Why?</h2>
+<p>After completing Assignment 1, you generated a <code>.csv</code> file containing cleaned data.</p>
+<p>Why would additional steps be necessary?</p>
+</section>
+<section id="dataset---adult" class="slide level2 scrollable smaller">
+<h2>Dataset - Adult</h2>
+<div id="8c66dd26" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a aria-label="2"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb1-3"><a aria-label="3"></a></span>
+<span id="cb1-4"><a aria-label="4"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_openml</span>
+<span id="cb1-5"><a aria-label="5"></a></span>
+<span id="cb1-6"><a aria-label="6"></a>adult <span class="op">=</span> fetch_openml(name<span class="op">=</span><span class="st">'adult'</span>, version<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-7"><a aria-label="7"></a></span>
+<span id="cb1-8"><a aria-label="8"></a><span class="bu">print</span>(adult.DESCR)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<aside class="notes">
+<p>The ‘Adult’ dataset contains several attributes characterized by categorical values. This dataset will serve as a basis for a brief discussion on encoding these categorical values.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="dataset---adult-output" class="slide level2 scrollable smaller output-location-slide"><h2>Dataset - Adult</h2><div class="cell output-location-slide" data-execution_count="2">
+<p><strong>Author</strong>: Ronny Kohavi and Barry Becker<br>
+<strong>Source</strong>: <a href="https://archive.ics.uci.edu/ml/datasets/Adult">UCI</a> - 1996<br>
+<strong>Please cite</strong>: Ron Kohavi, “Scaling Up the Accuracy of Naive-Bayes Classifiers: a Decision-Tree Hybrid”, Proceedings of the Second International Conference on Knowledge Discovery and Data Mining, 1996</p>
+<p>Prediction task is to determine whether a person makes over 50K a year. Extraction was done by Barry Becker from the 1994 Census database. A set of reasonably clean records was extracted using the following conditions: ((AAGE&gt;16) &amp;&amp; (AGI&gt;100) &amp;&amp; (AFNLWGT&gt;1)&amp;&amp; (HRSWK&gt;0))</p>
+<p>This is the original version from the UCI repository, with training and test sets merged.</p>
+<h3 id="variable-description">Variable description</h3>
+<p>Variables are all self-explanatory except <strong>fnlwgt</strong>. This is a proxy for the demographic background of the people: “People with similar demographic characteristics should have similar weights”. This similarity-statement is not transferable across the 51 different states.</p>
+<p>Description from the donor of the database:</p>
+<p>The weights on the CPS files are controlled to independent estimates of the civilian noninstitutional population of the US. These are prepared monthly for us by Population Division here at the Census Bureau. We use 3 sets of controls. These are: 1. A single cell estimate of the population 16+ for each state. 2. Controls for Hispanic Origin by age and sex. 3. Controls by Race, age and sex.</p>
+<p>We use all three sets of controls in our weighting program and “rake” through them 6 times so that by the end we come back to all the controls we used. The term estimate refers to population totals derived from CPS by creating “weighted tallies” of any specified socio-economic characteristics of the population. People with similar demographic characteristics should have similar weights. There is one important caveat to remember about this statement. That is that since the CPS sample is actually a collection of 51 state samples, each with its own probability of selection, the statement only applies within state.</p>
+<h3 id="relevant-papers">Relevant papers</h3>
+<p>Ronny Kohavi and Barry Becker. Data Mining and Visualization, Silicon Graphics.<br>
+e-mail: ronnyk ‘@’ live.com for questions.</p>
+<p>Downloaded from openml.org.</p>
+</div></section><section id="adult---workclass" class="slide level2 scrollable">
+<h2>Adult - Workclass</h2>
+<div id="94c485cf" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a>adult.data[<span class="st">'workclass'</span>].unique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<pre><code>['Private', 'Local-gov', NaN, 'Self-emp-not-inc', 'Federal-gov', 'State-gov', 'Self-emp-inc', 'Without-pay', 'Never-worked']
+Categories (8, str): ['Federal-gov', 'Local-gov', 'Never-worked', 'Private', 'Self-emp-inc', 'Self-emp-not-inc', 'State-gov', 'Without-pay']</code></pre>
+</div>
+</div>
+</section>
+<section id="adult---education" class="slide level2 scrollable">
+<h2>Adult - Education</h2>
+<div id="713ffe0b" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a>adult.data[<span class="st">'education'</span>].unique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<pre><code>['11th', 'HS-grad', 'Assoc-acdm', 'Some-college', '10th', ..., 'Assoc-voc', '9th', '12th', '1st-4th', 'Preschool']
+Length: 16
+Categories (16, str): ['10th', '11th', '12th', '1st-4th', ..., 'Masters', 'Preschool', 'Prof-school', 'Some-college']</code></pre>
+</div>
+</div>
+</section>
+<section id="adult---marital-status" class="slide level2 scrollable">
+<h2>Adult - Marital Status</h2>
+<div id="641e5610" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>adult.data[<span class="st">'marital-status'</span>].unique()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<pre><code>['Never-married', 'Married-civ-spouse', 'Widowed', 'Divorced', 'Separated', 'Married-spouse-absent', 'Married-AF-spouse']
+Categories (7, str): ['Divorced', 'Married-AF-spouse', 'Married-civ-spouse', 'Married-spouse-absent', 'Never-married', 'Separated', 'Widowed']</code></pre>
+</div>
+</div>
+</section>
+<section id="categorical-data" class="slide level2">
+<h2>Categorical Data</h2>
+<p><strong>Key Points on Data Representation</strong></p>
+<ul>
+<li><p><strong>Numerical Representation</strong>: Many learning algorithms require numerical feature vectors.</p></li>
+<li><p><strong>Meaning Matters</strong>: The representation should preserve whether categories are unordered or have an inherent order.</p></li>
+</ul>
+</section>
+<section id="encoding-methods" class="slide level2">
+<h2>Encoding Methods</h2>
+<p>Consider the <code>workclass</code> attribute, which has 8 distinct values like ‘Federal-gov’, ‘Local-gov’, and so on.</p>
+<ul>
+<li><strong>Which</strong> encoding method is preferable and <strong>why?</strong></li>
+</ul>
+<ol type="1">
+<li class="fragment"><code>w</code> = 1, 2, 3, 4, 5, 6, 7, or 8</li>
+<li class="fragment"><code>w</code> = [0,0,0], [0,0,1], [0,1,0], <span class="math inline">\ldots</span>, or [1,1,1]</li>
+<li class="fragment"><code>w</code> = [1,0,0,0,0,0,0,0], [0,1,0,0,0,0,0,0], <span class="math inline">\ldots</span>, or [0,0,0,0,0,0,0,1]</li>
+</ol>
+</section>
+<section id="encoding-nominal-data" class="slide level2 smaller">
+<h2>Encoding Nominal Data</h2>
+<p><strong>One-hot encoding</strong> is a common default for unordered, or <strong>nominal</strong>, categories.</p>
+<ul>
+<li class="fragment"><strong>Increases Dimensionality</strong>: One-hot encoding creates one output feature per retained category.</li>
+<li class="fragment"><strong>Avoids Artificial Order</strong>: Integer codes can introduce distances and order that the categories do not possess.</li>
+<li class="fragment"><strong>Example of Bias</strong>: Using the first method, <code>w</code> = 1, 2, 3, etc., implies that ‘Federal-gov’ and ‘Local-gov’ are similar, while ‘Federal-gov’ and ‘Without-pay’ are not.</li>
+<li class="fragment"><strong>Misleading Similarity</strong>: The second method, <code>w</code> = [0,0,0], [0,0,1], etc., might mislead the algorithm by suggesting similarity based on numeric patterns.</li>
+</ul>
+</section>
+<section id="definition" class="slide level2">
+<h2>Definition</h2>
+<p><strong>One-Hot Encoding</strong>: A technique that converts categorical variables into a binary vector representation, where each category is represented by a vector with a single ‘1’ and all other elements as ‘0’.</p>
+
+<aside><div>
+<p>High-cardinality attributes may require other representations, such as grouping infrequent categories, hashing, target encoding, or learned embeddings.</p>
+</div></aside></section>
+<section id="onehotencoder" class="slide level2">
+<h2>OneHotEncoder</h2>
+<div id="a0b9c60c" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder</span>
+<span id="cb8-2"><a aria-label="2"></a></span>
+<span id="cb8-3"><a aria-label="3"></a>work <span class="op">=</span> adult.data[[<span class="st">'workclass'</span>]]</span>
+<span id="cb8-4"><a aria-label="4"></a></span>
+<span id="cb8-5"><a aria-label="5"></a>onehot_encoder <span class="op">=</span> OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">"ignore"</span>)</span>
+<span id="cb8-6"><a aria-label="6"></a></span>
+<span id="cb8-7"><a aria-label="7"></a>onehot_encoder.fit(work)</span>
+<span id="cb8-8"><a aria-label="8"></a>values_encoded <span class="op">=</span> onehot_encoder.transform(work)</span>
+<span id="cb8-9"><a aria-label="9"></a></span>
+<span id="cb8-10"><a aria-label="10"></a>values_encoded[:<span class="dv">5</span>].toarray()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<pre><code>array([[0., 0., 0., 1., 0., 0., 0., 0., 0.],
+       [0., 0., 0., 1., 0., 0., 0., 0., 0.],
+       [0., 1., 0., 0., 0., 0., 0., 0., 0.],
+       [0., 0., 0., 1., 0., 0., 0., 0., 0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 1.]])</code></pre>
+</div>
+</div>
+
+<aside class="notes">
+<p>An encoder learns the categories and their column order during <code>fit</code>. Fitting a second encoder on validation, test, or production data can therefore change the meaning or number of columns. The correct pattern is to fit the encoder on the training data and reuse its <code>transform</code> method everywhere else. A pipeline applies this pattern automatically during cross-validation.</p>
+<p>While <code>Pandas</code> offers a method called <code>get_dummies()</code> for one-hot encoding, it is important to note the following distinctions:</p>
+<ul>
+<li><strong>Category Memory</strong>: <code>OneHotEncoder</code> retains the categories it was trained on, whereas <code>get_dummies()</code> does not.</li>
+<li><strong>Consistency in Production</strong>: It is crucial to use the same encoding scheme in production as was used during training to ensure accurate results.</li>
+<li><strong>Vector Length Discrepancies</strong>: If <code>get_dummies()</code> encounters a different number of categories in new data, it will produce vectors of varying lengths, leading to potential errors.</li>
+<li><strong>Handling Missing Values</strong>: By default, <code>get_dummies()</code> encodes a missing value as all zeros. An explicit missing-value column is created only with <code>dummy_na=True</code>.</li>
+</ul>
+<p>Ensuring consistency in encoding across <strong>training</strong>, <strong>validation</strong>, and <strong>production</strong> datasets is essential to maintain the integrity and accuracy of your machine learning models.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Consistency is Key</strong>: Ensure you use the same encoding on: Validation Set, Test Set, and Production Data.</p>
+</div></aside></section>
+<section id="case-study" class="slide level2 smaller">
+<h2>Case Study</h2>
+<ul>
+<li><strong>Dataset</strong>: <a href="https://archive.ics.uci.edu/dataset/45/heart+disease" class="external" data-icon="true">Heart Disease</a>
+<ul>
+<li><strong>Examples</strong>: 303, <strong>features</strong>: 13</li>
+<li><strong>Target</strong>: 0 denotes absence; values 1–4 denote presence of disease</li>
+</ul></li>
+<li><strong>Categorical Data</strong>:
+<ul>
+<li><strong>sex</strong>: 1 = male, 0 = female</li>
+<li><strong>cp (chest pain type)</strong>:
+<ul>
+<li>1: Typical angina</li>
+<li>2: Atypical angina</li>
+<li>3: Non-anginal pain</li>
+<li>4: Asymptomatic</li>
+</ul></li>
+<li><strong>Other</strong>: ‘fbs’, ‘restecg’, ‘exang’, ‘slope’, ‘thal’</li>
+</ul></li>
+</ul>
+
+<aside class="notes">
+<p>The UCI target records absence as 0 and degrees of presence as values 1 through 4. The code converts these values into the binary task described on the slide.</p>
+<p>Dropped rows can differ systematically from complete rows, so this shortcut may introduce selection bias. A realistic analysis would investigate the missingness process and compare an imputation strategy fitted on the training data.</p>
+<p>The example is intentionally limited to preprocessing. Model and regularization choices would be selected with validation data or cross-validation, while the test set would remain reserved for final evaluation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>To simplify the analysis</strong>: Examples with missing values are dropped, the target is converted to absence/presence, and no hyperparameter tuning is performed.</p>
+</div></aside></section>
+<section id="case-study-1" class="slide level2 scrollable">
+<h2>Case Study</h2>
+<div id="d832e945" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb10-3"><a aria-label="3"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-4"><a aria-label="4"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_openml</span>
+<span id="cb10-5"><a aria-label="5"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder, StandardScaler</span>
+<span id="cb10-6"><a aria-label="6"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
+<span id="cb10-7"><a aria-label="7"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb10-8"><a aria-label="8"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb10-9"><a aria-label="9"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report</span>
+<span id="cb10-10"><a aria-label="10"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb10-11"><a aria-label="11"></a></span>
+<span id="cb10-12"><a aria-label="12"></a><span class="co"># Load the 'Heart-Disease' dataset from OpenML</span></span>
+<span id="cb10-13"><a aria-label="13"></a>data <span class="op">=</span> fetch_openml(name<span class="op">=</span><span class="st">'Heart-Disease'</span>, version<span class="op">=</span><span class="dv">1</span>, as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-14"><a aria-label="14"></a>df <span class="op">=</span> data.frame</span>
+<span id="cb10-15"><a aria-label="15"></a></span>
+<span id="cb10-16"><a aria-label="16"></a><span class="co"># Replace '?' with NaN and convert columns to numeric</span></span>
+<span id="cb10-17"><a aria-label="17"></a><span class="cf">for</span> col <span class="kw">in</span> df.columns:</span>
+<span id="cb10-18"><a aria-label="18"></a>    df[col] <span class="op">=</span> pd.to_numeric(df[col], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb10-19"><a aria-label="19"></a></span>
+<span id="cb10-20"><a aria-label="20"></a><span class="co"># Drop rows with missing values</span></span>
+<span id="cb10-21"><a aria-label="21"></a>df.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-22"><a aria-label="22"></a></span>
+<span id="cb10-23"><a aria-label="23"></a><span class="co"># Define features and convert the target to absence/presence</span></span>
+<span id="cb10-24"><a aria-label="24"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[<span class="st">'target'</span>])</span>
+<span id="cb10-25"><a aria-label="25"></a>y <span class="op">=</span> (df[<span class="st">'target'</span>] <span class="op">&gt;</span> <span class="dv">0</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb10-26"><a aria-label="26"></a></span>
+<span id="cb10-27"><a aria-label="27"></a><span class="co"># Columns to encode with OneHotEncoder</span></span>
+<span id="cb10-28"><a aria-label="28"></a>columns_to_encode <span class="op">=</span> [<span class="st">'sex'</span>, <span class="st">'cp'</span>, <span class="st">'fbs'</span>, <span class="st">'restecg'</span>, <span class="st">'exang'</span>, <span class="st">'slope'</span>, <span class="st">'thal'</span>]</span>
+<span id="cb10-29"><a aria-label="29"></a></span>
+<span id="cb10-30"><a aria-label="30"></a><span class="co"># Identify numerical columns</span></span>
+<span id="cb10-31"><a aria-label="31"></a>numerical_columns <span class="op">=</span> X.columns.difference(columns_to_encode)</span>
+<span id="cb10-32"><a aria-label="32"></a></span>
+<span id="cb10-33"><a aria-label="33"></a><span class="co"># Split the dataset into training and testing sets before transformations</span></span>
+<span id="cb10-34"><a aria-label="34"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb10-35"><a aria-label="35"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>y</span>
+<span id="cb10-36"><a aria-label="36"></a>)</span>
+<span id="cb10-37"><a aria-label="37"></a></span>
+<span id="cb10-38"><a aria-label="38"></a><span class="co"># Apply OneHotEncoder and StandardScaler using ColumnTransformer</span></span>
+<span id="cb10-39"><a aria-label="39"></a>preprocessor <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb10-40"><a aria-label="40"></a>    transformers<span class="op">=</span>[</span>
+<span id="cb10-41"><a aria-label="41"></a>        (</span>
+<span id="cb10-42"><a aria-label="42"></a>            <span class="st">'onehot'</span>,</span>
+<span id="cb10-43"><a aria-label="43"></a>            OneHotEncoder(drop<span class="op">=</span><span class="st">'first'</span>, handle_unknown<span class="op">=</span><span class="st">'ignore'</span>),</span>
+<span id="cb10-44"><a aria-label="44"></a>            columns_to_encode,</span>
+<span id="cb10-45"><a aria-label="45"></a>        ),</span>
+<span id="cb10-46"><a aria-label="46"></a>        (<span class="st">'scaler'</span>, StandardScaler(), numerical_columns)</span>
+<span id="cb10-47"><a aria-label="47"></a>    ]</span>
+<span id="cb10-48"><a aria-label="48"></a>)</span>
+<span id="cb10-49"><a aria-label="49"></a></span>
+<span id="cb10-50"><a aria-label="50"></a><span class="co"># The pipeline fits preprocessing and the classifier on training data only</span></span>
+<span id="cb10-51"><a aria-label="51"></a>heart_pipeline <span class="op">=</span> Pipeline([</span>
+<span id="cb10-52"><a aria-label="52"></a>    (<span class="st">'preprocessor'</span>, preprocessor),</span>
+<span id="cb10-53"><a aria-label="53"></a>    (<span class="st">'classifier'</span>, LogisticRegression()),</span>
+<span id="cb10-54"><a aria-label="54"></a>])</span>
+<span id="cb10-55"><a aria-label="55"></a>heart_pipeline.fit(X_train, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<aside class="notes">
+<p><code>ColumnTransformer</code> applies different transformations to selected columns. Its transformer can also be <code>drop</code>, which excludes the selected columns, or <code>passthrough</code>, which retains them unchanged.</p>
+<p>The surrounding <code>Pipeline</code> is the important engineering pattern: calling <code>fit</code> learns both the preprocessing parameters and the classifier from the training data. Calling <code>predict</code> applies the already-fitted transformations before classification. During cross-validation, each fold therefore learns its own preprocessing parameters from that fold’s training partition.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="case-study---results" class="slide level2">
+<h2>Case study - results</h2>
+<div id="3ee5d991" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="co"># Predict and evaluate on the untouched test set</span></span>
+<span id="cb11-2"><a aria-label="2"></a>y_pred <span class="op">=</span> heart_pipeline.predict(X_test)</span>
+<span id="cb11-3"><a aria-label="3"></a></span>
+<span id="cb11-4"><a aria-label="4"></a><span class="bu">print</span>(classification_report(y_test, y_pred))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              precision    recall  f1-score   support
+
+           0       0.83      0.71      0.77        28
+           1       0.78      0.88      0.83        33
+
+    accuracy                           0.80        61
+   macro avg       0.81      0.80      0.80        61
+weighted avg       0.81      0.80      0.80        61
+</code></pre>
+</div>
+</div>
+</section>
+<section id="case-study---chest-pain-cp" class="slide level2 smaller">
+<h2>Case study - chest pain (cp)</h2>
+<div id="353c8a97" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="co"># Retrieve feature names and coefficients from the fitted pipeline</span></span>
+<span id="cb13-2"><a aria-label="2"></a>feature_names <span class="op">=</span> heart_pipeline[</span>
+<span id="cb13-3"><a aria-label="3"></a>    <span class="st">'preprocessor'</span></span>
+<span id="cb13-4"><a aria-label="4"></a>].get_feature_names_out()</span>
+<span id="cb13-5"><a aria-label="5"></a></span>
+<span id="cb13-6"><a aria-label="6"></a>coefficients <span class="op">=</span> heart_pipeline[<span class="st">'classifier'</span>].coef_[<span class="dv">0</span>]</span>
+<span id="cb13-7"><a aria-label="7"></a></span>
+<span id="cb13-8"><a aria-label="8"></a><span class="co"># Create a DataFrame with feature names and coefficients</span></span>
+<span id="cb13-9"><a aria-label="9"></a>coef_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb13-10"><a aria-label="10"></a>    <span class="st">'Feature'</span>: feature_names,</span>
+<span id="cb13-11"><a aria-label="11"></a>    <span class="st">'Coefficient'</span>: coefficients</span>
+<span id="cb13-12"><a aria-label="12"></a>})</span>
+<span id="cb13-13"><a aria-label="13"></a></span>
+<span id="cb13-14"><a aria-label="14"></a><span class="co"># Display coefficients associated with 'cp'</span></span>
+<span id="cb13-15"><a aria-label="15"></a>cp_features <span class="op">=</span> coef_df[coef_df[<span class="st">'Feature'</span>].<span class="bu">str</span>.contains(<span class="st">'_cp'</span>)]</span>
+<span id="cb13-16"><a aria-label="16"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Coefficients associated with 'cp':"</span>)</span>
+<span id="cb13-17"><a aria-label="17"></a><span class="bu">print</span>(cp_features)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Coefficients associated with 'cp':
+          Feature  Coefficient
+1  onehot__cp_1.0     0.754906
+2  onehot__cp_2.0     1.440017
+3  onehot__cp_3.0     1.255102</code></pre>
+</div>
+</div>
+</section>
+<section id="case-study---coefficients" class="slide level2 hide-code-toggle">
+<h2>Case study - coefficients</h2>
+<div id="e9fc3f41" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a><span class="co"># Visualize the fitted coefficients</span></span>
+<span id="cb15-2"><a aria-label="2"></a></span>
+<span id="cb15-3"><a aria-label="3"></a>coef_plot_df <span class="op">=</span> coef_df.sort_values(by<span class="op">=</span><span class="st">'Coefficient'</span>)</span>
+<span id="cb15-4"><a aria-label="4"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb15-5"><a aria-label="5"></a>plt.barh(coef_plot_df[<span class="st">'Feature'</span>], coef_plot_df[<span class="st">'Coefficient'</span>])</span>
+<span id="cb15-6"><a aria-label="6"></a>plt.title(<span class="st">'Feature Coefficients'</span>)</span>
+<span id="cb15-7"><a aria-label="7"></a>plt.xlabel(<span class="st">'Coefficient Value'</span>)</span>
+<span id="cb15-8"><a aria-label="8"></a>plt.ylabel(<span class="st">'Feature'</span>)</span>
+<span id="cb15-9"><a aria-label="9"></a>plt.tight_layout()</span>
+<span id="cb15-10"><a aria-label="10"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-10-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="slides_files/figure-revealjs/cell-10-output-1.png" class="quarto-figure quarto-figure-center" width="766" height="566"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>With the first category of each encoded attribute used as a reference, a positive coefficient raises the fitted log-odds of heart-disease presence relative to that reference, holding the other transformed features fixed. A negative coefficient lowers those log-odds.</p>
+<p>Coefficient magnitude also depends on feature scaling and regularization. These coefficients describe associations in this fitted model; they do not establish that a feature causes heart disease.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="definition-1" class="slide level2">
+<h2>Definition</h2>
+<p><strong>Ordinal encoding</strong> is a technique that assigns numerical values to categorical attributes based on their inherent order or rank.</p>
+</section>
+<section id="feature-engineering---ordinal" class="slide level2">
+<h2>Feature Engineering - Ordinal</h2>
+<p>For attributes with values such as <strong>‘Poor’</strong>, <strong>‘Average’</strong>, and <strong>‘Good’</strong>, an ordinal encoding can preserve their ordering.</p>
+<div class="fragment">
+<p>However!</p>
+<div id="fa2e5953" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OrdinalEncoder</span>
+<span id="cb16-2"><a aria-label="2"></a></span>
+<span id="cb16-3"><a aria-label="3"></a>X <span class="op">=</span>[[<span class="st">'Poor'</span>], [<span class="st">'Average'</span>], [<span class="st">'Good'</span>], [<span class="st">'Average'</span>], [<span class="st">'Average'</span>]]</span>
+<span id="cb16-4"><a aria-label="4"></a></span>
+<span id="cb16-5"><a aria-label="5"></a>encoder <span class="op">=</span> OrdinalEncoder()</span>
+<span id="cb16-6"><a aria-label="6"></a></span>
+<span id="cb16-7"><a aria-label="7"></a>encoder.fit(X)</span>
+<span id="cb16-8"><a aria-label="8"></a>encoder.transform(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<pre><code>array([[2.],
+       [0.],
+       [1.],
+       [0.],
+       [0.]])</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="ordinalencoder-revised" class="slide level2">
+<h2>OrdinalEncoder (revised)</h2>
+<div id="3632b8d9" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OrdinalEncoder</span>
+<span id="cb18-2"><a aria-label="2"></a></span>
+<span id="cb18-3"><a aria-label="3"></a>X <span class="op">=</span>[[<span class="st">'Poor'</span>], [<span class="st">'Average'</span>], [<span class="st">'Good'</span>], [<span class="st">'Average'</span>], [<span class="st">'Average'</span>]]</span>
+<span id="cb18-4"><a aria-label="4"></a></span>
+<span id="cb18-5"><a aria-label="5"></a>encoder <span class="op">=</span> OrdinalEncoder(categories<span class="op">=</span>[[<span class="st">'Poor'</span>, <span class="st">'Average'</span>, <span class="st">'Good'</span>]])</span>
+<span id="cb18-6"><a aria-label="6"></a></span>
+<span id="cb18-7"><a aria-label="7"></a>encoder.fit(X)</span>
+<span id="cb18-8"><a aria-label="8"></a></span>
+<span id="cb18-9"><a aria-label="9"></a>X_encoded <span class="op">=</span> encoder.transform(X)</span>
+<span id="cb18-10"><a aria-label="10"></a></span>
+<span id="cb18-11"><a aria-label="11"></a>X_encoded</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="45">
+<pre><code>array([[0.],
+       [1.],
+       [2.],
+       [1.],
+       [1.]])</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>The desired order of the categories must be explicitly provided to the encoder; otherwise, it defaults to alphabetical order.</p>
+<p>An ordinal encoder is appropriate when categorical attributes have a clear, inherent order or ranking, such as ‘Low’, ‘Medium’, and ‘High’, or ‘Poor’, ‘Average’, and ‘Good’. This encoding method preserves the ordinal relationships among categories.</p>
+<p>When data is inherently ordinal, this encoding is more compact and can be advantageous for machine learning models. However, if there is any uncertainty about the ordinal nature of the data, it is safer to use a <code>OneHotEncoder</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="definition-2" class="slide level2">
+<h2>Definition</h2>
+<p><strong>Discretization</strong> maps a continuous or fine-grained numerical feature into a finite set of intervals.</p>
+
+<aside><div>
+<p>AKA <strong>binning</strong>, <strong>bucketing</strong>, or <strong>quantization</strong>.</p>
+</div></aside></section>
+<section id="feature-engineering-binning" class="slide level2 scrollable smaller">
+<h2>Feature Engineering: Binning</h2>
+<p><strong>Example</strong>: Categorizing ages into bins such as ‘infant’, ‘child’, ‘teen’, ‘adult’, and ‘senior citizen’.</p>
+<div class="fragment">
+<p><strong>Possible advantage</strong>:</p>
+<ul>
+<li>Encodes useful domain thresholds and can reduce model complexity.</li>
+</ul>
+<p><strong>Disadvantages</strong>:</p>
+<ul>
+<li>Discards differences within each interval and introduces abrupt boundaries.</li>
+<li>Requires defensible cut points; for example, the starting age for ‘senior citizen’ could be 60, 65, or 70<sup>1</sup>.</li>
+</ul>
+<aside class="notes">
+<p>Predefined bins can help a decision tree produce a more compact model because the tree no longer has to discover every threshold from the available sample.</p>
+<p>However, this strong inductive bias can hide useful variation or prevent the estimator from discovering better boundaries. Binning is therefore a modelling choice, not an automatic preprocessing step.</p>
+<p>Cross-validation is an effective method to determine the best encoding scheme, but it is essential to withhold the test set until the final evaluation phase of the project to prevent data leakage and ensure unbiased assessment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Your instructor is concerned with your choice of cutoff <i class="fa-solid fa-face-smile-wink" aria-label="face-smile-wink"></i></p></li></ol></aside></section>
+<section id="functiontransformer" class="slide level2">
+<h2>FunctionTransformer</h2>
+<div id="f1820f11" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a aria-label="1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb20-2"><a aria-label="2"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb20-3"><a aria-label="3"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> FunctionTransformer</span>
+<span id="cb20-4"><a aria-label="4"></a></span>
+<span id="cb20-5"><a aria-label="5"></a>bins <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">13</span>, <span class="dv">20</span>, <span class="dv">60</span>, np.inf]</span>
+<span id="cb20-6"><a aria-label="6"></a>labels <span class="op">=</span> [<span class="st">'infant'</span>, <span class="st">'kid'</span>, <span class="st">'teen'</span>, <span class="st">'adult'</span>, <span class="st">'senior citizen'</span>]</span>
+<span id="cb20-7"><a aria-label="7"></a></span>
+<span id="cb20-8"><a aria-label="8"></a>transformer <span class="op">=</span> FunctionTransformer(</span>
+<span id="cb20-9"><a aria-label="9"></a>    pd.cut, kw_args<span class="op">=</span>{<span class="st">'bins'</span>: bins, <span class="st">'labels'</span>: labels, <span class="st">'retbins'</span>: <span class="va">False</span>}</span>
+<span id="cb20-10"><a aria-label="10"></a>)</span>
+<span id="cb20-11"><a aria-label="11"></a></span>
+<span id="cb20-12"><a aria-label="12"></a>X <span class="op">=</span> np.array([<span class="fl">0.5</span>, <span class="dv">2</span>, <span class="dv">15</span>, <span class="dv">25</span>, <span class="dv">97</span>])</span>
+<span id="cb20-13"><a aria-label="13"></a>transformer.fit_transform(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<pre><code>['infant', 'kid', 'teen', 'adult', 'senior citizen']
+Categories (5, str): ['infant' &lt; 'kid' &lt; 'teen' &lt; 'adult' &lt; 'senior citizen']</code></pre>
+</div>
+</div>
+
+<aside><div>
+<p>See also: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.KBinsDiscretizer.html" class="external" data-icon="true">KBinsDiscretizer</a></p>
+</div></aside></section></section>
+<section>
+<section id="scaling" class="title-slide slide level1 center">
+<h1>Scaling</h1>
+
+</section>
+<section id="what-is-it" class="slide level2">
+<h2>What is it?</h2>
+<p><strong>Scaling attributes</strong> ensures that their values fall within <strong>comparable ranges</strong>.</p>
+</section>
+<section id="why-1" class="slide level2">
+<h2>Why?</h2>
+<p>Why do some estimators require comparable feature scales?</p>
+<aside class="notes">
+<p>Scaling changes the geometry and numerical conditioning of a learning problem. Whether it helps depends on the estimator.</p>
+<p>Distance-based methods such as k-nearest neighbours and k-means are sensitive because a large-scale feature can dominate the distance. RBF kernels and regularized linear models are also scale-sensitive. Gradient-based optimization often converges more readily when feature scales are comparable.</p>
+<p>Tree-based models make threshold comparisons within one feature at a time, so monotonic rescaling usually leaves their possible partitions unchanged.</p>
+<p>Scaling does not decide how important a feature <em>should</em> be. Domain knowledge and the model’s intended geometry still matter.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="scenario" class="slide level2">
+<h2>Scenario</h2>
+<p>We pretend to predict a house price using <strong>k-Nearest Neighbors (KNN) regression</strong> with two features:</p>
+<ul>
+<li><span class="math inline">x_1</span>: number of rooms (small scale)</li>
+<li><span class="math inline">x_2</span>: square footage (large scale)</li>
+</ul>
+</section>
+<section id="data-three-houses" class="slide level2 scrollable">
+<h2>Data (three houses)</h2>
+<div id="4395876c" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb22-2"><a aria-label="2"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb22-3"><a aria-label="3"></a></span>
+<span id="cb22-4"><a aria-label="4"></a><span class="co"># Three examples (rooms, sqft); prices only for b and c (training)</span></span>
+<span id="cb22-5"><a aria-label="5"></a>point_names <span class="op">=</span> [<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>]</span>
+<span id="cb22-6"><a aria-label="6"></a>X <span class="op">=</span> np.array([</span>
+<span id="cb22-7"><a aria-label="7"></a>    [<span class="dv">4</span>, <span class="fl">1500.0</span>],  <span class="co"># a (query)</span></span>
+<span id="cb22-8"><a aria-label="8"></a>    [<span class="dv">8</span>, <span class="fl">1520.0</span>],  <span class="co"># b (train)</span></span>
+<span id="cb22-9"><a aria-label="9"></a>    [<span class="dv">4</span>, <span class="fl">1300.0</span>],  <span class="co"># c (train)</span></span>
+<span id="cb22-10"><a aria-label="10"></a>], dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb22-11"><a aria-label="11"></a></span>
+<span id="cb22-12"><a aria-label="12"></a>prices <span class="op">=</span> pd.Series([np.nan, <span class="dv">520_000</span>, <span class="dv">390_000</span>], index<span class="op">=</span>point_names, name<span class="op">=</span><span class="st">"price"</span>)</span>
+<span id="cb22-13"><a aria-label="13"></a></span>
+<span id="cb22-14"><a aria-label="14"></a>df <span class="op">=</span> pd.DataFrame(X, columns<span class="op">=</span>[<span class="st">"rooms"</span>, <span class="st">"sqft"</span>], index<span class="op">=</span>point_names)</span>
+<span id="cb22-15"><a aria-label="15"></a>display(df)</span>
+<span id="cb22-16"><a aria-label="16"></a>display(prices.to_frame())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<p><strong>Note.</strong> We’ll treat <strong>b</strong> and <strong>c</strong> as the training set, and <strong>a</strong> as the query whose price we want to predict.</p>
+</section>
+<section id="data-three-houses-output" class="slide level2 scrollable output-location-slide"><h2>Data (three houses)</h2><div class="cell output-location-slide" data-execution_count="14">
+<div class="cell-output cell-output-display">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">rooms</th>
+<th data-quarto-table-cell-role="th">sqft</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">a</th>
+<td>4.0</td>
+<td>1500.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">b</th>
+<td>8.0</td>
+<td>1520.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">c</th>
+<td>4.0</td>
+<td>1300.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">a</th>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">b</th>
+<td>520000.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">c</th>
+<td>390000.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div></section><section id="euclidean-distances-unscaled" class="slide level2">
+<h2>Euclidean distances (unscaled)</h2>
+<p>When one feature has a much larger scale (e.g., square footage), it can dominate the sum.</p>
+<div id="ee1d75eb" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> pairwise_distances</span>
+<span id="cb23-2"><a aria-label="2"></a></span>
+<span id="cb23-3"><a aria-label="3"></a>dist_unscaled <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb23-4"><a aria-label="4"></a>    pairwise_distances(df.values, metric<span class="op">=</span><span class="st">"euclidean"</span>),</span>
+<span id="cb23-5"><a aria-label="5"></a>    index<span class="op">=</span>df.index, columns<span class="op">=</span>df.index</span>
+<span id="cb23-6"><a aria-label="6"></a>)</span>
+<span id="cb23-7"><a aria-label="7"></a>dist_unscaled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<div id="3bb4b444" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="st">"Nearest to 'a' (unscaled):"</span>, dist_unscaled.loc[<span class="st">"a"</span>].drop(<span class="st">"a"</span>).idxmin())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nearest to 'a' (unscaled): b</code></pre>
+</div>
+</div>
+</section>
+<section id="euclidean-distances-unscaled-output" class="slide level2 output-location-slide"><h2>Euclidean distances (unscaled)</h2><div class="cell output-location-slide" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="48">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">a</th>
+<th data-quarto-table-cell-role="th">b</th>
+<th data-quarto-table-cell-role="th">c</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">a</th>
+<td>0.000000</td>
+<td>20.396078</td>
+<td>200.000000</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">b</th>
+<td>20.396078</td>
+<td>0.000000</td>
+<td>220.036361</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">c</th>
+<td>200.000000</td>
+<td>220.036361</td>
+<td>0.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div></section><section id="proper-scaling-for-modeling" class="slide level2">
+<h2>Proper scaling for modeling</h2>
+<p>For a fair ML workflow, compute scaling parameters on the training data (<strong>b</strong>, <strong>c</strong>) only, then transform both train and query:</p>
+<div id="bf8a9b24" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb26-2"><a aria-label="2"></a></span>
+<span id="cb26-3"><a aria-label="3"></a>train_idx <span class="op">=</span> [<span class="st">"b"</span>, <span class="st">"c"</span>]</span>
+<span id="cb26-4"><a aria-label="4"></a>query_idx <span class="op">=</span> [<span class="st">"a"</span>]</span>
+<span id="cb26-5"><a aria-label="5"></a></span>
+<span id="cb26-6"><a aria-label="6"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb26-7"><a aria-label="7"></a></span>
+<span id="cb26-8"><a aria-label="8"></a>scaler.fit(df.loc[train_idx])     <span class="co"># fit only on training points</span></span>
+<span id="cb26-9"><a aria-label="9"></a></span>
+<span id="cb26-10"><a aria-label="10"></a>Z <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb26-11"><a aria-label="11"></a>    scaler.transform(df),</span>
+<span id="cb26-12"><a aria-label="12"></a>    columns<span class="op">=</span>df.columns, index<span class="op">=</span>df.index</span>
+<span id="cb26-13"><a aria-label="13"></a>)</span>
+<span id="cb26-14"><a aria-label="14"></a></span>
+<span id="cb26-15"><a aria-label="15"></a>Z</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+</section>
+<section id="proper-scaling-for-modeling-output" class="slide level2 output-location-slide"><h2>Proper scaling for modeling</h2><div class="cell output-location-slide" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="50">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">rooms</th>
+<th data-quarto-table-cell-role="th">sqft</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">a</th>
+<td>-1.0</td>
+<td>0.818182</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">b</th>
+<td>1.0</td>
+<td>1.000000</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">c</th>
+<td>-1.0</td>
+<td>-1.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div></section><section id="euclidean-distances-after-scaling" class="slide level2">
+<h2>Euclidean distances (after scaling)</h2>
+<div id="5e88715d" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-label="1"></a>dist_scaled <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb27-2"><a aria-label="2"></a>    pairwise_distances(Z.values, metric<span class="op">=</span><span class="st">"euclidean"</span>),</span>
+<span id="cb27-3"><a aria-label="3"></a>    index<span class="op">=</span>Z.index, columns<span class="op">=</span>Z.index</span>
+<span id="cb27-4"><a aria-label="4"></a>)</span>
+<span id="cb27-5"><a aria-label="5"></a>dist_scaled</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="51">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe caption-top" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">a</th>
+<th data-quarto-table-cell-role="th">b</th>
+<th data-quarto-table-cell-role="th">c</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">a</th>
+<td>0.000000</td>
+<td>2.008247</td>
+<td>1.818182</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">b</th>
+<td>2.008247</td>
+<td>0.000000</td>
+<td>2.828427</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">c</th>
+<td>1.818182</td>
+<td>2.828427</td>
+<td>0.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="57acb418" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a aria-label="1"></a><span class="bu">print</span>(<span class="st">"Nearest to 'a' (scaled):"</span>, dist_scaled.loc[<span class="st">"a"</span>].drop(<span class="st">"a"</span>).idxmin())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nearest to 'a' (scaled): c</code></pre>
+</div>
+</div>
+</section>
+<section id="knn-regressor" class="slide level2 smaller">
+<h2>KNN regressor</h2>
+<p>A 1-NN regressor predicts the price of the nearest training example. Compare the same estimator with and without scaling.</p>
+<div id="7e727fb9" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a aria-label="1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
+<span id="cb30-2"><a aria-label="2"></a></span>
+<span id="cb30-3"><a aria-label="3"></a>X_train <span class="op">=</span> df.loc[train_idx].values</span>
+<span id="cb30-4"><a aria-label="4"></a>y_train <span class="op">=</span> prices.loc[train_idx].values</span>
+<span id="cb30-5"><a aria-label="5"></a>X_query <span class="op">=</span> df.loc[query_idx].values</span>
+<span id="cb30-6"><a aria-label="6"></a></span>
+<span id="cb30-7"><a aria-label="7"></a>knn_plain <span class="op">=</span> KNeighborsRegressor(n_neighbors<span class="op">=</span><span class="dv">1</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>)</span>
+<span id="cb30-8"><a aria-label="8"></a>knn_plain.fit(X_train, y_train)</span>
+<span id="cb30-9"><a aria-label="9"></a></span>
+<span id="cb30-10"><a aria-label="10"></a>knn_scaled <span class="op">=</span> Pipeline([</span>
+<span id="cb30-11"><a aria-label="11"></a>    (<span class="st">"scaler"</span>, StandardScaler()),</span>
+<span id="cb30-12"><a aria-label="12"></a>    (<span class="st">"knn"</span>, KNeighborsRegressor(n_neighbors<span class="op">=</span><span class="dv">1</span>, metric<span class="op">=</span><span class="st">"euclidean"</span>))</span>
+<span id="cb30-13"><a aria-label="13"></a>])</span>
+<span id="cb30-14"><a aria-label="14"></a></span>
+<span id="cb30-15"><a aria-label="15"></a>knn_scaled.fit(X_train, y_train)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<aside class="notes">
+<p>The pipeline behaves like a single regressor. Its <code>fit</code> method learns the scaler from <code>X_train</code> and then fits KNN in the transformed space. Its <code>predict</code> method applies that fitted scaler before searching for neighbours.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="knn-regressor-results" class="slide level2 hide-code-toggle">
+<h2>KNN regressor: results</h2>
+<div id="5cb57648" class="cell" data-execution_count="21">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a aria-label="1"></a>pred_plain <span class="op">=</span> knn_plain.predict(X_query)[<span class="dv">0</span>]</span>
+<span id="cb31-2"><a aria-label="2"></a>pred_scaled <span class="op">=</span> knn_scaled.predict(X_query)[<span class="dv">0</span>]</span>
+<span id="cb31-3"><a aria-label="3"></a></span>
+<span id="cb31-4"><a aria-label="4"></a>plain_index <span class="op">=</span> knn_plain.kneighbors(</span>
+<span id="cb31-5"><a aria-label="5"></a>    X_query, return_distance<span class="op">=</span><span class="va">False</span></span>
+<span id="cb31-6"><a aria-label="6"></a>)[<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb31-7"><a aria-label="7"></a>scaled_query <span class="op">=</span> knn_scaled[<span class="st">"scaler"</span>].transform(X_query)</span>
+<span id="cb31-8"><a aria-label="8"></a>scaled_index <span class="op">=</span> knn_scaled[<span class="st">"knn"</span>].kneighbors(</span>
+<span id="cb31-9"><a aria-label="9"></a>    scaled_query, return_distance<span class="op">=</span><span class="va">False</span></span>
+<span id="cb31-10"><a aria-label="10"></a>)[<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb31-11"><a aria-label="11"></a></span>
+<span id="cb31-12"><a aria-label="12"></a>knn_comparison <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb31-13"><a aria-label="13"></a>    {</span>
+<span id="cb31-14"><a aria-label="14"></a>        <span class="st">"prediction"</span>: [pred_plain, pred_scaled],</span>
+<span id="cb31-15"><a aria-label="15"></a>        <span class="st">"nearest neighbour"</span>: [</span>
+<span id="cb31-16"><a aria-label="16"></a>            train_idx[plain_index], train_idx[scaled_index]</span>
+<span id="cb31-17"><a aria-label="17"></a>        ],</span>
+<span id="cb31-18"><a aria-label="18"></a>    },</span>
+<span id="cb31-19"><a aria-label="19"></a>    index<span class="op">=</span>[<span class="st">"without scaling"</span>, <span class="st">"with scaling"</span>],</span>
+<span id="cb31-20"><a aria-label="20"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;"><strong>Prediction</strong></th>
+<th style="text-align: left;"><strong>Nearest neighbour</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Without scaling</strong></td>
+<td style="text-align: right;">$520,000</td>
+<td style="text-align: left;">b</td>
+</tr>
+<tr class="even">
+<td><strong>With scaling</strong></td>
+<td style="text-align: right;">$390,000</td>
+<td style="text-align: left;">c</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>This deliberately tiny dataset illustrates geometry, not model quality. Two observations are not enough to estimate stable population means and standard deviations, and the query has no known price with which to measure predictive performance. The example demonstrates a change in neighbour and prediction, not an improvement in accuracy.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="min-max-scaling" class="slide level2">
+<h2>Min-max scaling</h2>
+<p>Min-max scaling maps each feature to a chosen interval, usually <span class="math inline">[0,1]</span>.</p>
+<p><span class="math display">
+  \frac{x_i^{(j)} - \min^{(j)}}{\max^{(j)} - \min^{(j)}}
+</span></p>
+<p>The minimum and maximum must be learned from the training data.</p>
+
+<aside><div>
+<p><strong>See:</strong> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html" class="external" data-icon="true">sklearn.preprocessing.MinMaxScaler</a></p>
+</div></aside></section>
+<section id="standardization" class="slide level2">
+<h2>Standardization</h2>
+<p>Standardization subtracts the training mean and divides by the training standard deviation.</p>
+<p><span class="math display">
+\frac{x_i^{(j)} - \mu^{(j)}}{\sigma^{(j)}}
+</span></p>
+<p>The transformed training feature has mean 0 and variance 1, but its distribution does <strong>not</strong> become normal and its range is not bounded.</p>
+
+<aside><div>
+<p><strong>See:</strong> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html" class="external" data-icon="true">sklearn.preprocessing.StandardScaler</a></p>
+</div></aside></section>
+<section id="choosing-a-scaling-method" class="slide level2 smaller">
+<h2>Choosing a scaling method</h2>
+<ul>
+<li class="fragment"><strong>Standardization</strong> is a common choice for distance-based methods, regularized linear models, and gradient-based optimization.</li>
+<li class="fragment"><strong>Min-max scaling</strong> is useful when a bounded input range is required.</li>
+<li class="fragment">Both methods are sensitive to outliers: min-max scaling uses extremes, while standardization uses the mean and standard deviation.</li>
+<li class="fragment">For strongly skewed features or outliers, investigate the data-generating process and consider a justified transformation, clipping rule, or <code>RobustScaler</code>.</li>
+<li class="fragment">If several choices are plausible and consequential, compare them within cross-validation.</li>
+</ul>
+<aside class="notes">
+<p>Scaling and distributional transformation solve different problems. A logarithm can reduce right skew for strictly positive data, but it must be meaningful for the feature and fitted into the same leakage-safe workflow. <code>RobustScaler</code> uses the median and interquartile range, which makes its fitted statistics less sensitive to extreme values.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="scaling-methods-compared" class="slide level2 smaller">
+<h2>Scaling methods compared</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 35%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Feature</strong></th>
+<th><strong>Standardization</strong></th>
+<th><strong>Min-max scaling</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Output Range</strong></td>
+<td>Not bounded</td>
+<td>Typically [0, 1]</td>
+</tr>
+<tr class="even">
+<td><strong>Center</strong></td>
+<td>Mean at 0</td>
+<td>Not centered</td>
+</tr>
+<tr class="odd">
+<td><strong>Outlier sensitivity</strong></td>
+<td>Sensitive through the mean and standard deviation</td>
+<td>Sensitive through the minimum and maximum</td>
+</tr>
+<tr class="even">
+<td><strong>Typical use</strong></td>
+<td>Comparable variance and zero-centred features</td>
+<td>A prescribed bounded range</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="avoid-data-leakage" class="slide level2">
+<h2>Avoid Data Leakage!</h2>
+<p>The <strong>correct workflow</strong>:</p>
+<ul>
+<li>Split the examples before learning any preprocessing parameters.</li>
+<li>Fit the scaler on the <strong>training data</strong>.</li>
+<li>Reuse that fitted scaler to transform validation, test, and production data.</li>
+<li>During cross-validation, fit preprocessing separately inside each training fold—normally by placing it in a <code>Pipeline</code>.</li>
+</ul>
+<aside class="notes">
+<p>Means, standard deviations, minima, maxima, category sets, and imputation values are all learned information. They must come from the training data only.</p>
+<p>The test set simulates unseen data. Allowing it to influence preprocessing gives the training procedure information that would not be available when making a genuinely new prediction. This data leakage can produce an optimistic estimate of generalization performance.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="normally-distributed-sample-with-outliers" class="slide level2">
+<h2>Normally distributed sample with outliers</h2>
+<div id="6dd54860" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb32-2"><a aria-label="2"></a>np.random.seed(<span class="dv">7</span>)</span>
+<span id="cb32-3"><a aria-label="3"></a></span>
+<span id="cb32-4"><a aria-label="4"></a><span class="co"># Sample characteristics</span></span>
+<span id="cb32-5"><a aria-label="5"></a>sample_size <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb32-6"><a aria-label="6"></a>mu <span class="op">=</span> <span class="dv">57</span></span>
+<span id="cb32-7"><a aria-label="7"></a>sigma <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb32-8"><a aria-label="8"></a></span>
+<span id="cb32-9"><a aria-label="9"></a><span class="co"># Generate values</span></span>
+<span id="cb32-10"><a aria-label="10"></a>norm_values <span class="op">=</span> sigma <span class="op">*</span> np.random.randn(sample_size) <span class="op">+</span> mu</span>
+<span id="cb32-11"><a aria-label="11"></a></span>
+<span id="cb32-12"><a aria-label="12"></a><span class="co"># Add three outliers</span></span>
+<span id="cb32-13"><a aria-label="13"></a>norm_values <span class="op">=</span> np.append(norm_values, [<span class="dv">92</span>, <span class="dv">95</span>, <span class="dv">98</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="original-distribution" class="slide level2 hide-code-toggle">
+<h2>Original distribution</h2>
+<div id="6189cc70" class="cell" data-execution_count="23">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a aria-label="1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb33-2"><a aria-label="2"></a></span>
+<span id="cb33-3"><a aria-label="3"></a><span class="co"># Plot the histogram</span></span>
+<span id="cb33-4"><a aria-label="4"></a>plt.hist(norm_values, bins<span class="op">=</span><span class="dv">20</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb33-5"><a aria-label="5"></a></span>
+<span id="cb33-6"><a aria-label="6"></a>plt.title(<span class="ss">f'Sampling of </span><span class="sc">{</span>sample_size<span class="sc">}</span><span class="ss"> values from a normal distribution'</span>)</span>
+<span id="cb33-7"><a aria-label="7"></a></span>
+<span id="cb33-8"><a aria-label="8"></a>plt.xlabel(<span class="st">'Value'</span>)</span>
+<span id="cb33-9"><a aria-label="9"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb33-10"><a aria-label="10"></a></span>
+<span id="cb33-11"><a aria-label="11"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-23-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-23-output-1.png" width="817" height="451"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="min-max-scaling-1" class="slide level2 hide-code-toggle">
+<h2>Min-max scaling</h2>
+<div id="07a2bc19" class="cell" data-execution_count="24">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
+<span id="cb34-2"><a aria-label="2"></a></span>
+<span id="cb34-3"><a aria-label="3"></a>scaler <span class="op">=</span> MinMaxScaler()</span>
+<span id="cb34-4"><a aria-label="4"></a></span>
+<span id="cb34-5"><a aria-label="5"></a>minmax_norm_values <span class="op">=</span> scaler.fit_transform(norm_values.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb34-6"><a aria-label="6"></a></span>
+<span id="cb34-7"><a aria-label="7"></a><span class="co"># Plot the histogram</span></span>
+<span id="cb34-8"><a aria-label="8"></a>plt.hist(minmax_norm_values, bins<span class="op">=</span><span class="dv">20</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb34-9"><a aria-label="9"></a></span>
+<span id="cb34-10"><a aria-label="10"></a>plt.title(<span class="ss">f'MinMaxScaler'</span>)</span>
+<span id="cb34-11"><a aria-label="11"></a></span>
+<span id="cb34-12"><a aria-label="12"></a>plt.xlabel(<span class="st">'Value'</span>)</span>
+<span id="cb34-13"><a aria-label="13"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb34-14"><a aria-label="14"></a></span>
+<span id="cb34-15"><a aria-label="15"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-24-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-revealjs/cell-24-output-1.png" width="817" height="451"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside class="notes">
+<p>The largest observed value is mapped to 1 and the smallest to 0. The high outliers stretch that interval, compressing most observations into its lower portion. Min-max scaling does not imply that the transformed mean should be 0.5.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Min-max scaling of values from a normal distribution containing high outliers.</p>
+</div></aside></section>
+<section id="standardization-1" class="slide level2 hide-code-toggle">
+<h2>Standardization</h2>
+<div id="a32a73d7" class="cell" data-execution_count="25">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a aria-label="1"></a>standard_scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb35-2"><a aria-label="2"></a></span>
+<span id="cb35-3"><a aria-label="3"></a>standard_norm_values <span class="op">=</span> standard_scaler.fit_transform(</span>
+<span id="cb35-4"><a aria-label="4"></a>    norm_values.reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb35-5"><a aria-label="5"></a>)</span>
+<span id="cb35-6"><a aria-label="6"></a></span>
+<span id="cb35-7"><a aria-label="7"></a><span class="co"># Plot the histogram</span></span>
+<span id="cb35-8"><a aria-label="8"></a>plt.hist(standard_norm_values, bins<span class="op">=</span><span class="dv">20</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb35-9"><a aria-label="9"></a></span>
+<span id="cb35-10"><a aria-label="10"></a>plt.title(<span class="ss">f'StandardScaler'</span>)</span>
+<span id="cb35-11"><a aria-label="11"></a></span>
+<span id="cb35-12"><a aria-label="12"></a>plt.xlabel(<span class="st">'Value'</span>)</span>
+<span id="cb35-13"><a aria-label="13"></a>plt.ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb35-14"><a aria-label="14"></a></span>
+<span id="cb35-15"><a aria-label="15"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-25-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides_files/figure-revealjs/cell-25-output-1.png" width="817" height="451"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside class="notes">
+<p>Standardization changes the centre and scale but preserves the distribution’s shape. The bulk of this approximately normal sample lies near zero, while the outliers remain outliers. The interval <span class="math inline">[-2,2]</span> is a useful empirical description for this sample, not a guarantee of <code>StandardScaler</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Standardization (<code>StandardScaler</code>) of values from a normal distribution containing outliers.</p>
+</div></aside></section></section>
+<section>
+<section id="missing-values" class="title-slide slide level1 center">
+<h1>Missing Values</h1>
+
+</section>
+<section id="definition-3" class="slide level2">
+<h2>Definition</h2>
+<p><strong>Missing values</strong> refer to the absence of data points or entries in a dataset where a value is expected.</p>
+
+<aside><div>
+<p><strong>Age</strong> is a good example, as some patients may withhold their age due to privacy concerns.</p>
+</div></aside></section>
+<section id="handling-missing-values" class="slide level2 smaller">
+<h2>Handling Missing Values</h2>
+<ul>
+<li class="fragment"><strong>Drop Examples</strong>
+<ul>
+<li class="fragment">Reasonable only when enough data remain and the missing rows are not systematically different.</li>
+</ul></li>
+<li class="fragment"><strong>Drop Features</strong>
+<ul>
+<li class="fragment">Suitable when a feature is not essential and too little reliable information remains.</li>
+</ul></li>
+<li class="fragment"><strong>Use Algorithms Handling Missing Data</strong>
+<ul>
+<li class="fragment">Some estimators model missing values directly; many others do not accept them.</li>
+</ul></li>
+<li class="fragment"><strong>Data Imputation</strong>
+<ul>
+<li class="fragment">Replace missing values using statistics or a model learned from the training data.</li>
+</ul></li>
+</ul>
+</section>
+<section id="definition-4" class="slide level2">
+<h2>Definition</h2>
+<p><strong>Data imputation</strong> is the process of replacing missing values in a dataset with substituted values, typically using statistical or machine learning methods.</p>
+</section>
+<section id="data-imputation-strategy" class="slide level2 smaller">
+<h2>Data Imputation Strategy</h2>
+<p>Replace missing numerical values with the training <strong>mean</strong> or <strong>median</strong> of the feature.</p>
+<div id="b7f34cc8" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a aria-label="1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb36-2"><a aria-label="2"></a></span>
+<span id="cb36-3"><a aria-label="3"></a>X_train_missing <span class="op">=</span> np.array([</span>
+<span id="cb36-4"><a aria-label="4"></a>    [<span class="fl">1.0</span>, <span class="fl">10.0</span>],</span>
+<span id="cb36-5"><a aria-label="5"></a>    [<span class="fl">2.0</span>, np.nan],</span>
+<span id="cb36-6"><a aria-label="6"></a>    [<span class="fl">3.0</span>, <span class="fl">12.0</span>],</span>
+<span id="cb36-7"><a aria-label="7"></a>])</span>
+<span id="cb36-8"><a aria-label="8"></a>X_new_missing <span class="op">=</span> np.array([[<span class="fl">4.0</span>, np.nan]])</span>
+<span id="cb36-9"><a aria-label="9"></a></span>
+<span id="cb36-10"><a aria-label="10"></a>imputer <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>)</span>
+<span id="cb36-11"><a aria-label="11"></a>imputer.fit(X_train_missing)</span>
+<span id="cb36-12"><a aria-label="12"></a>imputer.transform(X_new_missing)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="59">
+<pre><code>array([[ 4., 11.]])</code></pre>
+</div>
+</div>
+<div class="fragment">
+<ul>
+<li class="fragment"><p><strong>Limitation</strong>: Univariate imputation ignores relationships between features and reduces the observed variability.</p></li>
+<li class="fragment"><p><strong>Categorical Features</strong>: Use the most frequent category or an explicit <code>"missing"</code> category when that representation is appropriate.</p></li>
+</ul>
+<aside class="notes">
+<p>Missingness can be <strong>completely at random</strong>, related to other observed features, or related to the missing value itself. These mechanisms are often described as MCAR, MAR, and MNAR. A simple imputer does not determine which mechanism produced the missing values.</p>
+<p>Mean, median, and most-frequent imputation are useful baselines, but they can distort distributions and relationships. The imputation strategy is part of the model and must be assessed on held-out data.</p>
+<p>As with scaling, fit the imputer only on the training partition. A pipeline repeats that fit correctly within every cross-validation fold.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="preserve-missingness-information" class="slide level2">
+<h2>Preserve Missingness Information</h2>
+<p>An imputed value can be accompanied by a binary feature indicating that the original value was missing.</p>
+<div id="7fabcb67" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a aria-label="1"></a>imputer_with_indicator <span class="op">=</span> SimpleImputer(</span>
+<span id="cb38-2"><a aria-label="2"></a>    strategy<span class="op">=</span><span class="st">"median"</span>, add_indicator<span class="op">=</span><span class="va">True</span></span>
+<span id="cb38-3"><a aria-label="3"></a>)</span>
+<span id="cb38-4"><a aria-label="4"></a>imputer_with_indicator.fit_transform(X_train_missing)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="60">
+<pre><code>array([[ 1., 10.,  0.],
+       [ 2., 11.,  1.],
+       [ 3., 12.,  0.]])</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p><code>add_indicator=True</code> lets an estimator use the fact that a value was missing as a separate signal. This can help when the observation process is informative—for example, when one measurement is ordered only for higher-risk patients.</p>
+<p>A sentinel value outside the normal range can serve a similar purpose for some tree-based models, but it can badly distort distances or linear relationships. An explicit indicator communicates the intent more clearly.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="predict-a-missing-feature" class="slide level2 smaller">
+<h2>Predict a Missing Feature</h2>
+<ul>
+<li class="fragment">Select a feature containing missing values as the prediction target.</li>
+<li class="fragment">Use rows where that feature is observed as training examples.</li>
+<li class="fragment">Use the remaining observed features as inputs.</li>
+<li class="fragment">Predict the missing entries with a regression or classification model.</li>
+</ul>
+</section>
+<section id="using-ml-for-imputation" class="slide level2">
+<h2>Using ML for Imputation</h2>
+<ol type="1">
+<li class="fragment"><p><strong>Neighbour-Based Method</strong>:</p>
+<ul>
+<li class="fragment">Use <span class="math inline">k</span> nearest neighbors (k-NN) to find the <span class="math inline">k</span> closest examples and impute using the non-missing values from the neighborhood.</li>
+</ul></li>
+<li class="fragment"><p><strong>Iterative Model-Based Methods</strong>:</p>
+<ul>
+<li class="fragment">Predict each incomplete feature from the others and repeat the process across features.</li>
+</ul></li>
+</ol>
+
+<aside><div>
+<p><a href="https://scikit-learn.org/stable/modules/impute.html" class="external" data-icon="true">Consult the scikit-learn imputation guide</a> or <a href="https://scikit-learn.org/stable/modules/generated/sklearn.impute.KNNImputer.html" class="external" data-icon="true"><code>KNNImputer</code> documentation</a>.</p>
+</div></aside></section>
+<section id="why-use-these-methods" class="slide level2">
+<h2>Why Use these Methods?</h2>
+<ul>
+<li class="fragment"><strong>Possible advantage</strong>:
+<ul>
+<li class="fragment">Can use relationships between features that univariate imputation ignores.</li>
+</ul></li>
+<li class="fragment"><strong>Limitations</strong>:
+<ul>
+<li class="fragment">More computation and modelling choices do not guarantee better predictions.</li>
+<li class="fragment">The imputer must still be fitted inside each training split or cross-validation fold.</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="class-imbalance-remedies" class="title-slide slide level1 center">
+<h1>Class Imbalance Remedies</h1>
+
+</section>
+<section id="from-evaluation-to-intervention" class="slide level2">
+<h2>From Evaluation to Intervention</h2>
+<p><a href="../07/slides.html">Lecture 7</a> established that class imbalance can hide poor performance on an infrequent class and that evaluation must reflect the decision problem.</p>
+<p>This lecture asks a different question:</p>
+<blockquote>
+<p>How can the <strong>training procedure</strong> respond to class imbalance without contaminating evaluation?</p>
+</blockquote>
+<aside class="notes">
+<p>Lecture 7 already developed the confusion matrix, accuracy, precision, recall, <span class="math inline">F_1</span>, micro and macro averaging, threshold trade-offs, ROC curves, and precision–recall curves. Those definitions and formulas are not repeated here.</p>
+<p>The important transition is from <strong>detecting</strong> a problem during evaluation to <strong>changing</strong> the training procedure. A remedy is useful only if it improves the application-relevant validation measure established in Lecture 7.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="training-time-remedies" class="slide level2 smaller">
+<h2>Training-Time Remedies</h2>
+<ul>
+<li class="fragment"><strong>Class or sample weights:</strong> Make errors on selected examples contribute more strongly to the training objective.</li>
+<li class="fragment"><strong>Random oversampling:</strong> Repeat minority-class training examples.</li>
+<li class="fragment"><strong>Random undersampling:</strong> Retain fewer majority-class training examples.</li>
+<li class="fragment"><strong>SMOTE:</strong> Interpolate synthetic minority-class examples from neighbouring training examples.</li>
+<li class="fragment"><strong>Decision threshold:</strong> Select an operating point using validation data, as introduced in Lecture 7.</li>
+</ul>
+
+<aside class="notes">
+<p>Class weights change the contribution of training examples without creating or deleting observations. Oversampling can overfit repeated examples, whereas undersampling can discard useful majority-class variation.</p>
+<p>SMOTE constructs synthetic points between minority-class neighbours <span class="citation" data-cites="Chawla:2002aa">(<a href="#/references" role="doc-biblioref" onclick="">Chawla et al. 2002</a>)</span>. This interpolation can be inappropriate when a straight line between two observations leaves the set of plausible examples. Ordinary SMOTE also assumes numerical features; mixed numerical and categorical data require an appropriate variant such as <code>SMOTENC</code>.</p>
+<p>No remedy is universally best. Compare plausible choices using the validation procedure and application-relevant measures established in Lecture 7.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Implementations: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.utils.class_weight.compute_class_weight.html" class="external" data-icon="true"><code>class_weight</code></a> and <a href="https://imbalanced-learn.org/stable/index.html" class="external" data-icon="true"><code>imbalanced-learn</code></a>.</p>
+</div></aside></section>
+<section id="keep-evaluation-untouched" class="slide level2 smaller">
+<h2>Keep Evaluation Untouched</h2>
+<ul>
+<li>Preserve the natural class distribution in validation and test data.</li>
+<li>Apply resampling <strong>only to a training partition</strong>.</li>
+<li>During cross-validation, resample separately inside each training fold.</li>
+<li>Place resampling and the estimator in an <code>imbalanced-learn</code> pipeline.</li>
+<li>Reserve the test set for the final evaluation after selecting the remedy and any decision threshold.</li>
+</ul>
+<aside class="notes">
+<p>Resampling before the train/test split leaks information and also creates an unrealistic evaluation distribution. Resampling once before cross-validation has the same problem because a synthetic or repeated example can influence both training and validation folds.</p>
+<p>An <code>imbalanced-learn</code> pipeline calls the sampler only while fitting each training fold. Its prediction path does not resample validation, test, or production examples.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="new-features" class="title-slide slide level1 center">
+<h1>New Features</h1>
+
+</section>
+<section id="definition-5" class="slide level2">
+<h2>Definition</h2>
+<p><strong>Feature engineering</strong> is the process of <strong>creating</strong>, <strong>transforming</strong>, and <strong>selecting</strong> variables (attributes) from raw data to improve the performance of machine learning models.</p>
+
+<aside><div>
+<p>Here, our focus is on <strong>creating</strong> new attributes from raw data.</p>
+</div></aside></section>
+<section id="exploration" class="slide level2">
+<h2>Exploration</h2>
+<div id="b3f3f89c" class="cell" data-execution_count="28">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb40-2"><a aria-label="2"></a></span>
+<span id="cb40-3"><a aria-label="3"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb40-4"><a aria-label="4"></a></span>
+<span id="cb40-5"><a aria-label="5"></a>X <span class="op">=</span> <span class="dv">6</span> <span class="op">*</span> np.random.rand(<span class="dv">100</span>, <span class="dv">1</span>) <span class="op">-</span> <span class="dv">3</span></span>
+<span id="cb40-6"><a aria-label="6"></a>y <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> X <span class="op">**</span> <span class="dv">2</span> <span class="op">-</span> X <span class="op">+</span> <span class="dv">2</span> <span class="op">+</span> np.random.randn(<span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb40-7"><a aria-label="7"></a></span>
+<span id="cb40-8"><a aria-label="8"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
+<span id="cb40-9"><a aria-label="9"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb40-10"><a aria-label="10"></a></span>
+<span id="cb40-11"><a aria-label="11"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">4</span>))</span>
+<span id="cb40-12"><a aria-label="12"></a></span>
+<span id="cb40-13"><a aria-label="13"></a>plt.plot(X, y, <span class="st">"b."</span>)</span>
+<span id="cb40-14"><a aria-label="14"></a>plt.xlabel(<span class="st">"$x$"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb40-15"><a aria-label="15"></a>plt.ylabel(<span class="st">"$y$"</span>, rotation<span class="op">=</span><span class="dv">0</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb40-16"><a aria-label="16"></a>plt.axis([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">10</span>])</span>
+<span id="cb40-17"><a aria-label="17"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb40-18"><a aria-label="18"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-28-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides_files/figure-revealjs/cell-28-output-1.png" class="quarto-figure quarto-figure-center" width="509" height="372"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside class="notes">
+<p>The scatter plot has a curved trend: the response decreases and then increases as <span class="math inline">x</span> changes. A model that uses only an intercept and the original feature <span class="math inline">x</span> cannot represent that curvature.</p>
+<p>The fixed random seed makes the generated sample reproducible. Reproducibility is useful for comparing models and debugging, but a single seed does not establish that a result is stable across possible samples.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Attribution</strong>: <span class="citation" data-cites="Geron:2022aa">Géron (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>, Chapter 4</p>
+</div></aside></section>
+<section id="linear-regression" class="slide level2">
+<h2>Linear Regression</h2>
+<div id="73ed4e7e" class="cell" data-execution_count="29">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a aria-label="1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb41-2"><a aria-label="2"></a></span>
+<span id="cb41-3"><a aria-label="3"></a>lin_reg <span class="op">=</span> LinearRegression()</span>
+<span id="cb41-4"><a aria-label="4"></a>lin_reg.fit(X, y)</span>
+<span id="cb41-5"><a aria-label="5"></a></span>
+<span id="cb41-6"><a aria-label="6"></a>X_new <span class="op">=</span> np.array([[<span class="op">-</span><span class="dv">3</span>], [<span class="dv">3</span>]])</span>
+<span id="cb41-7"><a aria-label="7"></a>y_pred <span class="op">=</span> lin_reg.predict(X_new)</span>
+<span id="cb41-8"><a aria-label="8"></a></span>
+<span id="cb41-9"><a aria-label="9"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">4</span>))</span>
+<span id="cb41-10"><a aria-label="10"></a></span>
+<span id="cb41-11"><a aria-label="11"></a>plt.plot(X, y, <span class="st">"b."</span>)</span>
+<span id="cb41-12"><a aria-label="12"></a>plt.plot(X_new, y_pred, <span class="st">"r-"</span>)</span>
+<span id="cb41-13"><a aria-label="13"></a>plt.xlabel(<span class="st">"$x$"</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb41-14"><a aria-label="14"></a>plt.ylabel(<span class="st">"$y$"</span>, rotation<span class="op">=</span><span class="dv">0</span>, fontsize<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb41-15"><a aria-label="15"></a>plt.axis([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">10</span>])</span>
+<span id="cb41-16"><a aria-label="16"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-29-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-revealjs/cell-29-output-1.png" class="quarto-figure quarto-figure-center" width="509" height="372"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="{aside}">
+<p>A <strong>linear model</strong> inadequately represents this dataset. <i class="fa-solid fa-face-sad-tear" aria-label="face-sad-tear"></i></p>
+</div>
+<aside class="notes">
+<p>The best-fitting straight line balances residuals across the dataset, but changing its slope and intercept cannot create a turning point. The model is underfitting because its representation is too restrictive for the observed relationship.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="polynomialfeatures" class="slide level2">
+<h2><code>PolynomialFeatures</code></h2>
+<div id="bca97372" class="cell" data-execution_count="30">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a aria-label="1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
+<span id="cb42-2"><a aria-label="2"></a></span>
+<span id="cb42-3"><a aria-label="3"></a>poly_features <span class="op">=</span> PolynomialFeatures(degree<span class="op">=</span><span class="dv">2</span>, include_bias<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb42-4"><a aria-label="4"></a>X_poly <span class="op">=</span> poly_features.fit_transform(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div id="30df7e2d" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a aria-label="1"></a>X[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="64">
+<pre><code>array([-0.75275929])</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div id="862c93fa" class="cell" data-execution_count="32">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a aria-label="1"></a>X_poly[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<pre><code>array([-0.75275929,  0.56664654])</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html" class="external" data-icon="true">sklearn.preprocessing.PolynomialFeatures</a></strong></p>
+</div>
+<div class="callout-content">
+<p>Generate a new feature matrix consisting of all polynomial combinations of the features with degree less than or equal to the specified degree. For example, if an input sample is two dimensional and of the form <span class="math inline">[a, b]</span>, the degree-2 polynomial features are <span class="math inline">[1, a, b, a^2, ab, b^2]</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="polynomialfeatures-1" class="slide level2">
+<h2><code>PolynomialFeatures</code></h2>
+<p>Given two features <span class="math inline">a</span> and <span class="math inline">b</span>, <code>PolynomialFeatures</code> with <code>degree=3</code> would add <span class="math inline">a^2</span>, <span class="math inline">a^3</span>, <span class="math inline">b^2</span>, <span class="math inline">b^3</span>, as well as, <span class="math inline">ab</span>, <span class="math inline">a^2b</span>, <span class="math inline">ab^2</span>!</p>
+<div class="fragment">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p>With <code>include_bias=True</code>, the total number of output features is</p>
+<p><span class="math display">
+\binom{D+d}{d} = \frac{(D+d)!}{d!D!},
+</span></p>
+<p>where <span class="math inline">D</span> is the number of input features. With <code>include_bias=False</code>, subtract one.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>The output count includes the original features as well as powers and interactions. It grows quickly with both <span class="math inline">D</span> and <span class="math inline">d</span>, which increases computation and the risk of overfitting. Select the degree with validation and use regularization when appropriate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="polynomial-regression" class="slide level2">
+<h2>Polynomial Regression</h2>
+<div id="1eb43015" class="cell" data-execution_count="33">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a aria-label="1"></a>lin_reg <span class="op">=</span> LinearRegression()</span>
+<span id="cb47-2"><a aria-label="2"></a>lin_reg <span class="op">=</span> lin_reg.fit(X_poly, y)</span>
+<span id="cb47-3"><a aria-label="3"></a></span>
+<span id="cb47-4"><a aria-label="4"></a>X_new <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">100</span>).reshape(<span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb47-5"><a aria-label="5"></a>X_new_poly <span class="op">=</span> poly_features.transform(X_new)</span>
+<span id="cb47-6"><a aria-label="6"></a>y_new <span class="op">=</span> lin_reg.predict(X_new_poly)</span>
+<span id="cb47-7"><a aria-label="7"></a></span>
+<span id="cb47-8"><a aria-label="8"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb47-9"><a aria-label="9"></a>plt.plot(X, y, <span class="st">"b."</span>)</span>
+<span id="cb47-10"><a aria-label="10"></a>plt.plot(X_new, y_new, <span class="st">"r-"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Predictions"</span>)</span>
+<span id="cb47-11"><a aria-label="11"></a>plt.xlabel(<span class="st">"$x_1$"</span>)</span>
+<span id="cb47-12"><a aria-label="12"></a>plt.ylabel(<span class="st">"$y$"</span>, rotation<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb47-13"><a aria-label="13"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb47-14"><a aria-label="14"></a>plt.axis([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">10</span>])</span>
+<span id="cb47-15"><a aria-label="15"></a>plt.grid()</span>
+<span id="cb47-16"><a aria-label="16"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-33-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides_files/figure-revealjs/cell-33-output-1.png" class="quarto-figure quarto-figure-center" width="431" height="287"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside><div>
+<p><code>LinearRegression</code> fitted to features <span class="math inline">[x, x^2]</span>.</p>
+</div></aside></section>
+<section id="learned-polynomial" class="slide level2 smaller">
+<h2>Learned Polynomial</h2>
+<p>The data was generated according to the following equation, with the inclusion of Gaussian noise.</p>
+<p><span class="math display">
+  y = 0.5 x^2 - 1.0 x + 2.0
+</span></p>
+<p>Presented below is the learned model.</p>
+<p><span class="math display">
+  \hat{y} = 0.56 x^2 + (-1.06) x + 1.78
+</span></p>
+<div id="4009ccab" class="cell" data-execution_count="34">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a aria-label="1"></a>lin_reg.coef_, lin_reg.intercept_</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="67">
+<pre><code>(array([[-1.06633107,  0.56456263]]), array([1.78134581]))</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Linearity refers to the fitted coefficients, not necessarily to the original input. After defining <span class="math inline">z_1=x</span> and <span class="math inline">z_2=x^2</span>, linear regression fits</p>
+<p><span class="math display">
+\hat{y}=\theta_0+\theta_1z_1+\theta_2z_2.
+</span></p>
+<p>This expression is linear in <span class="math inline">\theta_0,\theta_1,\theta_2</span>, even though it traces a curve as <span class="math inline">x</span> changes. <code>PolynomialFeatures</code> changes the feature representation; it does not change the fitting algorithm into a different kind of regression estimator.</p>
+<p>The fitted coefficients are close to the generating coefficients because the model contains the relevant quadratic term and the sample contains moderate Gaussian noise. Exact recovery is neither expected nor required.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="data-quantity-and-augmentation" class="title-slide slide level1 center">
+<h1>Data Quantity and Augmentation</h1>
+
+</section>
+<section id="size-does-matter" class="slide level2">
+<h2>Size does matter</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>For the language task studied by Banko and Brill, increasing the training corpus produced large gains across several learning algorithms.</p>
+</div><div class="column" style="width:50%;">
+<p><a href="../../assets/images/millions_of_words.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="../../assets/images/millions_of_words.png"></a></p>
+</div></div>
+
+<aside class="notes">
+<p>The result in <span class="citation" data-cites="Banko:2001aa">Banko and Brill (<a href="#/references" role="doc-biblioref" onclick="">2001</a>)</span> concerns one natural-language disambiguation task and should not be read as a universal law that more examples always solve a learning problem.</p>
+<p>Additional data help when they provide relevant, correctly labelled, and representative information. More examples do not repair a mismatched target, systematic label errors, omitted subpopulations, or a distribution shift between training and deployment.</p>
+<p>For some large neural models, empirical scaling laws relate loss to training data, parameter count, and computation over a studied range <span class="citation" data-cites="Kaplan:2020aa">(<a href="#/references" role="doc-biblioref" onclick="">Kaplan et al. 2020</a>)</span>. Those regularities do not remove the need to examine data quality and coverage.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Attribution</strong>: <span class="citation" data-cites="Banko:2001aa">Banko and Brill (<a href="#/references" role="doc-biblioref" onclick="">2001</a>)</span></p>
+</div></aside></section>
+<section id="definition-6" class="slide level2">
+<h2>Definition</h2>
+<p><strong>Data augmentation</strong> creates additional training examples with transformations that should preserve the target label.</p>
+
+<aside><div>
+<p><strong>Purpose</strong>: Encode plausible invariances and improve robustness to variation expected in deployment.</p>
+</div></aside></section>
+<section id="data-augmentation" class="slide level2">
+<h2>Data Augmentation</h2>
+<ul>
+<li class="fragment"><strong>Images</strong>: Rotations, translations, crops, flips, or noise—when these transformations preserve the label.
+<ul>
+<li class="fragment"><a href="https://youtube.com/shorts/DA_-6296G5o" class="external" data-icon="true">How to find ancient geoglyphs using machine learning?</a>, <span class="citation" data-cites="Sakai:2024aa">Sakai et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></li>
+</ul></li>
+<li class="fragment"><strong>Text</strong>: Carefully controlled paraphrasing or edits that preserve meaning and the assigned label.</li>
+</ul>
+
+<aside class="notes">
+<p>An augmentation is valid only when its transformation preserves the target for the application. A horizontal flip may be harmless for many object categories but invalid for text, medical laterality, or traffic signs. Synonym replacement can also change nuance or grammar.</p>
+<p>Apply augmentation only to training examples and, during cross-validation, only within the training fold. Validation and test sets should represent naturally occurring inputs.</p>
+<p>Synthetic data require the same scrutiny as collected data. Indiscriminate reuse of model-generated content can narrow the represented distribution or amplify artifacts; <span class="citation" data-cites="Shumailov:2024aa">Shumailov et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> discusses one form of this risk.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Generative models can also produce synthetic examples, but realistic-looking output does not guarantee correct labels, representative coverage, or independence from the source data.</p>
+</div></aside></section></section>
+<section>
+<section id="conclusion" class="title-slide slide level1 center">
+<h1>Conclusion</h1>
+
+</section>
+<section id="further-readings" class="slide level2">
+<h2>Further readings</h2>
+<div class="columns">
+<div class="column" style="width:20%;">
+<p><a href="https://m.media-amazon.com/images/I/51XUfJm64KL._AC_UF350,350_QL50_.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="https://m.media-amazon.com/images/I/51XUfJm64KL._AC_UF350,350_QL50_.jpg"></a></p>
+</div><div class="column" style="width:80%;">
+<ul>
+<li><a href="http://www.mlebook.com/wiki/doku.php" class="external" data-icon="true"><strong>Machine Learning Engineering</strong></a> by <a href="https://www.linkedin.com/in/andriyburkov" class="external" data-icon="true">Andriy Burkov</a> <span class="citation" data-cites="Burkov:2020aa">(<a href="#/references" role="doc-biblioref" onclick="">Burkov 2020</a>)</span>.</li>
+<li>Covers data collection, storage, preprocessing, feature engineering, model testing and debugging, deployment, retirement, and maintenance.</li>
+<li>From the author of <a href="https://themlbook.com" class="external" data-icon="true"><strong>The Hundred-Page Machine Learning Book</strong></a> <span class="citation" data-cites="Burkov:2019aa">(<a href="#/references" role="doc-biblioref" onclick="">Burkov 2019</a>)</span>.</li>
+<li>Available under a “read first, buy later” model.</li>
+</ul>
+</div></div>
+</section>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<ul>
+<li>Match <strong>categorical encodings</strong> to nominal or ordinal meaning.</li>
+<li>Fit <strong>scaling</strong>, <strong>encoding</strong>, and <strong>imputation</strong> on training data through a pipeline.</li>
+<li>Choose scaling according to the estimator; scaling does not make a feature normally distributed.</li>
+<li>Apply <strong>class-imbalance remedies</strong> only within training partitions and evaluate on the natural distribution.</li>
+<li>Use polynomial and interaction features to expand a model’s representation while controlling complexity.</li>
+<li>Value representative, correctly labelled data and use only label-preserving augmentation.</li>
+</ul>
+</section>
+<section id="next-lecture" class="slide level2">
+<h2>Next lecture</h2>
+<ul>
+<li><strong>Next:</strong> artificial neural networks.</li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Banko:2001aa" class="csl-entry" role="listitem">
+Banko, Michele, and Eric Brill. 2001. <span>“Scaling to Very Very Large Corpora for Natural Language Disambiguation.”</span> <em>Proceedings of the 39th Annual Meeting on Association for Computational Linguistics</em> (USA), ACL ’01, 26–33. <a href="https://doi.org/10.3115/1073012.1073017">https://doi.org/10.3115/1073012.1073017</a>.
+</div>
+<div id="ref-Burkov:2020aa" class="csl-entry" role="listitem">
+Burkov, A. 2020. <em>Machine Learning Engineering</em>. True Positive Incorporated. <a href="https://books.google.ca/books?id=HeXizQEACAAJ">https://books.google.ca/books?id=HeXizQEACAAJ</a>.
+</div>
+<div id="ref-Burkov:2019aa" class="csl-entry" role="listitem">
+Burkov, Andriy. 2019. <em>The Hundred-Page Machine Learning Book</em>. Andriy Burkov.
+</div>
+<div id="ref-Chawla:2002aa" class="csl-entry" role="listitem">
+Chawla, N V, K W Bowyer, L O Hall, and W P Kegelmeyer. 2002. <span>“<span class="nocase">SMOTE: Synthetic minority over-sampling technique</span>.”</span> <em>Journal of Artificial Intelligence Research</em> 16: 321–57.
+</div>
+<div id="ref-Geron:2022aa" class="csl-entry" role="listitem">
+Géron, Aurélien. 2022. <em>Hands-on Machine Learning with Scikit-Learn, Keras, and TensorFlow</em>. 3rd ed. O’Reilly Media, Inc.
+</div>
+<div id="ref-Halevy:2009aa" class="csl-entry" role="listitem">
+Halevy, Alon, Peter Norvig, and Fernando Pereira. 2009. <span>“<span class="nocase">The Unreasonable Effectiveness of Data</span>.”</span> <em>IEEE Intelligent Systems</em> 24 (2): 8–12.
+</div>
+<div id="ref-Kaplan:2020aa" class="csl-entry" role="listitem">
+Kaplan, Jared, Sam McCandlish, Tom Henighan, et al. 2020. <em>Scaling Laws for Neural Language Models</em>. <a href="https://arxiv.org/abs/2001.08361">https://arxiv.org/abs/2001.08361</a>.
+</div>
+<div id="ref-Sakai:2024aa" class="csl-entry" role="listitem">
+Sakai, Masato, Akihisa Sakurai, Siyuan Lu, et al. 2024. <span>“<span class="nocase">AI-accelerated Nazca survey nearly doubles the number of known figurative geoglyphs and sheds light on their purpose</span>.”</span> <em>Proceedings of the National Academy of Sciences</em> 121 (40): e2407652121. <a href="https://doi.org/10.1073/pnas.2407652121">https://doi.org/10.1073/pnas.2407652121</a>.
+</div>
+<div id="ref-Shumailov:2024aa" class="csl-entry" role="listitem">
+Shumailov, Ilia, Zakhar Shumaylov, Yiren Zhao, Nicolas Papernot, Ross Anderson, and Yarin Gal. 2024. <span>“<span class="nocase">AI models collapse when trained on recursively generated data</span>.”</span> <em>Nature</em> 631 (8022): 755–59. <a href="https://doi.org/10.1038/s41586-024-07566-y">https://doi.org/10.1038/s41586-024-07566-y</a>.
+</div>
+</div>
+</section></section>
+<section>
+<section id="appendix-video" class="title-slide slide level1 appendix center">
+<h1>Appendix: Video</h1>
+
+</section>
+<section id="unreasonable-effectiveness-of-data" class="slide level2">
+<h2>Unreasonable Effectiveness of Data</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/yvDCzhbjYWs" width="889" height="500" title="The Unreasonable Effectiveness of Data" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<aside class="notes">
+<p>Peter Norvig’s presentation runs for just over one hour and is provided for independent study rather than classroom viewing. The associated 2009 paper predates the modern wave of large deep-learning systems but remains useful for examining the relationship between data scale and modelling choices.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Supplementary presentation related to <span class="citation" data-cites="Halevy:2009aa">Halevy et al. (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span> and later empirical scaling work such as <span class="citation" data-cites="Kaplan:2020aa">Kaplan et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span>.</p>
+</div></aside></section></section>
+<section>
+<section id="sec-pipeline" class="title-slide slide level1 appendix center">
+<h1>Appendix: Pipeline</h1>
+
+</section>
+<section id="pipeline" class="slide level2 scrollable smaller">
+<h2>Pipeline</h2>
+<div id="1bf4bf72" class="cell" data-execution_count="35">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a aria-label="1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer, make_column_selector</span>
+<span id="cb50-2"><a aria-label="2"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb50-3"><a aria-label="3"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb50-4"><a aria-label="4"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb50-5"><a aria-label="5"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder, StandardScaler</span>
+<span id="cb50-6"><a aria-label="6"></a></span>
+<span id="cb50-7"><a aria-label="7"></a>numeric_pipeline <span class="op">=</span> Pipeline([</span>
+<span id="cb50-8"><a aria-label="8"></a>    (<span class="st">'imputer'</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>, add_indicator<span class="op">=</span><span class="va">True</span>)),</span>
+<span id="cb50-9"><a aria-label="9"></a>    (<span class="st">'scaler'</span>, StandardScaler()),</span>
+<span id="cb50-10"><a aria-label="10"></a>])</span>
+<span id="cb50-11"><a aria-label="11"></a></span>
+<span id="cb50-12"><a aria-label="12"></a>preprocessor <span class="op">=</span> ColumnTransformer([</span>
+<span id="cb50-13"><a aria-label="13"></a>    (</span>
+<span id="cb50-14"><a aria-label="14"></a>        <span class="st">"numeric"</span>,</span>
+<span id="cb50-15"><a aria-label="15"></a>        numeric_pipeline,</span>
+<span id="cb50-16"><a aria-label="16"></a>        make_column_selector(dtype_include<span class="op">=</span>np.number),</span>
+<span id="cb50-17"><a aria-label="17"></a>    ),</span>
+<span id="cb50-18"><a aria-label="18"></a>    (</span>
+<span id="cb50-19"><a aria-label="19"></a>        <span class="st">"categorical"</span>,</span>
+<span id="cb50-20"><a aria-label="20"></a>        OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">"ignore"</span>),</span>
+<span id="cb50-21"><a aria-label="21"></a>        make_column_selector(dtype_exclude<span class="op">=</span>np.number),</span>
+<span id="cb50-22"><a aria-label="22"></a>    ),</span>
+<span id="cb50-23"><a aria-label="23"></a>])</span>
+<span id="cb50-24"><a aria-label="24"></a></span>
+<span id="cb50-25"><a aria-label="25"></a>full_pipeline <span class="op">=</span> Pipeline([</span>
+<span id="cb50-26"><a aria-label="26"></a>    (<span class="st">"preprocessor"</span>, preprocessor),</span>
+<span id="cb50-27"><a aria-label="27"></a>    (<span class="st">"classifier"</span>, LogisticRegression()),</span>
+<span id="cb50-28"><a aria-label="28"></a>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<aside class="notes">
+<p>This template keeps every learned preprocessing step with the estimator. Numerical columns are imputed and standardized; categorical columns are one-hot encoded. The selectors choose columns by data type, so the template does not depend on lecture-specific column names.</p>
+<p>Calling <code>full_pipeline.fit(X_train, y_train)</code> fits every component on the same training examples. The fitted pipeline can then transform and classify validation, test, or production examples consistently.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<p>Marcel <strong>Turcotte</strong></p>
+<p><a href="mailto:Marcel.Turcotte@uOttawa.ca">Marcel.Turcotte@uOttawa.ca</a></p>
+<p>School of Electrical Engineering and <strong>Computer Science</strong> (EE<strong>CS</strong>)</p>
+<p>University of Ottawa</p>
+
+
+</section></section>
+
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../../assets/images/uottawa_hor_black.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p><a href="https://turcotte.xyz/teaching/csi-4106">turcotte.xyz/teaching/csi-4106</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/multiplex/socket.io.js"></script>
+  <script src="../../site_libs/revealjs/plugin/multiplex/multiplex.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'multiplex': {"secret":"ab3b982dd400d8d5752932a5d8c078c1","id":"1c1dfba6b59940e77e4e5749a765008ba9d3ee264c1587a782dc3a7e141b250a","url":"https://multiplex.up.railway.app/"},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/turcotte\.xyz\/teaching\/csi-4106");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+</body></html>

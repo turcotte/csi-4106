@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Marcel Turcotte">
-<meta name="dcterms.date" content="2026-01-30">
+<meta name="dcterms.date" content="2026-10-05">
 
 <title>Scaling – CSI 4106 - Fall 2026</title>
 <style>
@@ -492,7 +492,7 @@ window.Quarto = {
   <li><a href="#euclidean-distances-after-scaling" id="toc-euclidean-distances-after-scaling" class="nav-link" data-scroll-target="#euclidean-distances-after-scaling">Euclidean distances (after scaling)</a></li>
   <li><a href="#knn-regressor-flip-in-the-prediction" id="toc-knn-regressor-flip-in-the-prediction" class="nav-link" data-scroll-target="#knn-regressor-flip-in-the-prediction">KNN regressor: flip in the prediction</a></li>
   <li><a href="#why-this-happens" id="toc-why-this-happens" class="nav-link" data-scroll-target="#why-this-happens">Why this happens</a></li>
-  <li><a href="#show-the-distance-to-neighbors-only" id="toc-show-the-distance-to-neighbors-only" class="nav-link" data-scroll-target="#show-the-distance-to-neighbors-only">Show the distance to neighbors only</a></li>
+  <li><a href="#distances-to-the-training-examples" id="toc-distances-to-the-training-examples" class="nav-link" data-scroll-target="#distances-to-the-training-examples">Distances to the training examples</a></li>
   <li><a href="#switch-to-manhattan-distance" id="toc-switch-to-manhattan-distance" class="nav-link" data-scroll-target="#switch-to-manhattan-distance">Switch to Manhattan distance?</a></li>
   <li><a href="#tldr" id="toc-tldr" class="nav-link" data-scroll-target="#tldr">TL;DR</a></li>
   </ul>
@@ -532,7 +532,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">January 30, 2026</p>
+      <p class="date">October 5, 2026</p>
     </div>
   </div>
   
@@ -544,14 +544,15 @@ window.Quarto = {
 </header>
 
 
+<p>This independently executable notebook expands the scaling example from Lecture 10. It focuses on how feature scales alter the geometry used by nearest-neighbour methods.</p>
 <section id="scenario" class="level2">
 <h2 class="anchored" data-anchor-id="scenario">Scenario</h2>
-<p>We pretend to predict a house price using <strong>k-Nearest Neighbors (KNN) regression</strong> with two features:</p>
+<p>Consider a house-price prediction task using <strong>k-nearest neighbours (KNN) regression</strong> with two features:</p>
 <ul>
 <li><span class="math inline">x_1</span>: number of rooms (small scale)</li>
 <li><span class="math inline">x_2</span>: square footage (large scale)</li>
 </ul>
-<p>We create three examples <strong>a</strong>, <strong>b</strong>, <strong>c</strong> chosen so that:</p>
+<p>The three examples <strong>a</strong>, <strong>b</strong>, and <strong>c</strong> are chosen so that:</p>
 <ul>
 <li><strong>Without scaling</strong>, <strong>a</strong> is closer to <strong>b</strong> (because square footage dominates).</li>
 <li><strong>With scaling (z-score)</strong>, <strong>a</strong> becomes closer to <strong>c</strong> (rooms difference matters after rescaling).</li>
@@ -559,7 +560,7 @@ window.Quarto = {
 </section>
 <section id="data-three-houses" class="level2">
 <h2 class="anchored" data-anchor-id="data-three-houses">Data (three houses)</h2>
-<div id="aaa58df8" class="cell" data-execution_count="2">
+<div id="a2b5fcae" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -639,15 +640,16 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p><strong>Note.</strong> We’ll treat <strong>b</strong> and <strong>c</strong> as the training set, and <strong>a</strong> as the query whose price we want to predict.</p>
+<p>Examples <strong>b</strong> and <strong>c</strong> form the training set. Example <strong>a</strong> is the query whose price will be predicted. This deliberately tiny dataset illustrates geometry rather than realistic model estimation.</p>
 </section>
 <section id="euclidean-distances-unscaled" class="level2">
 <h2 class="anchored" data-anchor-id="euclidean-distances-unscaled">Euclidean distances (unscaled)</h2>
-<p>The (squared) Euclidean distance between <span class="math inline">u</span> and <span class="math inline">v</span> is <span class="math display">
+<p>The squared Euclidean distance between <span class="math inline">u</span> and <span class="math inline">v</span> is <span class="math display">
 \|u-v\|_2^2 = \sum_j (u_j - v_j)^2.
 </span></p>
+<p>Euclidean distance is its square root, <span class="math inline">\|u-v\|_2</span>; both expressions rank neighbours in the same order.</p>
 <p>When one feature has a much larger scale (e.g., square footage), it can dominate the sum.</p>
-<div id="4c18c6e1" class="cell" data-execution_count="3">
+<div id="ff1d0c1e" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> pairwise_distances</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dist_unscaled <span class="op">=</span> pd.DataFrame(</span>
@@ -693,21 +695,21 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="01873f3d" class="cell" data-execution_count="4">
+<div id="fa46d9b7" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Nearest to 'a' (unscaled):"</span>, dist_unscaled.loc[<span class="st">"a"</span>].drop(<span class="st">"a"</span>).idxmin())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Nearest to 'a' (unscaled): b</code></pre>
 </div>
 </div>
-<p><em>Expectation:</em> <strong>a</strong> is nearest to <strong>b</strong> (similar sqft overwhelms rooms).</p>
+<p><em>Result:</em> <strong>a</strong> is nearest to <strong>b</strong> because the square-footage difference dominates the distance.</p>
 </section>
 <section id="proper-scaling-for-modeling-fit-scaler-on-the-training-set" class="level2">
 <h2 class="anchored" data-anchor-id="proper-scaling-for-modeling-fit-scaler-on-the-training-set">Proper scaling for modeling (fit scaler on the <strong>training</strong> set)</h2>
-<p>For a fair ML workflow, compute scaling parameters on the training data (<strong>b</strong>, <strong>c</strong>) only, then transform both train and query:</p>
+<p>For a leakage-safe workflow, compute scaling parameters on the training data (<strong>b</strong>, <strong>c</strong>) only, then transform both the training data and query:</p>
 <p><span class="math display">
 z(x) = \frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
 </span></p>
-<div id="61acd123" class="cell" data-execution_count="5">
+<div id="516f15ff" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>train_idx <span class="op">=</span> [<span class="st">"b"</span>, <span class="st">"c"</span>]</span>
@@ -760,7 +762,7 @@ z(x) = \frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
 </section>
 <section id="euclidean-distances-after-scaling" class="level2">
 <h2 class="anchored" data-anchor-id="euclidean-distances-after-scaling">Euclidean distances (after scaling)</h2>
-<div id="cb73c098" class="cell" data-execution_count="6">
+<div id="57ce94a5" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dist_scaled <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    pairwise_distances(Z.values, metric<span class="op">=</span><span class="st">"euclidean"</span>),</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>Z.index, columns<span class="op">=</span>Z.index</span>
@@ -804,18 +806,18 @@ z(x) = \frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
 </div>
 </div>
 </div>
-<div id="7dfc2a96" class="cell" data-execution_count="7">
+<div id="32e86ba3" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Nearest to 'a' (scaled):"</span>, dist_scaled.loc[<span class="st">"a"</span>].drop(<span class="st">"a"</span>).idxmin())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Nearest to 'a' (scaled): c</code></pre>
 </div>
 </div>
-<p><em>Now:</em> <strong>a</strong> is nearest to <strong>c</strong> (rooms difference matters once features are on comparable scales).</p>
+<p><em>Now:</em> <strong>a</strong> is nearest to <strong>c</strong> because the room-count difference matters once the features have comparable scales.</p>
 </section>
 <section id="knn-regressor-flip-in-the-prediction" class="level2">
 <h2 class="anchored" data-anchor-id="knn-regressor-flip-in-the-prediction">KNN regressor: flip in the prediction</h2>
-<p>We’ll run a 1-NN regressor (so the prediction is exactly the nearest neighbor’s price) <strong>with and without</strong> scaling.</p>
-<div id="25086fb7" class="cell" data-execution_count="8">
+<p>A 1-NN regressor predicts the price of the nearest training example. Compare the same estimator <strong>with and without</strong> scaling.</p>
+<div id="4fca3b14" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -840,11 +842,24 @@ z(x) = \frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
 <span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    {</span>
 <span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"prediction (no scaling)"</span>: [pred_plain],</span>
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"prediction (with scaling)"</span>: [pred_scaled],</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"nearest neighbor (no scaling)"</span>: [point_names[<span class="dv">1</span>] <span class="cf">if</span> pred_plain<span class="op">==</span>prices[<span class="st">'b'</span>] <span class="cf">else</span> point_names[<span class="dv">2</span>]],</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"nearest neighbor (with scaling)"</span>: [point_names[<span class="dv">1</span>] <span class="cf">if</span> pred_scaled<span class="op">==</span>prices[<span class="st">'b'</span>] <span class="cf">else</span> point_names[<span class="dv">2</span>]],</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"a"</span>]</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"nearest neighbour (no scaling)"</span>: [</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>            train_idx[</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>                knn_plain.kneighbors(</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>                    X_query, return_distance<span class="op">=</span><span class="va">False</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>                )[<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>            ]</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>        ],</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>        <span class="st">"nearest neighbour (with scaling)"</span>: [</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>            train_idx[</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>                knn_scaled[<span class="st">"knn"</span>].kneighbors(</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>                    knn_scaled[<span class="st">"scaler"</span>].transform(X_query),</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>                    return_distance<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>                )[<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>            ]</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>        ],</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"a"</span>]</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
@@ -855,8 +870,8 @@ z(x) = \frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">prediction (no scaling)</th>
 <th data-quarto-table-cell-role="th">prediction (with scaling)</th>
-<th data-quarto-table-cell-role="th">nearest neighbor (no scaling)</th>
-<th data-quarto-table-cell-role="th">nearest neighbor (with scaling)</th>
+<th data-quarto-table-cell-role="th">nearest neighbour (no scaling)</th>
+<th data-quarto-table-cell-role="th">nearest neighbour (with scaling)</th>
 </tr>
 </thead>
 <tbody>
@@ -878,26 +893,26 @@ z(x) = \frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
 <li><strong>Unscaled:</strong> a ↔︎ b ⇒ prediction ≈ <strong>$520,000</strong></li>
 <li><strong>Scaled:</strong> a ↔︎ c ⇒ prediction ≈ <strong>$390,000</strong></li>
 </ul>
-<p>Same model and data; just <strong>feature scale</strong> changed the neighbor—and the prediction.</p>
+<p>The query has no known target, so this is not a performance comparison. It demonstrates that the chosen representation changed the nearest neighbour—and therefore the prediction.</p>
 </section>
 <section id="why-this-happens" class="level2">
 <h2 class="anchored" data-anchor-id="why-this-happens">Why this happens</h2>
 <ul>
-<li>(Squared) Euclidean distance aggregates per-feature squared differences:</li>
+<li>Squared Euclidean distance aggregates per-feature squared differences:</li>
 </ul>
 <p><span class="math display">
-  |u-v|_2^2 = \sum_j (u_j - v_j)^2.
+  \|u-v\|_2^2 = \sum_j (u_j - v_j)^2.
 </span></p>
 <ul>
 <li>A large-scale feature (e.g., <strong>sqft</strong>) can dwarf small-scale features (e.g., <strong>rooms</strong>), so KNN effectively “ignores” the smaller-scale dimensions.</li>
 <li><strong>Standardization</strong> (<span class="math inline">z</span>-scores) or <strong>min-max scaling</strong> puts dimensions on comparable footing.</li>
-<li><strong>Rule of thumb:</strong> For distance-based methods (KNN, k-means, RBF kernels, etc.), always <strong>scale</strong> features.</li>
+<li><strong>Rule of thumb:</strong> For distance-based methods, scale features unless their existing units deliberately encode the relative importance that the distance should use.</li>
 </ul>
 </section>
-<section id="show-the-distance-to-neighbors-only" class="level2">
-<h2 class="anchored" data-anchor-id="show-the-distance-to-neighbors-only">Show the distance to neighbors only</h2>
+<section id="distances-to-the-training-examples" class="level2">
+<h2 class="anchored" data-anchor-id="distances-to-the-training-examples">Distances to the training examples</h2>
 <p>Distances from <strong>a</strong> to {<strong>b</strong>, <strong>c</strong>} before and after scaling.</p>
-<div id="006ae351" class="cell" data-execution_count="9">
+<div id="32e3d27a" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> show_pair(name_from, names_to, D):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> D.loc[name_from, names_to].to_frame(<span class="st">"distance"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -966,41 +981,34 @@ z(x) = \frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
 </section>
 <section id="switch-to-manhattan-distance" class="level2">
 <h2 class="anchored" data-anchor-id="switch-to-manhattan-distance">Switch to Manhattan distance?</h2>
-<p>Even with <span class="math inline">L_1</span> distance, scale still matters:</p>
+<p>Scale also matters with <span class="math inline">L_1</span> distance:</p>
 <p><span class="math display">
 |u-v|_1 = \sum_j |u_j - v_j|.
 </span></p>
-<p>Try replacing <code>metric="euclidean"</code> with <code>metric="manhattan"</code>—you’ll see the same sensitivity to feature scale.</p>
-<div id="02c4e2d7" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> df.loc[train_idx].values          <span class="co"># b, c</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> prices.loc[train_idx].values      <span class="co"># prices for b, c</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>X_query <span class="op">=</span> df.loc[query_idx].values          <span class="co"># a</span></span>
+<p>The same training data can be reused with <code>metric="manhattan"</code>.</p>
+<div id="c4ae7f80" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) No scaling</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>knn_manhattan_plain <span class="op">=</span> KNeighborsRegressor(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    n_neighbors<span class="op">=</span><span class="dv">1</span>, metric<span class="op">=</span><span class="st">"manhattan"</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>knn_manhattan_plain.fit(X_train, y_train)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>pred_manhattan_plain <span class="op">=</span> knn_manhattan_plain.predict(X_query)[<span class="dv">0</span>]</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) No scaling</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>knn_plain <span class="op">=</span> KNeighborsRegressor(n_neighbors<span class="op">=</span><span class="dv">1</span>, metric<span class="op">=</span><span class="st">"manhattan"</span>)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>knn_plain.fit(X_train, y_train)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>pred_plain <span class="op">=</span> knn_plain.predict(X_query)[<span class="dv">0</span>]</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) With scaling (pipeline fits scaler only on training, then KNN on scaled)</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>knn_scaled <span class="op">=</span> Pipeline([</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scaler"</span>, StandardScaler()),</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"knn"</span>, KNeighborsRegressor(n_neighbors<span class="op">=</span><span class="dv">1</span>, metric<span class="op">=</span><span class="st">"manhattan"</span>))</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>knn_scaled.fit(X_train, y_train)</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>pred_scaled <span class="op">=</span> knn_scaled.predict(X_query)[<span class="dv">0</span>]</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">"prediction (no scaling)"</span>: [pred_plain],</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">"prediction (with scaling)"</span>: [pred_scaled],</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">"nearest neighbor (no scaling)"</span>: [point_names[<span class="dv">1</span>] <span class="cf">if</span> pred_plain<span class="op">==</span>prices[<span class="st">'b'</span>] <span class="cf">else</span> point_names[<span class="dv">2</span>]],</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">"nearest neighbor (with scaling)"</span>: [point_names[<span class="dv">1</span>] <span class="cf">if</span> pred_scaled<span class="op">==</span>prices[<span class="st">'b'</span>] <span class="cf">else</span> point_names[<span class="dv">2</span>]],</span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"a"</span>]</span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) With scaling (pipeline fits scaler only on training, then KNN on scaled)</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>knn_manhattan_scaled <span class="op">=</span> Pipeline([</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"scaler"</span>, StandardScaler()),</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"knn"</span>, KNeighborsRegressor(n_neighbors<span class="op">=</span><span class="dv">1</span>, metric<span class="op">=</span><span class="st">"manhattan"</span>))</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>knn_manhattan_scaled.fit(X_train, y_train)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>pred_manhattan_scaled <span class="op">=</span> knn_manhattan_scaled.predict(X_query)[<span class="dv">0</span>]</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"prediction (no scaling)"</span>: [pred_manhattan_plain],</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"prediction (with scaling)"</span>: [pred_manhattan_scaled],</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"a"</span>]</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
@@ -1011,8 +1019,6 @@ z(x) = \frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">prediction (no scaling)</th>
 <th data-quarto-table-cell-role="th">prediction (with scaling)</th>
-<th data-quarto-table-cell-role="th">nearest neighbor (no scaling)</th>
-<th data-quarto-table-cell-role="th">nearest neighbor (with scaling)</th>
 </tr>
 </thead>
 <tbody>
@@ -1020,8 +1026,6 @@ z(x) = \frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
 <th data-quarto-table-cell-role="th">a</th>
 <td>520000.0</td>
 <td>390000.0</td>
-<td>b</td>
-<td>c</td>
 </tr>
 </tbody>
 </table>
@@ -1033,9 +1037,10 @@ z(x) = \frac{x-\mu_{\text{train}}}{\sigma_{\text{train}}}.
 <section id="tldr" class="level2">
 <h2 class="anchored" data-anchor-id="tldr">TL;DR</h2>
 <ul>
-<li><strong>Distance-based models</strong> are highly sensitive to <strong>feature scales</strong>.</li>
-<li><strong>Always scale</strong> your inputs (fit the scaler on the <strong>training</strong> set only).</li>
-<li>Scaling can <strong>change nearest neighbors</strong> and therefore <strong>change predictions</strong>—as seen here with 1-NN regression.</li>
+<li><strong>Distance-based models</strong> are sensitive to the units and relative scales of their features.</li>
+<li>Fit a scaler on the <strong>training data only</strong>, then reuse it for validation, test, and production examples.</li>
+<li>A pipeline keeps scaling and prediction together and prevents leakage during cross-validation.</li>
+<li>Scaling changes the model’s geometry and can therefore change nearest neighbours and predictions.</li>
 </ul>
 
 

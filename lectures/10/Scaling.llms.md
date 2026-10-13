@@ -14,16 +14,18 @@ University of Ottawa
 
 Published
 
-January 30, 2026
+October 5, 2026
+
+This independently executable notebook expands the scaling example from Lecture 10. It focuses on how feature scales alter the geometry used by nearest-neighbour methods.
 
 ## Scenario
 
-We pretend to predict a house price using **k-Nearest Neighbors (KNN) regression** with two features:
+Consider a house-price prediction task using **k-nearest neighbours (KNN) regression** with two features:
 
 - x_1: number of rooms (small scale)
 - x_2: square footage (large scale)
 
-We create three examples **a**, **b**, **c** chosen so that:
+The three examples **a**, **b**, and **c** are chosen so that:
 
 - **Without scaling**, **a** is closer to **b** (because square footage dominates).
 - **With scaling (z-score)**, **a** becomes closer to **c** (rooms difference matters after rescaling).
@@ -61,11 +63,13 @@ display(prices.to_frame())
 | b   | 520000.0 |
 | c   | 390000.0 |
 
-**Note.** We’ll treat **b** and **c** as the training set, and **a** as the query whose price we want to predict.
+Examples **b** and **c** form the training set. Example **a** is the query whose price will be predicted. This deliberately tiny dataset illustrates geometry rather than realistic model estimation.
 
 ## Euclidean distances (unscaled)
 
-The (squared) Euclidean distance between u and v is \\u-v\\\_2^2 = \sum_j (u_j - v_j)^2.
+The squared Euclidean distance between u and v is \\u-v\\\_2^2 = \sum_j (u_j - v_j)^2.
+
+Euclidean distance is its square root, \\u-v\\\_2; both expressions rank neighbours in the same order.
 
 When one feature has a much larger scale (e.g., square footage), it can dominate the sum.
 
@@ -91,11 +95,11 @@ print("Nearest to 'a' (unscaled):", dist_unscaled.loc["a"].drop("a").idxmin())
 
     Nearest to 'a' (unscaled): b
 
-*Expectation:* **a** is nearest to **b** (similar sqft overwhelms rooms).
+*Result:* **a** is nearest to **b** because the square-footage difference dominates the distance.
 
 ## Proper scaling for modeling (fit scaler on the **training** set)
 
-For a fair ML workflow, compute scaling parameters on the training data (**b**, **c**) only, then transform both train and query:
+For a leakage-safe workflow, compute scaling parameters on the training data (**b**, **c**) only, then transform both the training data and query:
 
 z(x) = \frac{x-\mu\_{\text{train}}}{\sigma\_{\text{train}}}.
 
@@ -145,11 +149,11 @@ print("Nearest to 'a' (scaled):", dist_scaled.loc["a"].drop("a").idxmin())
 
     Nearest to 'a' (scaled): c
 
-*Now:* **a** is nearest to **c** (rooms difference matters once features are on comparable scales).
+*Now:* **a** is nearest to **c** because the room-count difference matters once the features have comparable scales.
 
 ## KNN regressor: flip in the prediction
 
-We’ll run a 1-NN regressor (so the prediction is exactly the nearest neighbor’s price) **with and without** scaling.
+A 1-NN regressor predicts the price of the nearest training example. Compare the same estimator **with and without** scaling.
 
 ``` python
 from sklearn.neighbors import KNeighborsRegressor
@@ -176,14 +180,27 @@ pd.DataFrame(
     {
         "prediction (no scaling)": [pred_plain],
         "prediction (with scaling)": [pred_scaled],
-        "nearest neighbor (no scaling)": [point_names[1] if pred_plain==prices['b'] else point_names[2]],
-        "nearest neighbor (with scaling)": [point_names[1] if pred_scaled==prices['b'] else point_names[2]],
+        "nearest neighbour (no scaling)": [
+            train_idx[
+                knn_plain.kneighbors(
+                    X_query, return_distance=False
+                )[0, 0]
+            ]
+        ],
+        "nearest neighbour (with scaling)": [
+            train_idx[
+                knn_scaled["knn"].kneighbors(
+                    knn_scaled["scaler"].transform(X_query),
+                    return_distance=False,
+                )[0, 0]
+            ]
+        ],
     },
     index=["a"]
 )
 ```
 
-|  | prediction (no scaling) | prediction (with scaling) | nearest neighbor (no scaling) | nearest neighbor (with scaling) |
+|  | prediction (no scaling) | prediction (with scaling) | nearest neighbour (no scaling) | nearest neighbour (with scaling) |
 |----|----|----|----|----|
 | a | 520000.0 | 390000.0 | b | c |
 
@@ -192,19 +209,19 @@ pd.DataFrame(
 - **Unscaled:** a ↔︎ b ⇒ prediction ≈ **\$520,000**
 - **Scaled:** a ↔︎ c ⇒ prediction ≈ **\$390,000**
 
-Same model and data; just **feature scale** changed the neighbor—and the prediction.
+The query has no known target, so this is not a performance comparison. It demonstrates that the chosen representation changed the nearest neighbour—and therefore the prediction.
 
 ## Why this happens
 
-- (Squared) Euclidean distance aggregates per-feature squared differences:
+- Squared Euclidean distance aggregates per-feature squared differences:
 
-\|u-v\|\_2^2 = \sum_j (u_j - v_j)^2.
+\\u-v\\\_2^2 = \sum_j (u_j - v_j)^2.
 
 - A large-scale feature (e.g., **sqft**) can dwarf small-scale features (e.g., **rooms**), so KNN effectively “ignores” the smaller-scale dimensions.
 - **Standardization** (z-scores) or **min-max scaling** puts dimensions on comparable footing.
-- **Rule of thumb:** For distance-based methods (KNN, k-means, RBF kernels, etc.), always **scale** features.
+- **Rule of thumb:** For distance-based methods, scale features unless their existing units deliberately encode the relative importance that the distance should use.
 
-## Show the distance to neighbors only
+## Distances to the training examples
 
 Distances from **a** to {**b**, **c**} before and after scaling.
 
@@ -235,50 +252,44 @@ display(show_pair("a", ["b", "c"], dist_scaled))
 
 ## Switch to Manhattan distance?
 
-Even with L_1 distance, scale still matters:
+Scale also matters with L_1 distance:
 
 \|u-v\|\_1 = \sum_j \|u_j - v_j\|.
 
-Try replacing `metric="euclidean"` with `metric="manhattan"`—you’ll see the same sensitivity to feature scale.
+The same training data can be reused with `metric="manhattan"`.
 
 ``` python
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.pipeline import Pipeline
-
-X_train = df.loc[train_idx].values          # b, c
-y_train = prices.loc[train_idx].values      # prices for b, c
-X_query = df.loc[query_idx].values          # a
-
 # 1) No scaling
-knn_plain = KNeighborsRegressor(n_neighbors=1, metric="manhattan")
-knn_plain.fit(X_train, y_train)
-pred_plain = knn_plain.predict(X_query)[0]
+knn_manhattan_plain = KNeighborsRegressor(
+    n_neighbors=1, metric="manhattan"
+)
+knn_manhattan_plain.fit(X_train, y_train)
+pred_manhattan_plain = knn_manhattan_plain.predict(X_query)[0]
 
 # 2) With scaling (pipeline fits scaler only on training, then KNN on scaled)
-knn_scaled = Pipeline([
+knn_manhattan_scaled = Pipeline([
     ("scaler", StandardScaler()),
     ("knn", KNeighborsRegressor(n_neighbors=1, metric="manhattan"))
 ])
-knn_scaled.fit(X_train, y_train)
-pred_scaled = knn_scaled.predict(X_query)[0]
+knn_manhattan_scaled.fit(X_train, y_train)
+pred_manhattan_scaled = knn_manhattan_scaled.predict(X_query)[0]
 
 pd.DataFrame(
     {
-        "prediction (no scaling)": [pred_plain],
-        "prediction (with scaling)": [pred_scaled],
-        "nearest neighbor (no scaling)": [point_names[1] if pred_plain==prices['b'] else point_names[2]],
-        "nearest neighbor (with scaling)": [point_names[1] if pred_scaled==prices['b'] else point_names[2]],
+        "prediction (no scaling)": [pred_manhattan_plain],
+        "prediction (with scaling)": [pred_manhattan_scaled],
     },
     index=["a"]
 )
 ```
 
-|  | prediction (no scaling) | prediction (with scaling) | nearest neighbor (no scaling) | nearest neighbor (with scaling) |
-|----|----|----|----|----|
-| a | 520000.0 | 390000.0 | b | c |
+|     | prediction (no scaling) | prediction (with scaling) |
+|-----|-------------------------|---------------------------|
+| a   | 520000.0                | 390000.0                  |
 
 ## TL;DR
 
-- **Distance-based models** are highly sensitive to **feature scales**.
-- **Always scale** your inputs (fit the scaler on the **training** set only).
-- Scaling can **change nearest neighbors** and therefore **change predictions**—as seen here with 1-NN regression.
+- **Distance-based models** are sensitive to the units and relative scales of their features.
+- Fit a scaler on the **training data only**, then reuse it for validation, test, and production examples.
+- A pipeline keeps scaling and prediction together and prevents leakage during cross-validation.
+- Scaling changes the model’s geometry and can therefore change nearest neighbours and predictions.
