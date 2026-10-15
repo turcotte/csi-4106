@@ -5624,7 +5624,7 @@
     "href": "lectures/11/slides.html#definition",
     "title": "Introduction to Artificial Neural Networks",
     "section": "Definition",
-    "text": "Definition\nThe universal approximation theorem (UAT) establishes that, on a compact input domain, a network with a sufficiently wide single hidden layer, sigmoid activations, and a linear output can approximate any specified continuous target function to any desired accuracy.\n\n\nA compact set in \\mathbb R^n is both closed and bounded. A closed interval such as [-4,2] is a simple example; compactness does not mean that the set contains only finitely many points.\nFor every continuous target function on this domain and every positive error tolerance, the theorem guarantees a finite network whose error stays below that tolerance throughout the domain. The required width and parameter values can depend on the target and the tolerance (Cybenko 1989; Hornik et al. 1989).\nThis is an existence result about representation. It does not guarantee that a training algorithm will find the appropriate parameters, that the network will be small, or that learning from a finite sample will generalize well. It also gives no guarantee about extrapolation outside the specified domain.\nThe sigmoid version is a convenient classical statement. Broader results cover other activations, including the ReLU used in the visual code example. Nonlinearity alone is not a sufficient activation assumption. Leshno et al., Multilayer feedforward networks with a nonpolynomial activation function can approximate any function\n\n\nCybenko (1989); Hornik et al. (1989)"
+    "text": "Definition\nThe universal approximation theorem (UAT) establishes that, on a compact input domain, a network with a sufficiently wide single hidden layer, sigmoid activations, and a linear output can approximate any specified continuous target function to any desired accuracy.\n\n\nA compact set in \\mathbb R^n is both closed and bounded. A closed interval such as [-4,2] is a simple example.\nFor every continuous target function on this domain and every positive error tolerance, the theorem guarantees a finite network whose error stays below that tolerance throughout the domain. The required width and parameter values can depend on the target and the tolerance (Cybenko 1989; Hornik et al. 1989).\nThis is an existence result about representation. It does not guarantee that a training algorithm will find the appropriate parameters, that the network will be small, or that learning from a finite sample will generalize well. It also gives no guarantee about extrapolation outside the specified domain.\nThe sigmoid version is a convenient classical statement. Broader results cover other activations, including the ReLU used in the visual code example. Nonlinearity alone is not a sufficient activation assumption. Leshno et al., Multilayer feedforward networks with a nonpolynomial activation function can approximate any function\n\n\nCybenko (1989); Hornik et al. (1989)"
   },
   {
     "objectID": "lectures/11/slides.html#single-hidden-layer",
@@ -5869,7 +5869,7 @@
     "href": "lectures/11/slides.html#next-lecture",
     "title": "Introduction to Artificial Neural Networks",
     "section": "Next lecture",
-    "text": "Next lecture\n\nWe will discuss the training algorithm for artificial neural networks."
+    "text": "Next lecture\n\nWe will explore the implementation of artificial neural networks."
   },
   {
     "objectID": "lectures/11/slides.html#references",
