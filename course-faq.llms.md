@@ -6,7 +6,7 @@ Marcel Turcotte
 
 Published
 
-September 29, 2026
+October 14, 2026
 
 # How to Get Help?
 
@@ -26,6 +26,12 @@ We use Brightspace primarily for assignments and discussion groups. On the deskt
 By clicking on **Assignments**, you should see the following notice at the top of the page:
 
 > Assignments will be posted here.
+
+# What does “dropped” mean on Brightspace?
+
+As outlined in the [syllabus](course-syllabus), the assignment component of your final grade is based on your three highest scores across the four assignments. Brightspace is configured to [automatically drop the lowest score](https://community.d2l.com/brightspace/kb/articles/12464-drop-the-lowest-grade).
+
+After an assignment deadline, Brightspace temporarily displays a score of 0 until your teaching assistant enters your grade. During this period, the assignment may be marked as “dropped” because it has the lowest recorded score. Once your grade is entered, Brightspace recalculates which score to drop.
 
 # What will be the format of Quiz 1?
 
@@ -53,6 +59,14 @@ By clicking on **Assignments**, you should see the following notice at the top o
   - Pay close attention to qualifiers such as *always*, *necessarily*, *may*, and *cannot*. Read each statement completely before answering.
 - **What not to prioritize**: You are not expected to memorize minor library syntax or incidental programming details such as how to reshape a NumPy array. However, you should understand the purpose of the principal operations and workflows demonstrated in class.
 - **What to bring**: Bring your student ID card and at least two pencils suitable for completing a Scantron sheet.
+
+# Can I see my quiz?
+
+We review the solutions to Quizzes 1 and 2 in class, which may be sufficient to help you understand any errors. You are also welcome to attend my office hours to review your quiz, including your Scantron answer sheet.
+
+If you intend to request a [grade revision](https://www.uottawa.ca/about-us/leadership-governance/policies-regulations/a-9-revision-grades-appeal), please note that a fixed submission deadline applies. A grade revision addresses grading errors; it does not involve changing the marking scheme.
+
+If my office hours conflict with your course schedule, please send me your availability so that we can arrange an alternative time to review your assessment.
 
 # What will be the format of Quiz 2?
 
