@@ -12,6 +12,8 @@ CSI4106 Introduction to Artificial Intelligence
 
 ### Watch 3Blue1Brown videos on neural networks
 
+The first two videos support this lecture; the backpropagation videos prepare for Lecture 13.
+
 - [**But what is a Neural Network?**](https://youtu.be/aircAruvnKk) (19 minutes)
 - [**Gradient descent, how neural networks learn**](https://youtu.be/IHZwWFHWa-w) (21 minutes)
 - [**What is backpropagation really doing?**](https://youtu.be/Ilg3gGewQ5U) (14 minutes)
@@ -19,7 +21,7 @@ CSI4106 Introduction to Artificial Intelligence
 
 ### Narrative of PyTorch’s inception
 
-- [PyTorch (2024) Official PyTorch Documentary - Powering the AI Revolution](https://https://www.youtube.com/watch?v=rgP_LBtaUEc) (36 minutes)
+- [PyTorch (2024) Official PyTorch Documentary - Powering the AI Revolution](https://www.youtube.com/watch?v=rgP_LBtaUEc) (36 minutes)
 
 ## Participate
 
@@ -27,7 +29,7 @@ CSI4106 Introduction to Artificial Intelligence
 
 ## Practice
 
-- [Circular Separability](../11/CircularSeparability): To complement your exploration of TensorFlow Playground (below), I have developed a notebook focusing on feature engineering.
+- [Circular Separability ](../../lectures/11/CircularSeparability.llms.md): A self-study notebook comparing engineered features and learned neural-network representations, complementing the TensorFlow Playground exploration below.
 - [Tinker With a Neural Network in Your Browser](https://playground.tensorflow.org)
 
 ## References
