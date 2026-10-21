@@ -8,27 +8,31 @@ Marcel Turcotte
 
 Published
 
-Version: Oct 13, 2026 18:38
+Version: Oct 20, 2026 15:33
 
 # Preamble
 
 ## Message of the Day
 
-# An error occurred.
+[![](https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Male_Fruit_Fly_Hero.width-2200.format-webp.webp)](https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Male_Fruit_Fly_Hero.width-2200.format-webp.webp)
 
-Unable to execute JavaScript.
+[5 amazing visuals show how the male fruit fly’s brain map is advancing neuroscience](https://blog.google/innovation-and-ai/technology/research/male-fruit-fly-brain-map/), Google Research, 2026-09-03.
 
-[These Numbers Can Make AI Dangerous \[Subliminal Learning\]](https://www.youtube.com/watch?v=NUAb6zHXqdI) by [WelchLabs](https://www.youtube.com/@WelchLabsVideo), 2025-09-04.
+Researchers at HHMI’s Janelia Research Campus, Google Research, and collaborating institutions have generated the first complete map of a male fruit fly brain. It comprises over 166,000 neurons.
 
-I appreciate the educational videos produced by WelchLabs, particularly their guest feature on the 3Blue1Brown channel, which elucidates the mechanism by which diffusion models convert text into images. This video assumes foundational knowledge of embeddings and latent space, thus catering to an audience with a background in these concepts.
+As described in the article below, developers created game-playing demonstrations in less than a day by routing game inputs through the fly’s existing, biologically evolved neural circuitry. These demonstrations enabled the fly to play Minecraft, Doom, Beat Saber, and other games while allowing developers to examine how the network processed and responded to these inputs.
 
-- [But how do AI images and videos actually work? \| Guest video by Welch Labs](https://www.youtube.com/watch?v=iv-5mZ_9CPY)
+- [Scientists mapped a fruit fly’s brain. The internet made it play Doom](https://www.ibm.com/think/news/fruit-fly-connectome-brain-map-minecraft-doom) by Antonia Davison, IBM Think news, 2026-09-22.
+
+## Message of the Day
+
+## Message of the Day (continued)
 
 ## Message of the Day (2024)
 
 [![](https://www.nobelprize.org/uploads/2024/10/fig_fy_24_4x3-1024x768.jpg)](https://www.nobelprize.org/uploads/2024/10/fig_fy_24_4x3-1024x768.jpg)
 
-Last year, the timing for this lecture could not have been better since [John J. Hopfield](https://en.wikipedia.org/wiki/John_Hopfield) and [Geoffrey E. Hinton](https://www.cs.toronto.edu/~hinton/) were awarded the [2024 Nobel Prize in Physics](https://www.nobelprize.org/prizes/physics/2024/summary/) “for their fundamental discoveries and inventions enabling machine learning with artificial neural networks.”
+2 years ago, the timing for this lecture could not have been better since [John J. Hopfield](https://en.wikipedia.org/wiki/John_Hopfield) and [Geoffrey E. Hinton](https://www.cs.toronto.edu/~hinton/) were awarded the [2024 Nobel Prize in Physics](https://www.nobelprize.org/prizes/physics/2024/summary/) “for their fundamental discoveries and inventions enabling machine learning with artificial neural networks.”
 
 ## Learning objectives
 
@@ -53,6 +57,8 @@ Two questions guide this introduction. **Computation** asks what a network does 
 TensorFlow Playground is an interactive demonstration of feedforward neural networks for two-dimensional classification. Its network diagram shows how inputs pass through hidden units to produce an output, while the background shows the resulting decision regions.
 
 The weights determine the computation performed by the network. During training, changes to those weights alter the decision regions. The distinction between computing a prediction and learning the parameters also applies to the larger networks used later in this lecture.
+
+Experiment with TensorFlow Playground to build intuition about how feature transformations and network architecture affect classification. For the nonlinearly separable circle and exclusive OR (XOR) datasets, first try to construct classifiers with no hidden layers by incorporating additional input features. Then, using only the original input features, explore how increasing the number of hidden layers and units enables the network to learn nonlinear decision boundaries.
 
 ## Neural Networks (NN)
 
@@ -131,7 +137,9 @@ This hierarchical approach is one of deep learning’s most significant contribu
 
 [![](../../assets/images/ann_threhold_unit.png)](../../assets/images/ann_threhold_unit.png)
 
-where x_1, x_2 \in \\0,1\\ and f(z) is a **step function**: f(z)= \begin{cases}0, & z\<\theta \\ 1, & z \geq \theta\end{cases}
+where x_1, x_2 \in \\0,1\\ and f(z) is a **step function**:
+
+f(z)= \begin{cases}0, & z\<\theta \\ 1, & z \geq \theta\end{cases}
 
 McCulloch and Pitts ([1943](#ref-McCulloch:1943ab)) connected neural activity with **Boolean computation**.
 
@@ -604,7 +612,7 @@ The **universal approximation theorem (UAT)** establishes that, on a **compact i
 
 Cybenko ([1989](#ref-Cybenko:1989aa)); Hornik et al. ([1989](#ref-Hornik:1989aa))
 
-A compact set in \mathbb R^n is both **closed** and **bounded**. A closed interval such as \[-4,2\] is a simple example; compactness does not mean that the set contains only finitely many points.
+A compact set in \mathbb R^n is both **closed** and **bounded**. A closed interval such as \[-4,2\] is a simple example.
 
 For every continuous target function on this domain and every positive error tolerance, the theorem guarantees a finite network whose error stays below that tolerance throughout the domain. The required width and parameter values can depend on the target and the tolerance ([Cybenko 1989](#ref-Cybenko:1989aa); [Hornik et al. 1989](#ref-Hornik:1989aa)).
 
@@ -636,6 +644,8 @@ plot_parameter_effect(sigmoid, "Sigmoid", weights=[0.5, 1, 2, 5], biases=[0],
 [![](slides_files/figure-html/cell-8-output-1.png)](slides_files/figure-html/cell-8-output-1.png)
 
 The weight changes the **steepness** of \sigma(wx+b).
+
+How do negative values of w affect the graph? Explore this question using the Jupyter Notebook accompanying the lecture.
 
 ## Effect of varying b: sigmoid
 
@@ -676,6 +686,8 @@ plot_parameter_effect(relu, "ReLU", weights=[1], biases=[-5, -2, 0, 2, 5],
 
 For fixed w\ne0, the bias moves the **kink** to x=-b/w.
 
+Interactive companion: [Build a function with two ReLU units](../../lectures/11/ReLUBuildingBlocks.llms.md).
+
 ## Visual demonstration with code
 
 Approximate the same target curve using networks with **different numbers of hidden units**.
@@ -694,6 +706,8 @@ X = approximation_rng.uniform(-4, 2, size=(1000, 1))
 y = f(X.flatten())
 ```
 
+y = f(x) = 2 x^3 + 4 x^2 - 5 x + 1
+
 ## Increasing the number of neurons
 
 ``` python
@@ -704,7 +718,7 @@ X_train, X_valid, y_train, y_valid = train_test_split(X, y, test_size=0.1, rando
 
 models = []
 
-sizes = [1, 2, 5, 10, 100]
+sizes = [1, 2, 3, 5, 50]
 
 for n in sizes:
     regressor = MLPRegressor(hidden_layer_sizes=(n,), max_iter=5000, random_state=42)
@@ -900,8 +914,6 @@ The seed utility sets the Python, NumPy, and TensorFlow seeds for reproducibilit
 
 ## Model structure and parameters
 
-Code
-
 ``` python
 model.summary()
 ```
@@ -970,65 +982,65 @@ history = model.fit(
 ```
 
     Epoch 1/30
-    1719/1719 - 2s - 981us/step - accuracy: 0.7616 - loss: 0.7239 - val_accuracy: 0.8298 - val_loss: 0.5026
+    1719/1719 - 2s - 874us/step - accuracy: 0.7616 - loss: 0.7239 - val_accuracy: 0.8298 - val_loss: 0.5026
     Epoch 2/30
-    1719/1719 - 1s - 848us/step - accuracy: 0.8299 - loss: 0.4894 - val_accuracy: 0.8418 - val_loss: 0.4472
+    1719/1719 - 1s - 715us/step - accuracy: 0.8299 - loss: 0.4894 - val_accuracy: 0.8418 - val_loss: 0.4472
     Epoch 3/30
-    1719/1719 - 1s - 857us/step - accuracy: 0.8448 - loss: 0.4434 - val_accuracy: 0.8480 - val_loss: 0.4233
+    1719/1719 - 1s - 715us/step - accuracy: 0.8448 - loss: 0.4434 - val_accuracy: 0.8480 - val_loss: 0.4233
     Epoch 4/30
-    1719/1719 - 1s - 841us/step - accuracy: 0.8548 - loss: 0.4154 - val_accuracy: 0.8550 - val_loss: 0.4088
+    1719/1719 - 1s - 693us/step - accuracy: 0.8548 - loss: 0.4154 - val_accuracy: 0.8550 - val_loss: 0.4088
     Epoch 5/30
-    1719/1719 - 1s - 872us/step - accuracy: 0.8607 - loss: 0.3951 - val_accuracy: 0.8584 - val_loss: 0.3970
+    1719/1719 - 1s - 707us/step - accuracy: 0.8607 - loss: 0.3951 - val_accuracy: 0.8584 - val_loss: 0.3970
     Epoch 6/30
-    1719/1719 - 1s - 843us/step - accuracy: 0.8667 - loss: 0.3790 - val_accuracy: 0.8594 - val_loss: 0.3889
+    1719/1719 - 1s - 702us/step - accuracy: 0.8667 - loss: 0.3790 - val_accuracy: 0.8594 - val_loss: 0.3889
     Epoch 7/30
-    1719/1719 - 1s - 852us/step - accuracy: 0.8713 - loss: 0.3656 - val_accuracy: 0.8616 - val_loss: 0.3824
+    1719/1719 - 1s - 704us/step - accuracy: 0.8713 - loss: 0.3656 - val_accuracy: 0.8616 - val_loss: 0.3824
     Epoch 8/30
-    1719/1719 - 1s - 844us/step - accuracy: 0.8748 - loss: 0.3539 - val_accuracy: 0.8642 - val_loss: 0.3780
+    1719/1719 - 1s - 710us/step - accuracy: 0.8748 - loss: 0.3539 - val_accuracy: 0.8642 - val_loss: 0.3780
     Epoch 9/30
-    1719/1719 - 1s - 850us/step - accuracy: 0.8783 - loss: 0.3432 - val_accuracy: 0.8666 - val_loss: 0.3740
+    1719/1719 - 1s - 705us/step - accuracy: 0.8783 - loss: 0.3432 - val_accuracy: 0.8666 - val_loss: 0.3740
     Epoch 10/30
-    1719/1719 - 1s - 853us/step - accuracy: 0.8817 - loss: 0.3336 - val_accuracy: 0.8678 - val_loss: 0.3684
+    1719/1719 - 1s - 720us/step - accuracy: 0.8817 - loss: 0.3336 - val_accuracy: 0.8678 - val_loss: 0.3684
     Epoch 11/30
-    1719/1719 - 1s - 866us/step - accuracy: 0.8851 - loss: 0.3247 - val_accuracy: 0.8702 - val_loss: 0.3641
+    1719/1719 - 1s - 719us/step - accuracy: 0.8851 - loss: 0.3247 - val_accuracy: 0.8702 - val_loss: 0.3641
     Epoch 12/30
-    1719/1719 - 1s - 848us/step - accuracy: 0.8875 - loss: 0.3165 - val_accuracy: 0.8726 - val_loss: 0.3601
+    1719/1719 - 1s - 695us/step - accuracy: 0.8875 - loss: 0.3165 - val_accuracy: 0.8726 - val_loss: 0.3601
     Epoch 13/30
-    1719/1719 - 1s - 860us/step - accuracy: 0.8898 - loss: 0.3089 - val_accuracy: 0.8736 - val_loss: 0.3578
+    1719/1719 - 1s - 701us/step - accuracy: 0.8898 - loss: 0.3089 - val_accuracy: 0.8736 - val_loss: 0.3578
     Epoch 14/30
-    1719/1719 - 1s - 848us/step - accuracy: 0.8922 - loss: 0.3017 - val_accuracy: 0.8724 - val_loss: 0.3554
+    1719/1719 - 1s - 716us/step - accuracy: 0.8922 - loss: 0.3017 - val_accuracy: 0.8724 - val_loss: 0.3554
     Epoch 15/30
-    1719/1719 - 1s - 842us/step - accuracy: 0.8942 - loss: 0.2951 - val_accuracy: 0.8736 - val_loss: 0.3543
+    1719/1719 - 1s - 720us/step - accuracy: 0.8942 - loss: 0.2951 - val_accuracy: 0.8736 - val_loss: 0.3543
     Epoch 16/30
-    1719/1719 - 1s - 863us/step - accuracy: 0.8962 - loss: 0.2887 - val_accuracy: 0.8734 - val_loss: 0.3520
+    1719/1719 - 1s - 688us/step - accuracy: 0.8962 - loss: 0.2887 - val_accuracy: 0.8734 - val_loss: 0.3520
     Epoch 17/30
-    1719/1719 - 1s - 835us/step - accuracy: 0.8983 - loss: 0.2829 - val_accuracy: 0.8738 - val_loss: 0.3522
+    1719/1719 - 1s - 682us/step - accuracy: 0.8983 - loss: 0.2829 - val_accuracy: 0.8738 - val_loss: 0.3522
     Epoch 18/30
-    1719/1719 - 1s - 843us/step - accuracy: 0.9002 - loss: 0.2771 - val_accuracy: 0.8746 - val_loss: 0.3495
+    1719/1719 - 1s - 692us/step - accuracy: 0.9002 - loss: 0.2771 - val_accuracy: 0.8746 - val_loss: 0.3495
     Epoch 19/30
-    1719/1719 - 2s - 874us/step - accuracy: 0.9021 - loss: 0.2717 - val_accuracy: 0.8758 - val_loss: 0.3478
+    1719/1719 - 1s - 734us/step - accuracy: 0.9021 - loss: 0.2717 - val_accuracy: 0.8758 - val_loss: 0.3478
     Epoch 20/30
-    1719/1719 - 1s - 862us/step - accuracy: 0.9043 - loss: 0.2664 - val_accuracy: 0.8760 - val_loss: 0.3465
+    1719/1719 - 1s - 727us/step - accuracy: 0.9043 - loss: 0.2664 - val_accuracy: 0.8760 - val_loss: 0.3465
     Epoch 21/30
-    1719/1719 - 1s - 847us/step - accuracy: 0.9060 - loss: 0.2615 - val_accuracy: 0.8754 - val_loss: 0.3465
+    1719/1719 - 1s - 729us/step - accuracy: 0.9060 - loss: 0.2615 - val_accuracy: 0.8754 - val_loss: 0.3465
     Epoch 22/30
-    1719/1719 - 1s - 850us/step - accuracy: 0.9081 - loss: 0.2565 - val_accuracy: 0.8772 - val_loss: 0.3449
+    1719/1719 - 1s - 753us/step - accuracy: 0.9081 - loss: 0.2565 - val_accuracy: 0.8772 - val_loss: 0.3449
     Epoch 23/30
-    1719/1719 - 1s - 849us/step - accuracy: 0.9102 - loss: 0.2519 - val_accuracy: 0.8782 - val_loss: 0.3454
+    1719/1719 - 1s - 709us/step - accuracy: 0.9102 - loss: 0.2519 - val_accuracy: 0.8782 - val_loss: 0.3454
     Epoch 24/30
-    1719/1719 - 1s - 855us/step - accuracy: 0.9121 - loss: 0.2471 - val_accuracy: 0.8780 - val_loss: 0.3445
+    1719/1719 - 1s - 724us/step - accuracy: 0.9121 - loss: 0.2471 - val_accuracy: 0.8780 - val_loss: 0.3445
     Epoch 25/30
-    1719/1719 - 1s - 852us/step - accuracy: 0.9145 - loss: 0.2427 - val_accuracy: 0.8790 - val_loss: 0.3437
+    1719/1719 - 1s - 737us/step - accuracy: 0.9145 - loss: 0.2427 - val_accuracy: 0.8790 - val_loss: 0.3437
     Epoch 26/30
-    1719/1719 - 1s - 846us/step - accuracy: 0.9158 - loss: 0.2384 - val_accuracy: 0.8792 - val_loss: 0.3446
+    1719/1719 - 1s - 704us/step - accuracy: 0.9158 - loss: 0.2384 - val_accuracy: 0.8792 - val_loss: 0.3446
     Epoch 27/30
-    1719/1719 - 1s - 855us/step - accuracy: 0.9172 - loss: 0.2341 - val_accuracy: 0.8810 - val_loss: 0.3445
+    1719/1719 - 1s - 698us/step - accuracy: 0.9172 - loss: 0.2341 - val_accuracy: 0.8810 - val_loss: 0.3445
     Epoch 28/30
-    1719/1719 - 1s - 839us/step - accuracy: 0.9193 - loss: 0.2299 - val_accuracy: 0.8804 - val_loss: 0.3441
+    1719/1719 - 1s - 710us/step - accuracy: 0.9193 - loss: 0.2299 - val_accuracy: 0.8804 - val_loss: 0.3441
     Epoch 29/30
-    1719/1719 - 1s - 848us/step - accuracy: 0.9210 - loss: 0.2260 - val_accuracy: 0.8808 - val_loss: 0.3445
+    1719/1719 - 1s - 704us/step - accuracy: 0.9210 - loss: 0.2260 - val_accuracy: 0.8808 - val_loss: 0.3445
     Epoch 30/30
-    1719/1719 - 1s - 856us/step - accuracy: 0.9223 - loss: 0.2220 - val_accuracy: 0.8800 - val_loss: 0.3440
+    1719/1719 - 1s - 711us/step - accuracy: 0.9223 - loss: 0.2220 - val_accuracy: 0.8800 - val_loss: 0.3440
 
 A training step processes one mini-batch and updates the parameters once. An epoch is one complete pass through the training examples. The batch size and learning rate connect this example to the stochastic and mini-batch gradient-descent methods introduced in Lecture 4.
 
@@ -1185,7 +1197,7 @@ Overall accuracy can hide differences between classes. The classification report
 
 ## Next lecture
 
-- We will discuss the training algorithm for artificial neural networks.
+- We will explore the implementation of artificial neural networks.
 
 ## References
 

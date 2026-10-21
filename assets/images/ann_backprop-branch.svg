@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="300" viewBox="0 0 700 300" role="img" aria-labelledby="title desc">
+  <title id="title">A hidden activation influences the loss through two downstream units</title>
+  <desc id="desc">Activation a feeds sigmoid units u and v through weights r and s. Their outputs feed one sigmoid output probability p hat through weights t and q, followed by the single-example loss ell.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#202020"/></marker>
+  </defs>
+  <rect width="700" height="300" fill="white"/>
+  <g stroke="#202020" stroke-width="2.5" fill="none" marker-end="url(#arrow)">
+    <path d="M121,131 L253,77"/>
+    <path d="M121,169 L253,223"/>
+    <path d="M327,77 L459,131"/>
+    <path d="M327,223 L459,169"/>
+    <path d="M542,150 L617,150"/>
+  </g>
+  <g stroke="#202020" stroke-width="2.5">
+    <circle cx="80" cy="150" r="44" fill="#c2beff"/>
+    <circle cx="290" cy="60" r="44" fill="#c2beff"/>
+    <circle cx="290" cy="240" r="44" fill="#c2beff"/>
+    <circle cx="500" cy="150" r="44" fill="#87fa7c"/>
+    <rect x="620" y="116" width="62" height="68" rx="5" fill="#fac0fa"/>
+  </g>
+  <g font-family="DejaVu Sans, Arial, sans-serif" font-size="29" font-style="italic" fill="#111" text-anchor="middle" dominant-baseline="central">
+    <text x="80" y="150">a</text>
+    <text x="290" y="60">u</text>
+    <text x="290" y="240">v</text>
+    <text x="500" y="150">p̂</text>
+    <text x="651" y="150">ℓ</text>
+  </g>
+  <g font-family="DejaVu Sans, Arial, sans-serif" font-size="25" font-style="italic" fill="#111" text-anchor="middle">
+    <text x="180" y="87">r</text>
+    <text x="180" y="235">s</text>
+    <text x="398" y="87">t</text>
+    <text x="398" y="235">q</text>
+  </g>
+</svg>

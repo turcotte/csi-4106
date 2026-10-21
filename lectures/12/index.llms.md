@@ -4,7 +4,7 @@ CSI4106 Introduction to Artificial Intelligence
 
 > **IMPORTANT:**
 >
-> **Deadline**: Assignment 2 must be submitted no later than October 26, 2026, at 11 PM. Please refer to the assignment description available on Brightspace.
+> **Deadline**: Assignment 2 must be submitted no later than ~~October 26~~ November 2, 2026, at 11 PM. Please refer to the assignment description available on Brightspace.
 
 ## Prepare
 
@@ -30,6 +30,7 @@ The first two videos support this lecture; the backpropagation videos prepare fo
 ## Practice
 
 - [Circular Separability ](../../lectures/11/CircularSeparability.llms.md): A self-study notebook comparing engineered features and learned neural-network representations, complementing the TensorFlow Playground exploration below.
+- [2D Regression with MSE Residuals](https://kickereb.github.io/nn-visualizer/experiment-2d.html): Supports one-dimensional regression, configurable hidden neurons, and sliders for every weight and bias, which can be helpful to further develop your intuition for the Universal Approximation Theorem.
 - [Tinker With a Neural Network in Your Browser](https://playground.tensorflow.org)
 
 ## References

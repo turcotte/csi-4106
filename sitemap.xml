@@ -38,7 +38,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/course-faq.html</loc>
-    <lastmod>2026-10-14T17:38:15.302Z</lastmod>
+    <lastmod>2026-10-16T13:27:04.580Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/course-links.html</loc>
@@ -46,7 +46,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/course-schedule.html</loc>
-    <lastmod>2026-09-20T15:05:14.680Z</lastmod>
+    <lastmod>2026-10-21T22:07:28.586Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/course-syllabus.html</loc>
@@ -162,7 +162,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/10/index.html</loc>
-    <lastmod>2026-10-05T19:52:24.237Z</lastmod>
+    <lastmod>2026-10-21T22:21:48.089Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/10/slides.html</loc>
@@ -178,31 +178,31 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/11/index.html</loc>
-    <lastmod>2026-09-17T14:27:36.742Z</lastmod>
+    <lastmod>2026-10-21T22:21:59.931Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/11/slides.html</loc>
-    <lastmod>2026-10-15T18:33:28.707Z</lastmod>
+    <lastmod>2026-10-20T19:33:43.067Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/12/index.html</loc>
-    <lastmod>2026-10-15T21:17:39.449Z</lastmod>
+    <lastmod>2026-10-21T22:22:13.137Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/12/slides.html</loc>
-    <lastmod>2026-10-15T21:35:54.466Z</lastmod>
+    <lastmod>2026-10-20T20:46:42.627Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/13/index.html</loc>
-    <lastmod>2026-08-10T15:49:09.468Z</lastmod>
+    <lastmod>2026-10-21T22:22:23.009Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/13/slides.html</loc>
-    <lastmod>2026-10-15T21:17:39.496Z</lastmod>
+    <lastmod>2026-10-17T20:03:05.482Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/14/index.html</loc>
-    <lastmod>2026-08-10T15:50:38.873Z</lastmod>
+    <lastmod>2026-10-17T16:18:51.559Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/14/kong_and_yu-2018.html</loc>
@@ -210,7 +210,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/14/slides.html</loc>
-    <lastmod>2026-10-09T14:58:57.077Z</lastmod>
+    <lastmod>2026-10-17T20:03:27.951Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/15/index.html</loc>
@@ -343,5 +343,9 @@
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/index.html</loc>
     <lastmod>2026-09-24T19:00:06.153Z</lastmod>
+  </url>
+  <url>
+    <loc>https://turcotte.xyz/teaching/csi-4106/lectures/11/ReLUBuildingBlocks.html</loc>
+    <lastmod>2026-10-20T20:28:56.513Z</lastmod>
   </url>
 </urlset>

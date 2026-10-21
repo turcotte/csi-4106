@@ -6,7 +6,7 @@ Marcel Turcotte
 
 Published
 
-October 14, 2026
+October 16, 2026
 
 # How to Get Help?
 
@@ -84,7 +84,7 @@ If my office hours conflict with your course schedule, please send me your avail
 
 # What will be the format of the final examination?
 
-- **When**: Exam schedule posted in uoZone on October 15, 2026.
+- **When**: Exam schedule posted in uoZone on October 15, 2026: Thursday, December 17, 2026, 7 pm to 10 pm.
   - The schedule in uoZone (under Applications, select My Exam Schedule) is the official document (not this web page).
   - Check your exam timetable regularly since exam times and locations can change after the initial posting.
 - **Format**: Closed book. Multiple-choice and true/false questions.

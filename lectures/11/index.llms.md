@@ -4,7 +4,7 @@ CSI4106 Introduction to Artificial Intelligence
 
 > **IMPORTANT:**
 >
-> **Deadline**: Assignment 2 must be submitted no later than October 26, 2026, at 11 PM. Please refer to the assignment description available on Brightspace.
+> **Deadline**: Assignment 2 must be submitted no later than ~~October 26~~ November 2, 2026, at 11 PM. Please refer to the assignment description available on Brightspace.
 
 ## Prepare
 
@@ -26,6 +26,8 @@ CSI4106 Introduction to Artificial Intelligence
 - [slides](slides.llms.md) ([PDF](slides.pdf), [Jupyter Notebook](slides.ipynb))
 
 ## Practice
+
+- [Building Functions with ReLU ](../../lectures/11/ReLUBuildingBlocks.llms.md) (interactive HTML): Adjust seven parameters to explore how two hidden units combine into a regression curve.
 
 - [Circular Separability ](CircularSeparability): To complement your exploration of TensorFlow Playground (below), I have developed a notebook focusing on feature engineering.
 

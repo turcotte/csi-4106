@@ -1,0 +1,2069 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <meta name="author" content="Marcel Turcotte">
+  <title>CSI 4106 - Fall 2026 – Training deep networks, softmax, and regularization</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link rel="stylesheet" href="../../assets/css/reveal-common.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+<meta property="og:title" content="Training deep networks, softmax, and regularization – CSI 4106 - Fall 2026">
+<meta property="og:description" content="CSI 4106 - Fall 2026">
+<meta property="og:site_name" content="CSI 4106 - Fall 2026">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Training deep networks, softmax, and regularization</h1>
+  <p class="subtitle">CSI 4106 - Fall 2026</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Marcel Turcotte
+</div>
+</div>
+</div>
+
+  <p class="date">Version: Oct 17, 2026 16:03</p>
+</section>
+<section>
+<section id="preamble" class="title-slide slide level1 center">
+<h1>Preamble</h1>
+
+</section>
+<section id="message-of-the-day" class="slide level2">
+<h2>Message of the Day</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/0Ge3jKLDJaA" width="889" height="500" title="The collie and the pug | HackMIT keynote 2026" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<aside class="notes">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Grant Sanderson explores the evolving relationship between technical understanding and the act of building in modern software development. By comparing the motivations of different approaches, this keynote encourages attendees to reflect on their own goals for learning and creation during the event.</p>
+</div>
+</div>
+</div>
+<p><a href="https://www.linkedin.com/in/grant-sanderson-950a6239b">Grant Sanderson</a> is the creator of <a href="https://www.youtube.com/c/3blue1brown">3Blue1Brown</a>, a YouTube channel known for exceptionally clear, visual explanations of mathematics. His work helped popularize intuitive, animation-driven math education online.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><a href="https://youtu.be/0Ge3jKLDJaA" class="external" data-icon="true">The collie and the pug | HackMIT keynote 2026</a>, Posting on YouTube on 2026-09-24.</p>
+</div></aside></section>
+<section id="message-of-the-day-1" class="slide level2">
+<h2>Message of the Day</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/big_think-2025-10-20.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="../../assets/images/big_think-2025-10-20.png" class="quarto-figure quarto-figure-center" height="475"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p><a href="https://bigthink.com/series/the-big-think-interview/great-inflection-2025/">Why 2025 is the single most pivotal year in our lifetime</a>, Peter Leyden, Big Think, <a href="https://www.youtube.com/watch?v=w5k72A30kUc">YouTube</a>, 2025-10-20.</p>
+</div></aside></section>
+<section id="learning-objectives" class="slide level2 smaller">
+<h2>Learning objectives</h2>
+<ul>
+<li><p><strong>Explain</strong> how activation functions and initialization affect gradient propagation.</p></li>
+<li><p><strong>Compare</strong> <code>SimplerMLP</code> with its extension using activation choices, L2, and learning-rate decay.</p></li>
+<li><p><strong>Explain</strong> the role of softmax and cross-entropy loss in measuring the dissimilarity between predicted and true probability distributions.</p></li>
+<li><p><strong>Explore</strong> methods like L1, L2 regularization, and dropout to enhance neural networks’ generalization capabilities.</p></li>
+</ul>
+<aside class="notes">
+<p>Lecture 13 implemented backpropagation in <code>SimplerMLP</code>, using sigmoid units, binary cross-entropy, and a constant learning rate. We first examine gradient propagation and initialization, then extend that implementation as <code>SimpleMLP</code>. The remaining sections consider output activations, multiclass cross-entropy, and regularization.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="gradient-propagation-and-initialization" class="title-slide slide level1 center">
+<h1>Gradient propagation and initialization</h1>
+
+</section>
+<section id="vanishing-gradients" class="slide level2">
+<h2>Vanishing gradients</h2>
+<ul>
+<li>Backpropagation repeatedly multiplies <strong>weights and local activation derivatives</strong>.</li>
+<li>Small factors can make early-layer gradients too small for effective learning.</li>
+<li>Saturated sigmoid units have derivatives close to zero.</li>
+</ul>
+
+<aside class="notes">
+<p>Lecture 13’s scalar example contained one hidden derivative. A deeper network introduces more such factors along each path. The sigmoid derivative approaches zero for large positive or negative preactivations, so saturated units can strongly attenuate the signal propagated upstream.</p>
+<p>Weights also enter these products and different paths contribute sums: the bound of <span class="math inline">0.25</span> on a sigmoid’s local derivative is not a bound on every complete parameter gradient. Gradients can shrink or grow depending on the combined transformations. Both vanishing and exploding gradients can occur in feed-forward as well as recurrent networks.</p>
+<p>For sigmoid output with binary cross-entropy, the output error signal simplifies to <span class="math inline">\hat p-y</span>. The explicit sigmoid factor cancels there, but hidden sigmoid units still contribute their activation derivatives. This is why the simplified output formula does not remove the hidden-layer problem.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Recall <span class="math inline">\sigma'(z)=\sigma(z)(1-\sigma(z))\leq 0.25</span>.</p>
+</div></aside></section>
+<section id="activation-functions-and-their-derivatives" class="slide level2 hide-code-toggle">
+<h2>Activation functions and their derivatives</h2>
+<div id="e33c2d1d" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="co"># Attribution: https://github.com/ageron/handson-ml3/blob/main/10_neural_nets_with_keras.ipynb</span></span>
+<span id="cb1-2"><a aria-label="2"></a></span>
+<span id="cb1-3"><a aria-label="3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a aria-label="4"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a aria-label="5"></a></span>
+<span id="cb1-6"><a aria-label="6"></a><span class="im">from</span> scipy.special <span class="im">import</span> expit <span class="im">as</span> sigmoid</span>
+<span id="cb1-7"><a aria-label="7"></a></span>
+<span id="cb1-8"><a aria-label="8"></a><span class="kw">def</span> relu(z):</span>
+<span id="cb1-9"><a aria-label="9"></a>    <span class="cf">return</span> np.maximum(<span class="dv">0</span>, z)</span>
+<span id="cb1-10"><a aria-label="10"></a></span>
+<span id="cb1-11"><a aria-label="11"></a><span class="kw">def</span> derivative(f, z, eps<span class="op">=</span><span class="fl">0.000001</span>):</span>
+<span id="cb1-12"><a aria-label="12"></a>    <span class="cf">return</span> (f(z <span class="op">+</span> eps) <span class="op">-</span> f(z <span class="op">-</span> eps))<span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span> eps)</span>
+<span id="cb1-13"><a aria-label="13"></a></span>
+<span id="cb1-14"><a aria-label="14"></a>max_z <span class="op">=</span> <span class="fl">4.5</span></span>
+<span id="cb1-15"><a aria-label="15"></a>z <span class="op">=</span> np.linspace(<span class="op">-</span>max_z, max_z, <span class="dv">200</span>)</span>
+<span id="cb1-16"><a aria-label="16"></a></span>
+<span id="cb1-17"><a aria-label="17"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="fl">3.1</span>))</span>
+<span id="cb1-18"><a aria-label="18"></a></span>
+<span id="cb1-19"><a aria-label="19"></a>plt.subplot(<span class="dv">121</span>)</span>
+<span id="cb1-20"><a aria-label="20"></a>plt.plot(z, relu(z), <span class="st">"m-."</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"ReLU"</span>)</span>
+<span id="cb1-21"><a aria-label="21"></a>plt.plot(z, sigmoid(z), <span class="st">"g--"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Sigmoid"</span>)</span>
+<span id="cb1-22"><a aria-label="22"></a>plt.plot(z, np.tanh(z), <span class="st">"b-"</span>, linewidth<span class="op">=</span><span class="dv">1</span>, label<span class="op">=</span><span class="st">"Tanh"</span>)</span>
+<span id="cb1-23"><a aria-label="23"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb1-24"><a aria-label="24"></a>plt.title(<span class="st">"Activation functions"</span>)</span>
+<span id="cb1-25"><a aria-label="25"></a>plt.axis([<span class="op">-</span>max_z, max_z, <span class="op">-</span><span class="fl">1.65</span>, <span class="fl">2.4</span>])</span>
+<span id="cb1-26"><a aria-label="26"></a>plt.gca().set_yticks([<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>])</span>
+<span id="cb1-27"><a aria-label="27"></a>plt.legend(loc<span class="op">=</span><span class="st">"lower right"</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
+<span id="cb1-28"><a aria-label="28"></a></span>
+<span id="cb1-29"><a aria-label="29"></a>plt.subplot(<span class="dv">122</span>)</span>
+<span id="cb1-30"><a aria-label="30"></a>plt.plot(z, derivative(sigmoid, z), <span class="st">"g--"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Sigmoid"</span>)</span>
+<span id="cb1-31"><a aria-label="31"></a>plt.plot(z, derivative(np.tanh, z), <span class="st">"b-"</span>, linewidth<span class="op">=</span><span class="dv">1</span>, label<span class="op">=</span><span class="st">"Tanh"</span>)</span>
+<span id="cb1-32"><a aria-label="32"></a>plt.plot([<span class="op">-</span>max_z, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">0</span>], <span class="st">"m-."</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-33"><a aria-label="33"></a>plt.plot([<span class="dv">0</span>, max_z], [<span class="dv">1</span>, <span class="dv">1</span>], <span class="st">"m-."</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-34"><a aria-label="34"></a>plt.plot([<span class="dv">0</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">1</span>], <span class="st">"mo"</span>, markersize<span class="op">=</span><span class="dv">6</span>, markerfacecolor<span class="op">=</span><span class="st">"white"</span>)</span>
+<span id="cb1-35"><a aria-label="35"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb1-36"><a aria-label="36"></a>plt.title(<span class="st">"Derivatives"</span>)</span>
+<span id="cb1-37"><a aria-label="37"></a>plt.axis([<span class="op">-</span>max_z, max_z, <span class="op">-</span><span class="fl">0.2</span>, <span class="fl">1.2</span>])</span>
+<span id="cb1-38"><a aria-label="38"></a></span>
+<span id="cb1-39"><a aria-label="39"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-2-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="slides_files/figure-revealjs/cell-2-output-1.png" class="quarto-figure quarto-figure-center" width="867" height="291"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside class="notes">
+<p>Activation choice affects gradient propagation and therefore training. You need to interpret these slopes and how the chain rule uses them, rather than manually derive every expression.</p>
+<p>Sigmoid’s maximum derivative is <span class="math inline">0.25</span>, and its derivative approaches zero at both extremes. The <span class="math inline">\tanh</span> derivative has maximum one at zero and also approaches zero in its saturated tails.</p>
+<p>For ReLU, the derivative is zero for negative preactivations and one for positive preactivations. At zero the ordinary derivative is undefined; implementations choose a value by convention, commonly zero. The open circles mark the missing ordinary derivative. The activation itself can take any nonnegative value: it is the derivative, away from zero, that takes values zero or one.</p>
+<p>ReLU produces sparse activations because it outputs zero for nonpositive inputs. A zero activation for one example is normal. A unit that remains in this region across the relevant training inputs receives no data-loss gradient through its activation and may remain inactive: the dying ReLU problem. This is persistent inactivity, not simply one zero output. Changes in upstream representations can sometimes reactivate a unit, so inactivity is not invariably irreversible. See <a href="https://arxiv.org/abs/1903.06733" class="external" data-icon="true">Lu et al.&nbsp;(2019)</a>.</p>
+<p>ReLU’s positive-side derivative avoids one source of attenuation, but does not make the entire gradient equal to one. Incoming activations, downstream weights, other activation derivatives, and path sums still matter. Leaky ReLU retains a small negative-side slope, reducing this particular risk.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><span class="citation" data-cites="Geron:2022aa">Géron (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> – <a href="https://github.com/ageron/handson-ml3/blob/main/10_neural_nets_with_keras.ipynb">10_neural_nets_with_keras.ipynb</a></p>
+</div></aside></section>
+<section id="vanishing-gradients-solutions" class="slide level2">
+<h2>Vanishing gradients: solutions</h2>
+<ul>
+<li class="fragment"><p><strong>Alternative activation functions</strong>: Rectified Linear Unit (<strong>ReLU</strong>) and its variants (e.g., <strong>Leaky ReLU</strong>, <strong>Parametric ReLU</strong>, and <strong>Exponential Linear Unit</strong>).</p></li>
+<li class="fragment"><p><strong>Weight Initialization</strong>: Xavier (Glorot) or He initialization.</p></li>
+</ul>
+<aside class="notes">
+<p>Activation functions and initialization influence the propagation of signals in both directions. ReLU avoids saturation for positive preactivations, but its zero derivative on the negative side creates a different limitation, discussed next. Choosing ReLU does not guarantee stable gradients in an arbitrarily deep network. Normalization layers and residual connections provide other approaches beyond this worked implementation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="glorot-and-bengio" class="slide level2">
+<h2>Glorot and Bengio</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Figure 6</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/glorot-2010-f6.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="../../assets/images/glorot-2010-f6.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Figure 7</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/glorot-2010-f7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="../../assets/images/glorot-2010-f7.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+
+<aside class="notes">
+<p>These figures compare standard initialization (top) with the normalized initialization proposed by Glorot and Bengio (bottom), for a network with <span class="math inline">\tanh</span> units <span class="citation" data-cites="Glorot:2010aa">(<a href="#/references" role="doc-biblioref" onclick="">Glorot and Bengio 2010, 254</a>)</span>. Figure 6 shows activation histograms; Figure 7 shows back-propagated-gradient histograms. With the standard initialization, activations become more concentrated near zero in later layers, while back-propagated gradients are more concentrated near zero closer to the input. Normalized initialization reduces the discrepancy across layers in these experiments.</p>
+<p>These are distributions for the reported setup, not a universal rule that vanishing gradients always imply small forward activations. A saturated sigmoid can have an activation near one and a derivative near zero. The paper also distinguishes back-propagated signals from weight gradients; their layerwise distributions need not behave identically.</p>
+<p>The Xavier/Glorot normal initializer balances input and output layer widths using <span class="math inline">\operatorname{Var}(W)=2/(n_{\mathrm{in}}+n_{\mathrm{out}})</span>. It is the scaled random initialization already used by <code>SimplerMLP</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><span class="citation" data-cites="Glorot:2010aa">Glorot and Bengio (<a href="#/references" role="doc-biblioref" onclick="">2010</a>)</span>, page 254.</p>
+</div></aside></section>
+<section id="he-initialization" class="slide level2">
+<h2>He initialization</h2>
+<p>For ReLU hidden layers, He normal initialization uses</p>
+<p><span class="math display">
+\operatorname{Var}(W)=\frac{2}{n_{\mathrm{in}}}.
+</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="kw">def</span> he_init(rng, fan_in, fan_out):</span>
+<span id="cb2-2"><a aria-label="2"></a>    std <span class="op">=</span> np.sqrt(<span class="fl">2.0</span> <span class="op">/</span> fan_in)</span>
+<span id="cb2-3"><a aria-label="3"></a>    <span class="cf">return</span> rng.normal(<span class="fl">0.0</span>, std, size<span class="op">=</span>(fan_in, fan_out))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+<aside class="notes">
+<p>The scaling accounts for the rectifier’s effect on signal variance. <code>SimpleMLP</code> will use He initialization for ReLU hidden layers and Xavier/Glorot initialization for sigmoid layers, including the output layer. These are initialization rules, not guarantees about the entire training trajectory. See <a href="https://arxiv.org/abs/1502.01852" class="external" data-icon="true">He et al.&nbsp;(2015)</a> for the rectifier analysis.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Also called Kaiming initialization.</p>
+</div></aside></section>
+<section id="note" class="slide level2">
+<h2>Note</h2>
+<p>Randomly initializing the weights<sup>1</sup> is sufficient to <strong>break symmetry</strong> in a neural network, <strong>allowing the bias terms to be set to zero</strong> without impacting the network’s ability to learn effectively.</p>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Proper initialization of weights, such as using Xavier/Glorot or He initialization, is crucial and should be aligned with the choice of activation function to ensure optimal network performance.</p></li></ol></aside></section>
+<section id="activation-function-leaky-relu" class="slide level2">
+<h2>Activation Function: Leaky ReLU</h2>
+<div id="23def407" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a aria-label="2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-3"><a aria-label="3"></a></span>
+<span id="cb3-4"><a aria-label="4"></a><span class="co"># Define the Leaky ReLU function</span></span>
+<span id="cb3-5"><a aria-label="5"></a><span class="kw">def</span> leaky_relu(x, alpha<span class="op">=</span><span class="fl">0.2</span>):</span>
+<span id="cb3-6"><a aria-label="6"></a>    <span class="cf">return</span> np.where(x <span class="op">&gt;</span> <span class="dv">0</span>, x, alpha <span class="op">*</span> x)</span>
+<span id="cb3-7"><a aria-label="7"></a></span>
+<span id="cb3-8"><a aria-label="8"></a><span class="co"># Define the derivative of the Leaky ReLU function</span></span>
+<span id="cb3-9"><a aria-label="9"></a><span class="kw">def</span> leaky_relu_derivative(x, alpha<span class="op">=</span><span class="fl">0.2</span>):</span>
+<span id="cb3-10"><a aria-label="10"></a>    <span class="cf">return</span> np.where(x <span class="op">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, alpha)</span>
+<span id="cb3-11"><a aria-label="11"></a></span>
+<span id="cb3-12"><a aria-label="12"></a><span class="co"># Generate a range of input values</span></span>
+<span id="cb3-13"><a aria-label="13"></a>x_values <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">400</span>)</span>
+<span id="cb3-14"><a aria-label="14"></a></span>
+<span id="cb3-15"><a aria-label="15"></a><span class="co"># Compute the Leaky ReLU and its derivative</span></span>
+<span id="cb3-16"><a aria-label="16"></a>leaky_relu_values <span class="op">=</span> leaky_relu(x_values)</span>
+<span id="cb3-17"><a aria-label="17"></a>leaky_relu_derivative_values <span class="op">=</span> leaky_relu_derivative(x_values)</span>
+<span id="cb3-18"><a aria-label="18"></a></span>
+<span id="cb3-19"><a aria-label="19"></a><span class="co"># Create the plot</span></span>
+<span id="cb3-20"><a aria-label="20"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">3</span>))</span>
+<span id="cb3-21"><a aria-label="21"></a></span>
+<span id="cb3-22"><a aria-label="22"></a><span class="co"># Plot the Leaky ReLU</span></span>
+<span id="cb3-23"><a aria-label="23"></a>plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb3-24"><a aria-label="24"></a>plt.plot(x_values, leaky_relu_values, label<span class="op">=</span><span class="st">'Leaky ReLU'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb3-25"><a aria-label="25"></a>plt.title(<span class="st">'Leaky ReLU Activation Function'</span>)</span>
+<span id="cb3-26"><a aria-label="26"></a>plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="cb3-27"><a aria-label="27"></a>plt.ylabel(<span class="st">'f(x)'</span>)</span>
+<span id="cb3-28"><a aria-label="28"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb3-29"><a aria-label="29"></a>plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>,linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb3-30"><a aria-label="30"></a>plt.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>,linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb3-31"><a aria-label="31"></a>plt.legend()</span>
+<span id="cb3-32"><a aria-label="32"></a></span>
+<span id="cb3-33"><a aria-label="33"></a><span class="co"># Plot the derivative of the Leaky ReLU</span></span>
+<span id="cb3-34"><a aria-label="34"></a>plt.subplot(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb3-35"><a aria-label="35"></a>plt.plot(x_values, leaky_relu_derivative_values, label<span class="op">=</span><span class="st">'Derivative of Leaky ReLU'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb3-36"><a aria-label="36"></a>plt.title(<span class="st">'Derivative of Leaky ReLU'</span>)</span>
+<span id="cb3-37"><a aria-label="37"></a>plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="cb3-38"><a aria-label="38"></a>plt.ylabel(<span class="st">"f'(x)"</span>)</span>
+<span id="cb3-39"><a aria-label="39"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb3-40"><a aria-label="40"></a>plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>,linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb3-41"><a aria-label="41"></a>plt.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>,linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb3-42"><a aria-label="42"></a>plt.legend()</span>
+<span id="cb3-43"><a aria-label="43"></a></span>
+<span id="cb3-44"><a aria-label="44"></a><span class="co"># Show the plots</span></span>
+<span id="cb3-45"><a aria-label="45"></a>plt.tight_layout()</span>
+<span id="cb3-46"><a aria-label="46"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="487" height="278"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside class="notes">
+<p>When the input to the ReLU activation function, the weighted sum plus bias, is negative for all the training examples, the output value of ReLU is zero. But also, its derivative is 0, which effectively deactivates the neuron. Leaky ReLU, or other variants, effectively mitigates the issue.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
+<span id="cb4-2"><a aria-label="2"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> Dense</span>
+<span id="cb4-3"><a aria-label="3"></a></span>
+<span id="cb4-4"><a aria-label="4"></a>leaky_relu <span class="op">=</span> tf.keras.layers.LeakyReLU(negative_slope<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb4-5"><a aria-label="5"></a>dense <span class="op">=</span> tf.keras.layers.Dense(<span class="dv">50</span>, activation<span class="op">=</span>leaky_relu, kernel_initializer<span class="op">=</span><span class="st">"he_normal"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>See the <a href="https://keras.io/api/layers/activations/" class="external" data-icon="true">Keras activation functions</a> for other choices.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>The Leaky ReLU, a variant of the standard ReLU activation function, effectively mitigates the issue of <em>dying ReLU nodes</em>. For negative input values, it introduces a linear component with a slope governed by the parameter <code>negative_slope</code>.</p>
+</div></aside></section></section>
+<section>
+<section id="extending-the-implementation" class="title-slide slide level1 center">
+<h1>Extending the implementation</h1>
+
+</section>
+<section id="from-simplermlp-to-simplemlp" class="slide level2 smaller">
+<h2>From SimplerMLP to SimpleMLP</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Component</th>
+<th style="text-align: left;"><code>SimplerMLP</code> (Lecture 13)</th>
+<th style="text-align: left;"><code>SimpleMLP</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Hidden activation</td>
+<td style="text-align: left;">Sigmoid</td>
+<td style="text-align: left;">Sigmoid or ReLU</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Output</td>
+<td style="text-align: left;">Sigmoid probability</td>
+<td style="text-align: left;">Sigmoid probability</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Learning rate</td>
+<td style="text-align: left;">Constant</td>
+<td style="text-align: left;">Constant or exponential decay</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Loss</td>
+<td style="text-align: left;">Mean BCE</td>
+<td style="text-align: left;">Mean BCE plus optional L2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Example order</td>
+<td style="text-align: left;">Shuffle every epoch</td>
+<td style="text-align: left;">Optional shuffling (default: on)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Caches and backward loop</td>
+<td style="text-align: left;">Same structure</td>
+<td style="text-align: left;">Same structure</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Prediction and training API</td>
+<td style="text-align: left;">Same methods</td>
+<td style="text-align: left;">Same methods</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>The new class extends the previous implementation while retaining its computational structure. Both are binary classifiers with one sigmoid output. Changing the hidden activation requires a matching local derivative and suitable initialization, but the chain rule and backward loop remain the same.</p>
+<p>Setting <code>hidden_activation="sigmoid"</code>, <code>l2=0.0</code>, and <code>lr_decay=None</code> recovers the <code>SimplerMLP</code> computation. With the same seed and the default <code>shuffle=True</code>, the two classes initialize and shuffle identically. <code>SimpleMLP</code> adds a <code>shuffle</code> option to <code>train</code>: setting <code>shuffle=False</code> preserves the supplied example order across epochs. This is useful when training depends on that order, as discussed in Lecture 13; it does not by itself make this feedforward classifier a sequence model. The complete definition below is included for independent notebook execution; the focused excerpts emphasize only the additions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="simplemlp" class="slide level2">
+<h2>SimpleMLP</h2>
+<div id="835d82ea" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a aria-label="2"></a></span>
+<span id="cb5-3"><a aria-label="3"></a><span class="kw">def</span> sigmoid(z):</span>
+<span id="cb5-4"><a aria-label="4"></a>    <span class="cf">return</span> <span class="fl">1.0</span> <span class="op">/</span> (<span class="fl">1.0</span> <span class="op">+</span> np.exp(<span class="op">-</span>z))</span>
+<span id="cb5-5"><a aria-label="5"></a></span>
+<span id="cb5-6"><a aria-label="6"></a><span class="kw">def</span> sigmoid_prime(z):</span>
+<span id="cb5-7"><a aria-label="7"></a>    a <span class="op">=</span> sigmoid(z)</span>
+<span id="cb5-8"><a aria-label="8"></a>    <span class="cf">return</span> a <span class="op">*</span> (<span class="fl">1.0</span> <span class="op">-</span> a)</span>
+<span id="cb5-9"><a aria-label="9"></a></span>
+<span id="cb5-10"><a aria-label="10"></a><span class="kw">def</span> bce_loss(y_true, y_prob, eps<span class="op">=</span><span class="fl">1e-9</span>):</span>
+<span id="cb5-11"><a aria-label="11"></a>    <span class="co">"""Binary cross-entropy averaged over examples."""</span></span>
+<span id="cb5-12"><a aria-label="12"></a>    p <span class="op">=</span> np.clip(y_prob, eps, <span class="dv">1</span> <span class="op">-</span> eps)</span>
+<span id="cb5-13"><a aria-label="13"></a>    <span class="cf">return</span> <span class="op">-</span>np.mean(y_true <span class="op">*</span> np.log(p) <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> y_true) <span class="op">*</span> np.log(<span class="dv">1</span> <span class="op">-</span> p))</span>
+<span id="cb5-14"><a aria-label="14"></a></span>
+<span id="cb5-15"><a aria-label="15"></a><span class="kw">def</span> xavier_init(rng, fan_in, fan_out):</span>
+<span id="cb5-16"><a aria-label="16"></a>    std <span class="op">=</span> np.sqrt(<span class="fl">2.0</span> <span class="op">/</span> (fan_in <span class="op">+</span> fan_out))</span>
+<span id="cb5-17"><a aria-label="17"></a>    <span class="cf">return</span> rng.normal(<span class="fl">0.0</span>, std, size<span class="op">=</span>(fan_in, fan_out))</span>
+<span id="cb5-18"><a aria-label="18"></a></span>
+<span id="cb5-19"><a aria-label="19"></a><span class="kw">def</span> relu(z):</span>
+<span id="cb5-20"><a aria-label="20"></a>    <span class="cf">return</span> np.maximum(<span class="fl">0.0</span>, z)</span>
+<span id="cb5-21"><a aria-label="21"></a></span>
+<span id="cb5-22"><a aria-label="22"></a><span class="kw">def</span> relu_prime(z):</span>
+<span id="cb5-23"><a aria-label="23"></a>    <span class="cf">return</span> (z <span class="op">&gt;</span> <span class="dv">0</span>).astype(<span class="bu">float</span>)</span>
+<span id="cb5-24"><a aria-label="24"></a></span>
+<span id="cb5-25"><a aria-label="25"></a><span class="kw">def</span> he_init(rng, fan_in, fan_out):</span>
+<span id="cb5-26"><a aria-label="26"></a>    std <span class="op">=</span> np.sqrt(<span class="fl">2.0</span> <span class="op">/</span> fan_in)</span>
+<span id="cb5-27"><a aria-label="27"></a>    <span class="cf">return</span> rng.normal(<span class="fl">0.0</span>, std, size<span class="op">=</span>(fan_in, fan_out))</span>
+<span id="cb5-28"><a aria-label="28"></a></span>
+<span id="cb5-29"><a aria-label="29"></a><span class="kw">class</span> SimpleMLP:</span>
+<span id="cb5-30"><a aria-label="30"></a>    <span class="co">"""Binary MLP with optional ReLU hidden units, L2, and learning-rate decay."""</span></span>
+<span id="cb5-31"><a aria-label="31"></a></span>
+<span id="cb5-32"><a aria-label="32"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, layer_sizes, lr<span class="op">=</span><span class="fl">0.1</span>, seed<span class="op">=</span><span class="va">None</span>, l2<span class="op">=</span><span class="fl">0.0</span>,</span>
+<span id="cb5-33"><a aria-label="33"></a>                 hidden_activation<span class="op">=</span><span class="st">"relu"</span>, lr_decay<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb5-34"><a aria-label="34"></a>        <span class="va">self</span>.sizes <span class="op">=</span> <span class="bu">list</span>(layer_sizes)</span>
+<span id="cb5-35"><a aria-label="35"></a>        <span class="va">self</span>.lr <span class="op">=</span> <span class="bu">float</span>(lr)</span>
+<span id="cb5-36"><a aria-label="36"></a>        <span class="va">self</span>.base_lr <span class="op">=</span> <span class="bu">float</span>(lr)</span>
+<span id="cb5-37"><a aria-label="37"></a>        <span class="va">self</span>.l2 <span class="op">=</span> <span class="bu">float</span>(l2)</span>
+<span id="cb5-38"><a aria-label="38"></a>        <span class="va">self</span>.hidden_activation <span class="op">=</span> hidden_activation</span>
+<span id="cb5-39"><a aria-label="39"></a>        <span class="va">self</span>.lr_decay <span class="op">=</span> lr_decay</span>
+<span id="cb5-40"><a aria-label="40"></a>        <span class="va">self</span>.rng <span class="op">=</span> np.random.default_rng(seed)</span>
+<span id="cb5-41"><a aria-label="41"></a></span>
+<span id="cb5-42"><a aria-label="42"></a>        <span class="va">self</span>.W <span class="op">=</span> []</span>
+<span id="cb5-43"><a aria-label="43"></a>        L <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>.sizes) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb5-44"><a aria-label="44"></a>        <span class="cf">for</span> l, (din, dout) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(<span class="va">self</span>.sizes[:<span class="op">-</span><span class="dv">1</span>], <span class="va">self</span>.sizes[<span class="dv">1</span>:]), start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb5-45"><a aria-label="45"></a>            <span class="cf">if</span> l <span class="op">&lt;</span> L <span class="kw">and</span> <span class="va">self</span>.hidden_activation <span class="op">==</span> <span class="st">"relu"</span>:</span>
+<span id="cb5-46"><a aria-label="46"></a>                Wk <span class="op">=</span> he_init(<span class="va">self</span>.rng, din, dout)</span>
+<span id="cb5-47"><a aria-label="47"></a>            <span class="cf">else</span>:</span>
+<span id="cb5-48"><a aria-label="48"></a>                Wk <span class="op">=</span> xavier_init(<span class="va">self</span>.rng, din, dout)</span>
+<span id="cb5-49"><a aria-label="49"></a>            <span class="va">self</span>.W.append(Wk)</span>
+<span id="cb5-50"><a aria-label="50"></a>        <span class="va">self</span>.b <span class="op">=</span> [np.zeros(dout) <span class="cf">for</span> dout <span class="kw">in</span> <span class="va">self</span>.sizes[<span class="dv">1</span>:]]</span>
+<span id="cb5-51"><a aria-label="51"></a></span>
+<span id="cb5-52"><a aria-label="52"></a>    <span class="kw">def</span> _act(<span class="va">self</span>, z, last<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb5-53"><a aria-label="53"></a>        <span class="cf">if</span> last:</span>
+<span id="cb5-54"><a aria-label="54"></a>            <span class="cf">return</span> sigmoid(z)</span>
+<span id="cb5-55"><a aria-label="55"></a>        <span class="cf">return</span> relu(z) <span class="cf">if</span> <span class="va">self</span>.hidden_activation <span class="op">==</span> <span class="st">"relu"</span> <span class="cf">else</span> sigmoid(z)</span>
+<span id="cb5-56"><a aria-label="56"></a></span>
+<span id="cb5-57"><a aria-label="57"></a>    <span class="kw">def</span> _act_prime(<span class="va">self</span>, z, last<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb5-58"><a aria-label="58"></a>        <span class="cf">if</span> last:</span>
+<span id="cb5-59"><a aria-label="59"></a>            <span class="cf">return</span> sigmoid_prime(z)</span>
+<span id="cb5-60"><a aria-label="60"></a>        <span class="cf">return</span> relu_prime(z) <span class="cf">if</span> <span class="va">self</span>.hidden_activation <span class="op">==</span> <span class="st">"relu"</span> <span class="cf">else</span> sigmoid_prime(z)</span>
+<span id="cb5-61"><a aria-label="61"></a></span>
+<span id="cb5-62"><a aria-label="62"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, X):</span>
+<span id="cb5-63"><a aria-label="63"></a>        a <span class="op">=</span> X</span>
+<span id="cb5-64"><a aria-label="64"></a>        L <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>.W)</span>
+<span id="cb5-65"><a aria-label="65"></a>        <span class="cf">for</span> l, (W, b) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(<span class="va">self</span>.W, <span class="va">self</span>.b), start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb5-66"><a aria-label="66"></a>            a <span class="op">=</span> <span class="va">self</span>._act(a <span class="op">@</span> W <span class="op">+</span> b, last<span class="op">=</span>(l <span class="op">==</span> L))</span>
+<span id="cb5-67"><a aria-label="67"></a>        <span class="cf">return</span> a.ravel()</span>
+<span id="cb5-68"><a aria-label="68"></a></span>
+<span id="cb5-69"><a aria-label="69"></a>    <span class="kw">def</span> predict_proba(<span class="va">self</span>, X):</span>
+<span id="cb5-70"><a aria-label="70"></a>        <span class="cf">return</span> <span class="va">self</span>.forward(X)</span>
+<span id="cb5-71"><a aria-label="71"></a></span>
+<span id="cb5-72"><a aria-label="72"></a>    <span class="kw">def</span> predict(<span class="va">self</span>, X, threshold<span class="op">=</span><span class="fl">0.5</span>):</span>
+<span id="cb5-73"><a aria-label="73"></a>        <span class="cf">return</span> (<span class="va">self</span>.predict_proba(X) <span class="op">&gt;=</span> threshold).astype(<span class="bu">int</span>)</span>
+<span id="cb5-74"><a aria-label="74"></a></span>
+<span id="cb5-75"><a aria-label="75"></a>    <span class="kw">def</span> loss(<span class="va">self</span>, X, y):</span>
+<span id="cb5-76"><a aria-label="76"></a>        p <span class="op">=</span> <span class="va">self</span>.predict_proba(X)</span>
+<span id="cb5-77"><a aria-label="77"></a>        base <span class="op">=</span> bce_loss(y, p)</span>
+<span id="cb5-78"><a aria-label="78"></a>        <span class="cf">if</span> <span class="va">self</span>.l2 <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb5-79"><a aria-label="79"></a>            base <span class="op">+=</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">self</span>.l2 <span class="op">*</span> <span class="bu">sum</span>((W <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>() <span class="cf">for</span> W <span class="kw">in</span> <span class="va">self</span>.W)</span>
+<span id="cb5-80"><a aria-label="80"></a>        <span class="cf">return</span> base</span>
+<span id="cb5-81"><a aria-label="81"></a></span>
+<span id="cb5-82"><a aria-label="82"></a>    <span class="kw">def</span> _forward_full(<span class="va">self</span>, X):</span>
+<span id="cb5-83"><a aria-label="83"></a>        a <span class="op">=</span> X</span>
+<span id="cb5-84"><a aria-label="84"></a>        activations <span class="op">=</span> [a]</span>
+<span id="cb5-85"><a aria-label="85"></a>        zs <span class="op">=</span> []</span>
+<span id="cb5-86"><a aria-label="86"></a>        L <span class="op">=</span> <span class="bu">len</span>(<span class="va">self</span>.W)</span>
+<span id="cb5-87"><a aria-label="87"></a>        <span class="cf">for</span> l, (W, b) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(<span class="va">self</span>.W, <span class="va">self</span>.b), start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb5-88"><a aria-label="88"></a>            z <span class="op">=</span> a <span class="op">@</span> W <span class="op">+</span> b</span>
+<span id="cb5-89"><a aria-label="89"></a>            a <span class="op">=</span> <span class="va">self</span>._act(z, last<span class="op">=</span>(l <span class="op">==</span> L))</span>
+<span id="cb5-90"><a aria-label="90"></a>            zs.append(z)</span>
+<span id="cb5-91"><a aria-label="91"></a>            activations.append(a)</span>
+<span id="cb5-92"><a aria-label="92"></a>        <span class="cf">return</span> activations, zs</span>
+<span id="cb5-93"><a aria-label="93"></a></span>
+<span id="cb5-94"><a aria-label="94"></a>    <span class="kw">def</span> train(<span class="va">self</span>, X, y, epochs<span class="op">=</span><span class="dv">30</span>, batch_size<span class="op">=</span><span class="va">None</span>, verbose<span class="op">=</span><span class="va">True</span>, shuffle<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb5-95"><a aria-label="95"></a>        <span class="co">"""X: (N, d), y: (N,); batch_size=None uses the full dataset."""</span></span>
+<span id="cb5-96"><a aria-label="96"></a>        N <span class="op">=</span> X.shape[<span class="dv">0</span>]</span>
+<span id="cb5-97"><a aria-label="97"></a>        idx <span class="op">=</span> np.arange(N)</span>
+<span id="cb5-98"><a aria-label="98"></a>        B <span class="op">=</span> N <span class="cf">if</span> batch_size <span class="kw">is</span> <span class="va">None</span> <span class="cf">else</span> <span class="bu">int</span>(batch_size)</span>
+<span id="cb5-99"><a aria-label="99"></a></span>
+<span id="cb5-100"><a aria-label="100"></a>        <span class="cf">for</span> ep <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, epochs <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb5-101"><a aria-label="101"></a>            <span class="cf">if</span> shuffle:</span>
+<span id="cb5-102"><a aria-label="102"></a>                <span class="va">self</span>.rng.shuffle(idx)</span>
+<span id="cb5-103"><a aria-label="103"></a>            <span class="cf">if</span> <span class="va">self</span>.lr_decay <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb5-104"><a aria-label="104"></a>                <span class="va">self</span>.lr <span class="op">=</span> <span class="va">self</span>.base_lr <span class="op">*</span> <span class="va">self</span>.lr_decay <span class="op">**</span> (ep <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb5-105"><a aria-label="105"></a></span>
+<span id="cb5-106"><a aria-label="106"></a>            base_loss <span class="op">=</span> <span class="va">self</span>.loss(X, y)</span>
+<span id="cb5-107"><a aria-label="107"></a></span>
+<span id="cb5-108"><a aria-label="108"></a>            <span class="cf">for</span> start <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, N, B):</span>
+<span id="cb5-109"><a aria-label="109"></a>                sl <span class="op">=</span> idx[start:start <span class="op">+</span> B]</span>
+<span id="cb5-110"><a aria-label="110"></a>                Xb <span class="op">=</span> X[sl]</span>
+<span id="cb5-111"><a aria-label="111"></a>                yb <span class="op">=</span> y[sl].reshape(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb5-112"><a aria-label="112"></a>                Bsz <span class="op">=</span> Xb.shape[<span class="dv">0</span>]</span>
+<span id="cb5-113"><a aria-label="113"></a></span>
+<span id="cb5-114"><a aria-label="114"></a>                activations, zs <span class="op">=</span> <span class="va">self</span>._forward_full(Xb)</span>
+<span id="cb5-115"><a aria-label="115"></a>                A_L <span class="op">=</span> activations[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb5-116"><a aria-label="116"></a></span>
+<span id="cb5-117"><a aria-label="117"></a>                <span class="co"># Each row is a single example's preactivation sensitivity.</span></span>
+<span id="cb5-118"><a aria-label="118"></a>                delta <span class="op">=</span> A_L <span class="op">-</span> yb</span>
+<span id="cb5-119"><a aria-label="119"></a>                grads_W <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> <span class="bu">len</span>(<span class="va">self</span>.W)</span>
+<span id="cb5-120"><a aria-label="120"></a>                grads_b <span class="op">=</span> [<span class="va">None</span>] <span class="op">*</span> <span class="bu">len</span>(<span class="va">self</span>.b)</span>
+<span id="cb5-121"><a aria-label="121"></a></span>
+<span id="cb5-122"><a aria-label="122"></a>                <span class="co"># Average parameter gradients over examples exactly once.</span></span>
+<span id="cb5-123"><a aria-label="123"></a>                grads_W[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> activations[<span class="op">-</span><span class="dv">2</span>].T <span class="op">@</span> delta <span class="op">/</span> Bsz</span>
+<span id="cb5-124"><a aria-label="124"></a>                grads_b[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> delta.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb5-125"><a aria-label="125"></a></span>
+<span id="cb5-126"><a aria-label="126"></a>                <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(<span class="va">self</span>.W) <span class="op">-</span> <span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb5-127"><a aria-label="127"></a>                    z <span class="op">=</span> zs[k]</span>
+<span id="cb5-128"><a aria-label="128"></a>                    d_act <span class="op">=</span> <span class="va">self</span>._act_prime(z, last<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-129"><a aria-label="129"></a>                    delta <span class="op">=</span> (delta <span class="op">@</span> <span class="va">self</span>.W[k <span class="op">+</span> <span class="dv">1</span>].T) <span class="op">*</span> d_act</span>
+<span id="cb5-130"><a aria-label="130"></a>                    grads_W[k] <span class="op">=</span> activations[k].T <span class="op">@</span> delta <span class="op">/</span> Bsz</span>
+<span id="cb5-131"><a aria-label="131"></a>                    grads_b[k] <span class="op">=</span> delta.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb5-132"><a aria-label="132"></a></span>
+<span id="cb5-133"><a aria-label="133"></a>                <span class="cf">if</span> <span class="va">self</span>.l2 <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb5-134"><a aria-label="134"></a>                    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(<span class="va">self</span>.W)):</span>
+<span id="cb5-135"><a aria-label="135"></a>                        grads_W[k] <span class="op">+=</span> <span class="va">self</span>.l2 <span class="op">*</span> <span class="va">self</span>.W[k]</span>
+<span id="cb5-136"><a aria-label="136"></a></span>
+<span id="cb5-137"><a aria-label="137"></a>                <span class="co"># All gradients use the weights from the same forward pass.</span></span>
+<span id="cb5-138"><a aria-label="138"></a>                <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(<span class="va">self</span>.W)):</span>
+<span id="cb5-139"><a aria-label="139"></a>                    <span class="va">self</span>.W[k] <span class="op">-=</span> <span class="va">self</span>.lr <span class="op">*</span> grads_W[k]</span>
+<span id="cb5-140"><a aria-label="140"></a>                    <span class="va">self</span>.b[k] <span class="op">-=</span> <span class="va">self</span>.lr <span class="op">*</span> grads_b[k]</span>
+<span id="cb5-141"><a aria-label="141"></a></span>
+<span id="cb5-142"><a aria-label="142"></a>            new_loss <span class="op">=</span> <span class="va">self</span>.loss(X, y)</span>
+<span id="cb5-143"><a aria-label="143"></a>            <span class="cf">if</span> verbose:</span>
+<span id="cb5-144"><a aria-label="144"></a>                <span class="bu">print</span>(<span class="ss">f"Epoch </span><span class="sc">{</span>ep<span class="sc">:3d}</span><span class="ss"> | loss </span><span class="sc">{</span>base_loss<span class="sc">:.5f}</span><span class="ss"> -&gt; </span><span class="sc">{</span>new_loss<span class="sc">:.5f}</span><span class="ss"> | lr=</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>lr<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="choosing-hidden-activations" class="slide level2">
+<h2>Choosing hidden activations</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>    <span class="kw">def</span> _act(<span class="va">self</span>, z, last<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb6-2"><a aria-label="2"></a>        <span class="cf">if</span> last:</span>
+<span id="cb6-3"><a aria-label="3"></a>            <span class="cf">return</span> sigmoid(z)</span>
+<span id="cb6-4"><a aria-label="4"></a>        <span class="cf">return</span> relu(z) <span class="cf">if</span> <span class="va">self</span>.hidden_activation <span class="op">==</span> <span class="st">"relu"</span> <span class="cf">else</span> sigmoid(z)</span>
+<span id="cb6-5"><a aria-label="5"></a></span>
+<span id="cb6-6"><a aria-label="6"></a>    <span class="kw">def</span> _act_prime(<span class="va">self</span>, z, last<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb6-7"><a aria-label="7"></a>        <span class="cf">if</span> last:</span>
+<span id="cb6-8"><a aria-label="8"></a>            <span class="cf">return</span> sigmoid_prime(z)</span>
+<span id="cb6-9"><a aria-label="9"></a>        <span class="cf">return</span> relu_prime(z) <span class="cf">if</span> <span class="va">self</span>.hidden_activation <span class="op">==</span> <span class="st">"relu"</span> <span class="cf">else</span> sigmoid_prime(z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p>The output remains sigmoid for binary classification. ReLU is an option only for hidden units. Lecture 13 called <code>sigmoid</code> and <code>sigmoid_prime</code> directly. Here the helpers <code>_act</code> and <code>_act_prime</code> select the activation and its derivative, and the flag <code>last</code> identifies the output layer. The forward and cached-forward methods now call <code>_act</code>; the backward loop calls <code>_act_prime</code>. Its multiplication by <code>W_next.T</code> and its averaging over examples are unchanged.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="learning-rate-decay" class="slide level2">
+<h2>Learning-rate decay</h2>
+<p>At epoch <span class="math inline">t=1,2,\ldots</span>, with decay factor <span class="math inline">0&lt;\gamma&lt;1</span>:</p>
+<p><span class="math display">
+\alpha_t=\alpha_1\gamma^{t-1}.
+</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a><span class="cf">if</span> <span class="va">self</span>.lr_decay <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb7-2"><a aria-label="2"></a>    <span class="va">self</span>.lr <span class="op">=</span> <span class="va">self</span>.base_lr <span class="op">*</span> <span class="va">self</span>.lr_decay <span class="op">**</span> (ep <span class="op">-</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p>The first epoch uses the initial learning rate; subsequent epochs use progressively smaller steps. With <code>lr_decay=None</code>, the learning rate stays constant. Decay changes the optimizer’s step size, not the derivative formulas or the objective. It is different from L2 regularization and from weight decay. Reducing the learning rate too quickly can prevent useful progress; it does not repair vanishing gradients.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="l2-in-the-objective-and-gradient" class="slide level2 smaller">
+<h2>L2 in the objective and gradient</h2>
+<p><span class="math display">
+J_{\mathrm{reg}}=J_{\mathrm{BCE}}+
+\frac{\lambda}{2}\sum_{l=1}^{L}\|W^{(l)}\|_F^2.
+</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a>base <span class="op">+=</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">self</span>.l2 <span class="op">*</span> <span class="bu">sum</span>((W <span class="op">**</span> <span class="dv">2</span>).<span class="bu">sum</span>() <span class="cf">for</span> W <span class="kw">in</span> <span class="va">self</span>.W)</span>
+<span id="cb8-2"><a aria-label="2"></a></span>
+<span id="cb8-3"><a aria-label="3"></a><span class="co"># After computing the mean data-loss gradients:</span></span>
+<span id="cb8-4"><a aria-label="4"></a>grads_W[k] <span class="op">+=</span> <span class="va">self</span>.l2 <span class="op">*</span> <span class="va">self</span>.W[k]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<aside class="notes">
+<p>The coefficient <code>l2</code> is <span class="math inline">\lambda</span>. The data loss is averaged over examples; the penalty is added separately, with no additional division by dataset or mini-batch size. Consequently, its derivative is <span class="math inline">\lambda W</span> in every batch. This keeps the reported objective and the update’s gradient consistent. Biases are not penalized in this implementation.</p>
+<p>The Frobenius norm squared is simply the sum of squared entries of a weight matrix. L2 discourages large weights; it does not change the local activation derivatives or repair gradient propagation directly. The later regularization section develops the generalization motivation and other methods.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="same-api-extended-model" class="slide level2 scrollable smaller">
+<h2>Same API, extended model</h2>
+<div id="0888f396" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_circles</span>
+<span id="cb9-2"><a aria-label="2"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb9-3"><a aria-label="3"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb9-4"><a aria-label="4"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score</span>
+<span id="cb9-5"><a aria-label="5"></a></span>
+<span id="cb9-6"><a aria-label="6"></a>X, y <span class="op">=</span> make_circles(n_samples<span class="op">=</span><span class="dv">200</span>, factor<span class="op">=</span><span class="fl">0.5</span>, noise<span class="op">=</span><span class="fl">0.08</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-7"><a aria-label="7"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb9-8"><a aria-label="8"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.3</span>, random_state<span class="op">=</span><span class="dv">0</span>, stratify<span class="op">=</span>y)</span>
+<span id="cb9-9"><a aria-label="9"></a></span>
+<span id="cb9-10"><a aria-label="10"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb9-11"><a aria-label="11"></a>X_train <span class="op">=</span> scaler.fit_transform(X_train)</span>
+<span id="cb9-12"><a aria-label="12"></a>X_test <span class="op">=</span> scaler.transform(X_test)</span>
+<span id="cb9-13"><a aria-label="13"></a></span>
+<span id="cb9-14"><a aria-label="14"></a>model <span class="op">=</span> SimpleMLP([<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>], lr<span class="op">=</span><span class="fl">0.3</span>, seed<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb9-15"><a aria-label="15"></a>                  hidden_activation<span class="op">=</span><span class="st">"relu"</span>, l2<span class="op">=</span><span class="fl">0.001</span>, lr_decay<span class="op">=</span><span class="fl">0.995</span>)</span>
+<span id="cb9-16"><a aria-label="16"></a>model.train(X_train, y_train, epochs<span class="op">=</span><span class="dv">500</span>, batch_size<span class="op">=</span><span class="dv">32</span>, verbose<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb9-17"><a aria-label="17"></a></span>
+<span id="cb9-18"><a aria-label="18"></a><span class="bu">print</span>(<span class="st">"Train acc:"</span>, accuracy_score(y_train, model.predict(X_train)))</span>
+<span id="cb9-19"><a aria-label="19"></a><span class="bu">print</span>(<span class="st">" Test acc:"</span>, accuracy_score(y_test, model.predict(X_test)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Train acc: 1.0
+ Test acc: 1.0</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>This uses the same data, split, preprocessing, and architecture as the <code>SimplerMLP</code> example. It demonstrates how to enable the additional options. Because the activation, training duration, penalty, and schedule differ, these two runs are illustrative workflows rather than a controlled claim that one setting is universally better. Both constructors’ seeds control weights and shuffling. All gradients are still collected before updates.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="output-layers" class="title-slide slide level1 center">
+<h1>Output Layers</h1>
+
+</section>
+<section id="output-layer-regression-task" class="slide level2">
+<h2>Output Layer: Regression Task</h2>
+<ul>
+<li><strong># of output neurons</strong>:
+<ul>
+<li>1 per dimension</li>
+</ul></li>
+<li><strong>Output layer activation function</strong>:
+<ul>
+<li>None, <em>ReLU/softplus</em>, if positive, <em>sigmoid/tanh</em>, if bounded</li>
+</ul></li>
+<li><strong>Loss function</strong>:
+<ul>
+<li><a href="https://www.tensorflow.org/api_docs/python/tf/keras/losses/MeanSquaredError">MeanSquaredError</a></li>
+</ul></li>
+</ul>
+
+<aside class="notes">
+<p>How does one select an appropriate activation function?</p>
+<p>In a feed-forward network, activation functions in the hidden layers are chosen mainly for their impact on performance and convergence, while the activation function in the output layer is selected according to the requirements of the task.</p>
+<ul>
+<li><p><strong>Hidden layers:</strong></p>
+<p>The activation function (e.g., ReLU, GELU, tanh) mainly affects <em>training dynamics</em> — such as gradient flow, nonlinearity strength, and convergence rate. The choice is typically empirical, guided by performance, numerical stability, and optimization behavior.</p></li>
+<li><p><strong>Output layer:</strong></p>
+<p>The activation function is determined by the <strong>nature of the prediction task</strong>:</p>
+<ul>
+<li><em>Regression</em>: linear, ReLU, or softplus (depending on range constraints)</li>
+<li><em>Binary classification</em>: sigmoid</li>
+<li><em>Multi-class classification</em>: softmax</li>
+<li><em>Multi-label classification</em>: sigmoid (per output unit)</li>
+</ul></li>
+</ul>
+<p>Examples of <strong>multi-output regression problems</strong> (2–4 outputs) include:</p>
+<ul>
+<li><p><strong>2 outputs:</strong></p>
+<ul>
+<li>Predicting both the <strong>latitude and longitude</strong> of a location from an image.</li>
+<li>Estimating the <strong>width and height</strong> of a bounding box in object detection.</li>
+<li>Forecasting <strong>temperature and humidity</strong> simultaneously.</li>
+</ul></li>
+<li><p><strong>3 outputs:</strong></p>
+<ul>
+<li>Predicting the <strong>x, y, z coordinates</strong> of a point in space (e.g., hand-joint localization).</li>
+<li>Estimating <strong>RGB color values</strong> from spectral measurements.</li>
+</ul></li>
+<li><p><strong>4 outputs:</strong></p>
+<ul>
+<li>Predicting <strong>bounding box coordinates</strong> — <span class="math inline">(x_{min}, y_{min}, x_{max}, y_{max})</span> — in object detection.</li>
+</ul></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>In an <a href="https://keras.io/guides/keras_cv/object_detection_keras_cv/">object detection problem</a>, determining the <strong>bounding box</strong> exemplifies a regression task where the output is multidimensional.</p>
+</div></aside></section>
+<section id="output-layer-multi-label" class="slide level2">
+<h2>Output Layer: Multi-Label</h2>
+<!-- Image update L14-01: feature labels should use x_1 and x_2. -->
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ann_mlp_multilabel-09-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="../../assets/images/ann_mlp_multilabel-09-00.png" class="quarto-figure quarto-figure-center" height="475"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>Why do independent sigmoid outputs not directly provide a probability distribution over mutually exclusive classes? Each output is a probability, but their sum is not constrained to equal one. Such outputs remain appropriate for multi-label classification.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>With the sigmoid activation function, this network makes multi-label predictions.</p>
+</div></aside></section>
+<section id="output-layer-classification-task" class="slide level2">
+<h2>Output Layer: Classification Task</h2>
+<ul>
+<li><strong># of output neurons</strong>:
+<ul>
+<li>1 if binary, 1 per class, if multi-label or multiclass.</li>
+</ul></li>
+<li><strong>Output layer activation function</strong>:
+<ul>
+<li><em>sigmoid</em>, if binary or multi-label, <em>softmax</em> if multi-class.</li>
+</ul></li>
+<li><strong>Loss function</strong>:
+<ul>
+<li>cross-entropy</li>
+</ul></li>
+</ul>
+</section>
+<section id="softmax" class="slide level2">
+<h2>Softmax</h2>
+<!-- Image update L14-02: feature labels should use x_1 and x_2. -->
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ann_mlp_softmax-09-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="../../assets/images/ann_mlp_softmax-09-00.png" class="quarto-figure quarto-figure-center" height="475"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>Observe that I have revised the representation of the output nodes to indicate that the softmax function is applied to the entire layer, rather than to individual nodes. This function transforms the raw output values of the layer into probabilities that sum to 1, facilitating multi-class classification. This characteristic distinguishes it from activation functions like ReLU or sigmoid, which are typically applied independently to each node’s output.</p>
+<p>The <span class="math inline">\operatorname{argmax}</span> function is not suitable for optimization via gradient-based methods because it is piecewise constant, with zero derivatives away from ties and undefined derivatives at relevant boundaries. In contrast, the softmax function offers both a probabilistic interpretation and a computable derivative, making it more effective for such applications.</p>
+<p>The <span class="math inline">\operatorname{argmax}</span> function can be applied <em>a posteriori</em> to trained networks for class prediction.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Softmax</strong> ensures that all activation outputs fall between 0 and 1 and collectively sum to 1.</p>
+</div></aside></section>
+<section id="softmax-1" class="slide level2">
+<h2>Softmax</h2>
+<p>The <strong>softmax</strong> function is an <strong>activation function</strong> used in <strong>multi-class classification problems</strong> to convert a vector of raw scores into <strong>probabilities that sum to 1</strong>.</p>
+<p>Given a vector <span class="math inline">\mathbf{z} = [z_1, z_2, \ldots, z_n]</span>:</p>
+<p><span class="math display">
+\hat p_i=\operatorname{softmax}(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{n} e^{z_j}}
+</span></p>
+<p>where <span class="math inline">\hat p_i</span> is the probability of the <span class="math inline">i</span>-th class, and <span class="math inline">n</span> is the number of classes.</p>
+<aside class="notes">
+<p>Softmax emphasizes higher scores while suppressing lower ones, enabling a probabilistic interpretation of the outputs.</p>
+<p>We clearly see that such an activation applies for an entire layer since the denominator depends on the values of all the <span class="math inline">z_j</span>, for <span class="math inline">j=1,\ldots,n</span>.</p>
+<p>In the <strong>softmax</strong> function, exponentiation serves a crucial mathematical and conceptual role: it transforms arbitrary real-valued scores into <strong>positive, normalized probabilities</strong> while <strong>amplifying differences</strong> between inputs.</p>
+<ol type="1">
+<li><p><strong>Ensures positivity:</strong></p>
+<p>The exponential function guarantees all outputs are positive, a necessary property for valid probabilities.</p></li>
+<li><p><strong>Magnifies relative differences:</strong></p>
+<p>Exponentiation is a <em>monotonic nonlinear</em> transformation that increases large values much more than small ones. If one logit is slightly larger, <span class="math inline">e^{z_i}</span> becomes <em>disproportionately larger</em>, sharpening the distribution (useful for emphasizing the most likely class).</p></li>
+<li><p><strong>Preserves ordering:</strong></p>
+<p>Since <span class="math inline">e^x</span> is strictly increasing, the class with the highest logit before softmax remains the one with the highest probability after.</p></li>
+<li><p><strong>Facilitates gradient-based learning:</strong></p>
+<p>The exponential smooths the transition between classes, providing differentiable outputs and stable gradients for optimization with cross-entropy.</p></li>
+</ol>
+<p>A <em>logit</em> is a pre-activation value (<span class="math inline">z_i</span>). Each neuron in the output layer (before activation) produces a logit <span class="math inline">z_i</span>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="softmax-2" class="slide level2">
+<h2>Softmax</h2>
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;"><span class="math inline">z_1</span></th>
+<th style="text-align: right;"><span class="math inline">z_2</span></th>
+<th style="text-align: right;"><span class="math inline">z_3</span></th>
+<th style="text-align: right;"><span class="math inline">\hat p_1</span></th>
+<th style="text-align: right;"><span class="math inline">\hat p_2</span></th>
+<th style="text-align: right;"><span class="math inline">\hat p_3</span></th>
+<th style="text-align: right;"><span class="math inline">\sum</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><strong>1.47</strong></td>
+<td style="text-align: right;">-0.39</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;"><strong>0.69</strong></td>
+<td style="text-align: right;">0.11</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5.00</td>
+<td style="text-align: right;"><strong>6.00</strong></td>
+<td style="text-align: right;">4.00</td>
+<td style="text-align: right;">0.24</td>
+<td style="text-align: right;"><strong>0.67</strong></td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.90</td>
+<td style="text-align: right;">0.80</td>
+<td style="text-align: right;"><strong>1.10</strong></td>
+<td style="text-align: right;">0.32</td>
+<td style="text-align: right;">0.29</td>
+<td style="text-align: right;"><strong>0.39</strong></td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-2.00</td>
+<td style="text-align: right;"><strong>2.00</strong></td>
+<td style="text-align: right;">-3.00</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;"><strong>0.98</strong></td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+</tbody>
+</table>
+
+<aside class="notes">
+<ol type="1">
+<li><p><strong>Maintains Relative Order</strong>: The softmax function preserves the relative order of the input values. If one input is greater than another, its corresponding output will also be greater.</p></li>
+<li><p><strong>Interpreted as probabilities</strong>: Each value is in the range 0 to 1. The output values from the softmax function are normalized to sum to one, which allows them to be interpreted as probabilities.</p></li>
+<li><p><strong>Relative Differences</strong>: When the relative differences among the input values are small, the differences in the output probabilities remain small, reflecting the input distribution. When the input values are identical, the output values will be <span class="math inline">\frac{1}{n}</span>, where <span class="math inline">n</span> is the number of classes.</p></li>
+<li><p><strong>Wide Range of Values</strong>: The softmax function can effectively handle a wide range of input values, thanks to the exponential function and normalization, which scale the inputs to a probabilistic range.</p></li>
+</ol>
+<p>These properties make the softmax function particularly useful for multi-class classification tasks in machine learning.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Softmax values for a vector of length 3.</p>
+</div></aside></section>
+<section id="softmax-3" class="slide level2">
+<h2>Softmax</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/KpKog-L9veg" width="889" height="500" title="Neural Networks Part 5: ArgMax and SoftMax" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section>
+<section id="cross-entropy-loss-function" class="slide level2">
+<h2>Cross-entropy loss function</h2>
+<p>The <strong>cross-entropy</strong> in a <strong>multi-class classification task</strong> for one example:</p>
+<p><span class="math display">
+\ell(W) = -\sum_{k=1}^{K} y_k \log(\hat p_k)
+</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">K</span> is the <strong>number of classes</strong>.</li>
+<li><span class="math inline">y_k</span> is the <strong>true distribution</strong> for the class <span class="math inline">k</span>.</li>
+<li><span class="math inline">\hat p_k</span> is the <strong>predicted probability</strong> of class <span class="math inline">k</span> from the model.</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p>The target vector <span class="math inline">y</span> is expressed as a one-hot encoded vector of length <span class="math inline">K</span>, where the element corresponding to the true class is set to 1, and all other elements are 0.</p></li>
+<li><p>Consequently, in the summation over classes, only the term associated with the true class contributes a non-zero value.</p></li>
+<li><p>Therefore, the cross-entropy loss for a single example is given by <span class="math inline">-\log(\hat p_k)</span>, where <span class="math inline">\hat p_k</span> is the predicted probability for the true class.</p></li>
+<li><p>The predicted probability <span class="math inline">\hat p_k</span> is derived from the softmax function applied in the output layer of the neural network.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="cross-entropy-loss-function-1" class="slide level2">
+<h2>Cross-entropy loss function</h2>
+<ul>
+<li class="fragment"><strong>Classification Problem</strong>: 3 classes
+<ul>
+<li class="fragment">Versicolour, Setosa, Virginica.</li>
+</ul></li>
+<li class="fragment"><strong>One-Hot Encoding</strong>:
+<ul>
+<li class="fragment">Setosa = <span class="math inline">[0, 1, 0]</span>.</li>
+</ul></li>
+<li class="fragment"><strong>Softmax Outputs &amp; Loss</strong>:
+<ul>
+<li class="fragment"><span class="math inline">[0.22,\mathbf{0.7}, 0.08]</span>: Loss = <span class="math inline">-\log(0.7) = 0.3567</span>.</li>
+<li class="fragment"><span class="math inline">[0.7, \mathbf{0.22}, 0.08]</span>: Loss = <span class="math inline">-\log(0.22) = 1.5141</span>.</li>
+<li class="fragment"><span class="math inline">[0.7, \mathbf{0.08}, 0.22]</span>: Loss = <span class="math inline">-\log(0.08) = 2.5257</span>.</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Among the softmax outputs, cross-entropy evaluates only the component corresponding to <span class="math inline">k=2</span> (Setosa), as the other entries in the one-hot encoded vector are zero. Here mathematical class indices run from 1 to 3. This relevant element is highlighted in bold. A higher probability for the true class produces a smaller loss; the three examples give losses of 0.3567, 1.5141, and 2.5257.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="case-one-example" class="slide level2 hide-code-toggle">
+<h2>Case: one example</h2>
+<div id="5bdf6c9f" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb11-2"><a aria-label="2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb11-3"><a aria-label="3"></a></span>
+<span id="cb11-4"><a aria-label="4"></a><span class="co"># Generate an array of p values from just above 0 to 1</span></span>
+<span id="cb11-5"><a aria-label="5"></a>p_values <span class="op">=</span> np.linspace(<span class="fl">0.001</span>, <span class="dv">1</span>, <span class="dv">1000</span>)</span>
+<span id="cb11-6"><a aria-label="6"></a></span>
+<span id="cb11-7"><a aria-label="7"></a><span class="co"># Compute the natural logarithm of each p value</span></span>
+<span id="cb11-8"><a aria-label="8"></a>ln_p_values <span class="op">=</span> <span class="op">-</span> np.log(p_values)</span>
+<span id="cb11-9"><a aria-label="9"></a></span>
+<span id="cb11-10"><a aria-label="10"></a><span class="co"># Plot the graph</span></span>
+<span id="cb11-11"><a aria-label="11"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb11-12"><a aria-label="12"></a>plt.plot(p_values, ln_p_values, label<span class="op">=</span><span class="vs">r'</span><span class="dv">$</span><span class="vs">-</span><span class="er">\</span><span class="vs">log</span><span class="kw">(</span><span class="er">\</span><span class="vs">hat p_k</span><span class="kw">)</span><span class="dv">$</span><span class="vs">'</span>, color<span class="op">=</span><span class="st">'b'</span>)</span>
+<span id="cb11-13"><a aria-label="13"></a></span>
+<span id="cb11-14"><a aria-label="14"></a><span class="co"># Add labels and title</span></span>
+<span id="cb11-15"><a aria-label="15"></a>plt.xlabel(<span class="vs">r'</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat p_k</span><span class="dv">$</span><span class="vs">'</span>)</span>
+<span id="cb11-16"><a aria-label="16"></a>plt.ylabel(<span class="vs">r'loss'</span>)</span>
+<span id="cb11-17"><a aria-label="17"></a>plt.title(<span class="vs">r'Graph of </span><span class="dv">$</span><span class="vs">-</span><span class="er">\</span><span class="vs">log</span><span class="kw">(</span><span class="er">\</span><span class="vs">hat p_k</span><span class="kw">)</span><span class="dv">$</span><span class="vs"> for </span><span class="dv">$</span><span class="er">\</span><span class="vs">hat p_k</span><span class="dv">$</span><span class="vs"> from 0 to 1'</span>)</span>
+<span id="cb11-18"><a aria-label="18"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb11-19"><a aria-label="19"></a>plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'gray'</span>, lw<span class="op">=</span><span class="fl">0.5</span>)  <span class="co"># Add horizontal line at y=0</span></span>
+<span id="cb11-20"><a aria-label="20"></a>plt.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'gray'</span>, lw<span class="op">=</span><span class="fl">0.5</span>)  <span class="co"># Add vertical line at x=0</span></span>
+<span id="cb11-21"><a aria-label="21"></a></span>
+<span id="cb11-22"><a aria-label="22"></a><span class="co"># Display the plot</span></span>
+<span id="cb11-23"><a aria-label="23"></a>plt.legend()</span>
+<span id="cb11-24"><a aria-label="24"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="651" height="530"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li><p>In the summation, only the term where <span class="math inline">y_k = 1</span> contributes a non-zero value.</p></li>
+<li><p>Due to the negative sign preceding the summation, the value of the function is <span class="math inline">-\log(\hat p_k)</span>.</p></li>
+<li><p>If the predicted probability <span class="math inline">\hat p_k</span> is near 1, the loss approaches zero, indicating minimal penalty.</p></li>
+<li><p>Conversely, as <span class="math inline">\hat p_k</span> nears 0, indicating an incorrect prediction, the loss approaches infinity. This strongly penalizes assigning very low probability to the true class; it does not by itself guarantee faster convergence.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="case-dataset" class="slide level2">
+<h2>Case: dataset</h2>
+<p>For a dataset with <span class="math inline">N</span> examples, the <strong>average cross-entropy loss</strong> over all examples is computed as:</p>
+<p><span class="math display">
+J(W) = -\frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} y_{i,k} \log(\hat p_{i,k})
+</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">i</span> indexes over the different <strong>examples</strong> in the dataset.</li>
+<li><span class="math inline">y_{i,k}</span> and <span class="math inline">\hat p_{i,k}</span> are the <strong>true</strong> and <strong>predicted probabilities</strong> for class <span class="math inline">k</span> of example <span class="math inline">i</span>, respectively.</li>
+</ul>
+</section></section>
+<section>
+<section id="regularization" class="title-slide slide level1 center">
+<h1>Regularization</h1>
+
+</section>
+<section id="definition" class="slide level2">
+<h2>Definition</h2>
+<p><strong>Regularization</strong> comprises a set of techniques designed to enhance a model’s ability to generalize by <strong>mitigating overfitting</strong>. By <strong>discouraging excessive model complexity</strong>, these methods <strong>improve</strong> the model’s <strong>robustness</strong> and <strong>performance</strong> on unseen data.</p>
+</section>
+<section id="adding-penalty-terms-to-the-loss" class="slide level2">
+<h2>Adding penalty terms to the loss</h2>
+<ul>
+<li><p>In numerical optimization, it is standard practice to <strong>incorporate additional terms</strong> into the <strong>objective function</strong> to <strong>deter undesirable model characteristics</strong>.</p></li>
+<li><p>For a <strong>minimization problem</strong>, the optimization process aims to <strong>circumvent the substantial costs</strong> associated with these <strong>penalty terms</strong>.</p></li>
+</ul>
+</section>
+<section id="loss-function" class="slide level2">
+<h2>Loss function</h2>
+<p>Consider the <strong>mean absolute error</strong> loss function:</p>
+<p><span class="math display">
+  \mathrm{MAE}(X,W) = \frac{1}{N} \sum_{i=1}^N | h_W(x_i) - y_i |
+</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">W</span> are the weights of our network.</li>
+<li><span class="math inline">h_W(x_i)</span> is the output of the network for example <span class="math inline">i</span>.</li>
+<li><span class="math inline">y_i</span> is the true label for example <span class="math inline">i</span>.</li>
+</ul>
+</section>
+<section id="penalty-terms" class="slide level2">
+<h2>Penalty term(s)</h2>
+<p>One or more terms can be added to the loss:</p>
+<p><span class="math display">
+  J_{\mathrm{reg}}(X,W) = \mathrm{MAE}(X,W) + \mathrm{penalty}
+</span></p>
+</section>
+<section id="norm" class="slide level2">
+<h2>Norm</h2>
+<p>A <strong>norm</strong> assigns a non-negative length to a vector.</p>
+<p>The <strong><span class="math inline">\ell_p</span> norm</strong> of a vector <span class="math inline">\mathbf{z} = [z_1, z_2, \ldots, z_n]</span> is defined as:</p>
+<p><span class="math display">
+  \|\mathbf{z}\|_p = \left( \sum_{i=1}^{n} |z_i|^p \right)^{1/p}
+</span></p>
+
+<aside class="notes">
+<p>A <strong>norm</strong> is a function that assigns a non-negative length or size to each vector in a vector space, satisfying certain properties: positivity, scalar multiplication, the triangle inequality, and the property that the norm is zero if and only if the vector is zero.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>With larger <span class="math inline">p</span>, the <span class="math inline">\ell_p</span> norm increasingly highlights larger <span class="math inline">z_i</span> values due to exponentiation.</p>
+</div></aside></section>
+<section id="ell_1-and-ell_2-norms" class="slide level2">
+<h2><span class="math inline">\ell_1</span> and <span class="math inline">\ell_2</span> norms</h2>
+<p>The <strong><span class="math inline">\ell_1</span> norm</strong> (<strong>Manhattan norm</strong>) is:</p>
+<p><span class="math display">
+  \|\mathbf{z}\|_1 = \sum_{i=1}^{n} |z_i|
+</span></p>
+<p>The <strong><span class="math inline">\ell_2</span> norm</strong> (<strong>Euclidean norm</strong>) is:</p>
+<p><span class="math display">
+  \|\mathbf{z}\|_2 = \sqrt{\sum_{i=1}^{n} z_i^2}
+</span></p>
+</section>
+<section id="ell_1-and-ell_2-regularization" class="slide level2">
+<h2><span class="math inline">\ell_1</span> and <span class="math inline">\ell_2</span> regularization</h2>
+<p>Let <span class="math inline">\mathbf w</span> collect all weight entries. The nonnegative coefficients <span class="math inline">\lambda_1</span> and <span class="math inline">\lambda_2</span> control the penalties; zero disables the corresponding term.</p>
+<p><span class="math display">
+J_{\mathrm{reg}}=\mathrm{MAE}(X,W)
++\lambda_1\|\mathbf w\|_1
++\frac{\lambda_2}{2}\|\mathbf w\|_2^2.
+</span></p>
+<aside class="notes">
+<p>The L1 term sums absolute weight values. The usual L2 penalty sums squared weight values; it uses the squared Euclidean or Frobenius norm, rather than the unsquared norm. The factor one-half is a convention that makes its derivative <span class="math inline">\lambda_2 W</span>, matching <code>SimpleMLP</code> above. Coefficient conventions differ across libraries.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="guidelines" class="slide level2">
+<h2>Guidelines</h2>
+<ul>
+<li class="fragment"><strong><span class="math inline">\ell_1</span> Regularization</strong>:
+<ul>
+<li class="fragment">Promotes <strong>sparsity</strong>, setting many weights to zero.</li>
+<li class="fragment">Useful for <strong>feature selection</strong> by reducing feature reliance.</li>
+</ul></li>
+<li class="fragment"><strong><span class="math inline">\ell_2</span> Regularization</strong>:
+<ul>
+<li class="fragment">Promotes <strong>small, distributed weights</strong> for stability.</li>
+<li class="fragment">Ideal when <strong>all features contribute</strong> and reducing complexity is key.</li>
+</ul></li>
+</ul>
+
+<aside><div>
+<p>See <a href="kong_and_yu-2018">kong_and_yu-2018</a> for an example.</p>
+</div></aside></section>
+<section id="keras-example" class="slide level2">
+<h2>Keras example</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
+<span id="cb12-2"><a aria-label="2"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> Dense</span>
+<span id="cb12-3"><a aria-label="3"></a></span>
+<span id="cb12-4"><a aria-label="4"></a>regularizer <span class="op">=</span> tf.keras.regularizers.l2(<span class="fl">0.001</span>)</span>
+<span id="cb12-5"><a aria-label="5"></a></span>
+<span id="cb12-6"><a aria-label="6"></a>dense <span class="op">=</span> Dense(<span class="dv">50</span>, kernel_regularizer<span class="op">=</span>regularizer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+<aside><div>
+<p>This layer specifically utilizes <span class="math inline">\ell_2</span> regularization, in contrast to the prior discussion where regularization was applied globally across the entire model.</p>
+</div></aside></section>
+<section id="dropout" class="slide level2">
+<h2>Dropout</h2>
+<p><strong>Dropout</strong> is a regularization technique in neural networks where <em>randomly selected neurons are ignored during training</em>, reducing overfitting by <strong>preventing co-adaptation of features</strong>.</p>
+
+<aside><div>
+<p><span class="citation" data-cites="Hinton:2012aa">Hinton et al. (<a href="#/references" role="doc-biblioref" onclick="">2012</a>)</span></p>
+</div></aside></section>
+<section id="dropout-1" class="slide level2">
+<h2>Dropout</h2>
+<ul>
+<li class="fragment"><p>During each training step, each neuron in a dropout layer has a probability <span class="math inline">p</span> of being <strong>excluded from the computation</strong>, typical values for <span class="math inline">p</span> are between 10% and 50%.</p></li>
+<li class="fragment"><p>While seemingly counterintuitive, this approach <strong>prevents the network from depending on specific neurons</strong>, promoting the <strong>distribution of learned representations across multiple neurons</strong>.</p></li>
+</ul>
+</section>
+<section id="dropout-2" class="slide level2">
+<h2>Dropout</h2>
+<ul>
+<li class="fragment"><p>Dropout is one of the <strong>most popular</strong> and <strong>effective</strong> methods for reducing overfitting.</p></li>
+<li class="fragment"><p>The typical improvement in performance is <strong>modest</strong>, usually around 1 to 2%.</p></li>
+</ul>
+<aside class="notes">
+<p>During training, each neuron in a dropout layer is randomly excluded (set to zero) with a probability <span class="math inline">p</span>—the dropout rate.</p>
+<p>When dropout “sets a neuron to zero,” it means that for the current training step (mini-batch), that neuron’s output activation is replaced by zero. The neuron still exists in the network — its weights are not removed or altered — but its output contributes nothing to the forward or backward pass for that batch.</p>
+<p>In the next batch, a new random mask is sampled, so a different subset of neurons is dropped. Over many iterations, all neurons participate, but never all at once.</p>
+<p>At inference time, dropout is disabled—all neurons are active, and their outputs are not scaled.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="keras" class="slide level2">
+<h2>Keras</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="im">import</span> keras</span>
+<span id="cb13-2"><a aria-label="2"></a><span class="im">from</span> keras.models <span class="im">import</span> Sequential</span>
+<span id="cb13-3"><a aria-label="3"></a><span class="im">from</span> keras.layers <span class="im">import</span> InputLayer, Dropout, Flatten, Dense</span>
+<span id="cb13-4"><a aria-label="4"></a></span>
+<span id="cb13-5"><a aria-label="5"></a>model <span class="op">=</span> keras.Sequential([</span>
+<span id="cb13-6"><a aria-label="6"></a>    InputLayer(shape<span class="op">=</span>[<span class="dv">28</span>, <span class="dv">28</span>]),</span>
+<span id="cb13-7"><a aria-label="7"></a>    Flatten(),</span>
+<span id="cb13-8"><a aria-label="8"></a>    Dropout(rate<span class="op">=</span><span class="fl">0.2</span>),</span>
+<span id="cb13-9"><a aria-label="9"></a>    Dense(<span class="dv">300</span>, activation<span class="op">=</span><span class="st">"relu"</span>),</span>
+<span id="cb13-10"><a aria-label="10"></a>    Dropout(rate<span class="op">=</span><span class="fl">0.2</span>),</span>
+<span id="cb13-11"><a aria-label="11"></a>    Dense(<span class="dv">100</span>, activation<span class="op">=</span><span class="st">"relu"</span>),</span>
+<span id="cb13-12"><a aria-label="12"></a>    Dropout(rate<span class="op">=</span><span class="fl">0.2</span>),</span>
+<span id="cb13-13"><a aria-label="13"></a>    Dense(<span class="dv">10</span>, activation<span class="op">=</span><span class="st">"softmax"</span>)</span>
+<span id="cb13-14"><a aria-label="14"></a>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+<aside class="notes">
+<p>The dropout rate may differ between layers; larger rates can be applied to larger layers, while smaller rates are suitable for smaller layers. It is common practice in many networks to apply dropout only after the final hidden layer.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Adding <code>Dropout</code> layers to the Fashion-MNIST model from Lecture 11.</p>
+</div></aside></section>
+<section id="definition-1" class="slide level2">
+<h2>Definition</h2>
+<p><strong>Early stopping</strong> is a regularization technique that halts training once the model’s performance on a validation set begins to degrade, preventing overfitting by stopping before the model learns noise.</p>
+
+<aside><div>
+<p>Geoffrey Hinton calls this the <em>“beautiful free lunch.”</em></p>
+</div></aside></section>
+<section id="early-stopping" class="slide level2 hide-code-toggle">
+<h2>Early Stopping</h2>
+<div id="c4132a66" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="im">from</span> copy <span class="im">import</span> deepcopy</span>
+<span id="cb14-2"><a aria-label="2"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> root_mean_squared_error</span>
+<span id="cb14-3"><a aria-label="3"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb14-4"><a aria-label="4"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb14-5"><a aria-label="5"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
+<span id="cb14-6"><a aria-label="6"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> SGDRegressor</span>
+<span id="cb14-7"><a aria-label="7"></a></span>
+<span id="cb14-8"><a aria-label="8"></a><span class="co"># extra code – creates the same quadratic dataset as earlier and splits it</span></span>
+<span id="cb14-9"><a aria-label="9"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb14-10"><a aria-label="10"></a>m <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb14-11"><a aria-label="11"></a>X <span class="op">=</span> <span class="dv">6</span> <span class="op">*</span> np.random.rand(m, <span class="dv">1</span>) <span class="op">-</span> <span class="dv">3</span></span>
+<span id="cb14-12"><a aria-label="12"></a>y <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> X <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> X <span class="op">+</span> <span class="dv">2</span> <span class="op">+</span> np.random.randn(m, <span class="dv">1</span>)</span>
+<span id="cb14-13"><a aria-label="13"></a>X_train, y_train <span class="op">=</span> X[: m <span class="op">//</span> <span class="dv">2</span>], y[: m <span class="op">//</span> <span class="dv">2</span>, <span class="dv">0</span>]</span>
+<span id="cb14-14"><a aria-label="14"></a>X_valid, y_valid <span class="op">=</span> X[m <span class="op">//</span> <span class="dv">2</span> :], y[m <span class="op">//</span> <span class="dv">2</span> :, <span class="dv">0</span>]</span>
+<span id="cb14-15"><a aria-label="15"></a></span>
+<span id="cb14-16"><a aria-label="16"></a>preprocessing <span class="op">=</span> make_pipeline(PolynomialFeatures(degree<span class="op">=</span><span class="dv">90</span>, include_bias<span class="op">=</span><span class="va">False</span>),</span>
+<span id="cb14-17"><a aria-label="17"></a>                              StandardScaler())</span>
+<span id="cb14-18"><a aria-label="18"></a>X_train_prep <span class="op">=</span> preprocessing.fit_transform(X_train)</span>
+<span id="cb14-19"><a aria-label="19"></a>X_valid_prep <span class="op">=</span> preprocessing.transform(X_valid)</span>
+<span id="cb14-20"><a aria-label="20"></a>sgd_reg <span class="op">=</span> SGDRegressor(penalty<span class="op">=</span><span class="va">None</span>, eta0<span class="op">=</span><span class="fl">0.002</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb14-21"><a aria-label="21"></a>n_epochs <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb14-22"><a aria-label="22"></a>best_valid_rmse <span class="op">=</span> <span class="bu">float</span>(<span class="st">'inf'</span>)</span>
+<span id="cb14-23"><a aria-label="23"></a>train_errors, val_errors <span class="op">=</span> [], []  <span class="co"># extra code – it's for the figure below</span></span>
+<span id="cb14-24"><a aria-label="24"></a></span>
+<span id="cb14-25"><a aria-label="25"></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(n_epochs):</span>
+<span id="cb14-26"><a aria-label="26"></a>    sgd_reg.partial_fit(X_train_prep, y_train)</span>
+<span id="cb14-27"><a aria-label="27"></a>    y_valid_predict <span class="op">=</span> sgd_reg.predict(X_valid_prep)</span>
+<span id="cb14-28"><a aria-label="28"></a>    val_error <span class="op">=</span> root_mean_squared_error(y_valid, y_valid_predict)</span>
+<span id="cb14-29"><a aria-label="29"></a>    <span class="cf">if</span> val_error <span class="op">&lt;</span> best_valid_rmse:</span>
+<span id="cb14-30"><a aria-label="30"></a>        best_valid_rmse <span class="op">=</span> val_error</span>
+<span id="cb14-31"><a aria-label="31"></a>        best_model <span class="op">=</span> deepcopy(sgd_reg)</span>
+<span id="cb14-32"><a aria-label="32"></a></span>
+<span id="cb14-33"><a aria-label="33"></a>    <span class="co"># extra code – we evaluate the train error and save it for the figure</span></span>
+<span id="cb14-34"><a aria-label="34"></a>    y_train_predict <span class="op">=</span> sgd_reg.predict(X_train_prep)</span>
+<span id="cb14-35"><a aria-label="35"></a>    train_error <span class="op">=</span> root_mean_squared_error(y_train, y_train_predict)</span>
+<span id="cb14-36"><a aria-label="36"></a>    val_errors.append(val_error)</span>
+<span id="cb14-37"><a aria-label="37"></a>    train_errors.append(train_error)</span>
+<span id="cb14-38"><a aria-label="38"></a></span>
+<span id="cb14-39"><a aria-label="39"></a><span class="co"># extra code – this section generates and saves Figure 4–20</span></span>
+<span id="cb14-40"><a aria-label="40"></a>best_epoch <span class="op">=</span> np.argmin(val_errors)</span>
+<span id="cb14-41"><a aria-label="41"></a>plt.annotate(<span class="st">'Best model'</span>,</span>
+<span id="cb14-42"><a aria-label="42"></a>             xy<span class="op">=</span>(best_epoch, best_valid_rmse),</span>
+<span id="cb14-43"><a aria-label="43"></a>             xytext<span class="op">=</span>(best_epoch, best_valid_rmse <span class="op">+</span> <span class="fl">0.5</span>),</span>
+<span id="cb14-44"><a aria-label="44"></a>             ha<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="cb14-45"><a aria-label="45"></a>             arrowprops<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">'black'</span>, shrink<span class="op">=</span><span class="fl">0.05</span>))</span>
+<span id="cb14-46"><a aria-label="46"></a>plt.plot([<span class="dv">0</span>, n_epochs], [best_valid_rmse, best_valid_rmse], <span class="st">"k:"</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb14-47"><a aria-label="47"></a>plt.plot(val_errors, <span class="st">"b-"</span>, linewidth<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="st">"Validation set"</span>)</span>
+<span id="cb14-48"><a aria-label="48"></a>plt.plot(best_epoch, best_valid_rmse, <span class="st">"bo"</span>)</span>
+<span id="cb14-49"><a aria-label="49"></a>plt.plot(train_errors, <span class="st">"r--"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Training set"</span>)</span>
+<span id="cb14-50"><a aria-label="50"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
+<span id="cb14-51"><a aria-label="51"></a>plt.xlabel(<span class="st">"Epoch"</span>)</span>
+<span id="cb14-52"><a aria-label="52"></a>plt.ylabel(<span class="st">"RMSE"</span>)</span>
+<span id="cb14-53"><a aria-label="53"></a>plt.axis([<span class="dv">0</span>, n_epochs, <span class="dv">0</span>, <span class="fl">3.5</span>])</span>
+<span id="cb14-54"><a aria-label="54"></a>plt.grid()</span>
+<span id="cb14-55"><a aria-label="55"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-7-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides_files/figure-revealjs/cell-7-output-1.png" class="quarto-figure quarto-figure-center" width="825" height="436"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside><div>
+<p><strong>Attribution</strong>: <span class="citation" data-cites="Geron:2022aa">Géron (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span>, <a href="https://github.com/ageron/handson-ml3/blob/main/04_training_linear_models.ipynb">04_training_linear_models.ipynb</a>.</p>
+</div></aside></section></section>
+<section>
+<section id="prologue" class="title-slide slide level1 center">
+<h1>Prologue</h1>
+
+</section>
+<section id="summary" class="slide level2 smaller">
+<h2>Summary</h2>
+<ul>
+<li><strong>Gradient propagation:</strong> activation derivatives and initialization affect training; ReLU and suitable scaling address some limitations of sigmoid networks.</li>
+<li><strong>Implementation:</strong> <code>SimpleMLP</code> retains the <code>SimplerMLP</code> structure and adds hidden activations, optional L2, and learning-rate decay.</li>
+<li><strong>Loss Functions:</strong>
+<ul>
+<li><strong>Regression Tasks:</strong> Mean Squared Error (MSE).</li>
+<li><strong>Classification Tasks:</strong> Cross-Entropy Loss with Softmax activation for multi-class outputs.</li>
+</ul></li>
+<li><strong>Regularization Techniques:</strong>
+<ul>
+<li><strong>L1 and L2 Regularization:</strong> Add penalty terms to the loss to discourage large weights.</li>
+<li><strong>Dropout:</strong> Randomly deactivate neurons during training to prevent overfitting.</li>
+<li><strong>Early Stopping:</strong> Halt training when validation performance deteriorates.</li>
+</ul></li>
+</ul>
+</section>
+<section id="next-lecture" class="slide level2">
+<h2>Next lecture</h2>
+<ul>
+<li>We will introduce convolutional neural networks.</li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Geron:2022aa" class="csl-entry" role="listitem">
+Géron, Aurélien. 2022. <em>Hands-on Machine Learning with Scikit-Learn, Keras, and TensorFlow</em>. 3rd ed. O’Reilly Media, Inc.
+</div>
+<div id="ref-Glorot:2010aa" class="csl-entry" role="listitem">
+Glorot, Xavier, and Yoshua Bengio. 2010. <span>“Understanding the Difficulty of Training Deep Feedforward Neural Networks.”</span> In <em>Proceedings of the Thirteenth International Conference on Artificial Intelligence and Statistics</em>, edited by Yee Whye Teh and Mike Titterington, vol. 9. Proceedings of Machine Learning Research. PMLR. <a href="https://proceedings.mlr.press/v9/glorot10a.html">https://proceedings.mlr.press/v9/glorot10a.html</a>.
+</div>
+<div id="ref-Hinton:2012aa" class="csl-entry" role="listitem">
+Hinton, Geoffrey E., Nitish Srivastava, Alex Krizhevsky, Ilya Sutskever, and Ruslan Salakhutdinov. 2012. <span>“Improving Neural Networks by Preventing Co-Adaptation of Feature Detectors.”</span> <em>CoRR</em> abs/1207.0580. <a href="http://arxiv.org/abs/1207.0580">http://arxiv.org/abs/1207.0580</a>.
+</div>
+<div id="ref-Russell:2020aa" class="csl-entry" role="listitem">
+Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</span> Modern Approach</em>. 4th ed. Pearson. <a href="http://aima.cs.berkeley.edu/">http://aima.cs.berkeley.edu/</a>.
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Marcel <strong>Turcotte</strong></p>
+<p><a href="mailto:Marcel.Turcotte@uOttawa.ca">Marcel.Turcotte@uOttawa.ca</a></p>
+<p>School of Electrical Engineering and <strong>Computer Science</strong> (EE<strong>CS</strong>)</p>
+<p>University of Ottawa</p>
+
+
+</section></section>
+
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../../assets/images/uottawa_hor_black.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p><a href="https://turcotte.xyz/teaching/csi-4106">turcotte.xyz/teaching/csi-4106</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/multiplex/socket.io.js"></script>
+  <script src="../../site_libs/revealjs/plugin/multiplex/multiplex.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'multiplex': {"secret":"01b237e3dae963d448637e3d38c458ca","id":"8da8440869835e2ec989eb5ac025e5aa7d2ce97f39dc37787719e68b8c9a4152","url":"https://multiplex.up.railway.app/"},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/turcotte\.xyz\/teaching\/csi-4106");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+</body></html>

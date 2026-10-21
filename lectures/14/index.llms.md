@@ -1,4 +1,4 @@
-# Softmax, cross-entropy, regularization
+# Training deep networks, softmax, and regularization
 
 CSI4106 Introduction to Artificial Intelligence
 
