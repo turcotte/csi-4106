@@ -6,7 +6,7 @@ Marcel Turcotte
 
 Published
 
-September 22, 2026
+October 26, 2026
 
 # Instructor
 
@@ -14,7 +14,7 @@ September 22, 2026
 
 | Office hours | Time        | Location |
 |--------------|-------------|----------|
-| Monday       | 15:00-16:20 | STE 5106 |
+| Monday [^1]  | 15:00-16:20 | STE 5106 |
 
 # Teaching assistants
 
@@ -26,3 +26,7 @@ September 22, 2026
 | Vishal Meenakshi Sundaram | Tuesday      | 12:00-14:00 | STE 5112 (5000J)   |
 
 Please refer to Brightspace to find the email addresses of our teaching assistants, which are available under either the ‘Overview’ or ‘Course Information’ sections.
+
+## Footnotes
+
+[^1]: Exceptionnaly on Tuesday, during the reading week.
