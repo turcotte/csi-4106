@@ -13788,5 +13788,75 @@
       "**Course information**",
       "Teaching team"
     ]
+  },
+  {
+    "objectID": "lectures/12/slides.html#parameters",
+    "href": "lectures/12/slides.html#parameters",
+    "title": "Training Artificial Neural Networks (Part 1)",
+    "section": "Parameters",
+    "text": "Parameters\n\n\n\n\n\n\n\n\n\nIn our running example, the model consists of three layers: \\(\\ell^{(1)}\\), \\(\\ell^{(2)}\\), and \\(\\ell^{(\\textrm{out})}\\). Each layer \\(\\ell\\) is parameterized by a weight matrix \\(W^{(\\ell)}\\) and a bias vector \\(b^{(\\ell)}\\). The dataset \\(X\\) contains 10 examples, each with two features. Ensure that you understand how the input and output dimensions of each layer determine the dimensions of its weight matrix and bias vector."
+  },
+  {
+    "objectID": "lectures/12/slides.html#following-the-array-shapes-continued",
+    "href": "lectures/12/slides.html#following-the-array-shapes-continued",
+    "title": "Training Artificial Neural Networks (Part 1)",
+    "section": "Following the array shapes (continued)",
+    "text": "Following the array shapes (continued)"
+  },
+  {
+    "objectID": "lectures/12/slides.html#following-the-array-shapes-contd",
+    "href": "lectures/12/slides.html#following-the-array-shapes-contd",
+    "title": "Training Artificial Neural Networks (Part 1)",
+    "section": "Following the array shapes (contd)",
+    "text": "Following the array shapes (contd)\n\n\n\n\n\n\nThe figure depicts the model, including the input vector \\(X\\), weight matrices, and bias vectors. For neuron 1 in layer \\(\\ell_1\\), the pre-activation value is computed as\n\\[\nz_1^{(\\ell_1)} = x_1 W_{1,1}^{(\\ell_1)} + x_2 W_{1,2}^{(\\ell_1)} + b_1^{(\\ell_1)}.\n\\]\nOne-based indexing is used throughout for readability."
+  },
+  {
+    "objectID": "lectures/12/slides.html#following-the-array-shapes-contd-1",
+    "href": "lectures/12/slides.html#following-the-array-shapes-contd-1",
+    "title": "Training Artificial Neural Networks (Part 1)",
+    "section": "Following the array shapes (contd)",
+    "text": "Following the array shapes (contd)\n\n\n\n\n\n\nThe figure illustrates the dimensions of the matrix obtained from the intermediate computation \\(A = X W^{(\\ell_1)}\\)."
+  },
+  {
+    "objectID": "lectures/12/slides.html#following-the-array-shapes-contd-2",
+    "href": "lectures/12/slides.html#following-the-array-shapes-contd-2",
+    "title": "Training Artificial Neural Networks (Part 1)",
+    "section": "Following the array shapes (contd)",
+    "text": "Following the array shapes (contd)\n\n\n\n\n\n\nThe figure illustrates how NumPy broadcasting adds the bias vector \\(b^{(\\ell_1)}\\) to each row of the matrix product \\(X W^{(\\ell_1)}\\). The next screens show the remaining intermediate calculations. Track the input and output dimensions at each step to understand how each operation transforms the matrix shapes."
+  },
+  {
+    "objectID": "lectures/12/slides.html#following-the-array-shapes-contd-3",
+    "href": "lectures/12/slides.html#following-the-array-shapes-contd-3",
+    "title": "Training Artificial Neural Networks (Part 1)",
+    "section": "Following the array shapes (contd)",
+    "text": "Following the array shapes (contd)"
+  },
+  {
+    "objectID": "lectures/12/slides.html#following-the-array-shapes-contd-4",
+    "href": "lectures/12/slides.html#following-the-array-shapes-contd-4",
+    "title": "Training Artificial Neural Networks (Part 1)",
+    "section": "Following the array shapes (contd)",
+    "text": "Following the array shapes (contd)"
+  },
+  {
+    "objectID": "lectures/12/slides.html#following-the-array-shapes-contd-5",
+    "href": "lectures/12/slides.html#following-the-array-shapes-contd-5",
+    "title": "Training Artificial Neural Networks (Part 1)",
+    "section": "Following the array shapes (contd)",
+    "text": "Following the array shapes (contd)"
+  },
+  {
+    "objectID": "lectures/12/slides.html#following-the-array-shapes-contd-6",
+    "href": "lectures/12/slides.html#following-the-array-shapes-contd-6",
+    "title": "Training Artificial Neural Networks (Part 1)",
+    "section": "Following the array shapes (contd)",
+    "text": "Following the array shapes (contd)"
+  },
+  {
+    "objectID": "lectures/12/slides.html#following-the-array-shapes-contd-7",
+    "href": "lectures/12/slides.html#following-the-array-shapes-contd-7",
+    "title": "Training Artificial Neural Networks (Part 1)",
+    "section": "Following the array shapes (contd)",
+    "text": "Following the array shapes (contd)"
   }
 ]

@@ -238,7 +238,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Oct 20, 2026 16:46</p>
+  <p class="date">Version: Oct 27, 2026 10:46</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -556,6 +556,30 @@ Marcel Turcotte
 <aside><div>
 <p>Memorizing the number of layers, the number of units per layer, and the learning algorithm’s step size. Initializing the weights (<span class="math inline">\(W\)</span>) and biases (<span class="math inline">\(b\)</span>).</p>
 </div></aside></section>
+<section id="parameters" class="slide level2">
+<h2>Parameters</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ann_mlp_params-2-4-4-1-s00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="../../assets/images/ann_mlp_params-2-4-4-1-s00.png" class="nostretch quarto-figure quarto-figure-center" height="475"></a></p>
+</figure>
+</div>
+<div class="corner-image">
+<p><a href="../../assets/images/ann_mlp-2-4-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="../../assets/images/ann_mlp-2-4-4-1.png"></a></p>
+</div>
+<aside class="notes">
+<p>In our running example, the model consists of three layers: <span class="math inline">\(\ell^{(1)}\)</span>, <span class="math inline">\(\ell^{(2)}\)</span>, and <span class="math inline">\(\ell^{(\textrm{out})}\)</span>. Each layer <span class="math inline">\(\ell\)</span> is parameterized by a weight matrix <span class="math inline">\(W^{(\ell)}\)</span> and a bias vector <span class="math inline">\(b^{(\ell)}\)</span>. The dataset <span class="math inline">\(X\)</span> contains 10 examples, each with two features. Ensure that you understand how the input and output dimensions of each layer determine the dimensions of its weight matrix and bias vector.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="python-detour-weight-arrays" class="slide level2">
 <h2>Python detour: weight arrays</h2>
 <div id="86dd7c19" class="cell" data-execution_count="5">
@@ -587,7 +611,7 @@ Marcel Turcotte
 </div>
 </div>
 <div class="corner-image">
-<p><a href="../../assets/images/ann_mlp-2-4-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="../../assets/images/ann_mlp-2-4-4-1.png"></a></p>
+<p><a href="../../assets/images/ann_mlp-2-4-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="../../assets/images/ann_mlp-2-4-4-1.png"></a></p>
 </div>
 <aside class="notes">
 <p>How many weights has this network?</p>
@@ -620,7 +644,7 @@ Marcel Turcotte
 </div>
 </div>
 <div class="corner-image">
-<p><a href="../../assets/images/ann_mlp-2-4-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="../../assets/images/ann_mlp-2-4-4-1.png"></a></p>
+<p><a href="../../assets/images/ann_mlp-2-4-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="../../assets/images/ann_mlp-2-4-4-1.png"></a></p>
 </div>
 <aside class="notes">
 <p>What is the number of bias terms in this network?</p>
@@ -655,7 +679,7 @@ Marcel Turcotte
 <span id="cb14-12"><a aria-label="12"></a></span>
 <span id="cb14-13"><a aria-label="13"></a>        <span class="cf">return</span> a.ravel()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="corner-image">
-<p><a href="../../assets/images/ann_mlp-2-4-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="../../assets/images/ann_mlp-2-4-4-1.png"></a></p>
+<p><a href="../../assets/images/ann_mlp-2-4-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="../../assets/images/ann_mlp-2-4-4-1.png"></a></p>
 </div>
 <aside class="notes">
 <p>Calculating the output activations. Determining the probability of each instance in the dataset <span class="math inline">\(X\)</span> belonging to class 1.</p>
@@ -723,7 +747,7 @@ Marcel Turcotte
 <li><code>ravel()</code> changes the final shape from <code>(N, 1)</code> to <code>(N,)</code>.</li>
 </ul>
 <div class="corner-image">
-<p><a href="../../assets/images/ann_mlp-2-4-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="../../assets/images/ann_mlp-2-4-4-1.png"></a></p>
+<p><a href="../../assets/images/ann_mlp-2-4-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="../../assets/images/ann_mlp-2-4-4-1.png"></a></p>
 </div>
 <aside class="notes">
 <p>Matrix multiplication requires the number of columns in the incoming activations to match the number of rows in the weight matrix. The number of columns in the result is the number of units in the current layer. Applying the sigmoid elementwise preserves that shape.</p>
@@ -739,6 +763,113 @@ Marcel Turcotte
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="following-the-array-shapes-contd" class="slide level2 smaller">
+<h2>Following the array shapes (contd)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ann_mlp_params_model-2-4-4-1-s00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="../../assets/images/ann_mlp_params_model-2-4-4-1-s00.png" class="quarto-figure quarto-figure-center" height="475"></a></p>
+</figure>
+</div>
+<aside class="notes">
+<p>The figure depicts the model, including the input vector <span class="math inline">\(X\)</span>, weight matrices, and bias vectors. For neuron 1 in layer <span class="math inline">\(\ell_1\)</span>, the pre-activation value is computed as</p>
+<p><span class="math display">\[
+z_1^{(\ell_1)} = x_1 W_{1,1}^{(\ell_1)} + x_2 W_{1,2}^{(\ell_1)} + b_1^{(\ell_1)}.
+\]</span></p>
+<p>One-based indexing is used throughout for readability.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="following-the-array-shapes-contd-1" class="slide level2 smaller">
+<h2>Following the array shapes (contd)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ann_mlp_params-2-4-4-1-s01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="../../assets/images/ann_mlp_params-2-4-4-1-s01.png" class="quarto-figure quarto-figure-center" height="475"></a></p>
+</figure>
+</div>
+<aside class="notes">
+<p>The figure illustrates the dimensions of the matrix obtained from the intermediate computation <span class="math inline">\(A = X W^{(\ell_1)}\)</span>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="following-the-array-shapes-contd-2" class="slide level2 smaller">
+<h2>Following the array shapes (contd)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ann_mlp_params-2-4-4-1-s01-broadcast.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="../../assets/images/ann_mlp_params-2-4-4-1-s01-broadcast.png" class="quarto-figure quarto-figure-center" height="475"></a></p>
+</figure>
+</div>
+<aside class="notes">
+<p>The figure illustrates how NumPy broadcasting adds the bias vector <span class="math inline">\(b^{(\ell_1)}\)</span> to each row of the matrix product <span class="math inline">\(X W^{(\ell_1)}\)</span>. The next screens show the remaining intermediate calculations. Track the input and output dimensions at each step to understand how each operation transforms the matrix shapes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="following-the-array-shapes-contd-3" class="slide level2 smaller">
+<h2>Following the array shapes (contd)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ann_mlp_params-2-4-4-1-s02.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="../../assets/images/ann_mlp_params-2-4-4-1-s02.png" class="quarto-figure quarto-figure-center" height="475"></a></p>
+</figure>
+</div>
+</section>
+<section id="following-the-array-shapes-contd-4" class="slide level2 smaller">
+<h2>Following the array shapes (contd)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ann_mlp_params-2-4-4-1-s03.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="../../assets/images/ann_mlp_params-2-4-4-1-s03.png" class="quarto-figure quarto-figure-center" height="475"></a></p>
+</figure>
+</div>
+</section>
+<section id="following-the-array-shapes-contd-5" class="slide level2 smaller">
+<h2>Following the array shapes (contd)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ann_mlp_params-2-4-4-1-s04.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="../../assets/images/ann_mlp_params-2-4-4-1-s04.png" class="quarto-figure quarto-figure-center" height="475"></a></p>
+</figure>
+</div>
+</section>
+<section id="following-the-array-shapes-contd-6" class="slide level2 smaller">
+<h2>Following the array shapes (contd)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ann_mlp_params-2-4-4-1-s05.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="../../assets/images/ann_mlp_params-2-4-4-1-s05.png" class="quarto-figure quarto-figure-center" height="475"></a></p>
+</figure>
+</div>
+</section>
+<section id="following-the-array-shapes-contd-7" class="slide level2 smaller">
+<h2>Following the array shapes (contd)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/ann_mlp_params-2-4-4-1-s06.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="../../assets/images/ann_mlp_params-2-4-4-1-s06.png" class="quarto-figure quarto-figure-center" height="475"></a></p>
+</figure>
+</div>
 </section>
 <section id="making-predictions" class="slide level2">
 <h2>Making predictions</h2>
@@ -1324,7 +1455,7 @@ Test acc:  1.0</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-16-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="slides_files/figure-revealjs/cell-16-output-1.png" class="quarto-figure quarto-figure-center" width="512" height="511"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-16-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-revealjs/cell-16-output-1.png" class="quarto-figure quarto-figure-center" width="512" height="511"></a></p>
 </figure>
 </div>
 </div>
@@ -1365,7 +1496,7 @@ Test acc:  1.0</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-17-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="slides_files/figure-revealjs/cell-17-output-1.png" class="quarto-figure quarto-figure-center" width="423" height="422"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-17-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="slides_files/figure-revealjs/cell-17-output-1.png" class="quarto-figure quarto-figure-center" width="423" height="422"></a></p>
 </figure>
 </div>
 </div>
@@ -1417,7 +1548,7 @@ Test acc:  0.98</code></pre>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><a href="slides_files/figure-revealjs/cell-19-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides_files/figure-revealjs/cell-19-output-1.png" class="quarto-figure quarto-figure-center" width="512" height="511"></a></p>
+<p><a href="slides_files/figure-revealjs/cell-19-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="slides_files/figure-revealjs/cell-19-output-1.png" class="quarto-figure quarto-figure-center" width="512" height="511"></a></p>
 </figure>
 </div>
 </div>
