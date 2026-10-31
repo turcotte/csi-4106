@@ -1,4 +1,4 @@
-# Training Artificial Neural Networks (Part 1)
+# Implementing Artificial Neural Networks (Part 1)
 
 CSI4106 Introduction to Artificial Intelligence
 

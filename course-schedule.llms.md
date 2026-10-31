@@ -6,7 +6,7 @@ Marcel Turcotte
 
 Published
 
-October 21, 2026
+October 27, 2026
 
 This page contains an outline of the topics, content, and assignments for the semester.
 
@@ -27,13 +27,13 @@ Note that this schedule will be updated as the semester progresses, with all cha
 | Oct. 12 | Thanksgiving - no lecture | \- | \- |  |
 | Oct. 14 | [Machine Learning Engineering](lectures/10/index.llms.md) | [](lectures/10/slides.llms.md) [](lectures/10/slides.pdf) | \- | \- |
 | Oct. 19 | [Introduction to Artificial Neural Networks](lectures/11/index.llms.md) | [](lectures/11/slides.llms.md) [](lectures/11/slides.pdf) | \- | \- |
-| Oct. 21 | [Training Artificial Neural Networks (Part 1](lectures/12/index.llms.md)) | [](lectures/12/slides.llms.md) [](lectures/12/slides.pdf) | \- | \- |
+| Oct. 21 | [Implementing Artificial Neural Networks (Part 1)](lectures/12/index.llms.md) | [](lectures/12/slides.llms.md) [](lectures/12/slides.pdf) | \- | \- |
 | Oct. 26 | \- | \- | ~~A2: ML~~ | \- |
 | Oct. 26 | Reading week - no lecture | \- | \- | \- |
 | Oct. 28 | Reading week - no lecture | \- | \- | \- |
 | Nov. 2 | \- | \- | A2: ML | \- |
-| Nov. 2 | [Training Artificial Neural Networks (Part 2](lectures/13/index.llms.md)) | [](lectures/13/slides.llms.md) [](lectures/13/slides.pdf) | \- | \- |
-| Nov. 4 | [Sofmax, cross-entropy and regularization](lectures/14/index.llms.md) | [](lectures/14/slides.llms.md) [](lectures/14/slides.pdf) | \- | \- |
+| Nov. 2 | [Implementing Artificial Neural Networks (Part 2)](lectures/13/index.llms.md) | [](lectures/13/slides.llms.md) [](lectures/13/slides.pdf) | \- | \- |
+| Nov. 4 | [Training neural networks: challenges and practical choices](lectures/14/index.llms.md) | [](lectures/14/slides.llms.md) [](lectures/14/slides.pdf) | \- | \- |
 | Nov. 9 | [Neural Network Architectures](lectures/15/index.llms.md) | [](lectures/15/slides.llms.md) [](lectures/15/slides.pdf) | \- | \- |
 | Nov. 11 | [Introduction to Search](lectures/16/index.llms.md) | [](lectures/16/slides.llms.md) [](lectures/16/slides.pdf) | \- | \- |
 | Nov. 16 | [Informed Search](lectures/17/index.llms.md) | [](lectures/17/slides.llms.md) [](lectures/17/slides.pdf) | \- | \- |

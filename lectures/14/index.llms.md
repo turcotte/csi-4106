@@ -1,4 +1,4 @@
-# Training deep networks, softmax, and regularization
+# Training neural networks: challenges and practical choices
 
 CSI4106 Introduction to Artificial Intelligence
 
@@ -12,4 +12,7 @@ CSI4106 Introduction to Artificial Intelligence
 
 ## Practice
 
-- [kong_and_yu-2018](kong_and_yu-2018) - a notebook illustrating the effectiveness of l_1 and l_2 regularization.
+- [Loss landscapes and gradient descent ](../../lectures/14/loss_functions.llms.md): Explore starting points, flat regions, local minima, and gradient clipping.
+- [Regularization: shrinkage and sparsity ](../../lectures/14/regularization.llms.md): Compare true coefficients, ordinary least squares, Ridge, and Lasso.
+- [Catastrophic forgetting on MNIST ](../../lectures/14/catastrophic_forgetting.llms.md): Train on two disjoint digit groups, measure retention, and compare a replay strategy.
+- [Regularization with correlated features ](../../lectures/14/kong_and_yu-2018.llms.md): A more advanced example with many correlated predictors.

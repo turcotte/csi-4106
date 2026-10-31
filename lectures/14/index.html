@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Training deep networks, softmax, and regularization – CSI 4106 - Fall 2026</title>
+<title>Training neural networks: challenges and practical choices – CSI 4106 - Fall 2026</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -49,6 +49,8 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/bootstrap/bootstrap-98c7db931a85d9ab1fb3feaac0faa502.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark-0455937d2cbe398515a871030189d4b5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="../../site_libs/bootstrap/bootstrap-98c7db931a85d9ab1fb3feaac0faa502.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -77,51 +79,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<meta property="og:title" content="Training deep networks, softmax, and regularization – CSI 4106 - Fall 2026">
+<meta property="og:title" content="Training neural networks: challenges and practical choices – CSI 4106 - Fall 2026">
 <meta property="og:description" content="CSI4106 Introduction to Artificial Intelligence">
 <meta property="og:site_name" content="CSI 4106 - Fall 2026">
 </head>
@@ -456,7 +415,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Training deep networks, softmax, and regularization</h1>
+<h1 class="title">Training neural networks: challenges and practical choices</h1>
 <p class="subtitle lead">CSI4106 Introduction to Artificial Intelligence</p>
 </div>
 
@@ -496,7 +455,10 @@ Important
 <section id="practice" class="level2">
 <h2 class="anchored" data-anchor-id="practice">Practice</h2>
 <ul>
-<li><a href="kong_and_yu-2018">kong_and_yu-2018</a> - a notebook illustrating the effectiveness of <span class="math inline">l_1</span> and <span class="math inline">l_2</span> regularization.</li>
+<li><a href="../../lectures/14/loss_functions.html">Loss landscapes and gradient descent <i class="fa-brands fa-python" aria-label="python"></i></a>: Explore starting points, flat regions, local minima, and gradient clipping.</li>
+<li><a href="../../lectures/14/regularization.html">Regularization: shrinkage and sparsity <i class="fa-brands fa-python" aria-label="python"></i></a>: Compare true coefficients, ordinary least squares, Ridge, and Lasso.</li>
+<li><a href="../../lectures/14/catastrophic_forgetting.html">Catastrophic forgetting on MNIST <i class="fa-brands fa-python" aria-label="python"></i></a>: Train on two disjoint digit groups, measure retention, and compare a replay strategy.</li>
+<li><a href="../../lectures/14/kong_and_yu-2018.html">Regularization with correlated features <i class="fa-brands fa-python" aria-label="python"></i></a>: A more advanced example with many correlated predictors.</li>
 </ul>
 
 

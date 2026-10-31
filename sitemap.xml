@@ -46,7 +46,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/course-schedule.html</loc>
-    <lastmod>2026-10-21T22:07:28.586Z</lastmod>
+    <lastmod>2026-10-27T18:10:25.054Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/course-syllabus.html</loc>
@@ -186,23 +186,23 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/12/index.html</loc>
-    <lastmod>2026-10-21T22:22:13.137Z</lastmod>
+    <lastmod>2026-10-27T18:10:24.986Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/12/slides.html</loc>
-    <lastmod>2026-10-27T14:46:17.279Z</lastmod>
+    <lastmod>2026-10-31T15:27:13.930Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/13/index.html</loc>
-    <lastmod>2026-10-21T22:22:23.009Z</lastmod>
+    <lastmod>2026-10-27T18:10:25.031Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/13/slides.html</loc>
-    <lastmod>2026-10-17T20:03:05.482Z</lastmod>
+    <lastmod>2026-10-31T15:26:37.780Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/14/index.html</loc>
-    <lastmod>2026-10-17T16:18:51.559Z</lastmod>
+    <lastmod>2026-10-27T17:39:47.584Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/14/kong_and_yu-2018.html</loc>
@@ -210,7 +210,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/14/slides.html</loc>
-    <lastmod>2026-10-17T20:03:27.951Z</lastmod>
+    <lastmod>2026-10-31T17:34:09.850Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/15/index.html</loc>
@@ -347,5 +347,17 @@
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/11/ReLUBuildingBlocks.html</loc>
     <lastmod>2026-10-20T20:28:56.513Z</lastmod>
+  </url>
+  <url>
+    <loc>https://turcotte.xyz/teaching/csi-4106/lectures/14/catastrophic_forgetting.html</loc>
+    <lastmod>2026-10-27T17:56:41.121Z</lastmod>
+  </url>
+  <url>
+    <loc>https://turcotte.xyz/teaching/csi-4106/lectures/14/regularization.html</loc>
+    <lastmod>2026-10-27T18:22:51.168Z</lastmod>
+  </url>
+  <url>
+    <loc>https://turcotte.xyz/teaching/csi-4106/lectures/14/loss_functions.html</loc>
+    <lastmod>2026-10-27T18:15:30.000Z</lastmod>
   </url>
 </urlset>

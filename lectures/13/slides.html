@@ -13,7 +13,7 @@
   <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Marcel Turcotte">
-  <title>CSI 4106 - Fall 2026 – Training Artificial Neural Networks (Part 2)</title>
+  <title>CSI 4106 - Fall 2026 – Implementing Artificial Neural Networks (Part&nbsp;2)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -218,7 +218,7 @@
       margin-right: 0; 
     }
   </style>
-<meta property="og:title" content="Training Artificial Neural Networks (Part 2) – CSI 4106 - Fall 2026">
+<meta property="og:title" content="Implementing Artificial Neural Networks (Part&nbsp;2) – CSI 4106 - Fall 2026">
 <meta property="og:description" content="CSI 4106 - Fall 2026">
 <meta property="og:site_name" content="CSI 4106 - Fall 2026">
 </head>
@@ -227,7 +227,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Training Artificial Neural Networks (Part 2)</h1>
+  <h1 class="title">Implementing Artificial Neural Networks (Part&nbsp;2)</h1>
   <p class="subtitle">CSI 4106 - Fall 2026</p>
 
 <div class="quarto-title-authors">
@@ -238,7 +238,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Oct 17, 2026 16:03</p>
+  <p class="date">Version: Oct 31, 2026 11:26</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -652,7 +652,7 @@ z^{(l)}=a^{(l-1)}W^{(l)}+b^{(l)},
 \sigma(z)=\frac{1}{1+e^{-z}},\qquad
 \sigma'(z)=\sigma(z)(1-\sigma(z)).
 \]</span></p>
-<div id="b20233f4" class="cell" data-execution_count="2">
+<div id="217931de" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1072,7 +1072,7 @@ z^{(l)}=a^{(l-1)}W^{(l)}+b^{(l)},
 </div></aside></section>
 <section id="exploration" class="slide level2 smaller">
 <h2>Exploration</h2>
-<div id="143cb240" class="cell" data-execution_count="3">
+<div id="38628158" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="im">import</span> math</span>
 <span id="cb3-2"><a aria-label="2"></a><span class="im">import</span> random</span>
 <span id="cb3-3"><a aria-label="3"></a></span>
@@ -1109,7 +1109,7 @@ z^{(l)}=a^{(l-1)}W^{(l)}+b^{(l)},
 </section>
 <section id="forward" class="slide level2">
 <h2>Forward</h2>
-<div id="7b9e5e1a" class="cell" data-execution_count="4">
+<div id="d02e26fa" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="kw">def</span> forward():</span>
 <span id="cb4-2"><a aria-label="2"></a></span>
 <span id="cb4-3"><a aria-label="3"></a>    <span class="kw">global</span> z1, a1, z2, a2, loss, p_hat</span>
@@ -1140,7 +1140,7 @@ z^{(l)}=a^{(l-1)}W^{(l)}+b^{(l)},
 </section>
 <section id="backward" class="slide level2">
 <h2>Backward</h2>
-<div id="6e80b4d0" class="cell" data-execution_count="5">
+<div id="54078066" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="kw">def</span> backward():</span>
 <span id="cb5-2"><a aria-label="2"></a></span>
 <span id="cb5-3"><a aria-label="3"></a>    grad_loss_w2 <span class="op">=</span> (p_hat <span class="op">-</span> y) <span class="op">*</span> a1</span>
@@ -1167,7 +1167,7 @@ z^{(l)}=a^{(l-1)}W^{(l)}+b^{(l)},
 </section>
 <section id="gradient-step" class="slide level2">
 <h2>Gradient step</h2>
-<div id="9ce444b1" class="cell" data-execution_count="6">
+<div id="635061a9" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a><span class="kw">def</span> step(gradients):</span>
 <span id="cb6-2"><a aria-label="2"></a></span>
 <span id="cb6-3"><a aria-label="3"></a>    <span class="kw">global</span> w1, b1, w2, b2</span>
@@ -1195,7 +1195,7 @@ z^{(l)}=a^{(l-1)}W^{(l)}+b^{(l)},
 </section>
 <section id="training" class="slide level2">
 <h2>Training</h2>
-<div id="047cd440" class="cell" data-execution_count="7">
+<div id="c5458be8" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a>init()</span>
 <span id="cb7-2"><a aria-label="2"></a></span>
 <span id="cb7-3"><a aria-label="3"></a>x <span class="op">=</span> <span class="fl">3.14</span></span>
@@ -1316,7 +1316,7 @@ After: p_hat = 0.99, loss = 0.01</code></pre>
 </div></aside></section>
 <section id="backward-with-error-signals" class="slide level2">
 <h2>Backward with error signals</h2>
-<div id="48eff7da" class="cell" data-execution_count="8">
+<div id="306d8e3e" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a><span class="kw">def</span> backward_with_signals():</span>
 <span id="cb9-2"><a aria-label="2"></a></span>
 <span id="cb9-3"><a aria-label="3"></a>    delta2 <span class="op">=</span> p_hat <span class="op">-</span> y</span>
@@ -1395,7 +1395,7 @@ z_v=sa+b_v,\qquad v=\sigma(z_v)
 </div></aside></section>
 <section id="branching-python" class="slide level2 smaller">
 <h2>Branching: Python</h2>
-<div id="f0a37053" class="cell" data-execution_count="9">
+<div id="aa0b8266" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a>a <span class="op">=</span> sigma(<span class="fl">0.0</span>)</span>
 <span id="cb10-2"><a aria-label="2"></a>r, s <span class="op">=</span> <span class="fl">2.0</span>, <span class="op">-</span><span class="fl">1.0</span></span>
 <span id="cb10-3"><a aria-label="3"></a>t, q <span class="op">=</span> <span class="fl">1.0</span>, <span class="fl">1.0</span></span>
@@ -1650,7 +1650,7 @@ delta_a: -0.03125</code></pre>
 <section id="simplermlp" class="slide level2">
 <h2>SimplerMLP</h2>
 <p>Sigmoid units, binary cross-entropy, and a constant learning rate.</p>
-<div id="ed596389" class="cell" data-execution_count="10">
+<div id="ccaa43ae" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1976,7 +1976,7 @@ delta_a: -0.03125</code></pre>
 </section>
 <section id="testing" class="slide level2 scrollable smaller">
 <h2>Testing</h2>
-<div id="b4708b2b" class="cell" data-execution_count="11">
+<div id="4e848537" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_circles</span>
 <span id="cb21-2"><a aria-label="2"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb21-3"><a aria-label="3"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
@@ -2170,6 +2170,66 @@ Rumelhart, David E., Geoffrey E. Hinton, and Ronald J. Williams. 1986. <span>“
 </div>
 <div id="ref-Russell:2020aa" class="csl-entry" role="listitem">
 Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</span> Modern Approach</em>. 4th ed. Pearson. <a href="http://aima.cs.berkeley.edu/">http://aima.cs.berkeley.edu/</a>.
+</div>
+</div>
+</section></section>
+<section>
+<section id="appendix-key-derivatives-sympy" class="title-slide slide level1 appendix center">
+<h1>Appendix: Key Derivatives (SymPy)</h1>
+
+</section>
+<section id="key-derivatives-using-sympy" class="slide level2 scrollable">
+<h2>Key Derivatives Using SymPy</h2>
+<div id="b2d85136" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb23-2"><a aria-label="2"></a><span class="im">from</span> IPython.display <span class="im">import</span> Math, display</span>
+<span id="cb23-3"><a aria-label="3"></a></span>
+<span id="cb23-4"><a aria-label="4"></a><span class="kw">def</span> sigmoid(z):</span>
+<span id="cb23-5"><a aria-label="5"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> sp.exp(<span class="op">-</span>z))</span>
+<span id="cb23-6"><a aria-label="6"></a></span>
+<span id="cb23-7"><a aria-label="7"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">"x y"</span>, real<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb23-8"><a aria-label="8"></a>w1, b1, w2, b2 <span class="op">=</span> sp.symbols(<span class="st">"w_1 b_1 w_2 b_2"</span>, real<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb23-9"><a aria-label="9"></a></span>
+<span id="cb23-10"><a aria-label="10"></a><span class="co"># Nested expressions, so the loss retains every parameter dependency.</span></span>
+<span id="cb23-11"><a aria-label="11"></a></span>
+<span id="cb23-12"><a aria-label="12"></a>z1 <span class="op">=</span> w1 <span class="op">*</span> x <span class="op">+</span> b1</span>
+<span id="cb23-13"><a aria-label="13"></a>a1 <span class="op">=</span> sigmoid(z1)</span>
+<span id="cb23-14"><a aria-label="14"></a></span>
+<span id="cb23-15"><a aria-label="15"></a>z2 <span class="op">=</span> w2 <span class="op">*</span> a1 <span class="op">+</span> b2</span>
+<span id="cb23-16"><a aria-label="16"></a>p_hat <span class="op">=</span> sigmoid(z2)</span>
+<span id="cb23-17"><a aria-label="17"></a></span>
+<span id="cb23-18"><a aria-label="18"></a>loss <span class="op">=</span> <span class="op">-</span>(y <span class="op">*</span> sp.log(p_hat) <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> y) <span class="op">*</span> sp.log(<span class="dv">1</span> <span class="op">-</span> p_hat))</span>
+<span id="cb23-19"><a aria-label="19"></a></span>
+<span id="cb23-20"><a aria-label="20"></a>gradients <span class="op">=</span> {parameter: sp.diff(loss, parameter) <span class="cf">for</span> parameter <span class="kw">in</span> (w2, b2, w1, b1)}</span>
+<span id="cb23-21"><a aria-label="21"></a></span>
+<span id="cb23-22"><a aria-label="22"></a><span class="co"># Cosmetic rewriting for readability</span></span>
+<span id="cb23-23"><a aria-label="23"></a></span>
+<span id="cb23-24"><a aria-label="24"></a>a1_symbol, p_symbol <span class="op">=</span> sp.symbols(<span class="st">"a_1 p_hat"</span>, real<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb23-25"><a aria-label="25"></a></span>
+<span id="cb23-26"><a aria-label="26"></a>rewrites <span class="op">=</span> [</span>
+<span id="cb23-27"><a aria-label="27"></a>  (sp.exp(<span class="op">-</span>z2), (<span class="dv">1</span> <span class="op">-</span> p_symbol) <span class="op">/</span> p_symbol),</span>
+<span id="cb23-28"><a aria-label="28"></a>  (sp.exp(<span class="op">-</span>z1), (<span class="dv">1</span> <span class="op">-</span> a1_symbol) <span class="op">/</span> a1_symbol),</span>
+<span id="cb23-29"><a aria-label="29"></a>]</span>
+<span id="cb23-30"><a aria-label="30"></a></span>
+<span id="cb23-31"><a aria-label="31"></a><span class="cf">for</span> parameter, gradient <span class="kw">in</span> gradients.items():</span>
+<span id="cb23-32"><a aria-label="32"></a>    named_gradient <span class="op">=</span> sp.factor(gradient.subs(rewrites))</span>
+<span id="cb23-33"><a aria-label="33"></a>    lhs <span class="op">=</span> <span class="vs">rf"</span><span class="ch">\f</span><span class="vs">rac</span><span class="ch">{{</span><span class="er">\</span><span class="vs">partial </span><span class="er">\</span><span class="vs">ell</span><span class="ch">}}{{</span><span class="er">\</span><span class="vs">partial </span><span class="sc">{</span>sp<span class="sc">.</span>latex(parameter)<span class="sc">}</span><span class="ch">}}</span><span class="vs">"</span></span>
+<span id="cb23-34"><a aria-label="34"></a>    rhs <span class="op">=</span> sp.latex(named_gradient, symbol_names<span class="op">=</span>{p_symbol: <span class="vs">r"</span><span class="er">\</span><span class="vs">hat p"</span>})</span>
+<span id="cb23-35"><a aria-label="35"></a>    display(Math(<span class="ss">f"</span><span class="sc">{</span>lhs<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>rhs<span class="sc">}</span><span class="ss">"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><span class="math inline">\(\displaystyle \frac{\partial \ell}{\partial w_{2}} = - a_{1} \left(- \hat p + y\right)\)</span></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><span class="math inline">\(\displaystyle \frac{\partial \ell}{\partial b_{2}} = \hat p - y\)</span></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><span class="math inline">\(\displaystyle \frac{\partial \ell}{\partial w_{1}} = a_{1} w_{2} x \left(a_{1} - 1\right) \left(- \hat p + y\right)\)</span></p>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
+<p><span class="math inline">\(\displaystyle \frac{\partial \ell}{\partial b_{1}} = a_{1} w_{2} \left(a_{1} - 1\right) \left(- \hat p + y\right)\)</span></p>
 </div>
 </div>
 </section>
