@@ -256,7 +256,10 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Oct 31, 2026 13:34</p>
+  <p class="date">Version: Nov 1, 2026 17:44</p>
+</section>
+<section id="section" class="slide level2" data-background-image="../../assets/images/grad_open_house-en.jpg" data-background-size="100% auto">
+<h2></h2>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -354,7 +357,7 @@ Marcel Turcotte
 <section id="where-will-gradient-descent-take-us" class="slide level2 hide-code-toggle">
 <h2>Where will gradient descent take us?</h2>
 <p>Start at each green point. With a small fixed learning rate, where might the updates stop?</p>
-<div id="d64945f1" class="cell" data-execution_count="1">
+<div id="d64945f1" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -432,7 +435,7 @@ Marcel Turcotte
 </section>
 <section id="three-landscapes-three-trajectories" class="slide level2 hide-code-toggle">
 <h2>Three landscapes, three trajectories</h2>
-<div id="4465377c" class="cell" data-execution_count="2">
+<div id="4465377c" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="fl">3.2</span>))</span>
@@ -478,7 +481,7 @@ Marcel Turcotte
 <section id="what-happens-along-a-longer-path" class="slide level2 hide-code-toggle">
 <h2>What happens along a longer path?</h2>
 <p>Lecture 13 used one hidden unit. What happens when many backward transformations are composed?</p>
-<div id="f84753ea" class="cell" data-execution_count="3">
+<div id="f84753ea" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a>distance <span class="op">=</span> np.arange(<span class="dv">21</span>)</span>
@@ -575,7 +578,7 @@ Marcel Turcotte
 <section id="activation-functions-and-their-derivatives" class="slide level2 hide-code-toggle">
 <h2>Activation functions and their derivatives</h2>
 <p>Which slopes keep a backward signal useful? Does ReLU solve every problem?</p>
-<div id="b5751f3d" class="cell" data-execution_count="4">
+<div id="b5751f3d" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Attribution: https://github.com/ageron/handson-ml3/blob/main/10_neural_nets_with_keras.ipynb</span></span>
@@ -650,7 +653,7 @@ Marcel Turcotte
 <section id="keeping-a-gradient-on-the-negative-side" class="slide level2 hide-code-toggle">
 <h2>Keeping a gradient on the negative side</h2>
 <p>What if a ReLU unit stays inactive across the training examples?</p>
-<div id="b746f8f1" class="cell" data-execution_count="5">
+<div id="b746f8f1" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1258,7 +1261,7 @@ c\,g/\|g\|_2, &amp; \|g\|_2&gt;c.
 </section>
 <section id="how-strongly-should-confident-mistakes-be-penalized" class="slide level2 hide-code-toggle">
 <h2>How strongly should confident mistakes be penalized?</h2>
-<div id="fe6dbbf7" class="cell" data-execution_count="6">
+<div id="fe6dbbf7" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1433,7 +1436,7 @@ J = -\frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} y_{i,k} \log(\hat p_{i,k})
 <section id="which-checkpoint-would-you-deploy" class="slide level2 hide-code-toggle smaller">
 <h2>Which checkpoint would you deploy?</h2>
 <p>Training error keeps decreasing. Does the validation curve support training longer?</p>
-<div id="fd46db29" class="cell" data-execution_count="7">
+<div id="fd46db29" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="im">from</span> copy <span class="im">import</span> deepcopy</span>
@@ -1691,7 +1694,7 @@ J_{\mathrm{reg}}=J_{\mathrm{data}}(W,b)
 </div></aside></section>
 <section id="which-coefficients-actually-disappear" class="slide level2 hide-code-toggle">
 <h2>Which coefficients actually disappear?</h2>
-<div id="aff0feba" class="cell" data-execution_count="8">
+<div id="aff0feba" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2231,7 +2234,7 @@ Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</s
 </section>
 <section id="simplemlp" class="slide level2">
 <h2>SimpleMLP</h2>
-<div id="14b47ad1" class="cell" data-execution_count="9">
+<div id="14b47ad1" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -2479,7 +2482,7 @@ J_{\mathrm{reg}}=J_{\mathrm{BCE}}+
 </div></aside></section>
 <section id="same-api-extended-model" class="slide level2 scrollable smaller">
 <h2>Same API, extended model</h2>
-<div id="224c7d96" class="cell" data-execution_count="10">
+<div id="224c7d96" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a aria-label="1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_circles</span>
 <span id="cb22-2"><a aria-label="2"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb22-3"><a aria-label="3"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
@@ -2522,7 +2525,7 @@ J_{\mathrm{reg}}=J_{\mathrm{BCE}}+
 <section id="stable-softmax-computation" class="slide level2">
 <h2>Computing softmax safely</h2>
 <p>Subtracting the largest logit preserves the probabilities and avoids exponentiating large positive values.</p>
-<div id="14647fa5" class="cell" data-execution_count="11">
+<div id="14647fa5" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
