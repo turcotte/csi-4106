@@ -226,11 +226,11 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/16/index.html</loc>
-    <lastmod>2026-08-10T15:51:05.786Z</lastmod>
+    <lastmod>2026-11-03T18:10:27.258Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/16/slides.html</loc>
-    <lastmod>2026-08-08T13:49:44.029Z</lastmod>
+    <lastmod>2026-11-03T18:56:55.069Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/17/index.html</loc>
@@ -359,5 +359,9 @@
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/14/loss_functions.html</loc>
     <lastmod>2026-10-27T18:15:30.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://turcotte.xyz/teaching/csi-4106/lectures/16/chess-search.html</loc>
+    <lastmod>2026-11-03T19:20:50.852Z</lastmod>
   </url>
 </urlset>

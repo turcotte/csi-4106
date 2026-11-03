@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <meta name="author" content="Marcel Turcotte">
+  <title>CSI 4106 - Fall 2026 – Introduction to Search</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link rel="stylesheet" href="../../assets/css/reveal-common.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+<meta property="og:title" content="Introduction to Search – CSI 4106 - Fall 2026">
+<meta property="og:description" content="CSI 4106">
+<meta property="og:site_name" content="CSI 4106 - Fall 2026">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Introduction to Search</h1>
+  <p class="subtitle">CSI 4106</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Marcel Turcotte
+</div>
+</div>
+</div>
+
+  <p class="date">Version: Nov 3, 2026 13:56</p>
+</section>
+<section>
+<section id="preamble" class="title-slide slide level1 center">
+<h1>Preamble</h1>
+
+</section>
+<section id="message-of-the-day" class="slide level2 scrollable">
+<h2>Message of the Day</h2>
+<p></p><div id="tweet-12861"></div><script>tweet={"url":"https:\/\/x.com\/sonyatweetybird\/status\/2110045408512836031","author_name":"Sonya Huang \uD83D\uDC25","author_url":"https:\/\/x.com\/sonyatweetybird","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EDavid Silver is one of the all-time greats. He was the creator of AlphaGo, which changed the course of history by showing that neural nets could achieve superhuman performance for the first time.\u003Cbr\u003E\u003Cbr\u003EHe also has a unique intuition and knack for forecasting when things will happen in… \u003Ca href=\"https:\/\/t.co\/TdAn2NGhBE\"\u003Epic.twitter.com\/TdAn2NGhBE\u003C\/a\u003E\u003C\/p\u003E&mdash; Sonya Huang \uD83D\uDC25 (@sonyatweetybird) \u003Ca href=\"https:\/\/x.com\/sonyatweetybird\/status\/2110045408512836031?ref_src=twsrc%5Etfw\"\u003EOctober 13, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-12861").innerHTML = tweet["html"];</script><p></p>
+
+<aside class="notes">
+<p>David Silver led the DeepMind research behind AlphaGo, the first AI system to defeat a professional human Go player, and its successors, AlphaZero and MuZero. He is also a professor of computer science at University College London and a Fellow of the Royal Society. His work connects the neural-network methods introduced earlier in the course with the search methods introduced here. His <a href="https://www.davidsilver.uk/" class="external" data-icon="true">personal website</a> provides his current biography.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><a href="https://www.youtube.com/watch?v=L4SWQebqhek">David Silver and Lasse Espeholt of Ineffable Intelligence: A Superlearner for the Age of Experience</a>, posted on the Sequoia Capital YouTube channel on 2026-10-13.</p>
+</div></aside></section>
+<section id="learning-objectives" class="slide level2 smaller">
+<h2>Learning Objectives</h2>
+<ul>
+<li><strong>Describe</strong> the role of search algorithms in AI, crucial for planning, reasoning, and applications like AlphaGo.</li>
+<li><strong>Formulate</strong> a search problem using states, an initial state, goal states, actions, a transition model, and action costs.</li>
+<li><strong>Distinguish</strong> states from search nodes, and reached states from frontier and expanded nodes.</li>
+<li><strong>Implement</strong> BFS and DFS and <strong>compare</strong> them using the 8-Puzzle problem.</li>
+<li><strong>Explain</strong> the completeness, cost optimality, and memory requirements of BFS and DFS under stated assumptions.</li>
+</ul>
+<aside class="notes">
+<p>This presentation motivates search methods in artificial intelligence and establishes the vocabulary for the search unit. Breadth-first and depth-first search provide familiar baselines for studying how a problem is represented, how nodes are selected, and why more selective methods are needed. The unit covers the following themes.</p>
+<ul>
+<li>Uninformed Search</li>
+<li>Informed Search</li>
+<li>Local Search</li>
+<li>Population-Based Metaheuristics</li>
+<li>Adversarial Search</li>
+<li>Monte Carlo Tree Search</li>
+</ul>
+<p>These methods also provide a foundation for formal reasoning, where search can explore possible deductions or candidate solutions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="justification" class="title-slide slide level1 center">
+<h1>Justification</h1>
+
+</section>
+<section id="justification-1" class="slide level2">
+<h2>Justification</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/AlphaGo-Nature-2016.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="../../assets/images/AlphaGo-Nature-2016.png" class="quarto-figure quarto-figure-center" height="525"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p><span class="citation" data-cites="Silver:2016aa">Silver et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span></p>
+</div></aside></section>
+<section id="justification-2" class="slide level2">
+<h2>Justification</h2>
+<p>We have honed our expertise in <strong>machine learning</strong> to a point where we possess a robust understanding of <strong>neural networks</strong> and <strong>deep learning</strong>, allowing us to develop simple models using <strong>Keras</strong>.</p>
+<div class="fragment">
+<p>In recent years, <strong>Monte Carlo Tree Search (MCTS)</strong> has played a pivotal role in advancing <strong>artificial intelligence</strong> research. After initially concentrating on deep learning, <strong>we are now shifting our focus to search</strong>.</p>
+</div>
+</section>
+<section id="justification-3" class="slide level2">
+<h2>Justification</h2>
+<p>The integration of <strong>deep learning</strong> and <strong>MCTS</strong> underpins modern applications such as <strong><a href="https://deepmind.google/research/breakthroughs/alphago/">AlphaGo</a></strong>, <strong><a href="https://deepmind.google/discover/blog/alphazero-shedding-new-light-on-chess-shogi-and-go/">AlphaZero</a></strong>, and <strong><a href="https://deepmind.google/discover/blog/muzero-mastering-go-chess-shogi-and-atari-without-rules/">MuZero</a></strong>.</p>
+<div class="fragment">
+<p>Search algorithms are crucial in addressing challenges in <strong>planning</strong> and <strong>reasoning</strong> and are likely to become <strong>increasingly significant in future developments</strong>.</p>
+</div>
+</section>
+<section id="search-a-biased-timeline" class="slide level2 smaller" style="font-size: 0.6em;">
+<h2>Search (a biased timeline)</h2>
+<ul>
+<li><strong>1968 – A*</strong>: Heuristic search for minimum-cost paths.</li>
+<li><strong>1970s–1980s – Population-Based Algorithms</strong> (e.g., Genetic Algorithms): Population-based stochastic search for optimization.</li>
+<li><strong>1980s – Constraint Satisfaction Problems (CSPs)</strong>: Advances in combining constraint propagation with backtracking search.</li>
+<li><strong>2013 – DQN</strong>: Learning action values directly from pixels through deep Q-learning.</li>
+<li><strong>2015 – AlphaGo</strong>: Deep neural networks guide MCTS; first match victory against a professional Go player.</li>
+<li><strong>2017 – AlphaZero</strong>: Self-play learning with neural-network-guided MCTS for chess, shogi, and Go.</li>
+<li><strong>2019 – MuZero</strong>: Planning with a learned model, without being supplied the environment’s dynamics.</li>
+<li><strong>2020 – Agent57</strong>: Deep reinforcement learning with directed exploration and adaptive policy selection across 57 Atari games.</li>
+<li><strong>2023 – FunSearch</strong>: Evolutionary search over programs proposed by an LLM and evaluated automatically.</li>
+<li><strong>2024 – AlphaGeometry</strong>: Geometry theorem proving combining a neural language model with symbolic deduction.</li>
+</ul>
+<aside class="notes">
+<p>This is a selected timeline of search and related learning milestones. DQN and Agent57 learn how to act through reinforcement learning; they do not perform the explicit look-ahead tree search used by AlphaGo, AlphaZero, and MuZero. Exploration during learning and search over possible future action sequences are distinct ideas.</p>
+<p>The dates refer to selected milestones, not necessarily journal publication dates. AlphaGo defeated Fan Hui in October 2015 before its Nature publication in January 2016. AlphaZero and MuZero first appeared as preprints in 2017 and 2019, respectively. The population-method and CSP entries identify periods of development rather than the origins of those fields.</p>
+<p>Sources: <span class="citation" data-cites="Hart:1968aa">Hart et al. (<a href="#/references" role="doc-biblioref" onclick="">1968</a>)</span>; <a href="https://doi.org/10.7551/MITPRESS/1090.001.0001" class="external" data-icon="true">Holland’s 1975 book</a>; <a href="https://www.cs.ubc.ca/~mack/Publications/AI85.pdf" class="external" data-icon="true">constraint-consistency algorithms, 1985</a>; <a href="https://arxiv.org/abs/1312.5602" class="external" data-icon="true">DQN, 2013</a>; <a href="https://arxiv.org/abs/1712.01815" class="external" data-icon="true">AlphaZero, 2017</a>; <a href="https://arxiv.org/abs/1911.08265" class="external" data-icon="true">MuZero, 2019</a>; <a href="https://arxiv.org/abs/2003.13350" class="external" data-icon="true">Agent57, 2020</a>; <a href="https://deepmind.google/blog/funsearch-making-new-discoveries-in-mathematical-sciences-using-large-language-models/" class="external" data-icon="true">FunSearch, 2023</a>; <a href="https://deepmind.google/blog/alphageometry-an-olympiad-level-ai-system-for-geometry/" class="external" data-icon="true">AlphaGeometry, 2024</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="search" class="slide level2">
+<h2>Search</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://youtu.be/g-dKXOlsf98"><img data-src="../../assets/images/youtube_g-dKXOlsf98.png" class="quarto-figure quarto-figure-center" height="450"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p><strong>Viewing question:</strong> How can learned knowledge help decide which moves to explore and how to evaluate a position?</p>
+<p>In 1997, IBM’s Deep Blue defeated the reigning world chess champion, Garry Kasparov. It could evaluate 200 million chess positions per second, combining fast computation with selective search, move ordering, and carefully designed evaluation. In a <a href="https://www.kasparov.com/i-was-there-when-ai-mastered-chess-mit-technology-review-october-6-2022/" class="external" data-icon="true">later reflection</a>, Kasparov described it as being “as intelligent as your alarm clock.” This comment contrasts task-specific performance with general intelligence; it does not mean that Deep Blue lacked sophisticated search algorithms. See <a href="https://www.ibm.com/history/deep-blue" class="external" data-icon="true">IBM’s history</a> and <a href="https://cdn.aaai.org/Symposia/Spring/1999/SS-99-07/SS99-07-004.pdf" class="external" data-icon="true">the developers’ technical account</a>.</p>
+<p>The Nature video explains how learned knowledge can make Go search selective: a policy network suggests promising moves, and a value network estimates the quality of positions. Search combines these estimates with exploration of possible continuations. Later, AlphaZero learned through self-play and combined learned evaluation with MCTS. Kasparov remarked, “I can’t disguise my satisfaction that it plays with a very dynamic style, much like my own!” See <a href="https://deepmind.google/blog/alphazero-shedding-new-light-on-chess-shogi-and-go/" class="external" data-icon="true">Google DeepMind’s AlphaZero article</a>.</p>
+<p>The key connection is that learning and search complement one another. This lecture establishes the vocabulary and baseline search methods; Lecture 22 examines MCTS in detail.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><a href="https://youtu.be/g-dKXOlsf98">The computer that mastered Go</a>. <a href="https://www.youtube.com/@NatureVideoChannel">Nature Video</a> posted on YouTube on 2016-01-27. <strong>In-class video</strong> (7<strong>m</strong> 52<strong>s</strong>).</p>
+</div></aside></section>
+<section id="alphago---the-movie" class="slide level2">
+<h2>AlphaGo - The Movie</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="https://youtu.be/WXuK6gekU1Y"><img data-src="../../assets/images/alphago.png" class="quarto-figure quarto-figure-center" height="450"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p><a href="https://youtu.be/WXuK6gekU1Y">AlphaGo - The Movie | Full award-winning documentary</a>, Google DeepMind, 2020-03-13.</p>
+<p>The Nature feature predates the Lee Sedol match: it introduces AlphaGo’s 5–0 victory over professional player Fan Hui in October 2015. The documentary is a supplementary resource about the subsequent match. See <a href="https://deepmind.google/research/alphago/" class="external" data-icon="true">Google DeepMind’s AlphaGo history</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Yes, <strong>AlphaGo</strong> successfully defeated Go champion Lee <strong>Sedol</strong>, 4–1 in March 2016. The full documentary follows that match. (1<strong>h</strong> 30<strong>m</strong>)</p>
+</div></aside></section>
+<section id="alphago2muzero" class="slide level2">
+<h2>AlphaGo2MuZero</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/AlphaGo2MuZero.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="../../assets/images/AlphaGo2MuZero.png" class="quarto-figure quarto-figure-center" height="500"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p><a href="https://www.davidsilver.uk" class="external" data-icon="true">David Silver</a> led the DeepMind research behind these projects and is a professor at University College London. He earned his PhD at the University of Alberta, where he was supervised by <a href="https://apps.ualberta.ca/directory/person/rsutton" class="external" data-icon="true">Richard Sutton</a>.</p>
+<p>You might also want to watch the following video: <a href="https://youtu.be/WXHFqTvfFSw?si=oXsOtb2uxvU1CyKb">AlphaGo Zero: Discovering new knowledge</a>. Posted on YouTube on 2017-10-18.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Attribution</strong>: <a href="https://deepmind.google/discover/blog/muzero-mastering-go-chess-shogi-and-atari-without-rules/">MuZero: Mastering Go, chess, shogi and Atari without rules</a>, Google DeepMind, 2020-12-23. <span class="citation" data-cites="Schrittwieser:2020aa">Schrittwieser et al. (<a href="#/references" role="doc-biblioref" onclick="">2020</a>)</span></p>
+</div></aside></section></section>
+<section>
+<section id="search-1" class="title-slide slide level1 center">
+<h1>Search</h1>
+
+</section>
+<section id="applications" class="slide level2">
+<h2>Applications</h2>
+<ul>
+<li class="fragment"><strong>Pathfinding and Navigation</strong>: Used in robotics and video games to find a <strong>path</strong> from a <strong>starting point</strong> to a <strong>destination</strong>.</li>
+<li class="fragment"><strong>Puzzle Solving</strong>: Solving puzzles like the <strong>8-puzzle</strong>, <strong>mazes</strong>, or <strong>Sudoku</strong>.</li>
+<li class="fragment"><strong>Network Analysis</strong>: Analyzing networks and graphs, such as finding <strong>connectivity</strong> or <strong>shortest paths</strong> in <strong>social networks</strong> or <strong>transportation maps</strong>.</li>
+<li class="fragment"><strong>Game Playing</strong>: Used to evaluate moves in games like <strong>chess</strong> or <strong>Go</strong>, especially when combined with other strategies.</li>
+</ul>
+</section>
+<section id="applications-1" class="slide level2">
+<h2>Applications</h2>
+<ul>
+<li class="fragment"><strong>Scheduling</strong>: Planning and scheduling tasks in <strong>manufacturing</strong>, <strong>project management</strong>, or <strong>airline scheduling</strong>.</li>
+<li class="fragment"><strong>Resource Allocation</strong>: Allocating resources in a network or within an organization where <strong>constraints</strong> must be satisfied.</li>
+<li class="fragment"><strong>Configuration Problems</strong>: Solving problems where a set of components must be assembled to meet specific requirements, such as configuring a computer system or <strong>designing a circuit</strong>.</li>
+</ul>
+</section>
+<section id="applications-2" class="slide level2">
+<h2>Applications</h2>
+<ul>
+<li class="fragment"><p><strong>Decision Making under Uncertainty</strong>: Used in <strong>real-time strategy games</strong> and <strong>simulations</strong> where decisions need to be evaluated under uncertain conditions.</p></li>
+<li class="fragment"><p><strong>Storytelling</strong>: LLMs can effectively generate stories when guided by a valid input plan from an <strong>automated planner</strong>. <span class="citation" data-cites="Simon:2024aa">(<a href="#/references" role="doc-biblioref" onclick="">Simon and Muise 2024</a>)</span></p></li>
+</ul>
+<aside class="notes">
+<p>The applications of search algorithms are both <strong>numerous</strong> and <strong>diverse</strong>.</p>
+<p>Search has been an active area of research not only because of its wide range of applications but also due to the potential for improvements in algorithms to significantly reduce program execution time or facilitate the exploration of larger search spaces.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ol type="1">
+<li class="fragment"><p><strong>Deterministic &amp; Heuristic Search</strong>: BFS, DFS, A* for pathfinding and optimization in classical AI.</p></li>
+<li class="fragment"><p><strong>Population-Based Algorithms</strong>: Focus on structured problems and stochastic search.</p></li>
+<li class="fragment"><p><strong>Adversarial Game Algorithms</strong>: Minimax, alpha-beta pruning, MCTS for decision-making in competitive environments.</p></li>
+</ol>
+
+<aside><div>
+<p>This lecture and the upcoming ones will thoroughly cover these topics.</p>
+</div></aside></section>
+<section id="definition" class="slide level2">
+<h2>Definition</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><i class="fa-solid fa-quote-right" aria-label="quote-right"></i> <span class="citation" data-cites="Russell:2020aa">(<a href="#/references" role="doc-biblioref" onclick="">Russell and Norvig 2020, 63</a>)</span></strong></p>
+</div>
+<div class="callout-content">
+<p>When the correct action to take is not immediately obvious, an agent may need to <strong>plan ahead</strong>: to consider a <strong>sequence of actions</strong> that form a <strong>path</strong> to a <strong>goal state</strong>. Such an agent is called a <strong>problem-solving agent</strong>, and the computational process it undertakes is called <strong>search</strong>.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="terminology" class="slide level2">
+<h2>Terminology</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/agent-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="../../assets/images/agent-01.png" class="quarto-figure quarto-figure-center" height="400"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>The definition of an agent in <strong>artificial intelligence (AI)</strong> shares some similarities with the <strong>psychological</strong> definition, but there are key distinctions. In AI, an agent is an <strong>autonomous entity</strong> that perceives its <strong>environment</strong> through <strong>sensors</strong> and acts upon it using <strong>actuators</strong> to achieve specific <strong>goals</strong>. Both definitions involve <strong>perception</strong>, <strong>decision-making</strong>, and <strong>action</strong>.</p>
+<p>However, while psychological agents are human or biological and involve <strong>complex cognitive</strong> and <strong>emotional processes</strong>, AI agents are computational and operate based on algorithms designed to <strong>maximize certain performance measures</strong> or <strong>achieve predefined objectives</strong>. The focus in AI is more on the technical implementation of these processes, whereas in psychology, the emphasis is on understanding the cognitive and motivational aspects of agency.</p>
+<p>The concept of <strong>agentic design</strong> in software engineering and artificial intelligence has experienced a resurgence in popularity.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>An <strong>agent</strong> is an entity that performs <strong>actions</strong>. A <strong>rational agent</strong> selects actions expected to achieve the <strong>best outcome</strong>, given its information and performance measure. Conceptually, an <strong>agent</strong> perceives its environment through <strong>sensors</strong> and interacts with it using <strong>actuators</strong>.</p>
+</div></aside></section>
+<section id="environment-characteristics" class="slide level2">
+<h2>Environment Characteristics</h2>
+<ul>
+<li><strong>Observability</strong>: Partially observable, or <em>fully observable</em></li>
+<li><strong>Agent Composition</strong>: <em>Single</em> or multiple agents</li>
+<li><strong>Predictability</strong>: <em>Deterministic</em> or non-deterministic</li>
+<li><strong>Decision Dependency</strong>: Episodic or <em>sequential</em></li>
+<li><strong>Temporal Dynamics</strong>: <em>Static</em> or dynamic</li>
+<li><strong>State Representation</strong>: <em>Discrete</em> or continuous</li>
+</ul>
+
+<aside class="notes">
+<p>The characteristics of an environment influence the complexity of problem-solving.</p>
+<ul>
+<li><p>A <strong>fully observable environment</strong> allows the agent to detect all relevant aspects for decision-making.</p></li>
+<li><p>In a <strong>deterministic environment</strong>, the agent can predict the next state based on the current state and its subsequent action.</p></li>
+<li><p><strong>Episodic environments</strong> involve independent decisions: an action in one episode does not affect later episodes. Classifying independent images is an example.</p></li>
+<li><p><strong>Sequential environments</strong> require considering how an action affects future decisions. The 8-puzzle and chess are examples. A state can summarize all relevant history without making the task episodic.</p></li>
+<li><p>A <strong>dynamic environment</strong> can change independently while the agent deliberates. A <strong>static environment</strong> does not change during deliberation, but the agent’s actions can still change its state.</p></li>
+<li><p>Chess serves as an example of a <strong>discrete environment</strong>, with distinct states and actions. Discrete spaces can be finite or countably infinite. In contrast, an autonomous vehicle operates within a <strong>continuous-state</strong> and <strong>continuous-time environment</strong>.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>In this lecture, environments are assumed to be: <em>fully observable</em>, <em>single agent</em>, <em>sequential</em>, <em>deterministic</em>, <em>static</em>, and <em>discrete</em>.</p>
+</div></aside></section>
+<section id="problem-solving-process" class="slide level2">
+<h2>Problem-Solving Process</h2>
+<p><strong>Search</strong>: The agent simulates possible sequences of actions in a model to find a path to a goal state. A successful sequence is a <strong>solution</strong>, which the agent can then execute.</p>
+<aside class="notes">
+<p>A precise formulation facilitates the development of reusable code.</p>
+<p>Under these assumptions, a solution, when one exists, can be expressed as a fixed sequence of actions rather than a policy that branches on uncertain outcomes.</p>
+<ul>
+<li><strong>Sequential</strong>: Each action changes the state and can affect which subsequent actions lead to the goal. The state representation retains the information needed to predict future transitions.</li>
+<li><strong>Single Agent</strong>: There is no interaction with other agents that could introduce variability.</li>
+<li><strong>Fully Observable</strong>: The agent has complete information about the environment, allowing for precise decision-making.</li>
+<li><strong>Deterministic</strong>: The outcome of actions is predictable, with no randomness affecting the result.</li>
+<li><strong>Static</strong>: The environment does not change independently while the agent plans; executing an action still changes the state.</li>
+<li><strong>Discrete</strong>: States and actions are distinct alternatives that can be considered separately; the space need not be finite.</li>
+</ul>
+<p>This formulation connects familiar graph-traversal algorithms with planning: the search selects a sequence in the model before the agent carries it out in the environment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="search-problem-definition" class="slide level2">
+<h2>Search Problem Definition</h2>
+<ul>
+<li class="fragment"><p>A collection of <strong>states</strong>, referred to as the <strong>state space</strong>.</p></li>
+<li class="fragment"><p>An <strong>initial state</strong> where the agent begins.</p></li>
+<li class="fragment"><p>One or more <strong>goal states</strong> that define successful outcomes, recognized by a <strong>goal test</strong>.</p></li>
+<li class="fragment"><p>A set of <strong>actions</strong> available in a given state <span class="math inline">s</span>.</p></li>
+<li class="fragment"><p>A <strong>transition model</strong> that determines the next state based on the current state and selected action.</p></li>
+<li class="fragment"><p>An <strong>action cost function</strong> that specifies the cost of performing action <span class="math inline">a</span> in state <span class="math inline">s</span> to reach state <span class="math inline">s'</span>.</p></li>
+</ul>
+</section>
+<section id="definitions" class="slide level2">
+<h2>Definitions</h2>
+<ul>
+<li class="fragment">A <strong>path</strong> is a sequence of states connected by actions; it can be recorded as the action sequence or the resulting state sequence.</li>
+<li class="fragment">A <strong>solution</strong> is a path that connects the initial state to the goal state.</li>
+<li class="fragment">An <strong>optimal solution</strong> is the path with the lowest cost among all possible solutions.</li>
+</ul>
+
+<aside class="notes">
+<p>In certain problems, multiple optimal solutions may exist. However, it is typically sufficient to identify and report a single optimal solution. Providing all optimal solutions can significantly increase time and space complexity for some problems.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>We assume that the <strong>path cost</strong> is the sum of the individual action costs, and all costs are positive. The state space can be conceptualized as a <strong>graph</strong>, where the nodes represent the states and the edges correspond to the actions.</p>
+</div></aside></section>
+<section id="example-8-puzzle" class="slide level2">
+<h2>Example: 8-Puzzle</h2>
+<div id="4c5a6ab3" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> random</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a aria-label="3"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a aria-label="4"></a></span>
+<span id="cb1-5"><a aria-label="5"></a>random.seed(<span class="dv">58</span>)</span>
+<span id="cb1-6"><a aria-label="6"></a></span>
+<span id="cb1-7"><a aria-label="7"></a><span class="kw">def</span> is_solvable(tiles):</span>
+<span id="cb1-8"><a aria-label="8"></a>    <span class="co"># Count the inversions in the flattened list of tiles (excluding the blank space).</span></span>
+<span id="cb1-9"><a aria-label="9"></a>    <span class="co"># Assumption: board is square and width is odd.</span></span>
+<span id="cb1-10"><a aria-label="10"></a>    inversions <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-11"><a aria-label="11"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(tiles)):</span>
+<span id="cb1-12"><a aria-label="12"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, <span class="bu">len</span>(tiles)):</span>
+<span id="cb1-13"><a aria-label="13"></a>            <span class="cf">if</span> tiles[i] <span class="op">!=</span> <span class="dv">0</span> <span class="kw">and</span> tiles[j] <span class="op">!=</span> <span class="dv">0</span> <span class="kw">and</span> tiles[i] <span class="op">&gt;</span> tiles[j]:</span>
+<span id="cb1-14"><a aria-label="14"></a>                inversions <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-15"><a aria-label="15"></a>    <span class="cf">return</span> inversions <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span></span>
+<span id="cb1-16"><a aria-label="16"></a></span>
+<span id="cb1-17"><a aria-label="17"></a><span class="kw">def</span> generate_solvable_board():</span>
+<span id="cb1-18"><a aria-label="18"></a>    <span class="co"># Generate a random board configuration that is guaranteed to be solvable</span></span>
+<span id="cb1-19"><a aria-label="19"></a>    tiles <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">9</span>))</span>
+<span id="cb1-20"><a aria-label="20"></a>    random.shuffle(tiles)</span>
+<span id="cb1-21"><a aria-label="21"></a>    <span class="cf">while</span> <span class="kw">not</span> is_solvable(tiles):</span>
+<span id="cb1-22"><a aria-label="22"></a>        random.shuffle(tiles)</span>
+<span id="cb1-23"><a aria-label="23"></a></span>
+<span id="cb1-24"><a aria-label="24"></a>    <span class="cf">return</span> tiles</span>
+<span id="cb1-25"><a aria-label="25"></a></span>
+<span id="cb1-26"><a aria-label="26"></a><span class="kw">def</span> plot_board(board, title, num_pos, position):</span>
+<span id="cb1-27"><a aria-label="27"></a>    ax <span class="op">=</span> plt.subplot(<span class="dv">1</span>, num_pos, position)</span>
+<span id="cb1-28"><a aria-label="28"></a>    ax.set_title(title)</span>
+<span id="cb1-29"><a aria-label="29"></a>    ax.set_xticks([])</span>
+<span id="cb1-30"><a aria-label="30"></a>    ax.set_yticks([])</span>
+<span id="cb1-31"><a aria-label="31"></a></span>
+<span id="cb1-32"><a aria-label="32"></a>    board <span class="op">=</span> np.array(board).reshape(<span class="dv">3</span>, <span class="dv">3</span>).tolist() <span class="co"># Reconfigure the grid to be 3x3</span></span>
+<span id="cb1-33"><a aria-label="33"></a></span>
+<span id="cb1-34"><a aria-label="34"></a>    <span class="co"># Use a color map to display the numbers</span></span>
+<span id="cb1-35"><a aria-label="35"></a>    cmap <span class="op">=</span> plt.cm.plasma</span>
+<span id="cb1-36"><a aria-label="36"></a>    norm <span class="op">=</span> plt.Normalize(vmin<span class="op">=-</span><span class="dv">1</span>, vmax<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb1-37"><a aria-label="37"></a></span>
+<span id="cb1-38"><a aria-label="38"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb1-39"><a aria-label="39"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb1-40"><a aria-label="40"></a>            tile_value <span class="op">=</span> board[i][j]</span>
+<span id="cb1-41"><a aria-label="41"></a>            color <span class="op">=</span> cmap(norm(tile_value))</span>
+<span id="cb1-42"><a aria-label="42"></a>            ax.add_patch(plt.Rectangle((j, <span class="dv">2</span> <span class="op">-</span> i), <span class="dv">1</span>, <span class="dv">1</span>, facecolor<span class="op">=</span>color, edgecolor<span class="op">=</span><span class="st">'black'</span>))</span>
+<span id="cb1-43"><a aria-label="43"></a>            <span class="cf">if</span> tile_value <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-44"><a aria-label="44"></a>                ax.add_patch(plt.Rectangle((j, <span class="dv">2</span> <span class="op">-</span> i), <span class="dv">1</span>, <span class="dv">1</span>, facecolor<span class="op">=</span><span class="st">'white'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>))</span>
+<span id="cb1-45"><a aria-label="45"></a>            <span class="cf">else</span>:</span>
+<span id="cb1-46"><a aria-label="46"></a>                ax.text(j <span class="op">+</span> <span class="fl">0.5</span>, <span class="dv">2</span> <span class="op">-</span> i <span class="op">+</span> <span class="fl">0.5</span>, <span class="bu">str</span>(tile_value),</span>
+<span id="cb1-47"><a aria-label="47"></a>                        fontsize<span class="op">=</span><span class="dv">16</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'center'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb1-48"><a aria-label="48"></a></span>
+<span id="cb1-49"><a aria-label="49"></a>    ax.set_xlim(<span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb1-50"><a aria-label="50"></a>    ax.set_ylim(<span class="dv">0</span>, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="example-8-puzzle-1" class="slide level2">
+<h2>Example: 8-Puzzle</h2>
+<div id="cd6f5410" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="co"># Generate initial solvable board</span></span>
+<span id="cb2-2"><a aria-label="2"></a>initial_board <span class="op">=</span> generate_solvable_board()</span>
+<span id="cb2-3"><a aria-label="3"></a></span>
+<span id="cb2-4"><a aria-label="4"></a><span class="co"># Define goal state</span></span>
+<span id="cb2-5"><a aria-label="5"></a>goal_board <span class="op">=</span> [</span>
+<span id="cb2-6"><a aria-label="6"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb2-7"><a aria-label="7"></a>    [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],</span>
+<span id="cb2-8"><a aria-label="8"></a>    [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb2-9"><a aria-label="9"></a>]</span>
+<span id="cb2-10"><a aria-label="10"></a></span>
+<span id="cb2-11"><a aria-label="11"></a><span class="co"># Plot both boards</span></span>
+<span id="cb2-12"><a aria-label="12"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb2-13"><a aria-label="13"></a>plot_board(initial_board, <span class="st">"Initial Board"</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb2-14"><a aria-label="14"></a>plot_board(goal_board, <span class="st">"Goal State"</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb2-15"><a aria-label="15"></a>plt.tight_layout()</span>
+<span id="cb2-16"><a aria-label="16"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-3-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="slides_files/figure-revealjs/cell-3-output-1.png" class="quarto-figure quarto-figure-center" width="758" height="374"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="puzzle" class="slide level2 hide-code-toggle">
+<h2>8-Puzzle</h2>
+<ul>
+<li class="fragment"><p>How can the <strong>states</strong> be represented?</p></li>
+<li class="fragment"><p>What constitutes the <strong>initial state</strong>?</p></li>
+<li class="fragment"><p>What defines the <strong>actions</strong>?</p></li>
+<li class="fragment"><p>What would constitute a <strong>path</strong>?</p></li>
+<li class="fragment"><p>What characterizes the <strong>goal state</strong>?</p></li>
+<li class="fragment"><p>What would constitute a <strong>solution</strong>?</p></li>
+<li class="fragment"><p>What should be the <strong>cost of an action</strong>?</p></li>
+</ul>
+<div id="9058baa8" class="cell corner-image" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb3-2"><a aria-label="2"></a>plot_board(initial_board, <span class="st">"Initial Board"</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb3-3"><a aria-label="3"></a>plt.tight_layout()</span>
+<span id="cb3-4"><a aria-label="4"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="slides_files/figure-revealjs/cell-4-output-1.png" width="182" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li><p>Each state can be represented as a list containing the numbers 0 to 8. Each number corresponds to a tile, and its position in the list reflects its location in the grid, with 0 denoting the blank space.</p></li>
+<li><p>The initial state is a permutation of the numbers 0 to 8.</p></li>
+<li><p>Actions move the <strong>blank</strong> <strong>left</strong>, <strong>right</strong>, <strong>up</strong>, or <strong>down</strong> by swapping it with an adjacent tile. These directions describe the blank’s movement, not the numbered tile’s movement.</p></li>
+<li><p>A path would be a sequence of actions, say <strong>left</strong>, <strong>left</strong>, <strong>up</strong>.</p></li>
+<li><p>The transition model maps a given state and action to a new state. Not all actions are feasible from every state; for instance, if the blank space is at the edge of the grid, only certain moves are possible, such as down, up, or left.</p></li>
+<li><p>The goal state is achieved when the list is ordered from 1 to 8, followed by 0, indicating that the tiles are arranged correctly. How many goal states are there? This formulation specifies one goal state, although another problem could permit several.</p></li>
+<li><p>A solution would be a valid path transforming an initial state into a goal state.</p></li>
+<li><p>Each action incurs a cost of 1.</p></li>
+</ul>
+<p>How many possible states are there?</p>
+<p>There are <span class="math inline">9! = 362,880</span> arrangements of the eight tiles and the blank. Only half, <span class="math inline">9!/2 = 181,440</span>, are reachable from a fixed initial state. Exhaustive graph search is feasible at this scale.</p>
+<p>How many states are there for the 15-Puzzle?</p>
+<p>There are <span class="math inline">16! = 20,922,789,888,000</span> arrangements of the fifteen tiles and the blank, with <span class="math inline">16!/2 = 10,461,394,944,000</span> reachable from a fixed initial state: about 10.46 trillion. This much larger space motivates more selective search. See <a href="https://kociemba.org/themen/fifteen/fifteensolver.html" class="external" data-icon="true">the 15-puzzle solver’s state counts</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="are-all-the-boards-solvable" class="slide level2 hide-code-toggle">
+<h2>Are all the boards solvable?</h2>
+<div id="4c987f7c" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a>some_board <span class="op">=</span> [</span>
+<span id="cb4-2"><a aria-label="2"></a>    [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb4-3"><a aria-label="3"></a>    [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],</span>
+<span id="cb4-4"><a aria-label="4"></a>    [<span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">0</span>]</span>
+<span id="cb4-5"><a aria-label="5"></a>]</span>
+<span id="cb4-6"><a aria-label="6"></a></span>
+<span id="cb4-7"><a aria-label="7"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb4-8"><a aria-label="8"></a>plot_board(some_board, <span class="st">""</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb4-9"><a aria-label="9"></a>plt.tight_layout()</span>
+<span id="cb4-10"><a aria-label="10"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-5-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="slides_files/figure-revealjs/cell-5-output-1.png" class="quarto-figure quarto-figure-center" width="182" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="are-all-the-boards-solvable-1" class="slide level2">
+<h2>Are all the boards solvable?</h2>
+<ul>
+<li class="fragment"><p>An <strong>8-puzzle</strong> board is solvable if it has the same <strong>inversion parity</strong> as the goal state.</p></li>
+<li class="fragment"><p>An <strong>inversion</strong> is a pair of tiles (excluding the blank) that are in the wrong order relative to each other, when reading the board as a one-dimensional list (left-to-right, top-to-bottom).</p></li>
+<li class="fragment"><p>When the goal is the ordered sequence from 1 to 8, there are no inversions, and therefore parity is even.</p></li>
+<li class="fragment"><p>See <span class="citation" data-cites="Archer:1999aa">Archer (<a href="#/references" role="doc-biblioref" onclick="">1999</a>)</span> or <a href="https://www.cs.princeton.edu/courses/archive/spring21/cos226/assignments/8puzzle/specification.php" class="external" data-icon="true">Slider Puzzle, Princeton</a></p></li>
+</ul>
+<aside class="notes">
+<p>For an odd-width board such as the 3×3 puzzle, two arrangements are connected by legal moves exactly when their inversion parities agree. The simple inversion-only rule does not extend to even-width boards: the 4×4 puzzle also requires the blank’s row in the solvability test.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="count_even_odd_parity" class="slide level2">
+<h2><code>count_even_odd_parity</code></h2>
+<div id="e3f8672c" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="im">from</span> itertools <span class="im">import</span> permutations</span>
+<span id="cb5-2"><a aria-label="2"></a></span>
+<span id="cb5-3"><a aria-label="3"></a><span class="kw">def</span> count_even_odd_parity():</span>
+<span id="cb5-4"><a aria-label="4"></a>    even_count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-5"><a aria-label="5"></a>    odd_count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-6"><a aria-label="6"></a></span>
+<span id="cb5-7"><a aria-label="7"></a>    <span class="cf">for</span> perm <span class="kw">in</span> permutations(<span class="bu">range</span>(<span class="dv">9</span>)):  <span class="co"># 0 represents the blank</span></span>
+<span id="cb5-8"><a aria-label="8"></a>        inversions <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb5-9"><a aria-label="9"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">9</span>):</span>
+<span id="cb5-10"><a aria-label="10"></a>            <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, <span class="dv">9</span>):</span>
+<span id="cb5-11"><a aria-label="11"></a>                <span class="cf">if</span> perm[i] <span class="op">!=</span> <span class="dv">0</span> <span class="kw">and</span> perm[j] <span class="op">!=</span> <span class="dv">0</span> <span class="kw">and</span> perm[i] <span class="op">&gt;</span> perm[j]:</span>
+<span id="cb5-12"><a aria-label="12"></a>                    inversions <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb5-13"><a aria-label="13"></a>        <span class="cf">if</span> inversions <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb5-14"><a aria-label="14"></a>            even_count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb5-15"><a aria-label="15"></a>        <span class="cf">else</span>:</span>
+<span id="cb5-16"><a aria-label="16"></a>            odd_count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb5-17"><a aria-label="17"></a></span>
+<span id="cb5-18"><a aria-label="18"></a>    <span class="cf">return</span> even_count, odd_count</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="6c5a9498" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>even, odd <span class="op">=</span> count_even_odd_parity()</span>
+<span id="cb6-2"><a aria-label="2"></a></span>
+<span id="cb6-3"><a aria-label="3"></a><span class="bu">print</span>(<span class="ss">f"Even parity: </span><span class="sc">{</span>even<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="ss">f"Odd parity: </span><span class="sc">{</span>odd<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Even parity: 181440
+Odd parity: 181440</code></pre>
+</div>
+</div>
+</section>
+<section id="search-tree" class="slide level2">
+<h2>Search Tree</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_tree-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="../../assets/images/search_tree-00.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>The search algorithms construct nodes representing states reached by particular paths. A node may retain its parent, the action used to reach it, and the path cost. In the implementations below, a pair <code>(state, path)</code> stores the state and the preceding state sequence.</p>
+<p>The <strong>state-space graph</strong> describes the problem: its vertices are states and its edges are actions. The <strong>search tree</strong> describes paths considered during search. Several paths can reach the same state, so the same state can occur at several tree nodes. The algorithms below use repeated-state detection, making them <strong>graph-search</strong> implementations; they do not retain every repeated occurrence in the conceptual tree.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>A <strong>search tree</strong> records possible <strong>paths</strong> from the <strong>initial state</strong>. Each <strong>node</strong> records a state reached along a particular path, and each <strong>edge</strong> represents an action. Different nodes can represent the same state.</p>
+</div></aside></section>
+<section id="search-tree-1" class="slide level2">
+<h2>Search Tree</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_bfs-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="../../assets/images/search_bfs-00.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p>An example of a <strong>search tree</strong> for the <strong>8-Puzzle</strong>. The solution here is incomplete.</p>
+</div></aside></section>
+<section id="search-tree-2" class="slide level2">
+<h2>Search Tree</h2>
+<ul>
+<li><p>The <strong>root</strong> of the search tree represents the <strong>initial state</strong> of the problem.</p></li>
+<li><p><strong>Expanding</strong> a node generates successor states by applying the <strong>available actions</strong> to its state.</p></li>
+<li><p>The <strong>result</strong> of an action is the new state achieved after <strong>applying that action</strong> to the <strong>current state</strong>.</p></li>
+<li><p>Every node except the <strong>root</strong> has a <strong>parent</strong>, including <strong>leaf</strong> nodes. Expanding a node may generate <strong>children</strong>.</p></li>
+</ul>
+
+<aside><div>
+<p>A distinctive feature of a search algorithm is its method for <strong>selecting the next node to expand</strong>.</p>
+</div></aside></section>
+<section id="frontier" class="slide level2">
+<h2>Frontier</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_bfs-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="../../assets/images/search_bfs-01.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p>Any state corresponding to a node in the search tree is considered <strong>reached</strong>. <strong>Frontier</strong> nodes are those that have been <strong>reached</strong> but have <strong>not yet been expanded</strong>. Above, there are <strong>10 expanded nodes</strong> and <strong>11 frontier nodes</strong>, resulting in a total of 21 nodes that have been <strong>reached</strong>.</p>
+</div></aside></section>
+<section id="frontier-1" class="slide level2">
+<h2>Frontier</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="../../assets/images/search_frontier-01.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-02.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="../../assets/images/search_frontier-02.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-03.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="../../assets/images/search_frontier-03.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+
+<aside class="notes">
+<p>These schematic graphs illustrate how a frontier changes as nodes are expanded. Expanding a green node generates its successors: newly reached states enter the frontier, while already reached states are not added again in the graph-search implementations below. Purple nodes have already been expanded. The drawn grid positions do not encode 8-puzzle tiles or determine which puzzle moves are legal.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>In the 8-Puzzle, the blank can move <strong>left</strong>, <strong>right</strong>, <strong>up</strong>, or <strong>down</strong> when the board boundaries permit. The diagrams schematically show the search frontier: <strong>purple nodes</strong> are expanded; <strong>green nodes</strong> are reached but not expanded. They are not the physical puzzle board.</p>
+</div></aside></section>
+<section id="frontier-2" class="slide level2">
+<h2>Frontier</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-04.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="../../assets/images/search_frontier-04.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_frontier-05.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="../../assets/images/search_frontier-05.png" class="nostretch quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="uninformed-search" class="title-slide slide level1 center">
+<h1>Uninformed search</h1>
+
+</section>
+<section id="definition-1" class="slide level2">
+<h2>Definition</h2>
+<p>An <strong>uninformed search</strong> (or blind search) uses the information in the problem definition without an additional <strong>heuristic estimate of the remaining cost to a goal</strong>. Problem-specific actions, transition rules, goal tests, and action costs are still available.</p>
+</section>
+<section id="state-representation" class="slide level2 scrollable">
+<h2>State Representation</h2>
+<div id="3085c299" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a><span class="co"># Plot both boards</span></span>
+<span id="cb8-2"><a aria-label="2"></a>initial_state_8 <span class="op">=</span> [<span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">5</span>,</span>
+<span id="cb8-3"><a aria-label="3"></a>                    <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">7</span>,</span>
+<span id="cb8-4"><a aria-label="4"></a>                    <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>]</span>
+<span id="cb8-5"><a aria-label="5"></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb8-6"><a aria-label="6"></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb8-7"><a aria-label="7"></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb8-8"><a aria-label="8"></a></span>
+<span id="cb8-9"><a aria-label="9"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">2</span>))</span>
+<span id="cb8-10"><a aria-label="10"></a>plot_board(initial_state_8, <span class="st">"Initial Board"</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb8-11"><a aria-label="11"></a>plot_board(goal_state_8, <span class="st">"Goal State"</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb8-12"><a aria-label="12"></a>plt.tight_layout()</span>
+<span id="cb8-13"><a aria-label="13"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-8-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-revealjs/cell-8-output-1.png" class="quarto-figure quarto-figure-center" width="374" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="69f1929b" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a aria-label="1"></a>initial_state_8 <span class="op">=</span> [<span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">5</span>,</span>
+<span id="cb9-2"><a aria-label="2"></a>                   <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">7</span>,</span>
+<span id="cb9-3"><a aria-label="3"></a>                   <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>]</span>
+<span id="cb9-4"><a aria-label="4"></a></span>
+<span id="cb9-5"><a aria-label="5"></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb9-6"><a aria-label="6"></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb9-7"><a aria-label="7"></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<aside><div>
+<p>The states are represented as <strong>lists</strong> of numbers. <code>0</code> represents the <strong>blank tile</strong>.</p>
+</div></aside></section>
+<section id="is_goal" class="slide level2">
+<h2><code>is_goal</code></h2>
+<div id="4e2dbba5" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a><span class="kw">def</span> is_goal(state, goal_state):</span>
+<span id="cb10-2"><a aria-label="2"></a>    <span class="co">"""Determines if a given state matches the goal state."""</span></span>
+<span id="cb10-3"><a aria-label="3"></a>    <span class="cf">return</span> state <span class="op">==</span> goal_state</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<aside><div>
+<p>Auxiliary function implementing the goal test.</p>
+</div></aside></section>
+<section id="expand" class="slide level2 smaller">
+<h2><code>expand</code></h2>
+<div id="e18667fc" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a aria-label="1"></a><span class="kw">def</span> expand(state):</span>
+<span id="cb11-2"><a aria-label="2"></a>    <span class="co">"""Generates successor states by moving the blank tile in all possible directions."""</span></span>
+<span id="cb11-3"><a aria-label="3"></a>    size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(state) <span class="op">**</span> <span class="fl">0.5</span>)  <span class="co"># Determine puzzle size (3 for 8-puzzle, 4 for 15-puzzle)</span></span>
+<span id="cb11-4"><a aria-label="4"></a>    idx <span class="op">=</span> state.index(<span class="dv">0</span>)  <span class="co"># Find the index of the blank tile represented by 0</span></span>
+<span id="cb11-5"><a aria-label="5"></a>    x, y <span class="op">=</span> idx <span class="op">%</span> size, idx <span class="op">//</span> size  <span class="co"># Convert index to (x, y) coordinates</span></span>
+<span id="cb11-6"><a aria-label="6"></a>    neighbors <span class="op">=</span> []</span>
+<span id="cb11-7"><a aria-label="7"></a></span>
+<span id="cb11-8"><a aria-label="8"></a>    <span class="co"># Define possible moves: Left, Right, Up, Down</span></span>
+<span id="cb11-9"><a aria-label="9"></a>    moves <span class="op">=</span> [(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>), (<span class="dv">1</span>, <span class="dv">0</span>), (<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>), (<span class="dv">0</span>, <span class="dv">1</span>)]</span>
+<span id="cb11-10"><a aria-label="10"></a>    <span class="cf">for</span> dx, dy <span class="kw">in</span> moves:</span>
+<span id="cb11-11"><a aria-label="11"></a>        nx, ny <span class="op">=</span> x <span class="op">+</span> dx, y <span class="op">+</span> dy</span>
+<span id="cb11-12"><a aria-label="12"></a>        <span class="co"># Check if the new position is within the puzzle boundaries</span></span>
+<span id="cb11-13"><a aria-label="13"></a>        <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;=</span> nx <span class="op">&lt;</span> size <span class="kw">and</span> <span class="dv">0</span> <span class="op">&lt;=</span> ny <span class="op">&lt;</span> size:</span>
+<span id="cb11-14"><a aria-label="14"></a>            n_idx <span class="op">=</span> ny <span class="op">*</span> size <span class="op">+</span> nx</span>
+<span id="cb11-15"><a aria-label="15"></a>            new_state <span class="op">=</span> state.copy()</span>
+<span id="cb11-16"><a aria-label="16"></a>            <span class="co"># Swap the blank tile with the adjacent tile</span></span>
+<span id="cb11-17"><a aria-label="17"></a>            new_state[idx], new_state[n_idx] <span class="op">=</span> new_state[n_idx], new_state[idx]</span>
+<span id="cb11-18"><a aria-label="18"></a>            neighbors.append(new_state)</span>
+<span id="cb11-19"><a aria-label="19"></a>    <span class="cf">return</span> neighbors</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="expand-1" class="slide level2">
+<h2><code>expand</code></h2>
+<div id="2340b28f" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">2</span>))</span>
+<span id="cb12-2"><a aria-label="2"></a></span>
+<span id="cb12-3"><a aria-label="3"></a>successors <span class="op">=</span> expand(initial_state_8)</span>
+<span id="cb12-4"><a aria-label="4"></a></span>
+<span id="cb12-5"><a aria-label="5"></a>plot_board(initial_state_8, <span class="st">"Initial State"</span>, <span class="dv">4</span>, <span class="dv">1</span>)</span>
+<span id="cb12-6"><a aria-label="6"></a></span>
+<span id="cb12-7"><a aria-label="7"></a><span class="cf">for</span> i, successor <span class="kw">in</span> <span class="bu">enumerate</span>(successors):</span>
+<span id="cb12-8"><a aria-label="8"></a>    plot_board(successor, <span class="ss">f"Successor: </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>, <span class="dv">4</span>, i<span class="op">+</span><span class="dv">2</span>)</span>
+<span id="cb12-9"><a aria-label="9"></a></span>
+<span id="cb12-10"><a aria-label="10"></a>plt.tight_layout()</span>
+<span id="cb12-11"><a aria-label="11"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-12-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-revealjs/cell-12-output-1.png" class="quarto-figure quarto-figure-center" width="758" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="3a6d2c99" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a>expand(initial_state_8)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>[[6, 4, 5, 8, 2, 7, 0, 1, 3],
+ [6, 4, 5, 8, 2, 7, 1, 3, 0],
+ [6, 4, 5, 8, 0, 7, 1, 2, 3]]</code></pre>
+</div>
+</div>
+</section>
+<section id="is_empty" class="slide level2">
+<h2><code>is_empty</code></h2>
+<div id="5f39f4f5" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a><span class="kw">def</span> is_empty(frontier):</span>
+<span id="cb15-2"><a aria-label="2"></a>    <span class="co">"""Checks if the frontier is empty."""</span></span>
+<span id="cb15-3"><a aria-label="3"></a>    <span class="cf">return</span> <span class="bu">len</span>(frontier) <span class="op">==</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<aside class="notes">
+<p>Are there 8-Puzzle boards that have no solutions?</p>
+<p>The solvability of the 8-puzzle depends on the number of <strong>inversions</strong> in the initial state. An inversion is a pair of tiles where a higher-numbered tile precedes a lower-numbered tile when the puzzle is viewed as a sequence (excluding the blank tile).</p>
+<p>If the initial state and the goal state do not have the same inversion parity, then the board has no solution.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>If the frontier becomes empty (no more nodes to be expanded), the problem has no solution.</p>
+</div></aside></section>
+<section id="print_solution" class="slide level2">
+<h2><code>print_solution</code></h2>
+<div id="e2f1d04b" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a><span class="kw">def</span> print_solution(solution):</span>
+<span id="cb16-2"><a aria-label="2"></a>    <span class="co">"""Prints the sequence of steps from the initial to the goal state."""</span></span>
+<span id="cb16-3"><a aria-label="3"></a>    size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(solution[<span class="dv">0</span>]) <span class="op">**</span> <span class="fl">0.5</span>)</span>
+<span id="cb16-4"><a aria-label="4"></a>    <span class="cf">for</span> step, state <span class="kw">in</span> <span class="bu">enumerate</span>(solution):</span>
+<span id="cb16-5"><a aria-label="5"></a>        <span class="bu">print</span>(<span class="ss">f"Step </span><span class="sc">{</span>step<span class="sc">}</span><span class="ss">:"</span>)</span>
+<span id="cb16-6"><a aria-label="6"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(size):</span>
+<span id="cb16-7"><a aria-label="7"></a>            row <span class="op">=</span> state[i<span class="op">*</span>size:(i<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span>size]</span>
+<span id="cb16-8"><a aria-label="8"></a>            <span class="bu">print</span>(<span class="st">' '</span>.join(<span class="bu">str</span>(n) <span class="cf">if</span> n <span class="op">!=</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">' '</span> <span class="cf">for</span> n <span class="kw">in</span> row))</span>
+<span id="cb16-9"><a aria-label="9"></a>        <span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="cycles" class="slide level2">
+<h2>Cycles</h2>
+<div class="fragment">
+<p>A path that revisits the same states forms a <strong>cycle</strong>.</p>
+<p>Allowing cycles would render the resulting <strong>search tree</strong> <strong>infinite</strong>.</p>
+<p>To prevent this, we monitor the states that have been reached, though this incurs a <strong>memory cost</strong>.</p>
+</div>
+</section></section>
+<section>
+<section id="breadth-first-search" class="title-slide slide level1 center">
+<h1>Breadth-first search</h1>
+
+</section>
+<section id="breadth-first-search-1" class="slide level2">
+<h2>Breadth-first search</h2>
+<div id="e116e162" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a><span class="im">from</span> collections <span class="im">import</span> deque</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Breadth-first search (BFS)</strong> employs a <strong>queue</strong> to manage the frontier nodes, which are also known as the open list.</p>
+</section>
+<section id="breadth-first-search-2" class="slide level2 scrollable smaller">
+<h2>Breadth-first search</h2>
+<div id="b0230a03" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a aria-label="1"></a><span class="kw">def</span> bfs(initial_state, goal_state):</span>
+<span id="cb18-2"><a aria-label="2"></a></span>
+<span id="cb18-3"><a aria-label="3"></a>    frontier <span class="op">=</span> deque()  <span class="co"># Initialize the queue for BFS</span></span>
+<span id="cb18-4"><a aria-label="4"></a>    frontier.append((initial_state, []))  <span class="co"># A node: (state, preceding states)</span></span>
+<span id="cb18-5"><a aria-label="5"></a></span>
+<span id="cb18-6"><a aria-label="6"></a>    reached <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb18-7"><a aria-label="7"></a>    reached.add(<span class="bu">tuple</span>(initial_state))</span>
+<span id="cb18-8"><a aria-label="8"></a></span>
+<span id="cb18-9"><a aria-label="9"></a>    expanded <span class="op">=</span> <span class="dv">0</span>  <span class="co"># Count non-goal nodes whose successors are generated</span></span>
+<span id="cb18-10"><a aria-label="10"></a></span>
+<span id="cb18-11"><a aria-label="11"></a>    <span class="cf">while</span> <span class="kw">not</span> is_empty(frontier):</span>
+<span id="cb18-12"><a aria-label="12"></a>        current_state, path <span class="op">=</span> frontier.popleft()</span>
+<span id="cb18-13"><a aria-label="13"></a></span>
+<span id="cb18-14"><a aria-label="14"></a>        <span class="cf">if</span> is_goal(current_state, goal_state):</span>
+<span id="cb18-15"><a aria-label="15"></a>            <span class="bu">print</span>(<span class="ss">f"Nodes expanded: </span><span class="sc">{</span>expanded<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-16"><a aria-label="16"></a>            <span class="cf">return</span> path <span class="op">+</span> [current_state]  <span class="co"># Return the successful path</span></span>
+<span id="cb18-17"><a aria-label="17"></a></span>
+<span id="cb18-18"><a aria-label="18"></a>        expanded <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb18-19"><a aria-label="19"></a></span>
+<span id="cb18-20"><a aria-label="20"></a>        <span class="cf">for</span> neighbor <span class="kw">in</span> expand(current_state):</span>
+<span id="cb18-21"><a aria-label="21"></a>            neighbor_tuple <span class="op">=</span> <span class="bu">tuple</span>(neighbor)</span>
+<span id="cb18-22"><a aria-label="22"></a>            <span class="cf">if</span> neighbor_tuple <span class="kw">not</span> <span class="kw">in</span> reached:</span>
+<span id="cb18-23"><a aria-label="23"></a>                reached.add(neighbor_tuple)</span>
+<span id="cb18-24"><a aria-label="24"></a>                frontier.append((neighbor, path <span class="op">+</span> [current_state]))</span>
+<span id="cb18-25"><a aria-label="25"></a></span>
+<span id="cb18-26"><a aria-label="26"></a>    <span class="cf">return</span> <span class="va">None</span>  <span class="co"># No solution found</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<aside class="notes">
+<p>BFS selects nodes in nondecreasing depth because the frontier is a first-in, first-out queue. With equal action costs, the first path that reaches a state is a least-cost path to that state, so later occurrences can be discarded. Unequal action costs break the equivalence between fewest actions and least cost.</p>
+<p>The <code>reached</code> set contains states in the frontier as well as expanded states. The <code>expanded</code> counter increases only when a non-goal node’s successors are generated; selecting a goal does not increase it. The returned solution is a sequence of states, including both endpoints, so its number of moves is <code>len(solution) - 1</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Find a path with the <strong>fewest actions</strong>. This is a <strong>least-cost solution when all action costs are equal</strong>, as in the 8-puzzle.</p>
+</div></aside></section>
+<section id="simple-case" class="slide level2 scrollable smaller">
+<h2>Simple Case</h2>
+<div id="b51f0d3c" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">2</span>))</span>
+<span id="cb19-2"><a aria-label="2"></a></span>
+<span id="cb19-3"><a aria-label="3"></a>initial_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb19-4"><a aria-label="4"></a>                   <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">6</span>,</span>
+<span id="cb19-5"><a aria-label="5"></a>                   <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">8</span>]</span>
+<span id="cb19-6"><a aria-label="6"></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb19-7"><a aria-label="7"></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb19-8"><a aria-label="8"></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb19-9"><a aria-label="9"></a></span>
+<span id="cb19-10"><a aria-label="10"></a>solutions <span class="op">=</span> bfs(initial_state_8, goal_state_8)</span>
+<span id="cb19-11"><a aria-label="11"></a></span>
+<span id="cb19-12"><a aria-label="12"></a><span class="cf">for</span> i, solution <span class="kw">in</span> <span class="bu">enumerate</span>(solutions):</span>
+<span id="cb19-13"><a aria-label="13"></a>    plot_board(solution, <span class="ss">f"Step: </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>, <span class="dv">3</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb19-14"><a aria-label="14"></a></span>
+<span id="cb19-15"><a aria-label="15"></a>plt.tight_layout()</span>
+<span id="cb19-16"><a aria-label="16"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nodes expanded: 12</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-18-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-revealjs/cell-18-output-2.png" class="quarto-figure quarto-figure-center" width="758" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="55ce20d5" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>initial_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb21-2"><a aria-label="2"></a>                   <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">6</span>,</span>
+<span id="cb21-3"><a aria-label="3"></a>                   <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">8</span>]</span>
+<span id="cb21-4"><a aria-label="4"></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb21-5"><a aria-label="5"></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb21-6"><a aria-label="6"></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb21-7"><a aria-label="7"></a></span>
+<span id="cb21-8"><a aria-label="8"></a>bfs(initial_state_8, goal_state_8)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nodes expanded: 12</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>[[1, 2, 3, 4, 0, 6, 7, 5, 8],
+ [1, 2, 3, 4, 5, 6, 7, 0, 8],
+ [1, 2, 3, 4, 5, 6, 7, 8, 0]]</code></pre>
+</div>
+</div>
+</section>
+<section id="challenging-case" class="slide level2 scrollable smaller">
+<h2>Challenging Case</h2>
+<div id="ce58df9b" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a>initial_state_8 <span class="op">=</span> [<span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">5</span>,</span>
+<span id="cb24-2"><a aria-label="2"></a>                   <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">7</span>,</span>
+<span id="cb24-3"><a aria-label="3"></a>                   <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>]</span>
+<span id="cb24-4"><a aria-label="4"></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb24-5"><a aria-label="5"></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb24-6"><a aria-label="6"></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb24-7"><a aria-label="7"></a></span>
+<span id="cb24-8"><a aria-label="8"></a><span class="bu">print</span>(<span class="st">"Solving 8-puzzle with BFS..."</span>)</span>
+<span id="cb24-9"><a aria-label="9"></a></span>
+<span id="cb24-10"><a aria-label="10"></a>solution_8_bfs <span class="op">=</span> bfs(initial_state_8, goal_state_8)</span>
+<span id="cb24-11"><a aria-label="11"></a></span>
+<span id="cb24-12"><a aria-label="12"></a><span class="cf">if</span> solution_8_bfs:</span>
+<span id="cb24-13"><a aria-label="13"></a>    <span class="bu">print</span>(<span class="ss">f"BFS Solution found in </span><span class="sc">{</span><span class="bu">len</span>(solution_8_bfs) <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> moves:"</span>)</span>
+<span id="cb24-14"><a aria-label="14"></a>    print_solution(solution_8_bfs)</span>
+<span id="cb24-15"><a aria-label="15"></a><span class="cf">else</span>:</span>
+<span id="cb24-16"><a aria-label="16"></a>    <span class="bu">print</span>(<span class="st">"No solution found for 8-puzzle using BFS."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solving 8-puzzle with BFS...
+Nodes expanded: 145605
+BFS Solution found in 25 moves:
+Step 0:
+6 4 5
+8 2 7
+1   3
+
+Step 1:
+6 4 5
+8 2 7
+  1 3
+
+Step 2:
+6 4 5
+  2 7
+8 1 3
+
+Step 3:
+6 4 5
+2   7
+8 1 3
+
+Step 4:
+6   5
+2 4 7
+8 1 3
+
+Step 5:
+  6 5
+2 4 7
+8 1 3
+
+Step 6:
+2 6 5
+  4 7
+8 1 3
+
+Step 7:
+2 6 5
+4   7
+8 1 3
+
+Step 8:
+2 6 5
+4 1 7
+8   3
+
+Step 9:
+2 6 5
+4 1 7
+  8 3
+
+Step 10:
+2 6 5
+  1 7
+4 8 3
+
+Step 11:
+2 6 5
+1   7
+4 8 3
+
+Step 12:
+2 6 5
+1 7  
+4 8 3
+
+Step 13:
+2 6 5
+1 7 3
+4 8  
+
+Step 14:
+2 6 5
+1 7 3
+4   8
+
+Step 15:
+2 6 5
+1   3
+4 7 8
+
+Step 16:
+2   5
+1 6 3
+4 7 8
+
+Step 17:
+2 5  
+1 6 3
+4 7 8
+
+Step 18:
+2 5 3
+1 6  
+4 7 8
+
+Step 19:
+2 5 3
+1   6
+4 7 8
+
+Step 20:
+2   3
+1 5 6
+4 7 8
+
+Step 21:
+  2 3
+1 5 6
+4 7 8
+
+Step 22:
+1 2 3
+  5 6
+4 7 8
+
+Step 23:
+1 2 3
+4 5 6
+  7 8
+
+Step 24:
+1 2 3
+4 5 6
+7   8
+
+Step 25:
+1 2 3
+4 5 6
+7 8  
+</code></pre>
+</div>
+</div>
+</section>
+<section id="bfs-search-tree" class="slide level2">
+<h2>BFS Search Tree</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_bfs-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="../../assets/images/search_bfs-00.png" class="quarto-figure quarto-figure-center"></a></p>
+</figure>
+</div>
+
+<aside><div>
+<p>The search tree above illustrates the first 20 node expansions of breadth-first search (BFS) for the specified initial state.</p>
+</div></aside></section></section>
+<section>
+<section id="depth-first-search" class="title-slide slide level1 center">
+<h1>Depth-First Search</h1>
+
+</section>
+<section id="depth-first-search-1" class="slide level2 scrollable smaller">
+<h2>Depth-First Search</h2>
+<div id="3eb6ce1e" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a><span class="kw">def</span> dfs(initial_state, goal_state):</span>
+<span id="cb26-2"><a aria-label="2"></a></span>
+<span id="cb26-3"><a aria-label="3"></a>    frontier <span class="op">=</span> [(initial_state, [])]  <span class="co"># A node: (state, preceding states)</span></span>
+<span id="cb26-4"><a aria-label="4"></a></span>
+<span id="cb26-5"><a aria-label="5"></a>    reached <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb26-6"><a aria-label="6"></a>    reached.add(<span class="bu">tuple</span>(initial_state))</span>
+<span id="cb26-7"><a aria-label="7"></a></span>
+<span id="cb26-8"><a aria-label="8"></a>    expanded <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb26-9"><a aria-label="9"></a></span>
+<span id="cb26-10"><a aria-label="10"></a>    <span class="cf">while</span> <span class="kw">not</span> is_empty(frontier):</span>
+<span id="cb26-11"><a aria-label="11"></a>        current_state, path <span class="op">=</span> frontier.pop()</span>
+<span id="cb26-12"><a aria-label="12"></a></span>
+<span id="cb26-13"><a aria-label="13"></a>        <span class="cf">if</span> is_goal(current_state, goal_state):</span>
+<span id="cb26-14"><a aria-label="14"></a>            <span class="bu">print</span>(<span class="ss">f"Nodes expanded: </span><span class="sc">{</span>expanded<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb26-15"><a aria-label="15"></a>            <span class="cf">return</span> path <span class="op">+</span> [current_state]  <span class="co"># Return the successful path</span></span>
+<span id="cb26-16"><a aria-label="16"></a></span>
+<span id="cb26-17"><a aria-label="17"></a>        expanded <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb26-18"><a aria-label="18"></a></span>
+<span id="cb26-19"><a aria-label="19"></a>        <span class="cf">for</span> neighbor <span class="kw">in</span> expand(current_state):</span>
+<span id="cb26-20"><a aria-label="20"></a>            neighbor_tuple <span class="op">=</span> <span class="bu">tuple</span>(neighbor)</span>
+<span id="cb26-21"><a aria-label="21"></a>            <span class="cf">if</span> neighbor_tuple <span class="kw">not</span> <span class="kw">in</span> reached:</span>
+<span id="cb26-22"><a aria-label="22"></a>                reached.add(neighbor_tuple)</span>
+<span id="cb26-23"><a aria-label="23"></a>                frontier.append((neighbor, path <span class="op">+</span> [current_state]))</span>
+<span id="cb26-24"><a aria-label="24"></a></span>
+<span id="cb26-25"><a aria-label="25"></a>    <span class="cf">return</span> <span class="va">None</span>  <span class="co"># No solution found</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<aside class="notes">
+<p><strong>Depth-first search (DFS)</strong> uses a last-in, first-out <strong>stack</strong>. Newly generated nodes are selected before older alternatives, so the search follows a branch deeply before returning to other frontier nodes. The successor order matters: because <code>expand</code> lists left, right, up, down and the stack removes the last entry first, DFS tries the last newly added successor first.</p>
+<p>When does the deepening process halt?</p>
+<p>It stops following a branch when a goal is found or no new successor can be added, because there are no available actions or all successors have already been reached.</p>
+<p>What happens next?</p>
+<p>The algorithm pops the most recently added remaining frontier node. The stored path records how that alternative was reached; the code does not undo moves on a shared board.</p>
+<p>If that node also has no new successors, the algorithm continues with the next stack entry. Repeated-state detection prevents cycles from continually adding the same states.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>What is the behaviour of <strong>depth-first search (DFS)</strong>?</p>
+</div></aside></section>
+<section id="dfs-search-tree" class="slide level2">
+<h2>DFS Search Tree</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_dfs-01.png" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img data-src="../../assets/images/search_dfs-01.png" class="quarto-figure quarto-figure-center" height="525"></a></p>
+</figure>
+</div>
+</section>
+<section id="dfs-search-tree-1" class="slide level2">
+<h2>DFS Search Tree</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/search_dfs-00.png" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img data-src="../../assets/images/search_dfs-00.png" class="quarto-figure quarto-figure-center" height="525"></a></p>
+</figure>
+</div>
+</section>
+<section id="simple-case-1" class="slide level2 scrollable smaller">
+<h2>Simple Case</h2>
+<div id="40056ffa" class="cell" data-execution_count="22">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a aria-label="1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">2</span>))</span>
+<span id="cb27-2"><a aria-label="2"></a></span>
+<span id="cb27-3"><a aria-label="3"></a>initial_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb27-4"><a aria-label="4"></a>                   <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">6</span>,</span>
+<span id="cb27-5"><a aria-label="5"></a>                   <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">8</span>]</span>
+<span id="cb27-6"><a aria-label="6"></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb27-7"><a aria-label="7"></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb27-8"><a aria-label="8"></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb27-9"><a aria-label="9"></a></span>
+<span id="cb27-10"><a aria-label="10"></a>solutions <span class="op">=</span> dfs(initial_state_8, goal_state_8)</span>
+<span id="cb27-11"><a aria-label="11"></a></span>
+<span id="cb27-12"><a aria-label="12"></a><span class="cf">for</span> i, solution <span class="kw">in</span> <span class="bu">enumerate</span>(solutions):</span>
+<span id="cb27-13"><a aria-label="13"></a>    plot_board(solution, <span class="ss">f"Step: </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>, <span class="dv">3</span>, i<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb27-14"><a aria-label="14"></a></span>
+<span id="cb27-15"><a aria-label="15"></a>plt.tight_layout()</span>
+<span id="cb27-16"><a aria-label="16"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nodes expanded: 2</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cell-22-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img data-src="slides_files/figure-revealjs/cell-22-output-2.png" class="quarto-figure quarto-figure-center" width="758" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="9d105383" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a aria-label="1"></a>initial_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb29-2"><a aria-label="2"></a>                   <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">6</span>,</span>
+<span id="cb29-3"><a aria-label="3"></a>                   <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">8</span>]</span>
+<span id="cb29-4"><a aria-label="4"></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb29-5"><a aria-label="5"></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb29-6"><a aria-label="6"></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb29-7"><a aria-label="7"></a></span>
+<span id="cb29-8"><a aria-label="8"></a>dfs(initial_state_8, goal_state_8)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nodes expanded: 2</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>[[1, 2, 3, 4, 0, 6, 7, 5, 8],
+ [1, 2, 3, 4, 5, 6, 7, 0, 8],
+ [1, 2, 3, 4, 5, 6, 7, 8, 0]]</code></pre>
+</div>
+</div>
+</section>
+<section id="challenging-case-1" class="slide level2 scrollable smaller">
+<h2>Challenging Case</h2>
+<div id="dcbaf3a7" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a aria-label="1"></a>initial_state_8 <span class="op">=</span> [<span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">5</span>,</span>
+<span id="cb32-2"><a aria-label="2"></a>                   <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">7</span>,</span>
+<span id="cb32-3"><a aria-label="3"></a>                   <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>]</span>
+<span id="cb32-4"><a aria-label="4"></a>goal_state_8 <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb32-5"><a aria-label="5"></a>                <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb32-6"><a aria-label="6"></a>                <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>]</span>
+<span id="cb32-7"><a aria-label="7"></a></span>
+<span id="cb32-8"><a aria-label="8"></a><span class="bu">print</span>(<span class="st">"Solving 8-puzzle with DFS..."</span>)</span>
+<span id="cb32-9"><a aria-label="9"></a></span>
+<span id="cb32-10"><a aria-label="10"></a>solution_8_dfs <span class="op">=</span> dfs(initial_state_8, goal_state_8)</span>
+<span id="cb32-11"><a aria-label="11"></a></span>
+<span id="cb32-12"><a aria-label="12"></a><span class="cf">if</span> solution_8_dfs:</span>
+<span id="cb32-13"><a aria-label="13"></a>    <span class="bu">print</span>(<span class="ss">f"DFS Solution found in </span><span class="sc">{</span><span class="bu">len</span>(solution_8_dfs) <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> moves:"</span>)</span>
+<span id="cb32-14"><a aria-label="14"></a>    <span class="co"># print_solution(solution_8_dfs)</span></span>
+<span id="cb32-15"><a aria-label="15"></a><span class="cf">else</span>:</span>
+<span id="cb32-16"><a aria-label="16"></a>    <span class="bu">print</span>(<span class="st">"No solution found for 8-puzzle using DFS."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solving 8-puzzle with DFS...
+Nodes expanded: 1187
+DFS Solution found in 1157 moves:</code></pre>
+</div>
+</div>
+</section>
+<section id="remarks" class="slide level2 smaller">
+<h2>Remarks</h2>
+<ul>
+<li><p><strong>BFS:</strong> 25 moves (optimal); 145,605 non-goal nodes expanded.</p></li>
+<li><p><strong>DFS:</strong> 1,157 moves; 1,187 non-goal nodes expanded.</p></li>
+</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>BFS</th>
+<th>DFS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Frontier</td>
+<td>FIFO queue</td>
+<td>LIFO stack</td>
+</tr>
+<tr class="even">
+<td>Complete on finite reachable graphs</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>Fewest actions / least cost (equal action costs)</td>
+<td>Guaranteed</td>
+<td>Not guaranteed</td>
+</tr>
+<tr class="even">
+<td>Memory retained</td>
+<td>Frontier, reached set, copied paths</td>
+<td>Frontier, reached set, copied paths</td>
+</tr>
+</tbody>
+</table>
+
+<aside class="notes">
+<p>Will <strong>Depth-First Search (DFS)</strong> invariably yield sub-optimal solutions?</p>
+<p>No.&nbsp;DFS can return an optimal solution if it encounters one first, but it provides no guarantee that the first solution has the fewest actions or lowest cost.</p>
+<p>Is it possible for DFS to discover solutions superior to the optimal solution?</p>
+<p>Certainly not; such solutions would either be invalid (involving impossible moves) or indicate an error in your estimation.</p>
+<p>Does this imply that depth-first search (DFS) has no practical applications?</p>
+<p>When is it appropriate to use DFS?</p>
+<p>Breadth-first search (BFS) expands its frontier systematically in all directions, leading to rapid growth in memory requirements.</p>
+<p>DFS often has a smaller frontier because it follows one branch before trying alternatives. However, the code shown here retains every reached state and copies paths into frontier entries. Its total memory is therefore not limited to the active branch, and a small frontier alone does not establish low total memory usage.</p>
+<p>The usual small-memory description of DFS applies to implementations that retain the active path and pending alternatives, without a global record of all reached states. Such backtracking implementations can be useful when systematically exploring possible solutions. Their duplicate-handling and termination properties differ from those of the graph-search code above.</p>
+<p>The programming language Prolog uses depth-first backtracking to search for answers. It can enumerate answers, but an infinite branch can prevent it from reaching other answers.</p>
+<p><strong>Completeness</strong> means finding a solution whenever one exists. Both graph-search implementations shown here are complete on a finite reachable state space because each state is added at most once. BFS also finds a finite-depth solution with finite branching in an infinite space; DFS can instead follow an infinite branch indefinitely.</p>
+<p>These numerical results apply to the specified initial board and successor order. Expansion counts describe search effort, not elapsed time or peak memory; different boards or move orders can change the comparison substantially.</p>
+<p>Depth-limited and iterative deepening search would be alternative uninformed search algorithms.</p>
+<p>Heuristic functions use additional knowledge to estimate the remaining cost to a goal and guide search. They are the focus of the next lecture.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>How can solutions be discovered <strong>more efficiently</strong>?</p>
+</div></aside></section></section>
+<section>
+<section id="epilogue" class="title-slide slide level1 center">
+<h1>Epilogue</h1>
+
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>Justification for Studying Search</li>
+<li>Key Terminology and Concepts</li>
+<li>Uninformed Search Algorithms
+<ul>
+<li>Breadth-First Search (BFS)</li>
+<li>Depth-First Search (DFS)</li>
+</ul></li>
+<li>Implementations: completeness, cost optimality, and memory</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><strong>Justification for Studying Search:</strong>
+<ul>
+<li>Emphasized the shift from solely focusing on machine learning to incorporating search algorithms.</li>
+<li>Highlighted the role of search in advanced AI systems like AlphaGo, AlphaZero, and MuZero.</li>
+<li>Noted that search algorithms are crucial for planning, reasoning, and will be increasingly significant.</li>
+</ul></li>
+<li><strong>Historical Timeline of Search Algorithms:</strong>
+<ul>
+<li>Selected milestones range from A* in 1968 to FunSearch in 2023 and AlphaGeometry in 2024.</li>
+<li>The timeline includes explicit search methods, reinforcement-learning advances, and systems combining learning with search.</li>
+</ul></li>
+<li><strong>Applications of Search:</strong>
+<ul>
+<li><strong>Pathfinding and Navigation:</strong> Finding optimal paths in robotics and games.</li>
+<li><strong>Puzzle Solving:</strong> Solving problems like the 8-puzzle and Sudoku.</li>
+<li><strong>Network Analysis:</strong> Analyzing connectivity and shortest paths in networks.</li>
+<li><strong>Game Playing:</strong> Evaluating moves in games like chess or Go.</li>
+<li><strong>Scheduling and Resource Allocation:</strong> Planning tasks and allocating resources efficiently.</li>
+<li><strong>Configuration Problems:</strong> Assembling components to meet specific requirements.</li>
+<li><strong>Decision Making under Uncertainty:</strong> Making decisions in dynamic and uncertain environments.</li>
+<li><strong>Storytelling:</strong> Guiding language models with plans from automated planners.</li>
+</ul></li>
+<li><strong>Key Terminology and Concepts:</strong>
+<ul>
+<li><strong>Agent:</strong> An entity that performs actions to achieve goals.</li>
+<li><strong>Environment Characteristics:</strong> Fully observable, single-agent, sequential, deterministic, static, and discrete environments were focused on.</li>
+<li><strong>Search Problem Definition:</strong>
+<ul>
+<li><strong>State Space:</strong> All possible states.</li>
+<li><strong>Initial State:</strong> Where the agent starts.</li>
+<li><strong>Goal State(s):</strong> Desired outcome(s).</li>
+<li><strong>Actions:</strong> Possible moves from a state.</li>
+<li><strong>Transition Model:</strong> Rules determining state changes.</li>
+<li><strong>Action Cost Function:</strong> Cost associated with actions.</li>
+</ul></li>
+</ul></li>
+<li><strong>Uninformed Search Algorithms:</strong>
+<ul>
+<li><strong>Breadth-First Search (BFS):</strong>
+<ul>
+<li>Explores the search space level by level.</li>
+<li>Guarantees the fewest actions, and least cost when action costs are equal, but can be memory-intensive.</li>
+<li>Implemented using a queue.</li>
+</ul></li>
+<li><strong>Depth-First Search (DFS):</strong>
+<ul>
+<li>Explores as deep as possible along each branch before backtracking.</li>
+<li>Does not guarantee the fewest actions or least cost. A smaller frontier does not remove the memory cost of the global reached set and copied paths in this implementation.</li>
+<li>Implemented using a stack.</li>
+</ul></li>
+</ul></li>
+<li><strong>Implementing Uninformed Search:</strong>
+<ul>
+<li>Used the <strong>8-Puzzle</strong> as an example problem.</li>
+<li>Represented states as lists of numbers, with <code>0</code> as the blank tile.</li>
+<li>Demonstrated BFS and DFS implementations in Python.</li>
+<li>On the specified board and move order, BFS found the optimal solution after more expansions, while DFS found a longer solution after fewer expansions.</li>
+</ul></li>
+<li><strong>Completeness and Repeated States:</strong>
+<ul>
+<li>Both implementations find a solution when one exists in a finite reachable state space.</li>
+<li><code>reached</code> includes frontier and expanded states; <code>expanded</code> counts non-goal nodes whose successors are generated.</li>
+</ul></li>
+<li><strong>Limitations of Uninformed Search:</strong>
+<ul>
+<li>Inefficient for large or complex problems due to exhaustive nature.</li>
+<li>Without an estimate of remaining goal cost, they can explore many states that do not help reach the goal.</li>
+</ul></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="next-lecture" class="slide level2">
+<h2>Next lecture</h2>
+<ul>
+<li>We will further explore heuristic functions and examine additional search algorithms.</li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Archer:1999aa" class="csl-entry" role="listitem">
+Archer, Aaron F. 1999. <span>“A Modern Treatment of the 15 Puzzle.”</span> <em>The American Mathematical Monthly</em> 106 (9): 793–99. <a href="https://doi.org/10.1080/00029890.1999.12005124">https://doi.org/10.1080/00029890.1999.12005124</a>.
+</div>
+<div id="ref-Hart:1968aa" class="csl-entry" role="listitem">
+Hart, Peter E., Nils J. Nilsson, and Bertram Raphael. 1968. <span>“<span class="nocase">A Formal Basis for the Heuristic Determination of Minimum Cost Paths</span>.”</span> <em>IEEE Transactions on Systems Science and Cybernetics</em> 4 (2): 100–107. <a href="https://doi.org/10.1109/tssc.1968.300136">https://doi.org/10.1109/tssc.1968.300136</a>.
+</div>
+<div id="ref-Russell:2020aa" class="csl-entry" role="listitem">
+Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</span> Modern Approach</em>. 4th ed. Pearson. <a href="http://aima.cs.berkeley.edu/">http://aima.cs.berkeley.edu/</a>.
+</div>
+<div id="ref-Schrittwieser:2020aa" class="csl-entry" role="listitem">
+Schrittwieser, Julian, Ioannis Antonoglou, Thomas Hubert, et al. 2020. <span>“<span class="nocase">Mastering Atari, Go, chess and shogi by planning with a learned model</span>.”</span> <em>Nature</em> 588 (7839): 604–9. <a href="https://doi.org/10.1038/s41586-020-03051-4">https://doi.org/10.1038/s41586-020-03051-4</a>.
+</div>
+<div id="ref-Silver:2016aa" class="csl-entry" role="listitem">
+Silver, David, Aja Huang, Chris J. Maddison, et al. 2016. <span>“<span class="nocase">Mastering the game of Go with deep neural networks and tree search</span>.”</span> <em>Nature</em> 529 (7587): 484–89. <a href="https://doi.org/10.1038/nature16961">https://doi.org/10.1038/nature16961</a>.
+</div>
+<div id="ref-Simon:2024aa" class="csl-entry" role="listitem">
+Simon, Nisha, and Christian Muise. 2024. <span>“Want <span>To</span> <span>Choose</span> <span>Your</span> <span>Own</span> <span>Adventure</span>? <span>Then</span> <span>First</span> <span>Make</span> a <span>Plan</span>.”</span> <em>Proceedings of the Canadian Conference on Artificial Intelligence</em>.
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Marcel <strong>Turcotte</strong></p>
+<p><a href="mailto:Marcel.Turcotte@uOttawa.ca">Marcel.Turcotte@uOttawa.ca</a></p>
+<p>School of Electrical Engineering and <strong>Computer Science</strong> (EE<strong>CS</strong>)</p>
+<p>University of Ottawa</p>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../../assets/images/uottawa_hor_black.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p><a href="https://turcotte.xyz/teaching/csi-4106">turcotte.xyz/teaching/csi-4106</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/multiplex/socket.io.js"></script>
+  <script src="../../site_libs/revealjs/plugin/multiplex/multiplex.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'multiplex': {"secret":"8b656ae83c01c2892de48e8e651c95e1","id":"75db857fb4e3a6a78eb272e66feb98443327c24b34c9e9e82a5eaf6b459837e6","url":"https://multiplex.up.railway.app/"},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/turcotte\.xyz\/teaching\/csi-4106");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+<script src="https://platform.twitter.com/widgets.js"></script>
+</body></html>
