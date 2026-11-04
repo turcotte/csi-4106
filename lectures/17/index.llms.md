@@ -11,10 +11,18 @@ CSI 4106 Introduction to Artificial Intelligence
 ## Prepare
 
 - Russell and Norvig ([2020](#ref-Russell:2020aa)), pages 85–92
+- Review [Lecture 16](../../lectures/16/index.llms.md), especially state representation, successor generation, the frontier, and breadth-first search.
 
 ## Participate
 
 - [slides](slides.llms.md) ([PDF](slides.pdf), [Jupyter Notebook](slides.ipynb))
+
+## Practice
+
+Use the lecture’s Jupyter notebook to:
+
+- Compare misplaced-tile and Manhattan heuristics on the same boards. Compare node expansions and validate solution paths and lengths against BFS on a small sample.
+- Set h(s)=0 and explain the relationship between A\*, uniform-cost search, and BFS, including the effect of tie-breaking.
 
 ## References
 

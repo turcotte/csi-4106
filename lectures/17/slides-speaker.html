@@ -1,0 +1,2184 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
+
+  <meta name="author" content="Marcel Turcotte">
+  <title>CSI 4106 - Fall 2026 – Heuristic Search</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link rel="stylesheet" href="../../assets/css/reveal-common.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+  <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+<meta property="og:title" content="Heuristic Search – CSI 4106 - Fall 2026">
+<meta property="og:description" content="CSI 4106 Introduction to Artificial Intelligence">
+<meta property="og:site_name" content="CSI 4106 - Fall 2026">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Heuristic Search</h1>
+  <p class="subtitle">CSI 4106 Introduction to Artificial Intelligence</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Marcel Turcotte
+</div>
+</div>
+</div>
+
+  <p class="date">Version: Nov 3, 2026 20:28</p>
+</section>
+<section>
+<section id="preamble" class="title-slide slide level1 center">
+<h1>Preamble</h1>
+
+</section>
+<section id="message-of-the-day" class="slide level2">
+<h2>Message of the Day</h2>
+<p></p><div id="tweet-89253"></div><script>tweet={"url":"https:\/\/x.com\/Waymo\/status\/2111042355671244871","author_name":"Waymo","author_url":"https:\/\/x.com\/Waymo","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EWe’re bringing the magic of Waymo to Toronto! \uD83C\uDDE8\uD83C\uDDE6 \u003Cbr\u003E\u003Cbr\u003EIn the coming days, you’ll begin seeing Waymo’s all-electric vehicles driving through Toronto’s streets as we lay the groundwork for our ride-hailing service. \u003Cbr\u003E\u003Cbr\u003EOur goal is to begin serving riders in 2028. \u003Cbr\u003E\u003Cbr\u003ESign up for future… \u003Ca href=\"https:\/\/t.co\/FQmGxwV5T9\"\u003Epic.twitter.com\/FQmGxwV5T9\u003C\/a\u003E\u003C\/p\u003E&mdash; Waymo (@Waymo) \u003Ca href=\"https:\/\/x.com\/Waymo\/status\/2111042355671244871?ref_src=twsrc%5Etfw\"\u003EOctober 16, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-89253").innerHTML = tweet["html"];</script><p></p>
+</section>
+<section id="learning-objectives" class="slide level2 smaller">
+<h2>Learning Objectives</h2>
+<ul>
+<li><strong>Distinguish</strong> the heuristic estimate <span class="math inline">h</span>, path cost <span class="math inline">g</span>, and search priority <span class="math inline">f</span>.</li>
+<li><strong>Implement</strong> A* graph search using a priority queue and best-known path costs.</li>
+<li><strong>Explain</strong> cost optimality under admissibility and the stated duplicate-handling policy.</li>
+<li><strong>Construct and justify</strong> misplaced-tile and Manhattan heuristics for the 8-puzzle.</li>
+<li><strong>Compare</strong> search effort and memory requirements under controlled conditions.</li>
+</ul>
+</section>
+<section id="python-helpers-from-lecture-16" class="slide level2 scrollable">
+<h2>Python Helpers from Lecture 16</h2>
+<div id="lecture-16-helpers" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Show Python helper functions</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> random</span>
+<span id="cb1-2"><a aria-label="2"></a><span class="im">from</span> collections <span class="im">import</span> deque</span>
+<span id="cb1-3"><a aria-label="3"></a></span>
+<span id="cb1-4"><a aria-label="4"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a aria-label="5"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-6"><a aria-label="6"></a></span>
+<span id="cb1-7"><a aria-label="7"></a>random.seed(<span class="dv">58</span>)</span>
+<span id="cb1-8"><a aria-label="8"></a></span>
+<span id="cb1-9"><a aria-label="9"></a><span class="kw">def</span> is_solvable(tiles):</span>
+<span id="cb1-10"><a aria-label="10"></a>    <span class="co"># Count the inversions in the flattened list of tiles (excluding the blank space).</span></span>
+<span id="cb1-11"><a aria-label="11"></a>    <span class="co"># Assumption: board is square and width is odd.</span></span>
+<span id="cb1-12"><a aria-label="12"></a>    inversions <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-13"><a aria-label="13"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(tiles)):</span>
+<span id="cb1-14"><a aria-label="14"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, <span class="bu">len</span>(tiles)):</span>
+<span id="cb1-15"><a aria-label="15"></a>            <span class="cf">if</span> tiles[i] <span class="op">!=</span> <span class="dv">0</span> <span class="kw">and</span> tiles[j] <span class="op">!=</span> <span class="dv">0</span> <span class="kw">and</span> tiles[i] <span class="op">&gt;</span> tiles[j]:</span>
+<span id="cb1-16"><a aria-label="16"></a>                inversions <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-17"><a aria-label="17"></a>    <span class="cf">return</span> inversions <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span></span>
+<span id="cb1-18"><a aria-label="18"></a></span>
+<span id="cb1-19"><a aria-label="19"></a><span class="kw">def</span> generate_solvable_board():</span>
+<span id="cb1-20"><a aria-label="20"></a>    <span class="co"># Generate a random board configuration that is guaranteed to be solvable</span></span>
+<span id="cb1-21"><a aria-label="21"></a>    tiles <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">9</span>))</span>
+<span id="cb1-22"><a aria-label="22"></a>    random.shuffle(tiles)</span>
+<span id="cb1-23"><a aria-label="23"></a>    <span class="cf">while</span> <span class="kw">not</span> is_solvable(tiles):</span>
+<span id="cb1-24"><a aria-label="24"></a>        random.shuffle(tiles)</span>
+<span id="cb1-25"><a aria-label="25"></a></span>
+<span id="cb1-26"><a aria-label="26"></a>    <span class="cf">return</span> <span class="bu">tuple</span>(tiles)</span>
+<span id="cb1-27"><a aria-label="27"></a></span>
+<span id="cb1-28"><a aria-label="28"></a><span class="kw">def</span> plot_board(board, title, num_pos, position):</span>
+<span id="cb1-29"><a aria-label="29"></a>    ax <span class="op">=</span> plt.subplot(<span class="dv">1</span>, num_pos, position)</span>
+<span id="cb1-30"><a aria-label="30"></a>    ax.set_title(title)</span>
+<span id="cb1-31"><a aria-label="31"></a>    ax.set_xticks([])</span>
+<span id="cb1-32"><a aria-label="32"></a>    ax.set_yticks([])</span>
+<span id="cb1-33"><a aria-label="33"></a></span>
+<span id="cb1-34"><a aria-label="34"></a>    board <span class="op">=</span> np.array(board).reshape(<span class="dv">3</span>, <span class="dv">3</span>).tolist() <span class="co"># Reconfigure the grid to be 3x3</span></span>
+<span id="cb1-35"><a aria-label="35"></a></span>
+<span id="cb1-36"><a aria-label="36"></a>    <span class="co"># Use a color map to display the numbers</span></span>
+<span id="cb1-37"><a aria-label="37"></a>    cmap <span class="op">=</span> plt.cm.plasma</span>
+<span id="cb1-38"><a aria-label="38"></a>    norm <span class="op">=</span> plt.Normalize(vmin<span class="op">=-</span><span class="dv">1</span>, vmax<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb1-39"><a aria-label="39"></a></span>
+<span id="cb1-40"><a aria-label="40"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb1-41"><a aria-label="41"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb1-42"><a aria-label="42"></a>            tile_value <span class="op">=</span> board[i][j]</span>
+<span id="cb1-43"><a aria-label="43"></a>            color <span class="op">=</span> cmap(norm(tile_value))</span>
+<span id="cb1-44"><a aria-label="44"></a>            ax.add_patch(plt.Rectangle((j, <span class="dv">2</span> <span class="op">-</span> i), <span class="dv">1</span>, <span class="dv">1</span>, facecolor<span class="op">=</span>color, edgecolor<span class="op">=</span><span class="st">'black'</span>))</span>
+<span id="cb1-45"><a aria-label="45"></a>            <span class="cf">if</span> tile_value <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb1-46"><a aria-label="46"></a>                ax.add_patch(plt.Rectangle((j, <span class="dv">2</span> <span class="op">-</span> i), <span class="dv">1</span>, <span class="dv">1</span>, facecolor<span class="op">=</span><span class="st">'white'</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>))</span>
+<span id="cb1-47"><a aria-label="47"></a>            <span class="cf">else</span>:</span>
+<span id="cb1-48"><a aria-label="48"></a>                ax.text(j <span class="op">+</span> <span class="fl">0.5</span>, <span class="dv">2</span> <span class="op">-</span> i <span class="op">+</span> <span class="fl">0.5</span>, <span class="bu">str</span>(tile_value),</span>
+<span id="cb1-49"><a aria-label="49"></a>                        fontsize<span class="op">=</span><span class="dv">16</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'center'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb1-50"><a aria-label="50"></a></span>
+<span id="cb1-51"><a aria-label="51"></a>    ax.set_xlim(<span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb1-52"><a aria-label="52"></a>    ax.set_ylim(<span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb1-53"><a aria-label="53"></a></span>
+<span id="cb1-54"><a aria-label="54"></a><span class="kw">def</span> is_empty(frontier):</span>
+<span id="cb1-55"><a aria-label="55"></a>    <span class="co">"""Checks if the frontier is empty."""</span></span>
+<span id="cb1-56"><a aria-label="56"></a>    <span class="cf">return</span> <span class="bu">len</span>(frontier) <span class="op">==</span> <span class="dv">0</span></span>
+<span id="cb1-57"><a aria-label="57"></a></span>
+<span id="cb1-58"><a aria-label="58"></a><span class="kw">def</span> is_goal(state, goal_state):</span>
+<span id="cb1-59"><a aria-label="59"></a>    <span class="co">"""Determines if a given state matches the goal state."""</span></span>
+<span id="cb1-60"><a aria-label="60"></a>    <span class="cf">return</span> state <span class="op">==</span> goal_state</span>
+<span id="cb1-61"><a aria-label="61"></a></span>
+<span id="cb1-62"><a aria-label="62"></a><span class="kw">def</span> expand(state):</span>
+<span id="cb1-63"><a aria-label="63"></a>    <span class="co">"""Generates successor states by moving the blank tile in all possible directions."""</span></span>
+<span id="cb1-64"><a aria-label="64"></a>    size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(state) <span class="op">**</span> <span class="fl">0.5</span>)  <span class="co"># Determine puzzle size (3 for 8-puzzle, 4 for 15-puzzle)</span></span>
+<span id="cb1-65"><a aria-label="65"></a>    idx <span class="op">=</span> state.index(<span class="dv">0</span>)  <span class="co"># Find the index of the blank tile represented by 0</span></span>
+<span id="cb1-66"><a aria-label="66"></a>    x, y <span class="op">=</span> idx <span class="op">%</span> size, idx <span class="op">//</span> size  <span class="co"># Convert index to (x, y) coordinates</span></span>
+<span id="cb1-67"><a aria-label="67"></a>    neighbors <span class="op">=</span> []</span>
+<span id="cb1-68"><a aria-label="68"></a></span>
+<span id="cb1-69"><a aria-label="69"></a>    <span class="co"># Define possible moves: Left, Right, Up, Down</span></span>
+<span id="cb1-70"><a aria-label="70"></a>    moves <span class="op">=</span> [(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>), (<span class="dv">1</span>, <span class="dv">0</span>), (<span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>), (<span class="dv">0</span>, <span class="dv">1</span>)]</span>
+<span id="cb1-71"><a aria-label="71"></a>    <span class="cf">for</span> dx, dy <span class="kw">in</span> moves:</span>
+<span id="cb1-72"><a aria-label="72"></a>        nx, ny <span class="op">=</span> x <span class="op">+</span> dx, y <span class="op">+</span> dy</span>
+<span id="cb1-73"><a aria-label="73"></a>        <span class="co"># Check if the new position is within the puzzle boundaries</span></span>
+<span id="cb1-74"><a aria-label="74"></a>        <span class="cf">if</span> <span class="dv">0</span> <span class="op">&lt;=</span> nx <span class="op">&lt;</span> size <span class="kw">and</span> <span class="dv">0</span> <span class="op">&lt;=</span> ny <span class="op">&lt;</span> size:</span>
+<span id="cb1-75"><a aria-label="75"></a>            n_idx <span class="op">=</span> ny <span class="op">*</span> size <span class="op">+</span> nx</span>
+<span id="cb1-76"><a aria-label="76"></a>            new_state <span class="op">=</span> <span class="bu">list</span>(state)</span>
+<span id="cb1-77"><a aria-label="77"></a>            <span class="co"># Swap the blank tile with the adjacent tile</span></span>
+<span id="cb1-78"><a aria-label="78"></a>            new_state[idx], new_state[n_idx] <span class="op">=</span> new_state[n_idx], new_state[idx]</span>
+<span id="cb1-79"><a aria-label="79"></a>            neighbors.append(<span class="bu">tuple</span>(new_state))</span>
+<span id="cb1-80"><a aria-label="80"></a>    <span class="cf">return</span> neighbors</span>
+<span id="cb1-81"><a aria-label="81"></a></span>
+<span id="cb1-82"><a aria-label="82"></a><span class="kw">def</span> print_solution(solution):</span>
+<span id="cb1-83"><a aria-label="83"></a>    <span class="co">"""Prints the sequence of steps from the initial to the goal state."""</span></span>
+<span id="cb1-84"><a aria-label="84"></a>    size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(solution[<span class="dv">0</span>]) <span class="op">**</span> <span class="fl">0.5</span>)</span>
+<span id="cb1-85"><a aria-label="85"></a>    <span class="cf">for</span> step, state <span class="kw">in</span> <span class="bu">enumerate</span>(solution):</span>
+<span id="cb1-86"><a aria-label="86"></a>        <span class="bu">print</span>(<span class="ss">f"Step </span><span class="sc">{</span>step<span class="sc">}</span><span class="ss">:"</span>)</span>
+<span id="cb1-87"><a aria-label="87"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(size):</span>
+<span id="cb1-88"><a aria-label="88"></a>            row <span class="op">=</span> state[i<span class="op">*</span>size:(i<span class="op">+</span><span class="dv">1</span>)<span class="op">*</span>size]</span>
+<span id="cb1-89"><a aria-label="89"></a>            <span class="bu">print</span>(<span class="st">' '</span>.join(<span class="bu">str</span>(n) <span class="cf">if</span> n <span class="op">!=</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">' '</span> <span class="cf">for</span> n <span class="kw">in</span> row))</span>
+<span id="cb1-90"><a aria-label="90"></a>        <span class="bu">print</span>()</span>
+<span id="cb1-91"><a aria-label="91"></a></span>
+<span id="cb1-92"><a aria-label="92"></a><span class="kw">def</span> bfs(initial_state, goal_state):</span>
+<span id="cb1-93"><a aria-label="93"></a></span>
+<span id="cb1-94"><a aria-label="94"></a>    frontier <span class="op">=</span> deque()  <span class="co"># Initialize the queue for BFS</span></span>
+<span id="cb1-95"><a aria-label="95"></a>    frontier.append((initial_state, []))  <span class="co"># A node: (state, preceding states)</span></span>
+<span id="cb1-96"><a aria-label="96"></a></span>
+<span id="cb1-97"><a aria-label="97"></a>    reached <span class="op">=</span> {initial_state}</span>
+<span id="cb1-98"><a aria-label="98"></a></span>
+<span id="cb1-99"><a aria-label="99"></a>    expanded <span class="op">=</span> <span class="dv">0</span>  <span class="co"># Count non-goal nodes whose successors are generated</span></span>
+<span id="cb1-100"><a aria-label="100"></a></span>
+<span id="cb1-101"><a aria-label="101"></a>    <span class="cf">while</span> <span class="kw">not</span> is_empty(frontier):</span>
+<span id="cb1-102"><a aria-label="102"></a>        current_state, path <span class="op">=</span> frontier.popleft()</span>
+<span id="cb1-103"><a aria-label="103"></a></span>
+<span id="cb1-104"><a aria-label="104"></a>        <span class="cf">if</span> is_goal(current_state, goal_state):</span>
+<span id="cb1-105"><a aria-label="105"></a>            <span class="bu">print</span>(<span class="ss">f"Nodes expanded: </span><span class="sc">{</span>expanded<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-106"><a aria-label="106"></a>            <span class="cf">return</span> path <span class="op">+</span> [current_state]  <span class="co"># Return the successful path</span></span>
+<span id="cb1-107"><a aria-label="107"></a></span>
+<span id="cb1-108"><a aria-label="108"></a>        expanded <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-109"><a aria-label="109"></a></span>
+<span id="cb1-110"><a aria-label="110"></a>        <span class="cf">for</span> neighbor <span class="kw">in</span> expand(current_state):</span>
+<span id="cb1-111"><a aria-label="111"></a>            <span class="cf">if</span> neighbor <span class="kw">not</span> <span class="kw">in</span> reached:</span>
+<span id="cb1-112"><a aria-label="112"></a>                reached.add(neighbor)</span>
+<span id="cb1-113"><a aria-label="113"></a>                frontier.append((neighbor, path <span class="op">+</span> [current_state]))</span>
+<span id="cb1-114"><a aria-label="114"></a></span>
+<span id="cb1-115"><a aria-label="115"></a>    <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb1-116"><a aria-label="116"></a></span>
+<span id="cb1-117"><a aria-label="117"></a><span class="kw">def</span> dfs(initial_state, goal_state):</span>
+<span id="cb1-118"><a aria-label="118"></a></span>
+<span id="cb1-119"><a aria-label="119"></a>    frontier <span class="op">=</span> [(initial_state, [])]  <span class="co"># A node: (state, preceding states)</span></span>
+<span id="cb1-120"><a aria-label="120"></a></span>
+<span id="cb1-121"><a aria-label="121"></a>    reached <span class="op">=</span> {initial_state}</span>
+<span id="cb1-122"><a aria-label="122"></a></span>
+<span id="cb1-123"><a aria-label="123"></a>    expanded <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-124"><a aria-label="124"></a></span>
+<span id="cb1-125"><a aria-label="125"></a>    <span class="cf">while</span> <span class="kw">not</span> is_empty(frontier):</span>
+<span id="cb1-126"><a aria-label="126"></a>        current_state, path <span class="op">=</span> frontier.pop()</span>
+<span id="cb1-127"><a aria-label="127"></a></span>
+<span id="cb1-128"><a aria-label="128"></a>        <span class="cf">if</span> is_goal(current_state, goal_state):</span>
+<span id="cb1-129"><a aria-label="129"></a>            <span class="bu">print</span>(<span class="ss">f"Nodes expanded: </span><span class="sc">{</span>expanded<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-130"><a aria-label="130"></a>            <span class="cf">return</span> path <span class="op">+</span> [current_state]  <span class="co"># Return the successful path</span></span>
+<span id="cb1-131"><a aria-label="131"></a></span>
+<span id="cb1-132"><a aria-label="132"></a>        expanded <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-133"><a aria-label="133"></a></span>
+<span id="cb1-134"><a aria-label="134"></a>        <span class="cf">for</span> neighbor <span class="kw">in</span> expand(current_state):</span>
+<span id="cb1-135"><a aria-label="135"></a>            <span class="cf">if</span> neighbor <span class="kw">not</span> <span class="kw">in</span> reached:</span>
+<span id="cb1-136"><a aria-label="136"></a>                reached.add(neighbor)</span>
+<span id="cb1-137"><a aria-label="137"></a>                frontier.append((neighbor, path <span class="op">+</span> [current_state]))</span>
+<span id="cb1-138"><a aria-label="138"></a></span>
+<span id="cb1-139"><a aria-label="139"></a>    <span class="cf">return</span> <span class="va">None</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+
+<aside class="notes">
+<p>The problem formulation, search-tree vocabulary, frontier, and BFS/DFS baselines are developed in <a href="../16/slides.html">Lecture 16</a>. The helper code on this slide keeps the notebook independently executable and provides a reference for revisiting those concepts.</p>
+<p>A search state is a flat tuple of nine integers, with <code>0</code> denoting the blank. Tuples of integers are immutable and hashable, so states can be used directly as set elements or dictionary keys. Only board generation and successor construction use temporary mutable lists; each completed state is returned as a tuple. Frontier containers and paths remain separate from the state representation. A reached-state set records discovered states, including those still on the frontier.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>These functions were introduced in <a href="../16/slides.html">Lecture 16</a> and are required to run the examples in Lecture 17. Expand the code to revisit state representation, successor generation, goal tests, and the BFS/DFS baselines.</p>
+</div></aside></section>
+<section id="remarks" class="slide level2">
+<h2>Remarks</h2>
+<ul>
+<li><p><strong>Breadth-first search (BFS)</strong> identifies the optimal solution, 25 moves, after 145,605 non-goal node expansions.</p></li>
+<li><p><strong>Depth-first search (DFS)</strong> discovers a solution involving 1,157 moves after 1,187 non-goal node expansions.</p></li>
+</ul>
+
+<aside><div>
+<p>How can solutions be discovered <strong>more efficiently</strong>?</p>
+</div></aside></section></section>
+<section>
+<section id="informed-search" class="title-slide slide level1 center">
+<h1>Informed Search</h1>
+
+</section>
+<section id="heuristic-search" class="slide level2">
+<h2>Heuristic Search</h2>
+<p>An <strong>informed search</strong> uses an estimate of the <strong>remaining cost to a goal</strong> to guide exploration.</p>
+<div class="fragment">
+<p>How could such an estimate help <strong>choose the next frontier node</strong>?</p>
+<aside class="notes">
+<p>The estimate uses knowledge beyond the problem’s actions, transition model, goal test, and action costs. A goal may be a city, a solved puzzle, or a condition on an abstract state; it need not have a physical location.</p>
+<p>The estimate guides which possibilities to examine. It does not replace the transition model or verify that a complete solution exists.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="heuristics-and-search-priorities" class="slide level2 smaller">
+<h2>Heuristics and Search Priorities</h2>
+<p>For a search node <span class="math inline">n</span> representing state <span class="math inline">s</span>:</p>
+<ul>
+<li><span class="math inline">g(n)</span>: <strong>known cost of this path</strong> from the initial state to <span class="math inline">s</span>.</li>
+<li><span class="math inline">h(s)</span>: <strong>estimated least remaining cost</strong> from <span class="math inline">s</span> to a goal.</li>
+<li><span class="math inline">f(n)</span>: <strong>priority</strong> used to select a frontier entry.</li>
+</ul>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Best-first strategy</th>
+<th>Priority <span class="math inline">f(n)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Greedy best-first search</td>
+<td><span class="math inline">h(s)</span></td>
+</tr>
+<tr class="even">
+<td>Uniform-cost search</td>
+<td><span class="math inline">g(n)</span></td>
+</tr>
+<tr class="odd">
+<td>A* search</td>
+<td><span class="math inline">g(n)+h(s)</span></td>
+</tr>
+</tbody>
+</table>
+
+<aside class="notes">
+<p>A state describes a configuration, while a search node also records a path to it. Two nodes can therefore have the same state and heuristic estimate but different path costs. The notation <span class="math inline">h(n)</span> is often used as shorthand for <span class="math inline">h(s)</span>, where <span class="math inline">s</span> is the state stored in <span class="math inline">n</span>.</p>
+<p>Greedy search uses the estimated remaining cost alone and has no general least-cost guarantee. A* also considers the cost already incurred. Uniform-cost search is the special case of A* with <span class="math inline">h=0</span>. See <a href="https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html" class="external" data-icon="true">Berkeley CS 188, Informed Search</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Best-first search</strong> selects a frontier entry with minimum <span class="math inline">f</span>. The heuristic <span class="math inline">h</span> and path cost <span class="math inline">g</span> must use the same cost units.</p>
+</div></aside></section>
+<section id="a-route-finding-heuristic" class="slide level2">
+<h2>A Route-Finding Heuristic</h2>
+<p>In a road-distance problem, <strong>straight-line distance</strong> to the destination estimates the remaining distance.</p>
+<div class="fragment">
+<p>The straight line need <strong>not</strong> be a usable road. A* adds this estimate to the distance already travelled:</p>
+<p><span class="math display">
+f(n)=g(n)+h(s).
+</span></p>
+<aside class="notes">
+<p>Both terms are measured in kilometres in the following example. Straight-line distance is a lower bound on road distance. It would not directly estimate travel time without a suitable conversion to time units.</p>
+<p>The Romania example uses A*: the displayed priorities include both travelled distance and straight-line distance. Selecting the city with the smallest straight-line distance alone would instead be greedy best-first search.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="romania-route-finding-problem" class="slide level2">
+<h2>Romania: Route-Finding Problem</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/AIMA2021-3_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="../../assets/images/AIMA2021-3_1.png" class="quarto-figure quarto-figure-center" width="800"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p><strong>Problem:</strong> Find a least-road-distance route from Arad to Bucharest. States are cities, actions follow roads, and action costs are road distances in kilometres.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Source:</strong> <span class="citation" data-cites="Russell:2020aa">(<a href="#/references" role="doc-biblioref" onclick="">Russell and Norvig 2020, fig. 3.1</a>)</span></p>
+</div></aside></section>
+<section id="romania-straight-line-heuristic" class="slide level2">
+<h2>Romania: Straight-Line Heuristic</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/AIMA2021-3_16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="../../assets/images/AIMA2021-3_16.png" class="quarto-figure quarto-figure-center" width="800"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>The table supplies straight-line distances to Bucharest. These are heuristic values <span class="math inline">h(s)</span>, not total route costs.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Source:</strong> <span class="citation" data-cites="Russell:2020aa">(<a href="#/references" role="doc-biblioref" onclick="">Russell and Norvig 2020, fig. 3.16</a>)</span></p>
+</div></aside></section>
+<section id="romania-initial-frontier" class="slide level2">
+<h2>Romania: Initial Frontier</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/AIMA2021-3_18a.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img data-src="../../assets/images/AIMA2021-3_18a.png" class="quarto-figure quarto-figure-center" width="800"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>Arad enters the frontier with <span class="math inline">g(n)=0</span> and <span class="math inline">h(s)=366</span>, so its priority is <span class="math inline">f(n)=366</span>. Every displayed total in the following figures is a value of <span class="math inline">f=g+h</span>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Source:</strong> <span class="citation" data-cites="Russell:2020aa">(<a href="#/references" role="doc-biblioref" onclick="">Russell and Norvig 2020, fig. 3.18</a>)</span></p>
+</div></aside></section>
+<section id="romania-expand-arad" class="slide level2">
+<h2>Romania: Expand Arad</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/AIMA2021-3_18b.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img data-src="../../assets/images/AIMA2021-3_18b.png" class="quarto-figure quarto-figure-center" width="800"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>From Arad, the new entries are Sibiu (<span class="math inline">140+253=393</span>), Timisoara (<span class="math inline">118+329=447</span>), and Zerind (<span class="math inline">75+374=449</span>). Sibiu has the smallest <span class="math inline">f</span> and is selected next.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Source:</strong> <span class="citation" data-cites="Russell:2020aa">(<a href="#/references" role="doc-biblioref" onclick="">Russell and Norvig 2020, fig. 3.18</a>)</span></p>
+</div></aside></section>
+<section id="romania-expand-sibiu" class="slide level2">
+<h2>Romania: Expand Sibiu</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/AIMA2021-3_18c.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img data-src="../../assets/images/AIMA2021-3_18c.png" class="quarto-figure quarto-figure-center" width="800"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>Expanding Sibiu generates paths to Arad, Fagaras, Oradea, and Rimnicu Vilcea. Rimnicu Vilcea has <span class="math inline">g=220</span>, <span class="math inline">h=193</span>, and <span class="math inline">f=413</span>, so it is selected before Fagaras, whose priority is 415.</p>
+<p>These figures retain search-tree occurrences, including repeated cities. The graph-search implementation developed below instead discards dominated paths and keeps a new entry when a city’s recorded cost improves.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Source:</strong> <span class="citation" data-cites="Russell:2020aa">(<a href="#/references" role="doc-biblioref" onclick="">Russell and Norvig 2020, fig. 3.18</a>)</span></p>
+</div></aside></section>
+<section id="romania-expand-rimnicu-vilcea" class="slide level2">
+<h2>Romania: Expand Rimnicu Vilcea</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/AIMA2021-3_18d.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img data-src="../../assets/images/AIMA2021-3_18d.png" class="quarto-figure quarto-figure-center" width="800"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>From Rimnicu Vilcea, the candidates are Craiova (<span class="math inline">366+160=526</span>), Pitesti (<span class="math inline">317+100=417</span>), and Sibiu (<span class="math inline">300+253=553</span>). The second occurrence of Sibiu represents a more expensive path to the same city; its first path cost was 140. A graph-search implementation would discard the cost-300 route to Sibiu.</p>
+<p>Which frontier entry is selected next? Fagaras still has the smallest priority, <span class="math inline">f=415</span>, followed by Pitesti at 417.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Source:</strong> <span class="citation" data-cites="Russell:2020aa">(<a href="#/references" role="doc-biblioref" onclick="">Russell and Norvig 2020, fig. 3.18</a>)</span></p>
+</div></aside></section>
+<section id="romania-expand-fagaras" class="slide level2">
+<h2>Romania: Expand Fagaras</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/AIMA2021-3_18e.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img data-src="../../assets/images/AIMA2021-3_18e.png" class="quarto-figure quarto-figure-center" width="800"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>Expanding Fagaras generates a Bucharest entry with <span class="math inline">g=450</span> and <span class="math inline">h=0</span>, hence <span class="math inline">f=450</span>. This is a complete route, but generating a goal entry does not end A*.</p>
+<p>Pitesti (<span class="math inline">f=417</span>), Timisoara (447), and Zerind (449) all have lower priority values than this goal entry. Pitesti is selected next.</p>
+<p>The goal test is applied when a current minimum-<span class="math inline">f</span> entry is removed from the frontier. At a goal, <span class="math inline">h=0</span> and <span class="math inline">f=g</span>; search does not inherently make the heuristic more accurate as execution progresses.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Source:</strong> <span class="citation" data-cites="Russell:2020aa">(<a href="#/references" role="doc-biblioref" onclick="">Russell and Norvig 2020, fig. 3.18</a>)</span></p>
+</div></aside></section>
+<section id="romania-select-bucharest" class="slide level2">
+<h2>Romania: Select Bucharest</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="../../assets/images/AIMA2021-3_18f.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img data-src="../../assets/images/AIMA2021-3_18f.png" class="quarto-figure quarto-figure-center" width="800"></a></p>
+</figure>
+</div>
+
+<aside class="notes">
+<p>Expanding Pitesti generates a cheaper Bucharest entry with cost 418. Since <span class="math inline">h(\mathrm{Bucharest})=0</span>, its priority is also 418, lower than those of the other frontier entries.</p>
+<p>The returned route is Arad → Sibiu → Rimnicu Vilcea → Pitesti → Bucharest, with total road distance <strong>418 km</strong>. The previous cost-450 Bucharest entry illustrates why an already reached state may need a cheaper path.</p>
+<p><strong>Why is selecting this goal sufficient to establish cost optimality?</strong> The following implementation and proof state the required conditions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><strong>Source:</strong> <span class="citation" data-cites="Russell:2020aa">(<a href="#/references" role="doc-biblioref" onclick="">Russell and Norvig 2020, fig. 3.18</a>)</span></p>
+</div></aside></section>
+<section id="a-priority-queue" class="slide level2">
+<h2>A Priority Queue</h2>
+<p>How should the BFS/DFS frontier change when nodes have different priorities?</p>
+<div class="fragment">
+<p>Use a <strong>priority queue</strong> ordered by the evaluation function <span class="math inline">f</span>.</p>
+<div id="heap-import" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="im">import</span> heapq</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+</div>
+<aside><div>
+<p>Python’s <code>heapq</code> removes the smallest entry. For A*, the first component is <span class="math inline">g+h</span>.</p>
+</div></aside></section>
+<section id="bfs-as-best-first-search" class="slide level2">
+<h2>BFS as Best-First Search</h2>
+<p>BFS selects nodes in nondecreasing <strong>depth</strong>. It can be described using the evaluation function</p>
+<p><span class="math display">
+f(n)=\operatorname{depth}(n).
+</span></p>
+<aside class="notes">
+<p>Depth is known from the path; it is not a heuristic estimate of remaining goal cost. With equal action costs, depth and path cost induce the same ordering between levels. A FIFO queue is a simpler implementation of BFS than a heap and preserves its usual within-level order.</p>
+<p>DFS can similarly be described by prioritizing deeper nodes, using negative depth and a suitable last-in, first-out tie rule. The choice of tie rule matters when several entries have the same priority.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-search" class="slide level2">
+<h2>A* Search</h2>
+<p><span class="math display">
+f(n)=g(n)+h(s).
+</span></p>
+<ul>
+<li><span class="math inline">g(n)</span> is the cost of the <strong>particular path</strong> stored in entry <span class="math inline">n</span>.</li>
+<li><span class="math inline">h(s)</span> estimates the <strong>least remaining cost</strong> from its state <span class="math inline">s</span>.</li>
+<li>A* selects a frontier entry with <strong>minimum <span class="math inline">f</span></strong>.</li>
+</ul>
+
+<aside class="notes">
+<p>Knowing <span class="math inline">g(n)</span> exactly for a recorded path does not mean that this is the cheapest path to the state. Another route can improve it. The dictionary in the next implementation records the cheapest cost discovered so far.</p>
+<p>The 8-puzzle implementation uses unit action costs, so extending a path changes <span class="math inline">g</span> to <span class="math inline">g+1</span>. The same idea applies to other cost models by adding the actual action cost.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p><span class="citation" data-cites="Hart:1968aa">Hart et al. (<a href="#/references" role="doc-biblioref" onclick="">1968</a>)</span></p>
+</div></aside></section>
+<section id="a-implementation" class="slide level2 smaller scrollable">
+<h2>A* Implementation</h2>
+<div id="astar" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="kw">def</span> astar(initial_state, goal_state, heuristic):</span>
+<span id="cb3-2"><a aria-label="2"></a>    <span class="co"># Entries contain (f, g, state, preceding states).</span></span>
+<span id="cb3-3"><a aria-label="3"></a>    frontier <span class="op">=</span> [(heuristic(initial_state, goal_state), <span class="dv">0</span>, initial_state, [])]</span>
+<span id="cb3-4"><a aria-label="4"></a>    best_g <span class="op">=</span> {initial_state: <span class="dv">0</span>}</span>
+<span id="cb3-5"><a aria-label="5"></a>    expanded <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-6"><a aria-label="6"></a></span>
+<span id="cb3-7"><a aria-label="7"></a>    <span class="cf">while</span> frontier:</span>
+<span id="cb3-8"><a aria-label="8"></a>        f, g, current_state, path <span class="op">=</span> heapq.heappop(frontier)</span>
+<span id="cb3-9"><a aria-label="9"></a>        <span class="co"># A cheaper path may have replaced this queue entry.</span></span>
+<span id="cb3-10"><a aria-label="10"></a>        <span class="cf">if</span> g <span class="op">&gt;</span> best_g[current_state]:</span>
+<span id="cb3-11"><a aria-label="11"></a>            <span class="cf">continue</span></span>
+<span id="cb3-12"><a aria-label="12"></a></span>
+<span id="cb3-13"><a aria-label="13"></a>        <span class="cf">if</span> is_goal(current_state, goal_state):</span>
+<span id="cb3-14"><a aria-label="14"></a>            <span class="cf">return</span> path <span class="op">+</span> [current_state], expanded</span>
+<span id="cb3-15"><a aria-label="15"></a></span>
+<span id="cb3-16"><a aria-label="16"></a>        expanded <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb3-17"><a aria-label="17"></a>        <span class="cf">for</span> neighbor <span class="kw">in</span> expand(current_state):</span>
+<span id="cb3-18"><a aria-label="18"></a>            new_g <span class="op">=</span> g <span class="op">+</span> <span class="dv">1</span>  <span class="co"># Each puzzle move costs 1.</span></span>
+<span id="cb3-19"><a aria-label="19"></a>            <span class="cf">if</span> neighbor <span class="kw">not</span> <span class="kw">in</span> best_g <span class="kw">or</span> new_g <span class="op">&lt;</span> best_g[neighbor]:</span>
+<span id="cb3-20"><a aria-label="20"></a>                best_g[neighbor] <span class="op">=</span> new_g</span>
+<span id="cb3-21"><a aria-label="21"></a>                new_f <span class="op">=</span> new_g <span class="op">+</span> heuristic(neighbor, goal_state)</span>
+<span id="cb3-22"><a aria-label="22"></a>                heapq.heappush(frontier, (new_f, new_g, neighbor, path <span class="op">+</span> [current_state]))</span>
+<span id="cb3-23"><a aria-label="23"></a></span>
+<span id="cb3-24"><a aria-label="24"></a>    <span class="cf">return</span> <span class="va">None</span>, expanded</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<aside><div>
+<p>The function returns <strong><code>(solution_states, expanded)</code></strong>. A solution includes the initial and goal states, so its number of moves is <code>len(solution_states) - 1</code>.</p>
+</div></aside></section>
+<section id="keeping-better-paths" class="slide level2 smaller">
+<h2>Keeping Better Paths</h2>
+<ul>
+<li><code>best_g[state]</code> records the <strong>cheapest path discovered so far</strong>, not a final cost.</li>
+<li>Enqueue a successor whenever its new path cost is <strong>strictly smaller</strong>.</li>
+<li>Skip a popped entry if its stored <code>g</code> is larger than <code>best_g[state]</code>.</li>
+<li>A cheaper path can <strong>reopen</strong> an already expanded state.</li>
+<li>Test for a goal only after popping a <strong>current minimum-<span class="math inline">f</span> entry</strong>.</li>
+</ul>
+<aside class="notes">
+<p>A frontier entry represents a particular path to a state. Several entries may refer to the same state, with different path costs. When a better path is found, the new entry is added; an older, more expensive entry may remain in the heap. The stale-entry check discards it before the goal test or expansion. For example, if a state is queued at cost 7 and later reached at cost 5, <code>best_g</code> becomes 5; the old cost-7 entry is skipped when popped.</p>
+<p>An expanded state is not permanently closed in this implementation. If its recorded cost improves, its successors must be considered again using that cheaper path. The <code>expanded</code> result counts actual non-goal expansions, including any repeated expansions; it does not count stale entries or the selected goal.</p>
+<p>For the 8-puzzle, each action costs one, so the new path cost is <code>g + 1</code>. With unequal action costs, the same policy uses <code>g + action_cost</code> instead.</p>
+<p>The best-cost update follows the policy in <a href="https://aima.cs.berkeley.edu/algorithms.pdf" class="external" data-icon="true">AIMA, Figure 3.7</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="admissibility" class="slide level2">
+<h2>Admissibility</h2>
+<p>A heuristic is <strong>admissible</strong> if it never overestimates the least remaining solution cost:</p>
+<p><span class="math display">
+0\le h(s)\le h^\star(s).
+</span></p>
+<p>Here <span class="math inline">h^\star(s)</span> is the true least cost from <span class="math inline">s</span> to a goal.</p>
+
+<aside class="notes">
+<p>An overestimate can make a genuinely cheap solution look unattractive, so A* may return a more expensive solution. Overestimating does not force a wrong answer on every instance; it removes the general guarantee.</p>
+<p>At every goal <span class="math inline">G</span>, admissibility gives <span class="math inline">h(G)=0</span>, because the remaining cost is zero. This lecture uses nonnegative heuristic values. If no goal is reachable from a state, its true remaining cost is infinite.</p>
+<p>The heuristic condition alone is not the whole algorithm: the implementation must also retain improved paths and test a goal at the appropriate point.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>What could go wrong if the estimate overstates the remaining cost?</p>
+</div></aside></section>
+<section id="cost-optimality" class="slide level2">
+<h2>Cost Optimality</h2>
+<p>An algorithm is <strong>cost optimal</strong> when it returns a solution with the least path cost whenever it returns a solution.</p>
+<div class="fragment">
+<p>For the A* graph search above, the guarantee combines:</p>
+<ul>
+<li>an <strong>admissible heuristic</strong>;</li>
+<li><strong>best-cost updates and reopening</strong>;</li>
+<li>a goal test on a <strong>current minimum-<span class="math inline">f</span> entry</strong>.</li>
+</ul>
+<aside class="notes">
+<p>The proof concerns the same implementation used by the examples and experiments. The stale-entry check ensures that an outdated entry is not treated as the current best route to its state. Completeness additionally asks whether the algorithm finds a solution whenever one exists; finite and infinite spaces require different termination assumptions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="theorem-cost-optimality" class="slide level2 smaller">
+<h2>Theorem: Cost Optimality</h2>
+<p>Consider the <strong>finite reachable state-space graph</strong> of the implementation above, with <strong>unit action costs</strong>. Let <span class="math inline">h^\star(s)</span> be the least remaining cost from state <span class="math inline">s</span> to a goal.</p>
+<p>The heuristic is <strong>admissible</strong>:</p>
+<p><span class="math display">
+0 \le h(s) \le h^\star(s), \qquad h(G)=0 \text{ for every goal }G.
+</span></p>
+<p>With the <strong>best-cost and reopening policy above</strong>, A* returns a <strong>least-cost solution</strong> when one exists, and reports failure otherwise.</p>
+<aside class="notes">
+<p>The finite, unit-cost 8-puzzle satisfies these assumptions. The result also extends to finite graphs with nonnegative action costs when the implementation adds each actual action cost. If no goal is reachable from a state, its remaining goal cost is infinite; admissibility imposes no finite upper bound there. The heuristic used by the implementation is a fixed, nonnegative estimate for each state.</p>
+<p>The policy matters as much as admissibility. Discarding every later path to a state merely because it was generated earlier does not satisfy this theorem.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="proof" class="slide level2">
+<h2>Proof</h2>
+<p><strong>1. Suppose A* selects a suboptimal goal.</strong></p>
+<p>Let the optimal solution cost be <span class="math inline">C^\star</span>. Suppose the algorithm returns a goal entry <span class="math inline">G</span> with cost <span class="math inline">C&gt;C^\star</span>.</p>
+<p>Because <span class="math inline">h(G)=0</span>,</p>
+<p><span class="math display">
+f(G)=g(G)+h(G)=C.
+</span></p>
+<p>We examine the frontier immediately before that current goal entry is selected.</p>
+</section>
+<section id="proof-1" class="slide level2">
+<h2>Proof</h2>
+<p><strong>2. An optimal-cost continuation remains on the frontier.</strong></p>
+<p>Follow an optimal path from the start. Consider its first state that has <strong>not yet been expanded at its optimal prefix cost</strong>.</p>
+<p>A <strong>current frontier entry</strong> reaches that state with that optimal prefix cost.</p>
+<aside class="notes">
+<p>The start enters the frontier with cost zero. Whenever a state on the chosen optimal path is expanded at its optimal prefix cost, generating the next action offers the next state its own optimal prefix cost.</p>
+<p>If this improves <code>best_g</code>, the new entry is enqueued, even if the state was expanded earlier along a more expensive path. If the same optimal cost was already recorded, its entry is either still waiting or was already expanded at that cost. Continue along the path in the latter case. No cheaper prefix can exist, because replacing this prefix would produce a cheaper solution.</p>
+<p>Therefore the first state not yet expanded at its optimal prefix cost has a waiting entry with that cost. It is not stale: <code>best_g</code> cannot improve below the optimal prefix cost. Such a state must exist unless an optimal goal has already been selected, in which case the algorithm would already have returned.</p>
+<p>An earlier expansion at a worse cost does not break this argument: the strict improvement rule reopens the state when its optimal prefix is discovered.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="proof-2" class="slide level2">
+<h2>Proof</h2>
+<p><strong>3. That frontier entry has a lower bound no larger than <span class="math inline">C^\star</span>.</strong></p>
+<p>Call the entry <span class="math inline">n</span> and its state <span class="math inline">s</span>. Its stored <span class="math inline">g(n)</span> is the optimal prefix cost. By admissibility,</p>
+<p><span class="math display">
+f(n)=g(n)+h(s)
+\le g(n)+h^\star(s)
+=C^\star.
+</span></p>
+<p>The prefix and the cheapest remaining continuation together form an optimal solution.</p>
+</section>
+<section id="proof-3" class="slide level2">
+<h2>Proof</h2>
+<p><strong>4. The minimum-<span class="math inline">f</span> rule contradicts selecting the suboptimal goal.</strong></p>
+<p>The frontier contains a current entry <span class="math inline">n</span> with</p>
+<p><span class="math display">
+f(n) \le C^\star &lt; C = f(G).
+</span></p>
+<p>A* must select an entry with lower <span class="math inline">f</span> before <span class="math inline">G</span>. It therefore cannot return a suboptimal goal.</p>
+<aside class="notes">
+<p>On a finite graph, nonnegative-cost cycles cannot improve a path cost. Accepting only strict improvements prevents endlessly adding equal-cost cycles; only finitely many improving paths can be accepted. The search therefore terminates. If it exhausts the frontier, no solution remains to be found.</p>
+<p>On an <strong>infinite</strong> graph, admissibility alone is not a completeness guarantee. A standard sufficient set of assumptions is finite branching, an existing solution of finite cost, and action costs bounded below by some <span class="math inline">\varepsilon&gt;0</span>. Since <span class="math inline">h\ge0</span>, only finitely many candidate paths can have <span class="math inline">f\le C^\star</span> under these assumptions. This excludes an infinite succession of zero-cost steps delaying a solution forever. An infinite unsolvable search need not terminate and report failure.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="consistency" class="slide level2 smaller">
+<h2>Consistency</h2>
+<p>A heuristic is <strong>consistent</strong> if every action from <span class="math inline">s</span> to <span class="math inline">s'</span> satisfies</p>
+<p><span class="math display">
+h(s) \le c(s,s')+h(s'), \qquad h(G)=0.
+</span></p>
+<p>Its estimated remaining cost cannot drop by more than the cost of that action. Consequently, along a path,</p>
+<p><span class="math display">
+f(n')=g(n)+c(s,s')+h(s') \ge g(n)+h(s)=f(n).
+</span></p>
+<aside class="notes">
+<p>Consistency is a local condition on every transition. Applying it repeatedly along a path to a goal shows that the heuristic is admissible. In the 8-puzzle, one unit-cost move can reduce misplaced tiles by at most one, and can reduce Manhattan distance by at most one; both heuristics are consistent.</p>
+<p>With a consistent heuristic, a state’s first current minimum-<span class="math inline">f</span> selection already uses a least-cost path to that state. Reopening after expansion is therefore unnecessary. The same <code>astar</code> implementation still works; it simply does not need to expand a state again at a better cost.</p>
+<p>Consistency does not justify finalizing a state’s cost when it is first generated: a cheaper path can still be found before its first expansion.</p>
+<p>An admissible but inconsistent heuristic can require reopening. The best-cost policy retains optimality in that case, although repeated expansions may add work. A graph-search variant that permanently closes states after expansion instead relies on consistency for this guarantee. See <a href="https://inst.eecs.berkeley.edu/~cs188/fa22/assets/notes/cs188-fa22-note02.pdf" class="external" data-icon="true">Berkeley CS 188, Informed Search</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="constructing-an-8-puzzle-heuristic" class="slide level2">
+<h2>Constructing an 8-Puzzle Heuristic</h2>
+<p>What information about a board could estimate the number of moves remaining?</p>
+<aside class="notes">
+<p>Each action costs one, so the heuristic must estimate moves. The examples exclude the blank when counting misplaced tiles or summing numbered-tile distances. Their goal is the standard ordered board with the blank in the lower-right corner.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="can-inversion-count-be-a-heuristic" class="slide level2 smaller hide-code-toggle">
+<h2>Can Inversion Count Be a Heuristic?</h2>
+<p>Consider the <strong>raw number of inversions</strong> as <span class="math inline">h(s)</span>.</p>
+<div class="fragment">
+<div id="cell-inversion-counterexample" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Define the initial state</span></span>
+<span id="cb4-2"><a aria-label="2"></a>initial_board <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb4-3"><a aria-label="3"></a>                 <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">0</span>,</span>
+<span id="cb4-4"><a aria-label="4"></a>                 <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">6</span>)</span>
+<span id="cb4-5"><a aria-label="5"></a></span>
+<span id="cb4-6"><a aria-label="6"></a><span class="co"># Define goal state</span></span>
+<span id="cb4-7"><a aria-label="7"></a>goal_board <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb4-8"><a aria-label="8"></a>              <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb4-9"><a aria-label="9"></a>              <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>)</span>
+<span id="cb4-10"><a aria-label="10"></a></span>
+<span id="cb4-11"><a aria-label="11"></a><span class="co"># Plot both boards</span></span>
+<span id="cb4-12"><a aria-label="12"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">3</span>))</span>
+<span id="cb4-13"><a aria-label="13"></a>plot_board(initial_board, <span class="st">"Initial Board"</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb4-14"><a aria-label="14"></a>plot_board(goal_board, <span class="st">"Goal State"</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb4-15"><a aria-label="15"></a>plt.tight_layout()</span>
+<span id="cb4-16"><a aria-label="16"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/inversion-counterexample-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img data-src="slides_files/figure-revealjs/inversion-counterexample-output-1.png" id="inversion-counterexample" class="quarto-figure quarto-figure-center" width="566" height="278"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>Calculate <span class="math inline">h(s)</span> and <span class="math inline">h^\star(s)</span> for this board.</li>
+<li>What does the comparison establish?</li>
+</ul>
+<aside class="notes">
+<p>The shown board has two inversions: tile 6 follows both 7 and 8. Moving 6 into the blank solves the puzzle in one move. Therefore <span class="math inline">h(s)=2&gt;1=h^\star(s)</span>, which disproves admissibility of the raw inversion count. The same transition to a goal violates consistency: <span class="math inline">2&gt;1+0</span>.</p>
+<p>On a <strong>3×3 board</strong>, a legal move changes the inversion count by 0 or ±2. A vertical move can move a numbered tile past two other numbered tiles in row-major order. The counterexample shows why raw inversion count is not a lower bound on moves; the possible ±2 change alone is not a proof of inadmissibility.</p>
+<p>Parity still serves a different purpose. The board <code>(1,2,3,4,5,6,0,8,7)</code> has odd inversion parity and cannot reach the even-parity goal. Solvability and remaining solution cost are different questions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="misplaced-tiles" class="slide level2">
+<h2>Misplaced Tiles</h2>
+<div id="misplaced-tiles" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="kw">def</span> misplaced_tiles_distance(state, goal_state):</span>
+<span id="cb5-2"><a aria-label="2"></a></span>
+<span id="cb5-3"><a aria-label="3"></a>    <span class="co"># Count the number of misplaced tiles</span></span>
+<span id="cb5-4"><a aria-label="4"></a></span>
+<span id="cb5-5"><a aria-label="5"></a>    misplaced_tiles <span class="op">=</span> <span class="bu">sum</span>(<span class="dv">1</span> <span class="cf">for</span> s, g <span class="kw">in</span> <span class="bu">zip</span>(state, goal_state) <span class="cf">if</span> s <span class="op">!=</span> g <span class="kw">and</span> s <span class="op">!=</span> <span class="dv">0</span>)</span>
+<span id="cb5-6"><a aria-label="6"></a>    </span>
+<span id="cb5-7"><a aria-label="7"></a>    <span class="cf">return</span> misplaced_tiles</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+<aside class="notes">
+<p>One legal move changes the position of exactly one numbered tile. It can correct at most one misplaced tile; the other numbered tiles retain their positions. If <span class="math inline">h(s)</span> tiles are misplaced, any solution therefore needs at least <span class="math inline">h(s)</span> moves, so <span class="math inline">h(s)\le h^\star(s)</span>.</p>
+<p>The same observation gives consistency: one move can reduce the count by at most one, so <span class="math inline">h(s)\le1+h(s')</span>. The goal has value zero.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Is this heuristic admissible? The <strong>blank is excluded</strong>.</p>
+</div></aside></section>
+<section id="misplaced-tiles-on-two-boards" class="slide level2 hide-code-toggle">
+<h2>Misplaced Tiles on Two Boards</h2>
+<div id="cell-misplaced-values" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>GOAL_STATE <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb6-2"><a aria-label="2"></a>              <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb6-3"><a aria-label="3"></a>              <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>)</span>
+<span id="cb6-4"><a aria-label="4"></a>SIMPLE_STATE <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb6-5"><a aria-label="5"></a>                <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">6</span>,</span>
+<span id="cb6-6"><a aria-label="6"></a>                <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">8</span>)</span>
+<span id="cb6-7"><a aria-label="7"></a>HARD_STATE <span class="op">=</span> (<span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">5</span>,</span>
+<span id="cb6-8"><a aria-label="8"></a>              <span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">7</span>,</span>
+<span id="cb6-9"><a aria-label="9"></a>              <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>)</span>
+<span id="cb6-10"><a aria-label="10"></a></span>
+<span id="cb6-11"><a aria-label="11"></a><span class="kw">def</span> plot_heuristic_comparison(left, right, goal, heuristics):</span>
+<span id="cb6-12"><a aria-label="12"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="fl">2.5</span>))</span>
+<span id="cb6-13"><a aria-label="13"></a>    <span class="cf">for</span> position, state <span class="kw">in</span> [(<span class="dv">1</span>, left), (<span class="dv">3</span>, right)]:</span>
+<span id="cb6-14"><a aria-label="14"></a>        title <span class="op">=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(</span>
+<span id="cb6-15"><a aria-label="15"></a>            <span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">=</span><span class="sc">{</span>heuristic(state, goal)<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb6-16"><a aria-label="16"></a>            <span class="cf">for</span> name, heuristic <span class="kw">in</span> heuristics.items()</span>
+<span id="cb6-17"><a aria-label="17"></a>        )</span>
+<span id="cb6-18"><a aria-label="18"></a>        plot_board(state, title, <span class="dv">3</span>, position)</span>
+<span id="cb6-19"><a aria-label="19"></a>    plot_board(goal, <span class="st">"Goal State"</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb6-20"><a aria-label="20"></a>    plt.tight_layout()</span>
+<span id="cb6-21"><a aria-label="21"></a>    plt.show()</span>
+<span id="cb6-22"><a aria-label="22"></a></span>
+<span id="cb6-23"><a aria-label="23"></a>plot_heuristic_comparison(</span>
+<span id="cb6-24"><a aria-label="24"></a>    SIMPLE_STATE, HARD_STATE, GOAL_STATE,</span>
+<span id="cb6-25"><a aria-label="25"></a>    {<span class="st">"misplaced"</span>: misplaced_tiles_distance},</span>
+<span id="cb6-26"><a aria-label="26"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/misplaced-values-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img data-src="slides_files/figure-revealjs/misplaced-values-output-1.png" id="misplaced-values" class="quarto-figure quarto-figure-center" width="758" height="230"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="calling-a-with-a-heuristic" class="slide level2">
+<h2>Calling A* with a Heuristic</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a aria-label="1"></a>solution_states, expanded <span class="op">=</span> astar(</span>
+<span id="cb7-2"><a aria-label="2"></a>    SIMPLE_STATE, GOAL_STATE, misplaced_tiles_distance</span>
+<span id="cb7-3"><a aria-label="3"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+<aside><div>
+<p>One search implementation accepts the heuristic as an argument. It returns a state sequence and the number of non-goal node expansions.</p>
+</div></aside></section>
+<section id="simple-case-misplaced-tiles" class="slide level2 hide-code-toggle">
+<h2>Simple Case: Misplaced Tiles</h2>
+<div id="cell-simple-misplaced_tiles_distance" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a>solution_states, expanded <span class="op">=</span> astar(SIMPLE_STATE, GOAL_STATE, misplaced_tiles_distance)</span>
+<span id="cb8-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="ss">f"Solution: </span><span class="sc">{</span><span class="bu">len</span>(solution_states) <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> moves; nodes expanded: </span><span class="sc">{</span>expanded<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-3"><a aria-label="3"></a></span>
+<span id="cb8-4"><a aria-label="4"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">2</span>))</span>
+<span id="cb8-5"><a aria-label="5"></a><span class="cf">for</span> i, state <span class="kw">in</span> <span class="bu">enumerate</span>(solution_states):</span>
+<span id="cb8-6"><a aria-label="6"></a>    plot_board(state, <span class="ss">f"Step </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>, <span class="bu">len</span>(solution_states), i <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb8-7"><a aria-label="7"></a>plt.tight_layout()</span>
+<span id="cb8-8"><a aria-label="8"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solution: 2 moves; nodes expanded: 2</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/simple-misplaced_tiles_distance-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img data-src="slides_files/figure-revealjs/simple-misplaced_tiles_distance-output-2.png" id="simple-misplaced_tiles_distance" class="quarto-figure quarto-figure-center" width="758" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="challenging-case-misplaced-tiles" class="slide level2">
+<h2>Challenging Case: Misplaced Tiles</h2>
+<div id="hard-misplaced_tiles_distance" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a>misplaced_solution, misplaced_expanded <span class="op">=</span> astar(</span>
+<span id="cb10-2"><a aria-label="2"></a>    HARD_STATE, GOAL_STATE, misplaced_tiles_distance</span>
+<span id="cb10-3"><a aria-label="3"></a>)</span>
+<span id="cb10-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="ss">f"Solution: </span><span class="sc">{</span><span class="bu">len</span>(misplaced_solution) <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> moves"</span>)</span>
+<span id="cb10-5"><a aria-label="5"></a><span class="bu">print</span>(<span class="ss">f"Nodes expanded: </span><span class="sc">{</span>misplaced_expanded<span class="sc">:,}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solution: 25 moves
+Nodes expanded: 29,005</code></pre>
+</div>
+</div>
+
+<aside><div>
+<p>The returned path includes both endpoints. Use <code>print_solution(misplaced_solution)</code> to inspect a complete state sequence.</p>
+</div></aside></section>
+<section id="manhattan-distance" class="slide level2">
+<h2>Manhattan Distance</h2>
+<div id="manhattan-distance" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="kw">def</span> manhattan_distance(state, goal_state):</span>
+<span id="cb12-2"><a aria-label="2"></a>    distance <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb12-3"><a aria-label="3"></a>    size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(state) <span class="op">**</span> <span class="fl">0.5</span>)</span>
+<span id="cb12-4"><a aria-label="4"></a>    <span class="cf">for</span> num <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(state)):</span>
+<span id="cb12-5"><a aria-label="5"></a>        idx1 <span class="op">=</span> state.index(num)</span>
+<span id="cb12-6"><a aria-label="6"></a>        idx2 <span class="op">=</span> goal_state.index(num)</span>
+<span id="cb12-7"><a aria-label="7"></a>        x1, y1 <span class="op">=</span> idx1 <span class="op">%</span> size, idx1 <span class="op">//</span> size</span>
+<span id="cb12-8"><a aria-label="8"></a>        x2, y2 <span class="op">=</span> idx2 <span class="op">%</span> size, idx2 <span class="op">//</span> size</span>
+<span id="cb12-9"><a aria-label="9"></a>        distance <span class="op">+=</span> <span class="bu">abs</span>(x1 <span class="op">-</span> x2) <span class="op">+</span> <span class="bu">abs</span>(y1 <span class="op">-</span> y2)</span>
+<span id="cb12-10"><a aria-label="10"></a>    <span class="cf">return</span> distance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><span class="math display">
+h_{\mathrm{Manhattan}}(s)=
+\sum_{t=1}^{8}\left(|x_t-x_t^\star|+|y_t-y_t^\star|\right).
+</span></p>
+
+<aside class="notes">
+<p>For tile <span class="math inline">t</span>, <span class="math inline">(x_t,y_t)</span> is its current position and <span class="math inline">(x_t^\star,y_t^\star)</span> is its goal position. The sum includes the eight numbered tiles.</p>
+<p>One legal action moves one numbered tile by one square, changing that tile’s Manhattan contribution by exactly one in magnitude. At most one unit of the total can be removed per move. Reaching a total of zero therefore takes at least the initial Manhattan sum, proving admissibility. The same observation gives consistency: <span class="math inline">h(s)\le1+h(s')</span>.</p>
+<p>The relaxed-problem interpretation makes tiles independent: each numbered tile may move orthogonally without needing the blank, and occupancy constraints are ignored. In that relaxation, each tile can follow a shortest grid path to its target, so the exact total cost is the Manhattan sum. Removing constraints cannot increase the least solution cost, which supplies the lower bound for the real puzzle.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>The blank is excluded. Why is this a lower bound on the required number of moves?</p>
+</div></aside></section>
+<section id="manhattan-values-on-two-boards" class="slide level2 hide-code-toggle">
+<h2>Manhattan Values on Two Boards</h2>
+<div id="cell-manhattan-values" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a>plot_heuristic_comparison(</span>
+<span id="cb13-2"><a aria-label="2"></a>    SIMPLE_STATE, HARD_STATE, GOAL_STATE,</span>
+<span id="cb13-3"><a aria-label="3"></a>    {<span class="st">"Manhattan"</span>: manhattan_distance},</span>
+<span id="cb13-4"><a aria-label="4"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/manhattan-values-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img data-src="slides_files/figure-revealjs/manhattan-values-output-1.png" id="manhattan-values" class="quarto-figure quarto-figure-center" width="758" height="230"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="comparing-the-heuristics" class="slide level2">
+<h2>Comparing the Heuristics</h2>
+<p>For every reachable state, with the blank excluded,</p>
+<p><span class="math display">
+h_{\mathrm{misplaced}}(s)
+\le h_{\mathrm{Manhattan}}(s)
+\le h^\star(s).
+</span></p>
+<div class="fragment">
+<ul>
+<li>Each misplaced numbered tile contributes at least one to Manhattan distance.</li>
+<li>Manhattan therefore <strong>dominates</strong> misplaced tiles: it is a more informative lower bound.</li>
+<li>Does that guarantee a shorter wall-clock runtime on every instance?</li>
+</ul>
+<aside class="notes">
+<p>A larger admissible estimate can rule out more unpromising paths. It does not necessarily produce strictly fewer expansions on every problem. Entries with priority equal to the optimal cost can be treated differently by tie rules, and computing a more informative heuristic may cost more per node.</p>
+<p>The experiments hold the algorithm, problem instances, and tie policy fixed, and measure non-goal node expansions. They do not measure elapsed runtime. See <a href="https://inst.eecs.berkeley.edu/~cs188/textbook/search/informed.html#dominance" class="external" data-icon="true">Berkeley CS 188, Dominance</a>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="both-estimates-on-the-same-boards" class="slide level2 hide-code-toggle">
+<h2>Both Estimates on the Same Boards</h2>
+<div id="cell-both-heuristics" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>plot_heuristic_comparison(</span>
+<span id="cb14-2"><a aria-label="2"></a>    SIMPLE_STATE, HARD_STATE, GOAL_STATE,</span>
+<span id="cb14-3"><a aria-label="3"></a>    {<span class="st">"misplaced"</span>: misplaced_tiles_distance, <span class="st">"Manhattan"</span>: manhattan_distance},</span>
+<span id="cb14-4"><a aria-label="4"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/both-heuristics-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img data-src="slides_files/figure-revealjs/both-heuristics-output-1.png" id="both-heuristics" class="quarto-figure quarto-figure-center" width="758" height="230"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="same-misplaced-count-different-distances" class="slide level2 hide-code-toggle">
+<h2>Same Misplaced Count, Different Distances</h2>
+<div id="cell-equal-misplaced-count" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a>comparison_left <span class="op">=</span> (<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>,</span>
+<span id="cb15-2"><a aria-label="2"></a>                   <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb15-3"><a aria-label="3"></a>                   <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">0</span>)</span>
+<span id="cb15-4"><a aria-label="4"></a>comparison_right <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
+<span id="cb15-5"><a aria-label="5"></a>                    <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>,</span>
+<span id="cb15-6"><a aria-label="6"></a>                    <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">7</span>)</span>
+<span id="cb15-7"><a aria-label="7"></a>plot_heuristic_comparison(</span>
+<span id="cb15-8"><a aria-label="8"></a>    comparison_left, comparison_right, GOAL_STATE,</span>
+<span id="cb15-9"><a aria-label="9"></a>    {<span class="st">"misplaced"</span>: misplaced_tiles_distance, <span class="st">"Manhattan"</span>: manhattan_distance},</span>
+<span id="cb15-10"><a aria-label="10"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/equal-misplaced-count-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img data-src="slides_files/figure-revealjs/equal-misplaced-count-output-1.png" id="equal-misplaced-count" class="quarto-figure quarto-figure-center" width="758" height="230"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Both boards have three misplaced numbered tiles, but their Manhattan estimates differ. Misplaced tiles records only whether a tile is in its target position; Manhattan also uses how far it is from that position.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="changing-the-heuristic" class="slide level2">
+<h2>Changing the Heuristic</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a aria-label="1"></a>solution_states, expanded <span class="op">=</span> astar(</span>
+<span id="cb16-2"><a aria-label="2"></a>    SIMPLE_STATE, GOAL_STATE, manhattan_distance</span>
+<span id="cb16-3"><a aria-label="3"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+<aside class="notes">
+<p>The frontier may contain goal entries. Their heuristic value is zero, so their priority is the cost of the complete path they represent. Another frontier entry with lower priority may still lead to a cheaper goal. This is why the algorithm tests for a goal after selecting a current minimum-priority entry.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Only the heuristic argument changes. The frontier, best-cost updates, goal test, and path reconstruction remain the same.</p>
+</div></aside></section>
+<section id="simple-case-manhattan" class="slide level2 hide-code-toggle">
+<h2>Simple Case: Manhattan</h2>
+<div id="cell-simple-manhattan_distance" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a>solution_states, expanded <span class="op">=</span> astar(SIMPLE_STATE, GOAL_STATE, manhattan_distance)</span>
+<span id="cb17-2"><a aria-label="2"></a><span class="bu">print</span>(<span class="ss">f"Solution: </span><span class="sc">{</span><span class="bu">len</span>(solution_states) <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> moves; nodes expanded: </span><span class="sc">{</span>expanded<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb17-3"><a aria-label="3"></a></span>
+<span id="cb17-4"><a aria-label="4"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">2</span>))</span>
+<span id="cb17-5"><a aria-label="5"></a><span class="cf">for</span> i, state <span class="kw">in</span> <span class="bu">enumerate</span>(solution_states):</span>
+<span id="cb17-6"><a aria-label="6"></a>    plot_board(state, <span class="ss">f"Step </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">"</span>, <span class="bu">len</span>(solution_states), i <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb17-7"><a aria-label="7"></a>plt.tight_layout()</span>
+<span id="cb17-8"><a aria-label="8"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solution: 2 moves; nodes expanded: 2</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/simple-manhattan_distance-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img data-src="slides_files/figure-revealjs/simple-manhattan_distance-output-2.png" id="simple-manhattan_distance" class="quarto-figure quarto-figure-center" width="758" height="182"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="challenging-case-manhattan" class="slide level2">
+<h2>Challenging Case: Manhattan</h2>
+<div id="hard-manhattan_distance" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a>manhattan_solution, manhattan_expanded <span class="op">=</span> astar(</span>
+<span id="cb19-2"><a aria-label="2"></a>    HARD_STATE, GOAL_STATE, manhattan_distance</span>
+<span id="cb19-3"><a aria-label="3"></a>)</span>
+<span id="cb19-4"><a aria-label="4"></a><span class="bu">print</span>(<span class="ss">f"Solution: </span><span class="sc">{</span><span class="bu">len</span>(manhattan_solution) <span class="op">-</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> moves"</span>)</span>
+<span id="cb19-5"><a aria-label="5"></a><span class="bu">print</span>(<span class="ss">f"Nodes expanded: </span><span class="sc">{</span>manhattan_expanded<span class="sc">:,}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solution: 25 moves
+Nodes expanded: 2,255</code></pre>
+</div>
+</div>
+
+<aside><div>
+<p>The returned path includes both endpoints. Use <code>print_solution(manhattan_solution)</code> to inspect a complete state sequence.</p>
+</div></aside></section>
+<section id="paired-experiments" class="slide level2">
+<h2>Paired Experiments</h2>
+<ul>
+<li>Use the <strong>same 1,000 solvable boards</strong> with both heuristics.</li>
+<li>Keep the <strong>same A* implementation and tie policy</strong>.</li>
+<li>Retain both solution lengths and compare <strong>node expansions</strong>.</li>
+</ul>
+<aside class="notes">
+<p>The heap entries are <code>(f, g, state, path)</code>. Equal <code>f</code> values are broken first by smaller <code>g</code>, then lexicographically by the state tuple. This deterministic policy is shared by both heuristic runs; it may differ from a FIFO queue’s within-depth order.</p>
+<p>The local random generator makes the experiment independent of random draws in earlier examples. The two length arrays allow a direct correctness check rather than overwriting one result. Agreement between the two heuristic runs alone is not a proof of optimality; a useful implementation check also compares a bounded sample against BFS.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<div id="paired-experiments" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>experiment_rng <span class="op">=</span> random.Random(<span class="dv">58</span>)</span>
+<span id="cb21-2"><a aria-label="2"></a>experiment_states <span class="op">=</span> []</span>
+<span id="cb21-3"><a aria-label="3"></a><span class="cf">while</span> <span class="bu">len</span>(experiment_states) <span class="op">&lt;</span> <span class="dv">1000</span>:</span>
+<span id="cb21-4"><a aria-label="4"></a>    state <span class="op">=</span> <span class="bu">tuple</span>(experiment_rng.sample(<span class="bu">range</span>(<span class="dv">9</span>), <span class="dv">9</span>))</span>
+<span id="cb21-5"><a aria-label="5"></a>    <span class="cf">if</span> is_solvable(state):</span>
+<span id="cb21-6"><a aria-label="6"></a>        experiment_states.append(state)</span>
+<span id="cb21-7"><a aria-label="7"></a></span>
+<span id="cb21-8"><a aria-label="8"></a>moves_misplaced <span class="op">=</span> []</span>
+<span id="cb21-9"><a aria-label="9"></a>moves_manhattan <span class="op">=</span> []</span>
+<span id="cb21-10"><a aria-label="10"></a>expanded_misplaced <span class="op">=</span> []</span>
+<span id="cb21-11"><a aria-label="11"></a>expanded_manhattan <span class="op">=</span> []</span>
+<span id="cb21-12"><a aria-label="12"></a></span>
+<span id="cb21-13"><a aria-label="13"></a><span class="cf">for</span> initial_state <span class="kw">in</span> experiment_states:</span>
+<span id="cb21-14"><a aria-label="14"></a>    path_misplaced, count_misplaced <span class="op">=</span> astar(</span>
+<span id="cb21-15"><a aria-label="15"></a>        initial_state, GOAL_STATE, misplaced_tiles_distance</span>
+<span id="cb21-16"><a aria-label="16"></a>    )</span>
+<span id="cb21-17"><a aria-label="17"></a>    path_manhattan, count_manhattan <span class="op">=</span> astar(</span>
+<span id="cb21-18"><a aria-label="18"></a>        initial_state, GOAL_STATE, manhattan_distance</span>
+<span id="cb21-19"><a aria-label="19"></a>    )</span>
+<span id="cb21-20"><a aria-label="20"></a>    moves_misplaced.append(<span class="bu">len</span>(path_misplaced) <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb21-21"><a aria-label="21"></a>    moves_manhattan.append(<span class="bu">len</span>(path_manhattan) <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb21-22"><a aria-label="22"></a>    expanded_misplaced.append(count_misplaced)</span>
+<span id="cb21-23"><a aria-label="23"></a>    expanded_manhattan.append(count_manhattan)</span>
+<span id="cb21-24"><a aria-label="24"></a></span>
+<span id="cb21-25"><a aria-label="25"></a><span class="cf">assert</span> moves_misplaced <span class="op">==</span> moves_manhattan</span>
+<span id="cb21-26"><a aria-label="26"></a><span class="bu">print</span>(<span class="ss">f"Paired solvable boards: </span><span class="sc">{</span><span class="bu">len</span>(experiment_states)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-27"><a aria-label="27"></a><span class="bu">print</span>(<span class="st">"Both heuristics return the same solution cost on every board."</span>)</span>
+<span id="cb21-28"><a aria-label="28"></a><span class="bu">print</span>(<span class="ss">f"Mean expansions, misplaced tiles: </span><span class="sc">{</span>np<span class="sc">.</span>mean(expanded_misplaced)<span class="sc">:,.1f}</span><span class="ss">"</span>)</span>
+<span id="cb21-29"><a aria-label="29"></a><span class="bu">print</span>(<span class="ss">f"Mean expansions, Manhattan:       </span><span class="sc">{</span>np<span class="sc">.</span>mean(expanded_manhattan)<span class="sc">:,.1f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Paired solvable boards: 1000
+Both heuristics return the same solution cost on every board.
+Mean expansions, misplaced tiles: 16,469.7
+Mean expansions, Manhattan:       1,708.2</code></pre>
+</div>
+</div>
+</section>
+<section id="paired-searches" class="slide level2 hide-code-toggle">
+<h2>1,000 Paired Searches</h2>
+<div id="cell-experiment-histograms" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb23-2"><a aria-label="2"></a></span>
+<span id="cb23-3"><a aria-label="3"></a>axes[<span class="dv">0</span>].hist(moves_misplaced, bins<span class="op">=</span>np.arange(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">32.5</span>), color<span class="op">=</span><span class="st">'green'</span>, edgecolor<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb23-4"><a aria-label="4"></a>axes[<span class="dv">0</span>].set_title(<span class="st">"Solution lengths: both heuristics"</span>)</span>
+<span id="cb23-5"><a aria-label="5"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">"Moves"</span>)</span>
+<span id="cb23-6"><a aria-label="6"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">"Number of boards"</span>)</span>
+<span id="cb23-7"><a aria-label="7"></a></span>
+<span id="cb23-8"><a aria-label="8"></a>bins <span class="op">=</span> np.histogram_bin_edges(expanded_misplaced <span class="op">+</span> expanded_manhattan, bins<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb23-9"><a aria-label="9"></a>axes[<span class="dv">1</span>].hist(expanded_misplaced, bins<span class="op">=</span>bins, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">"Misplaced tiles"</span>)</span>
+<span id="cb23-10"><a aria-label="10"></a>axes[<span class="dv">1</span>].hist(expanded_manhattan, bins<span class="op">=</span>bins, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">"Manhattan"</span>)</span>
+<span id="cb23-11"><a aria-label="11"></a>axes[<span class="dv">1</span>].set_title(<span class="st">"Search effort on the same boards"</span>)</span>
+<span id="cb23-12"><a aria-label="12"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">"Non-goal node expansions"</span>)</span>
+<span id="cb23-13"><a aria-label="13"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">"Number of boards"</span>)</span>
+<span id="cb23-14"><a aria-label="14"></a>axes[<span class="dv">1</span>].legend()</span>
+<span id="cb23-15"><a aria-label="15"></a>plt.tight_layout()</span>
+<span id="cb23-16"><a aria-label="16"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/experiment-histograms-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img data-src="slides_files/figure-revealjs/experiment-histograms-output-1.png" id="experiment-histograms" class="quarto-figure quarto-figure-center" width="952" height="374"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="comparing-search-effort" class="slide level2 hide-code-toggle">
+<h2>Comparing Search Effort</h2>
+<div id="cell-experiment-scatter" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb24-2"><a aria-label="2"></a></span>
+<span id="cb24-3"><a aria-label="3"></a>axes[<span class="dv">0</span>].scatter(moves_manhattan, expanded_manhattan, s<span class="op">=</span><span class="dv">12</span>, alpha<span class="op">=</span><span class="fl">0.4</span>)</span>
+<span id="cb24-4"><a aria-label="4"></a>axes[<span class="dv">0</span>].set_title(<span class="st">"Manhattan search"</span>)</span>
+<span id="cb24-5"><a aria-label="5"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">"Solution length (moves)"</span>)</span>
+<span id="cb24-6"><a aria-label="6"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">"Non-goal node expansions"</span>)</span>
+<span id="cb24-7"><a aria-label="7"></a></span>
+<span id="cb24-8"><a aria-label="8"></a>axes[<span class="dv">1</span>].scatter(expanded_misplaced, expanded_manhattan, s<span class="op">=</span><span class="dv">12</span>, alpha<span class="op">=</span><span class="fl">0.4</span>)</span>
+<span id="cb24-9"><a aria-label="9"></a>limit <span class="op">=</span> <span class="bu">max</span>(<span class="bu">max</span>(expanded_misplaced), <span class="bu">max</span>(expanded_manhattan))</span>
+<span id="cb24-10"><a aria-label="10"></a>axes[<span class="dv">1</span>].plot([<span class="dv">0</span>, limit], [<span class="dv">0</span>, limit], <span class="st">'--'</span>, color<span class="op">=</span><span class="st">'black'</span>, label<span class="op">=</span><span class="st">"Equal expansions"</span>)</span>
+<span id="cb24-11"><a aria-label="11"></a>axes[<span class="dv">1</span>].set_title(<span class="st">"Paired comparison"</span>)</span>
+<span id="cb24-12"><a aria-label="12"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">"Expansions: misplaced tiles"</span>)</span>
+<span id="cb24-13"><a aria-label="13"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">"Expansions: Manhattan"</span>)</span>
+<span id="cb24-14"><a aria-label="14"></a>axes[<span class="dv">1</span>].legend()</span>
+<span id="cb24-15"><a aria-label="15"></a>plt.tight_layout()</span>
+<span id="cb24-16"><a aria-label="16"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/experiment-scatter-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img data-src="slides_files/figure-revealjs/experiment-scatter-output-1.png" id="experiment-scatter" class="quarto-figure quarto-figure-center" width="953" height="374"></a></p>
+</figure>
+</div>
+</div>
+</div>
+
+<aside><div>
+<p>Each point on the right represents one board. A point below the diagonal means fewer expansions with Manhattan on that board.</p>
+</div></aside></section>
+<section id="exploration-validate-optimality" class="slide level2 smaller">
+<h2>Exploration: Validate Optimality</h2>
+<p>BFS returns a minimum-move solution when every action costs one.</p>
+<ol type="1">
+<li>Generate a bounded sample of solvable 8-puzzle boards.</li>
+<li>Find a BFS solution and an A* solution for each board.</li>
+<li>Check that each path is legal, reaches the goal, and has the same number of moves.</li>
+<li>Repeat with both admissible heuristics.</li>
+</ol>
+<aside class="notes">
+<p>BFS supplies an independent reference for solution cost; it need not follow the same path as A*. Multiple optimal solutions can exist. Keep the validation sample manageable because BFS can visit a large fraction of the reachable state space for each board.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="exploration-a-zero-heuristic" class="slide level2 smaller">
+<h2>Exploration: A Zero Heuristic</h2>
+<p>With <span class="math inline">h(s)=0</span>, A* orders its frontier by <span class="math inline">g(n)</span> alone: it becomes <strong>uniform-cost search</strong>.</p>
+<div class="fragment">
+<p>When all action costs are one, both uniform-cost search and BFS expand nodes in <strong>nondecreasing depth</strong>.</p>
+
+<aside class="notes">
+<p>They agree on minimum solution cost, but their order within a depth can differ. The heap’s tie rule, successor order, duplicate policy, and goal-test location affect the order and the work completed before the goal is selected. Graph search avoids repeated states; it does not enumerate every possible path.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+<aside><div>
+<p>Must their expansion order and expansion counts be identical?</p>
+</div></aside></section>
+<section id="results-on-the-lecture-16-board" class="slide level2 smaller">
+<h2>Results on the Lecture 16 Board</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th style="text-align: right;">Solution length</th>
+<th style="text-align: right;">Non-goal expansions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BFS</td>
+<td style="text-align: right;">25 moves (optimal)</td>
+<td style="text-align: right;">145,605</td>
+</tr>
+<tr class="even">
+<td>DFS</td>
+<td style="text-align: right;">1,157 moves</td>
+<td style="text-align: right;">1,187</td>
+</tr>
+<tr class="odd">
+<td>A* with Manhattan</td>
+<td style="text-align: right;">25 moves (optimal)</td>
+<td style="text-align: right;">2,255</td>
+</tr>
+</tbody>
+</table>
+
+<aside class="notes">
+<p>The BFS and DFS baselines come from Lecture 16. The A* result uses the single corrected implementation above. All methods return paths, but only BFS with equal action costs and A* under the stated conditions guarantee a least-cost solution.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>These results concern one fixed board, successor order, and tie policy. Expansion counts do not measure wall-clock runtime or total memory.</p>
+</div></aside></section>
+<section id="measuring-performance" class="slide level2">
+<h2>Measuring Performance</h2>
+<ul>
+<li><strong>Completeness:</strong> Does the algorithm find a solution whenever one exists?</li>
+<li><strong>Cost optimality:</strong> Does it return a solution with the least path cost?</li>
+</ul>
+<aside class="notes">
+<p>On a finite reachable state-space graph, the BFS and DFS implementations with repeated-state detection are complete. The corrected A* implementation is also complete under the theorem’s assumptions. They can exhaust the frontier and return failure when no goal is reachable.</p>
+<p>In infinite spaces, finding an existing solution and terminating on every unsolvable problem are different requirements. DFS can follow an infinite branch. Standard A* completeness assumptions include finite branching, a finite-cost solution, and action costs bounded below by a positive constant.</p>
+<p>BFS is cost optimal for equal action costs. DFS has no general cost-optimality guarantee. A* relies on admissibility and the specified best-cost, reopening, and goal-selection policies.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="time-and-space-complexity" class="slide level2 smaller">
+<h2>Time and Space Complexity</h2>
+<ul>
+<li><strong>State-space graph:</strong> use the number of states <span class="math inline">V</span> and actions <span class="math inline">E</span>.</li>
+<li><strong>Search tree:</strong> use branching factor <span class="math inline">b</span> and solution depth <span class="math inline">d</span>.</li>
+<li><strong>Actual implementation:</strong> also account for heaps, heuristic evaluation, and stored paths.</li>
+</ul>
+
+<aside class="notes">
+<p>With constant-time state operations and constant-size per-node records, ordinary graph BFS takes <span class="math inline">\mathcal{O}(V+E)</span> time and <span class="math inline">\mathcal{O}(V)</span> storage. The lecture code copies full paths into frontier entries, which adds work and storage proportional to their lengths; these costs must not be silently omitted when describing the implementation.</p>
+<p>For tree-style BFS with goal testing on generation, the familiar bound is <span class="math inline">\mathcal{O}(b^d)</span> generated nodes. With goal testing on removal, as in our code, nodes at depth <span class="math inline">d+1</span> may be generated before a depth-<span class="math inline">d</span> goal is selected, giving <span class="math inline">\mathcal{O}(b^{d+1})</span> generated or stored occurrences in the corresponding worst-case tree analysis. State-space graph bounds and search-tree bounds count different objects.</p>
+<p>A* adds priority-queue operations and heuristic evaluations. With inconsistent admissible heuristics it may also expand a state again after an improved path, so the expansion count can exceed the number of distinct expanded states. A small frontier does not remove the memory retained in best-cost records and copied paths.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>The examples report <strong>node expansions</strong>. A complete performance comparison must also consider the work and memory used by each expansion.</p>
+</div></aside></section>
+<section id="videos-by-sebastian-lague" class="slide level2 smaller scrollable">
+<h2>Videos by Sebastian Lague</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=-L-WgKMFuhE" class="external" data-icon="true">A* Pathfinding (E01: algorithm explanation)</a> posted on 2014-12-16.</li>
+<li><a href="https://www.youtube.com/watch?v=nhiFx28e7JY" class="external" data-icon="true">A* Pathfinding (E02: node grid)</a> posted on 2014-12-18.</li>
+<li><a href="https://www.youtube.com/watch?v=mZfyt03LDH4" class="external" data-icon="true">A* Pathfinding (E03: algorithm implementation)</a> posted on 2014-12-19.</li>
+<li><a href="https://www.youtube.com/watch?v=3Dw5d7PlcTM" class="external" data-icon="true">A* Pathfinding (E04: heap optimization)</a> posted on 2014-12-24.</li>
+<li><a href="https://www.youtube.com/watch?v=dn1XRIaROM4" class="external" data-icon="true">A* Pathfinding (E05: units)</a> posted on 2015-01-06.</li>
+<li><a href="https://www.youtube.com/watch?v=T0Qv4-KkAUo" class="external" data-icon="true">A* Pathfinding (E06: weights)</a> posted on 2015-01-11.</li>
+<li><a href="https://www.youtube.com/watch?v=Tb-rM3wGwv4" class="external" data-icon="true">A* Pathfinding (E07: smooth weights)</a> posted on 2016-12-30.</li>
+<li><a href="https://www.youtube.com/watch?v=NjQjl-ZBXoY" class="external" data-icon="true">A* Pathfinding (E08: path smoothing 1/2)</a> posted on 2017-01-31.</li>
+<li><a href="https://www.youtube.com/watch?v=bfevcsANSr4" class="external" data-icon="true">A* Pathfinding (E09: path smoothing 2/2)</a> posted on 2017-01-31.</li>
+<li><a href="https://www.youtube.com/watch?v=TFyEWDMQUKc" class="external" data-icon="true">A* Pathfinding (E10: threading)</a> posted on 2017-02-03.</li>
+<li><a href="https://www.youtube.com/playlist?list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW" class="external" data-icon="true">A* Pathfinding Tutorial (Unity)</a> (play list)</li>
+</ul>
+</section>
+<section id="a-resource-dedicated-to-astar" class="slide level2">
+<h2>A resource dedicated to <span class="math inline">A^\star</span></h2>
+<ul>
+<li><a href="https://theory.stanford.edu/~amitp/GameProgramming/" class="external" data-icon="true">Amit’s A* Pages</a></li>
+</ul>
+</section></section>
+<section>
+<section id="epilogue" class="title-slide slide level1 center">
+<h1>Epilogue</h1>
+
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<ul>
+<li>Best-first priorities distinguish <strong>greedy search</strong>, <strong>uniform-cost search</strong>, and <strong>A</strong>*.</li>
+<li>A* combines <strong>known path cost</strong> with an <strong>estimated remaining cost</strong>.</li>
+<li><strong>Best-cost updates, reopening, and goal selection</strong> connect the implementation to the optimality proof.</li>
+<li><strong>Admissibility, consistency, and dominance</strong> justify and compare the puzzle heuristics.</li>
+</ul>
+<aside class="notes">
+<p>An A* frontier entry represents a particular path. <code>best_g</code> records the cheapest discovered route to each state, while stale entries can remain in the heap until they are removed. An improved route may reopen a state. These policies preserve the optimal-path frontier entry used in the proof.</p>
+<p>Misplaced tiles and Manhattan distance exclude the blank and are both admissible and consistent for unit-cost 8-puzzle moves. Manhattan dominates misplaced tiles, but computation costs and tie choices still matter when measuring performance.</p>
+<p>On the fixed Lecture 16 board, BFS and A* with Manhattan both return 25 moves, with 145,605 and 2,255 non-goal expansions respectively. DFS returns a longer path after fewer expansions. The paired experiment compares both heuristics on identical boards and retains their solution costs separately.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="next-session" class="slide level2">
+<h2>Next Session</h2>
+<ul>
+<li><strong>Quiz 2:</strong> November 18, 2026. See the <a href="../../course-faq.html">course FAQ</a>.</li>
+<li>After the quiz: <a href="../../lectures/19/index.html">Local Search, Lecture 19</a>.</li>
+</ul>
+</section>
+<section id="references" class="slide level2 smaller scrollable">
+<h2>References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Hart:1968aa" class="csl-entry" role="listitem">
+Hart, Peter E., Nils J. Nilsson, and Bertram Raphael. 1968. <span>“<span class="nocase">A Formal Basis for the Heuristic Determination of Minimum Cost Paths</span>.”</span> <em>IEEE Transactions on Systems Science and Cybernetics</em> 4 (2): 100–107. <a href="https://doi.org/10.1109/tssc.1968.300136">https://doi.org/10.1109/tssc.1968.300136</a>.
+</div>
+<div id="ref-Russell:2020aa" class="csl-entry" role="listitem">
+Russell, Stuart, and Peter Norvig. 2020. <em>Artificial Intelligence: <span>A</span> Modern Approach</em>. 4th ed. Pearson. <a href="http://aima.cs.berkeley.edu/">http://aima.cs.berkeley.edu/</a>.
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Marcel <strong>Turcotte</strong></p>
+<p><a href="mailto:Marcel.Turcotte@uOttawa.ca">Marcel.Turcotte@uOttawa.ca</a></p>
+<p>School of Electrical Engineering and <strong>Computer Science</strong> (EE<strong>CS</strong>)</p>
+<p>University of Ottawa</p>
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../../assets/images/uottawa_hor_black.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p><a href="https://turcotte.xyz/teaching/csi-4106">turcotte.xyz/teaching/csi-4106</a></p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../../site_libs/revealjs/plugin/multiplex/socket.io.js"></script>
+  <script src="../../site_libs/revealjs/plugin/multiplex/multiplex.js"></script>
+  <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': true,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'multiplex': {"secret":"69424fb0dc7191733b08193264b94973","id":"4324e42666c309205b12931956165bb6b6b439756eebedb716a0ab7ed96a0145","url":"https://multiplex.up.railway.app/"},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/turcotte\.xyz\/teaching\/csi-4106");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
+    
+
+<script src="https://platform.twitter.com/widgets.js"></script>
+</body></html>

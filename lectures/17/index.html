@@ -96,6 +96,49 @@ div.csl-indent {
   }
 }</script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta property="og:title" content="Heuristic Search – CSI 4106 - Fall 2026">
 <meta property="og:description" content="CSI 4106 Introduction to Artificial Intelligence">
@@ -423,6 +466,7 @@ div.csl-indent {
   <ul>
   <li><a href="#prepare" id="toc-prepare" class="nav-link active" data-scroll-target="#prepare">Prepare</a></li>
   <li><a href="#participate" id="toc-participate" class="nav-link" data-scroll-target="#participate">Participate</a></li>
+  <li><a href="#practice" id="toc-practice" class="nav-link" data-scroll-target="#practice">Practice</a></li>
   </ul>
 </nav>
     </div>
@@ -468,12 +512,21 @@ Important
 <h2 class="anchored" data-anchor-id="prepare">Prepare</h2>
 <ul>
 <li><span class="citation" data-cites="Russell:2020aa">Russell and Norvig (<a href="#ref-Russell:2020aa" role="doc-biblioref">2020</a>)</span>, pages 85–92</li>
+<li>Review <a href="../../lectures/16/index.html">Lecture 16</a>, especially state representation, successor generation, the frontier, and breadth-first search.</li>
 </ul>
 </section>
 <section id="participate" class="level2">
 <h2 class="anchored" data-anchor-id="participate">Participate</h2>
 <ul>
 <li><a href="slides.html">slides</a> (<a href="slides.pdf">PDF</a>, <a href="slides.ipynb" download="csi4106_slides-17.ipynb">Jupyter Notebook</a>)</li>
+</ul>
+</section>
+<section id="practice" class="level2">
+<h2 class="anchored" data-anchor-id="practice">Practice</h2>
+<p>Use the lecture’s Jupyter notebook to:</p>
+<ul>
+<li>Compare misplaced-tile and Manhattan heuristics on the same boards. Compare node expansions and validate solution paths and lengths against BFS on a small sample.</li>
+<li>Set <span class="math inline">h(s)=0</span> and explain the relationship between A*, uniform-cost search, and BFS, including the effect of tie-breaking.</li>
 </ul>
 
 

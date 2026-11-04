@@ -7570,35 +7570,35 @@
     "href": "lectures/16/slides.html#example-8-puzzle",
     "title": "Introduction to Search",
     "section": "Example: 8-Puzzle",
-    "text": "Example: 8-Puzzle\n\n\nCode\nimport random\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nrandom.seed(58)\n\ndef is_solvable(tiles):\n    # Count the inversions in the flattened list of tiles (excluding the blank space).\n    # Assumption: board is square and width is odd.\n    inversions = 0\n    for i in range(len(tiles)):\n        for j in range(i + 1, len(tiles)):\n            if tiles[i] != 0 and tiles[j] != 0 and tiles[i] &gt; tiles[j]:\n                inversions += 1\n    return inversions % 2 == 0\n\ndef generate_solvable_board():\n    # Generate a random board configuration that is guaranteed to be solvable\n    tiles = list(range(9))\n    random.shuffle(tiles)\n    while not is_solvable(tiles):\n        random.shuffle(tiles)\n\n    return tiles\n\ndef plot_board(board, title, num_pos, position):\n    ax = plt.subplot(1, num_pos, position)\n    ax.set_title(title)\n    ax.set_xticks([])\n    ax.set_yticks([])\n\n    board = np.array(board).reshape(3, 3).tolist() # Reconfigure the grid to be 3x3\n\n    # Use a color map to display the numbers\n    cmap = plt.cm.plasma\n    norm = plt.Normalize(vmin=-1, vmax=8)\n\n    for i in range(3):\n        for j in range(3):\n            tile_value = board[i][j]\n            color = cmap(norm(tile_value))\n            ax.add_patch(plt.Rectangle((j, 2 - i), 1, 1, facecolor=color, edgecolor='black'))\n            if tile_value == 0:\n                ax.add_patch(plt.Rectangle((j, 2 - i), 1, 1, facecolor='white', edgecolor='black'))\n            else:\n                ax.text(j + 0.5, 2 - i + 0.5, str(tile_value),\n                        fontsize=16, ha='center', va='center', color='black')\n\n    ax.set_xlim(0, 3)\n    ax.set_ylim(0, 3)"
+    "text": "Example: 8-Puzzle\n\n\nCode\nimport random\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nrandom.seed(58)\n\ndef is_solvable(tiles):\n    # Count the inversions in the flattened list of tiles (excluding the blank space).\n    # Assumption: board is square and width is odd.\n    inversions = 0\n    for i in range(len(tiles)):\n        for j in range(i + 1, len(tiles)):\n            if tiles[i] != 0 and tiles[j] != 0 and tiles[i] &gt; tiles[j]:\n                inversions += 1\n    return inversions % 2 == 0\n\ndef generate_solvable_board():\n    # Generate a random board configuration that is guaranteed to be solvable\n    tiles = list(range(9))\n    random.shuffle(tiles)\n    while not is_solvable(tiles):\n        random.shuffle(tiles)\n\n    return tuple(tiles)\n\ndef plot_board(board, title, num_pos, position):\n    ax = plt.subplot(1, num_pos, position)\n    ax.set_title(title)\n    ax.set_xticks([])\n    ax.set_yticks([])\n\n    board = np.array(board).reshape(3, 3).tolist() # Reconfigure the grid to be 3x3\n\n    # Use a color map to display the numbers\n    cmap = plt.cm.plasma\n    norm = plt.Normalize(vmin=-1, vmax=8)\n\n    for i in range(3):\n        for j in range(3):\n            tile_value = board[i][j]\n            color = cmap(norm(tile_value))\n            ax.add_patch(plt.Rectangle((j, 2 - i), 1, 1, facecolor=color, edgecolor='black'))\n            if tile_value == 0:\n                ax.add_patch(plt.Rectangle((j, 2 - i), 1, 1, facecolor='white', edgecolor='black'))\n            else:\n                ax.text(j + 0.5, 2 - i + 0.5, str(tile_value),\n                        fontsize=16, ha='center', va='center', color='black')\n\n    ax.set_xlim(0, 3)\n    ax.set_ylim(0, 3)"
   },
   {
     "objectID": "lectures/16/slides.html#example-8-puzzle-1",
     "href": "lectures/16/slides.html#example-8-puzzle-1",
     "title": "Introduction to Search",
     "section": "Example: 8-Puzzle",
-    "text": "Example: 8-Puzzle\n\n\nCode\n# Generate initial solvable board\ninitial_board = generate_solvable_board()\n\n# Define goal state\ngoal_board = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 0]\n]\n\n# Plot both boards\nplt.figure(figsize=(8, 4))\nplot_board(initial_board, \"Initial Board\", 2, 1)\nplot_board(goal_board, \"Goal State\", 2, 2)\nplt.tight_layout()\nplt.show()"
+    "text": "Example: 8-Puzzle\n\n\nCode\n# Generate initial solvable board\ninitial_board = generate_solvable_board()\n\n# Define goal state\ngoal_board = (1, 2, 3,\n              4, 5, 6,\n              7, 8, 0)\n\n# Plot both boards\nplt.figure(figsize=(8, 4))\nplot_board(initial_board, \"Initial Board\", 2, 1)\nplot_board(goal_board, \"Goal State\", 2, 2)\nplt.tight_layout()\nplt.show()"
   },
   {
     "objectID": "lectures/16/slides.html#puzzle",
     "href": "lectures/16/slides.html#puzzle",
     "title": "Introduction to Search",
     "section": "8-Puzzle",
-    "text": "8-Puzzle\n\nHow can the states be represented?\nWhat constitutes the initial state?\nWhat defines the actions?\nWhat would constitute a path?\nWhat characterizes the goal state?\nWhat would constitute a solution?\nWhat should be the cost of an action?\n\n\n\nCode\nplt.figure(figsize=(2, 2))\nplot_board(initial_board, \"Initial Board\", 1, 1)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nEach state can be represented as a list containing the numbers 0 to 8. Each number corresponds to a tile, and its position in the list reflects its location in the grid, with 0 denoting the blank space.\nThe initial state is a permutation of the numbers 0 to 8.\nActions move the blank left, right, up, or down by swapping it with an adjacent tile. These directions describe the blank’s movement, not the numbered tile’s movement.\nA path would be a sequence of actions, say left, left, up.\nThe transition model maps a given state and action to a new state. Not all actions are feasible from every state; for instance, if the blank space is at the edge of the grid, only certain moves are possible, such as down, up, or left.\nThe goal state is achieved when the list is ordered from 1 to 8, followed by 0, indicating that the tiles are arranged correctly. How many goal states are there? This formulation specifies one goal state, although another problem could permit several.\nA solution would be a valid path transforming an initial state into a goal state.\nEach action incurs a cost of 1.\n\nHow many possible states are there?\nThere are 9! = 362,880 arrangements of the eight tiles and the blank. Only half, 9!/2 = 181,440, are reachable from a fixed initial state. Exhaustive graph search is feasible at this scale.\nHow many states are there for the 15-Puzzle?\nThere are 16! = 20,922,789,888,000 arrangements of the fifteen tiles and the blank, with 16!/2 = 10,461,394,944,000 reachable from a fixed initial state: about 10.46 trillion. This much larger space motivates more selective search. See the 15-puzzle solver’s state counts."
+    "text": "8-Puzzle\n\nHow can the states be represented?\nWhat constitutes the initial state?\nWhat defines the actions?\nWhat would constitute a path?\nWhat characterizes the goal state?\nWhat would constitute a solution?\nWhat should be the cost of an action?\n\n\n\nCode\nplt.figure(figsize=(2, 2))\nplot_board(initial_board, \"Initial Board\", 1, 1)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nEach state is represented as a flat tuple containing the integers 0 to 8. Each number corresponds to a tile, and its position in the tuple reflects its location in the grid, with 0 denoting the blank space.\nThe initial state is a permutation of the numbers 0 to 8.\nActions move the blank left, right, up, or down by swapping it with an adjacent tile. These directions describe the blank’s movement, not the numbered tile’s movement.\nA path would be a sequence of actions, say left, left, up.\nThe transition model maps a given state and action to a new state. Not all actions are feasible from every state; for instance, if the blank space is at the edge of the grid, only certain moves are possible, such as down, up, or left.\nThe goal state is achieved when the tuple is ordered from 1 to 8, followed by 0, indicating that the tiles are arranged correctly. How many goal states are there? This formulation specifies one goal state, although another problem could permit several.\nA solution would be a valid path transforming an initial state into a goal state.\nEach action incurs a cost of 1.\n\nHow many possible states are there?\nThere are 9! = 362,880 arrangements of the eight tiles and the blank. Only half, 9!/2 = 181,440, are reachable from a fixed initial state. Exhaustive graph search is feasible at this scale.\nHow many states are there for the 15-Puzzle?\nThere are 16! = 20,922,789,888,000 arrangements of the fifteen tiles and the blank, with 16!/2 = 10,461,394,944,000 reachable from a fixed initial state: about 10.46 trillion. This much larger space motivates more selective search. See the 15-puzzle solver’s state counts."
   },
   {
     "objectID": "lectures/16/slides.html#are-all-the-boards-solvable",
     "href": "lectures/16/slides.html#are-all-the-boards-solvable",
     "title": "Introduction to Search",
     "section": "Are all the boards solvable?",
-    "text": "Are all the boards solvable?\n\n\nCode\nsome_board = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [8, 7, 0]\n]\n\nplt.figure(figsize=(2, 2))\nplot_board(some_board, \"\", 1, 1)\nplt.tight_layout()\nplt.show()"
+    "text": "Are all the boards solvable?\n\n\nCode\nsome_board = (1, 2, 3,\n              4, 5, 6,\n              8, 7, 0)\n\nplt.figure(figsize=(2, 2))\nplot_board(some_board, \"\", 1, 1)\nplt.tight_layout()\nplt.show()"
   },
   {
     "objectID": "lectures/16/slides.html#are-all-the-boards-solvable-1",
     "href": "lectures/16/slides.html#are-all-the-boards-solvable-1",
     "title": "Introduction to Search",
     "section": "Are all the boards solvable?",
-    "text": "Are all the boards solvable?\n\nAn 8-puzzle board is solvable if it has the same inversion parity as the goal state.\nAn inversion is a pair of tiles (excluding the blank) that are in the wrong order relative to each other, when reading the board as a one-dimensional list (left-to-right, top-to-bottom).\nWhen the goal is the ordered sequence from 1 to 8, there are no inversions, and therefore parity is even.\nSee Archer (1999) or Slider Puzzle, Princeton\n\n\nFor an odd-width board such as the 3×3 puzzle, two arrangements are connected by legal moves exactly when their inversion parities agree. The simple inversion-only rule does not extend to even-width boards: the 4×4 puzzle also requires the blank’s row in the solvability test."
+    "text": "Are all the boards solvable?\n\nAn 8-puzzle board is solvable if it has the same inversion parity as the goal state.\nAn inversion is a pair of tiles (excluding the blank) that are in the wrong order relative to each other, when reading the board as a one-dimensional sequence (left-to-right, top-to-bottom).\nWhen the goal is the ordered sequence from 1 to 8, there are no inversions, and therefore parity is even.\nSee Archer (1999) or Slider Puzzle, Princeton\n\n\nFor an odd-width board such as the 3×3 puzzle, two arrangements are connected by legal moves exactly when their inversion parities agree. The simple inversion-only rule does not extend to even-width boards: the 4×4 puzzle also requires the blank’s row in the solvability test."
   },
   {
     "objectID": "lectures/16/slides.html#count_even_odd_parity",
@@ -7661,7 +7661,7 @@
     "href": "lectures/16/slides.html#state-representation",
     "title": "Introduction to Search",
     "section": "State Representation",
-    "text": "State Representation\n\n\nCode\n# Plot both boards\ninitial_state_8 = [6, 4, 5,\n                    8, 2, 7,\n                    1, 0, 3]\ngoal_state_8 = [1, 2, 3,\n                4, 5, 6,\n                7, 8, 0]\n\nplt.figure(figsize=(4, 2))\nplot_board(initial_state_8, \"Initial Board\", 2, 1)\nplot_board(goal_state_8, \"Goal State\", 2, 2)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\ninitial_state_8 = [6, 4, 5,\n                   8, 2, 7,\n                   1, 0, 3]\n\ngoal_state_8 = [1, 2, 3,\n                4, 5, 6,\n                7, 8, 0]\n\n\n\nThe states are represented as lists of numbers. 0 represents the blank tile."
+    "text": "State Representation\n\n\nCode\n# Plot both boards\ninitial_state_8 = (6, 4, 5,\n                    8, 2, 7,\n                    1, 0, 3)\ngoal_state_8 = (1, 2, 3,\n                4, 5, 6,\n                7, 8, 0)\n\nplt.figure(figsize=(4, 2))\nplot_board(initial_state_8, \"Initial Board\", 2, 1)\nplot_board(goal_state_8, \"Goal State\", 2, 2)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\ninitial_state_8 = (6, 4, 5,\n                   8, 2, 7,\n                   1, 0, 3)\n\ngoal_state_8 = (1, 2, 3,\n                4, 5, 6,\n                7, 8, 0)\n\n\n\nStates are flat tuples of integers; 0 represents the blank tile. The reached set requires hashable states: tuples of integers are immutable and hashable, whereas mutable lists are not."
   },
   {
     "objectID": "lectures/16/slides.html#is_goal",
@@ -7675,14 +7675,14 @@
     "href": "lectures/16/slides.html#expand",
     "title": "Introduction to Search",
     "section": "expand",
-    "text": "expand\n\ndef expand(state):\n    \"\"\"Generates successor states by moving the blank tile in all possible directions.\"\"\"\n    size = int(len(state) ** 0.5)  # Determine puzzle size (3 for 8-puzzle, 4 for 15-puzzle)\n    idx = state.index(0)  # Find the index of the blank tile represented by 0\n    x, y = idx % size, idx // size  # Convert index to (x, y) coordinates\n    neighbors = []\n\n    # Define possible moves: Left, Right, Up, Down\n    moves = [(-1, 0), (1, 0), (0, -1), (0, 1)]\n    for dx, dy in moves:\n        nx, ny = x + dx, y + dy\n        # Check if the new position is within the puzzle boundaries\n        if 0 &lt;= nx &lt; size and 0 &lt;= ny &lt; size:\n            n_idx = ny * size + nx\n            new_state = state.copy()\n            # Swap the blank tile with the adjacent tile\n            new_state[idx], new_state[n_idx] = new_state[n_idx], new_state[idx]\n            neighbors.append(new_state)\n    return neighbors"
+    "text": "expand\n\ndef expand(state):\n    \"\"\"Generates successor states by moving the blank tile in all possible directions.\"\"\"\n    size = int(len(state) ** 0.5)  # Determine puzzle size (3 for 8-puzzle, 4 for 15-puzzle)\n    idx = state.index(0)  # Find the index of the blank tile represented by 0\n    x, y = idx % size, idx // size  # Convert index to (x, y) coordinates\n    neighbors = []\n\n    # Define possible moves: Left, Right, Up, Down\n    moves = [(-1, 0), (1, 0), (0, -1), (0, 1)]\n    for dx, dy in moves:\n        nx, ny = x + dx, y + dy\n        # Check if the new position is within the puzzle boundaries\n        if 0 &lt;= nx &lt; size and 0 &lt;= ny &lt; size:\n            n_idx = ny * size + nx\n            new_state = list(state)\n            # Swap the blank tile with the adjacent tile\n            new_state[idx], new_state[n_idx] = new_state[n_idx], new_state[idx]\n            neighbors.append(tuple(new_state))\n    return neighbors"
   },
   {
     "objectID": "lectures/16/slides.html#expand-1",
     "href": "lectures/16/slides.html#expand-1",
     "title": "Introduction to Search",
     "section": "expand",
-    "text": "expand\n\n\nCode\nplt.figure(figsize=(8, 2))\n\nsuccessors = expand(initial_state_8)\n\nplot_board(initial_state_8, \"Initial State\", 4, 1)\n\nfor i, successor in enumerate(successors):\n    plot_board(successor, f\"Successor: {i}\", 4, i+2)\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\nexpand(initial_state_8)\n\n[[6, 4, 5, 8, 2, 7, 0, 1, 3],\n [6, 4, 5, 8, 2, 7, 1, 3, 0],\n [6, 4, 5, 8, 0, 7, 1, 2, 3]]"
+    "text": "expand\n\n\nCode\nplt.figure(figsize=(8, 2))\n\nsuccessors = expand(initial_state_8)\n\nplot_board(initial_state_8, \"Initial State\", 4, 1)\n\nfor i, successor in enumerate(successors):\n    plot_board(successor, f\"Successor: {i}\", 4, i+2)\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\nexpand(initial_state_8)\n\n[(6, 4, 5, 8, 2, 7, 0, 1, 3),\n (6, 4, 5, 8, 2, 7, 1, 3, 0),\n (6, 4, 5, 8, 0, 7, 1, 2, 3)]"
   },
   {
     "objectID": "lectures/16/slides.html#is_empty",
@@ -7717,21 +7717,21 @@
     "href": "lectures/16/slides.html#breadth-first-search-2",
     "title": "Introduction to Search",
     "section": "Breadth-first search",
-    "text": "Breadth-first search\n\ndef bfs(initial_state, goal_state):\n\n    frontier = deque()  # Initialize the queue for BFS\n    frontier.append((initial_state, []))  # A node: (state, preceding states)\n\n    reached = set()\n    reached.add(tuple(initial_state))\n\n    expanded = 0  # Count non-goal nodes whose successors are generated\n\n    while not is_empty(frontier):\n        current_state, path = frontier.popleft()\n\n        if is_goal(current_state, goal_state):\n            print(f\"Nodes expanded: {expanded}\")\n            return path + [current_state]  # Return the successful path\n\n        expanded += 1\n\n        for neighbor in expand(current_state):\n            neighbor_tuple = tuple(neighbor)\n            if neighbor_tuple not in reached:\n                reached.add(neighbor_tuple)\n                frontier.append((neighbor, path + [current_state]))\n\n    return None  # No solution found\n\n\n\nBFS selects nodes in nondecreasing depth because the frontier is a first-in, first-out queue. With equal action costs, the first path that reaches a state is a least-cost path to that state, so later occurrences can be discarded. Unequal action costs break the equivalence between fewest actions and least cost.\nThe reached set contains states in the frontier as well as expanded states. The expanded counter increases only when a non-goal node’s successors are generated; selecting a goal does not increase it. The returned solution is a sequence of states, including both endpoints, so its number of moves is len(solution) - 1.\n\n\nFind a path with the fewest actions. This is a least-cost solution when all action costs are equal, as in the 8-puzzle."
+    "text": "Breadth-first search\n\ndef bfs(initial_state, goal_state):\n\n    frontier = deque()  # Initialize the queue for BFS\n    frontier.append((initial_state, []))  # A node: (state, preceding states)\n\n    reached = {initial_state}\n\n    expanded = 0  # Count non-goal nodes whose successors are generated\n\n    while not is_empty(frontier):\n        current_state, path = frontier.popleft()\n\n        if is_goal(current_state, goal_state):\n            print(f\"Nodes expanded: {expanded}\")\n            return path + [current_state]  # Return the successful path\n\n        expanded += 1\n\n        for neighbor in expand(current_state):\n            if neighbor not in reached:\n                reached.add(neighbor)\n                frontier.append((neighbor, path + [current_state]))\n\n    return None  # No solution found\n\n\n\nBFS selects nodes in nondecreasing depth because the frontier is a first-in, first-out queue. With equal action costs, the first path that reaches a state is a least-cost path to that state, so later occurrences can be discarded. Unequal action costs break the equivalence between fewest actions and least cost.\nThe reached set contains states in the frontier as well as expanded states. The expanded counter increases only when a non-goal node’s successors are generated; selecting a goal does not increase it. The returned solution is a sequence of states, including both endpoints, so its number of moves is len(solution) - 1.\n\n\nFind a path with the fewest actions. This is a least-cost solution when all action costs are equal, as in the 8-puzzle."
   },
   {
     "objectID": "lectures/16/slides.html#simple-case",
     "href": "lectures/16/slides.html#simple-case",
     "title": "Introduction to Search",
     "section": "Simple Case",
-    "text": "Simple Case\n\n\nCode\nplt.figure(figsize=(8, 2))\n\ninitial_state_8 = [1, 2, 3,\n                   4, 0, 6,\n                   7, 5, 8]\ngoal_state_8 = [1, 2, 3,\n                4, 5, 6,\n                7, 8, 0]\n\nsolutions = bfs(initial_state_8, goal_state_8)\n\nfor i, solution in enumerate(solutions):\n    plot_board(solution, f\"Step: {i}\", 3, i+1)\n\nplt.tight_layout()\nplt.show()\n\n\nNodes expanded: 12\n\n\n\n\n\n\n\n\n\n\ninitial_state_8 = [1, 2, 3,\n                   4, 0, 6,\n                   7, 5, 8]\ngoal_state_8 = [1, 2, 3,\n                4, 5, 6,\n                7, 8, 0]\n\nbfs(initial_state_8, goal_state_8)\n\nNodes expanded: 12\n\n\n[[1, 2, 3, 4, 0, 6, 7, 5, 8],\n [1, 2, 3, 4, 5, 6, 7, 0, 8],\n [1, 2, 3, 4, 5, 6, 7, 8, 0]]"
+    "text": "Simple Case\n\n\nCode\nplt.figure(figsize=(8, 2))\n\ninitial_state_8 = (1, 2, 3,\n                   4, 0, 6,\n                   7, 5, 8)\ngoal_state_8 = (1, 2, 3,\n                4, 5, 6,\n                7, 8, 0)\n\nsolutions = bfs(initial_state_8, goal_state_8)\n\nfor i, solution in enumerate(solutions):\n    plot_board(solution, f\"Step: {i}\", 3, i+1)\n\nplt.tight_layout()\nplt.show()\n\n\nNodes expanded: 12\n\n\n\n\n\n\n\n\n\n\ninitial_state_8 = (1, 2, 3,\n                   4, 0, 6,\n                   7, 5, 8)\ngoal_state_8 = (1, 2, 3,\n                4, 5, 6,\n                7, 8, 0)\n\nbfs(initial_state_8, goal_state_8)\n\nNodes expanded: 12\n\n\n[(1, 2, 3, 4, 0, 6, 7, 5, 8),\n (1, 2, 3, 4, 5, 6, 7, 0, 8),\n (1, 2, 3, 4, 5, 6, 7, 8, 0)]"
   },
   {
     "objectID": "lectures/16/slides.html#challenging-case",
     "href": "lectures/16/slides.html#challenging-case",
     "title": "Introduction to Search",
     "section": "Challenging Case",
-    "text": "Challenging Case\n\ninitial_state_8 = [6, 4, 5,\n                   8, 2, 7,\n                   1, 0, 3]\ngoal_state_8 = [1, 2, 3,\n                4, 5, 6,\n                7, 8, 0]\n\nprint(\"Solving 8-puzzle with BFS...\")\n\nsolution_8_bfs = bfs(initial_state_8, goal_state_8)\n\nif solution_8_bfs:\n    print(f\"BFS Solution found in {len(solution_8_bfs) - 1} moves:\")\n    print_solution(solution_8_bfs)\nelse:\n    print(\"No solution found for 8-puzzle using BFS.\")\n\nSolving 8-puzzle with BFS...\nNodes expanded: 145605\nBFS Solution found in 25 moves:\nStep 0:\n6 4 5\n8 2 7\n1   3\n\nStep 1:\n6 4 5\n8 2 7\n  1 3\n\nStep 2:\n6 4 5\n  2 7\n8 1 3\n\nStep 3:\n6 4 5\n2   7\n8 1 3\n\nStep 4:\n6   5\n2 4 7\n8 1 3\n\nStep 5:\n  6 5\n2 4 7\n8 1 3\n\nStep 6:\n2 6 5\n  4 7\n8 1 3\n\nStep 7:\n2 6 5\n4   7\n8 1 3\n\nStep 8:\n2 6 5\n4 1 7\n8   3\n\nStep 9:\n2 6 5\n4 1 7\n  8 3\n\nStep 10:\n2 6 5\n  1 7\n4 8 3\n\nStep 11:\n2 6 5\n1   7\n4 8 3\n\nStep 12:\n2 6 5\n1 7  \n4 8 3\n\nStep 13:\n2 6 5\n1 7 3\n4 8  \n\nStep 14:\n2 6 5\n1 7 3\n4   8\n\nStep 15:\n2 6 5\n1   3\n4 7 8\n\nStep 16:\n2   5\n1 6 3\n4 7 8\n\nStep 17:\n2 5  \n1 6 3\n4 7 8\n\nStep 18:\n2 5 3\n1 6  \n4 7 8\n\nStep 19:\n2 5 3\n1   6\n4 7 8\n\nStep 20:\n2   3\n1 5 6\n4 7 8\n\nStep 21:\n  2 3\n1 5 6\n4 7 8\n\nStep 22:\n1 2 3\n  5 6\n4 7 8\n\nStep 23:\n1 2 3\n4 5 6\n  7 8\n\nStep 24:\n1 2 3\n4 5 6\n7   8\n\nStep 25:\n1 2 3\n4 5 6\n7 8"
+    "text": "Challenging Case\n\ninitial_state_8 = (6, 4, 5,\n                   8, 2, 7,\n                   1, 0, 3)\ngoal_state_8 = (1, 2, 3,\n                4, 5, 6,\n                7, 8, 0)\n\nprint(\"Solving 8-puzzle with BFS...\")\n\nsolution_8_bfs = bfs(initial_state_8, goal_state_8)\n\nif solution_8_bfs:\n    print(f\"BFS Solution found in {len(solution_8_bfs) - 1} moves:\")\n    print_solution(solution_8_bfs)\nelse:\n    print(\"No solution found for 8-puzzle using BFS.\")\n\nSolving 8-puzzle with BFS...\nNodes expanded: 145605\nBFS Solution found in 25 moves:\nStep 0:\n6 4 5\n8 2 7\n1   3\n\nStep 1:\n6 4 5\n8 2 7\n  1 3\n\nStep 2:\n6 4 5\n  2 7\n8 1 3\n\nStep 3:\n6 4 5\n2   7\n8 1 3\n\nStep 4:\n6   5\n2 4 7\n8 1 3\n\nStep 5:\n  6 5\n2 4 7\n8 1 3\n\nStep 6:\n2 6 5\n  4 7\n8 1 3\n\nStep 7:\n2 6 5\n4   7\n8 1 3\n\nStep 8:\n2 6 5\n4 1 7\n8   3\n\nStep 9:\n2 6 5\n4 1 7\n  8 3\n\nStep 10:\n2 6 5\n  1 7\n4 8 3\n\nStep 11:\n2 6 5\n1   7\n4 8 3\n\nStep 12:\n2 6 5\n1 7  \n4 8 3\n\nStep 13:\n2 6 5\n1 7 3\n4 8  \n\nStep 14:\n2 6 5\n1 7 3\n4   8\n\nStep 15:\n2 6 5\n1   3\n4 7 8\n\nStep 16:\n2   5\n1 6 3\n4 7 8\n\nStep 17:\n2 5  \n1 6 3\n4 7 8\n\nStep 18:\n2 5 3\n1 6  \n4 7 8\n\nStep 19:\n2 5 3\n1   6\n4 7 8\n\nStep 20:\n2   3\n1 5 6\n4 7 8\n\nStep 21:\n  2 3\n1 5 6\n4 7 8\n\nStep 22:\n1 2 3\n  5 6\n4 7 8\n\nStep 23:\n1 2 3\n4 5 6\n  7 8\n\nStep 24:\n1 2 3\n4 5 6\n7   8\n\nStep 25:\n1 2 3\n4 5 6\n7 8"
   },
   {
     "objectID": "lectures/16/slides.html#bfs-search-tree",
@@ -7745,7 +7745,7 @@
     "href": "lectures/16/slides.html#depth-first-search-1",
     "title": "Introduction to Search",
     "section": "Depth-First Search",
-    "text": "Depth-First Search\n\ndef dfs(initial_state, goal_state):\n\n    frontier = [(initial_state, [])]  # A node: (state, preceding states)\n\n    reached = set()\n    reached.add(tuple(initial_state))\n\n    expanded = 0\n\n    while not is_empty(frontier):\n        current_state, path = frontier.pop()\n\n        if is_goal(current_state, goal_state):\n            print(f\"Nodes expanded: {expanded}\")\n            return path + [current_state]  # Return the successful path\n\n        expanded += 1\n\n        for neighbor in expand(current_state):\n            neighbor_tuple = tuple(neighbor)\n            if neighbor_tuple not in reached:\n                reached.add(neighbor_tuple)\n                frontier.append((neighbor, path + [current_state]))\n\n    return None  # No solution found\n\n\n\nDepth-first search (DFS) uses a last-in, first-out stack. Newly generated nodes are selected before older alternatives, so the search follows a branch deeply before returning to other frontier nodes. The successor order matters: because expand lists left, right, up, down and the stack removes the last entry first, DFS tries the last newly added successor first.\nWhen does the deepening process halt?\nIt stops following a branch when a goal is found or no new successor can be added, because there are no available actions or all successors have already been reached.\nWhat happens next?\nThe algorithm pops the most recently added remaining frontier node. The stored path records how that alternative was reached; the code does not undo moves on a shared board.\nIf that node also has no new successors, the algorithm continues with the next stack entry. Repeated-state detection prevents cycles from continually adding the same states.\n\n\nWhat is the behaviour of depth-first search (DFS)?"
+    "text": "Depth-First Search\n\ndef dfs(initial_state, goal_state):\n\n    frontier = [(initial_state, [])]  # A node: (state, preceding states)\n\n    reached = {initial_state}\n\n    expanded = 0\n\n    while not is_empty(frontier):\n        current_state, path = frontier.pop()\n\n        if is_goal(current_state, goal_state):\n            print(f\"Nodes expanded: {expanded}\")\n            return path + [current_state]  # Return the successful path\n\n        expanded += 1\n\n        for neighbor in expand(current_state):\n            if neighbor not in reached:\n                reached.add(neighbor)\n                frontier.append((neighbor, path + [current_state]))\n\n    return None  # No solution found\n\n\n\nDepth-first search (DFS) uses a last-in, first-out stack. Newly generated nodes are selected before older alternatives, so the search follows a branch deeply before returning to other frontier nodes. The successor order matters: because expand lists left, right, up, down and the stack removes the last entry first, DFS tries the last newly added successor first.\nWhen does the deepening process halt?\nIt stops following a branch when a goal is found or no new successor can be added, because there are no available actions or all successors have already been reached.\nWhat happens next?\nThe algorithm pops the most recently added remaining frontier node. The stored path records how that alternative was reached; the code does not undo moves on a shared board.\nIf that node also has no new successors, the algorithm continues with the next stack entry. Repeated-state detection prevents cycles from continually adding the same states.\n\n\nWhat is the behaviour of depth-first search (DFS)?"
   },
   {
     "objectID": "lectures/16/slides.html#dfs-search-tree",
@@ -7766,14 +7766,14 @@
     "href": "lectures/16/slides.html#simple-case-1",
     "title": "Introduction to Search",
     "section": "Simple Case",
-    "text": "Simple Case\n\n\nCode\nplt.figure(figsize=(8, 2))\n\ninitial_state_8 = [1, 2, 3,\n                   4, 0, 6,\n                   7, 5, 8]\ngoal_state_8 = [1, 2, 3,\n                4, 5, 6,\n                7, 8, 0]\n\nsolutions = dfs(initial_state_8, goal_state_8)\n\nfor i, solution in enumerate(solutions):\n    plot_board(solution, f\"Step: {i}\", 3, i+1)\n\nplt.tight_layout()\nplt.show()\n\n\nNodes expanded: 2\n\n\n\n\n\n\n\n\n\n\ninitial_state_8 = [1, 2, 3,\n                   4, 0, 6,\n                   7, 5, 8]\ngoal_state_8 = [1, 2, 3,\n                4, 5, 6,\n                7, 8, 0]\n\ndfs(initial_state_8, goal_state_8)\n\nNodes expanded: 2\n\n\n[[1, 2, 3, 4, 0, 6, 7, 5, 8],\n [1, 2, 3, 4, 5, 6, 7, 0, 8],\n [1, 2, 3, 4, 5, 6, 7, 8, 0]]"
+    "text": "Simple Case\n\n\nCode\nplt.figure(figsize=(8, 2))\n\ninitial_state_8 = (1, 2, 3,\n                   4, 0, 6,\n                   7, 5, 8)\ngoal_state_8 = (1, 2, 3,\n                4, 5, 6,\n                7, 8, 0)\n\nsolutions = dfs(initial_state_8, goal_state_8)\n\nfor i, solution in enumerate(solutions):\n    plot_board(solution, f\"Step: {i}\", 3, i+1)\n\nplt.tight_layout()\nplt.show()\n\n\nNodes expanded: 2\n\n\n\n\n\n\n\n\n\n\ninitial_state_8 = (1, 2, 3,\n                   4, 0, 6,\n                   7, 5, 8)\ngoal_state_8 = (1, 2, 3,\n                4, 5, 6,\n                7, 8, 0)\n\ndfs(initial_state_8, goal_state_8)\n\nNodes expanded: 2\n\n\n[(1, 2, 3, 4, 0, 6, 7, 5, 8),\n (1, 2, 3, 4, 5, 6, 7, 0, 8),\n (1, 2, 3, 4, 5, 6, 7, 8, 0)]"
   },
   {
     "objectID": "lectures/16/slides.html#challenging-case-1",
     "href": "lectures/16/slides.html#challenging-case-1",
     "title": "Introduction to Search",
     "section": "Challenging Case",
-    "text": "Challenging Case\n\ninitial_state_8 = [6, 4, 5,\n                   8, 2, 7,\n                   1, 0, 3]\ngoal_state_8 = [1, 2, 3,\n                4, 5, 6,\n                7, 8, 0]\n\nprint(\"Solving 8-puzzle with DFS...\")\n\nsolution_8_dfs = dfs(initial_state_8, goal_state_8)\n\nif solution_8_dfs:\n    print(f\"DFS Solution found in {len(solution_8_dfs) - 1} moves:\")\n    # print_solution(solution_8_dfs)\nelse:\n    print(\"No solution found for 8-puzzle using DFS.\")\n\nSolving 8-puzzle with DFS...\nNodes expanded: 1187\nDFS Solution found in 1157 moves:"
+    "text": "Challenging Case\n\ninitial_state_8 = (6, 4, 5,\n                   8, 2, 7,\n                   1, 0, 3)\ngoal_state_8 = (1, 2, 3,\n                4, 5, 6,\n                7, 8, 0)\n\nprint(\"Solving 8-puzzle with DFS...\")\n\nsolution_8_dfs = dfs(initial_state_8, goal_state_8)\n\nif solution_8_dfs:\n    print(f\"DFS Solution found in {len(solution_8_dfs) - 1} moves:\")\n    # print_solution(solution_8_dfs)\nelse:\n    print(\"No solution found for 8-puzzle using DFS.\")\n\nSolving 8-puzzle with DFS...\nNodes expanded: 1187\nDFS Solution found in 1157 moves:"
   },
   {
     "objectID": "lectures/16/slides.html#remarks",
@@ -7787,7 +7787,7 @@
     "href": "lectures/16/slides.html#summary",
     "title": "Introduction to Search",
     "section": "Summary",
-    "text": "Summary\n\nJustification for Studying Search\nKey Terminology and Concepts\nUninformed Search Algorithms\n\nBreadth-First Search (BFS)\nDepth-First Search (DFS)\n\nImplementations: completeness, cost optimality, and memory\n\n\n\nJustification for Studying Search:\n\nEmphasized the shift from solely focusing on machine learning to incorporating search algorithms.\nHighlighted the role of search in advanced AI systems like AlphaGo, AlphaZero, and MuZero.\nNoted that search algorithms are crucial for planning, reasoning, and will be increasingly significant.\n\nHistorical Timeline of Search Algorithms:\n\nSelected milestones range from A* in 1968 to FunSearch in 2023 and AlphaGeometry in 2024.\nThe timeline includes explicit search methods, reinforcement-learning advances, and systems combining learning with search.\n\nApplications of Search:\n\nPathfinding and Navigation: Finding optimal paths in robotics and games.\nPuzzle Solving: Solving problems like the 8-puzzle and Sudoku.\nNetwork Analysis: Analyzing connectivity and shortest paths in networks.\nGame Playing: Evaluating moves in games like chess or Go.\nScheduling and Resource Allocation: Planning tasks and allocating resources efficiently.\nConfiguration Problems: Assembling components to meet specific requirements.\nDecision Making under Uncertainty: Making decisions in dynamic and uncertain environments.\nStorytelling: Guiding language models with plans from automated planners.\n\nKey Terminology and Concepts:\n\nAgent: An entity that performs actions to achieve goals.\nEnvironment Characteristics: Fully observable, single-agent, sequential, deterministic, static, and discrete environments were focused on.\nSearch Problem Definition:\n\nState Space: All possible states.\nInitial State: Where the agent starts.\nGoal State(s): Desired outcome(s).\nActions: Possible moves from a state.\nTransition Model: Rules determining state changes.\nAction Cost Function: Cost associated with actions.\n\n\nUninformed Search Algorithms:\n\nBreadth-First Search (BFS):\n\nExplores the search space level by level.\nGuarantees the fewest actions, and least cost when action costs are equal, but can be memory-intensive.\nImplemented using a queue.\n\nDepth-First Search (DFS):\n\nExplores as deep as possible along each branch before backtracking.\nDoes not guarantee the fewest actions or least cost. A smaller frontier does not remove the memory cost of the global reached set and copied paths in this implementation.\nImplemented using a stack.\n\n\nImplementing Uninformed Search:\n\nUsed the 8-Puzzle as an example problem.\nRepresented states as lists of numbers, with 0 as the blank tile.\nDemonstrated BFS and DFS implementations in Python.\nOn the specified board and move order, BFS found the optimal solution after more expansions, while DFS found a longer solution after fewer expansions.\n\nCompleteness and Repeated States:\n\nBoth implementations find a solution when one exists in a finite reachable state space.\nreached includes frontier and expanded states; expanded counts non-goal nodes whose successors are generated.\n\nLimitations of Uninformed Search:\n\nInefficient for large or complex problems due to exhaustive nature.\nWithout an estimate of remaining goal cost, they can explore many states that do not help reach the goal."
+    "text": "Summary\n\nJustification for Studying Search\nKey Terminology and Concepts\nUninformed Search Algorithms\n\nBreadth-First Search (BFS)\nDepth-First Search (DFS)\n\nImplementations: completeness, cost optimality, and memory\n\n\n\nJustification for Studying Search:\n\nEmphasized the shift from solely focusing on machine learning to incorporating search algorithms.\nHighlighted the role of search in advanced AI systems like AlphaGo, AlphaZero, and MuZero.\nNoted that search algorithms are crucial for planning, reasoning, and will be increasingly significant.\n\nHistorical Timeline of Search Algorithms:\n\nSelected milestones range from A* in 1968 to FunSearch in 2023 and AlphaGeometry in 2024.\nThe timeline includes explicit search methods, reinforcement-learning advances, and systems combining learning with search.\n\nApplications of Search:\n\nPathfinding and Navigation: Finding optimal paths in robotics and games.\nPuzzle Solving: Solving problems like the 8-puzzle and Sudoku.\nNetwork Analysis: Analyzing connectivity and shortest paths in networks.\nGame Playing: Evaluating moves in games like chess or Go.\nScheduling and Resource Allocation: Planning tasks and allocating resources efficiently.\nConfiguration Problems: Assembling components to meet specific requirements.\nDecision Making under Uncertainty: Making decisions in dynamic and uncertain environments.\nStorytelling: Guiding language models with plans from automated planners.\n\nKey Terminology and Concepts:\n\nAgent: An entity that performs actions to achieve goals.\nEnvironment Characteristics: Fully observable, single-agent, sequential, deterministic, static, and discrete environments were focused on.\nSearch Problem Definition:\n\nState Space: All possible states.\nInitial State: Where the agent starts.\nGoal State(s): Desired outcome(s).\nActions: Possible moves from a state.\nTransition Model: Rules determining state changes.\nAction Cost Function: Cost associated with actions.\n\n\nUninformed Search Algorithms:\n\nBreadth-First Search (BFS):\n\nExplores the search space level by level.\nGuarantees the fewest actions, and least cost when action costs are equal, but can be memory-intensive.\nImplemented using a queue.\n\nDepth-First Search (DFS):\n\nExplores as deep as possible along each branch before backtracking.\nDoes not guarantee the fewest actions or least cost. A smaller frontier does not remove the memory cost of the global reached set and copied paths in this implementation.\nImplemented using a stack.\n\n\nImplementing Uninformed Search:\n\nUsed the 8-Puzzle as an example problem.\nRepresented states as flat tuples of integers, with 0 as the blank tile.\nDemonstrated BFS and DFS implementations in Python.\nOn the specified board and move order, BFS found the optimal solution after more expansions, while DFS found a longer solution after fewer expansions.\n\nCompleteness and Repeated States:\n\nBoth implementations find a solution when one exists in a finite reachable state space.\nreached includes frontier and expanded states; expanded counts non-goal nodes whose successors are generated.\n\nLimitations of Uninformed Search:\n\nInefficient for large or complex problems due to exhaustive nature.\nWithout an estimate of remaining goal cost, they can explore many states that do not help reach the goal."
   },
   {
     "objectID": "lectures/16/slides.html#next-lecture",
@@ -7815,7 +7815,7 @@
     "href": "lectures/17/index.html#prepare",
     "title": "Heuristic Search",
     "section": "Prepare",
-    "text": "Prepare\n\nRussell and Norvig (2020), pages 85–92"
+    "text": "Prepare\n\nRussell and Norvig (2020), pages 85–92\nReview Lecture 16, especially state representation, successor generation, the frontier, and breadth-first search."
   },
   {
     "objectID": "lectures/17/index.html#participate",
@@ -7829,14 +7829,14 @@
     "href": "lectures/17/slides.html#message-of-the-day",
     "title": "Heuristic Search",
     "section": "Message of the Day",
-    "text": "Message of the Day\n\n\n\n\n\n\n\n7 U of T community members named in Observer A.I. Power Index, 2025-10-08."
+    "text": "Message of the Day"
   },
   {
     "objectID": "lectures/17/slides.html#learning-objectives",
     "href": "lectures/17/slides.html#learning-objectives",
     "title": "Heuristic Search",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\n\nComprehend informed search strategies and heuristic functions’ role in search efficiency.\nImplement and compare BFS, DFS, and Best-First Search using the 8-Puzzle problem.\nAnalyze performance and optimality of various search algorithms."
+    "text": "Learning Objectives\n\nDistinguish the heuristic estimate h, path cost g, and search priority f.\nImplement A* graph search using a priority queue and best-known path costs.\nExplain cost optimality under admissibility and the stated duplicate-handling policy.\nConstruct and justify misplaced-tile and Manhattan heuristics for the 8-puzzle.\nCompare search effort and memory requirements under controlled conditions."
   },
   {
     "objectID": "lectures/17/slides.html#search-problem-definition",
@@ -7955,14 +7955,14 @@
     "href": "lectures/17/slides.html#remarks",
     "title": "Heuristic Search",
     "section": "Remarks",
-    "text": "Remarks\n\nBreadth-first search (BFS) identifies the optimal solution, 25 moves, in 145,605 iterations.\nDepth-first search (DFS) discovers a solution involving 1,157 moves in 1,187 iterations.\n\n\n\nWill Depth-First Search (DFS) invariably yield sub-optimal solutions?\nNo, if the optimal solution lies along the path traversed by depth-first search (DFS) within the search tree, then DFS will indeed identify the optimal solution.\nIs it possible for DFS to discover solutions superior to the optimal solution?\nCertainly not; such solutions would either be invalid (involving impossible moves) or indicate an error in your estimation.\nDoes this imply that depth-first search (DFS) has no practical applications?\nWhen is it appropriate to use DFS?\nBreadth-first search (BFS) expands its frontier systematically in all directions, leading to rapid growth in memory requirements.\nIn contrast, the memory usage of DFS is constrained by the number of moves needed to reach its backtracking points or the path length of the first solution found. In all scenarios, DFS continues expanding the frontier in one direction.\nIn certain applications where all possible solutions must be explored, the entire search space must be traversed. Using BFS in these cases would be prohibitively expensive in terms of memory. However, DFS can explore the entire space with minimal memory usage.\nThe programming language Prolog includes a built-in backtracking algorithm that enumerates all possible solutions. Backtracking is a memory-efficient variant of DFS.\nDepth-limited and iterative deepening search would be alternative uninformed search algorithms.\nFinding solutions more efficiently requires domain knowledge.\n\n\nHow can solutions be discovered more efficiently?"
+    "text": "Remarks\n\nBreadth-first search (BFS) identifies the optimal solution, 25 moves, after 145,605 non-goal node expansions.\nDepth-first search (DFS) discovers a solution involving 1,157 moves after 1,187 non-goal node expansions.\n\n\n\nHow can solutions be discovered more efficiently?"
   },
   {
     "objectID": "lectures/17/slides.html#heuristic-search",
     "href": "lectures/17/slides.html#heuristic-search",
     "title": "Heuristic Search",
     "section": "Heuristic Search",
-    "text": "Heuristic Search\nInformed search algorithms utilize domain-specific knowledge regarding the goal state’s location."
+    "text": "Heuristic Search\nAn informed search uses an estimate of the remaining cost to a goal to guide exploration.\n\nHow could such an estimate help choose the next frontier node?\n\nThe estimate uses knowledge beyond the problem’s actions, transition model, goal test, and action costs. A goal may be a city, a solved puzzle, or a condition on an abstract state; it need not have a physical location.\nThe estimate guides which possibilities to examine. It does not replace the transition model or verify that a complete solution exists."
   },
   {
     "objectID": "lectures/17/slides.html#heuristic-search-1",
@@ -8060,7 +8060,7 @@
     "href": "lectures/17/slides.html#admissibility",
     "title": "Heuristic Search",
     "section": "Admissibility",
-    "text": "Admissibility\nA heuristic is admissible if it never overestimates the true cost to reach the goal from any node in the search space.\n\nThis ensures that the A^\\star algorithm finds an optimal solution, as it guarantees that the estimated cost is always a lower bound on the actual cost.\n\n\nIf a heuristic were to overestimate the cost of the shortest path from n to the goal, then A^\\star might ignore or delay expanding nodes that actually lie on the optimal path, because their f values look artificially expensive. The algorithm may still find a solution, but not necessarily the shortest one!\n\n\n\nWhat would happen if a heuristic were to overestimate the cost of the shortest path from n to the goal?"
+    "text": "Admissibility\nA heuristic is admissible if it never overestimates the least remaining solution cost:\n\n0\\le h(s)\\le h^\\star(s).\n\nHere h^\\star(s) is the true least cost from s to a goal.\n\n\nAn overestimate can make a genuinely cheap solution look unattractive, so A* may return a more expensive solution. Overestimating does not force a wrong answer on every instance; it removes the general guarantee.\nAt every goal G, admissibility gives h(G)=0, because the remaining cost is zero. This lecture uses nonnegative heuristic values. If no goal is reachable from a state, its true remaining cost is infinite.\nThe heuristic condition alone is not the whole algorithm: the implementation must also retain improved paths and test a goal at the appropriate point.\n\n\nWhat could go wrong if the estimate overstates the remaining cost?"
   },
   {
     "objectID": "lectures/17/slides.html#admissibility-1",
@@ -8074,7 +8074,7 @@
     "href": "lectures/17/slides.html#cost-optimality",
     "title": "Heuristic Search",
     "section": "Cost Optimality",
-    "text": "Cost Optimality\nCost optimality refers to an algorithm’s ability to find the least-cost solution among all possible solutions.\n\nIn the context of search algorithms like A^\\star, cost optimality means that the algorithm will identify the path with the lowest total cost from the start to the goal, assuming an admissible heuristic is used."
+    "text": "Cost Optimality\nAn algorithm is cost optimal when it returns a solution with the least path cost whenever it returns a solution.\n\nFor the A* graph search above, the guarantee combines:\n\nan admissible heuristic;\nbest-cost updates and reopening;\na goal test on a current minimum-f entry.\n\n\nThe proof concerns the same implementation used by the examples and experiments. The stale-entry check ensures that an outdated entry is not treated as the current best route to its state. Completeness additionally asks whether the algorithm finds a solution whenever one exists; finite and infinite spaces require different termination assumptions."
   },
   {
     "objectID": "lectures/17/slides.html#theorem",
@@ -8088,28 +8088,28 @@
     "href": "lectures/17/slides.html#proof",
     "title": "Heuristic Search",
     "section": "Proof",
-    "text": "Proof\n\nAssume for contradiction\n\nSuppose A^\\star returns a suboptimal goal G with cost C &gt; C^\\star, where C^* is the optimal solution cost.\nWhen A^\\star halts, G has just been selected from the frontier with f(G)=g(G)=C."
+    "text": "Proof\n1. Suppose A* selects a suboptimal goal.\nLet the optimal solution cost be C^\\star. Suppose the algorithm returns a goal entry G with cost C&gt;C^\\star.\nBecause h(G)=0,\n\nf(G)=g(G)+h(G)=C.\n\nWe examine the frontier immediately before that current goal entry is selected."
   },
   {
     "objectID": "lectures/17/slides.html#proof-1",
     "href": "lectures/17/slides.html#proof-1",
     "title": "Heuristic Search",
     "section": "Proof",
-    "text": "Proof\n\nLower bound along any optimal path\n\nConsider any node n on an optimal path to an optimal goal G^\\star (cost C^\\star).\nBy admissibility,\n\n   f(n) = g(n) + h(n)\\ \\le\\ g(n) + h^\\star(n) = C^\\star\n\nThus every node on an optimal path has f(n) \\le C^\\star."
+    "text": "Proof\n2. An optimal-cost continuation remains on the frontier.\nFollow an optimal path from the start. Consider its first state that has not yet been expanded at its optimal prefix cost.\nA current frontier entry reaches that state with that optimal prefix cost.\n\nThe start enters the frontier with cost zero. Whenever a state on the chosen optimal path is expanded at its optimal prefix cost, generating the next action offers the next state its own optimal prefix cost.\nIf this improves best_g, the new entry is enqueued, even if the state was expanded earlier along a more expensive path. If the same optimal cost was already recorded, its entry is either still waiting or was already expanded at that cost. Continue along the path in the latter case. No cheaper prefix can exist, because replacing this prefix would produce a cheaper solution.\nTherefore the first state not yet expanded at its optimal prefix cost has a waiting entry with that cost. It is not stale: best_g cannot improve below the optimal prefix cost. Such a state must exist unless an optimal goal has already been selected, in which case the algorithm would already have returned.\nAn earlier expansion at a worse cost does not break this argument: the strict improvement rule reopens the state when its optimal prefix is discovered."
   },
   {
     "objectID": "lectures/17/slides.html#proof-2",
     "href": "lectures/17/slides.html#proof-2",
     "title": "Heuristic Search",
     "section": "Proof",
-    "text": "Proof\n\nThe first-unexpanded node is in frontier\n\nWhen G is chosen, walk from the start along an optimal path to G^\\star until you reach the first node n that has not yet been expanded.\n\nIts parent on that path has been expanded (by definition of “first”), so n has been generated and is therefore in frontier.\n\n\nFrom Step 2, f(n)\\le C^\\star. Since C^\\star &lt; C = f(G), A^\\star’s best-first rule should choose n (or another node with f \\le C^\\star) before G, a contradiction."
+    "text": "Proof\n3. That frontier entry has a lower bound no larger than C^\\star.\nCall the entry n and its state s. Its stored g(n) is the optimal prefix cost. By admissibility,\n\nf(n)=g(n)+h(s)\n\\le g(n)+h^\\star(s)\n=C^\\star.\n\nThe prefix and the cheapest remaining continuation together form an optimal solution."
   },
   {
     "objectID": "lectures/17/slides.html#proof-3",
     "href": "lectures/17/slides.html#proof-3",
     "title": "Heuristic Search",
     "section": "Proof",
-    "text": "Proof\n\nConclude optimality\n\nThe contradiction shows A^\\star cannot return a goal with cost &gt;C^\\star; hence the returned solution is optimal.\nQ.E.D."
+    "text": "Proof\n4. The minimum-f rule contradicts selecting the suboptimal goal.\nThe frontier contains a current entry n with\n\nf(n) \\le C^\\star &lt; C = f(G).\n\nA* must select an entry with lower f before G. It therefore cannot return a suboptimal goal.\n\nOn a finite graph, nonnegative-cost cycles cannot improve a path cost. Accepting only strict improvements prevents endlessly adding equal-cost cycles; only finitely many improving paths can be accepted. The search therefore terminates. If it exhausts the frontier, no solution remains to be found.\nOn an infinite graph, admissibility alone is not a completeness guarantee. A standard sufficient set of assumptions is finite branching, an existing solution of finite cost, and action costs bounded below by some \\varepsilon&gt;0. Since h\\ge0, only finitely many candidate paths can have f\\le C^\\star under these assumptions. This excludes an infinite succession of zero-cost steps delaying a solution forever. An infinite unsolvable search need not terminate and report failure."
   },
   {
     "objectID": "lectures/17/slides.html#puzzle",
@@ -8263,7 +8263,7 @@
     "href": "lectures/17/slides.html#measuring-performance",
     "title": "Heuristic Search",
     "section": "Measuring Performance",
-    "text": "Measuring Performance\n\nCompleteness: Does the algorithm ensure that a solution will be found if one exists, and accurately indicate failure when no solution exists?\nCost Optimality: Does the algorithm identify the (a) solution with the lowest path cost among all possible solutions?\n\n\n\nAre all three algorithms complete? What are the necessary conditions?\nDo all three algorithms guarantee cost optimality?"
+    "text": "Measuring Performance\n\nCompleteness: Does the algorithm find a solution whenever one exists?\nCost optimality: Does it return a solution with the least path cost?\n\n\nOn a finite reachable state-space graph, the BFS and DFS implementations with repeated-state detection are complete. The corrected A* implementation is also complete under the theorem’s assumptions. They can exhaust the frontier and return failure when no goal is reachable.\nIn infinite spaces, finding an existing solution and terminating on every unsolvable problem are different requirements. DFS can follow an infinite branch. Standard A* completeness assumptions include finite branching, a finite-cost solution, and action costs bounded below by a positive constant.\nBFS is cost optimal for equal action costs. DFS has no general cost-optimality guarantee. A* relies on admissibility and the specified best-cost, reopening, and goal-selection policies."
   },
   {
     "objectID": "lectures/17/slides.html#measuring-performance-1",
@@ -14509,5 +14509,306 @@
     "title": "Introduction to Search",
     "section": "Practice",
     "text": "Practice\n\nChess as a Search Problem  (PDF, Jupyter Notebook): A self-study puzzle applying problem formulation, breadth-first search, and repeated-state detection."
+  },
+  {
+    "objectID": "lectures/17/slides.html#python-helpers-from-lecture-16",
+    "href": "lectures/17/slides.html#python-helpers-from-lecture-16",
+    "title": "Heuristic Search",
+    "section": "Python Helpers from Lecture 16",
+    "text": "Python Helpers from Lecture 16\n\n\nShow Python helper functions\nimport random\nfrom collections import deque\n\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nrandom.seed(58)\n\ndef is_solvable(tiles):\n    # Count the inversions in the flattened list of tiles (excluding the blank space).\n    # Assumption: board is square and width is odd.\n    inversions = 0\n    for i in range(len(tiles)):\n        for j in range(i + 1, len(tiles)):\n            if tiles[i] != 0 and tiles[j] != 0 and tiles[i] &gt; tiles[j]:\n                inversions += 1\n    return inversions % 2 == 0\n\ndef generate_solvable_board():\n    # Generate a random board configuration that is guaranteed to be solvable\n    tiles = list(range(9))\n    random.shuffle(tiles)\n    while not is_solvable(tiles):\n        random.shuffle(tiles)\n\n    return tuple(tiles)\n\ndef plot_board(board, title, num_pos, position):\n    ax = plt.subplot(1, num_pos, position)\n    ax.set_title(title)\n    ax.set_xticks([])\n    ax.set_yticks([])\n\n    board = np.array(board).reshape(3, 3).tolist() # Reconfigure the grid to be 3x3\n\n    # Use a color map to display the numbers\n    cmap = plt.cm.plasma\n    norm = plt.Normalize(vmin=-1, vmax=8)\n\n    for i in range(3):\n        for j in range(3):\n            tile_value = board[i][j]\n            color = cmap(norm(tile_value))\n            ax.add_patch(plt.Rectangle((j, 2 - i), 1, 1, facecolor=color, edgecolor='black'))\n            if tile_value == 0:\n                ax.add_patch(plt.Rectangle((j, 2 - i), 1, 1, facecolor='white', edgecolor='black'))\n            else:\n                ax.text(j + 0.5, 2 - i + 0.5, str(tile_value),\n                        fontsize=16, ha='center', va='center', color='black')\n\n    ax.set_xlim(0, 3)\n    ax.set_ylim(0, 3)\n\ndef is_empty(frontier):\n    \"\"\"Checks if the frontier is empty.\"\"\"\n    return len(frontier) == 0\n\ndef is_goal(state, goal_state):\n    \"\"\"Determines if a given state matches the goal state.\"\"\"\n    return state == goal_state\n\ndef expand(state):\n    \"\"\"Generates successor states by moving the blank tile in all possible directions.\"\"\"\n    size = int(len(state) ** 0.5)  # Determine puzzle size (3 for 8-puzzle, 4 for 15-puzzle)\n    idx = state.index(0)  # Find the index of the blank tile represented by 0\n    x, y = idx % size, idx // size  # Convert index to (x, y) coordinates\n    neighbors = []\n\n    # Define possible moves: Left, Right, Up, Down\n    moves = [(-1, 0), (1, 0), (0, -1), (0, 1)]\n    for dx, dy in moves:\n        nx, ny = x + dx, y + dy\n        # Check if the new position is within the puzzle boundaries\n        if 0 &lt;= nx &lt; size and 0 &lt;= ny &lt; size:\n            n_idx = ny * size + nx\n            new_state = list(state)\n            # Swap the blank tile with the adjacent tile\n            new_state[idx], new_state[n_idx] = new_state[n_idx], new_state[idx]\n            neighbors.append(tuple(new_state))\n    return neighbors\n\ndef print_solution(solution):\n    \"\"\"Prints the sequence of steps from the initial to the goal state.\"\"\"\n    size = int(len(solution[0]) ** 0.5)\n    for step, state in enumerate(solution):\n        print(f\"Step {step}:\")\n        for i in range(size):\n            row = state[i*size:(i+1)*size]\n            print(' '.join(str(n) if n != 0 else ' ' for n in row))\n        print()\n\ndef bfs(initial_state, goal_state):\n\n    frontier = deque()  # Initialize the queue for BFS\n    frontier.append((initial_state, []))  # A node: (state, preceding states)\n\n    reached = {initial_state}\n\n    expanded = 0  # Count non-goal nodes whose successors are generated\n\n    while not is_empty(frontier):\n        current_state, path = frontier.popleft()\n\n        if is_goal(current_state, goal_state):\n            print(f\"Nodes expanded: {expanded}\")\n            return path + [current_state]  # Return the successful path\n\n        expanded += 1\n\n        for neighbor in expand(current_state):\n            if neighbor not in reached:\n                reached.add(neighbor)\n                frontier.append((neighbor, path + [current_state]))\n\n    return None\n\ndef dfs(initial_state, goal_state):\n\n    frontier = [(initial_state, [])]  # A node: (state, preceding states)\n\n    reached = {initial_state}\n\n    expanded = 0\n\n    while not is_empty(frontier):\n        current_state, path = frontier.pop()\n\n        if is_goal(current_state, goal_state):\n            print(f\"Nodes expanded: {expanded}\")\n            return path + [current_state]  # Return the successful path\n\n        expanded += 1\n\n        for neighbor in expand(current_state):\n            if neighbor not in reached:\n                reached.add(neighbor)\n                frontier.append((neighbor, path + [current_state]))\n\n    return None\n\n\n\n\nThe problem formulation, search-tree vocabulary, frontier, and BFS/DFS baselines are developed in Lecture 16. The helper code on this slide keeps the notebook independently executable and provides a reference for revisiting those concepts.\nA search state is a flat tuple of nine integers, with 0 denoting the blank. Tuples of integers are immutable and hashable, so states can be used directly as set elements or dictionary keys. Only board generation and successor construction use temporary mutable lists; each completed state is returned as a tuple. Frontier containers and paths remain separate from the state representation. A reached-state set records discovered states, including those still on the frontier.\n\n\nThese functions were introduced in Lecture 16 and are required to run the examples in Lecture 17. Expand the code to revisit state representation, successor generation, goal tests, and the BFS/DFS baselines."
+  },
+  {
+    "objectID": "lectures/17/slides.html#heuristics-and-search-priorities",
+    "href": "lectures/17/slides.html#heuristics-and-search-priorities",
+    "title": "Heuristic Search",
+    "section": "Heuristics and Search Priorities",
+    "text": "Heuristics and Search Priorities\nFor a search node n representing state s:\n\ng(n): known cost of this path from the initial state to s.\nh(s): estimated least remaining cost from s to a goal.\nf(n): priority used to select a frontier entry.\n\n\n\n\nBest-first strategy\nPriority f(n)\n\n\n\n\nGreedy best-first search\nh(s)\n\n\nUniform-cost search\ng(n)\n\n\nA* search\ng(n)+h(s)\n\n\n\n\n\nA state describes a configuration, while a search node also records a path to it. Two nodes can therefore have the same state and heuristic estimate but different path costs. The notation h(n) is often used as shorthand for h(s), where s is the state stored in n.\nGreedy search uses the estimated remaining cost alone and has no general least-cost guarantee. A* also considers the cost already incurred. Uniform-cost search is the special case of A* with h=0. See Berkeley CS 188, Informed Search.\n\n\nBest-first search selects a frontier entry with minimum f. The heuristic h and path cost g must use the same cost units."
+  },
+  {
+    "objectID": "lectures/17/slides.html#a-route-finding-heuristic",
+    "href": "lectures/17/slides.html#a-route-finding-heuristic",
+    "title": "Heuristic Search",
+    "section": "A Route-Finding Heuristic",
+    "text": "A Route-Finding Heuristic\nIn a road-distance problem, straight-line distance to the destination estimates the remaining distance.\n\nThe straight line need not be a usable road. A* adds this estimate to the distance already travelled:\n\nf(n)=g(n)+h(s).\n\n\nBoth terms are measured in kilometres in the following example. Straight-line distance is a lower bound on road distance. It would not directly estimate travel time without a suitable conversion to time units.\nThe Romania example uses A*: the displayed priorities include both travelled distance and straight-line distance. Selecting the city with the smallest straight-line distance alone would instead be greedy best-first search."
+  },
+  {
+    "objectID": "lectures/17/slides.html#romania-route-finding-problem",
+    "href": "lectures/17/slides.html#romania-route-finding-problem",
+    "title": "Heuristic Search",
+    "section": "Romania: Route-Finding Problem",
+    "text": "Romania: Route-Finding Problem\n\n\n\n\n\n\n\nProblem: Find a least-road-distance route from Arad to Bucharest. States are cities, actions follow roads, and action costs are road distances in kilometres.\n\n\nSource: (Russell and Norvig 2020, fig. 3.1)"
+  },
+  {
+    "objectID": "lectures/17/slides.html#romania-straight-line-heuristic",
+    "href": "lectures/17/slides.html#romania-straight-line-heuristic",
+    "title": "Heuristic Search",
+    "section": "Romania: Straight-Line Heuristic",
+    "text": "Romania: Straight-Line Heuristic\n\n\n\n\n\n\n\nThe table supplies straight-line distances to Bucharest. These are heuristic values h(s), not total route costs.\n\n\nSource: (Russell and Norvig 2020, fig. 3.16)"
+  },
+  {
+    "objectID": "lectures/17/slides.html#romania-initial-frontier",
+    "href": "lectures/17/slides.html#romania-initial-frontier",
+    "title": "Heuristic Search",
+    "section": "Romania: Initial Frontier",
+    "text": "Romania: Initial Frontier\n\n\n\n\n\n\n\nArad enters the frontier with g(n)=0 and h(s)=366, so its priority is f(n)=366. Every displayed total in the following figures is a value of f=g+h.\n\n\nSource: (Russell and Norvig 2020, fig. 3.18)"
+  },
+  {
+    "objectID": "lectures/17/slides.html#romania-expand-arad",
+    "href": "lectures/17/slides.html#romania-expand-arad",
+    "title": "Heuristic Search",
+    "section": "Romania: Expand Arad",
+    "text": "Romania: Expand Arad\n\n\n\n\n\n\n\nFrom Arad, the new entries are Sibiu (140+253=393), Timisoara (118+329=447), and Zerind (75+374=449). Sibiu has the smallest f and is selected next.\n\n\nSource: (Russell and Norvig 2020, fig. 3.18)"
+  },
+  {
+    "objectID": "lectures/17/slides.html#romania-expand-sibiu",
+    "href": "lectures/17/slides.html#romania-expand-sibiu",
+    "title": "Heuristic Search",
+    "section": "Romania: Expand Sibiu",
+    "text": "Romania: Expand Sibiu\n\n\n\n\n\n\n\nExpanding Sibiu generates paths to Arad, Fagaras, Oradea, and Rimnicu Vilcea. Rimnicu Vilcea has g=220, h=193, and f=413, so it is selected before Fagaras, whose priority is 415.\nThese figures retain search-tree occurrences, including repeated cities. The graph-search implementation developed below instead discards dominated paths and keeps a new entry when a city’s recorded cost improves.\n\n\nSource: (Russell and Norvig 2020, fig. 3.18)"
+  },
+  {
+    "objectID": "lectures/17/slides.html#romania-expand-rimnicu-vilcea",
+    "href": "lectures/17/slides.html#romania-expand-rimnicu-vilcea",
+    "title": "Heuristic Search",
+    "section": "Romania: Expand Rimnicu Vilcea",
+    "text": "Romania: Expand Rimnicu Vilcea\n\n\n\n\n\n\n\nFrom Rimnicu Vilcea, the candidates are Craiova (366+160=526), Pitesti (317+100=417), and Sibiu (300+253=553). The second occurrence of Sibiu represents a more expensive path to the same city; its first path cost was 140. A graph-search implementation would discard the cost-300 route to Sibiu.\nWhich frontier entry is selected next? Fagaras still has the smallest priority, f=415, followed by Pitesti at 417.\n\n\nSource: (Russell and Norvig 2020, fig. 3.18)"
+  },
+  {
+    "objectID": "lectures/17/slides.html#romania-expand-fagaras",
+    "href": "lectures/17/slides.html#romania-expand-fagaras",
+    "title": "Heuristic Search",
+    "section": "Romania: Expand Fagaras",
+    "text": "Romania: Expand Fagaras\n\n\n\n\n\n\n\nExpanding Fagaras generates a Bucharest entry with g=450 and h=0, hence f=450. This is a complete route, but generating a goal entry does not end A*.\nPitesti (f=417), Timisoara (447), and Zerind (449) all have lower priority values than this goal entry. Pitesti is selected next.\nThe goal test is applied when a current minimum-f entry is removed from the frontier. At a goal, h=0 and f=g; search does not inherently make the heuristic more accurate as execution progresses.\n\n\nSource: (Russell and Norvig 2020, fig. 3.18)"
+  },
+  {
+    "objectID": "lectures/17/slides.html#romania-select-bucharest",
+    "href": "lectures/17/slides.html#romania-select-bucharest",
+    "title": "Heuristic Search",
+    "section": "Romania: Select Bucharest",
+    "text": "Romania: Select Bucharest\n\n\n\n\n\n\n\nExpanding Pitesti generates a cheaper Bucharest entry with cost 418. Since h(\\mathrm{Bucharest})=0, its priority is also 418, lower than those of the other frontier entries.\nThe returned route is Arad → Sibiu → Rimnicu Vilcea → Pitesti → Bucharest, with total road distance 418 km. The previous cost-450 Bucharest entry illustrates why an already reached state may need a cheaper path.\nWhy is selecting this goal sufficient to establish cost optimality? The following implementation and proof state the required conditions.\n\n\nSource: (Russell and Norvig 2020, fig. 3.18)"
+  },
+  {
+    "objectID": "lectures/17/slides.html#a-priority-queue",
+    "href": "lectures/17/slides.html#a-priority-queue",
+    "title": "Heuristic Search",
+    "section": "A Priority Queue",
+    "text": "A Priority Queue\nHow should the BFS/DFS frontier change when nodes have different priorities?\n\nUse a priority queue ordered by the evaluation function f.\n\nimport heapq\n\n\n\n\nPython’s heapq removes the smallest entry. For A*, the first component is g+h."
+  },
+  {
+    "objectID": "lectures/17/slides.html#bfs-as-best-first-search",
+    "href": "lectures/17/slides.html#bfs-as-best-first-search",
+    "title": "Heuristic Search",
+    "section": "BFS as Best-First Search",
+    "text": "BFS as Best-First Search\nBFS selects nodes in nondecreasing depth. It can be described using the evaluation function\n\nf(n)=\\operatorname{depth}(n).\n\n\nDepth is known from the path; it is not a heuristic estimate of remaining goal cost. With equal action costs, depth and path cost induce the same ordering between levels. A FIFO queue is a simpler implementation of BFS than a heap and preserves its usual within-level order.\nDFS can similarly be described by prioritizing deeper nodes, using negative depth and a suitable last-in, first-out tie rule. The choice of tie rule matters when several entries have the same priority."
+  },
+  {
+    "objectID": "lectures/17/slides.html#a-search",
+    "href": "lectures/17/slides.html#a-search",
+    "title": "Heuristic Search",
+    "section": "A* Search",
+    "text": "A* Search\n\nf(n)=g(n)+h(s).\n\n\ng(n) is the cost of the particular path stored in entry n.\nh(s) estimates the least remaining cost from its state s.\nA* selects a frontier entry with minimum f.\n\n\n\nKnowing g(n) exactly for a recorded path does not mean that this is the cheapest path to the state. Another route can improve it. The dictionary in the next implementation records the cheapest cost discovered so far.\nThe 8-puzzle implementation uses unit action costs, so extending a path changes g to g+1. The same idea applies to other cost models by adding the actual action cost.\n\n\nHart et al. (1968)"
+  },
+  {
+    "objectID": "lectures/17/slides.html#a-implementation",
+    "href": "lectures/17/slides.html#a-implementation",
+    "title": "Heuristic Search",
+    "section": "A* Implementation",
+    "text": "A* Implementation\n\ndef astar(initial_state, goal_state, heuristic):\n    # Entries contain (f, g, state, preceding states).\n    frontier = [(heuristic(initial_state, goal_state), 0, initial_state, [])]\n    best_g = {initial_state: 0}\n    expanded = 0\n\n    while frontier:\n        f, g, current_state, path = heapq.heappop(frontier)\n        # A cheaper path may have replaced this queue entry.\n        if g &gt; best_g[current_state]:\n            continue\n\n        if is_goal(current_state, goal_state):\n            return path + [current_state], expanded\n\n        expanded += 1\n        for neighbor in expand(current_state):\n            new_g = g + 1  # Each puzzle move costs 1.\n            if neighbor not in best_g or new_g &lt; best_g[neighbor]:\n                best_g[neighbor] = new_g\n                new_f = new_g + heuristic(neighbor, goal_state)\n                heapq.heappush(frontier, (new_f, new_g, neighbor, path + [current_state]))\n\n    return None, expanded\n\n\n\nThe function returns (solution_states, expanded). A solution includes the initial and goal states, so its number of moves is len(solution_states) - 1."
+  },
+  {
+    "objectID": "lectures/17/slides.html#keeping-better-paths",
+    "href": "lectures/17/slides.html#keeping-better-paths",
+    "title": "Heuristic Search",
+    "section": "Keeping Better Paths",
+    "text": "Keeping Better Paths\n\nbest_g[state] records the cheapest path discovered so far, not a final cost.\nEnqueue a successor whenever its new path cost is strictly smaller.\nSkip a popped entry if its stored g is larger than best_g[state].\nA cheaper path can reopen an already expanded state.\nTest for a goal only after popping a current minimum-f entry.\n\n\nA frontier entry represents a particular path to a state. Several entries may refer to the same state, with different path costs. When a better path is found, the new entry is added; an older, more expensive entry may remain in the heap. The stale-entry check discards it before the goal test or expansion. For example, if a state is queued at cost 7 and later reached at cost 5, best_g becomes 5; the old cost-7 entry is skipped when popped.\nAn expanded state is not permanently closed in this implementation. If its recorded cost improves, its successors must be considered again using that cheaper path. The expanded result counts actual non-goal expansions, including any repeated expansions; it does not count stale entries or the selected goal.\nFor the 8-puzzle, each action costs one, so the new path cost is g + 1. With unequal action costs, the same policy uses g + action_cost instead.\nThe best-cost update follows the policy in AIMA, Figure 3.7."
+  },
+  {
+    "objectID": "lectures/17/slides.html#theorem-cost-optimality",
+    "href": "lectures/17/slides.html#theorem-cost-optimality",
+    "title": "Heuristic Search",
+    "section": "Theorem: Cost Optimality",
+    "text": "Theorem: Cost Optimality\nConsider the finite reachable state-space graph of the implementation above, with unit action costs. Let h^\\star(s) be the least remaining cost from state s to a goal.\nThe heuristic is admissible:\n\n0 \\le h(s) \\le h^\\star(s), \\qquad h(G)=0 \\text{ for every goal }G.\n\nWith the best-cost and reopening policy above, A* returns a least-cost solution when one exists, and reports failure otherwise.\n\nThe finite, unit-cost 8-puzzle satisfies these assumptions. The result also extends to finite graphs with nonnegative action costs when the implementation adds each actual action cost. If no goal is reachable from a state, its remaining goal cost is infinite; admissibility imposes no finite upper bound there. The heuristic used by the implementation is a fixed, nonnegative estimate for each state.\nThe policy matters as much as admissibility. Discarding every later path to a state merely because it was generated earlier does not satisfy this theorem."
+  },
+  {
+    "objectID": "lectures/17/slides.html#consistency",
+    "href": "lectures/17/slides.html#consistency",
+    "title": "Heuristic Search",
+    "section": "Consistency",
+    "text": "Consistency\nA heuristic is consistent if every action from s to s' satisfies\n\nh(s) \\le c(s,s')+h(s'), \\qquad h(G)=0.\n\nIts estimated remaining cost cannot drop by more than the cost of that action. Consequently, along a path,\n\nf(n')=g(n)+c(s,s')+h(s') \\ge g(n)+h(s)=f(n).\n\n\nConsistency is a local condition on every transition. Applying it repeatedly along a path to a goal shows that the heuristic is admissible. In the 8-puzzle, one unit-cost move can reduce misplaced tiles by at most one, and can reduce Manhattan distance by at most one; both heuristics are consistent.\nWith a consistent heuristic, a state’s first current minimum-f selection already uses a least-cost path to that state. Reopening after expansion is therefore unnecessary. The same astar implementation still works; it simply does not need to expand a state again at a better cost.\nConsistency does not justify finalizing a state’s cost when it is first generated: a cheaper path can still be found before its first expansion.\nAn admissible but inconsistent heuristic can require reopening. The best-cost policy retains optimality in that case, although repeated expansions may add work. A graph-search variant that permanently closes states after expansion instead relies on consistency for this guarantee. See Berkeley CS 188, Informed Search."
+  },
+  {
+    "objectID": "lectures/17/slides.html#constructing-an-8-puzzle-heuristic",
+    "href": "lectures/17/slides.html#constructing-an-8-puzzle-heuristic",
+    "title": "Heuristic Search",
+    "section": "Constructing an 8-Puzzle Heuristic",
+    "text": "Constructing an 8-Puzzle Heuristic\nWhat information about a board could estimate the number of moves remaining?\n\nEach action costs one, so the heuristic must estimate moves. The examples exclude the blank when counting misplaced tiles or summing numbered-tile distances. Their goal is the standard ordered board with the blank in the lower-right corner."
+  },
+  {
+    "objectID": "lectures/17/slides.html#can-inversion-count-be-a-heuristic",
+    "href": "lectures/17/slides.html#can-inversion-count-be-a-heuristic",
+    "title": "Heuristic Search",
+    "section": "Can Inversion Count Be a Heuristic?",
+    "text": "Can Inversion Count Be a Heuristic?\nConsider the raw number of inversions as h(s).\n\n\n\nCode\n# Define the initial state\ninitial_board = (1, 2, 3,\n                 4, 5, 0,\n                 7, 8, 6)\n\n# Define goal state\ngoal_board = (1, 2, 3,\n              4, 5, 6,\n              7, 8, 0)\n\n# Plot both boards\nplt.figure(figsize=(6, 3))\nplot_board(initial_board, \"Initial Board\", 2, 1)\nplot_board(goal_board, \"Goal State\", 2, 2)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\nCalculate h(s) and h^\\star(s) for this board.\nWhat does the comparison establish?\n\n\nThe shown board has two inversions: tile 6 follows both 7 and 8. Moving 6 into the blank solves the puzzle in one move. Therefore h(s)=2&gt;1=h^\\star(s), which disproves admissibility of the raw inversion count. The same transition to a goal violates consistency: 2&gt;1+0.\nOn a 3×3 board, a legal move changes the inversion count by 0 or ±2. A vertical move can move a numbered tile past two other numbered tiles in row-major order. The counterexample shows why raw inversion count is not a lower bound on moves; the possible ±2 change alone is not a proof of inadmissibility.\nParity still serves a different purpose. The board (1,2,3,4,5,6,0,8,7) has odd inversion parity and cannot reach the even-parity goal. Solvability and remaining solution cost are different questions."
+  },
+  {
+    "objectID": "lectures/17/slides.html#misplaced-tiles",
+    "href": "lectures/17/slides.html#misplaced-tiles",
+    "title": "Heuristic Search",
+    "section": "Misplaced Tiles",
+    "text": "Misplaced Tiles\n\ndef misplaced_tiles_distance(state, goal_state):\n\n    # Count the number of misplaced tiles\n\n    misplaced_tiles = sum(1 for s, g in zip(state, goal_state) if s != g and s != 0)\n    \n    return misplaced_tiles\n\n\n\nOne legal move changes the position of exactly one numbered tile. It can correct at most one misplaced tile; the other numbered tiles retain their positions. If h(s) tiles are misplaced, any solution therefore needs at least h(s) moves, so h(s)\\le h^\\star(s).\nThe same observation gives consistency: one move can reduce the count by at most one, so h(s)\\le1+h(s'). The goal has value zero.\n\n\nIs this heuristic admissible? The blank is excluded."
+  },
+  {
+    "objectID": "lectures/17/slides.html#misplaced-tiles-on-two-boards",
+    "href": "lectures/17/slides.html#misplaced-tiles-on-two-boards",
+    "title": "Heuristic Search",
+    "section": "Misplaced Tiles on Two Boards",
+    "text": "Misplaced Tiles on Two Boards\n\n\nCode\nGOAL_STATE = (1, 2, 3,\n              4, 5, 6,\n              7, 8, 0)\nSIMPLE_STATE = (1, 2, 3,\n                4, 0, 6,\n                7, 5, 8)\nHARD_STATE = (6, 4, 5,\n              8, 2, 7,\n              1, 0, 3)\n\ndef plot_heuristic_comparison(left, right, goal, heuristics):\n    plt.figure(figsize=(8, 2.5))\n    for position, state in [(1, left), (3, right)]:\n        title = \"\\n\".join(\n            f\"{name}={heuristic(state, goal)}\"\n            for name, heuristic in heuristics.items()\n        )\n        plot_board(state, title, 3, position)\n    plot_board(goal, \"Goal State\", 3, 2)\n    plt.tight_layout()\n    plt.show()\n\nplot_heuristic_comparison(\n    SIMPLE_STATE, HARD_STATE, GOAL_STATE,\n    {\"misplaced\": misplaced_tiles_distance},\n)"
+  },
+  {
+    "objectID": "lectures/17/slides.html#calling-a-with-a-heuristic",
+    "href": "lectures/17/slides.html#calling-a-with-a-heuristic",
+    "title": "Heuristic Search",
+    "section": "Calling A* with a Heuristic",
+    "text": "Calling A* with a Heuristic\nsolution_states, expanded = astar(\n    SIMPLE_STATE, GOAL_STATE, misplaced_tiles_distance\n)\n\n\nOne search implementation accepts the heuristic as an argument. It returns a state sequence and the number of non-goal node expansions."
+  },
+  {
+    "objectID": "lectures/17/slides.html#simple-case-misplaced-tiles",
+    "href": "lectures/17/slides.html#simple-case-misplaced-tiles",
+    "title": "Heuristic Search",
+    "section": "Simple Case: Misplaced Tiles",
+    "text": "Simple Case: Misplaced Tiles\n\n\nCode\nsolution_states, expanded = astar(SIMPLE_STATE, GOAL_STATE, misplaced_tiles_distance)\nprint(f\"Solution: {len(solution_states) - 1} moves; nodes expanded: {expanded}\")\n\nplt.figure(figsize=(8, 2))\nfor i, state in enumerate(solution_states):\n    plot_board(state, f\"Step {i}\", len(solution_states), i + 1)\nplt.tight_layout()\nplt.show()\n\n\nSolution: 2 moves; nodes expanded: 2"
+  },
+  {
+    "objectID": "lectures/17/slides.html#challenging-case-misplaced-tiles",
+    "href": "lectures/17/slides.html#challenging-case-misplaced-tiles",
+    "title": "Heuristic Search",
+    "section": "Challenging Case: Misplaced Tiles",
+    "text": "Challenging Case: Misplaced Tiles\n\nmisplaced_solution, misplaced_expanded = astar(\n    HARD_STATE, GOAL_STATE, misplaced_tiles_distance\n)\nprint(f\"Solution: {len(misplaced_solution) - 1} moves\")\nprint(f\"Nodes expanded: {misplaced_expanded:,}\")\n\nSolution: 25 moves\nNodes expanded: 29,005\n\n\n\n\nThe returned path includes both endpoints. Use print_solution(misplaced_solution) to inspect a complete state sequence."
+  },
+  {
+    "objectID": "lectures/17/slides.html#manhattan-distance",
+    "href": "lectures/17/slides.html#manhattan-distance",
+    "title": "Heuristic Search",
+    "section": "Manhattan Distance",
+    "text": "Manhattan Distance\n\ndef manhattan_distance(state, goal_state):\n    distance = 0\n    size = int(len(state) ** 0.5)\n    for num in range(1, len(state)):\n        idx1 = state.index(num)\n        idx2 = goal_state.index(num)\n        x1, y1 = idx1 % size, idx1 // size\n        x2, y2 = idx2 % size, idx2 // size\n        distance += abs(x1 - x2) + abs(y1 - y2)\n    return distance\n\n\nh_{\\mathrm{Manhattan}}(s)=\n\\sum_{t=1}^{8}\\left(|x_t-x_t^\\star|+|y_t-y_t^\\star|\\right).\n\n\n\nFor tile t, (x_t,y_t) is its current position and (x_t^\\star,y_t^\\star) is its goal position. The sum includes the eight numbered tiles.\nOne legal action moves one numbered tile by one square, changing that tile’s Manhattan contribution by exactly one in magnitude. At most one unit of the total can be removed per move. Reaching a total of zero therefore takes at least the initial Manhattan sum, proving admissibility. The same observation gives consistency: h(s)\\le1+h(s').\nThe relaxed-problem interpretation makes tiles independent: each numbered tile may move orthogonally without needing the blank, and occupancy constraints are ignored. In that relaxation, each tile can follow a shortest grid path to its target, so the exact total cost is the Manhattan sum. Removing constraints cannot increase the least solution cost, which supplies the lower bound for the real puzzle.\n\n\nThe blank is excluded. Why is this a lower bound on the required number of moves?"
+  },
+  {
+    "objectID": "lectures/17/slides.html#manhattan-values-on-two-boards",
+    "href": "lectures/17/slides.html#manhattan-values-on-two-boards",
+    "title": "Heuristic Search",
+    "section": "Manhattan Values on Two Boards",
+    "text": "Manhattan Values on Two Boards\n\n\nCode\nplot_heuristic_comparison(\n    SIMPLE_STATE, HARD_STATE, GOAL_STATE,\n    {\"Manhattan\": manhattan_distance},\n)"
+  },
+  {
+    "objectID": "lectures/17/slides.html#comparing-the-heuristics",
+    "href": "lectures/17/slides.html#comparing-the-heuristics",
+    "title": "Heuristic Search",
+    "section": "Comparing the Heuristics",
+    "text": "Comparing the Heuristics\nFor every reachable state, with the blank excluded,\n\nh_{\\mathrm{misplaced}}(s)\n\\le h_{\\mathrm{Manhattan}}(s)\n\\le h^\\star(s).\n\n\n\nEach misplaced numbered tile contributes at least one to Manhattan distance.\nManhattan therefore dominates misplaced tiles: it is a more informative lower bound.\nDoes that guarantee a shorter wall-clock runtime on every instance?\n\n\nA larger admissible estimate can rule out more unpromising paths. It does not necessarily produce strictly fewer expansions on every problem. Entries with priority equal to the optimal cost can be treated differently by tie rules, and computing a more informative heuristic may cost more per node.\nThe experiments hold the algorithm, problem instances, and tie policy fixed, and measure non-goal node expansions. They do not measure elapsed runtime. See Berkeley CS 188, Dominance."
+  },
+  {
+    "objectID": "lectures/17/slides.html#both-estimates-on-the-same-boards",
+    "href": "lectures/17/slides.html#both-estimates-on-the-same-boards",
+    "title": "Heuristic Search",
+    "section": "Both Estimates on the Same Boards",
+    "text": "Both Estimates on the Same Boards\n\n\nCode\nplot_heuristic_comparison(\n    SIMPLE_STATE, HARD_STATE, GOAL_STATE,\n    {\"misplaced\": misplaced_tiles_distance, \"Manhattan\": manhattan_distance},\n)"
+  },
+  {
+    "objectID": "lectures/17/slides.html#same-misplaced-count-different-distances",
+    "href": "lectures/17/slides.html#same-misplaced-count-different-distances",
+    "title": "Heuristic Search",
+    "section": "Same Misplaced Count, Different Distances",
+    "text": "Same Misplaced Count, Different Distances\n\n\nCode\ncomparison_left = (3, 1, 2,\n                   4, 5, 6,\n                   7, 8, 0)\ncomparison_right = (8, 2, 3,\n                    4, 5, 6,\n                    1, 0, 7)\nplot_heuristic_comparison(\n    comparison_left, comparison_right, GOAL_STATE,\n    {\"misplaced\": misplaced_tiles_distance, \"Manhattan\": manhattan_distance},\n)\n\n\n\n\n\n\n\n\n\n\nBoth boards have three misplaced numbered tiles, but their Manhattan estimates differ. Misplaced tiles records only whether a tile is in its target position; Manhattan also uses how far it is from that position."
+  },
+  {
+    "objectID": "lectures/17/slides.html#changing-the-heuristic",
+    "href": "lectures/17/slides.html#changing-the-heuristic",
+    "title": "Heuristic Search",
+    "section": "Changing the Heuristic",
+    "text": "Changing the Heuristic\nsolution_states, expanded = astar(\n    SIMPLE_STATE, GOAL_STATE, manhattan_distance\n)\n\n\nThe frontier may contain goal entries. Their heuristic value is zero, so their priority is the cost of the complete path they represent. Another frontier entry with lower priority may still lead to a cheaper goal. This is why the algorithm tests for a goal after selecting a current minimum-priority entry.\n\n\nOnly the heuristic argument changes. The frontier, best-cost updates, goal test, and path reconstruction remain the same."
+  },
+  {
+    "objectID": "lectures/17/slides.html#simple-case-manhattan",
+    "href": "lectures/17/slides.html#simple-case-manhattan",
+    "title": "Heuristic Search",
+    "section": "Simple Case: Manhattan",
+    "text": "Simple Case: Manhattan\n\n\nCode\nsolution_states, expanded = astar(SIMPLE_STATE, GOAL_STATE, manhattan_distance)\nprint(f\"Solution: {len(solution_states) - 1} moves; nodes expanded: {expanded}\")\n\nplt.figure(figsize=(8, 2))\nfor i, state in enumerate(solution_states):\n    plot_board(state, f\"Step {i}\", len(solution_states), i + 1)\nplt.tight_layout()\nplt.show()\n\n\nSolution: 2 moves; nodes expanded: 2"
+  },
+  {
+    "objectID": "lectures/17/slides.html#challenging-case-manhattan",
+    "href": "lectures/17/slides.html#challenging-case-manhattan",
+    "title": "Heuristic Search",
+    "section": "Challenging Case: Manhattan",
+    "text": "Challenging Case: Manhattan\n\nmanhattan_solution, manhattan_expanded = astar(\n    HARD_STATE, GOAL_STATE, manhattan_distance\n)\nprint(f\"Solution: {len(manhattan_solution) - 1} moves\")\nprint(f\"Nodes expanded: {manhattan_expanded:,}\")\n\nSolution: 25 moves\nNodes expanded: 2,255\n\n\n\n\nThe returned path includes both endpoints. Use print_solution(manhattan_solution) to inspect a complete state sequence."
+  },
+  {
+    "objectID": "lectures/17/slides.html#paired-experiments",
+    "href": "lectures/17/slides.html#paired-experiments",
+    "title": "Heuristic Search",
+    "section": "Paired Experiments",
+    "text": "Paired Experiments\n\nUse the same 1,000 solvable boards with both heuristics.\nKeep the same A* implementation and tie policy.\nRetain both solution lengths and compare node expansions.\n\n\nThe heap entries are (f, g, state, path). Equal f values are broken first by smaller g, then lexicographically by the state tuple. This deterministic policy is shared by both heuristic runs; it may differ from a FIFO queue’s within-depth order.\nThe local random generator makes the experiment independent of random draws in earlier examples. The two length arrays allow a direct correctness check rather than overwriting one result. Agreement between the two heuristic runs alone is not a proof of optimality; a useful implementation check also compares a bounded sample against BFS.\n\n\n\nCode\nexperiment_rng = random.Random(58)\nexperiment_states = []\nwhile len(experiment_states) &lt; 1000:\n    state = tuple(experiment_rng.sample(range(9), 9))\n    if is_solvable(state):\n        experiment_states.append(state)\n\nmoves_misplaced = []\nmoves_manhattan = []\nexpanded_misplaced = []\nexpanded_manhattan = []\n\nfor initial_state in experiment_states:\n    path_misplaced, count_misplaced = astar(\n        initial_state, GOAL_STATE, misplaced_tiles_distance\n    )\n    path_manhattan, count_manhattan = astar(\n        initial_state, GOAL_STATE, manhattan_distance\n    )\n    moves_misplaced.append(len(path_misplaced) - 1)\n    moves_manhattan.append(len(path_manhattan) - 1)\n    expanded_misplaced.append(count_misplaced)\n    expanded_manhattan.append(count_manhattan)\n\nassert moves_misplaced == moves_manhattan\nprint(f\"Paired solvable boards: {len(experiment_states)}\")\nprint(\"Both heuristics return the same solution cost on every board.\")\nprint(f\"Mean expansions, misplaced tiles: {np.mean(expanded_misplaced):,.1f}\")\nprint(f\"Mean expansions, Manhattan:       {np.mean(expanded_manhattan):,.1f}\")\n\n\nPaired solvable boards: 1000\nBoth heuristics return the same solution cost on every board.\nMean expansions, misplaced tiles: 16,469.7\nMean expansions, Manhattan:       1,708.2"
+  },
+  {
+    "objectID": "lectures/17/slides.html#paired-searches",
+    "href": "lectures/17/slides.html#paired-searches",
+    "title": "Heuristic Search",
+    "section": "1,000 Paired Searches",
+    "text": "1,000 Paired Searches\n\n\nCode\nfig, axes = plt.subplots(1, 2, figsize=(10, 4))\n\naxes[0].hist(moves_misplaced, bins=np.arange(-0.5, 32.5), color='green', edgecolor='white')\naxes[0].set_title(\"Solution lengths: both heuristics\")\naxes[0].set_xlabel(\"Moves\")\naxes[0].set_ylabel(\"Number of boards\")\n\nbins = np.histogram_bin_edges(expanded_misplaced + expanded_manhattan, bins=30)\naxes[1].hist(expanded_misplaced, bins=bins, alpha=0.6, label=\"Misplaced tiles\")\naxes[1].hist(expanded_manhattan, bins=bins, alpha=0.6, label=\"Manhattan\")\naxes[1].set_title(\"Search effort on the same boards\")\naxes[1].set_xlabel(\"Non-goal node expansions\")\naxes[1].set_ylabel(\"Number of boards\")\naxes[1].legend()\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "lectures/17/slides.html#comparing-search-effort",
+    "href": "lectures/17/slides.html#comparing-search-effort",
+    "title": "Heuristic Search",
+    "section": "Comparing Search Effort",
+    "text": "Comparing Search Effort\n\n\nCode\nfig, axes = plt.subplots(1, 2, figsize=(10, 4))\n\naxes[0].scatter(moves_manhattan, expanded_manhattan, s=12, alpha=0.4)\naxes[0].set_title(\"Manhattan search\")\naxes[0].set_xlabel(\"Solution length (moves)\")\naxes[0].set_ylabel(\"Non-goal node expansions\")\n\naxes[1].scatter(expanded_misplaced, expanded_manhattan, s=12, alpha=0.4)\nlimit = max(max(expanded_misplaced), max(expanded_manhattan))\naxes[1].plot([0, limit], [0, limit], '--', color='black', label=\"Equal expansions\")\naxes[1].set_title(\"Paired comparison\")\naxes[1].set_xlabel(\"Expansions: misplaced tiles\")\naxes[1].set_ylabel(\"Expansions: Manhattan\")\naxes[1].legend()\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\nEach point on the right represents one board. A point below the diagonal means fewer expansions with Manhattan on that board."
+  },
+  {
+    "objectID": "lectures/17/slides.html#exploration-validate-optimality",
+    "href": "lectures/17/slides.html#exploration-validate-optimality",
+    "title": "Heuristic Search",
+    "section": "Exploration: Validate Optimality",
+    "text": "Exploration: Validate Optimality\nBFS returns a minimum-move solution when every action costs one.\n\nGenerate a bounded sample of solvable 8-puzzle boards.\nFind a BFS solution and an A* solution for each board.\nCheck that each path is legal, reaches the goal, and has the same number of moves.\nRepeat with both admissible heuristics.\n\n\nBFS supplies an independent reference for solution cost; it need not follow the same path as A*. Multiple optimal solutions can exist. Keep the validation sample manageable because BFS can visit a large fraction of the reachable state space for each board."
+  },
+  {
+    "objectID": "lectures/17/slides.html#exploration-a-zero-heuristic",
+    "href": "lectures/17/slides.html#exploration-a-zero-heuristic",
+    "title": "Heuristic Search",
+    "section": "Exploration: A Zero Heuristic",
+    "text": "Exploration: A Zero Heuristic\nWith h(s)=0, A* orders its frontier by g(n) alone: it becomes uniform-cost search.\n\nWhen all action costs are one, both uniform-cost search and BFS expand nodes in nondecreasing depth.\n\n\nThey agree on minimum solution cost, but their order within a depth can differ. The heap’s tie rule, successor order, duplicate policy, and goal-test location affect the order and the work completed before the goal is selected. Graph search avoids repeated states; it does not enumerate every possible path.\n\n\n\nMust their expansion order and expansion counts be identical?"
+  },
+  {
+    "objectID": "lectures/17/slides.html#results-on-the-lecture-16-board",
+    "href": "lectures/17/slides.html#results-on-the-lecture-16-board",
+    "title": "Heuristic Search",
+    "section": "Results on the Lecture 16 Board",
+    "text": "Results on the Lecture 16 Board\n\n\n\nMethod\nSolution length\nNon-goal expansions\n\n\n\n\nBFS\n25 moves (optimal)\n145,605\n\n\nDFS\n1,157 moves\n1,187\n\n\nA* with Manhattan\n25 moves (optimal)\n2,255\n\n\n\n\n\nThe BFS and DFS baselines come from Lecture 16. The A* result uses the single corrected implementation above. All methods return paths, but only BFS with equal action costs and A* under the stated conditions guarantee a least-cost solution.\n\n\nThese results concern one fixed board, successor order, and tie policy. Expansion counts do not measure wall-clock runtime or total memory."
+  },
+  {
+    "objectID": "lectures/17/slides.html#time-and-space-complexity",
+    "href": "lectures/17/slides.html#time-and-space-complexity",
+    "title": "Heuristic Search",
+    "section": "Time and Space Complexity",
+    "text": "Time and Space Complexity\n\nState-space graph: use the number of states V and actions E.\nSearch tree: use branching factor b and solution depth d.\nActual implementation: also account for heaps, heuristic evaluation, and stored paths.\n\n\n\nWith constant-time state operations and constant-size per-node records, ordinary graph BFS takes \\mathcal{O}(V+E) time and \\mathcal{O}(V) storage. The lecture code copies full paths into frontier entries, which adds work and storage proportional to their lengths; these costs must not be silently omitted when describing the implementation.\nFor tree-style BFS with goal testing on generation, the familiar bound is \\mathcal{O}(b^d) generated nodes. With goal testing on removal, as in our code, nodes at depth d+1 may be generated before a depth-d goal is selected, giving \\mathcal{O}(b^{d+1}) generated or stored occurrences in the corresponding worst-case tree analysis. State-space graph bounds and search-tree bounds count different objects.\nA* adds priority-queue operations and heuristic evaluations. With inconsistent admissible heuristics it may also expand a state again after an improved path, so the expansion count can exceed the number of distinct expanded states. A small frontier does not remove the memory retained in best-cost records and copied paths.\n\n\nThe examples report node expansions. A complete performance comparison must also consider the work and memory used by each expansion."
+  },
+  {
+    "objectID": "lectures/17/slides.html#summary",
+    "href": "lectures/17/slides.html#summary",
+    "title": "Heuristic Search",
+    "section": "Summary",
+    "text": "Summary\n\nBest-first priorities distinguish greedy search, uniform-cost search, and A*.\nA* combines known path cost with an estimated remaining cost.\nBest-cost updates, reopening, and goal selection connect the implementation to the optimality proof.\nAdmissibility, consistency, and dominance justify and compare the puzzle heuristics.\n\n\nAn A* frontier entry represents a particular path. best_g records the cheapest discovered route to each state, while stale entries can remain in the heap until they are removed. An improved route may reopen a state. These policies preserve the optimal-path frontier entry used in the proof.\nMisplaced tiles and Manhattan distance exclude the blank and are both admissible and consistent for unit-cost 8-puzzle moves. Manhattan dominates misplaced tiles, but computation costs and tie choices still matter when measuring performance.\nOn the fixed Lecture 16 board, BFS and A* with Manhattan both return 25 moves, with 145,605 and 2,255 non-goal expansions respectively. DFS returns a longer path after fewer expansions. The paired experiment compares both heuristics on identical boards and retains their solution costs separately."
+  },
+  {
+    "objectID": "lectures/17/slides.html#next-session",
+    "href": "lectures/17/slides.html#next-session",
+    "title": "Heuristic Search",
+    "section": "Next Session",
+    "text": "Next Session\n\nQuiz 2: November 18, 2026. See the course FAQ.\nAfter the quiz: Local Search, Lecture 19."
+  },
+  {
+    "objectID": "lectures/17/index.html#practice",
+    "href": "lectures/17/index.html#practice",
+    "title": "Heuristic Search",
+    "section": "Practice",
+    "text": "Practice\nUse the lecture’s Jupyter notebook to:\n\nCompare misplaced-tile and Manhattan heuristics on the same boards. Compare node expansions and validate solution paths and lengths against BFS on a small sample.\nSet h(s)=0 and explain the relationship between A*, uniform-cost search, and BFS, including the effect of tie-breaking."
   }
 ]
