@@ -38,7 +38,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/course-faq.html</loc>
-    <lastmod>2026-10-16T13:27:04.580Z</lastmod>
+    <lastmod>2026-11-07T14:48:33.056Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/course-links.html</loc>
@@ -210,7 +210,7 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/14/slides.html</loc>
-    <lastmod>2026-11-01T22:44:15.421Z</lastmod>
+    <lastmod>2026-11-04T12:41:37.928Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/15/index.html</loc>
@@ -234,11 +234,11 @@
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/17/index.html</loc>
-    <lastmod>2026-11-04T01:15:24.725Z</lastmod>
+    <lastmod>2026-11-04T22:02:50.656Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/17/slides.html</loc>
-    <lastmod>2026-11-04T01:28:19.233Z</lastmod>
+    <lastmod>2026-11-04T22:10:35.498Z</lastmod>
   </url>
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/18/index.html</loc>
@@ -363,5 +363,13 @@
   <url>
     <loc>https://turcotte.xyz/teaching/csi-4106/lectures/16/chess-search.html</loc>
     <lastmod>2026-11-03T19:20:50.852Z</lastmod>
+  </url>
+  <url>
+    <loc>https://turcotte.xyz/teaching/csi-4106/lectures/15/name_generation.html</loc>
+    <lastmod>2026-11-06T01:03:08.399Z</lastmod>
+  </url>
+  <url>
+    <loc>https://turcotte.xyz/teaching/csi-4106/lectures/15/shakespeare_generation.html</loc>
+    <lastmod>2026-11-06T02:29:23.244Z</lastmod>
   </url>
 </urlset>

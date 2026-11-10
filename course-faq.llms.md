@@ -6,7 +6,7 @@ Marcel Turcotte
 
 Published
 
-October 16, 2026
+November 7, 2026
 
 # How to Get Help?
 
@@ -72,8 +72,8 @@ If my office hours conflict with your course schedule, please send me your avail
 
 - **When**: Refer to the course [Schedule](course-schedule) page.
 - **Format**: Closed book. Multiple-choice and true/false questions.
-- **Scope**: Lectures 1 to 17.
-  - The numbering corresponds to that used in the URLs, for example, [turcotte.xyz/teaching/csi-4106/lectures/07/slides.html](https://turcotte.xyz/teaching/csi-4106/lectures/07/slides.html) is Lecture 7. Consequently, the quiz covers the lectures from September 9 to November 16 inclusively.
+- **Scope**: Lectures 10 to 17.
+  - The numbering corresponds to that used in the URLs, for example, [turcotte.xyz/teaching/csi-4106/lectures/10/slides.html](https://turcotte.xyz/teaching/csi-4106/lectures/10/slides.html) is Lecture 10. Consequently, the quiz covers the lectures from October 14 to November 16 inclusively.
 - **Content**: Emphasis on conceptual questions rather than intricate technical details (e.g., reshaping a numpy array).
 - **Question Types**: Includes code excerpts or diagrams requiring identification of the correct statements.
 - **Number of Questions**: Expect 25 to 35 questions.

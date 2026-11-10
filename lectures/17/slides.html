@@ -254,7 +254,7 @@ Marcel Turcotte
 </div>
 </div>
 
-  <p class="date">Version: Nov 3, 2026 20:28</p>
+  <p class="date">Version: Nov 4, 2026 17:10</p>
 </section>
 <section>
 <section id="preamble" class="title-slide slide level1 center">
@@ -263,7 +263,7 @@ Marcel Turcotte
 </section>
 <section id="message-of-the-day" class="slide level2">
 <h2>Message of the Day</h2>
-<p></p><div id="tweet-89253"></div><script>tweet={"url":"https:\/\/x.com\/Waymo\/status\/2111042355671244871","author_name":"Waymo","author_url":"https:\/\/x.com\/Waymo","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EWe’re bringing the magic of Waymo to Toronto! \uD83C\uDDE8\uD83C\uDDE6 \u003Cbr\u003E\u003Cbr\u003EIn the coming days, you’ll begin seeing Waymo’s all-electric vehicles driving through Toronto’s streets as we lay the groundwork for our ride-hailing service. \u003Cbr\u003E\u003Cbr\u003EOur goal is to begin serving riders in 2028. \u003Cbr\u003E\u003Cbr\u003ESign up for future… \u003Ca href=\"https:\/\/t.co\/FQmGxwV5T9\"\u003Epic.twitter.com\/FQmGxwV5T9\u003C\/a\u003E\u003C\/p\u003E&mdash; Waymo (@Waymo) \u003Ca href=\"https:\/\/x.com\/Waymo\/status\/2111042355671244871?ref_src=twsrc%5Etfw\"\u003EOctober 16, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-89253").innerHTML = tweet["html"];</script><p></p>
+<p></p><div id="tweet-39279"></div><script>tweet={"url":"https:\/\/x.com\/Waymo\/status\/2111042355671244871","author_name":"Waymo","author_url":"https:\/\/x.com\/Waymo","html":"\u003Cblockquote class=\"twitter-tweet\" align=\"center\"\u003E\u003Cp lang=\"en\" dir=\"ltr\"\u003EWe’re bringing the magic of Waymo to Toronto! \uD83C\uDDE8\uD83C\uDDE6 \u003Cbr\u003E\u003Cbr\u003EIn the coming days, you’ll begin seeing Waymo’s all-electric vehicles driving through Toronto’s streets as we lay the groundwork for our ride-hailing service. \u003Cbr\u003E\u003Cbr\u003EOur goal is to begin serving riders in 2028. \u003Cbr\u003E\u003Cbr\u003ESign up for future… \u003Ca href=\"https:\/\/t.co\/FQmGxwV5T9\"\u003Epic.twitter.com\/FQmGxwV5T9\u003C\/a\u003E\u003C\/p\u003E&mdash; Waymo (@Waymo) \u003Ca href=\"https:\/\/x.com\/Waymo\/status\/2111042355671244871?ref_src=twsrc%5Etfw\"\u003EOctober 16, 2026\u003C\/a\u003E\u003C\/blockquote\u003E\n\u003Cscript async src=\"https:\/\/platform.x.com\/widgets.js\" charset=\"utf-8\"\u003E\u003C\/script\u003E\n\n","width":550,"height":null,"type":"rich","cache_age":"3153600000","provider_name":"X","provider_url":"https:\/\/x.com","version":"1.0"};document.getElementById("tweet-39279").innerHTML = tweet["html"];</script><p></p>
 </section>
 <section id="learning-objectives" class="slide level2 smaller">
 <h2>Learning Objectives</h2>
@@ -277,7 +277,7 @@ Marcel Turcotte
 </section>
 <section id="python-helpers-from-lecture-16" class="slide level2 scrollable">
 <h2>Python Helpers from Lecture 16</h2>
-<div id="lecture-16-helpers" class="cell" data-execution_count="2">
+<div id="lecture-16-helpers" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show Python helper functions</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a aria-label="1"></a><span class="im">import</span> random</span>
@@ -750,7 +750,7 @@ f(n)=g(n)+h(s).
 <p>How should the BFS/DFS frontier change when nodes have different priorities?</p>
 <div class="fragment">
 <p>Use a <strong>priority queue</strong> ordered by the evaluation function <span class="math inline">f</span>.</p>
-<div id="heap-import" class="cell" data-execution_count="3">
+<div id="heap-import" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a aria-label="1"></a><span class="im">import</span> heapq</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
@@ -809,7 +809,7 @@ f(n)=g(n)+h(s).
 </div></aside></section>
 <section id="a-implementation" class="slide level2 smaller scrollable">
 <h2>A* Implementation</h2>
-<div id="astar" class="cell" data-execution_count="4">
+<div id="astar" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a aria-label="1"></a><span class="kw">def</span> astar(initial_state, goal_state, heuristic):</span>
 <span id="cb3-2"><a aria-label="2"></a>    <span class="co"># Entries contain (f, g, state, preceding states).</span></span>
 <span id="cb3-3"><a aria-label="3"></a>    frontier <span class="op">=</span> [(heuristic(initial_state, goal_state), <span class="dv">0</span>, initial_state, [])]</span>
@@ -1053,7 +1053,7 @@ f(n')=g(n)+c(s,s')+h(s') \ge g(n)+h(s)=f(n).
 <h2>Can Inversion Count Be a Heuristic?</h2>
 <p>Consider the <strong>raw number of inversions</strong> as <span class="math inline">h(s)</span>.</p>
 <div class="fragment">
-<div id="cell-inversion-counterexample" class="cell" data-execution_count="5">
+<div id="cell-inversion-counterexample" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a aria-label="1"></a><span class="co"># Define the initial state</span></span>
@@ -1104,7 +1104,7 @@ f(n')=g(n)+c(s,s')+h(s') \ge g(n)+h(s)=f(n).
 </section>
 <section id="misplaced-tiles" class="slide level2">
 <h2>Misplaced Tiles</h2>
-<div id="misplaced-tiles" class="cell" data-execution_count="6">
+<div id="misplaced-tiles" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a aria-label="1"></a><span class="kw">def</span> misplaced_tiles_distance(state, goal_state):</span>
 <span id="cb5-2"><a aria-label="2"></a></span>
 <span id="cb5-3"><a aria-label="3"></a>    <span class="co"># Count the number of misplaced tiles</span></span>
@@ -1133,7 +1133,7 @@ f(n')=g(n)+c(s,s')+h(s') \ge g(n)+h(s)=f(n).
 </div></aside></section>
 <section id="misplaced-tiles-on-two-boards" class="slide level2 hide-code-toggle">
 <h2>Misplaced Tiles on Two Boards</h2>
-<div id="cell-misplaced-values" class="cell" data-execution_count="7">
+<div id="cell-misplaced-values" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a aria-label="1"></a>GOAL_STATE <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,</span>
@@ -1183,7 +1183,7 @@ f(n')=g(n)+c(s,s')+h(s') \ge g(n)+h(s)=f(n).
 </div></aside></section>
 <section id="simple-case-misplaced-tiles" class="slide level2 hide-code-toggle">
 <h2>Simple Case: Misplaced Tiles</h2>
-<div id="cell-simple-misplaced_tiles_distance" class="cell" data-execution_count="8">
+<div id="cell-simple-misplaced_tiles_distance" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a aria-label="1"></a>solution_states, expanded <span class="op">=</span> astar(SIMPLE_STATE, GOAL_STATE, misplaced_tiles_distance)</span>
@@ -1209,7 +1209,7 @@ f(n')=g(n)+c(s,s')+h(s') \ge g(n)+h(s)=f(n).
 </section>
 <section id="challenging-case-misplaced-tiles" class="slide level2">
 <h2>Challenging Case: Misplaced Tiles</h2>
-<div id="hard-misplaced_tiles_distance" class="cell" data-execution_count="9">
+<div id="hard-misplaced_tiles_distance" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a aria-label="1"></a>misplaced_solution, misplaced_expanded <span class="op">=</span> astar(</span>
 <span id="cb10-2"><a aria-label="2"></a>    HARD_STATE, GOAL_STATE, misplaced_tiles_distance</span>
 <span id="cb10-3"><a aria-label="3"></a>)</span>
@@ -1226,7 +1226,7 @@ Nodes expanded: 29,005</code></pre>
 </div></aside></section>
 <section id="manhattan-distance" class="slide level2">
 <h2>Manhattan Distance</h2>
-<div id="manhattan-distance" class="cell" data-execution_count="10">
+<div id="manhattan-distance" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a aria-label="1"></a><span class="kw">def</span> manhattan_distance(state, goal_state):</span>
 <span id="cb12-2"><a aria-label="2"></a>    distance <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb12-3"><a aria-label="3"></a>    size <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(state) <span class="op">**</span> <span class="fl">0.5</span>)</span>
@@ -1263,7 +1263,7 @@ h_{\mathrm{Manhattan}}(s)=
 </div></aside></section>
 <section id="manhattan-values-on-two-boards" class="slide level2 hide-code-toggle">
 <h2>Manhattan Values on Two Boards</h2>
-<div id="cell-manhattan-values" class="cell" data-execution_count="11">
+<div id="cell-manhattan-values" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a aria-label="1"></a>plot_heuristic_comparison(</span>
@@ -1312,7 +1312,7 @@ h_{\mathrm{misplaced}}(s)
 </section>
 <section id="both-estimates-on-the-same-boards" class="slide level2 hide-code-toggle">
 <h2>Both Estimates on the Same Boards</h2>
-<div id="cell-both-heuristics" class="cell" data-execution_count="12">
+<div id="cell-both-heuristics" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a aria-label="1"></a>plot_heuristic_comparison(</span>
@@ -1331,7 +1331,7 @@ h_{\mathrm{misplaced}}(s)
 </section>
 <section id="same-misplaced-count-different-distances" class="slide level2 hide-code-toggle">
 <h2>Same Misplaced Count, Different Distances</h2>
-<div id="cell-equal-misplaced-count" class="cell" data-execution_count="13">
+<div id="cell-equal-misplaced-count" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a aria-label="1"></a>comparison_left <span class="op">=</span> (<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>,</span>
@@ -1391,7 +1391,7 @@ h_{\mathrm{misplaced}}(s)
 </div></aside></section>
 <section id="simple-case-manhattan" class="slide level2 hide-code-toggle">
 <h2>Simple Case: Manhattan</h2>
-<div id="cell-simple-manhattan_distance" class="cell" data-execution_count="14">
+<div id="cell-simple-manhattan_distance" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a aria-label="1"></a>solution_states, expanded <span class="op">=</span> astar(SIMPLE_STATE, GOAL_STATE, manhattan_distance)</span>
@@ -1417,7 +1417,7 @@ h_{\mathrm{misplaced}}(s)
 </section>
 <section id="challenging-case-manhattan" class="slide level2">
 <h2>Challenging Case: Manhattan</h2>
-<div id="hard-manhattan_distance" class="cell" data-execution_count="15">
+<div id="hard-manhattan_distance" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a aria-label="1"></a>manhattan_solution, manhattan_expanded <span class="op">=</span> astar(</span>
 <span id="cb19-2"><a aria-label="2"></a>    HARD_STATE, GOAL_STATE, manhattan_distance</span>
 <span id="cb19-3"><a aria-label="3"></a>)</span>
@@ -1453,7 +1453,7 @@ Nodes expanded: 2,255</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<div id="paired-experiments" class="cell" data-execution_count="16">
+<div id="paired-experiments" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a aria-label="1"></a>experiment_rng <span class="op">=</span> random.Random(<span class="dv">58</span>)</span>
@@ -1496,7 +1496,7 @@ Mean expansions, Manhattan:       1,708.2</code></pre>
 </section>
 <section id="paired-searches" class="slide level2 hide-code-toggle">
 <h2>1,000 Paired Searches</h2>
-<div id="cell-experiment-histograms" class="cell" data-execution_count="17">
+<div id="cell-experiment-histograms" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a aria-label="1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
@@ -1527,7 +1527,7 @@ Mean expansions, Manhattan:       1,708.2</code></pre>
 </section>
 <section id="comparing-search-effort" class="slide level2 hide-code-toggle">
 <h2>Comparing Search Effort</h2>
-<div id="cell-experiment-scatter" class="cell" data-execution_count="18">
+<div id="cell-experiment-scatter" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a aria-label="1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
@@ -1558,6 +1558,164 @@ Mean expansions, Manhattan:       1,708.2</code></pre>
 
 <aside><div>
 <p>Each point on the right represents one board. A point below the diagonal means fewer expansions with Manhattan on that board.</p>
+</div></aside></section>
+<section id="empirical-validation" class="slide level2 smaller">
+<h2>Empirical Validation</h2>
+<ul>
+<li>With unit action costs, <strong>BFS supplies a minimum-move reference</strong>.</li>
+<li>Compare BFS and A* with Manhattan distance on <strong>25,000 unique solvable boards</strong>.</li>
+<li>Check solution lengths and record <strong>non-goal node expansions</strong>.</li>
+<li>Agreement increases confidence in the code; <strong>it is not a proof</strong>.</li>
+</ul>
+<p>Download <a href="https://turcotte.xyz/teaching/csi-4106/lectures/17/validate_astar.py" class="external" data-icon="true" download="validate_astar.py">the Python validation script</a> and run it from the lecture folder:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a aria-label="1"></a><span class="ex">python3</span> validate_astar.py 4106 25000</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+<aside class="notes">
+<p>The mathematical proof establishes A<em>’s cost optimality under its assumptions. This experiment checks whether our implementation behaves as expected on a substantial sample. A discrepancy is evidence of an implementation error; agreement does not rule out every error, especially because BFS and A</em> share the successor generator and goal test.</p>
+<p>The script compares solution lengths, reports disagreements on standard error, and retains both expansion counts in the CSV. Additional checks can verify that returned paths use legal moves and reach the goal. Different optimal paths may have the same length.</p>
+<p>The seed makes the experiment reproducible. Duplicate boards are skipped before either search, and a completed run contains 25,000 distinct boards from the 181,440 solvable configurations. Each completed row is saved immediately, so the results slide may show a partial experiment while the script is still running. Generating the data is a separate, manual step; reading the CSV does not rerun the searches.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Keep the generated <code>astar_validation_runs-25000_seed-4106.csv</code> beside the notebook. The next slide reads these saved results.</p>
+</div></aside></section>
+<section id="saved-results-bfs-versus-a" class="slide level2 smaller hide-code-toggle">
+<h2>Saved Results: BFS versus A*</h2>
+<div id="cached-bfs-astar-validation" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a aria-label="1"></a><span class="im">import</span> csv</span>
+<span id="cb26-2"><a aria-label="2"></a><span class="im">import</span> os</span>
+<span id="cb26-3"><a aria-label="3"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb26-4"><a aria-label="4"></a><span class="im">from</span> IPython.display <span class="im">import</span> Markdown, display</span>
+<span id="cb26-5"><a aria-label="5"></a></span>
+<span id="cb26-6"><a aria-label="6"></a>number_translation <span class="op">=</span> <span class="bu">str</span>.maketrans({<span class="st">","</span>: <span class="st">","</span>, <span class="st">"."</span>: <span class="st">"."</span>})</span>
+<span id="cb26-7"><a aria-label="7"></a><span class="kw">def</span> format_number(value, decimals<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb26-8"><a aria-label="8"></a>    <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>value<span class="sc">:,.</span>{decimals}f<span class="sc">}</span><span class="ss">"</span>.translate(number_translation)</span>
+<span id="cb26-9"><a aria-label="9"></a></span>
+<span id="cb26-10"><a aria-label="10"></a>CSV_NAME <span class="op">=</span> <span class="st">"astar_validation_runs-25000_seed-4106.csv"</span></span>
+<span id="cb26-11"><a aria-label="11"></a>csv_path <span class="op">=</span> Path(CSV_NAME)</span>
+<span id="cb26-12"><a aria-label="12"></a>project_dir <span class="op">=</span> os.environ.get(<span class="st">"QUARTO_PROJECT_DIR"</span>)</span>
+<span id="cb26-13"><a aria-label="13"></a><span class="cf">if</span> <span class="kw">not</span> csv_path.is_file() <span class="kw">and</span> project_dir:</span>
+<span id="cb26-14"><a aria-label="14"></a>    csv_path <span class="op">=</span> Path(project_dir) <span class="op">/</span> <span class="st">"lectures"</span> <span class="op">/</span> <span class="st">"17"</span> <span class="op">/</span> CSV_NAME</span>
+<span id="cb26-15"><a aria-label="15"></a></span>
+<span id="cb26-16"><a aria-label="16"></a><span class="cf">if</span> <span class="kw">not</span> csv_path.is_file():</span>
+<span id="cb26-17"><a aria-label="17"></a>    display(Markdown(</span>
+<span id="cb26-18"><a aria-label="18"></a>        <span class="st">"**Saved results are not available yet.** Run this once beside the notebook, "</span></span>
+<span id="cb26-19"><a aria-label="19"></a>        <span class="st">"then rerun the notebook or render the slides:</span><span class="ch">\n\n</span><span class="st">"</span></span>
+<span id="cb26-20"><a aria-label="20"></a>        <span class="st">"```bash</span><span class="ch">\n</span><span class="st">python3 validate_astar.py 4106 25000</span><span class="ch">\n</span><span class="st">```"</span></span>
+<span id="cb26-21"><a aria-label="21"></a>    ))</span>
+<span id="cb26-22"><a aria-label="22"></a><span class="cf">else</span>:</span>
+<span id="cb26-23"><a aria-label="23"></a>    <span class="co"># Read a complete prefix even while the experiment is appending rows.</span></span>
+<span id="cb26-24"><a aria-label="24"></a>    csv_text <span class="op">=</span> csv_path.read_text(encoding<span class="op">=</span><span class="st">"utf-8"</span>)</span>
+<span id="cb26-25"><a aria-label="25"></a>    complete_text <span class="op">=</span> csv_text[:csv_text.rfind(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>) <span class="op">+</span> <span class="dv">1</span>]</span>
+<span id="cb26-26"><a aria-label="26"></a>    records <span class="op">=</span> <span class="bu">list</span>(csv.DictReader(complete_text.splitlines()))</span>
+<span id="cb26-27"><a aria-label="27"></a></span>
+<span id="cb26-28"><a aria-label="28"></a>    <span class="cf">if</span> <span class="kw">not</span> records:</span>
+<span id="cb26-29"><a aria-label="29"></a>        display(Markdown(<span class="st">"**The CSV exists, but no completed results are available yet.**"</span>))</span>
+<span id="cb26-30"><a aria-label="30"></a>    <span class="cf">else</span>:</span>
+<span id="cb26-31"><a aria-label="31"></a>        unique_boards <span class="op">=</span> <span class="bu">len</span>({row[<span class="st">"board"</span>] <span class="cf">for</span> row <span class="kw">in</span> records})</span>
+<span id="cb26-32"><a aria-label="32"></a>        mismatches <span class="op">=</span> <span class="bu">sum</span>(</span>
+<span id="cb26-33"><a aria-label="33"></a>            row[<span class="st">"bfs_moves"</span>] <span class="op">==</span> <span class="st">""</span> <span class="kw">or</span> row[<span class="st">"astar_moves"</span>] <span class="op">==</span> <span class="st">""</span></span>
+<span id="cb26-34"><a aria-label="34"></a>            <span class="kw">or</span> row[<span class="st">"bfs_moves"</span>] <span class="op">!=</span> row[<span class="st">"astar_moves"</span>]</span>
+<span id="cb26-35"><a aria-label="35"></a>            <span class="cf">for</span> row <span class="kw">in</span> records</span>
+<span id="cb26-36"><a aria-label="36"></a>        )</span>
+<span id="cb26-37"><a aria-label="37"></a>        status <span class="op">=</span> <span class="st">"Partial results. "</span> <span class="cf">if</span> <span class="bu">len</span>(records) <span class="op">&lt;</span> <span class="dv">25000</span> <span class="cf">else</span> <span class="st">""</span></span>
+<span id="cb26-38"><a aria-label="38"></a>        display(Markdown(</span>
+<span id="cb26-39"><a aria-label="39"></a>            <span class="ss">f"**</span><span class="sc">{</span>status<span class="sc">}{</span>format_number(<span class="bu">len</span>(records))<span class="sc">}</span><span class="ss"> completed comparisons** "</span></span>
+<span id="cb26-40"><a aria-label="40"></a>            <span class="ss">f"(</span><span class="sc">{</span>format_number(unique_boards)<span class="sc">}</span><span class="ss"> unique boards); **</span><span class="sc">{</span>format_number(mismatches)<span class="sc">}</span><span class="ss"> move-count failures**."</span></span>
+<span id="cb26-41"><a aria-label="41"></a>        ))</span>
+<span id="cb26-42"><a aria-label="42"></a></span>
+<span id="cb26-43"><a aria-label="43"></a>        methods <span class="op">=</span> [</span>
+<span id="cb26-44"><a aria-label="44"></a>            (<span class="st">"BFS"</span>, [<span class="bu">int</span>(row[<span class="st">"bfs_expanded"</span>]) <span class="cf">for</span> row <span class="kw">in</span> records], <span class="st">"steelblue"</span>),</span>
+<span id="cb26-45"><a aria-label="45"></a>            (<span class="st">"A* (Manhattan)"</span>, [<span class="bu">int</span>(row[<span class="st">"astar_expanded"</span>]) <span class="cf">for</span> row <span class="kw">in</span> records], <span class="st">"darkorange"</span>),</span>
+<span id="cb26-46"><a aria-label="46"></a>        ]</span>
+<span id="cb26-47"><a aria-label="47"></a>        fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.6</span>))</span>
+<span id="cb26-48"><a aria-label="48"></a>        table <span class="op">=</span> [<span class="st">"| Method | Mean | Median | Minimum | Maximum |"</span>, <span class="st">"|---|---:|---:|---:|---:|"</span>]</span>
+<span id="cb26-49"><a aria-label="49"></a>        <span class="cf">for</span> ax, (name, expanded, color) <span class="kw">in</span> <span class="bu">zip</span>(axes, methods):</span>
+<span id="cb26-50"><a aria-label="50"></a>            bins <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="bu">max</span>(<span class="dv">1</span>, <span class="bu">max</span>(expanded)), <span class="dv">41</span>)</span>
+<span id="cb26-51"><a aria-label="51"></a>            ax.hist(expanded, bins<span class="op">=</span>bins, color<span class="op">=</span>color, edgecolor<span class="op">=</span><span class="st">"white"</span>)</span>
+<span id="cb26-52"><a aria-label="52"></a>            ax.set_title(name)</span>
+<span id="cb26-53"><a aria-label="53"></a>            ax.set_xlabel(<span class="st">"Non-goal node expansions"</span>)</span>
+<span id="cb26-54"><a aria-label="54"></a>            ax.set_ylabel(<span class="st">"Number of boards"</span>)</span>
+<span id="cb26-55"><a aria-label="55"></a>            ax.set_xlim(<span class="dv">0</span>, <span class="bu">max</span>(<span class="dv">1</span>, <span class="bu">max</span>(expanded)) <span class="op">*</span> <span class="fl">1.05</span>)</span>
+<span id="cb26-56"><a aria-label="56"></a>            ax.ticklabel_format(style<span class="op">=</span><span class="st">"plain"</span>, axis<span class="op">=</span><span class="st">"x"</span>)</span>
+<span id="cb26-57"><a aria-label="57"></a>            ax.tick_params(labelsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb26-58"><a aria-label="58"></a>            table.append(</span>
+<span id="cb26-59"><a aria-label="59"></a>                <span class="ss">f"| </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>format_number(np.mean(expanded), <span class="dv">1</span>)<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>format_number(np.median(expanded), <span class="dv">1</span>)<span class="sc">}</span><span class="ss"> "</span></span>
+<span id="cb26-60"><a aria-label="60"></a>                <span class="ss">f"| </span><span class="sc">{</span>format_number(<span class="bu">min</span>(expanded))<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>format_number(<span class="bu">max</span>(expanded))<span class="sc">}</span><span class="ss"> |"</span></span>
+<span id="cb26-61"><a aria-label="61"></a>            )</span>
+<span id="cb26-62"><a aria-label="62"></a>        plt.tight_layout()</span>
+<span id="cb26-63"><a aria-label="63"></a>        plt.show()</span>
+<span id="cb26-64"><a aria-label="64"></a>        display(Markdown(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(table)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="cached-bfs-astar-validation-1" class="cell-output cell-output-display cell-output-markdown">
+<p><strong>25,000 completed comparisons</strong> (25,000 unique boards); <strong>0 move-count failures</strong>.</p>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><a href="slides_files/figure-revealjs/cached-bfs-astar-validation-output-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img data-src="slides_files/figure-revealjs/cached-bfs-astar-validation-output-2.png" id="cached-bfs-astar-validation-2" class="quarto-figure quarto-figure-center" width="948" height="240"></a></p>
+</figure>
+</div>
+</div>
+<div id="cached-bfs-astar-validation-3" class="cell-output cell-output-display cell-output-markdown">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Method</th>
+<th style="text-align: right;">Mean</th>
+<th style="text-align: right;">Median</th>
+<th style="text-align: right;">Minimum</th>
+<th style="text-align: right;">Maximum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BFS</td>
+<td style="text-align: right;">93,419.1</td>
+<td style="text-align: right;">93,362.0</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">181,437</td>
+</tr>
+<tr class="even">
+<td>A* (Manhattan)</td>
+<td style="text-align: right;">1,643.7</td>
+<td style="text-align: right;">959.0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">23,647</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<aside class="notes">
+<p>Each row pairs the two algorithms on the same initial board. The table reports the mean, median, minimum and maximum numbers of non-goal expansions. The selected goal is excluded; stale A* entries are excluded, while any actual repeated expansion would be counted.</p>
+<p>The histograms use separate horizontal ranges so that the shape of each distribution remains visible. A narrow concentration at small counts indicates that many boards require little search effort; a long right tail identifies a smaller group of expensive cases. Compare the axis values and the table before drawing conclusions about relative effort. Expansion counts measure search work, rather than elapsed runtime or total memory.</p>
+<p>The sample size and any solution-length failures are computed from the completed CSV rows, rather than inferred from the requested run count in the filename. Partial results should not be described as a completed 25,000-board experiment. The experiment and the proof answer complementary questions about the code and the algorithm.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>The histograms use <strong>different horizontal ranges</strong> to reveal both distributions. Compare the numerical scales and statistics.</p>
 </div></aside></section>
 <section id="exploration-validate-optimality" class="slide level2 smaller">
 <h2>Exploration: Validate Optimality</h2>
